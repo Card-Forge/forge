@@ -709,6 +709,8 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.ai.setLife(5, null); c.bf("Swamp", c.ai); c.hand("Sleeper Agent", c.ai); }));
         l.add(play("13048-answer", "Sleeper Agent is cast at 5 life when a Serra Angel holds the 3/3 off", Fid.EXACT, "MAIN2", true, "Sleeper Agent",
                 c -> { c.ai.setLife(5, null); c.bf("Swamp", c.ai); c.bf("Serra Angel", c.ai); c.hand("Sleeper Agent", c.ai); }));
+        l.add(noPlay("13048-tapped-blocker", "control: a tapped 4/4 does not protect the AI from Sleeper Agent", Fid.EXACT, "MAIN2", true, "Sleeper Agent",
+                c -> { c.ai.setLife(5, null); c.bf("Swamp", c.ai); c.bf("Serra Angel", c.ai).setTapped(true); c.hand("Sleeper Agent", c.ai); }));
         l.add(new Scenario("13048-trigger", "Sleeper Agent's enter trigger resolves and the opponent really gets the creature", Fid.EXACT, "MAIN2", true,
                 c -> c.bf("Swamp", c.ai),
                 c -> {
@@ -749,8 +751,8 @@ public class AiReportScenarioTest extends AITest {
                     final SpellAbility anthem = c.ai.getCardsIn(ZoneType.Hand).get(0).getFirstSpellAbility();
                     anthem.setActivatingPlayer(c.ai);
                     final String before = "before the draw: untapped Plains " + CardLists.count(c.ai.getCardsIn(ZoneType.Battlefield), k -> k.isLand() && !k.isTapped())
-                            + ", mana estimate " + ComputerUtilMana.getAvailableManaEstimate(c.ai) + ", Anthem castable with 0 / 2 extra mana: "
-                            + ComputerUtilMana.canPayManaCost(anthem, c.ai, 0, false) + " / " + ComputerUtilMana.canPayManaCost(anthem, c.ai, 2, false);
+                            + ", mana estimate " + ComputerUtilMana.getAvailableManaEstimate(c.ai)
+                            + ", Anthem printed cost: " + anthem.getPayCosts().getTotalMana();
                     final String broken = drawIntoTithe(c);
                     if (broken != null) { return broken; }
                     // what the check in TokenAi sees for every spell in hand, with the Tithe trigger on the stack
@@ -783,10 +785,7 @@ public class AiReportScenarioTest extends AITest {
                     c.resolveAll();
                     return hasTreasure(c) ? null : "the AI paid {2} and could no longer cast Glorious Anthem; " + asked + "; spells seen: " + seen + "; " + before + "; untapped Plains left: "
                             + CardLists.count(c.ai.getCardsIn(ZoneType.Battlefield), k -> k.isLand() && !k.isTapped())
-                            + ", hand: " + c.ai.getCardsIn(ZoneType.Hand) + ", Anthem castable with 0 / 2 extra mana: "
-                            + ComputerUtilMana.canPayManaCost(c.ai.getCardsIn(ZoneType.Hand).get(0).getFirstSpellAbility(), c.ai, 0, false) + " / "
-                            + ComputerUtilMana.canPayManaCost(c.ai.getCardsIn(ZoneType.Hand).get(0).getFirstSpellAbility(), c.ai, 2, false)
-                            + ", trace:" + c.trace;
+                            + ", hand: " + c.ai.getCardsIn(ZoneType.Hand) + ", trace:" + c.trace;
                 }));
         l.add(new Scenario("tithe-colors", "the AI pays {2} for Smothering Tithe when its Counterspell could not be cast with four Plains anyway", Fid.APPROX, "DRAW", true,
                 c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); c.hand("Counterspell", c.ai); },

@@ -553,11 +553,12 @@ public class TokenAi extends SpellAbilityAi {
      * The ways to cast a card: its spells and their alternative costs, whatever the phase. Card.getAllPossibleAbilities drops what
      * cannot be played at this moment even when asked to keep it, and a sorcery-speed spell such as Glorious Anthem cannot be played
      * while a trigger is on the stack, so the AI would have found nothing to keep its mana for. The mana it will take on its own
-     * turn is what matters here.
+     * turn is what matters here. Include abilities from alternate card states as well: a modal double-faced card may have a
+     * castable back face even when its front face cannot be cast with the available colors.
      */
     private static List<SpellAbility> castOptions(final Card card, final Player payer) {
         final List<SpellAbility> options = new ArrayList<>();
-        for (final SpellAbility sa : card.getSpellAbilities()) {
+        for (final SpellAbility sa : card.getAllSpellAbilities()) {
             if (sa.isAdventure() && card.isOnAdventure()) {
                 continue; // already cast as the adventure
             }

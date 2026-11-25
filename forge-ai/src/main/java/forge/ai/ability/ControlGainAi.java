@@ -23,6 +23,7 @@ import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.combat.CombatUtil;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -304,7 +305,10 @@ public class ControlGainAi extends SpellAbilityAi {
         }
         final int power = host.getNetPower();
         final int toughness = host.getNetToughness();
-        final boolean answer = ai.getCreaturesInPlay().anyMatch(c -> c.getNetToughness() > power || c.getNetPower() >= toughness);
+        // Only count creatures that can legally block in the opponent's upcoming combat.
+        // In particular, a tapped creature cannot block before the AI gets its next untap step.
+        final boolean answer = ai.getCreaturesInPlay().anyMatch(c -> CombatUtil.canBlock(host, c)
+                && (c.getNetToughness() > power || c.getNetPower() >= toughness));
         final int opponentLife = opponents.stream().mapToInt(Player::getLife).min().orElse(0);
         final boolean ahead = ai.getLife() > 3 * power && ai.getLife() >= opponentLife;
         if (answer || ahead) {
