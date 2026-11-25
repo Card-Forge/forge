@@ -106,7 +106,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
 
-        if (!random && !sa.hasParam("Shuffle")) {
+        if (!random && !(sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
             if (movingToDeck && cards.size() >= 2) {
                 Player p = AbilityUtils.getDefinedPlayers(source, sa.getParam("DefinedPlayer"), sa).get(0);
                 cards = (CardCollection) p.getController().orderMoveToZoneList(cards, destination, sa);
@@ -214,7 +214,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         // CR 701.20d If an effect would cause a player to shuffle a set of objects into a library,
         // that library is shuffled even if there are no objects in that set. 
-        if (sa.hasParam("Shuffle")) {
+        if (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
             //TODO: If destination zone is some other kind of deck like a planar deck, shuffle that instead.
             for (Player p : tgtPlayers) {
                 p.shuffle(sa);

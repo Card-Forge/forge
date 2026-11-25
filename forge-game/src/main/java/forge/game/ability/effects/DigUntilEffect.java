@@ -138,7 +138,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
         final ZoneType noneFoundDest = ZoneType.smartValueOf(sa.getParam("NoneFoundDestination"));
         final int noneFoundLibPos = AbilityUtils.calculateAmount(host, sa.getParam("NoneFoundLibraryPosition"), sa);
         final ZoneType digSite = sa.hasParam("DigZone") ? ZoneType.smartValueOf(sa.getParam("DigZone")) : ZoneType.Library;
-        boolean shuffle = sa.hasParam("Shuffle");
+        boolean shuffle = sa.hasParam("Shuffle") && !"False".equals(sa.getParam("Shuffle"));
         final boolean optional = sa.hasParam("Optional");
         final boolean optionalFound = sa.hasParam("OptionalFoundMove");
         boolean sequential = digSite == ZoneType.Library && revealedDest != null && revealedDest.equals(foundDest);

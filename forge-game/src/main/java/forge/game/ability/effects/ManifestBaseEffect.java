@@ -69,7 +69,7 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
             }
         }
 
-        if (sa.hasParam("Shuffle")) {
+        if (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
             CardLists.shuffle(tgtCards);
         }
 
