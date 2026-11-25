@@ -3,12 +3,12 @@ Name=Yosei, the Morning Star
 [Commander]
 1 Yosei, the Morning Star|CHK
 [Main]
-1 Academy Rector|UDS
-1 Altar of Dementia|MH1
+1 The Wandering Emperor|NEO
+1 Cloudsteel Kirin|NEO
+1 Invoke Justice|NEO
 1 Always Watching|GNT
 1 Animal Boneyard|ODY
 1 Archon of Justice|M12
-1 Ashnod's Altar|EMA
 1 Aura of Silence|C15
 1 Aven Mindcensor|AKH
 1 Blasting Station|5DN
@@ -49,12 +49,11 @@ Name=Yosei, the Morning Star
 1 Miren, the Moaning Well|SOK
 1 Mother of Runes|CMA
 1 Myriad Landscape|C18
-1 Nykthos, Shrine to Nyx|THS
 1 Oblivion Stone|CM2
 1 Oreskos Explorer|CM2
 1 Parallax Wave|NEM
 1 Path to Exile|SS2
-29 Plains|CHK
+30 Plains|CHK
 1 Ranger of Eos|MM3
 1 Reveillark|UMA
 1 Scroll Rack|TMP
