@@ -787,6 +787,21 @@ public class AiReportScenarioTest extends AITest {
                             + CardLists.count(c.ai.getCardsIn(ZoneType.Battlefield), k -> k.isLand() && !k.isTapped())
                             + ", hand: " + c.ai.getCardsIn(ZoneType.Hand) + ", trace:" + c.trace;
                 }));
+        l.add(new Scenario("tithe-alternate-face",
+                "the AI keeps mana for the castable back face of Mila, Crafty Companion",
+                Fid.APPROX, "DRAW", true,
+                c -> {
+                    c.bf("Smothering Tithe", c.opp);
+                    c.bf("Mountain", 6, c.ai);
+                    c.hand("Mila, Crafty Companion", c.ai);
+                },
+                c -> {
+                    final String broken = drawIntoTithe(c);
+                    if (broken != null) { return broken; }
+                    c.resolveAll();
+                    return hasTreasure(c) ? null
+                            : "the AI paid {2} and left itself unable to cast Lukka, Wayward Bonder ({4}{R}{R}); trace: " + c.trace;
+                }));
         l.add(new Scenario("tithe-colors", "the AI pays {2} for Smothering Tithe when its Counterspell could not be cast with four Plains anyway", Fid.APPROX, "DRAW", true,
                 c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); c.hand("Counterspell", c.ai); },
                 c -> {
