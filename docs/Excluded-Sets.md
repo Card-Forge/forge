@@ -37,10 +37,10 @@ A card's default art avoids excluded sets when another printing exists. Adventur
 
 Excluding Un-cards and playtest cards goes further. These cards also leave deck editor catalogs, boosters, drafts and generated decks in every mode.
 
-Owned cards and saved decks do not change. A deck with an excluded card still loads.
+Owned cards and decks keep all their cards. In a deck line that names no set, the card switches to an allowed printing when one exists. Otherwise the deck keeps the excluded printing, and a deck with an excluded card still loads.
 
 ### Warnings
-Some content keeps excluded cards, and Forge shows a message once per session when it does. Quest, Planar Conquest and Adventure opponents play their decks as written. A message at the start of a match names any opponent whose deck holds excluded cards. In Adventure, a message also appears when a shop's stock is missing cards because of the list.
+Some content keeps excluded cards, and Forge shows a message once per session when it does. Opponent decks in Quest, Planar Conquest and Adventure still play cards on the list. A message at the start of a match names any opponent whose deck uses cards with no allowed printing, or Un-cards and playtest cards. In Adventure, a message also appears when a shop's stock is missing cards because of the list.
 
 ## How It Works
 Each category is a tag on sets and individual printings. The built-in tags update daily from Scryfall, and custom tags can be added by hand (see [Defining custom tags](#defining-custom-tags)).

@@ -25,14 +25,11 @@ USER_AGENT = "Forge-printtags/1.0"
 
 
 def is_funny(card):
-    """Un-cards and playtest cards. The Vintage check keeps legal cards, such as an acorn Counterspell, out, and
-    Scryfall calls the eternal-legal Attractions and sticker sheets not legal, so only acorn ones count."""
+    """Un-cards and playtest cards. The Commander check keeps legal cards out, such as an acorn Counterspell or the
+    eternal-legal Attractions and sticker sheets."""
     marked = (card.get("set_type") == "funny" or card.get("border_color") == "silver"
               or card.get("security_stamp") == "acorn" or "playtest" in card.get("promo_types", []))
-    if not marked or card.get("legalities", {}).get("vintage") != "not_legal":
-        return False
-    type_line = card.get("type_line", "")
-    return card.get("security_stamp") == "acorn" or ("Attraction" not in type_line and "Stickers" not in type_line)
+    return marked and card.get("legalities", {}).get("commander") == "not_legal"
 
 
 # To add a tag, add its name and a test on a Scryfall card object, such as
@@ -131,15 +128,17 @@ def download_bulk():
 
 
 def read_scryfall(path, wanted):
-    """Maps each wanted (set, number) found on Scryfall to the tags RULES give its card."""
-    tags = {}
+    """Maps each wanted (set, number) found on Scryfall to the tags RULES give its card, and lists the basic lands."""
+    tags, basics = {}, set()
     with gzip.open(path, "rt", encoding="utf-8") as f:
         for line in f:
             card = json.loads(line)
             key = (card["set"], card["collector_number"])
             if key in wanted:
                 tags[key] = {tag for tag, rule in RULES.items() if rule(card)}
-    return tags
+                if "Basic Land" in card.get("type_line", ""):
+                    basics.add(key)
+    return tags, basics
 
 
 def main():
@@ -148,7 +147,7 @@ def main():
     args = parser.parse_args()
     editions = read_editions()
     wanted = {scryfall_key(metadata, number) for metadata, numbers, _ in editions for number in numbers}
-    card_tags = read_scryfall(args.bulk or download_bulk(), wanted)
+    card_tags, basics = read_scryfall(args.bulk or download_bulk(), wanted)
 
     lines = {tag: [] for tag in [*RULES, *SECTION_RULES]}
     total = found = 0
@@ -167,10 +166,13 @@ def main():
         total += len(numbers)
         found += len(prints)
         unmatched += [f"{code} {n}" for n in numbers if n not in prints]
+        basic_numbers = {n for n in prints if scryfall_key(metadata, n) in basics}
         for tag in RULES:
             tagged = [n for n in numbers if n in prints and tag in prints[n]]
+            # untagged basic lands, such as an Un-set's legal basics, still let the set be tagged as a whole
+            whole = all(tag in tags or n in basic_numbers for n, tags in prints.items())
             if tagged:
-                lines[tag].append(code if len(tagged) == len(prints) else code + " " + " ".join(with_ranges(tagged)))
+                lines[tag].append(code if whole else code + " " + " ".join(with_ranges(tagged)))
         for tag, section in SECTION_RULES.items():
             if section in section_numbers:
                 lines[tag].append(code + " " + " ".join(with_ranges(section_numbers[section])))
