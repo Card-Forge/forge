@@ -442,7 +442,7 @@ public class ReplacementHandler {
                 Card source = e.getKey();
                 Integer damage = e.getValue();
                 if (damage > 0) {
-                    boolean prevention = source.canDamagePrevented(isCombat) &&
+                    boolean prevention = source.canDamagePrevented(target, isCombat) &&
                                             (cause == null || !cause.hasParam("NoPrevention"));
                     final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(target);
                     repParams.put(AbilityKey.DamageSource, source);
