@@ -3,7 +3,6 @@ package forge.game.card;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
-import forge.card.CardDb;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -1956,8 +1955,7 @@ public class CardProperty {
             if (card.getName().isEmpty()) {
                 return false;
             }
-            final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEditions(card.getName(),
-                    CardDb.CardArtPreference.ORIGINAL_ART_BLACK_BORDER_ALL_EDITIONS);
+            final PaperCard setCard = StaticData.instance().getCommonCards().getOriginalPrint(card.getName());
             if (setCard == null || !Arrays.asList(setCodes).contains(setCard.getEdition())) {
                 return false;
             }
