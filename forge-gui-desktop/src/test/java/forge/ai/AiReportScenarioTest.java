@@ -720,6 +720,17 @@ public class AiReportScenarioTest extends AITest {
                     c.resolveAll();
                     return agent.getController().equals(c.opp) ? null : "Sleeper Agent stayed with " + agent.getController();
                 }));
+        // #13073: Fireball with 7 lands against a player on 5 life: X=5 at the player alone is lethal, not X=5 split between the player and a creature
+        l.add(new Scenario("13073-fireball-lethal", "Fireball goes at the player alone when that is lethal, not split with a creature (#13073)", Fid.EXACT, "MAIN1", true,
+                c -> { c.bf("Mountain", 4, c.ai); c.bf("Swamp", 3, c.ai); c.hand("Fireball", c.ai); c.bf("Whirling Dervish", c.opp); c.opp.setLife(5, null); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Fireball");
+                    if (sa == null) { return "AI did not cast Fireball" + c.why("Fireball"); }
+                    if (sa.getTargets().size() != 1 || !sa.getTargets().contains(c.opp)) {
+                        return "Fireball targeted " + sa.getTargets() + " instead of the player alone";
+                    }
+                    return null;
+                }));
         // #13049: Pay {E}{E}, sacrifice Gonti's Machinations: the opponent loses 3 and the AI gains 3, with 10 life and 3 energy
         l.add(play("13049", "Gonti's Machinations is spent as soon as there is the energy for it, not only for lethal", Fid.EXACT, M1, true, "Gonti's Machinations",
                 c -> { c.bf("Gonti's Machinations", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 3); c.ai.setLife(10, null); }));

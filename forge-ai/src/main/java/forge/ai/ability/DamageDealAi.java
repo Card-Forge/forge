@@ -622,6 +622,8 @@ public class DamageDealAi extends DamageAiBase {
 
         immediately = immediately || ComputerUtil.playImmediately(ai, sa);
 
+        final int fullDmg = dmg; // what one target would take: every target beyond the first costs {1} and splits the damage
+        final boolean dividedEvenly = sa.hasParam("DivideEvenly");
         int totalTargetedSoFar = -1;
         while (sa.canAddMoreTarget()) {
             if (totalTargetedSoFar == tcs.size()) {
@@ -665,10 +667,16 @@ public class DamageDealAi extends DamageAiBase {
                         sa.addDividedAllocation(enemy, dmg);
                         break;
                     }
+                    if (dividedEvenly && killsAlone(enemy, fullDmg, source, noPrevention)) {
+                        break; // Fireball for exactly what it takes: a second target only costs {1} and halves the damage
+                    }
                     continue;
                 }
-                if ("RoundedDown".equals(sa.getParam("DivideEvenly"))) {
-                    dmg = dmg * sa.getTargets().size() / (sa.getTargets().size() +1);
+                if (dividedEvenly) {
+                    // one more target: {1} less for X, and the rest split between one more. Always from the full amount, not from
+                    // what the last pass left, or every pass halves it again
+                    final int shares = tcs.size() + 1;
+                    dmg = Math.max(0, (fullDmg - tcs.size()) / shares);
                 }
 
                 // look for creature targets; currently also catches planeswalkers that can be killed immediately
@@ -1006,6 +1014,13 @@ public class DamageDealAi extends DamageAiBase {
             //target is a player
             if (!sa.getTargets().isTargetingAnyCard()) {
                 actualPay = dmg;
+                // a player that dies to less is paid for no more (X is what it takes, not all the mana)
+                if (com.google.common.collect.Iterables.size(sa.getTargets().getTargetPlayers()) == 1) {
+                    final Player victim = sa.getTargets().getFirstTargetedPlayer();
+                    if (victim.getLife() > 0 && victim.getLife() < dmg && killsAlone(victim, victim.getLife(), source, noPrevention)) {
+                        actualPay = victim.getLife();
+                    }
+                }
             }
             for (final Card c : sa.getTargets().getTargetCards()) {
                 final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
@@ -1018,6 +1033,16 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    /** Whether this much damage, all of it to one player, is lethal for that player. */
+    private static boolean killsAlone(final Player p, final int damage, final Card source, final boolean noPrevention) {
+        if (p == null || !p.canLoseLife() || p.cantLoseForZeroOrLessLife()) {
+            return false;
+        }
+        final int dealt = noPrevention ? p.staticReplaceDamage(damage, source, false)
+                : ComputerUtilCombat.predictDamageTo(p, damage, source, false);
+        return dealt >= p.getLife();
     }
 
     private static int calculateDamageAmount(SpellAbility sa, Card source, String damage) {
