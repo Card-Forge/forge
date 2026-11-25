@@ -63,7 +63,6 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
 
         for (Player zoneToPeek : srcZonePlayers) {
             final PlayerZone playerZone = zoneToPeek.getZone(srcZone);
-            // clamp per player: one short library must not shrink the peek for the next player
             final int playerPeek = Math.min(numPeek, playerZone.size());
 
             CardCollection peekCards = new CardCollection();
