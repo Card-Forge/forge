@@ -23,6 +23,7 @@ import forge.card.DraftOptions;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
@@ -65,8 +66,6 @@ public class BoosterDraft implements IBoosterDraft {
 
     /** Whether this draft uses Commander-format deck-building rules. */
     protected boolean isCommanderDraft = false;
-    protected String freeCommanderName = null;
-    protected String impliedPartner = null;
 
     private IDraftLog draftLog = null;
 
@@ -201,9 +200,6 @@ public class BoosterDraft implements IBoosterDraft {
                             setPodSize(edition.getDraftOptions().getRecommendedPodSize());
                         }
                         doublePickDuringDraft = edition.getDraftOptions().getDoublePick();
-                        if (edition.getDraftType() == CardEdition.DraftType.Commander) {
-                            activateCommanderDraft(edition.getDraftOptions().getFreeCommander(), edition.getDraftOptions().getImpliedPartner());
-                        }
                     }
 
                     final IUnOpenedProduct product1 = block.getBooster(setCode);
@@ -332,9 +328,6 @@ public class BoosterDraft implements IBoosterDraft {
                 draft.setPodSize(edition.getDraftOptions().getRecommendedPodSize());
             }
             draft.doublePickDuringDraft = edition.getDraftOptions().getDoublePick();
-            if (edition.getDraftType() == CardEdition.DraftType.Commander) {
-                draft.activateCommanderDraft(edition.getDraftOptions().getFreeCommander(), edition.getDraftOptions().getImpliedPartner());
-            }
         }
 
         for (String booster : boosters) {
@@ -379,26 +372,23 @@ public class BoosterDraft implements IBoosterDraft {
      */
     protected LimitedPlayer createAIPlayer(final int seatingOrder) {
         if (isCommanderDraft) {
-            return new CommanderLimitedPlayerAI(seatingOrder, this, freeCommanderName, impliedPartner);
+            return new CommanderLimitedPlayerAI(seatingOrder, this);
         }
         return new LimitedPlayerAI(seatingOrder, this);
     }
 
     /**
-     * Activate commander-draft mode and replace any already-created AI players
-     * with {@link CommanderLimitedPlayerAI} instances.  Must be called before
-     * {@link #initializeBoosters()}.
-     *
-     * @param freeCmdName    name of the edition's free commander, or {@code null}
-     * @param impliedPartner
+     * Activate commander-draft mode and replace the AI players
+     * with {@link CommanderLimitedPlayerAI} instances.
      */
-    protected void activateCommanderDraft(final String freeCmdName, String impliedPartner) {
+    private void activateCommanderDraft() {
         this.isCommanderDraft = true;
-        this.freeCommanderName = (freeCmdName != null && !freeCmdName.isEmpty()) ? freeCmdName : null;
-        this.impliedPartner = impliedPartner;
-        for (int i = 1; i < this.players.size(); i++) {
-            this.players.set(i, createAIPlayer(i));
+        for (int i = 0; i < this.players.size(); i++) {
+            if (this.players.get(i) instanceof LimitedPlayerAI) {
+                this.players.set(i, createAIPlayer(i));
+            }
         }
+        this.localPlayer = players.get(0);
     }
 
     public DraftPack addBooster(CardEdition edition) {
@@ -526,11 +516,6 @@ public class BoosterDraft implements IBoosterDraft {
     /** @return whether this draft uses Commander-format deck-building rules. */
     public boolean isCommanderDraft() {
         return isCommanderDraft;
-    }
-
-    /** @return the edition's free commander name, or {@code null} if none. */
-    public String getFreeCommanderName() {
-        return freeCommanderName;
     }
 
     @Override
@@ -674,11 +659,17 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     public void initializeBoosters() {
+        final List<DraftPack> packs = new ArrayList<>();
         for (Supplier<List<PaperCard>> boosterRound : this.product) {
             for (int i = 0; i < this.podSize; i++) {
-                DraftPack pack = new DraftPack(boosterRound.get(), nextId++);
-                this.players.get(i).receiveUnopenedPack(pack);
+                packs.add(new DraftPack(boosterRound.get(), nextId++));
             }
+        }
+        if (DeckFormat.isCommanderDraft(packs.stream().flatMap(List::stream).collect(Collectors.toList()))) {
+            activateCommanderDraft();
+        }
+        for (int i = 0; i < packs.size(); i++) {
+            this.players.get(i % this.podSize).receiveUnopenedPack(packs.get(i));
         }
         startRound();
     }

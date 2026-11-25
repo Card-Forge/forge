@@ -75,7 +75,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     private SpellAbility primaryAbility = null;
     private boolean frozen = false;
-    private boolean bResolving = false;
 
     private final List<SpellAbility> thisTurnCast = Lists.newArrayList();
     private List<Card> lastTurnCast = Lists.newArrayList();
@@ -170,25 +169,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.getTriggerHandler().runWaitingTriggers();
     }
 
-    public final void clearFrozen() {
-        // TODO: frozen triggered abilities and undoable costs have nasty consequences
-        frozen = false;
-    }
-
     public final boolean isResolving() {
-        return bResolving;
+        return curResolving != null;
     }
-    public final void setResolving(final boolean b) {
-        bResolving = b;
-    }
-
     public final boolean isResolving(Card c) {
         if (!isResolving()) {
             return false;
         }
         return c.equals(curResolving.getHostCard());
     }
-
     public final SpellAbility getResolvingAbility() {
         return curResolving;
     }
@@ -643,7 +632,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final void resolveStack() {
         // freeze the stack while we're in the middle of resolving
         freezeStack(null);
-        setResolving(true);
 
         // The SpellAbility isn't removed from the Stack until it finishes resolving
         // temporarily reverted removing SAs after resolution
@@ -733,7 +721,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         // After SA resolves we have to do a handful of things
-        setResolving(false);
         unfreezeStack();
         sa.resetOnceResolved();
 

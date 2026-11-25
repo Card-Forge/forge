@@ -16,6 +16,7 @@ import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 public class DamageDealAiTest extends AITest {
     @Test
@@ -80,6 +81,36 @@ public class DamageDealAiTest extends AITest {
 
         // AI should choose the creature it can kill (Grizzly Bears)
         AssertJUnit.assertEquals("AI should target opponent creature it can kill", killableCreature, chosen);
+    }
+
+    private boolean shouldTargetPlayerWithProwess(final String cardName, final boolean useDamageSubAbility) {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        addCard("Monastery Swiftspear", ai);
+        final Card burn = addCardToZone(cardName, ai, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+
+        final SpellAbility root = burn.getFirstSpellAbility();
+        root.setActivatingPlayer(ai);
+        final SpellAbility damage = useDamageSubAbility ? root.getSubAbility() : root;
+        if (damage == null) {
+            throw new AssertionError(cardName + " has no damage sub-ability");
+        }
+        damage.setActivatingPlayer(ai);
+        final DamageDealAi damageAi = (DamageDealAi) SpellApiToAi.Converter.get(ApiType.DealDamage);
+        return damageAi.shouldTgtP(ai, damage, 3, false);
+    }
+
+    @Test
+    public void testLavaSpikeCanTargetPlayerBeforeCombatForProwess() {
+        AssertJUnit.assertTrue("Lava Spike should be allowed to target the player to trigger Prowess before combat",
+                shouldTargetPlayerWithProwess("Lava Spike", false));
+    }
+
+    @Test
+    public void testSkullcrackDamageSubAbilityUsesRootSpellForProwess() {
+        AssertJUnit.assertTrue("Skullcrack's nested damage ability should be allowed to target the player before combat",
+                shouldTargetPlayerWithProwess("Skullcrack", true));
     }
 
     @Test

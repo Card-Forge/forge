@@ -21,19 +21,19 @@
     {
       "type": "Table",
       "name": "questList",
-      "x": 20,
-      "y": 22,
-      "width": 390,
-      "height": 220,
+      "x": 22,
+      "y": 24,
+      "width": 160,
+      "height": 216,
 	  "fontColor":"black"
     },
 	{
       "type": "Table",
       "name": "questDetails",
-      "x": 20,
-      "y": 22,
-      "width": 390,
-      "height": 220,
+      "x": 198,
+      "y": 24,
+      "width": 210,
+      "height": 216,
 	  "fontColor":"black"
     },
 	{
@@ -45,6 +45,24 @@
       "height": 30,
       "x": 420,
       "y": 224
+    },
+	{
+      "type": "TextButton",
+      "name": "abandon",
+      "text": "tr(lblAbandonQuest)",
+      "width": 60,
+      "height": 30,
+      "x": 420,
+      "y": 104
+    },
+	{
+      "type": "TextButton",
+      "name": "track",
+      "binding": "Bookmark",
+      "width": 60,
+      "height": 30,
+      "x": 420,
+      "y": 144
     },
 	{
       "type": "TextButton",

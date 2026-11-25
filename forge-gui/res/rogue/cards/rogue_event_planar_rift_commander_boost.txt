@@ -1,0 +1,5 @@
+Name:Event Trait - Commander Boost
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouCtrl | AddPower$ 2 | AddToughness$ 2 | EffectZone$ Command | Description$ Commander creatures you control get +2/+2.
+Oracle:Commander creatures you control get +2/+2.

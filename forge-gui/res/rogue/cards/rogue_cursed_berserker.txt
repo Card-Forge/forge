@@ -1,0 +1,5 @@
+Name:Cursed - Berserker
+ManaCost:no cost
+Types:Cursed
+S:Mode$ Continuous | Affected$ Creature.attacking+OppCtrl | AddKeyword$ Double Strike | EffectZone$ Command | Description$ Attacking creatures your opponents control have double strike.
+Oracle:Attacking creatures your opponents control have double strike.

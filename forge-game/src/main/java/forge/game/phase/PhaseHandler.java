@@ -517,7 +517,6 @@ public class PhaseHandler implements IHasForgeLog {
     private void onPhaseEnd() {
         onPhaseEnd(true);
     }
-
     private void onPhaseEnd(final boolean priorityWasGiven) {
         // If the Stack isn't empty why is nextPhase being called?
         // (a step in which nobody received priority may end with objects on the stack: CR 502.4, CR 725.1f)
@@ -971,7 +970,7 @@ public class PhaseHandler implements IHasForgeLog {
 
         game.setMonarchBeginTurn(game.getMonarch());
 
-        if (game.getRules().hasAppliedVariant(GameType.Planechase)) {
+        if (game.getRules().hasAppliedVariant(GameType.Planechase) && game.getActivePlanes() != null) {
             for (Card p :game.getActivePlanes()) {
                 if (p != null) {
                     p.setController(next, 0);

@@ -1,0 +1,13 @@
+Name:Padishah Emperor Shaddam IV
+ManaCost:5 B B
+Types:Legendary Creature Human Noble
+PT:2/4
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch
+T:Mode$ ChangesZone | ValidCard$ Creature.!token+Other | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerZones$ Battlefield | CheckDefinedPlayer$ You.isMonarch | NoResolvingCheck$ True | TriggerDescription$ Whenever another nontoken creature dies while you're the monarch, you may pay 1 life. If you do, create a Treasure token.
+SVar:TrigToken:AB$ Token | Cost$ PayLife<1> | TokenScript$ c_a_treasure_sac
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of your end step, destroy target creature with the greatest power among creatures your opponents control.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl+powerEQX | ValidTgtsDesc$ creature with the greatest power among creatures your opponents control
+SVar:X:Count$Valid Creature.OppCtrl$GreatestCardPower
+Oracle:When Padishah Emperor Shaddam IV enters, you become the monarch.\nWhenever another nontoken creature dies while you're the monarch, you may pay 1 life. If you do, create a Treasure token.\nAt the beginning of your end step, destroy target creature with the greatest power among creatures your opponents control.

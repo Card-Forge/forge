@@ -456,7 +456,7 @@ public class CountersPutAi extends CountersAi {
                 // don't put the counter on the dead creature
                 if (sacSelf && c.equals(source)) {
                     return false;
-                } else if (hasSacCost && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) {
+                } else if (hasSacCost && !sacSelf && !sa.isCurse() && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) { // the threatened card is the one sacrificed: a self-sacrifice does not threaten the target (#12058). A curse puts its counters on a creature of the opponent, which is never the sacrificed one (Ifnir Deadlands, #13046)
                     return false;
                 }
                 if ("NoCounterOfType".equals(sa.getParam("AILogic"))) {
@@ -639,7 +639,9 @@ public class CountersPutAi extends CountersAi {
 
         boolean immediately = ComputerUtil.playImmediately(ai, sa);
 
-        if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa, immediately)) {
+        // a solved Case has nothing else to do: it is cashed in as soon as there is something to animate (Case of the Filched Falcon, #12058)
+        final boolean cashInCase = sacSelf && source.getType().hasSubtype("Case");
+        if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa, immediately || cashInCase)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
@@ -874,8 +876,12 @@ public class CountersPutAi extends CountersAi {
                     choice = Aggregates.random(list);
                 }
                 if (choice != null && divided) {
-                    if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1) {
+                    if (left <= 0) {
+                        break; // no more counters to distribute
+                    }
+                    if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1 || left <= Math.max(amount / totalTargets, 1)) {
                         sa.addDividedAllocation(choice, left);
+                        left = 0;
                     } else {
                         int alloc = Math.max(amount / totalTargets, 1);
                         sa.addDividedAllocation(choice, alloc);
@@ -932,7 +938,16 @@ public class CountersPutAi extends CountersAi {
                 }
             }
         }
-        return MyRandom.getRandom().nextBoolean();
+        // "you may put a counter": a good counter on the host is taken, a bad one is not (it was a coin flip)
+        final String type = sa.getParam("CounterType");
+        if (type != null && !type.startsWith("Choose") && !type.contains(",")) {
+            try {
+                return !ComputerUtil.isNegativeCounter(CounterType.getType(type), source);
+            } catch (final RuntimeException e) {
+                return true;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -1208,7 +1223,6 @@ public class CountersPutAi extends CountersAi {
         Card source = sa.getHostCard();
         PhaseHandler ph = source.getGame().getPhaseHandler();
 
-        int numStation = source.getKeywordMagnitude(Keyword.STATION);
         int numCharge = source.getCounters(CounterEnumType.CHARGE);
         CardCollection canTap = CardLists.filter(ai.getCreaturesInPlay(), c -> c.getNetPower() > 0 && c.isUntapped());
         if (canTap.isEmpty()) {
@@ -1224,7 +1238,18 @@ public class CountersPutAi extends CountersAi {
         if (ph.is(PhaseType.MAIN1, ai)) {
             Card firstToTap = canTap.getFirst();
             if (source.getType().hasSubtype("Spacecraft") && !source.isCreature() && source.isUntapped()) {
-                if (numCharge < numStation && numCharge + firstToTap.getNetPower() >= numStation
+                Integer minStation = null;
+                for (StaticAbility st : source.getStaticAbilities()) {
+                    if (!st.isIntrinsic() || !st.hasParam("Station") || !"Creature".equals(st.getParam("AddType"))) {
+                        continue;
+                    }
+                    minStation = Integer.valueOf(st.getParam("Station"));
+                    break;
+                }
+                if (minStation == null) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+                if (numCharge < minStation && numCharge + firstToTap.getNetPower() >= minStation
                         && firstToTap.getNetPower() <= source.getBasePower()) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
@@ -1233,10 +1258,22 @@ public class CountersPutAi extends CountersAi {
 
         // If there's nothing to possibly block next turn, or we can reasonably stay on high enough life, go for it
         if (ph.is(PhaseType.MAIN2, ai)) {
+            Integer maxStation = null;
+            for (StaticAbility st : source.getStaticAbilities()) {
+                if (!st.isIntrinsic() || !st.hasParam("Station")) {
+                    continue;
+                }
+                int value = Integer.valueOf(st.getParam("Station"));
+                maxStation = maxStation == null ? value : Math.max(maxStation, value);
+            }
+            if (maxStation == null) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+
             List<Card> nextTurnAttackers = CardLists.filter(ai.getStrongestOpponent().getCreaturesInPlay(), c -> CombatUtil.canAttackNextTurn(c, ai));
             CardCollection blockerList = CardLists.filter(canTap, CardPredicates.possibleBlockerForAtLeastOne(nextTurnAttackers));
 
-            if (numCharge < numStation) {
+            if (numCharge < maxStation) {
                 if (blockerList.isEmpty() || ComputerUtil.predictNextCombatsRemainingLife(ai, false, true, 0, blockerList) > ai.getStartingLife() * 2 / 3) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }

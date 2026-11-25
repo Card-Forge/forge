@@ -1,0 +1,7 @@
+Name:Henzie Trait - Dramatic Entrance
+ManaCost:no cost
+Types:Trait
+S:Mode$ RaiseCost | ValidCard$ Permanent | Activator$ You | Type$ Spell | Amount$ 1 | EffectZone$ Command | Description$ Permanent spells you cast cost {1} more to cast.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | GameActivationLimit$ 1 | Execute$ TrigDig | TriggerDescription$ At the beginning of your first upkeep, reveal cards from the top of your library until you reveal two nonland permanent cards with mana value 3 or less. Put those cards onto the battlefield, then shuffle the rest into your library.
+SVar:TrigDig:DB$ DigUntil | Amount$ 2 | Valid$ Permanent.nonLand+cmcLE3 | ValidDescription$ nonland permanent with mana value 3 or less | FoundDestination$ Battlefield | RevealedDestination$ Library | Shuffle$ True
+Oracle:Permanent spells you cast cost {1} more to cast.\nAt the beginning of your first upkeep, reveal cards from the top of your library until you reveal two nonland permanent cards with mana value 3 or less. Put those cards onto the battlefield, then shuffle the rest into your library.

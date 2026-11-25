@@ -442,7 +442,10 @@ public class MatchScreen extends FScreen {
             unifiedPhase.setVisible(unified);
             if (unified) {
                 unifiedPhase.setBounds(width - buttonWidth, 0, buttonWidth, barHeight);
-                unifiedPhase.getMenu().layoutFor(width, barHeight, height - VPrompt.HEIGHT - barHeight);
+                //Shift only the open dropdown left of the right-side player controls. The label and menu bar stay put.
+                final float menuInset = topPlayerPanel != null && topPlayerPanel.isCompactRight()
+                        ? topPlayerPanel.getColumnWidth() + Utils.scale(4) : 0f;
+                unifiedPhase.getMenu().layoutFor(width, barHeight, height - VPrompt.HEIGHT - barHeight, menuInset);
             } else {
                 unifiedPhase.getMenu().close();
             }

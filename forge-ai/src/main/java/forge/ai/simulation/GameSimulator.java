@@ -3,6 +3,7 @@ package forge.ai.simulation;
 
 import forge.ai.AIOption;
 import forge.ai.ComputerUtil;
+import forge.ai.NamedDiscard;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
@@ -263,6 +264,8 @@ public class GameSimulator {
                 } else {
                     SpellAbilityChoiceCopier.copyTargets(origSa, playingSa, copier::find);
                 }
+                NamedDiscard.aimIfUntargeted(aiPlayer, playingSa);
+                TargetTopUp.apply(aiPlayer, playingSa);
                 if (debugPrint && !playingSa.getAllTargetChoices().isEmpty()) {
                     debugPrint("Targets: ");
                     for (TargetChoices target : playingSa.getAllTargetChoices()) {
@@ -346,7 +349,11 @@ public class GameSimulator {
 
             simGame.copyLastState();
             boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa,
-                    playingSa -> SpellAbilityChoiceCopier.copyTargets(origSa, playingSa, copier::find));
+                    playingSa -> {
+                        SpellAbilityChoiceCopier.copyTargets(origSa, playingSa, copier::find);
+                        NamedDiscard.aimIfUntargeted(aiPlayer, playingSa);
+                        TargetTopUp.apply(aiPlayer, playingSa);
+                    });
             if (!success) {
                 if (Boolean.getBoolean("flatmc.trace")) {
                     System.err.println("[sim] applySpellAbility: could not pay/play " + sa + " cost=" + sa.getPayCosts());

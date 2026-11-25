@@ -1,0 +1,5 @@
+Name:Cursed - Assault
+ManaCost:no cost
+Types:Cursed
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Deathtouch | EffectZone$ Command | Description$ Creatures your opponents control get +2/+2 and have deathtouch.
+Oracle:Creatures your opponents control get +2/+2 and have deathtouch.

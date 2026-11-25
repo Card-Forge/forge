@@ -2,8 +2,10 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
+import forge.ai.ProwessTiming;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.keyword.Keyword;
@@ -11,6 +13,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -40,6 +43,33 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             }
         }
         return false;
+    }
+
+    /**
+     * A burn spell that can only go to the face has no other use, and holding it for a "better" moment never comes when the
+     * opponent stays above 5 life with a small hand (Boltwave, Skullcrack). Once the AI is done with its own turn, the mana
+     * that is left goes into the damage: in the second main phase, or at the end of the opponent's turn for an instant.
+     */
+    protected static boolean isFaceBurnWorthCasting(final Player ai, final SpellAbility sa) {
+        if (!sa.getRootAbility().isSpell()) {
+            return false;
+        }
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (ph.is(PhaseType.MAIN2, ai)) {
+            return true;
+        }
+        return !isSorcerySpeed(sa, ai) && ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai);
+    }
+
+    /** Does this source deal any damage to the target after replacement and prevention effects? */
+    protected static boolean canActuallyDamage(final GameEntity target, final int damage, final Card source,
+                                               final boolean noPrevention) {
+        if (target == null || source == null || damage <= 0) {
+            return false;
+        }
+        final int predicted = noPrevention ? target.staticReplaceDamage(damage, source, false)
+                : ComputerUtilCombat.predictDamageTo(target, damage, source, false);
+        return predicted > 0;
     }
 
     protected boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention) {
@@ -103,6 +133,16 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             return true;
         }
 
+        if (sa.isSpell() && hasAnotherUseThanDamage(hostcard)) {
+            return false; // Fire // Ice: the other half draws a card; two damage to the face is not what the card is for
+        }
+
+        final TargetRestrictions restrictions = sa.getTargetRestrictions();
+        if (restrictions != null && restrictions.canTgtPlayer() && !restrictions.canTgtCreature()
+                && (ProwessTiming.worthBeforeCombat(comp, sa) || isFaceBurnWorthCasting(comp, sa))) {
+            return true; // nothing else it could hit; Prowess also rewards casting before combat
+        }
+
         if (sa.isSpell()) {
             final CardCollectionView hand = comp.getCardsIn(ZoneType.Hand);
             PhaseHandler phase = game.getPhaseHandler();
@@ -148,6 +188,21 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             }
         }
 
+        return false;
+    }
+
+    /** A split card (Fire // Ice) whose other half does something else than damage. */
+    private static boolean hasAnotherUseThanDamage(final Card host) {
+        if (host == null || !host.isSplitCard()) {
+            return false;
+        }
+        for (final forge.card.CardStateName name : new forge.card.CardStateName[] { forge.card.CardStateName.LeftSplit, forge.card.CardStateName.RightSplit }) {
+            final forge.game.card.CardState state = host.getState(name);
+            final SpellAbility first = state == null ? null : state.getFirstAbility();
+            if (first != null && first.getApi() != forge.game.ability.ApiType.DealDamage) {
+                return true;
+            }
+        }
         return false;
     }
 }

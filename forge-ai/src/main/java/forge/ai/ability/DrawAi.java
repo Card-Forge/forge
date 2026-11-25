@@ -21,6 +21,9 @@ package forge.ai.ability;
 import java.util.Map;
 
 import forge.ai.*;
+import forge.ai.simulation.AiCardLists;
+import forge.ai.simulation.AlurenPlan;
+import forge.ai.simulation.DoomsdayPile;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -245,7 +248,7 @@ public class DrawAi extends SpellAbilityAi {
             }
             final int numCards = sa.hasParam("NumCards")
                     ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
-            return forge.ai.simulation.DoomsdayPile.drawsThroughPile(ai, numCards);
+            return DoomsdayPile.drawsThroughPile(ai, numCards);
         } catch (final RuntimeException e) {
             return false;
         }
@@ -253,7 +256,7 @@ public class DrawAi extends SpellAbilityAi {
 
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
-        if (targetAI(ai, sa, sa.isTrigger() && sa.getHostCard().isInPlay())) {
+        if (targetAI(ai, sa, sa.isTrigger() && !sa.isOptionalTrigger())) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
@@ -328,7 +331,7 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         if (sa.costHasManaX() && sa.getRootAbility().getXManaCostPaid() == null && source != null
-                && forge.ai.simulation.AiCardLists.has(forge.ai.simulation.AiCardLists.Role.DREDGE_REFILL, source)) {
+                && AiCardLists.has(AiCardLists.Role.DREDGE_REFILL, source)) {
             // Breakthrough for the dredge line: X=0 draws four and throws the hand away, which is the point.
             sa.getRootAbility().setXManaCostPaid(0);
         }
@@ -471,7 +474,7 @@ public class DrawAi extends SpellAbilityAi {
             // checks what the ai prevent from casting it on itself
             // if spell is not mandatory
             if (aiTarget && !ai.cantLose()) {
-                if (numCards >= computerLibrarySize - 3 && !forge.ai.simulation.DoomsdayPile.drawsThroughPile(ai, numCards)) {
+                if (numCards >= computerLibrarySize - 3 && !DoomsdayPile.drawsThroughPile(ai, numCards)) {
                     if (xPaid) {
                         numCards = computerLibrarySize - 1;
                         if (numCards <= 0 && !mandatory) {
@@ -589,7 +592,7 @@ public class DrawAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (numCards >= computerLibrarySize - 3 && !forge.ai.simulation.DoomsdayPile.drawsThroughPile(ai, numCards)) {
+            if (numCards >= computerLibrarySize - 3 && !DoomsdayPile.drawsThroughPile(ai, numCards)) {
                 if (ai.isCardInPlay("Laboratory Maniac") && !ai.cantWin()) {
                     return true;
                 }
@@ -597,7 +600,8 @@ public class DrawAi extends SpellAbilityAi {
                 return false;
             }
 
-            if ((computerHandSize + numCards > computerMaxHandSize)) {
+            if (computerHandSize + numCards > computerMaxHandSize
+                    && !AlurenPlan.digging(ai)) {
                 // Don't draw too many cards and then risk discarding cards at EOT
                  if (game.getPhaseHandler().isPlayerTurn(ai)
                         && !sa.isTrigger()
@@ -628,6 +632,10 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        if ("AttackTaxDraw".equals(sa.getParam("AILogic"))
+                && !forge.ai.AttackRestrictionDeal.worthTaking(player, sa.getHostCard().getController())) {
+            return false; // The Second Doctor: the card is not worth an attack it wants to make
+        }
         int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
         // AI shouldn't mill itself
         if (numCards < player.getZone(ZoneType.Library).size())

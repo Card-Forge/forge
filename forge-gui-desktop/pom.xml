@@ -85,7 +85,12 @@
                             <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                             <dontWrapJar>true</dontWrapJar>
                             <errTitle>forge</errTitle>
-                            <downloadUrl>https://bell-sw.com/pages/downloads/#jdk-17-lts</downloadUrl>
+                            <downloadUrl>https://adoptium.net/temurin/releases/?os=windows&amp;package=jre&amp;version=17</downloadUrl>
+                            <messages>
+                                <!-- launch4j appends " 17" (the minimum version) to this text. -->
+                                <jreVersionErr>Forge needs Java 17 or newer. Click OK to open the download page. Minimum version:</jreVersionErr>
+                                <jreNotFoundErr>Forge needs Java 17 or newer. Click OK to open the download page.</jreNotFoundErr>
+                            </messages>
                             <icon>src/main/config/forge.ico</icon>
                             <classPath>
                                 <mainClass>forge.view.Main</mainClass>
@@ -94,7 +99,7 @@
                             </classPath>
                             <jre>
                                 <minVersion>17</minVersion>
-                                <requiresJdk>true</requiresJdk>
+                                <requiresJdk>false</requiresJdk>
                                 <maxHeapSize>4096</maxHeapSize>
                                 <opts>
                                     <opt>${mandatory.java.args}</opt>
@@ -287,6 +292,21 @@ try {
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- Tests can read and write saves, so they get a Forge profile of their own rather than
+                 the developer's: user.home on Linux and macOS, APPDATA and LOCALAPPDATA on Windows. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <user.home>${project.build.directory}/test-home</user.home>
+                    </systemPropertyVariables>
+                    <environmentVariables>
+                        <APPDATA>${project.build.directory}/test-home</APPDATA>
+                        <LOCALAPPDATA>${project.build.directory}/test-home</LOCALAPPDATA>
+                    </environmentVariables>
+                </configuration>
             </plugin>
         </plugins>
         <resources>

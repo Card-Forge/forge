@@ -34,7 +34,14 @@ public final class ComboAssembly {
     static final Set<String> COVERED = new HashSet<>(Arrays.asList(
             "Channel", "Time Vault", "Thassa's Oracle", "Doomsday", "Demonic Consultation", "Hermit Druid", "Tinker",
             "Ad Nauseam", "Tendrils", "Yawgmoth's Will", "Illusions of Grandeur", "Painter's Servant", "Hive Mind",
-            "Dark Depths"));
+            "Dark Depths",
+            // High Tide with an untapper and a finisher (Stroke of Genius, Blue Sun's Zenith, Brain Freeze): LoopRunner
+            "High Tide + Stroke of Genius + Turnabout", "High Tide + Blue Sun's Zenith", "High Tide + Brain Freeze",
+            "Glimpse of Nature + Craterhoof Behemoth",
+            // an instant is the other half: Faith's Reward only brings back what died this turn, Early Harvest only
+            // untaps lands Heartbeat of Spring doubles; cast from the hand in the main phase either is a wasted card,
+            // so the rollouts (which see the turn through) are left to time them
+            "Time Sieve", "Heartbeat of Spring"));
 
     private ComboAssembly() {
     }
@@ -65,27 +72,7 @@ public final class ComboAssembly {
         if (!piece.getName().equals("Scapeshift")) {
             return false;
         }
-        boolean valakut = false;
-        int lands = 0;
-        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-            if (c.getName().startsWith("Valakut")) {
-                valakut = true;
-            } else if (c.isLand()) {
-                lands++;
-            }
-        }
-        int mountains = 0;
-        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
-            if (c.getType().hasSubtype("Mountain")) {
-                mountains++;
-            }
-        }
-        int life = Integer.MAX_VALUE;
-        for (final Player opp : ai.getOpponents()) {
-            life = Math.min(life, opp.getLife());
-        }
-        final int entering = Math.min(lands, mountains);
-        return !(valakut && entering >= 6 && 3 * entering >= life);
+        return RampPlan.scapeshiftMustWait(ai); // a deck without a Valakut uses Scapeshift as ordinary ramp
     }
 
     /**

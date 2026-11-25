@@ -1,0 +1,27 @@
+name: Update Print Tags
+
+on:
+  workflow_dispatch:
+  schedule:
+    # an hour before the daily snapshot build
+    - cron: '00 17 * * *'
+
+jobs:
+  update:
+    if: github.repository_owner == 'Card-Forge'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Regenerate print tags from Scryfall
+        run: python3 forge-gui/tools/printtags.py
+
+      - name: Commit changed tags
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add forge-gui/res/blockdata/printtags.txt
+          git diff --cached --quiet || { git commit -m "Update print tags from Scryfall" && git pull --rebase && git push; }

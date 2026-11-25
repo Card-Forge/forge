@@ -1,0 +1,6 @@
+Name:Chest Trait - Idol Of Embers
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1
+Oracle:At the beginning of your upkeep, Idol Of Embers deals 1 damage to each opponent.

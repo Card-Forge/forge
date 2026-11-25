@@ -1,9 +1,11 @@
 package forge.ai.simulation;
 
 import com.google.common.collect.ArrayListMultimap;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
@@ -69,11 +71,43 @@ public class PossibleTargetSelector {
 
         SimilarTargetSkipper skipper = new SimilarTargetSkipper();
         for (GameObject o : tgt.getAllCandidates(targetingSa)) {
+            if (pointlessCounterTarget(player, o) || pointlessUnpromisedGiftTarget(player, o)) {
+                continue;
+            }
             if (maxTargets == 1 && skipper.shouldSkipTarget(o)) {
                 continue;
             }
             validTargets.add(o);
         }
+    }
+
+    /**
+     * A +1/+1 counter is only a gain on a creature of the player's own (a curse, -1/-1 or a counter that is meant to hurt,
+     * is another matter): Ozolith, the Shattered Spire may name any artifact, and a counter on a Treasure or an
+     * Equipment is wasted, as is one on the opponent's creature.
+     */
+    private boolean pointlessCounterTarget(final Player player, final GameObject o) {
+        if (targetingSa.getApi() != ApiType.PutCounter || targetingSa.isCurse()
+                || !"P1P1".equals(targetingSa.getParam("CounterType")) || ActivationGuard.animatesTargetToCreature(targetingSa)) {
+            return false;
+        }
+        if (!(o instanceof Card)) {
+            return false;
+        }
+        final Card c = (Card) o;
+        return !c.isCreature() || c.getController().isOpponentOf(player);
+    }
+
+    /**
+     * An unpromised Gift spell returns its opposing target later, so that target is not useful removal.
+     * The separate Promise Gift spell ability remains available and can still target opposing creatures.
+     */
+    private boolean pointlessUnpromisedGiftTarget(final Player player, final GameObject o) {
+        if (!(o instanceof Card) || ((Card) o).getOwner() == null
+                || !((Card) o).getOwner().isOpponentOf(player)) {
+            return false;
+        }
+        return ComputerUtilAbility.hasUnpromisedGiftReturn(targetingSa);
     }
 
     private static class SimilarTargetSkipper {

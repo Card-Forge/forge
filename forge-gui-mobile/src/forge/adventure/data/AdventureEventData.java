@@ -236,6 +236,10 @@ public class AdventureEventData implements Serializable {
             if(editions.stream().anyMatch(setPoolFilter))
                 filter = filter.and(setPoolFilter);
         }
+        if (Config.instance().appliesUserExclusions()) {
+            Set<String> excluded = Config.instance().getExcludedEditionCodes();
+            filter = filter.and(q -> !excluded.contains(q.getCode()));
+        }
 
         List<CardEdition> allEditions = new ArrayList<>();
         StreamUtil.stream(editions)

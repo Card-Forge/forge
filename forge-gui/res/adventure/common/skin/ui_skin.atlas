@@ -206,6 +206,15 @@ map
   orig: 48, 48
   offset: 0, 0
   index: -1
+paper_gold
+  rotate: false
+  xy: 41, 1
+  size: 48, 48
+  split: 16, 16, 16, 19
+  pad: 0, 0, 0, 0
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
 pressed
   rotate: false
   xy: 125, 175

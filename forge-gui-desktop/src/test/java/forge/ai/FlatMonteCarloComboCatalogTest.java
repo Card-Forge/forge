@@ -114,6 +114,7 @@ public class FlatMonteCarloComboCatalogTest extends AITest {
     public void aManlandIsNotAnimatedWithoutAReason() {
         setUp();
         final Card vault = addCard("Mutavault", ai);
+        addCard("Mountain", ai); // another land pays the {1}
         vault.setSickness(true);
         game.getPhaseHandler().devModeSet(forge.game.phase.PhaseType.MAIN1, ai);
         game.getAction().checkStateEffects(true);

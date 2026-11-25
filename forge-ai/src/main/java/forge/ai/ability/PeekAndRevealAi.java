@@ -63,6 +63,13 @@ public class PeekAndRevealAi extends SpellAbilityAi {
             }
         }
 
+        // an X spell that reveals "X plus one" (Epiphany at the Drownyard) is not worth casting for X=0: one card, no choice
+        if (sa.costHasManaX() && !sa.isTrigger() && sa.getSVar("X").equals("Count$xPaid")
+                && !"X".equals(sa.getParam("PeekAmount"))) {
+            if (ComputerUtilCost.setMaxXValue(sa, aiPlayer, false) <= 0) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+        }
         if ("X".equals(sa.getParam("PeekAmount")) && sa.getSVar("X").equals("Count$xPaid")) {
             int xPay = ComputerUtilCost.setMaxXValue(sa, aiPlayer, sa.isTrigger());
             if (xPay == 0) {
