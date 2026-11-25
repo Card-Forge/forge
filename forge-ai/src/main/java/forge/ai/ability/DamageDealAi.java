@@ -1061,17 +1061,53 @@ public class DamageDealAi extends DamageAiBase {
         if (cap <= 0) {
             return null;
         }
-        int need = 0;
+        // damage that is not X: Crater's Claws deals X plus 2 with a creature of power 4 or more
+        final Player activator = sa.getActivatingPlayer();
+        final int bonus = "Crater's Claws".equals(ComputerUtilAbility.getAbilitySourceName(sa)) && activator != null
+                && activator.hasFerocious() ? 2 : 0;
+        final int most = cap + bonus; // the most damage that the mana can make
+        int need = 0; // the damage, before the bonus, that each target must be dealt
         for (final Card c : tcs.getTargetCards()) {
-            need = Math.max(need, ComputerUtilCombat.getEnoughDamageToKill(c, cap, source, false, noPrevention));
+            need = Math.max(need, ComputerUtilCombat.getEnoughDamageToKill(c, most, source, false, noPrevention));
         }
         for (final Player p : tcs.getTargetPlayers()) {
-            if (!killsAlone(p, p.getLife(), source, noPrevention)) {
-                return null; // it does not die to its life in damage (prevention, cannot lose life): no cheaper X to find
+            final int raw = leastLethalDamage(p, most, source, noPrevention);
+            if (raw < 0) {
+                return null; // it does not die to any damage that the mana can make (prevention, cannot lose life): nothing cheaper to find
             }
-            need = Math.max(need, p.getLife());
+            need = Math.max(need, raw);
         }
-        return Math.min(cap, evenly ? need * targets : need);
+        if (evenly) {
+            return Math.min(cap, need * targets);
+        }
+        return Math.min(cap, Math.max(0, need - bonus));
+    }
+
+    private static int predictedDamage(final Player p, final int damage, final Card source, final boolean noPrevention) {
+        return noPrevention ? p.staticReplaceDamage(damage, source, false)
+                : ComputerUtilCombat.predictDamageTo(p, damage, source, false);
+    }
+
+    /**
+     * The least damage that kills this player once replacement and prevention are applied (Furnace of Rath doubles it: 5 life takes
+     * 3), found by a search up to {@code most}; -1 when even that is not enough.
+     */
+    private static int leastLethalDamage(final Player p, final int most, final Card source, final boolean noPrevention) {
+        if (p == null || !p.canLoseLife() || p.cantLoseForZeroOrLessLife() || most <= 0 || p.getLife() <= 0
+                || predictedDamage(p, most, source, noPrevention) < p.getLife()) {
+            return -1;
+        }
+        int lo = 1;
+        int hi = most;
+        while (lo < hi) {
+            final int mid = (lo + hi) >>> 1;
+            if (predictedDamage(p, mid, source, noPrevention) >= p.getLife()) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+        return lo;
     }
 
     /** Whether this much damage, all of it to one player, is lethal for that player. */

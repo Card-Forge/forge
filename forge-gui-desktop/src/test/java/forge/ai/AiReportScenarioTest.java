@@ -733,6 +733,26 @@ public class AiReportScenarioTest extends AITest {
                     return sa.getXManaCostPaid() != null && sa.getXManaCostPaid() == 5 ? null
                             : "Fireball was cast with X=" + sa.getXManaCostPaid() + ", not the 5 that is lethal";
                 }));
+        // damage that is doubled (Furnace of Rath): 5 life dies to 3 damage, so X=3, not the 5 of the life total
+        l.add(new Scenario("13073-fireball-furnace", "Fireball pays X=3 for a player on 5 life under Furnace of Rath", Fid.EXACT, "MAIN1", true,
+                c -> { c.bf("Mountain", 4, c.ai); c.bf("Swamp", 3, c.ai); c.hand("Fireball", c.ai); c.bf("Furnace of Rath", c.opp); c.opp.setLife(5, null); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Fireball");
+                    if (sa == null) { return "AI did not cast Fireball" + c.why("Fireball"); }
+                    if (sa.getTargets().size() != 1 || !sa.getTargets().contains(c.opp)) { return "Fireball targeted " + sa.getTargets(); }
+                    return sa.getXManaCostPaid() != null && sa.getXManaCostPaid() == 3 ? null
+                            : "Fireball was cast with X=" + sa.getXManaCostPaid() + ", the doubled damage needs only 3";
+                }));
+        // Crater's Claws deals X plus 2 with a creature of power 4 or more: 5 life dies to X=3
+        l.add(new Scenario("13073-claws-ferocious", "Crater's Claws pays X=3 for a player on 5 life when ferocious (X plus 2)", Fid.EXACT, "MAIN1", true,
+                c -> { c.bf("Mountain", 4, c.ai); c.bf("Swamp", 3, c.ai); c.hand("Crater's Claws", c.ai); c.bf("Craw Wurm", c.ai); c.opp.setLife(5, null); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Crater's Claws");
+                    if (sa == null) { return "AI did not cast Crater's Claws" + c.why("Crater's Claws"); }
+                    if (!sa.getTargets().contains(c.opp)) { return "Crater's Claws targeted " + sa.getTargets(); }
+                    return sa.getXManaCostPaid() != null && sa.getXManaCostPaid() == 3 ? null
+                            : "Crater's Claws was cast with X=" + sa.getXManaCostPaid() + ", ferocious needs only 3";
+                }));
         // two planeswalkers on 3 loyalty: both as targets cost {1} more and take 2 each (X=5 of 7 lands), neither dies
         l.add(new Scenario("13073-fireball-walkers", "Fireball does not aim at two planeswalkers that would each take 2 of their 3 loyalty", Fid.EXACT, "MAIN1", true,
                 c -> { c.bf("Mountain", 4, c.ai); c.bf("Swamp", 3, c.ai); c.hand("Fireball", c.ai);
