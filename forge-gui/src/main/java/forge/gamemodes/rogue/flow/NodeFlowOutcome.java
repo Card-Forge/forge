@@ -1,4 +1,4 @@
-package forge.screens.home.rogue;
+package forge.gamemodes.rogue.flow;
 
 enum NodeFlowOutcome {
     COMPLETE_NODE,

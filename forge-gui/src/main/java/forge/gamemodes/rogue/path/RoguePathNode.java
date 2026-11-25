@@ -41,6 +41,8 @@ public abstract class RoguePathNode {
         this.columnIndex = columnIndex;
     }
 
+    public abstract NodeType getType();
+
     public boolean isSideNode() {
         return false;
     }

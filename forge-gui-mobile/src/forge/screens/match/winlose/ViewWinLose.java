@@ -38,7 +38,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     private static final float GAP_Y_FACTOR = 0.02f;
 
     private final FButton btnContinue, btnRestart, btnQuit;
-    private final FLabel lblTitle, lblLog, lblStats, btnCopyLog, btnShowBattlefield;
+    private final FLabel lblTitle, lblLog, lblStats, btnCopyLog, btnShowBattlefield, lblHint;
     private final FTextArea txtLog;
     private final OutcomesPanel pnlOutcomes;
     private final GameView game;
@@ -55,6 +55,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         btnContinue = add(new FButton());
         btnRestart = add(new FButton());
         btnQuit = add(new FButton());
+        lblHint = add(new FLabel.Builder().font(FSkinFont.get(14)).align(Align.center).build());
 
         btnContinue.setText(Forge.getLocalizer().getMessage("btnNextGame"));
         btnContinue.setFont(FSkinFont.get(22));
@@ -110,6 +111,9 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         case PlanarConquest:
             control = new ConquestWinLose(this, game0);
             break;
+        case RogueCommander:
+            control = new RogueWinLose(this, game0);
+            break;
         case Adventure:
         case AdventureEvent:
             control = new AdventureWinLose(this, game0);
@@ -159,6 +163,16 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
 
     public FButton getBtnQuit() {
         return this.btnQuit;
+    }
+
+    public void setTitle(String title) {
+        lblTitle.setText(title);
+    }
+
+    /** A line under the buttons, such as why one is not offered. */
+    public void setHint(String hint) {
+        lblHint.setText(hint);
+        revalidate();
     }
 
     public FLabel getLabelShowBattlefield() {
@@ -234,6 +248,12 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
                 y += h + dy;
             } else {
                 btnQuit.setBounds(-w, -w, 0, 0);
+            }
+            if (lblHint.getText() != null && !lblHint.getText().isEmpty()) {
+                lblHint.setBounds(x, y, w, h);
+                y += h + dy;
+            } else {
+                lblHint.setBounds(-w, -w, 0, 0);
             }
         }
 

@@ -4,6 +4,7 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import forge.ai.AITest;
+import forge.ai.ComputerUtil;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -83,6 +84,35 @@ public class OpeningHandTest extends AITest {
         setUp(9, 8);
         AssertJUnit.assertFalse(keeps(DeckPlan.of(DeckPlan.Archetype.MIDRANGE), true,
                 "Island", "Island", "Island", "Mountain", "Mountain", "Mountain", "Island"));
+    }
+
+    @Test
+    public void sendsBackLandsAndCreatureAurasWithoutCreature() {
+        setUp(9, 8);
+        final CardCollection hand = hand("Island", "Island", "Mountain", "Holy Strength", "Holy Strength", "Rancor", "Holy Strength");
+        final DeckPlan plan = DeckPlan.of(DeckPlan.Archetype.MIDRANGE);
+
+        AssertJUnit.assertTrue("the hand is only lands and creature Auras",
+                OpeningHand.hasOnlyLandsAndCreatureAuras(hand));
+        AssertJUnit.assertFalse("Auras without a creature are not castable opening plays",
+                OpeningHand.castsSomething(hand, ai));
+        AssertJUnit.assertFalse("the smart mulligan must reject the hand",
+                OpeningHand.keep(ai, hand, 0, true, plan, 4));
+        AssertJUnit.assertTrue("the classic mulligan must reject the same hand",
+                ComputerUtil.wantMulligan(ai, 0));
+    }
+
+    @Test
+    public void keepsCreatureAurasWhenARealCreatureIsInHand() {
+        setUp(9, 8);
+        final CardCollection hand = hand("Forest", "Forest", "Plains", "Gladecover Scout", "Rancor", "Holy Strength", "Hyena Umbra");
+        final DeckPlan plan = DeckPlan.of(DeckPlan.Archetype.AGGRO);
+
+        AssertJUnit.assertFalse(OpeningHand.hasOnlyLandsAndCreatureAuras(hand));
+        AssertJUnit.assertTrue(OpeningHand.castsSomething(hand, ai));
+        AssertJUnit.assertTrue("the creature gives the Auras a real target and the hand has a castable play",
+                OpeningHand.keep(ai, hand, 0, true, plan, 4));
+        AssertJUnit.assertFalse(ComputerUtil.wantMulligan(ai, 0));
     }
 
     @Test

@@ -31,6 +31,12 @@ public class VZoneDisplay extends VCardDisplayArea {
         refreshCardPanels(MatchController.instance.isNetGame() ? cards.threadSafeIterable() : cards);
     }
 
+    //Flashback cards also show in their own zone, and taps only reach a shared panel where it was drawn last
+    @Override
+    protected boolean usesSharedCardPanels() {
+        return zoneType != ZoneType.Flashback;
+    }
+
     @Override
     public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
         super.buildTouchListeners(screenX, screenY, listeners);
@@ -106,8 +112,8 @@ public class VZoneDisplay extends VCardDisplayArea {
 
     @Override
     public void setSelectedIndex(int index) {
-        if (revealedPanel == null) {
-            super.setSelectedIndex(index);
+        if (revealedPanel == null && index >= 0 && index < cardPanels.get().size()) {
+            scrollIntoView(cardPanels.get().get(index));
         }
         setRevealedPanel(index);
     }

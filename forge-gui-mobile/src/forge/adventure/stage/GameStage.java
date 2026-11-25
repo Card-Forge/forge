@@ -132,6 +132,30 @@ public abstract class GameStage extends Stage {
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
     }
 
+    /**
+     * Show a one-button message using the stage's existing modal dialog. Returns false when
+     * another Adventure dialog is already active so the caller can retry without losing it.
+     */
+    public boolean showImageLoadFailureDialog(String title, String message) {
+        if (dialogOnlyInput) {
+            return false;
+        }
+
+        dialog.getButtonTable().clear();
+        dialog.getContentTable().clear();
+        dialog.clearListeners();
+
+        TextraButton ok = Controls.newTextButton(Forge.getLocalizer().getMessage("lblOK"), this::hideDialog);
+        dialog.getButtonTable().add(ok).width(240f);
+        TypingLabel label = Controls.newTypingLabel(title + "\n\n" + message.replace("[", "[["));
+        label.setWrap(true);
+        label.skipToTheEnd();
+        addScrollingText(label, 250f);
+        dialog.setKeepWithinStage(true);
+        showDialog();
+        return true;
+    }
+
     public void hideDialog() {
         dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide()));
         dialogOnlyInput = false;

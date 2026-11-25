@@ -1,5 +1,6 @@
 package forge.screens.home.rogue;
 
+import forge.gamemodes.rogue.CodexHelper.CodexState;
 import forge.item.PaperCard;
 import forge.toolbox.FSkin;
 import forge.view.arcane.CardPanel;
@@ -14,13 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.Scrollable;
 
 class CodexCardGrid extends FSkin.SkinnedPanel implements Scrollable {
-    enum CardState {
-        HIDDEN,
-        GREYED,
-        NORMAL
-    }
-
-    record Entry(PaperCard card, String label, String tooltip, CardState state) {
+    record Entry(PaperCard card, String label, String tooltip, CodexState state) {
     }
 
     private static final int BASE_CARD_WIDTH = 240;
@@ -141,10 +136,10 @@ class CodexCardGrid extends FSkin.SkinnedPanel implements Scrollable {
     }
 
     private static class CodexReadonlyCardPanel extends SelectableCardPanelBase {
-        private final CardState state;
+        private final CodexState state;
 
-        private CodexReadonlyCardPanel(PaperCard card, Supplier<CardUtil> zoomUtilSupplier, CardState state) {
-            super(card, zoomUtilSupplier, state == CardState.HIDDEN,
+        private CodexReadonlyCardPanel(PaperCard card, Supplier<CardUtil> zoomUtilSupplier, CodexState state) {
+            super(card, zoomUtilSupplier, state == CodexState.UNKNOWN,
                     ZoomActivation.MIDDLE_MOUSE_BUTTON);
             this.state = state;
         }
@@ -156,12 +151,12 @@ class CodexCardGrid extends FSkin.SkinnedPanel implements Scrollable {
         @Override
         public void paint(Graphics g) {
             super.paint(g);
-            if (state == CardState.GREYED && !faceDown) {
+            if (state == CodexState.SEEN && !faceDown) {
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setColor(new Color(70, 70, 70, 145));
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
-            if (hovered && (faceDown || state == CardState.GREYED)) {
+            if (hovered && (faceDown || state == CodexState.SEEN)) {
                 drawHoverHighlight((Graphics2D) g, getWidth(), getHeight());
             }
         }

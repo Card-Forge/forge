@@ -344,9 +344,7 @@ public class DamageDealAi extends DamageAiBase {
 
         // Filter MustTarget requirements
         StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
-        final int targetCountBeforePrevention = hPlay.size();
         hPlay = CardLists.filter(hPlay, c -> canActuallyDamage(c, d, source, noPrevention));
-        final boolean skippedPreventedTargets = hPlay.size() < targetCountBeforePrevention;
 
         CardCollection killables = CardLists.filter(hPlay, c -> c.getSVar("Targeting").equals("Dies")
                 || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
@@ -369,12 +367,9 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (!mandatory) {
-            // If prevention made another legal target take zero damage, prefer a target that can actually be damaged
-            // rather than falling through and aiming the spell at the protected creature.
-            if (skippedPreventedTargets && pl.isOpponentOf(ai) && activator.equals(ai) && !hPlay.isEmpty()) {
-                final List<Card> creatures = CardLists.filter(hPlay, CardPredicates.CREATURES);
-                if (!creatures.isEmpty()) { return ComputerUtilCard.getBestCreatureAI(creatures); }
-            }
+            // Nothing that the damage kills (protected creatures were left out above): the spell is held. A creature that
+            // merely survives it is no target, not even the only one left unprotected (a Lightning Bolt at the 0/4 Crystal
+            // Barricade while it keeps everything else safe, #3994). A mandatory trigger still has to pick one below.
             return null;
         }
 

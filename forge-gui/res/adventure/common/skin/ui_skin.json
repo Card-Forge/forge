@@ -73,6 +73,26 @@
 		"playMode": 2,
 		"crushMode": 0
 	},
+	"paperGold10Patch": {
+		"region": "paper_gold",
+		"horizontalStretchAreas": [ 16, 31 ],
+		"verticalStretchAreas": [ 16, 28 ],
+		"tiling": true,
+		"minWidth": 48,
+		"minHeight": 48,
+		"rightWidth": 11,
+		"leftWidth": 11,
+		"bottomHeight": 11,
+		"topHeight": 11,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
+	},
 	"TenPatchGold": {
 		"region": "9patch4",
 		"horizontalStretchAreas": [ 7, 40 ],

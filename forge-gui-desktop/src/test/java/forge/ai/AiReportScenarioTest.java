@@ -97,7 +97,17 @@ public class AiReportScenarioTest extends AITest {
         final Game game;
         final Player ai, opp;
 
+        /**
+         * What the scenario drove, so that "passes" can be told from "proves something". A decision is the AI's own entry point
+         * (what to play, the attack, the blocks, a choice made while an effect resolves); a gate is only AiController's check of
+         * one ability, and a scenario with neither exercised a helper class and none of the code a game goes through (#12927).
+         */
+        int decisions, gates;
+
         Ctx(final Game g) { game = g; opp = g.getPlayers().get(0); ai = g.getPlayers().get(1); }
+
+        /** The controller of the AI for the questions the engine puts to a player (a card name, a confirmation, the attack). */
+        PlayerControllerAi ctl() { decisions++; return (PlayerControllerAi) ai.getController(); }
 
         Card uginLabyrinthWithExiled(final String name) {
             final Card labyrinth = bf("Ugin's Labyrinth", ai);
@@ -161,9 +171,10 @@ public class AiReportScenarioTest extends AITest {
                     ? ((forge.game.trigger.WrappedAbility) ability).getWrappedAbility() : ability;
         }
 
-        AiController controller() { return ((PlayerControllerAi) ai.getController()).getAi(); }
+        AiController controller() { gates++; return ((PlayerControllerAi) ai.getController()).getAi(); }
 
         List<SpellAbility> plays() {
+            decisions++;
             final List<SpellAbility> l = controller().chooseSpellAbilityToPlay();
             return l == null ? new ArrayList<SpellAbility>() : l;
         }
@@ -235,14 +246,21 @@ public class AiReportScenarioTest extends AITest {
             }
             return sb.toString();
         }
-        /** Attackers the AI would declare now. */
+        /** Attackers the AI would declare now, in the declare attackers step of its own turn as in a game. */
         List<Card> attackers() {
+            if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai)) {
+                // AiController.declareAttackers commits the land creatures only in this step: from MAIN1 a scenario skips that
+                // path, and "Dryad Arbor stays home" passed while the Arbor still went into Lyra Dawnbringer (#12927)
+                throw new AssertionError("c.attackers() outside the declare attackers step of the AI's turn (phase "
+                        + game.getPhaseHandler().getPhase() + "): use \"COMBAT_DECLARE_ATTACKERS\" with aiTurn = true");
+            }
             final Combat combat = new Combat(ai);
-            ai.getController().declareAttackers(ai, combat);
+            ctl().declareAttackers(ai, combat);
             return new ArrayList<Card>(combat.getAttackers());
         }
         /** Blockers the AI would assign against the given attackers of the opponent. */
         List<Card> blockers(final Card... attackers) {
+            decisions++;
             final Combat combat = new Combat(opp);
             for (final Card a : attackers) { combat.addAttacker(a, ai); }
             game.getPhaseHandler().setCombat(combat);
@@ -309,6 +327,8 @@ public class AiReportScenarioTest extends AITest {
                 game.getStack().addAllTriggeredAbilitiesToStack();
                 if (game.getStack().isEmpty()) { return; }
                 final SpellAbility top = game.getStack().peekAbility();
+                // only an ability of the AI that resolves, or one that lets it pay "unless", asks its controller for choices (a target, a card, a payment)
+                if (ai.equals(top.getActivatingPlayer()) || top.hasParam("UnlessCost")) { decisions++; }
                 trace.append(" [resolving ").append(top).append(top.usesTargeting() ? " -> " + top.getTargets() : "").append(']');
                 game.getStack().resolveStack();
                 game.getAction().checkStateEffects(true); // lethal damage kills, as it does between two priority passes
@@ -340,6 +360,57 @@ public class AiReportScenarioTest extends AITest {
                                    final String card, final Setup s) {
         return new Scenario(id, t + " (should NOT play " + card + ")", f, ph, aiTurn, s,
                 c -> c.plays(card) ? "AI played/activated " + card + ": " + c.plays() : null);
+    }
+
+    /**
+     * Thought-Knot Seer is cast and resolves through the game (the AI picks the player, then the card out of the opponent's hand).
+     * The opponent's key card list is Eladamri, Serra's Emissary, Iona, Champion of Rhonas, in this order; the AI's own list holds
+     * Birds of Paradise when {@code aiKeyCards}: it must not decide what the AI takes from their hand.
+     */
+    private static Scenario tksKeyCards(final String id, final String title, final String expectedExiled, final boolean aiKeyCards,
+                                        final Setup hand) {
+        return new Scenario(id, title, Fid.EXACT, "MAIN1", true,
+                c -> {
+                    if (c.opp.getRegisteredPlayer() == null || c.opp.getRegisteredPlayer().getDeck() == null
+                            || c.ai.getRegisteredPlayer() == null || c.ai.getRegisteredPlayer().getDeck() == null) {
+                        throw new SkipException("the test game has no registered decks to hold key cards");
+                    }
+                    if (c.ai.getRegisteredPlayer().getDeck() == c.opp.getRegisteredPlayer().getDeck()) {
+                        throw new SkipException("both players share one Deck: a key card list set for one is the list of both");
+                    }
+                    // getKeyCards() hands out a copy: the list is filled through addKeyCard, in the order the player wants them answered
+                    for (final String key : new String[] { "Eladamri, Korvecdal", "Serra's Emissary", "Iona, Shield of Emeria", "Champion of Rhonas" }) {
+                        c.opp.getRegisteredPlayer().getDeck().addKeyCard(key);
+                    }
+                    if (aiKeyCards) { c.ai.getRegisteredPlayer().getDeck().addKeyCard("Birds of Paradise"); }
+                    c.bf("Wastes", 4, c.ai);
+                    hand.run(c);
+                    final SpellAbility cast = c.hand("Thought-Knot Seer", c.ai).getFirstSpellAbility();
+                    cast.setActivatingPlayer(c.ai);
+                    if (!ComputerUtil.playStack(cast, c.ai, c.game)) {
+                        throw new AssertionError("Thought-Knot Seer could not be cast in the regression setup");
+                    }
+                    c.resolveAll();
+                },
+                c -> c.opp.getCardsIn(ZoneType.Exile).anyMatch(card -> expectedExiled.equals(card.getName()))
+                        ? null : "Thought-Knot Seer exiled " + c.opp.getCardsIn(ZoneType.Exile) + " instead of " + expectedExiled
+                        + "; remaining hand=" + c.opp.getCardsIn(ZoneType.Hand));
+    }
+
+    /**
+     * The AI draws a card and the trigger of Smothering Tithe is put on the stack. A scenario that has no trigger to answer proves
+     * nothing (no Treasure is made then either), so it says so instead of passing.
+     */
+    private static String drawIntoTithe(final Ctx c) {
+        c.ai.drawCards(1);
+        c.game.getTriggerHandler().runWaitingTriggers();
+        c.game.getStack().addAllTriggeredAbilitiesToStack();
+        return c.game.getStack().isEmpty() ? "setup: the Smothering Tithe trigger never reached the stack" : null;
+    }
+
+    private static boolean hasTreasure(final Ctx c) {
+        // the token is called "Treasure Token": its subtype is what says it is one
+        return c.opp.getCardsIn(ZoneType.Battlefield).anyMatch(k -> k.getType().hasSubtype("Treasure"));
     }
 
     /** The card is played and aimed at the wanted target. */
@@ -463,6 +534,14 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Mountain", 2, c.ai); c.hand("Skullcrack", c.ai); }));
         l.add(play("6601", "Boltwave against a player at 20 life with creatures", Fid.EXACT, "MAIN2", true, "Boltwave",
                 c -> { c.bf("Mountain", 3, c.ai); c.hand("Boltwave", c.ai); c.bf("Grizzly Bears", c.opp); c.bf("Grizzly Bears", c.opp); }));
+        l.add(new Scenario("6617-lava-spike", "Lava Spike is cast before combat to trigger Monastery Swiftspear's Prowess", Fid.EXACT, M1, true,
+                c -> { c.bf("Mountain", 3, c.ai); c.bf("Monastery Swiftspear", c.ai); c.hand("Lava Spike", c.ai); },
+                c -> c.plays("Lava Spike") ? null
+                        : "AI deferred Lava Spike instead of triggering Prowess before its predicted attack" + c.why("Lava Spike")));
+        l.add(new Scenario("6617-skullcrack", "Skullcrack's nested damage effect is cast before a Prowess attack", Fid.EXACT, M1, true,
+                c -> { c.bf("Mountain", 3, c.ai); c.bf("Monastery Swiftspear", c.ai); c.hand("Skullcrack", c.ai); },
+                c -> c.plays("Skullcrack") ? null
+                        : "AI deferred Skullcrack instead of triggering Prowess before its predicted attack" + c.why("Skullcrack")));
 
         // ---------------- the same name chosen by several copies
         l.add(new Scenario("12801", "a second Meddling Mage names a different card than the first", Fid.APPROX, M1, true,
@@ -584,6 +663,160 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Swamp", c.ai); c.hand("Inquisition of Kozilek", c.ai); c.hand("Wurmcoil Engine", c.opp); c.hand("Mountain", c.opp); }));
         l.add(noPlay("4233", "evoking Grief while the player has hexproof", Fid.EXACT, M1, true, "Grief",
                 c -> { c.hand("Grief", c.ai); c.hand("Thoughtseize", c.ai); c.bf("Leyline of Sanctity", c.opp); c.hand("Lightning Bolt", c.opp); }));
+        // #13026: Solitude pitched to exile a mana dork is two cards (and the best removal) for a card that only ramped them
+        l.add(noPlay("13026", "evoking Solitude at a lone Noble Hierarch on the opponent's turn", Fid.EXACT, M1, false, "Solitude",
+                c -> { c.hand("Solitude", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        l.add(noPlay("13026-hexproof", "Solitude does not treat a hexproof creature as an alternative target to a mana dork", Fid.APPROX, M1, false, "Solitude",
+                c -> { c.hand("Solitude", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Noble Hierarch", c.opp); c.bf("Carnage Tyrant", c.opp); }));
+        l.add(noPlay("13026-dorks", "evoking Solitude when every creature of theirs is a mana dork", Fid.APPROX, M1, false, "Solitude",
+                c -> { c.hand("Solitude", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Noble Hierarch", c.opp); c.bf("Birds of Paradise", c.opp); }));
+        l.add(play("13026-angel", "control: Solitude is still evoked at a Serra Angel", Fid.APPROX, M1, false, "Solitude",
+                c -> { c.hand("Solitude", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Serra Angel", c.opp); }));
+        l.add(play("13026-angel-and-dork", "control: a real threat beside the mana dork keeps the evoke open", Fid.APPROX, M1, false, "Solitude",
+                c -> { c.hand("Solitude", c.ai); c.hand("Savannah Lions", c.ai); c.bf("Noble Hierarch", c.opp); c.bf("Serra Angel", c.opp); }));
+        l.add(new Scenario("13026-fury-dorks", "control: Fury divides its 4 damage and can kill two mana dorks, so its evoke is not refused as a trade for dorks", Fid.APPROX, M1, true,
+                c -> { c.hand("Fury", c.ai); c.hand("Goblin Guide", c.ai); c.bf("Llanowar Elves", c.opp); c.bf("Llanowar Elves", c.opp); },
+                c -> {
+                    // the AI does not offer the evoke of a creature card at sorcery speed in this setup (no mana), so the guard is asked directly
+                    final SpellAbility evoke = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Fury"))
+                            .flatMap(k -> k.getSpellAbilities().stream()).filter(SpellAbility::isEvoke).findFirst().orElse(null);
+                    if (evoke == null) { return "setup: Fury has no evoke ability"; }
+                    evoke.setActivatingPlayer(c.ai);
+                    return ActivationGuard.evokeOnlyHitsManaDorks(c.ai, evoke) ? "the evoke of Fury was treated as a removal of mana dorks only" : null;
+                }));
+        l.add(new Scenario("13026-guard-no-side-effect", "the evoke guard asks about targets on a copy: the enter-the-battlefield ability of the card keeps its player", Fid.APPROX, M1, true,
+                c -> { c.hand("Solitude", c.ai); c.bf("Noble Hierarch", c.opp); },
+                c -> {
+                    final Card solitude = c.ai.getCardsIn(ZoneType.Hand).stream().filter(k -> k.getName().equals("Solitude")).findFirst().orElse(null);
+                    final SpellAbility evoke = solitude == null ? null : solitude.getSpellAbilities().stream().filter(SpellAbility::isEvoke).findFirst().orElse(null);
+                    if (evoke == null) { return "setup: Solitude has no evoke ability"; }
+                    evoke.setActivatingPlayer(c.ai);
+                    final SpellAbility etb = solitude.getTriggers().stream().map(t -> t.ensureAbility()).filter(a -> a != null && a.usesTargeting()).findFirst().orElse(null);
+                    if (etb == null) { return "setup: Solitude has no targeted enter-the-battlefield ability"; }
+                    final Player before = etb.getActivatingPlayer();
+                    if (!ActivationGuard.evokeOnlyHitsManaDorks(c.ai, evoke)) { return "setup: the guard should refuse Solitude at a lone Noble Hierarch"; }
+                    return etb.getActivatingPlayer() == before ? null : "the guard changed the activating player of the card's own ability";
+                }));
+        // #13046: the -1/-1 counters of Ifnir Deadlands (2BB, tap, sacrifice a Desert; sorcery speed), with the lands of the report
+        l.add(play("13046", "Ifnir Deadlands puts its counters on an annoying creature with 4 other lands and nothing to cast", Fid.EXACT, M1, true, "Ifnir Deadlands",
+                c -> { c.bf("Ifnir Deadlands", c.ai); c.bf("Swamp", 2, c.ai); c.bf("Eldrazi Temple", 2, c.ai); c.bf("Grizzly Bears", c.opp); }));
+        l.add(noPlay("13046-no-target", "control: Ifnir Deadlands is not sacrificed when they have no creature", Fid.EXACT, M1, true, "Ifnir Deadlands",
+                c -> { c.bf("Ifnir Deadlands", c.ai); c.bf("Swamp", 2, c.ai); c.bf("Eldrazi Temple", 2, c.ai); }));
+        // #13048: Sleeper Agent gives the opponent a 3/3 that hits them for 2 at each of their upkeeps
+        l.add(play("13048", "Sleeper Agent is cast by a deck with no creatures while the AI is not behind on life", Fid.EXACT, "MAIN2", true, "Sleeper Agent",
+                c -> { c.bf("Swamp", c.ai); c.hand("Sleeper Agent", c.ai); }));
+        l.add(noPlay("13048-behind", "control: Sleeper Agent is held at 5 life with nothing that blocks a 3/3", Fid.EXACT, "MAIN2", true, "Sleeper Agent",
+                c -> { c.ai.setLife(5, null); c.bf("Swamp", c.ai); c.hand("Sleeper Agent", c.ai); }));
+        l.add(play("13048-answer", "Sleeper Agent is cast at 5 life when a Serra Angel holds the 3/3 off", Fid.EXACT, "MAIN2", true, "Sleeper Agent",
+                c -> { c.ai.setLife(5, null); c.bf("Swamp", c.ai); c.bf("Serra Angel", c.ai); c.hand("Sleeper Agent", c.ai); }));
+        l.add(noPlay("13048-tapped-blocker", "control: a tapped 4/4 does not protect the AI from Sleeper Agent", Fid.EXACT, "MAIN2", true, "Sleeper Agent",
+                c -> { c.ai.setLife(5, null); c.bf("Swamp", c.ai); c.bf("Serra Angel", c.ai).setTapped(true); c.hand("Sleeper Agent", c.ai); }));
+        l.add(new Scenario("13048-trigger", "Sleeper Agent's enter trigger resolves and the opponent really gets the creature", Fid.EXACT, "MAIN2", true,
+                c -> c.bf("Swamp", c.ai),
+                c -> {
+                    final Card agent = c.hand("Sleeper Agent", c.ai);
+                    c.game.getAction().moveToPlay(agent, c.ai, null, forge.game.ability.AbilityKey.newMap());
+                    c.game.getTriggerHandler().runWaitingTriggers();
+                    c.resolveAll();
+                    return agent.getController().equals(c.opp) ? null : "Sleeper Agent stayed with " + agent.getController();
+                }));
+        // #13049: Pay {E}{E}, sacrifice Gonti's Machinations: the opponent loses 3 and the AI gains 3, with 10 life and 3 energy
+        l.add(play("13049", "Gonti's Machinations is spent as soon as there is the energy for it, not only for lethal", Fid.EXACT, M1, true, "Gonti's Machinations",
+                c -> { c.bf("Gonti's Machinations", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 3); c.ai.setLife(10, null); }));
+        l.add(noPlay("13049-one-energy", "control: Gonti's Machinations cannot be paid with one energy", Fid.EXACT, M1, true, "Gonti's Machinations",
+                c -> { c.bf("Gonti's Machinations", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 1); c.ai.setLife(10, null); }));
+        l.add(noPlay("13049-no-life-loss", "control: Gonti's Machinations is kept while the opponent cannot lose life (Platinum Emperion)", Fid.EXACT, M1, true, "Gonti's Machinations",
+                c -> { c.bf("Gonti's Machinations", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 3); c.ai.setLife(10, null); c.bf("Platinum Emperion", c.opp); }));
+        // Smothering Tithe: whenever the AI draws, it may pay {2} or they get a Treasure; and a 3 mana counterspell is not the answer to that
+        l.add(new Scenario("tithe-pays", "the AI pays {2} for Smothering Tithe when the mana is not needed for anything in its hand", Fid.APPROX, "DRAW", true,
+                c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); },
+                c -> {
+                    final String broken = drawIntoTithe(c);
+                    if (broken != null) { return broken; }
+                    c.resolveAll();
+                    return hasTreasure(c) ? "the AI let them have a Treasure instead of paying {2}" : null;
+                }));
+        l.add(new Scenario("tithe-unaffordable", "control for the Treasure check: with no mana to pay {2} the opponent must get the Treasure", Fid.APPROX, "DRAW", true,
+                c -> c.bf("Smothering Tithe", c.opp),
+                c -> {
+                    final String broken = drawIntoTithe(c);
+                    if (broken != null) { return broken; }
+                    c.resolveAll();
+                    return hasTreasure(c) ? null : "no Treasure although the AI could not pay: the scenario does not see the token, trace:" + c.trace;
+                }));
+        l.add(new Scenario("tithe-keeps-mana", "control: the AI does not pay {2} for Smothering Tithe when that leaves too little for the 3 mana white spell in its hand", Fid.APPROX, "DRAW", true,
+                c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); c.hand("Glorious Anthem", c.ai); },
+                c -> {
+                    // asked before the draw: afterwards the Plains are tapped and the answers say nothing
+                    final SpellAbility anthem = c.ai.getCardsIn(ZoneType.Hand).get(0).getFirstSpellAbility();
+                    anthem.setActivatingPlayer(c.ai);
+                    final String before = "before the draw: untapped Plains " + CardLists.count(c.ai.getCardsIn(ZoneType.Battlefield), k -> k.isLand() && !k.isTapped())
+                            + ", mana estimate " + ComputerUtilMana.getAvailableManaEstimate(c.ai)
+                            + ", Anthem printed cost: " + anthem.getPayCosts().getTotalMana();
+                    final String broken = drawIntoTithe(c);
+                    if (broken != null) { return broken; }
+                    // what the check in TokenAi sees for every spell in hand, with the Tithe trigger on the stack
+                    final StringBuilder seen = new StringBuilder();
+                    for (final Card h : c.ai.getCardsIn(ZoneType.Hand)) {
+                        for (final SpellAbility s : h.getSpellAbilities()) {
+                            if (s.getActivatingPlayer() == null) { s.setActivatingPlayer(c.ai); }
+                            final forge.game.mana.ManaCostBeingPaid now = s.getPayCosts() == null ? null
+                                    : ComputerUtilMana.calculateManaCost(s.getPayCosts(), s, c.ai, true, 0, false);
+                            seen.append("[").append(h).append(" / ").append(s).append(": isSpell ").append(s.isSpell())
+                                    .append(", payCosts ").append(s.getPayCosts())
+                                    .append(", cost now ").append(now).append(" cmc ").append(now == null ? -1 : now.getConvertedManaCost())
+                                    .append(", payable ").append(now != null && ComputerUtilMana.canPayManaCost(now, s, c.ai, false))
+                                    .append(", estimate ").append(ComputerUtilMana.getAvailableManaEstimate(c.ai)).append("] ");
+                        }
+                    }
+                    // what TokenAi itself answers for the trigger on the stack, before anything resolves
+                    String asked;
+                    try {
+                        final SpellAbility top = c.game.getStack().peekAbility();
+                        final SpellAbility inner = top instanceof forge.game.trigger.WrappedAbility
+                                ? ((forge.game.trigger.WrappedAbility) top).getWrappedAbility() : top;
+                        final Cost unless = new Cost(inner.getParam("UnlessCost"), true);
+                        asked = "stack top " + top + ", api " + inner.getApi() + ", activator " + inner.getActivatingPlayer() + ", ai " + c.ai
+                                + ", cost parts " + unless.getCostParts() + ", TokenAi pays: "
+                                + SpellApiToAi.Converter.get(inner).willPayUnlessCost(c.ai, inner, unless, false, new FCollection<>(c.ai));
+                    } catch (final RuntimeException e) {
+                        asked = "asking TokenAi threw " + e;
+                    }
+                    c.resolveAll();
+                    return hasTreasure(c) ? null : "the AI paid {2} and could no longer cast Glorious Anthem; " + asked + "; spells seen: " + seen + "; " + before + "; untapped Plains left: "
+                            + CardLists.count(c.ai.getCardsIn(ZoneType.Battlefield), k -> k.isLand() && !k.isTapped())
+                            + ", hand: " + c.ai.getCardsIn(ZoneType.Hand) + ", trace:" + c.trace;
+                }));
+        l.add(new Scenario("tithe-alternate-face",
+                "the AI keeps mana for the castable back face of Mila, Crafty Companion",
+                Fid.APPROX, "DRAW", true,
+                c -> {
+                    c.bf("Smothering Tithe", c.opp);
+                    c.bf("Mountain", 6, c.ai);
+                    c.hand("Mila, Crafty Companion", c.ai);
+                },
+                c -> {
+                    final String broken = drawIntoTithe(c);
+                    if (broken != null) { return broken; }
+                    c.resolveAll();
+                    return hasTreasure(c) ? null
+                            : "the AI paid {2} and left itself unable to cast Lukka, Wayward Bonder ({4}{R}{R}); trace: " + c.trace;
+                }));
+        l.add(new Scenario("tithe-colors", "the AI pays {2} for Smothering Tithe when its Counterspell could not be cast with four Plains anyway", Fid.APPROX, "DRAW", true,
+                c -> { c.bf("Smothering Tithe", c.opp); c.bf("Plains", 4, c.ai); c.hand("Counterspell", c.ai); },
+                c -> {
+                    final String broken = drawIntoTithe(c);
+                    if (broken != null) { return broken; }
+                    c.resolveAll();
+                    return hasTreasure(c) ? "the AI gave a Treasure to keep two Plains for a Counterspell it cannot cast" : null;
+                }));
+        l.add(new Scenario("tithe-disallow", "Disallow is not cast at the trigger of Smothering Tithe when paying {2} is cheaper", Fid.APPROX, "DRAW", true,
+                c -> { c.bf("Smothering Tithe", c.opp); c.bf("Island", 3, c.ai); c.hand("Disallow", c.ai); },
+                c -> {
+                    final String broken = drawIntoTithe(c);
+                    if (broken != null) { return broken; }
+                    return c.plays("Disallow") ? "Disallow was cast at the Tithe trigger" + c.why("Disallow") : null;
+                }));
         l.add(new Scenario("4278", "Up the Beanstalk before the 5+ cost spell (should be the first play)", Fid.EXACT, M1, true,
                 c -> { c.bf("Forest", 10, c.ai); c.hand("Up the Beanstalk", c.ai); c.hand("Craterhoof Behemoth", c.ai); },
                 c -> { final SpellAbility sa = c.first();
@@ -639,16 +872,15 @@ public class AiReportScenarioTest extends AITest {
                 c -> c.plays().stream().anyMatch(sa -> sa.getHostCard().getName().equals("Wrenn and Six") && sa.getDescription().contains("1 damage")) ? "used the -1" : null));
         l.add(play("4169", "Agatha's Soul Cauldron in response to Unearth", Fid.APPROX, M1, false, "Agatha's Soul Cauldron",
                 c -> { c.bf("Agatha's Soul Cauldron", c.ai); final Card bears = c.gy("Grizzly Bears", c.opp); c.stack(c.opp, "Unearth", bears); }));
-        l.add(new Scenario("4373", "Giver of Runes is not activated before combat and the AI still attacks", Fid.APPROX, M1, true,
+        l.add(noPlay("4373", "Giver of Runes is not activated before combat", Fid.APPROX, M1, true, "Giver of Runes",
+                c -> { c.bf("Giver of Runes", c.ai); c.bf("Grizzly Bears", c.ai); c.bf("Assault Formation", c.ai); c.bf("Forest", 2, c.ai); }));
+        l.add(new Scenario("4373-attack", "Giver of Runes beside Grizzly Bears: the AI still attacks into an empty board", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Giver of Runes", c.ai); c.bf("Grizzly Bears", c.ai); c.bf("Assault Formation", c.ai); c.bf("Forest", 2, c.ai); },
-                c -> {
-                    if (c.plays("Giver of Runes")) { return "activated Giver of Runes precombat"; }
-                    return c.attackers().isEmpty() ? "AI did not attack into an empty board" : null;
-                }));
-        l.add(new Scenario("decayed-not-thrown-away", "A decayed 5/5 does not attack an empty board for 5 of 20 (it would be sacrificed)", Fid.APPROX, M1, true,
+                c -> c.attackers().isEmpty() ? "AI did not attack into an empty board" : null));
+        l.add(new Scenario("decayed-not-thrown-away", "A decayed 5/5 does not attack an empty board for 5 of 20 (it would be sacrificed)", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Rot-Curse Rakshasa", c.ai); },
                 c -> c.attackers().isEmpty() ? null : "attacked with a decayed creature for no lethal"));
-        l.add(new Scenario("decayed-for-lethal", "A decayed 5/5 does attack when it is lethal", Fid.APPROX, M1, true,
+        l.add(new Scenario("decayed-for-lethal", "A decayed 5/5 does attack when it is lethal", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Rot-Curse Rakshasa", c.ai); c.opp.setLife(5, null); },
                 c -> c.attackers().isEmpty() ? "did not attack for lethal with the decayed creature" : null));
         l.add(new Scenario("13014", "Seal of Fire is used before Skewer the Critics so Spectacle is available", Fid.EXACT, M1, true,
@@ -786,9 +1018,30 @@ public class AiReportScenarioTest extends AITest {
                     return bears != null && !c.wouldPayParalyze(bears) ? null
                             : "AI paid for an untap that would only remove a stun counter";
                 }));
-        l.add(aimed("7477", "burn is aimed at a creature that is not protected by Crystal Barricade", Fid.EXACT, M1, true,
-                "Lightning Bolt", "Crystal Barricade",
+        // #7477 / #3994: Crystal Barricade stops noncombat damage to their other creatures, and a Bolt does not kill the 0/4 itself
+        l.add(noPlay("7477", "burn is not cast when the only creature it could hurt is the Crystal Barricade that survives it", Fid.EXACT, M1, true, "Lightning Bolt",
                 c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Birds of Paradise", c.opp); c.bf("Crystal Barricade", c.opp); }));
+        l.add(noPlay("3994-barricade", "Lightning Bolt at a 0/4 Crystal Barricade that keeps their other creature safe", Fid.EXACT, M1, true, "Lightning Bolt",
+                c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Crystal Barricade", c.opp); c.bf("Grizzly Bears", c.opp); }));
+        l.add(noPlay("3994-barricade-prowess", "A prowess creature is no reason to Bolt a 0/4 Crystal Barricade in the main phase", Fid.APPROX, M1, true, "Lightning Bolt",
+                c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Monastery Swiftspear", c.ai); c.bf("Crystal Barricade", c.opp); c.bf("Grizzly Bears", c.opp); }));
+        // ComputerUtilCard.useRemovalNow decides whether a removal spell is cast now with MyRandom (chance < value): a Bolt at a vanilla
+        // Grizzly Bears is held about a third of the time. The control pins every draw to 0 (the chance succeeds), or it is flaky.
+        l.add(new Scenario("3994-killable", "control: a Lightning Bolt still goes at a creature it kills (should play Lightning Bolt)", Fid.EXACT, M1, true,
+                c -> { c.bf("Mountain", c.ai); c.hand("Lightning Bolt", c.ai); c.bf("Grizzly Bears", c.opp); },
+                c -> {
+                    final java.util.Random previous = forge.util.MyRandom.getRandom();
+                    // MyRandom wraps what it is given and draws only delegate.nextInt(): that is the one method to override (every
+                    // nextFloat/nextInt(bound)/nextDouble of the wrapper is computed from it), so 0 makes every chance roll succeed
+                    forge.util.MyRandom.setRandom(new java.util.Random(0) {
+                        @Override public int nextInt() { return 0; }
+                    });
+                    try {
+                        return c.plays("Lightning Bolt") ? null : "AI did not play/activate Lightning Bolt" + c.why("Lightning Bolt");
+                    } finally {
+                        forge.util.MyRandom.setRandom(previous);
+                    }
+                }));
         l.add(noPlay("13011", "Ephemerate does not blink a creature whose ETB trigger is disabled", Fid.EXACT, M1, true, "Ephemerate",
                 c -> { c.bf("Doorkeeper Thrull", c.opp); c.bf("Quantum Riddler", c.ai); c.bf("Plains", c.ai); c.hand("Ephemerate", c.ai); }));
         l.add(play("13011-protection", "Ephemerate still saves a creature from removal while ETB triggers are disabled", Fid.APPROX, M1, false, "Ephemerate",
@@ -825,9 +1078,60 @@ public class AiReportScenarioTest extends AITest {
                     final Player target = etb.getTargets().getFirstTargetedPlayer();
                     return target == c.opp ? null : "Endurance should target the opponent's valuable graveyard, chose " + target;
                 }));
-        l.add(new Scenario("12927-dryad-arbor", "Dryad Arbor does not attack into Lyra Dawnbringer (it is just killed)", Fid.APPROX, M1, true,
+        // The attack is declared in the declare attackers step: AiController.declareAttackers only commits the land creatures
+        // (commitAttackers) in that phase, so a MAIN1 scenario never reaches the path that sent the Arbor in.
+        l.add(new Scenario("12927-dryad-arbor", "Dryad Arbor does not attack into Lyra Dawnbringer (it is just killed)", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Gladecover Scout", c.ai); c.bf("Lyra Dawnbringer", c.opp); },
                 c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "Dryad Arbor attacked into Lyra" : null));
+        l.add(new Scenario("12927-dryad-arbor-flatmc-off", "Same board with the plain heuristics only (no Monte Carlo): the Arbor stays home", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Gladecover Scout", c.ai); c.bf("Lyra Dawnbringer", c.opp); c.game.AI_FLAT_MONTE_CARLO = false; },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "Dryad Arbor attacked into Lyra without the rollouts" : null));
+        // the report's own board: the other creatures stay home and the land creature goes in alone
+        l.add(new Scenario("12927-dryad-arbor-alone", "Dryad Arbor is not sent into a Serra Angel alone while the other creatures stay home", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Gladecover Scout", c.ai); c.bf("Slippery Bogle", c.ai); c.bf("Serra Angel", c.opp); },
+                c -> {
+                    final List<Card> attackers = c.attackers();
+                    return attackers.stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "Dryad Arbor attacked into the Serra Angel: " + attackers : null;
+                }));
+        // controls: the guard only refuses a plain gift, it is not a ban on land creatures attacking
+        l.add(new Scenario("12927-control-no-blockers", "control: nothing can block, the Dryad Arbor still attacks", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? null : "Dryad Arbor stayed home against an empty board"));
+        l.add(new Scenario("12927-control-harmless-blocker", "control: the only blocker is a 0/8 wall that cannot kill it, the Dryad Arbor still attacks", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Dryad Arbor", c.ai); c.bf("Wall of Stone", c.opp); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? null : "Dryad Arbor stayed home against a blocker that cannot hurt it"));
+        // a creature with zero power and no effect of its own has no reason to attack: another attacker's "Whenever ~ attacks" must not make it one
+        l.add(new Scenario("zero-power-attacker", "Spellskite (0/4) stays home when Goblin Guide, with an attack trigger of its own, attacks", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Goblin Guide", c.ai); c.bf("Spellskite", c.ai); },
+                c -> {
+                    final List<Card> attackers = c.attackers();
+                    if (attackers.stream().noneMatch(a -> a.getName().equals("Goblin Guide"))) { return "setup: Goblin Guide did not attack, the scenario proves nothing: " + attackers; }
+                    return attackers.stream().anyMatch(a -> a.getName().equals("Spellskite")) ? "Spellskite attacked with no power and no effect: " + attackers : null;
+                }));
+        l.add(new Scenario("zero-power-attacker-alone", "Spellskite (0/4) alone never attacks", Fid.EXACT, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Spellskite", c.ai); },
+                c -> c.attackers().isEmpty() ? null : "Spellskite attacked alone: " + c.attackers()));
+        l.add(new Scenario("zero-power-battle-cry", "control: Spellskite attacks next to a battle cry creature, which gives it +1/+0", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Accorder Paladin", c.ai); c.bf("Spellskite", c.ai); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Spellskite")) ? null : "Spellskite stayed home although battle cry makes it a 1/4 attacker"));
+        l.add(new Scenario("zero-power-aerial-guide", "Spellskite (0/4) stays home next to Aerial Guide: flying is no damage", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Aerial Guide", c.ai); c.bf("Spellskite", c.ai); },
+                c -> {
+                    final List<Card> attackers = c.attackers();
+                    if (attackers.stream().noneMatch(a -> a.getName().equals("Aerial Guide"))) { return "setup: Aerial Guide did not attack, the scenario proves nothing: " + attackers; }
+                    return attackers.stream().anyMatch(a -> a.getName().equals("Spellskite")) ? "Spellskite attacked for a trigger that adds no power: " + attackers : null;
+                }));
+        l.add(new Scenario("zero-power-doran", "control: Doran, the Siege Tower (0/5, damage equal to toughness) attacks into an empty board", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Doran, the Siege Tower", c.ai); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Doran, the Siege Tower")) ? null : "Doran stayed home although it deals 5 damage"));
+        // the attack trigger of another attacker can aim at the candidate: Wildwood Mentor puts +X/+X on another attacking creature
+        l.add(new Scenario("zero-power-targeted-trigger", "Spellskite (0/4) attacks next to Wildwood Mentor, whose trigger pumps another attacker", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Wildwood Mentor", c.ai); c.bf("Spellskite", c.ai); },
+                c -> {
+                    final List<Card> attackers = c.attackers();
+                    if (attackers.stream().noneMatch(a -> a.getName().equals("Wildwood Mentor"))) { return "setup: Wildwood Mentor did not attack, the scenario proves nothing: " + attackers; }
+                    return attackers.stream().anyMatch(a -> a.getName().equals("Spellskite")) ? null : "Spellskite stayed home although Wildwood Mentor's trigger would pump it: " + attackers;
+                }));
         // Manabarbs: the lands that pay for a spell cost life, and the AI ran into it until it died
         l.add(noPlay("manabarbs-low-life", "At 3 life under Manabarbs the AI does not pay four lands for a Hill Giant", Fid.APPROX, "MAIN2", true, "Hill Giant",
                 c -> { c.ai.setLife(3, null); c.bf("Mountain", 4, c.ai); c.hand("Hill Giant", c.ai); c.bf("Manabarbs", c.opp); }));
@@ -944,7 +1248,7 @@ public class AiReportScenarioTest extends AITest {
                     }
                     return ActivationGuard.tooPainfulToPay(c.ai, sa) ? null : "the shielded Hill Giant was counted as removed by the Bolt";
                 }));
-        l.add(new Scenario("deathtouch-plan-stays-consistent", "The Craw Wurm that stays home does not send a Grizzly Bears alone into the blocker meant for it", Fid.APPROX, M1, true,
+        l.add(new Scenario("deathtouch-plan-stays-consistent", "The Craw Wurm that stays home does not send a Grizzly Bears alone into the blocker meant for it", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Craw Wurm", c.ai); c.bf("Grizzly Bears", c.ai); c.bf("Typhoid Rats", c.opp); },
                 c -> {
                     final boolean bears = c.attackers().stream().anyMatch(a -> a.getName().equals("Grizzly Bears"));
@@ -1521,10 +1825,7 @@ public class AiReportScenarioTest extends AITest {
                 }));
         l.add(new Scenario("land-creature-gift", "Dryad Arbor into a Serra Angel that kills it for nothing is a gift to the blocker", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
-                c -> {
-                    final Card arbor = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Dryad Arbor")).findFirst().get();
-                    return AiAttackController.isGiftToABlocker(c.ai, arbor, new Combat(c.ai)) ? null : "the Arbor was not recognised as a gift";
-                }));
+                c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Dryad Arbor")) ? "the Arbor was sent into a Serra Angel" : null));
         l.add(new Scenario("land-creature-all-out-gift", "Even at all-out aggression 5, Dryad Arbor stays home when a blocker kills it for free", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Dryad Arbor", c.ai); c.bf("Serra Angel", c.opp); },
                 c -> {
@@ -1539,8 +1840,8 @@ public class AiReportScenarioTest extends AITest {
                 c -> {
                     final Card arbor = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> k.getName().equals("Dryad Arbor")).findFirst().get();
                     final Combat combat = new Combat(c.ai);
-                    final boolean ordinary = AiAttackController.shouldDeclineLandGift(c.ai, arbor, combat, false);
-                    final boolean exalted = AiAttackController.shouldDeclineLandGift(c.ai, arbor, combat, true);
+                    final boolean ordinary = AiAttackController.shouldDeclineLandGift(c.ai, arbor, combat, c.opp, false);
+                    final boolean exalted = AiAttackController.shouldDeclineLandGift(c.ai, arbor, combat, c.opp, true);
                     return ordinary && !exalted ? null : "the land-gift guard was not limited to the explicit Exalted path";
                 }));
         l.add(new Scenario("manabarbs-budget-order", "With 3 life the two basic lands (1 each) are kept, the nonbasic one (2 with Burning Earth) is dropped", Fid.APPROX, M1, true,
@@ -1669,25 +1970,25 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Island", 4, c.ai); c.bf("Kiora, the Rising Tide", c.opp); c.bf("Craw Wurm", c.opp); c.lib("Island", 8, c.ai); },
                 c -> effigyBecame(c, "Kiora, the Rising Tide")));
         // a deathtouch blocker takes one attacker: it does not hold back a whole army
-        l.add(new Scenario("deathtouch-swarm", "Four 2/2s attack into one Typhoid Rats: it can block only one", Fid.APPROX, M1, true,
+        l.add(new Scenario("deathtouch-swarm", "Four 2/2s attack into one Typhoid Rats: it can block only one", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Grizzly Bears", 4, c.ai); c.bf("Typhoid Rats", c.opp); },
                 c -> c.attackers().size() < 2 ? "only " + c.attackers().size() + " attacked into a single deathtouch blocker" : null));
-        l.add(new Scenario("deathtouch-lone", "A lone Hill Giant does not attack into the Typhoid Rats", Fid.APPROX, M1, true,
+        l.add(new Scenario("deathtouch-lone", "A lone Hill Giant does not attack into the Typhoid Rats", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Hill Giant", c.ai); c.bf("Typhoid Rats", c.opp); },
                 c -> c.attackers().isEmpty() ? null : "the Hill Giant attacked into a deathtouch blocker with nothing else"));
         // review of the deathtouch patch: only the blocks that are possible count, and only blockers that kill and die
-        l.add(new Scenario("deathtouch-flyer", "A Serra Angel that the Rats cannot block attacks, the Hill Giant stays", Fid.APPROX, M1, true,
+        l.add(new Scenario("deathtouch-flyer", "A Serra Angel that the Rats cannot block attacks, the Hill Giant stays", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Serra Angel", c.ai); c.bf("Hill Giant", c.ai); c.bf("Typhoid Rats", c.opp); },
                 c -> c.attackers().stream().anyMatch(a -> a.getName().equals("Serra Angel")) ? null : "the flyer did not attack past a ground deathtouch blocker"));
-        l.add(new Scenario("deathtouch-protection", "White Knights with protection from black are not blocked by the Rats, they attack", Fid.APPROX, M1, true,
+        l.add(new Scenario("deathtouch-protection", "White Knights with protection from black are not blocked by the Rats, they attack", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("White Knight", 2, c.ai); c.bf("Typhoid Rats", c.opp); },
                 c -> c.attackers().isEmpty() ? "protection from black attackers stayed home against a black deathtouch blocker" : null));
-        l.add(new Scenario("deathtouch-first-strike-wall", "Glissa (first strike, deathtouch) takes ONE Hill Giant: the other two still attack", Fid.APPROX, M1, true,
+        l.add(new Scenario("deathtouch-first-strike-wall", "Glissa (first strike, deathtouch) takes ONE Hill Giant: the other two still attack", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Hill Giant", 3, c.ai); c.bf("Glissa Sunslayer", c.opp); },
                 c -> c.attackers().size() >= 2 ? null : "only " + c.attackers().size() + " of 3 Hill Giants attacked, she can block only one"));
         l.add(new Scenario("deathtouch-group-damage",
                 "Two Grizzly Bears attack together into a Palace Guard with Gorgon's Head: combined damage kills it, but its 1 power only kills one",
-                Fid.APPROX, M1, true,
+                Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> {
                     c.bf("Grizzly Bears", 2, c.ai);
 
@@ -2225,9 +2526,11 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("12929-lands-and-auras", "a hand of lands and Auras for creatures, no creature, is sent back", Fid.APPROX, M1, true,
                 c -> { for (int i = 0; i < 20; i++) { c.lib("Plains", c.ai); c.lib("Grizzly Bears", c.ai); } },
                 c -> {
-                    for (final String n : new String[] { "Plains", "Plains", "Plains", "Holy Strength", "Holy Strength", "Rancor", "Holy Strength" }) { c.hand(n, c.ai); }
+                    final CardCollection hand = new CardCollection();
+                    for (final String n : new String[] { "Plains", "Plains", "Plains", "Holy Strength", "Holy Strength", "Rancor", "Holy Strength" }) { hand.add(c.hand(n, c.ai)); }
                     final DeckPlan plan = DeckPlan.forSetting("auto", c.ai);
-                    return OpeningHand.keep(c.ai, c.ai.getCardsIn(ZoneType.Hand), 0, true, plan, 4) ? "kept lands and Auras without a creature" : null;
+                    if (OpeningHand.keep(c.ai, hand, 0, true, plan, 4)) { return "smart mulligan kept lands and Auras without a creature"; }
+                    return ComputerUtil.wantMulligan(c.ai, 0) ? null : "classic mulligan kept lands and Auras without a creature";
                 }));
         l.add(noPlay("5860", "edict against a player with nothing to sacrifice", Fid.EXACT, M1, true, "Diabolic Edict",
                 c -> { c.bf("Swamp", 2, c.ai); c.hand("Diabolic Edict", c.ai); }));
@@ -2557,6 +2860,15 @@ public class AiReportScenarioTest extends AITest {
                 c -> c.opp.getCardsIn(ZoneType.Exile).anyMatch(card -> "Serra's Emissary".equals(card.getName()))
                         ? null : "Thought-Knot Seer exiled " + c.opp.getCardsIn(ZoneType.Exile)
                         + " instead of Serra's Emissary; remaining hand=" + c.opp.getCardsIn(ZoneType.Hand)));
+        // #13037: Thought-Knot Seer takes the first card of the OPPONENT's key card list that is in their hand and not in play
+        l.add(tksKeyCards("13037", "Thought-Knot Seer exiles the first key card of the list, not the most expensive one (Iona)", "Eladamri, Korvecdal", false,
+                c -> { c.hand("Eladamri, Korvecdal", c.opp); c.hand("Serra's Emissary", c.opp); c.hand("Iona, Shield of Emeria", c.opp); c.hand("Champion of Rhonas", c.opp); }));
+        l.add(tksKeyCards("13037-in-play", "Thought-Knot Seer skips a key card that is already in play and takes the next one", "Serra's Emissary", false,
+                c -> { c.bf("Eladamri, Korvecdal", c.opp); c.hand("Serra's Emissary", c.opp); c.hand("Iona, Shield of Emeria", c.opp); c.hand("Champion of Rhonas", c.opp); }));
+        l.add(tksKeyCards("13037-no-key-card", "Control: with no key card in their hand it still takes the most expensive card", "Iona, Shield of Emeria", false,
+                c -> { c.hand("Birds of Paradise", c.opp); c.hand("Iona, Shield of Emeria", c.opp); c.hand("Opt", c.opp); }));
+        l.add(tksKeyCards("13037-own-list", "The key cards of the AI's own deck do not decide what it takes from the opponent", "Serra's Emissary", true,
+                c -> { c.hand("Birds of Paradise", c.opp); c.hand("Serra's Emissary", c.opp); }));
         l.add(new Scenario("nog-ambitious-cadet-promotion-once", "Nog's two promotion stages cannot be paid for repeatedly in one turn", Fid.APPROX, M1, true,
                 c -> {
                     c.richMana();
@@ -2648,6 +2960,19 @@ public class AiReportScenarioTest extends AITest {
 
     @Test(dataProvider = "scenarios")
     public void aiBehavesAsReported(final Scenario s) {
+        // The AI rolls dice in many places (useRemovalNow, percentTrue ...): every scenario gets its own fixed stream, so that a
+        // result is the same on every machine, Java version and run order, and a failure can be repeated (-Dforge.test.seed=N
+        // tries another stream: a scenario that is only right for one seed tests the dice, not the AI)
+        final java.util.Random previousRandom = forge.util.MyRandom.getRandom();
+        forge.util.MyRandom.setRandom(new java.util.Random(Long.getLong("forge.test.seed", 0L) * 31 + s.toString().hashCode()));
+        try {
+            runScenario(s);
+        } finally {
+            forge.util.MyRandom.setRandom(previousRandom);
+        }
+    }
+
+    private void runScenario(final Scenario s) {
         final Game game = initAndCreateGame();
         game.AI_FLAT_MONTE_CARLO = FLAT_MC;
         if (System.getProperty("forge.test.issue") != null) { forge.ai.simulation.FlatMonteCarloPicker.DEBUG = true; } // a single scenario: print what the picker made of it
@@ -2671,8 +2996,98 @@ public class AiReportScenarioTest extends AITest {
             SUMMARY.add("ERROR  " + s + " -> " + t);
             throw t;
         }
-        SUMMARY.add((failure == null ? "OK     " : "BUG    ") + s + (failure == null ? "" : " -> " + failure));
+        // "passes" only proves something when the AI itself was asked: a scenario that went through no decision of the controller
+        // called a helper class, which is how #12927 stayed green (-Dforge.test.strictE2E=true fails those)
+        final boolean e2e = c.decisions > 0;
+        if (failure == null && !e2e && Boolean.getBoolean("forge.test.strictE2E")) {
+            failure = "not end to end: no decision of the AI controller was exercised (only helpers, " + c.gates + " gate calls)";
+        }
+        SUMMARY.add((failure == null ? (e2e ? "OK     " : "OK-HELPER ") : "BUG    ") + s + (failure == null ? "" : " -> " + failure));
         AssertJUnit.assertNull(s + (failure == null ? "" : " -> " + failure), failure); // the reason is in the assertion, not only in the summary
+    }
+
+    @Test
+    public void flatMcPointlessAttackerUsesTheProposedAttackSet() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final Card battleCry = addCard("Accorder Paladin", ai);
+        final Card spellskite = addCard("Spellskite", ai);
+        AssertJUnit.assertTrue("Spellskite must be pointless when Battle Cry's source is not in the planned attack",
+                AiAttackController.isPointlessAttacker(ai, spellskite, opponent, Map.of(spellskite, opponent)));
+        AssertJUnit.assertFalse("Spellskite is effective when Battle Cry's source is also in the planned attack",
+                AiAttackController.isPointlessAttacker(ai, spellskite, opponent, Map.of(battleCry, opponent, spellskite, opponent)));
+    }
+
+    @Test
+    public void flatMcPointlessAttackerSeesTargetedAttackTriggers() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final Card mentor = addCard("Wildwood Mentor", ai);
+        final Card spellskite = addCard("Spellskite", ai);
+        AssertJUnit.assertFalse("Spellskite is worth attacking with when Wildwood Mentor's trigger pumps another attacker",
+                AiAttackController.isPointlessAttacker(ai, spellskite, opponent, Map.of(mentor, opponent, spellskite, opponent)));
+        AssertJUnit.assertTrue("without Wildwood Mentor in the attack Spellskite is still pointless",
+                AiAttackController.isPointlessAttacker(ai, spellskite, opponent, Map.of(spellskite, opponent)));
+    }
+
+    @Test
+    public void flatMcPointlessAttackerIgnoresTargetedTriggersThatAddNoPower() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        final Card guide = addCard("Aerial Guide", ai); // another attacking creature gains flying: no damage for a 0/4
+        final Card spellskite = addCard("Spellskite", ai);
+        AssertJUnit.assertTrue("Spellskite gains nothing from Aerial Guide's flying, it is still a pointless attacker",
+                AiAttackController.isPointlessAttacker(ai, spellskite, opponent, Map.of(guide, opponent, spellskite, opponent)));
+    }
+
+    @Test
+    public void landGiftCheckOnlyConsidersTheChosenDefendingTeam() {
+        final Game game = initAndCreateThreePlayerGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player chosenDefender = game.getPlayers().get(0);
+        final Player otherDefender = game.getPlayers().get(2);
+        final Card arbor = addCard("Dryad Arbor", ai);
+        addCard("Lyra Dawnbringer", otherDefender);
+        final Combat combat = new Combat(ai);
+
+        AssertJUnit.assertFalse("a blocker belonging to another free-for-all opponent cannot block this attack",
+                AiAttackController.isGiftToABlocker(ai, arbor, combat, chosenDefender));
+        AssertJUnit.assertTrue("the chosen defender's Lyra can kill the Dryad Arbor for free",
+                AiAttackController.isGiftToABlocker(ai, arbor, combat, otherDefender));
+    }
+
+    @Test
+    public void classicMulliganChecksTheHandAfterBottomingItsOnlyCreature() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        // The classic bottoming heuristic only sends uncastable cards back when the profile enables this rule.
+        ((LobbyPlayerAi) ai.getLobbyPlayer()).setAiProfile("Default");
+        for (int i = 0; i < 20; i++) {
+            addCardToZone("Plains", ai, ZoneType.Library);
+        }
+        final CardCollection hand = new CardCollection();
+        for (int i = 0; i < 3; i++) {
+            hand.add(addCardToZone("Plains", ai, ZoneType.Hand));
+        }
+        for (int i = 0; i < 3; i++) {
+            hand.add(addCardToZone("Holy Strength", ai, ZoneType.Hand));
+        }
+        final Card onlyCreature = addCardToZone("Emrakul, the Aeons Torn", ai, ZoneType.Hand);
+        hand.add(onlyCreature);
+        AssertJUnit.assertTrue("the Default profile should bottom an uncastable creature",
+                ComputerUtil.scryWillMoveCardToBottomOfLibrary(ai, onlyCreature));
+
+        final PlayerControllerAi controller = (PlayerControllerAi) ai.getController();
+        final CardCollection bottom = controller.classicMulliganBottomCards(hand, 1);
+        AssertJUnit.assertTrue("the uncastable high-cost creature should be selected for bottoming", bottom.contains(onlyCreature));
+        final CardCollection kept = new CardCollection(hand);
+        kept.removeAll(bottom);
+        AssertJUnit.assertTrue("the retained hand now contains only lands and creature Auras",
+                OpeningHand.hasOnlyLandsAndCreatureAuras(kept));
+        AssertJUnit.assertFalse("the classic mulligan must reject the resulting hand", controller.classicMulliganKeepsHand(hand, 1));
     }
 
     @AfterClass

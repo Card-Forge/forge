@@ -419,6 +419,23 @@ public class VStack extends FDropDown {
         TargetingOverlay.drawArrow(g, from, to, connects);
     }
 
+    //an open Flashback tab shows its own copy of the card, so aim there before the card's own zone
+    private static Vector2 getTargetArrowEnd(final CardView card) {
+        for (final VPlayerPanel panel : MatchScreen.getPlayerPanels().values()) {
+            if (!(panel.getSelectedTab() instanceof VPlayerPanel.InfoTabZone tab) || tab.zoneType != ZoneType.Flashback
+                    || !(tab.getDisplayArea() instanceof VCardDisplayArea area)) {
+                continue;
+            }
+            for (final VCardDisplayArea.CardAreaPanel p : area.getCardPanels()) {
+                if (p.getCard().getId() == card.getId()) {
+                    final Vector2 end = p.getTargetingArrowOrigin();
+                    if (end != null) { return end; }
+                }
+            }
+        }
+        return VCardDisplayArea.CardAreaPanel.get(card).getTargetingArrowOrigin();
+    }
+
     @Override
     protected void drawOnContainer(Graphics g) {
         //draw target arrows immediately above stack for active item only
@@ -439,7 +456,7 @@ public class VStack extends FDropDown {
             while (instance != null) {
                 for (CardView c : instance.getTargetCards()) {
                     TargetingOverlay.ArcConnection conn = activator != null && activator.isOpponentOf(c.getController()) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
-                    drawTargetArrow(g, arrowOrigin, VCardDisplayArea.CardAreaPanel.get(c).getTargetingArrowOrigin(), conn);
+                    drawTargetArrow(g, arrowOrigin, getTargetArrowEnd(c), conn);
                 }
                 for (PlayerView p : instance.getTargetPlayers()) {
                     TargetingOverlay.ArcConnection conn = activator != null && activator.isOpponentOf(p) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;

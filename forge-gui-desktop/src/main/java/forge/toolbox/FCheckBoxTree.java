@@ -50,6 +50,7 @@ public class FCheckBoxTree extends JTree {
         public Comparable item;
         public boolean isEnabled = true;
         public boolean isSelected = false;
+        public String detail;  // shown in a second column beside the label when set
 
         public FTreeNodeData(Comparable value) {
             this(value, value.toString(), value.hashCode());
@@ -464,6 +465,7 @@ public class FCheckBoxTree extends JTree {
     // of a single (FCheckBox) node based on the "checked" property.
     private class FCheckBoxTreeCellRenderer extends JPanel implements TreeCellRenderer {
         FCheckBox checkBox;
+        private final FSkin.SkinnedLabel detailLabel = new FSkin.SkinnedLabel();
         private final FSkin.SkinFont CHECKBOX_LABEL_FONT = FSkin.getFont(14);
         private final FSkin.SkinColor CHECKBOX_LABEL_COLOUR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
         private final Color CHECKBOX_SELECTED_LABEL_COLOUR = new Color(252, 226, 137);
@@ -477,6 +479,9 @@ public class FCheckBoxTree extends JTree {
             this.checkBox = new FCheckBox();
             this.displayNodesCount = displayNodesCount;
             add(this.checkBox, "left, gaptop 2, w 250::450, h 20!");
+            this.detailLabel.setFont(CHECKBOX_LABEL_FONT);
+            this.detailLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).alphaColor(150));
+            add(this.detailLabel, "gaptop 2, h 20!");
 
         }
 
@@ -502,6 +507,10 @@ public class FCheckBoxTree extends JTree {
                 chkBoxTxt += String.format(" (%d/%d)", cn.selectedChildrenCount, totalActiveNodes);
             }
             this.checkBox.setText(chkBoxTxt);
+            // a fixed label width lines the details up in a column
+            ((MigLayout) getLayout()).setComponentConstraints(this.checkBox, nodeInfo.detail == null
+                    ? "left, gaptop 2, w 250::450, h 20!" : "left, gaptop 2, w 450!, h 20!");
+            this.detailLabel.setText(nodeInfo.detail == null ? "" : nodeInfo.detail);
             this.checkBox.setName(nodeInfo.item.toString());
             if (cn.isSelected) {
                 this.checkBox.setForeground(CHECKBOX_SELECTED_LABEL_COLOUR);

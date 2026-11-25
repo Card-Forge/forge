@@ -199,7 +199,7 @@ public enum VHomeUI implements IVTopLevelUI {
         return pnlMenu;
     }
 
-    void setSidebarVisible(final boolean visible) {
+    public void setSidebarVisible(final boolean visible) {
         if (pnlMenu.isVisible() != visible) {
             pnlMenu.setVisible(visible);
             final JPanel content = FView.SINGLETON_INSTANCE.getPnlInsets();

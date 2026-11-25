@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 /**
  * Shared card reward logic used by RogueWinLoseController (post-match rewards)
- * and CSubmenuRogueMap (chest node rewards).
+ * and EffectResultHelper (chest and event rewards).
  */
 public class CardRewardHelper {
 
@@ -34,8 +34,9 @@ public class CardRewardHelper {
      */
     @FunctionalInterface
     public interface RewardDialog {
+        /** rerollLabel is null when there is no reroll. rerollCost is its price in gold. */
         List<PaperCard> show(String title, List<PaperCard> cards, int maxSelections,
-                             String rerollLabel, boolean rerollEnabled, int gold);
+                             String rerollLabel, int rerollCost, boolean rerollEnabled, int gold);
     }
 
     /**
@@ -46,13 +47,17 @@ public class CardRewardHelper {
     }
 
     /**
+     * Calculate gold cost of the next reroll, 0 while free ones are left.
+     */
+    public static int getRerollCost(int freeRerolls, int rerollCount) {
+        return rerollCount < freeRerolls ? 0 : getRerollCost(rerollCount - freeRerolls);
+    }
+
+    /**
      * Build the reroll button label showing gold cost, or "Reroll (free)" if free.
      */
     public static String buildRerollLabel(int freeRerolls, int rerollCount) {
-        if (rerollCount < freeRerolls) {
-            return "Reroll: 0";
-        }
-        return "Reroll: " + getRerollCost(rerollCount - freeRerolls);
+        return "Reroll: " + getRerollCost(freeRerolls, rerollCount);
     }
 
     /**
@@ -128,7 +133,8 @@ public class CardRewardHelper {
                                                     boolean customReward) {
         String rerollLabel = customReward ? null : buildRerollLabel(freeRerolls, rerollCount);
         boolean rerollEnabled = !customReward && canAffordReroll(freeRerolls, rerollCount, run.getCurrentGold());
-        return dialog.show(title, rewardOptions, maxPicks, rerollLabel, rerollEnabled, run.getCurrentGold());
+        return dialog.show(title, rewardOptions, maxPicks, rerollLabel, getRerollCost(freeRerolls, rerollCount), rerollEnabled,
+            run.getCurrentGold());
     }
 
     private static boolean isPaidReroll(List<PaperCard> chosenCards, int freeRerolls, int rerollCount,

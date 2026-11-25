@@ -157,14 +157,14 @@ public class RogueWinLoseController {
             return;
         }
 
+        // Lost carry cards come before the card choice, so a view can show them with it
+        showLostCarryCards();
+
         // Award card rewards (only for non-final nodes, skip if distortion)
         if (planeboundNode != null && !rewardCtx.skipRewards) {
             boolean isElite = planeboundNode.getPlaneboundType() == RoguePlaneboundType.ELITE;
             awardCardRewards(isElite, goldReward, echoReward, rewardCtx);
         }
-
-        // Show lost carry card message
-        showLostCarryCards();
 
         // Track meta progress for match
         recordMatchStats(progress, true);
@@ -231,8 +231,17 @@ public class RogueWinLoseController {
     }
 
     private void awardCardRewards(boolean isElite, int goldReward, int echoReward, MatchRewardContext rewardCtx) {
-        List<PaperCard> chosenCards = CardRewardHelper.runReward(currentRun,
-                rewardDialog, false, rewardCtx, null);
+        // The gold and Echoes come before the card choice, so a view can show them with it
+        if (goldReward > 0) {
+            view.showMessage(localizer.getMessage("lblRogueGoldWon", goldReward), localizer.getMessage("lblRogueGoldReward"), FSkinProp.ICO_QUEST_COIN);
+        }
+
+        if (echoReward > 0) {
+            view.showMessage(localizer.getMessage("lblRogueEchoesWon", echoReward), localizer.getMessage("lblRogueEchoReward"), FSkinProp.ICO_QUEST_GOLD);
+        }
+
+        List<PaperCard> chosenCards = new ArrayList<>(CardRewardHelper.runReward(currentRun,
+                rewardDialog, false, rewardCtx, null));
 
         // If Elite opponent, show second reward screen with mythic cards
         if (isElite) {
@@ -243,14 +252,6 @@ public class RogueWinLoseController {
 
         if (!chosenCards.isEmpty()) {
             view.showCards(localizer.getMessage("lblRogueCardsAdded"), chosenCards);
-        }
-
-        if (goldReward > 0) {
-            view.showMessage(localizer.getMessage("lblRogueGoldWon", goldReward), localizer.getMessage("lblRogueGoldReward"), FSkinProp.ICO_QUEST_COIN);
-        }
-
-        if (echoReward > 0) {
-            view.showMessage(localizer.getMessage("lblRogueEchoesWon", echoReward), localizer.getMessage("lblRogueEchoReward"), FSkinProp.ICO_QUEST_GOLD);
         }
     }
 
@@ -404,10 +405,5 @@ public class RogueWinLoseController {
                 .anyMatch(c -> c.getName().equals(card.cardName()))
             || human.getCardsIn(ZoneType.Stack).stream()
                 .anyMatch(c -> c.getName().equals(card.cardName()));
-    }
-
-    public void actionOnQuit() {
-        // Any cleanup needed before quitting
-        // Currently handled by RogueWinLose.actionOnQuit()
     }
 }

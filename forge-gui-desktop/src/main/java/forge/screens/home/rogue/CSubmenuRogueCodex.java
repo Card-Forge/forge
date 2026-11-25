@@ -1,26 +1,19 @@
 package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.CodexHelper;
-import forge.gamemodes.rogue.RogueConfig;
+import forge.gamemodes.rogue.CodexHelper.JournalEntry;
 import forge.gamemodes.rogue.RogueDeck;
 import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.RoguePlanebound;
 import forge.gamemodes.rogue.RogueTutorial;
 import forge.gamemodes.rogue.effect.RogueEffect;
-import forge.gamemodes.rogue.npc.NPC;
-import forge.gamemodes.rogue.npc.TeferiEncounter;
-import forge.gamemodes.rogue.npc.TeferiOptionalEncounter;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.achievements.RogueCommanderAchievements;
 import forge.localinstance.properties.ForgePreferences;
 import forge.screens.home.CHomeUI;
-import forge.screens.home.rogue.VSubmenuRogueCodex.JournalEntry;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +47,9 @@ public enum CSubmenuRogueCodex implements ICDoc {
 
   @Override
   public void update() {
+    if (!RogueUIHelper.progressReadable()) {
+      return;
+    }
     RogueCommanderAchievements.getInstance().evaluateCodexAchievements(RogueMetaProgress.getInstance());
     RogueTutorialHelper.showIfNotSeen(RogueTutorial.CODEX, RogueTutorial.CARD_SELECTION_ZOOM);
     loadStatistics();
@@ -76,7 +72,7 @@ public enum CSubmenuRogueCodex implements ICDoc {
     switch (activeTab) {
       case GLOBAL_STATS -> view.showGlobalStats();
       case COMMANDERS -> {
-        List<RogueDeck> commanders = loadCommanders();
+        List<RogueDeck> commanders = CodexHelper.codexCommanders();
         selectedCommander = resolveSelectedCommander(commanders);
         view.showCommanders(commanders, selectedCommander, progress, commander -> {
           selectedCommander = commander;
@@ -85,7 +81,7 @@ public enum CSubmenuRogueCodex implements ICDoc {
         });
       }
       case PLANEBOUNDS -> {
-        List<RoguePlanebound> planebounds = loadPlanebounds();
+        List<RoguePlanebound> planebounds = CodexHelper.codexPlanebounds();
         selectedPlanebound = resolveSelectedPlanebound(planebounds, progress);
         view.showPlanebounds(planebounds, selectedPlanebound, progress, planebound -> {
           selectedPlanebound = planebound;
@@ -99,37 +95,9 @@ public enum CSubmenuRogueCodex implements ICDoc {
   }
 
   private void showJournal(RogueMetaProgress progress) {
-    List<JournalEntry> tutorials = Arrays.stream(RogueTutorial.values())
-        .filter(progress::hasSeenTutorial)
-        .map(tutorial -> new JournalEntry(tutorial.getId(), tutorial.getTitle(),
-            String.join("\n\n", tutorial.getMessageChunks())))
-        .toList();
-
-    Localizer localizer = Localizer.getInstance();
-    List<JournalEntry> story = new ArrayList<>();
-    int storyLevel = progress.getNPCLevel(NPC.TEFERI.id);
-    for (TeferiEncounter chapter : TeferiEncounter.values()) {
-      if (chapter.getRequiredLevel() >= storyLevel) {
-        continue;
-      }
-      List<String> text = chapter.getJournalText();
-      if (!text.isEmpty()) {
-        story.add(new JournalEntry("teferi:" + chapter.name(), chapter.getTitle(), String.join("\n\n", text)));
-      }
-    }
-    TeferiOptionalEncounter anchor = TeferiOptionalEncounter.TEMPORAL_ANCHOR;
-    if (progress.hasSeenNPCEncounter(anchor.getId())) {
-      story.add(new JournalEntry(anchor.getId(), localizer.getMessage("lblRogueJournalTemporalAnchor"),
-          String.join("\n\n", anchor.getStoryTextChunks())));
-    }
-    view.showJournal(tutorials, story);
-  }
-
-  private List<RogueDeck> loadCommanders() {
-    return RogueConfig.loadRogueDecks().stream()
-        .filter(deck -> !deck.isExperimental())
-        .sorted(Comparator.comparing(RogueDeck::getName, String.CASE_INSENSITIVE_ORDER))
-        .toList();
+    List<JournalEntry> journal = CodexHelper.journal(progress);
+    view.showJournal(journal.stream().filter(entry -> !entry.story()).toList(),
+        journal.stream().filter(JournalEntry::story).toList());
   }
 
   private RogueDeck resolveSelectedCommander(List<RogueDeck> commanders) {
@@ -142,12 +110,6 @@ public enum CSubmenuRogueCodex implements ICDoc {
       }
     }
     return commanders.stream().filter(RogueDeck::isUnlocked).findFirst().orElse(null);
-  }
-
-  private List<RoguePlanebound> loadPlanebounds() {
-    return RogueConfig.loadPlanebounds().stream()
-        .sorted(Comparator.comparing(RoguePlanebound::planeboundName, String.CASE_INSENSITIVE_ORDER))
-        .toList();
   }
 
   private RoguePlanebound resolveSelectedPlanebound(List<RoguePlanebound> planebounds,

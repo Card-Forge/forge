@@ -67,6 +67,11 @@ public enum RogueEffectComposite implements RogueEffect {
         forEachEffect(run, e -> e.onMatchWin(run));
     }
 
+    /** Whether losing now would revive the player rather than end the run; changes nothing. */
+    public boolean wouldRevive(RogueRun run) {
+        return getAllEffects(run).stream().anyMatch(RogueEffect::revivesOnDefeat);
+    }
+
     @Override
     public void onDefeat(DefeatContext ctx, RogueRun run) {
         for (RogueEffect e : getAllEffects(run)) {

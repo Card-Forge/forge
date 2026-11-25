@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.github.tommyettinger.textra.Font;
 import forge.Forge;
@@ -260,6 +261,13 @@ public class Assets implements Disposable {
             manager.setLoader(Texture.class, new GreyscaleTextureLoader(resolver));
             manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
             manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
+            manager.setErrorListener((asset, throwable) -> {
+                if (ImageCache.handleAssetLoadError(asset.fileName, asset.type, throwable)) {
+                    return;
+                }
+                // Preserve the existing fail-fast behavior for unrelated assets.
+                throw new GdxRuntimeException("Error loading asset: " + asset.fileName, throwable);
+            });
         }
         return manager;
     }
