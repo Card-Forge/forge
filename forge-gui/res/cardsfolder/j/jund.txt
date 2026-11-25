@@ -5,4 +5,5 @@ T:Mode$ SpellCast | ValidCard$ Creature.Black,Creature.Red,Creature.Green | Vali
 SVar:DevourPump:DB$ Animate | Defined$ TriggeredCardLKICopy | Keywords$ Devour:5 | Duration$ Permanent
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, create two 1/1 red Goblin creature tokens.
 SVar:RolledChaos:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You
+SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 1 | RollInMain1$ True
 Oracle:Whenever a player casts a black, red, or green creature spell, it gains devour 5. (As the creature enters, its controller may sacrifice any number of creatures. The creature enters with five times that many +1/+1 counters on it.)\nWhenever chaos ensues, create two 1/1 red Goblin creature tokens.

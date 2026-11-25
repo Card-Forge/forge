@@ -6,5 +6,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDig | TriggerZon
 SVar:TrigDig:DB$ Dig | DigNum$ 1 | Reveal$ True | Optional$ True | ChangeNum$ 1 | ChangeValid$ Permanent | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition2$ -1
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, return target permanent card from your graveyard to the battlefield.
 SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouOwn
-SVar:AIRollPlanarDieParams:Mode$ Always | CardsInGraveyardGE$ 1
+SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 1 | HasValidCardInZone$ Graveyard:Permanent.YouOwn
+SVar:AIRollPlanarDieParamsRogueCommander:Mode$ Always | MinTurn$ 1
 Oracle:When you planeswalk to The Maelstrom or at the beginning of your upkeep, you may reveal the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you revealed a card but didn't put it onto the battlefield, put it on the bottom of your library.\nWhenever chaos ensues, return target permanent card from your graveyard to the battlefield.
