@@ -1127,6 +1127,12 @@ public class GameAction {
                     staticAbilities.add(stAb);
                 }
             }
+            // CR 613.6, 702.73a, 702.114a: a keyword CDA (Changeling, Devoid) survives an immediate "loses all abilities"
+            for (StaticAbility stAb : co.getCharacteristicStaticsLostWithKeywords()) {
+                if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
+                    staticAbilities.add(stAb);
+                }
+            }
             if (!co.getStaticCommandList().isEmpty()) {
                 staticList.add(co);
             }
