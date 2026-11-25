@@ -6250,10 +6250,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return total;
     }
 
-    public final boolean canDamagePrevented(final boolean isCombat) {
-        return !StaticAbilityCantPreventDamage.cantPreventDamage(this, isCombat);
-    }
-
     public final boolean canDamagePrevented(final GameEntity target, final boolean isCombat) {
         return !StaticAbilityCantPreventDamage.cantPreventDamage(this, target, isCombat);
     }

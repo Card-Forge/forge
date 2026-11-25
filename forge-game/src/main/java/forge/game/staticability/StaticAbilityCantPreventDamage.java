@@ -7,10 +7,6 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantPreventDamage {
 
-    public static boolean cantPreventDamage(final Card source, final boolean isCombat) {
-        return cantPreventDamage(source, null, isCombat);
-    }
-
     // target is null when the caller only knows the source (AI forecasts)
     public static boolean cantPreventDamage(final Card source, final GameEntity target, final boolean isCombat) {
         CardCollection list = new CardCollection(source.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
