@@ -1,0 +1,3 @@
+# Tags added by hand, read alongside the generated printtags.txt. The two files add together.
+# A line holds an edition code alone to tag the whole edition, or the code followed by collector numbers.
+# 1..21 stands for 1 to 21. Remove a line once printtags.py gives the same tags.
