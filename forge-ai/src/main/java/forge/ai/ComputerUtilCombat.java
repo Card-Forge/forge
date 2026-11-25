@@ -2390,7 +2390,7 @@ public class ComputerUtilCombat {
     }
 
     public static boolean isCombatDamagePrevented(final Card attacker, final GameEntity target, final int damage) {
-        if (!attacker.canDamagePrevented(true)) {
+        if (!attacker.canDamagePrevented(target, true)) {
             return false;
         }
 
