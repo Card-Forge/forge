@@ -5,10 +5,13 @@ import com.google.common.collect.Sets;
 
 import forge.ai.ability.TokenAi;
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -30,6 +33,61 @@ import java.util.List;
  */
 
 public class SpecialAiLogic {
+    private static boolean isExpendableAristocratFodder(final Player ai, final SpellAbility sa, final Card source, final Card card) {
+        if (card.equals(source)) {
+            return false;
+        }
+
+        return card.hasSVar("SacMe")
+                || ComputerUtil.shouldSacrificeThreatenedCard(ai, card, sa)
+                || (card.isCreature()
+                        ? ComputerUtilCard.isUselessCreature(ai, card)
+                                || ComputerUtilCard.evaluateCreature(card) < ComputerUtilCard.evaluateCreature(source)
+                        : ManaSacrifice.sacrificeValue(ai, card) < ComputerUtilCard.evaluateCreature(source));
+    }
+
+    private static boolean isRoutineAristocratFodder(final Player ai, final Card card) {
+        return card.isCreature()
+                ? ComputerUtilCard.isUselessCreature(ai, card) || card.hasSVar("SacMe")
+                        || ComputerUtilCard.evaluateCreature(card) <= AiProfileUtil.getIntProperty(ai,
+                                AiProps.SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL)
+                : ManaSacrifice.sacrificeValue(ai, card) <= ManaSacrifice.FODDER_MAX;
+    }
+
+    static CardCollection aristocratSacrificeOptions(final Player ai, final SpellAbility sa, final CardCollection options) {
+        final Card source = sa.getHostCard();
+        final CardCollection legal = new CardCollection();
+        for (final CostPart part : sa.getPayCosts().getCostParts()) {
+            if (part instanceof CostSacrifice sacrifice && !part.payCostFromSource()) {
+                legal.addAll(CardLists.getValidCards(options, sacrifice.getType().split(";"), ai, source, sa));
+            }
+        }
+        legal.removeIf(c -> c.equals(source) || !c.canBeSacrificedBy(sa, false));
+        CardCollection protectedOptions = ComputerUtilCost.paymentChoicesWithoutTargets(legal, sa, ai);
+        final String logic = sa.getParamOrDefault("AILogic", "");
+        final Combat combat = ai.getGame().getCombat();
+        final boolean inCombat = ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS) && combat != null;
+        final List<GameObject> threatened = ComputerUtil.predictThreatenedObjects(ai, null, true);
+        final SpellAbility top = ai.getGame().getStack().isEmpty() ? null : ai.getGame().getStack().peekAbility();
+        final boolean gainsProtection = sa.getParamOrDefault("KW", "").contains("Indestructible")
+                && !source.hasKeyword(Keyword.INDESTRUCTIBLE)
+                && (inCombat && ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, combat)
+                        || threatened.contains(source) && top != null
+                                && (top.getApi() == ApiType.DealDamage || top.getApi() == ApiType.DamageAll));
+        if (logic.contains(".") && !gainsProtection) {
+            protectedOptions = CardLists.filter(protectedOptions, CardPredicates.isType(logic.substring(logic.indexOf('.') + 1)));
+        }
+        if (inCombat && combat.isAttacking(source) && combat.getBlockers(source).isEmpty()) {
+            return protectedOptions; // The lethal-attack calculation may spend otherwise valuable creatures.
+        }
+        final boolean protectingSource = inCombat && (combat.isAttacking(source) || combat.isBlocking(source))
+                || gainsProtection && ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source);
+        return CardLists.filter(protectedOptions, c -> threatened.contains(c) || ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)
+                        || protectingSource && (isExpendableAristocratFodder(ai, sa, source, c)
+                                || inCombat && c.isCreature() && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat))
+                        || !protectingSource && isRoutineAristocratFodder(ai, c));
+    }
+
     // A logic for cards like Pongify, Crib Swap, Angelic Ascension
     public static boolean doPongifyLogic(final Player ai, final SpellAbility sa) {
         Card source = sa.getHostCard();
@@ -204,9 +262,7 @@ public class SpecialAiLogic {
         } else {
             // We can't deal lethal, check if there's any sac fodder than can be used for other circumstances
             final CardCollection sacFodder = CardLists.filter(ai.getCreaturesInPlay(),
-                    card -> ComputerUtilCard.isUselessCreature(ai, card)
-                            || card.hasSVar("SacMe")
-                            || ComputerUtilCard.evaluateCreature(card) < selfEval // Maybe around 150 is OK?
+                    card -> isExpendableAristocratFodder(ai, sa, source, card)
             );
 
             return !sacFodder.isEmpty();
@@ -218,16 +274,25 @@ public class SpecialAiLogic {
         final Card source = sa.getHostCard();
         final String logic = sa.getParam("AILogic"); // should not even get here unless there's an Aristocrats logic applied
         final boolean isDeclareBlockers = ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
+        final Game game = ai.getGame();
+        final Combat combat = game.getCombat();
 
-        final int numOtherCreats = Math.max(0, ai.getCreaturesInPlay().size() - 1);
-        if (numOtherCreats == 0) {
-            // Cut short if there's nothing to sac at all
+        final CardCollection legalFodder = aristocratSacrificeOptions(ai, sa, new CardCollection(ai.getCardsIn(ZoneType.Battlefield)));
+        if (legalFodder.isEmpty()) {
             return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
-        // Check if the standard Aristocrats logic applies first (if in the right conditions for it)
+        final boolean gainsProtection = sa.getParamOrDefault("KW", "").contains("Indestructible")
+                && !source.hasKeyword(Keyword.INDESTRUCTIBLE);
+        if (gainsProtection && isDeclareBlockers && combat != null
+                && ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, combat)
+                && legalFodder.anyMatch(c -> isExpendableAristocratFodder(ai, sa, source, c))) {
+            return new AiAbilityDecision(100, AiPlayDecision.ImpactCombat);
+        }
+
+        // Stack responses and combat protection are independent of routine counter growth.
         final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source);
-        if (isDeclareBlockers || isThreatened) {
+        if (isThreatened && gainsProtection) {
             if (doAristocratLogic(ai, sa)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
@@ -250,23 +315,25 @@ public class SpecialAiLogic {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
         }
 
-        final Game game = ai.getGame();
-        final Combat combat = game.getCombat();
-        final int selfEval = ComputerUtilCard.evaluateCreature(source);
-
         String typeToGainCtr = "";
         if (logic.contains(".")) {
             typeToGainCtr = logic.substring(logic.indexOf(".") + 1);
         }
-        CardCollection relevantCreats = typeToGainCtr.isEmpty() ? ai.getCreaturesInPlay()
-                : CardLists.filter(ai.getCreaturesInPlay(), CardPredicates.isType(typeToGainCtr));
-        relevantCreats.remove(source);
-        if (relevantCreats.isEmpty()) {
-            // No relevant creatures to sac
+        CardCollection relevantPermanents = typeToGainCtr.isEmpty() ? legalFodder
+                : CardLists.filter(legalFodder, CardPredicates.isType(typeToGainCtr));
+        if (relevantPermanents.isEmpty()) {
+            // No relevant permanents to sac
             return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         }
 
         int numCtrs = AbilityUtils.calculateAmount(source, countersSa.getParam("CounterNum"), countersSa);
+        if (numCtrs <= 0) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        if (isDeclareBlockers && combat != null && combat.isBlocking(source)) {
+            return aristocratCombatGrowth(ai, sa, relevantPermanents, combat.getAttackersBlockedBy(source), numCtrs, combat);
+        }
 
         if (combat != null && combat.isAttacking(source) && isDeclareBlockers) {
             if (combat.getBlockers(source).isEmpty()) {
@@ -282,7 +349,7 @@ public class SpecialAiLogic {
                 }
 
                 // Check if there's anything that will die anyway that can be eaten to gain a perma-bonus
-                final CardCollection forcedSacTgts = CardLists.filter(relevantCreats,
+                final CardCollection forcedSacTgts = CardLists.filter(relevantPermanents,
                         card -> ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card)
                                 || (combat.isAttacking(card) && combat.isBlocked(card) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, card, combat))
                 );
@@ -292,9 +359,9 @@ public class SpecialAiLogic {
 
                 final int numCreatsToSac = Math.max(0, (lethalDmg - source.getNetCombatDamage()) / numCtrs);
 
-                if (defTappedOut || numCreatsToSac < relevantCreats.size() / 2) {
+                if (defTappedOut || numCreatsToSac < relevantPermanents.size() / 2) {
                     if (source.getNetCombatDamage() < lethalDmg
-                            && source.getNetCombatDamage() + relevantCreats.size() * numCtrs >= lethalDmg) {
+                            && source.getNetCombatDamage() + relevantPermanents.size() * numCtrs >= lethalDmg) {
                         return new AiAbilityDecision(100, AiPlayDecision.ImpactCombat);
                     }
 
@@ -303,45 +370,63 @@ public class SpecialAiLogic {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else {
-                // We have already attacked. Thus, see if we have a creature to sac that is worse to lose
-                // than the card we attacked with. Since we're getting a permanent bonus, consider sacrificing
-                // things that are also threatened to be destroyed anyway.
-                final CardCollection sacTgts = CardLists.filter(relevantCreats,
-                        card -> ComputerUtilCard.isUselessCreature(ai, card)
-                                || ComputerUtilCard.evaluateCreature(card) < selfEval
-                                || ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card)
-                );
-
-                if (sacTgts.isEmpty()) {
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-                }
-
-                final boolean sourceCantDie = ComputerUtilCombat.combatantCantBeDestroyed(ai, source);
-                final int minDefT = Aggregates.min(combat.getBlockers(source), Card::getNetToughness);
-                final int DefP = sourceCantDie ? 0 : Aggregates.sum(combat.getBlockers(source), Card::getNetPower);
-
-                // Make sure we don't over-sacrifice, only sac until we can survive and kill a creature
-                if (source.getNetToughness() - source.getDamage() <= DefP || source.getNetCombatDamage() < minDefT) {
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                return aristocratCombatGrowth(ai, sa, relevantPermanents, combat.getBlockers(source), numCtrs, combat);
             }
         } else {
             // We can't deal lethal, check if there's any sac fodder than can be used for other circumstances
-            final boolean isBlocking = combat != null && combat.isBlocking(source);
-            final CardCollection sacFodder = CardLists.filter(relevantCreats,
-                    card -> ComputerUtilCard.isUselessCreature(ai, card)
-                            || card.hasSVar("SacMe")
-                            || (isBlocking && ComputerUtilCard.evaluateCreature(card) < selfEval)
-                            || ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card)
+            final CardCollection rawThreatenedFodder = CardLists.filter(relevantPermanents,
+                    card -> ComputerUtil.predictThreatenedObjects(card.getController(), null, true).contains(card)
+            );
+
+            if (!rawThreatenedFodder.isEmpty()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+
+            final CardCollection threatenedFodder = CardLists.filter(relevantPermanents,
+                    card -> ComputerUtil.shouldSacrificeThreatenedCard(ai, card, sa)
+            );
+
+            if (!threatenedFodder.isEmpty()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+
+            final CardCollection sacFodder = CardLists.filter(relevantPermanents,
+                    card -> isRoutineAristocratFodder(ai, card)
             );
 
             if (sacFodder.isEmpty()) {
                 return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
 
+            final PhaseHandler ph = game.getPhaseHandler();
+            if (!ph.isPlayerTurn(ai) || !ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
+            }
+
+            if (source.getAbilityActivatedThisTurn().getActivators(sa).contains(ai)) {
+                return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
+            }
+
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
+    }
+
+    private static AiAbilityDecision aristocratCombatGrowth(final Player ai, final SpellAbility sa,
+            final CardCollection fodder, final List<Card> enemies, final int counters, final Combat combat) {
+        final Card source = sa.getHostCard();
+        final CardCollection suitable = CardLists.filter(fodder,
+                c -> isExpendableAristocratFodder(ai, sa, source, c)
+                        || ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat));
+        final boolean sourceCantDie = ComputerUtilCombat.combatantCantBeDestroyed(ai, source);
+        final int damage = sourceCantDie ? 0 : Aggregates.sum(enemies, Card::getNetCombatDamage);
+        final int sacsToSurvive = sourceCantDie ? 0
+                : Math.max(0, (int) Math.ceil((damage - source.getNetToughness() + source.getDamage() + 1) / (double) counters));
+        final int sacsToKill = Math.max(0, (int) Math.ceil(
+                (Aggregates.min(enemies, Card::getLethalDamage) - source.getNetCombatDamage()) / (double) counters));
+        final int needed = Math.max(sacsToSurvive, sacsToKill);
+        return needed > 0 && suitable.size() >= needed
+                ? new AiAbilityDecision(100, AiPlayDecision.ImpactCombat)
+                : new AiAbilityDecision(0, AiPlayDecision.DoesntImpactCombat);
     }
 
     // AF Branch Counterspell with UnlessCost logic (Bring the Ending, Anticognition)
