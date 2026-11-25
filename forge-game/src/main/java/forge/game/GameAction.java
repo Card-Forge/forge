@@ -1437,6 +1437,12 @@ public class GameAction {
         boolean orderedDesCreats = false;
         boolean orderedNoRegCreats = false;
         boolean orderedSacrificeList = false;
+        // A pass with cards in more than one of those lists is one simultaneous
+        // move; this remembers the cards whose union was already put to the
+        // owners, so a card that survives the move is not asked about again.
+        // It never touches the per-list flags above: a later pass that has a
+        // single multi-card list still runs that list's own ask.
+        CardCollection orderedSbaDeaths = new CardCollection();
 
         for (int q = 0; q < 9; q++) {
             boolean checkAgain = false;
@@ -1588,32 +1594,97 @@ public class GameAction {
             // (e.g. helpful for Erebos's Titan and another creature dealing lethal damage to each other simultaneously)
             setHoldCheckingStaticAbilities(true);
 
-            if (noRegCreats.size() > 1 && !orderedNoRegCreats) {
-                noRegCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, noRegCreats, ZoneType.Graveyard, null);
-                orderedNoRegCreats = true;
-            }
-            for (Card c : noRegCreats) {
-                sacrificeDestroy(c, null, mapParams);
-            }
-
-            if (desCreats != null) {
-                if (desCreats.size() > 1 && !orderedDesCreats) {
-                    desCreats = CardLists.filter(desCreats, Card::canBeDestroyed);
-                    if (!desCreats.isEmpty()) {
-                        desCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, desCreats, ZoneType.Graveyard, null);
+            // CR 704.3 performs every applicable state-based action at once.
+            // noRegCreats, desCreats and sacrificeList are three different
+            // reasons a permanent leaves for a graveyard in this pass, but the
+            // moves are still one event, and CR 404.3 gives each owner the
+            // arrangement of every card that entered their graveyard at the
+            // same time. Ordering each list on its own (and moving noRegCreats
+            // before desCreats) denies an owner whose cards are split across the
+            // lists that choice: Volcanic Salvo kills a 0/3 creature and a
+            // 0-loyalty planeswalker together. Filter the destroy path for the
+            // union so a card destroy() will refuse is not offered, then put the
+            // union to the owners once and dispatch each card down its own path
+            // in that order. With only one non-empty list the per-list paths
+            // below run exactly as before, including their own filter and flag.
+            CardCollection combinedDes = desCreats == null ? null : CardLists.filter(desCreats, Card::canBeDestroyed);
+            CardCollection combinedSba = null;
+            if ((noRegCreats.isEmpty() ? 0 : 1)
+                    + (combinedDes == null || combinedDes.isEmpty() ? 0 : 1)
+                    + (sacrificeList.isEmpty() ? 0 : 1) > 1) {
+                combinedSba = new CardCollection(noRegCreats);
+                if (combinedDes != null) {
+                    for (Card c : combinedDes) {
+                        if (!combinedSba.contains(c)) {
+                            combinedSba.add(c);
+                        }
                     }
-                    orderedDesCreats = true;
                 }
-                for (Card c : desCreats) {
-                    destroy(c, null, true, mapParams);
+                for (Card c : sacrificeList) {
+                    if (!combinedSba.contains(c)) {
+                        combinedSba.add(c);
+                    }
+                }
+                CardCollection toOrder = new CardCollection();
+                for (Card c : combinedSba) {
+                    if (!orderedSbaDeaths.contains(c)) {
+                        toOrder.add(c);
+                    }
+                }
+                if (toOrder.size() > 1) {
+                    CardCollection ordered = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, toOrder, ZoneType.Graveyard, null);
+                    orderedSbaDeaths.addAll(ordered);
+                    // cards already ordered in an earlier pass keep their place after the new ones
+                    for (Card c : combinedSba) {
+                        if (!ordered.contains(c)) {
+                            ordered.add(c);
+                        }
+                    }
+                    combinedSba = ordered;
                 }
             }
 
-            if (sacrificeList.size() > 1 && !orderedSacrificeList) {
-                sacrificeList = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, sacrificeList, ZoneType.Graveyard, null);
-                orderedSacrificeList = true;
+            if (combinedSba != null) {
+                Multimap<Player, Card> sacrificeLki = MultimapBuilder.hashKeys().arrayListValues().build();
+                CardCollection sacrificed = new CardCollection();
+                for (Card c : combinedSba) {
+                    if (noRegCreats.contains(c)) {
+                        sacrificeDestroy(c, null, mapParams);
+                    } else if (combinedDes != null && combinedDes.contains(c)) {
+                        destroy(c, null, true, mapParams);
+                    } else if (sacrificeList.contains(c)) {
+                        sacrificeOne(c, null, true, mapParams, sacrificeLki, sacrificed, false);
+                    }
+                }
+                runSacrificedOnce(sacrificeLki, null);
+            } else {
+                if (noRegCreats.size() > 1 && !orderedNoRegCreats) {
+                    noRegCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, noRegCreats, ZoneType.Graveyard, null);
+                    orderedNoRegCreats = true;
+                }
+                for (Card c : noRegCreats) {
+                    sacrificeDestroy(c, null, mapParams);
+                }
+
+                if (desCreats != null) {
+                    if (desCreats.size() > 1 && !orderedDesCreats) {
+                        desCreats = CardLists.filter(desCreats, Card::canBeDestroyed);
+                        if (!desCreats.isEmpty()) {
+                            desCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, desCreats, ZoneType.Graveyard, null);
+                        }
+                        orderedDesCreats = true;
+                    }
+                    for (Card c : desCreats) {
+                        destroy(c, null, true, mapParams);
+                    }
+                }
+
+                if (sacrificeList.size() > 1 && !orderedSacrificeList) {
+                    sacrificeList = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, sacrificeList, ZoneType.Graveyard, null);
+                    orderedSacrificeList = true;
+                }
+                sacrifice(sacrificeList, null, true, mapParams);
             }
-            sacrifice(sacrificeList, null, true, mapParams);
 
             setHoldCheckingStaticAbilities(false);
 
@@ -2142,34 +2213,50 @@ public class GameAction {
 
         CardCollection result = new CardCollection();
         for (Card c : list) {
-            if (c == null) {
-                continue;
-            }
-
-            if (!c.canBeSacrificedBy(source, effect)) {
-                continue;
-            }
-
-            Card lkiCopy = ((CardCollection) params.get(AbilityKey.LastStateBattlefield)).get(c);
-            c.getController().addSacrificedThisTurn(lkiCopy, source);
-            lki.put(c.getController(), lkiCopy);
-
-            Card changed = sacrificeDestroy(c, source, params);
-            if (changed != null) {
-                result.add(changed);
-            }
-            if (showRevealDialog) {
-                final String message = Localizer.getInstance().getMessage("lblSacrifice");
-                reveal(result, ZoneType.Graveyard, c.getOwner(), false, message, false);
-            }
+            sacrificeOne(c, source, effect, params, lki, result, showRevealDialog);
         }
+        runSacrificedOnce(lki, source);
+        return result;
+    }
+
+    /**
+     * The per-card half of {@link #sacrifice}. It is separate so a state-based
+     * action pass that also destroys other permanents in the same event can put
+     * this card at the owner's chosen place in the combined order (CR 404.3)
+     * while the SacrificedOnce trigger still batches after the whole pass.
+     *
+     * @return the sacrificed card in its new zone, or null when it did not move
+     */
+    private Card sacrificeOne(final Card c, final SpellAbility source, final boolean effect,
+            Map<AbilityKey, Object> params, Multimap<Player, Card> lki, CardCollection moved,
+            final boolean showRevealDialog) {
+        if (c == null || !c.canBeSacrificedBy(source, effect)) {
+            return null;
+        }
+
+        Card lkiCopy = ((CardCollection) params.get(AbilityKey.LastStateBattlefield)).get(c);
+        c.getController().addSacrificedThisTurn(lkiCopy, source);
+        lki.put(c.getController(), lkiCopy);
+
+        Card changed = sacrificeDestroy(c, source, params);
+        if (changed != null) {
+            moved.add(changed);
+        }
+        if (showRevealDialog) {
+            final String message = Localizer.getInstance().getMessage("lblSacrifice");
+            reveal(moved, ZoneType.Graveyard, c.getOwner(), false, message, false);
+        }
+        return changed;
+    }
+
+    /** Runs the one SacrificedOnce trigger per sacrificing controller. */
+    private void runSacrificedOnce(Multimap<Player, Card> lki, final SpellAbility source) {
         for (Map.Entry<Player, Collection<Card>> e : lki.asMap().entrySet()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(e.getKey());
             runParams.put(AbilityKey.Cards, new CardCollection(e.getValue()));
             runParams.put(AbilityKey.Cause, source);
             game.getTriggerHandler().runTrigger(TriggerType.SacrificedOnce, runParams, false);
         }
-        return result;
     }
 
     public final boolean destroy(final Card c, final SpellAbility sa, final boolean regenerate, Map<AbilityKey, Object> params) {
