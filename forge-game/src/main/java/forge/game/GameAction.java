@@ -1437,11 +1437,7 @@ public class GameAction {
         boolean orderedDesCreats = false;
         boolean orderedNoRegCreats = false;
         boolean orderedSacrificeList = false;
-        // A pass with cards in more than one of those lists is one simultaneous
-        // move; this remembers the cards whose union was already put to the
-        // owners, so a card that survives the move is not asked about again.
-        // It never touches the per-list flags above: a later pass that has a
-        // single multi-card list still runs that list's own ask.
+        // cards of a combined pass already ordered, so a survivor is not asked about again
         CardCollection orderedSbaDeaths = new CardCollection();
 
         for (int q = 0; q < 9; q++) {
@@ -1594,19 +1590,8 @@ public class GameAction {
             // (e.g. helpful for Erebos's Titan and another creature dealing lethal damage to each other simultaneously)
             setHoldCheckingStaticAbilities(true);
 
-            // CR 704.3 performs every applicable state-based action at once.
-            // noRegCreats, desCreats and sacrificeList are three different
-            // reasons a permanent leaves for a graveyard in this pass, but the
-            // moves are still one event, and CR 404.3 gives each owner the
-            // arrangement of every card that entered their graveyard at the
-            // same time. Ordering each list on its own (and moving noRegCreats
-            // before desCreats) denies an owner whose cards are split across the
-            // lists that choice: Volcanic Salvo kills a 0/3 creature and a
-            // 0-loyalty planeswalker together. Filter the destroy path for the
-            // union so a card destroy() will refuse is not offered, then put the
-            // union to the owners once and dispatch each card down its own path
-            // in that order. With only one non-empty list the per-list paths
-            // below run exactly as before, including their own filter and flag.
+            // CR 704.3, 404.3: cards from different lists dying in one pass are one simultaneous move,
+            // so their owners order the union once (e.g. a creature and a planeswalker from Volcanic Salvo)
             CardCollection combinedDes = desCreats == null ? null : CardLists.filter(desCreats, Card::canBeDestroyed);
             CardCollection combinedSba = null;
             if ((noRegCreats.isEmpty() ? 0 : 1)
@@ -1634,7 +1619,6 @@ public class GameAction {
                 if (toOrder.size() > 1) {
                     CardCollection ordered = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, toOrder, ZoneType.Graveyard, null);
                     orderedSbaDeaths.addAll(ordered);
-                    // cards already ordered in an earlier pass keep their place after the new ones
                     for (Card c : combinedSba) {
                         if (!ordered.contains(c)) {
                             ordered.add(c);
@@ -2219,14 +2203,7 @@ public class GameAction {
         return result;
     }
 
-    /**
-     * The per-card half of {@link #sacrifice}. It is separate so a state-based
-     * action pass that also destroys other permanents in the same event can put
-     * this card at the owner's chosen place in the combined order (CR 404.3)
-     * while the SacrificedOnce trigger still batches after the whole pass.
-     *
-     * @return the sacrificed card in its new zone, or null when it did not move
-     */
+    /** The per-card half of {@link #sacrifice}, shared with the combined state-based action pass. */
     private Card sacrificeOne(final Card c, final SpellAbility source, final boolean effect,
             Map<AbilityKey, Object> params, Multimap<Player, Card> lki, CardCollection moved,
             final boolean showRevealDialog) {
