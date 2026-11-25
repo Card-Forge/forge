@@ -14,11 +14,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
-/**
- * Mobilize X with X = 0: "create X tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the
- * beginning of the next end step." The delayed trigger is created when the ability resolves even if no token was
- * created (CR 603.7a); at the end step it triggers and does nothing (CR 603.7c).
- */
 public class MobilizeZeroTest extends AITest {
 
     @Test

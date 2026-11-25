@@ -188,8 +188,6 @@ public class TokenEffect extends TokenEffectBase {
 
         int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("TokenAmount", "1"), sa);
         if (amount < 1) {
-            // CR 603.7a: "create X tokens ... sacrifice them at the beginning of the next end step" (Mobilize X with
-            // X = 0) still creates its delayed trigger; with no token it does nothing (CR 603.7c)
             if (sa.hasParam("AtEOT")) {
                 registerDelayedTrigger(sa, sa.getParam("AtEOT"), new CardCollection());
             }
