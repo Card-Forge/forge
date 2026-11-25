@@ -492,6 +492,10 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                     }
                 }
+            } else if (sa.hasParam("ForgetOtherRemembered")) {
+                // Nothing was dug (the source zone is empty): the remembered cards from the previous pass
+                // are still forgotten, so a Repeat loop keyed on them (Primal Surge) ends here.
+                host.clearRemembered();
             }
         }
         if (combatChanged) {
