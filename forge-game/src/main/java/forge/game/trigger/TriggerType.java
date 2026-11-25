@@ -142,6 +142,7 @@ public enum TriggerType {
     SpellCastOrCopy(TriggerSpellAbilityCastOrCopy.class),
     SpellCopy(TriggerSpellAbilityCastOrCopy.class),
     Stationed(TriggerCrewedSaddled.class),
+    StickerPlaced(TriggerStickerPlaced.class),
     Surveil(TriggerSurveil.class),
     TakesInitiative(TriggerTakesInitiative.class),
     TapAll(TriggerTapAll.class),
@@ -178,6 +179,10 @@ public enum TriggerType {
             }
         }
         throw new RuntimeException("No constructor found that would take Map as 1st parameter in class " + clasz.getName());
+    }
+
+    public Class<? extends Trigger> getTriggerClass() {
+        return constructor.getDeclaringClass();
     }
 
     /**

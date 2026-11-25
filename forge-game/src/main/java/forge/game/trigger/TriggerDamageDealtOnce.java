@@ -91,13 +91,13 @@ public class TriggerDamageDealtOnce extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         @SuppressWarnings("unchecked")
         final Map<GameEntity, Integer> damageMap = (Map<GameEntity, Integer>) runParams.get(AbilityKey.DamageMap);
 
-        sa.setTriggeringObject(AbilityKey.Source, runParams.get(AbilityKey.DamageSource));
-        sa.setTriggeringObject(AbilityKey.Targets, getDamageTargets(damageMap));
-        sa.setTriggeringObject(AbilityKey.DamageAmount, getDamageAmount(damageMap));
+        objects.put(AbilityKey.Source, runParams.get(AbilityKey.DamageSource));
+        objects.put(AbilityKey.Targets, getDamageTargets(damageMap));
+        objects.put(AbilityKey.DamageAmount, getDamageAmount(damageMap));
     }
 
     @Override

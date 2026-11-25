@@ -30,6 +30,9 @@ public class FToggleSwitch extends FDisplayObject {
             return FSkinColor.get(Colors.ADV_CLR_TEXT);
         return FSkinColor.get(Colors.CLR_TEXT);
     }
+    private static FSkinColor getBorderColor() {
+        return FSkinColor.getStandardColor(Frost.slate(0.9f)).stepColor(5);
+    }
     private static final float BORDER_THICKNESS = Utils.scale(1);
     private static final float INSETS = Utils.scale(2);
     private static final float PADDING = Utils.scale(3);
@@ -162,8 +165,8 @@ public class FToggleSwitch extends FDisplayObject {
         float w = getWidth() - 2 * x;
         float h = getHeight() - 2 * y;
 
-        g.fillRect(getInactiveColor(), x, y, w, h);
-        g.drawRect(BORDER_THICKNESS, getForeColor(), x, y, w, h);
+        g.fillRect(Frost.isOn() ? getBorderColor() : getInactiveColor(), x, y, w, h);
+        g.drawRect(BORDER_THICKNESS, Frost.isOn() ? getInactiveColor() : getForeColor(), x, y, w, h);
 
         final String text;
         float switchWidth = w - h + PADDING;

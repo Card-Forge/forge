@@ -11,11 +11,15 @@ import com.google.common.collect.ObjectArrays;
 import forge.game.zone.ZoneType;
 import forge.screens.deckeditor.views.*;
 import forge.screens.home.gauntlet.*;
+import forge.screens.home.rogue.VSubmenuRogueAether;
+import forge.screens.home.rogue.VSubmenuRogueCodex;
+import forge.screens.home.rogue.VSubmenuRogueHistory;
+import forge.screens.home.rogue.VSubmenuRogueMap;
+import forge.screens.home.rogue.VSubmenuRogueStart;
 import forge.screens.home.online.VSubmenuOnlineDecks;
 import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.home.puzzle.VSubmenuPuzzleCreate;
 import forge.screens.home.puzzle.VSubmenuPuzzleSolve;
-import forge.screens.home.puzzle.VSubmenuTutorial;
 import forge.screens.home.quest.VSubmenuChallenges;
 import forge.screens.home.quest.VSubmenuDuels;
 import forge.screens.home.quest.VSubmenuQuestDecks;
@@ -75,11 +79,15 @@ public enum EDocID {
     HOME_GAUNTLETCOMMANDERQUICK (VSubmenuGauntletCommanderQuick.SINGLETON_INSTANCE),
     HOME_GAUNTLETCOMMANDERBUILD (VSubmenuGauntletCommanderBuild.SINGLETON_INSTANCE),
     HOME_GAUNTLETCONTESTS (VSubmenuGauntletContests.SINGLETON_INSTANCE),
+    HOME_ROGUEMAP (VSubmenuRogueMap.SINGLETON_INSTANCE),
+    HOME_ROGUESTART (VSubmenuRogueStart.SINGLETON_INSTANCE),
+    HOME_ROGUESTATS (VSubmenuRogueCodex.SINGLETON_INSTANCE),
+    HOME_ROGUEAETHER (VSubmenuRogueAether.SINGLETON_INSTANCE),
+    HOME_ROGUEHISTORY (VSubmenuRogueHistory.SINGLETON_INSTANCE),
     HOME_PREFERENCES (VSubmenuPreferences.SINGLETON_INSTANCE),
     HOME_ACHIEVEMENTS (VSubmenuAchievements.SINGLETON_INSTANCE),
     HOME_AVATARS (VSubmenuAvatars.SINGLETON_INSTANCE),
     HOME_UTILITIES (VSubmenuDownloaders.SINGLETON_INSTANCE),
-    HOME_TUTORIAL(VSubmenuTutorial.SINGLETON_INSTANCE),
     HOME_PUZZLE_CREATE(VSubmenuPuzzleCreate.SINGLETON_INSTANCE),
     HOME_PUZZLE_SOLVE(VSubmenuPuzzleSolve.SINGLETON_INSTANCE),
     HOME_CONSTRUCTED (VSubmenuConstructed.SINGLETON_INSTANCE),
@@ -132,7 +140,8 @@ public enum EDocID {
     ZONE_SCHEME_DECK (),
     ZONE_ATTRACTION_DECK (),
     ZONE_CONTRAPTION_DECK (),
-    ZONE_JUNKYARD ();
+    ZONE_JUNKYARD (),
+    ZONE_STICKER_SHEETS ();
 
     public final static EDocID[] Fields = new EDocID[] {FIELD_0, FIELD_1, FIELD_2, FIELD_3, FIELD_4, FIELD_5, FIELD_6, FIELD_7};
     public final static EDocID[] Hands = new EDocID[] {HAND_0, HAND_1, HAND_2, HAND_3, HAND_4, HAND_5, HAND_6, HAND_7};
@@ -180,6 +189,7 @@ public enum EDocID {
         ZONE_DOC_IDS.put(ZoneType.AttractionDeck, ZONE_ATTRACTION_DECK);
         ZONE_DOC_IDS.put(ZoneType.ContraptionDeck, ZONE_CONTRAPTION_DECK);
         ZONE_DOC_IDS.put(ZoneType.Junkyard, ZONE_JUNKYARD);
+        ZONE_DOC_IDS.put(ZoneType.StickerSheets, ZONE_STICKER_SHEETS);
     }
 
     /** Returns the EDocID for a dockable zone type, or null if the zone type has no EDocID. */

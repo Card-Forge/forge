@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Ancient Battlefield
+Title=Ancient Battlefield
+Icon=Ancient Battlefield.jpg
+Difficulty=Easy
+Description=./Standard/The_Hobbit/Charlymukhar_-_Orzhov_Aggro_(Standard,_#891591).dck
+Deck Type=constructed
+
+[Main]
+4 Amalia Benavides Aguirre
+4 Hinterland Sanctifier
+3 Deep-Cavern Bat
+3 Haliya, Guided by Light
+3 Moseo, Vein's New Dean
+2 Emptiness
+2 Essence Channeler
+2 Starscape Cleric
+2 Voice of Victory
+1 Aunt May
+1 Zoraline, Cosmos Caller
+1 Raise the Past
+4 Case of the Uneaten Feast
+4 Lunar Convocation
+2 Sheltered by Ghosts
+4 Concealed Courtyard
+4 Godless Shrine
+4 Multiversal Passage
+4 Plains
+4 Starting Town
+1 Dalkovan Encampment
+1 Swamp
+[Sideboard]
+2 Sheltered by Ghosts
+3 Avatar's Wrath
+3 Strategic Betrayal
+2 Ancient Vendetta
+2 Bilbo's Gambit
+2 Requisition Raid
+1 Decorum Dissertation

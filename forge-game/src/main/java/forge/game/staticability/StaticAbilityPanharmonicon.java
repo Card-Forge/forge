@@ -1,5 +1,6 @@
 package forge.game.staticability;
 
+import com.google.common.collect.Iterables;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
@@ -15,54 +16,66 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 public class StaticAbilityPanharmonicon {
 
+    /**
+     * @return how many additional times the trigger triggers for the event, according to the current board and limited by its activation limits
+     */
     public static int handlePanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
+        return t.limitByActivations(countPanharmonicon(game, t, runParams));
+    }
+
+    /**
+     * 603.2d How many times a trigger triggers is determined when its trigger event happens.
+     * For events that only get run later this therefore has to be counted when they are collected,
+     * since the permanents involved might have changed their controller or left the battlefield by then.
+     * The activation limits depend on how often it triggered by the time it is run, see {@link #limitByActivations}
+     *
+     * @return how many additional times the trigger triggers for the event
+     */
+    public static int countPanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
         int n = 0;
 
-        if (t.isStatic() && t.getMode() != TriggerType.TapsForMana && t.getMode() != TriggerType.ManaAdded) {
-            // exclude "helper" trigger
+        // already at its limit (e.g. "triggers only once each turn"), so there's no need to look for any effects
+        if (t.limitByActivations(2) < 2) {
             return n;
         }
 
-        // These effects say "abilities of objects trigger an additional time" which excludes Delayed Trigger
-        // 603.2e
+        // exclude "helper" trigger
+        if (t.isStatic() && t.getMode() != TriggerType.TapsForMana && t.getMode() != TriggerType.ManaAdded) {
+            return n;
+        }
+
+        // CR 603.2d excludes Delayed Trigger
         if (t.getSpawningAbility() != null) {
             return n;
         }
 
-        CardCollectionView cardList = null;
-        // if LTB look back
+        Set<ZoneType> zones = ZoneType.STATIC_ABILITIES_SOURCE_ZONES;
+        Iterable<Card> cardList;
         if (t.looksBackInTime()) {
-            if (runParams.containsKey(AbilityKey.LastStateBattlefield)) {
-                cardList = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+            CardCollectionView lki = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+            if (lki == null) {
+                lki = game.getLastStateBattlefield();
             }
-            if (cardList == null) {
-                cardList = game.getLastStateBattlefield();
-            }
+            zones = new HashSet<>(zones);
+            zones.remove(ZoneType.Battlefield);
+            cardList = Iterables.concat(lki, game.getCardsIn(zones));
         } else {
-            cardList = game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+            cardList = game.getCardsIn(zones);
         }
 
-        // Checks only the battlefield, as those effects only work from there
         for (final Card ca : cardList) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.Panharmonicon)) {
                     continue;
-                }
-                // it can't trigger more times than the limit allows
-                if (t.hasParam("GameActivationLimit") &&
-                        t.getActivationsThisGame() + n + 1 >= Integer.parseInt(t.getParam("GameActivationLimit"))) {
-                    break;
-                }
-                if (t.hasParam("ActivationLimit") &&
-                        t.getActivationsThisTurn() + n + 1 >= Integer.parseInt(t.getParam("ActivationLimit"))) {
-                    break;
                 }
                 if (applyPanharmoniconAbility(stAb, t, runParams)) {
                     n++;

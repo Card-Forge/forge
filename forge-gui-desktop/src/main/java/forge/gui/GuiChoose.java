@@ -20,6 +20,7 @@ import forge.game.card.Card;
 import forge.game.card.CardFaceView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.zone.ZoneType;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -271,23 +272,16 @@ public class GuiChoose {
         return new OrderResult<>(null, false);
     }
 
-    public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, 
-						    final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
-	gui.setSelectables(manipulable, 0, 0);
-	@SuppressWarnings("Convert2Lambda") // Avoid lambdas to maintain compatibility with Android 5 API
-    final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
-        @Override
-        public List<CardView> call()  {
-            ListCardArea tempArea = ListCardArea.show(gui,title,cards,manipulable,toTop,toBottom,toAnywhere);
-
-            //		tempArea.pack();
-            tempArea.setVisible(true);
-            return tempArea.getCards();
-        }
-    };
-	final FutureTask<List<CardView>> ft = new FutureTask<>(callable);
+    public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, final ZoneType secondPile) {
+        @SuppressWarnings("Convert2Lambda") // Avoid lambdas to maintain compatibility with Android 5 API
+        final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
+            @Override
+            public List<CardView> call()  {
+                return ListCardArea.arrange(gui, title, cards, manipulable, secondPile);
+            }
+        };
+        final FutureTask<List<CardView>> ft = new FutureTask<>(callable);
         FThreads.invokeInEdtAndWait(ft);
-	gui.clearSelectables();
         try {
             List<CardView> result = ft.get();
             return result;

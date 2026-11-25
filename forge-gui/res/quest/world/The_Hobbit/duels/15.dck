@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Brother Voodoo
+Title=Brother Voodoo
+Icon=Brother Voodoo.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/4FunNoWin_-_Boros_Dragons_(Standard,_#897602).dck
+Deck Type=constructed
+
+[Main]
+1 Mountain
+4 Magmatic Hellkite
+4 Multiversal Passage
+2 Erode
+4 Maelstrom of the Spirit Dragon
+4 Inspiring Vantage
+4 Momo, Friendly Flier
+4 Nova Hellkite
+2 Cavern of Souls
+4 Burst Lightning
+4 Smaug the Magnificent
+4 Sunbillow Verge
+2 Twinmaw Stormbrood
+4 Voice of Victory
+1 Plains
+4 Sarkhan, Dragon Ascendant
+4 Sacred Foundry
+4 Clarion Conqueror
+[Sideboard]
+4 Seam Rip
+1 Get Lost
+3 Rest in Peace
+2 Pyroclasm
+1 Magda, the Hoardmaster
+2 Boros Charm
+1 The Legend of Roku
+1 Split Up

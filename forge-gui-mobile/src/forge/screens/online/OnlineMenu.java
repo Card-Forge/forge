@@ -6,6 +6,7 @@ import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
 import forge.gamemodes.net.server.FServerManager;
+import forge.gamemodes.net.server.HostingServer;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FMenuItem;
@@ -71,7 +72,7 @@ public class OnlineMenu extends FPopupMenu {
 
         public void update(){
             Disconnect.item.setEnabled(getGameLobby() != null);
-            ServerUrl.item.setEnabled(FServerManager.getInstance() != null && FServerManager.getInstance().isHosting());
+            ServerUrl.item.setEnabled(HostingServer.isHosting());
         }
     }
 
@@ -113,11 +114,10 @@ public class OnlineMenu extends FPopupMenu {
                 Forge.getLocalizer().getMessage("lblLeaveLobbyDescription"),
                 Forge.getLocalizer().getMessage("lblDisconnect"), result -> {
                     if (result) {
-                        if (FServerManager.getInstance() != null)
-                            if (FServerManager.getInstance().isHosting()) {
-                                FServerManager.getInstance().unsetReady();
-                                FServerManager.getInstance().stopServer();
-                            }
+                        if (HostingServer.isHosting()) {
+                            FServerManager.getInstance().unsetReady();
+                            FServerManager.getInstance().stopServer();
+                        }
 
                         if (OnlineLobbyScreen.getfGameClient() != null)
                             OnlineLobbyScreen.closeClient();

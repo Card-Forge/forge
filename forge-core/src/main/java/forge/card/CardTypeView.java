@@ -55,6 +55,7 @@ public interface CardTypeView extends Serializable {
     boolean isPhenomenon();
     boolean isKindred();
     boolean isDungeon();
+    boolean isStickers();
 
     boolean isAttachment();
     boolean isAura();

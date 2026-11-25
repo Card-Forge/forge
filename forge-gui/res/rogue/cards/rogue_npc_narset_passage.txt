@@ -1,0 +1,4 @@
+Name:Narset Trait - Narset's Passage
+ManaCost:no cost
+Types:Trait
+Oracle:Start each match with a Rogue's Passage on the battlefield.

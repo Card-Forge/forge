@@ -1,0 +1,6 @@
+Name:Croakid Amphibonaut
+ManaCost:4 U
+Types:Creature Frog Guest
+PT:4/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | IsPresent$ Permanent.stickered+YouCtrl | Description$ CARDNAME has flying as long as you control a stickered permanent.
+Oracle:This creature has flying as long as you control a stickered permanent.

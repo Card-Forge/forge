@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.LobbyPlayer;
-import forge.game.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
@@ -16,6 +15,7 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.zone.ZoneType;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
@@ -66,11 +66,6 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
     @Override public void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1) { }
     @Override public void flashIncorrectAction() { }
     @Override public void alertUser() { }
-
-    @Override
-    public GameState getGamestate() {
-        return null;
-    }
 
     @Override public void setPanelSelection(CardView hostCard) { }
 
@@ -161,7 +156,7 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
     }
 
     @Override
-    public List<CardView> manipulateCardList(String title, Iterable<CardView> cards, Iterable<CardView> manipulable, boolean toTop, boolean toBottom, boolean toAnywhere) {
+    public List<CardView> manipulateCardList(String title, Iterable<CardView> cards, Iterable<CardView> manipulable, ZoneType secondPile) {
         List<CardView> result = new ArrayList<>();
         if (cards != null) {
             for (CardView card : cards) {

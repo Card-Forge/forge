@@ -26,13 +26,16 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.gui.FThreads;
+import forge.gui.util.ListHeading;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.AdvancedSearchFilter;
 import forge.itemmanager.filters.ItemFilter;
@@ -80,14 +83,19 @@ public class ListChooser<T> extends FContainer {
     private final Collection<T> list;
     private final Function<T, String> display;
     private final Consumer<List<T>> callback;
+    private final boolean hasHeadings;
     private AdvancedSearchFilter<? extends InventoryItem> advancedSearchFilter;
 
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list0, final Function<T, String> display0, final Consumer<List<T>> callback0) {
         FThreads.assertExecutedByEdt(true);
         list = list0;
+        hasHeadings = list.stream().anyMatch(ListHeading.class::isInstance);
         lstChoices = add(new ChoiceList(list, minChoices, maxChoices));
         display = display0;
         callback = callback0;
+        if (hasHeadings) {
+            lstChoices.setListItemRenderer(new HeadingRenderer(lstChoices.getListItemRenderer()));
+        }
 
         //only show search field if more than 25 items and vertical layout
         if (list.size() > 25 && !lstChoices.getListItemRenderer().layoutHorizontal()) {
@@ -171,6 +179,24 @@ public class ListChooser<T> extends FContainer {
 
         if (predicates.isEmpty()) {
             lstChoices.setListData(list);
+        }
+        else if (hasHeadings) {
+            // In list order, so each match stays under its heading
+            final Predicate<T> matches = IterableUtil.<T>and(predicates);
+            final List<T> shown = new ArrayList<>();
+            T heading = null;
+            for (final T item : list) {
+                if (item instanceof ListHeading) {
+                    heading = item;
+                } else if (matches.test(item)) {
+                    if (heading != null) {
+                        shown.add(heading);
+                        heading = null;
+                    }
+                    shown.add(item);
+                }
+            }
+            lstChoices.setListData(shown);
         }
         else {
             lstChoices.setListData(IterableUtil.filter(list, IterableUtil.<T>and(predicates)));
@@ -293,6 +319,58 @@ public class ListChooser<T> extends FContainer {
         public void drawOverlay(Graphics g) {
             //don't draw border
         }
+
+        @Override
+        public void setSelectedIndex(int index) {
+            super.setSelectedIndex(skipHeadings(index, 1));
+        }
+
+        @Override
+        public void addSelectedIndex(int index) {
+            super.addSelectedIndex(skipHeadings(index, 1));
+        }
+
+        @Override
+        protected FSkinColor getItemFillColor(int index) {
+            return getItemAt(index) instanceof ListHeading ? getItemColor().darker() : super.getItemFillColor(index);
+        }
+    }
+
+    /** Draws headings smaller and dimmed, and ignores taps on them so they cannot be chosen. */
+    private class HeadingRenderer extends FList.ListItemRenderer<T> {
+        private final FList.ListItemRenderer<T> choiceRenderer;
+
+        private HeadingRenderer(FList.ListItemRenderer<T> choiceRenderer0) {
+            choiceRenderer = choiceRenderer0;
+        }
+
+        @Override
+        public float getItemHeight() {
+            return choiceRenderer.getItemHeight();
+        }
+
+        @Override
+        public boolean tap(Integer index, T value, float x, float y, int count) {
+            return value instanceof ListHeading || choiceRenderer.tap(index, value, x, y, count);
+        }
+
+        @Override
+        public void drawValue(Graphics g, Integer index, T value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
+            if (value instanceof ListHeading) {
+                g.drawText(value.toString().toUpperCase(), FSkinFont.get(10), foreColor.alphaColor(0.7f), x, y, w, h, false, Align.left, true);
+            } else {
+                choiceRenderer.drawValue(g, index, value, font, foreColor, backColor, pressed, x, y, w, h);
+            }
+        }
+    }
+
+    /** The first choice from index in the direction of step, or index itself when no choice lies that way. */
+    private int skipHeadings(int index, int step) {
+        int choice = index;
+        while (choice >= 0 && choice < lstChoices.getCount() && lstChoices.getItemAt(choice) instanceof ListHeading) {
+            choice += step;
+        }
+        return choice >= 0 && choice < lstChoices.getCount() ? choice : index;
     }
 
     @Override
@@ -319,6 +397,6 @@ public class ListChooser<T> extends FContainer {
 
     public void moveSelection(int offset) {
         int target = Math.min(lstChoices.getCount(), Math.max(lstChoices.getSelectedIndex() + offset, 0));
-        lstChoices.setSelectedIndex(target);
+        lstChoices.setSelectedIndex(skipHeadings(target, offset < 0 ? -1 : 1));
     }
 }

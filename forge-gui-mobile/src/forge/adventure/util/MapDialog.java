@@ -49,6 +49,7 @@ public class MapDialog {
     private final int parentID;
     private final static float WIDTH = 250f;
     public String questAccepted = "";
+    private final String blockedGateText = "YOU ARE NOT WORTHY, BEGONE!";
     static private final String defaultJSON = "[\n" +
             "  {\n" +
             //"    \"effect\":[],\n" +
@@ -234,6 +235,13 @@ public class MapDialog {
         } else {
             fadeIn();
         }
+        // Only used by castle though this should be controlled by map creator as dialog option but no one has updated it in ages
+        boolean blockedGate;
+        if (blockedGateText.equalsIgnoreCase(text))
+            blockedGate = true;
+        else {
+            blockedGate = false;
+        }
         TypingLabel A = Controls.newTypingLabel(text);
         A.setWrap(true);
         Array<TextraButton> buttons = new Array<>();
@@ -265,7 +273,6 @@ public class MapDialog {
         } else {
             width = WIDTH;
         }
-        D.getContentTable().add(A).width(width); //Add() returns a Cell, which is what the width is being applied to.
         if (dialog.options != null) {
             int i = 0;
             for (DialogData option : dialog.options) {
@@ -278,7 +285,13 @@ public class MapDialog {
                         B = Controls.newTextButton(name);
                         B.setDisabled(true);
                     } else {
-                        B = Controls.newTextButton(name, () -> loadDialog(option));
+                        B = Controls.newTextButton(name, () -> {
+                            loadDialog(option);
+                            if (blockedGate) {
+                                // TODO: Add support for extra dialog actions and maybe animated bounce back..
+                                stage.getPlayerSprite().moveBy(0f, -stage.getPlayerSprite().getHeight());
+                            }
+                        });
                     }
                     B.getTextraLabel().setWrap(true); //We want this to wrap in case it's a wordy choice.
                     buttons.add(B);
@@ -297,6 +310,7 @@ public class MapDialog {
                 return false;
             }
             else{
+                stage.addScrollingText(A, width);
                 stage.showDialog();
                 return true;
             }

@@ -11,7 +11,7 @@ import forge.game.zone.ZoneType;
 
 public class ConniveAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         if (!ai.canDraw()) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }

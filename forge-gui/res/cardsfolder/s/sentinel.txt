@@ -2,7 +2,7 @@ Name:Sentinel
 ManaCost:4
 Types:Artifact Creature Shapeshifter
 PT:1/1
-A:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.blockedBySource,Creature.blockingSource | TgtPrompt$ Select target creature blocking or being blocked by this creature | SubAbility$ DBAnimate | StackDescription$ None | SpellDescription$ Change CARDNAME's base toughness to 1 plus the power of target creature blocking or blocked by CARDNAME. (This effect lasts indefinitely.)
+A:AB$ TargetOnly | Cost$ 0 | ValidTgts$ Creature.blockedBySource,Creature.blockingSource | TgtPrompt$ Select target creature blocking or being blocked by this creature | SubAbility$ DBAnimate | StackDescription$ None | SpellDescription$ Change CARDNAME's base toughness to 1 plus the power of target creature blocking or blocked by CARDNAME. (This effect lasts indefinitely.)
 SVar:DBAnimate:DB$ Animate | Defined$ Self | Toughness$ X | Duration$ Permanent
 SVar:X:Targeted$CardPower/Plus.1
 AI:RemoveDeck:All

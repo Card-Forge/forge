@@ -21,18 +21,18 @@
     {
       "type": "Table",
       "name": "questList",
-      "x": 8,
+      "x": 11,
       "y": 10,
-      "width": 258,
-      "height": 413
+      "width": 248,
+      "height": 405
     },
 	{
       "type": "Table",
       "name": "questDetails",
-      "x": 8,
+      "x": 11,
       "y": 10,
-      "width": 258,
-      "height": 413
+      "width": 248,
+      "height": 405,
 	  "fontColor":"black"
     },
 	
@@ -48,7 +48,7 @@
 	{
       "type": "TextButton",
       "name": "status",
-      "text": "Status",
+      "text": "tr(lblStatus)",
       "width": 130,
       "height": 30,
       "x": 5,

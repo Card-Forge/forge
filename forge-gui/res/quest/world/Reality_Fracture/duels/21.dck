@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Comic Book Guy
+Title=Comic Book Guy
+Icon=Comic Book Guy.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/Benjamin_Cohen_-_Mono_Black_Aggro_(Standard,_#895738).dck
+Deck Type=constructed
+
+[Main]
+1 Dark Knight's Greatsword
+4 Forsaken Miner
+4 Iridescent Vinelasher
+4 Nighthowl Pursuer
+4 Sunset Saboteur
+4 Desolation Prowler
+3 Gollum, Riddle Master
+3 Shoot the Sheriff
+1 Vraska's Final Mercy
+4 Dissection Practice
+1 Strategic Betrayal
+4 Corpses of the Lost
+1 Elegy Acolyte
+16 Swamp
+3 Realm of Koh
+3 Soulstone Sanctuary
+[Sideboard]
+2 Strategic Betrayal
+1 Elegy Acolyte
+3 Duress
+2 Deep-Cavern Bat
+1 Day of Black Sun
+2 Requiting Hex
+2 Mai, Scornful Striker
+2 Karn, Argent Defender

@@ -65,9 +65,9 @@ public class TriggerExplores extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObject(AbilityKey.Explorer, runParams.get(AbilityKey.Card));
-        if (runParams.containsKey(AbilityKey.Explored)) sa.setTriggeringObjectsFrom(runParams, AbilityKey.Explored);
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        objects.put(AbilityKey.Explorer, runParams.get(AbilityKey.Card));
+        if (runParams.containsKey(AbilityKey.Explored)) AbilityKey.copyKeys(runParams, objects, AbilityKey.Explored);
     }
 
     @Override

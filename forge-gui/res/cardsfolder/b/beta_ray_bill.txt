@@ -1,0 +1,8 @@
+Name:Beta Ray Bill
+ManaCost:2 GW
+Types:Legendary Creature Alien Warrior Hero
+PT:2/3
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.YouCtrl | TriggerZones$ Battlefield | Valiant$ True | Execute$ TrigPutCounter | TriggerDescription$ Valiant — Whenever CARDNAME becomes the target of a spell or ability you control for the first time each turn, put a +1/+1 counter on him and up to one target God you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ God.YouCtrl | ValidTgtsDesc$ God you control | TargetMin$ 0 | TargetMax$ 1 | Defined$ Self & Targeted | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Valiant — Whenever Beta Ray Bill becomes the target of a spell or ability you control for the first time each turn, put a +1/+1 counter on him and up to one target God you control.

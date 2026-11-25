@@ -1,0 +1,6 @@
+Name:Wrathful - Vigor
+ManaCost:no cost
+Types:Wrathful
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.tapped+OppCtrl | Execute$ TrigUntap | TriggerZones$ Command | TriggerDescription$ Whenever a permanent your opponents control enters tapped, untap it.
+SVar:TrigUntap:DB$ Untap | Defined$ TriggeredCardLKICopy
+Oracle:Whenever a permanent your opponents control enters tapped, untap it.

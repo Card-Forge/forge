@@ -1,0 +1,5 @@
+Name:Chest Trait - Banner Of Fervor
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | EffectZone$ Command | Description$ Creatures you control have haste.
+Oracle:Creatures you control have haste.

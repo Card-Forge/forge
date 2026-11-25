@@ -17,6 +17,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -70,11 +71,53 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+        if (!pDefined.isEmpty() && !worthUntappingItself(ai, sa, pDefined.get(0))) {
+            // a timing decision: the rollouts must not add the activation back as a discovered play either
+            return new AiAbilityDecision(0, AiPlayDecision.TimingRestrictions);
+        }
         if (pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai)) {
             // If the defined card is tapped, or if there are no defined cards, we can play this ability
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
+    }
+
+    /** For the simulation, which does not go through checkApiLogic: an untap of the card itself that is not worth its cost. */
+    public static boolean isPointlessSelfUntap(final Player ai, final SpellAbility sa) {
+        if (sa.getApi() != ApiType.Untap || sa.usesTargeting()) {
+            return false;
+        }
+        final List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+        return !defined.isEmpty() && !worthUntappingItself(ai, sa, defined.get(0));
+    }
+
+    /**
+     * A creature that pays mana to untap itself (Sleep-Cursed Faerie) is untapped for combat: to attack with it before
+     * the attackers are declared, or to block with it once the opponent has attacked. Not in response to just any spell,
+     * and not while a stun counter would take the untap (#6391).
+     */
+    /** For discovery: false for an untap of the creature itself that is not wanted at this moment (see below). */
+    public static boolean worthUntapping(final Player ai, final SpellAbility sa) {
+        if (sa.getApi() != forge.game.ability.ApiType.Untap || sa.usesTargeting()) {
+            return true;
+        }
+        final List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+        return defined.isEmpty() || worthUntappingItself(ai, sa, defined.get(0));
+    }
+
+    private static boolean worthUntappingItself(final Player ai, final SpellAbility sa, final Card untapped) {
+        if (!sa.isActivatedAbility() || !untapped.equals(sa.getHostCard()) || !untapped.isCreature()
+                || sa.getPayCosts().hasTapCost() || !sa.getPayCosts().hasManaCost()) {
+            return true;
+        }
+        if (untapped.getCounters(CounterEnumType.STUN) > 0) {
+            return false;
+        }
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (ph.isPlayerTurn(ai)) {
+            return ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS);
+        }
+        return ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS);
     }
 
     @Override
@@ -478,7 +521,7 @@ public class UntapAi extends SpellAbilityAi {
 
         // no harm in doing this past declare blockers during the opponent's turn and right before our turn,
         // maybe we'll serendipitously untap into something like a removal spell or burn spell that'll help
-        return ph.getNextTurn() == ai
+        return ph.isPlayerNextTurn(ai)
                 && (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS));
     }
 
@@ -488,19 +531,31 @@ public class UntapAi extends SpellAbilityAi {
         if (sa.hasParam("UnlessSwitched")) {
             final Card host = sa.getHostCard();
             final Game game = host.getGame();
-            for (Card card : AbilityUtils.getDefinedCards(host, null, sa)) {
+            for (Card card : AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa)) {
                 final Card gameCard = game.getCardState(card, null);
                 if (gameCard == null
                         || !gameCard.isInPlay() // not in play
                         || gameCard.isUntapped() // already untapped
-                        ) {
+                ) {
                     return false;
                 }
 
-                // if the ManaCost would cost more than the creatures CMC, it is not worth it
-                CostPartMana mana = cost.getCostMana();
-                if (mana != null && mana.getManaCostFor(sa).getCMC() > card.getCMC()) {
+                // A stun counter would be removed instead of actually untapping the creature.
+                if (gameCard.getCounters(CounterEnumType.STUN) > 0) {
                     return false;
+                }
+
+                final CostPartMana mana = cost.getCostMana();
+                if (mana != null) {
+                    final int manaCost = mana.getManaCostFor(sa).getCMC();
+                    final int spareMana = Math.max(0, ComputerUtilMana.getAvailableManaEstimate(payer) - manaCost);
+                    // Three mana left over is enough to avoid a scarcity penalty. If paying would consume
+                    // nearly all available mana, require a more valuable creature before agreeing to pay.
+                    final int scarcityPenalty = Math.max(0, 3 - spareMana) * 15;
+                    final int minimumCreatureValue = 160 + manaCost * 10 + scarcityPenalty;
+                    if (ComputerUtilCard.evaluateCreatureForUntap(gameCard) < minimumCreatureValue) {
+                        return false;
+                    }
                 }
             }
         }

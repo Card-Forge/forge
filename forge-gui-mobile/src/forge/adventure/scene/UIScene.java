@@ -122,6 +122,14 @@ public class UIScene extends Scene {
 
     }
 
+    /** Show an error message using the Adventure scene's own dialog layer. */
+    public void showImageLoadFailureDialog(String title, String message) {
+        Dialog errorDialog = createGenericDialog(title, message.replace("[", "[["),
+                Forge.getLocalizer().getMessage("lblOK"), null,
+                this::removeDialog, null, false, "", true);
+        showDialog(errorDialog);
+    }
+
     private void requestTextInput(String text, KeyBoardDialog.ScreenKeyboardFinished e) {
         KeyBoardDialog keyboardDialog=new KeyBoardDialog()
         {
@@ -248,15 +256,15 @@ public class UIScene extends Scene {
     }
 
     public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo) {
-        return createGenericDialog(title, label, stringYes, stringNo, runnableYes, runnableNo, false, "");
+        return createGenericDialog(title, label, stringYes, stringNo, runnableYes, runnableNo, false, "", false);
     }
 
-    public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo, boolean cancelButton, String stringCancel) {
+    public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo, boolean cancelButton, String stringCancel, boolean wrap) {
         Dialog dialog = new Dialog(title == null ? "" : title, Controls.getSkin());
         textboxOpen = true;
 
         if (label != null)
-            dialog.getContentTable().add(Controls.newTextraLabel(label));
+            dialog.getContentTable().add(Controls.newTextraLabel(label).setWrap(wrap)).center().fill();
 
         dialog.button(Controls.newTextButton(stringYes, runnableYes));
 

@@ -71,7 +71,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
             ScryfallRateLimiter.acquire(urlToDownload);
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
             c.setRequestProperty("Accept", "*/*");
-            c.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+            c.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
             // don't let a stalled connection hang the download thread forever
             c.setConnectTimeout(10000);
             c.setReadTimeout(30000);
@@ -133,7 +133,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 //connection.setConnectTimeout(1000 * 5); //wait 5 seconds the most
                 //connection.setReadTimeout(1000 * 5);
-                conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+                conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
                     imageurl = TextUtil.fastReplace(imageurl, ".full.jpg", ".fullborder.jpg");
                 conn.disconnect();

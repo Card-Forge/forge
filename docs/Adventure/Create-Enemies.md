@@ -105,3 +105,11 @@ String - Any combination of "B" (Black), "U" (Blue), "C" (Colorless), "G" (Green
 
 ## **questTags**
 Array- A collection of strings associated with this entity for filtering in regards to quests.
+
+## **effect**
+Object - Duel effect for this enemy, in the same format as an item effect. The top level goes to the enemy and `opponent` goes to the player. In a fight against several enemies (`nextEnemy`), only the first enemy's effect is used, and it goes to all of them. Enemies with an effect show a crown icon. A map can replace it with the enemy object's `effect` property.
+
+## **ignoreGlobalEffect**
+## **ignoreBiomeEffect**
+## **ignoreDungeonEffect**
+Boolean - True to skip the plane's global effect, the biome effect or the dungeon effect in duels with this enemy. See [Duel effect layers](Configure-Planes.md#duel-effect-layers).

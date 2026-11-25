@@ -8,6 +8,7 @@ import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor;
 import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.CommanderDraftUtil;
 import forge.gamemodes.quest.QuestEventDraft;
 import forge.gamemodes.quest.QuestTournamentController;
 import forge.gui.FThreads;
@@ -110,7 +111,11 @@ public class DraftingProcessScreen extends FDeckEditor {
         final Deck[] computer = draft.getComputerDecks();
 
         final DeckGroup finishedDraft = new DeckGroup(name);
-        finishedDraft.setHumanDeck((Deck) getDeck().copyTo(name));
+        final Deck humanDeck = (Deck) getDeck().copyTo(name);
+        if (draft.isCommanderDraft()) {
+            CommanderDraftUtil.markCommanderDraftDeck(humanDeck);
+        }
+        finishedDraft.setHumanDeck(humanDeck);
         finishedDraft.addAiDecks(computer);
 
         if(!isQuestDraft()) {
@@ -118,17 +123,26 @@ public class DraftingProcessScreen extends FDeckEditor {
             FDeckEditor.DECK_CONTROLLER_DRAFT.load("", name);
             DeckPreferences.setDraftDeck(name);
 
-            LoadGameScreen.BoosterDraft.setAsBackScreen(false); //set load draft screen to be opened when user done editing deck
-            LoadGameScreen.BoosterDraft.open();
+            //show header for main deck and sideboard when finished drafting
+            deckHeader.setVisible(true);
+            revalidate();
+
+            if (draft.isCommanderDraft()) {
+                // Open commander-draft-aware editor so player picks commanders first
+                Forge.openScreen(new FDeckEditor(FDeckEditor.EditorConfigCommanderDraft, finishedDraft));
+            } else {
+                LoadGameScreen.BoosterDraft.setAsBackScreen(false); //set load draft screen to be opened when user done editing deck
+                LoadGameScreen.BoosterDraft.open();
+            }
         }
         else {
             FModel.getQuest().getDraftDecks().add(finishedDraft);
             FDeckEditor.DECK_CONTROLLER_QUEST_DRAFT.load("", name);
-        }
 
-        //show header for main deck and sideboard when finished drafting
-        deckHeader.setVisible(true);
-        revalidate();
+            //show header for main deck and sideboard when finished drafting
+            deckHeader.setVisible(true);
+            revalidate();
+        }
     }
 
     @Override

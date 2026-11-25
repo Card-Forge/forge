@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="29" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="31" nextobjectid="206">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Jester's Cap&quot;, &quot;Jabs, Mistress of Mockery&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="20481" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="30" name="Collision" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAOWKUDwfQEA2HfcPfjcAJunMRjatpJrLtG7Ry1E5959Ey3pLhpFIyC4QoAEWYRXQ==
+  </data>
+ </layer>
+ <layer id="28" name="Stars" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzdlEkSwiAQRWnna8UxOVacr4VD9Fi+pQusbkNTVrl4O34X/AfEOoQLXOEGd+jgAU+QJoQBDGEEY5jAFGYQlXwFc1jAElaGmanMGjZQG/Ita7awgz0cPuzjfWYqc4QTnA35VA/aTK07LZ/qQZv5C599zpHrs885cn2W6CH3jpTwmXvHvvVZGWZ6+2wN3Xr7jAZf3j6l0bv19ikGX94+xfD+vH2K4a38g0+LrxL/bQmfL7OwhTA=
+  </data>
+ </layer>
+ <layer id="26" name="BackGround" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBjcoDUYuxgMU8N8bJiQGkrtI2Q/Ne0kxR/UtG84A2rHDan2USMN4jOH2mmQ3vmMFDPpHZfY7B+MdsLU0Dpc6FH2EbILm9xQtA+XnbjkqA0GKh9Ryz4AnUNm8Q==
+  </data>
+ </layer>
+ <layer id="27" name="Clutter" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFMLBKB4JJlaPUPnzmUtNOmF2twaiYlgDdPnoCUV8GBjECWNyXPLOR4w45jkKB5oURwOG+uM0i1k5kMNzsxAXIsRPZXnraSQmYCDRvEgE8mcp2jiRAzzIeBnCVf7Syc6DK3KEOAHsnVXk=
+  </data>
+ </layer>
+ <layer id="29" name="Teleport" width="29" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2B4guu+DAw3gLg9iIGhA4g7g1DZMHlqAnE/BgYJIF4MNH8JEC8NQmXD5KkJsPmj0xiCcclTCgj5g17+JEWeHIDNHw958MuPglEwCoYmAAC1ZR++
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="201" template="../../../../common/maps/obj/enemy.tx" x="212.149" y="135.487">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Celebr-8000&quot;, &quot;Crumbling Sanctuary&quot; ] }"/>
+    <property name="enemy" value="The Madcap Jester"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="203" template="../../../../common/maps/obj/dialog.tx" x="145.522" y="151.689" width="149.64" height="8.83333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You step into the strange tent and find it bigger on the inside. Star swirl through the extradimensional space, the sound of wild laughter emanating into the void from a strange clown ahead.
+
+'HE HA HE! RIGHT HERE YOU BE! TO ENGAGE IN SOME REVELRY! BUT DO TAKE CARE! YOU MUST BEWARE! THIS JESTER CAN GIVE QUITE A SCARE!'
+
+Your manasight stone glows, sensing the power of the legend here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="204" template="../../../../common/maps/obj/enemy.tx" x="210.842" y="134.772">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Crumbling Sanctuary&quot; ] }"/>
+    <property name="enemy" value="The Madcap Jester"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="205" template="../../../../common/maps/obj/entry_up.tx" x="222.842" y="180.772" width="12.6667" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

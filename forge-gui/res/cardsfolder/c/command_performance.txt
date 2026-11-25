@@ -1,0 +1,9 @@
+Name:Command Performance
+ManaCost:1 U
+Types:Sorcery
+A:SP$ Charm | CharmNum$ 2 | Choices$ DBOpen,DBRoll,DBTicket,DBSticker
+SVar:DBOpen:DB$ OpenAttraction | SpellDescription$ Open an Attraction.
+SVar:DBRoll:DB$ RollDice | Sides$ 6 | ToVisitYourAttractions$ True | SpellDescription$ Roll to visit your Attractions.
+SVar:DBTicket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 2 | SpellDescription$ You get {TK}{TK}.
+SVar:DBSticker:DB$ PutSticker | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own | Optional$ True | SpellDescription$ You may put a sticker on a nonland permanent you own.
+Oracle:Choose two —\n• Open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)\n• Roll to visit your Attractions.\n• You get {TK}{TK}.\n• You may put a sticker on a nonland permanent you own.

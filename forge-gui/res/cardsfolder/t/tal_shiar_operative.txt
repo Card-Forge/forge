@@ -1,0 +1,10 @@
+Name:Tal Shiar Operative
+ManaCost:1 B
+Types:Creature Romulan Officer Spy
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever this creature attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDeathtouch,DBSurveil
+SVar:DBDeathtouch:DB$ Pump | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | KW$ Deathtouch | SpellDescription$ Target creature you control gains deathtouch until end of turn.
+SVar:DBSurveil:DB$ Surveil | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever this creature attacks, choose one —\n• Target creature you control gains deathtouch until end of turn.\n• Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

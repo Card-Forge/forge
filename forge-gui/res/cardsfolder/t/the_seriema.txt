@@ -1,11 +1,10 @@
 Name:The Seriema
 ManaCost:1 W W
 Types:Legendary Artifact Spacecraft
-PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters, search your library for a legendary creature card, reveal it, put it into your hand, then shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Legendary | ChangeNum$ 1
-K:Station:7
-S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE7_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddStaticAbility$ DBStatic | Description$ STATION 7+ Flying Other tapped legendary creatures you control have indestructible.
+K:Station
+S:Mode$ Continuous | AffectedDefined$ Self | Station$ 7 | AddType$ Creature | SetPower$ 5 | SetToughness$ 5 | AddKeyword$ Flying | AddStaticAbility$ DBStatic | Description$ STATION 7+ Flying,,,Other tapped legendary creatures you control have indestructible. [5/5]
 SVar:DBStatic:Mode$ Continuous | Affected$ Creature.Legendary+YouCtrl+Other+tapped | AddKeyword$ Indestructible | Secondary$ True | Description$ Other tapped legendary creatures you control have indestructible.
 AI:RemoveDeck:Random
 DeckHints:Type$Legendary

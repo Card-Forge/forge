@@ -21,7 +21,16 @@
       "type": "TextButton",
       "name": "return",
       "text": "tr(lblBack)",
-      "width": 250,
+      "width": 123,
+      "height": 32,
+      "x": 137,
+      "y": 432
+    },
+    {
+      "type": "TextButton",
+      "name": "general",
+      "text": "tr(lblGeneralSettings)",
+      "width": 123,
       "height": 32,
       "x": 10,
       "y": 432

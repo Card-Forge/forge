@@ -55,6 +55,8 @@ public class CommanderChooser<T> extends FDialog {
             final Function<T, String> label, final Function<T, PaperCard> previewCard) {
         this.items = items;
         this.previewCard = previewCard;
+        
+        picture.setOpaque(false);
 
         final List<String> labels = new ArrayList<>(items.size());
         for (final T item : items) {

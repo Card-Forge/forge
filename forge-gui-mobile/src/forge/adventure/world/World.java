@@ -51,6 +51,7 @@ public class World implements Disposable, SaveFileContent {
     private Texture globalTexture = null;
     private final ArrayList<DrawingInformation> drawingInfoCache = new ArrayList<>(32);
     private Pixmap globalTileDrawing = null;
+    private Pixmap emptyTile = null;
 
     public Random getRandom() {
         return random;
@@ -163,7 +164,12 @@ public class World implements Disposable, SaveFileContent {
 
     public Pixmap getBiomeSprite(int x, int y) {
         if (x < 0 || y <= 0 || x >= width || y > height) {
-            return new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
+            if (emptyTile == null) {
+                emptyTile = new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
+                emptyTile.setColor(0, 0, 0, 0);
+                emptyTile.fill();
+            }
+            return emptyTile;
         }
 
         // init exactly once on demand
@@ -947,7 +953,7 @@ public class World implements Disposable, SaveFileContent {
 
     public void dispose() {
         drawingInfoCache.clear();
-        Forge.safeDispose(biomeImage, globalTileDrawing, globalTexture);
+        Forge.safeDispose(biomeImage, globalTileDrawing, globalTexture, emptyTile);
     }
 
     public void setSeed(long seedOffset) {
@@ -960,5 +966,68 @@ public class World implements Disposable, SaveFileContent {
             System.out.print("Loading auxiliary sprites.\n");
         }
         return globalTexture;
+    }
+
+    public static final class AsyncSaveSnapshot implements Disposable {
+        private final SaveFileData data;
+        private Pixmap biomeImage;
+
+        private AsyncSaveSnapshot(SaveFileData data, Pixmap biomeImage) {
+            this.data = data;
+            this.biomeImage = biomeImage;
+        }
+
+        public SaveFileData encode() {
+            Pixmap image = biomeImage;
+            if (image == null) {
+                throw new IllegalStateException("Snapshot already consumed");
+            }
+
+            try {
+                data.store("biomeImage", image);
+                return data;
+            } finally {
+                image.dispose();
+                biomeImage = null;
+            }
+        }
+
+        @Override
+        public void dispose() {
+            if (biomeImage != null) {
+                biomeImage.dispose();
+                biomeImage = null;
+            }
+        }
+    }
+
+    public AsyncSaveSnapshot snapshotForAsyncSave() {
+        if (biomeImage == null) {
+            throw new IllegalStateException("World biome image is unavailable");
+        }
+
+        // Capture the image while still on the calling thread.
+        Pixmap imageCopy = new Pixmap(
+                biomeImage.getWidth(),
+                biomeImage.getHeight(),
+                biomeImage.getFormat());
+
+        try {
+            imageCopy.drawPixmap(biomeImage, 0, 0);
+
+            SaveFileData saveData = new SaveFileData();
+            saveData.storeObject("biomeMap", biomeMap);
+            saveData.storeObject("terrainMap", terrainMap);
+            saveData.store("width", width);
+            saveData.store("height", height);
+            saveData.store("mapObjectIds", mapObjectIds.save());
+            saveData.store("mapPoiIds", mapPoiIds.save());
+            saveData.store("seed", seed);
+
+            return new AsyncSaveSnapshot(saveData, imageCopy);
+        } catch (RuntimeException | Error e) {
+            imageCopy.dispose();
+            throw e;
+        }
     }
 }

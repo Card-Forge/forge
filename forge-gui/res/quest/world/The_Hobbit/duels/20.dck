@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Azorius-precon
+Title=Azorius-precon
+Icon=Azorius-precon.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Paul_Wright_-_UW_Control_(Standard,_#893925).dck
+Deck Type=constructed
+
+[Main]
+2 Demolition Field
+4 Floodfarm Verge
+2 Fountainport
+2 Gleaming Bastion
+4 Hallowed Fountain
+4 Island
+1 Petrified Hamlet
+4 Plains
+3 Restless Anchorage
+1 Captain Marvel, Earth's Protector
+2 Emeritus of Ideation
+4 Consult the Star Charts
+3 Day of Judgment
+2 Erode
+4 Get Lost
+4 No More Lies
+2 Plunder the Trollshaws
+3 Stock Up
+3 Three Steps Ahead
+3 Pinnacle Starcage
+3 Seam Rip
+[Sideboard]
+1 Petrified Hamlet
+1 Emeritus of Ideation
+1 Erode
+1 Seam Rip
+1 Agatha's Soul Cauldron
+2 Beza, the Bounding Spring
+2 Disdainful Stroke
+2 Flashfreeze
+1 Negate
+2 Rest in Peace
+1 Spell Snare

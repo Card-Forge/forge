@@ -1,0 +1,13 @@
+Name:Gargantos, the Endbringer
+ManaCost:2 B G
+Types:Legendary Creature Elder God Horror
+PT:0/0
+K:Deathtouch
+K:etbCounter:P1P1:3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDoubleCounters | TriggerDescription$ At the beginning of your upkeep, double the number of +1/+1 counters on NICKNAME.
+SVar:TrigDoubleCounters:DB$ MultiplyCounter | Defined$ Self | CounterType$ P1P1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDmg | TriggerDescription$ Whenever NICKNAME deals combat damage to an opponent, he deals that much damage to each other opponent.
+SVar:TrigDmg:DB$ DamageAll | ValidPlayers$ OppNonTriggeredTarget | NumDmg$ X
+SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Counters
+Oracle:Deathtouch\nGargantos enters with three +1/+1 counters on him.\nAt the beginning of your upkeep, double the number of +1/+1 counters on Gargantos.\nWhenever Gargantos deals combat damage to an opponent, he deals that much damage to each other opponent.

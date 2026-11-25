@@ -405,8 +405,8 @@ assemble_arm64_sim_app() {
     local TMP="$ROOT/forge-gui-ios/target/robovm.tmp"
     local APP="$TMP/$APP_EXEC.app"
     local RVHOME CJ
-    RVHOME="$(ls -d "$M2"/com/mobidevelop/robovm/robovm-dist/*/unpacked/robovm-* 2>/dev/null | sort | tail -1)"
-    CJ="$(ls "$M2"/com/mobidevelop/robovm/robovm-dist-compiler/*/robovm-dist-compiler-*.jar 2>/dev/null | sort | tail -1)"
+    RVHOME="$(ls -d "$CLONE"/com/mobidevelop/robovm/robovm-dist/*/unpacked/robovm-* 2>/dev/null | sort | tail -1)"
+    CJ="$(ls "$CLONE"/com/mobidevelop/robovm/robovm-dist-compiler/*/robovm-dist-compiler-*.jar 2>/dev/null | sort | tail -1)"
     [ -f "$TMP/config.xml" ] || { echo "config.xml missing — robovm build did not run"; exit 1; }
     echo "=== assemble arm64 iOS-simulator .app (RoboVM 2.3.24 can't launch AS sims via maven) ==="
 
@@ -424,7 +424,7 @@ assemble_arm64_sim_app() {
 
     # 3. re-stamp the main binary as iOS-simulator (AppCompiler writes device LC_VERSION_MIN_IPHONEOS)
     local SDKV; SDKV="$(xcrun --sdk iphonesimulator --show-sdk-version)"
-    vtool -set-build-version 7 14.0 "$SDKV" -replace -output "$APP/$APP_EXEC.sim" "$APP/$APP_EXEC"
+    vtool -set-build-version 7 14.0 26.0 -replace -output "$APP/$APP_EXEC.sim" "$APP/$APP_EXEC"
     mv -f "$APP/$APP_EXEC.sim" "$APP/$APP_EXEC"
 
     # 4. swap device framework slices -> simulator slices
@@ -502,6 +502,8 @@ device() {
         -Dmaven.repo.local="$CLONE" -DskipTests 2>&1 | tail -8) || true
     APP="$ROOT/forge-gui-ios/target/robovm.tmp/$APP_EXEC.app"
     [ -f "$APP/$APP_EXEC" ] || { echo "DEVICE BINARY MISSING - build failed"; exit 1; }
+    # iOS 27 UIScene-lifecycle workaround: stamp SDK 26.0 (see assemble_arm64_sim_app)
+    vtool -set-build-version 2 14.0 26.0 -replace -output "$APP/$APP_EXEC.tmp" "$APP/$APP_EXEC" && mv -f "$APP/$APP_EXEC.tmp" "$APP/$APP_EXEC"
 
     echo "=== sign ==="
     cp "$PROFILE" "$APP/embedded.mobileprovision"

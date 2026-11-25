@@ -2,7 +2,7 @@ Name:Calix, Destiny's Hand
 ManaCost:2 G W
 Types:Legendary Planeswalker Calix
 Loyalty:4
-A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Enchantment | RestRandomOrder$ True | SpellDescription$ Look at the top four cards of your library. You may reveal an enchantment card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.
+A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Enchantment | RestRandomOrder$ True | SpellDescription$ Look at the top four cards of your library. You may reveal an enchantment card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouDontCtrl,Enchantment.YouDontCtrl | TgtPrompt$ Select target creature or enchantment you don't control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile target creature or enchantment you don't control until target enchantment you control leaves the battlefield.
 SVar:DBEffect:DB$ Effect | ValidTgts$ Enchantment.YouCtrl | TgtPrompt$ Select target enchantment you control | Triggers$ ComeBack | RememberObjects$ Remembered | ImprintCards$ ThisTargetedCard | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

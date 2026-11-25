@@ -20,6 +20,28 @@ import forge.game.zone.ZoneType;
 
 public class SpellAbilityPickerSimulationTest extends SimulationTest {
     @Test
+    public void doesNotAnimateTappedManland() {
+        // a tapped Mutavault can't attack or block, even though being a Rat makes Pack Rat bigger
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        game.getPlayers().get(0).setTeam(1);
+
+        addCard("Pack Rat", p);
+        addCard("Swamp", p);
+        addCard("Swamp", p);
+        Card mutavault = addCard("Mutavault", p);
+        mutavault.setTapped(true);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertTrue(sa == null || !mutavault.equals(sa.getHostCard()));
+    }
+
+    @Test
     public void testPickingLethalDamage() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -820,8 +842,10 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(targets.toString().contains("Forest Bear"));
         AssertJUnit.assertTrue(targets.toString().contains("Runeclaw Bear"));
         AssertJUnit.assertTrue(targets.toString().contains("Grizzly Bear"));
-        // Expected 5*4*3=60 iterations (5 choices for first target, 4 for next, 3 for last.)
-        AssertJUnit.assertEquals(60, picker.getNumSimulations());
+        // Expected 3*2*1=6 iterations: a +1/+1 counter is only a gain on a creature of the AI's own, so the opponent's
+        // Flying Men and Water Elemental are not offered as targets (PossibleTargetSelector.pointlessCounterTarget);
+        // 3 choices for the first target, 2 for the next, 1 for the last.
+        AssertJUnit.assertEquals(6, picker.getNumSimulations());
     }
 
     @Test

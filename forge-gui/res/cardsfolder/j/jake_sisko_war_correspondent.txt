@@ -1,0 +1,9 @@
+Name:Jake Sisko, War Correspondent
+ManaCost:1 G
+Types:Legendary Creature Human Citizen
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigGainLife | TriggerDescription$ Landfall — Whenever a land you control enters, you gain 1 life. If this is the second time this ability has resolved this turn, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ2
+SVar:X:Count$ResolvedThisTurn
+Oracle:Landfall — Whenever a land you control enters, you gain 1 life. If this is the second time this ability has resolved this turn, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")

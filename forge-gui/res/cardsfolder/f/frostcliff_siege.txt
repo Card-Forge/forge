@@ -3,8 +3,8 @@ ManaCost:1 U R
 Types:Enchantment
 K:ETBReplacement:Other:SiegeChoice
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Jeskai,Temur | Defined$ You | SetChosenMode$ True | ShowChoice$ ExceptSelf | SpellDescription$ As this enchantment enters, choose Jeskai or Temur.
-SVar:Jeskai:DB$ Pump | SpellDescription$ Jeskai
-SVar:Temur:DB$ Pump | SpellDescription$ Temur
+SVar:Jeskai:DB$ Nothing | SpellDescription$ Jeskai
+SVar:Temur:DB$ Nothing | SpellDescription$ Temur
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeJeskai | AddTrigger$ JeskaiTrigger | Description$ • Jeskai — Whenever one or more creatures you control deal combat damage to a player, draw a card.
 SVar:JeskaiTrigger:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigDraw | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, draw a card.
 SVar:TrigDraw:DB$ Draw

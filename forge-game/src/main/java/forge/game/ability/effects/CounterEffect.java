@@ -36,14 +36,11 @@ public class CounterEffect extends SpellAbilityEffect {
         sb.append("Counter");
 
         boolean isAbility = false;
-        for (final SpellAbility tgtSA : getTargetSpells(sa)) {
-            sb.append(" ");
-            sb.append(tgtSA.getHostCard());
+        final List<SpellAbility> countered = getTargetSpells(sa);
+        for (final SpellAbility tgtSA : countered) {
             isAbility = tgtSA.isAbility();
-            if (isAbility) {
-                sb.append("'s ability");
-            }
         }
+        sb.append(" ").append(joinNamed(countered));
 
         if (isAbility && sa.hasParam("DestroyPermanent")) {
             sb.append(" and destroy it");
@@ -64,12 +61,12 @@ public class CounterEffect extends SpellAbilityEffect {
         final CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
+            final Card tgtSACard = tgtSA.getHostCard();
             if (sa.hasParam("Optional") && !sa.getActivatingPlayer().getController().confirmAction(sa, null,
-                    Localizer.getInstance().getMessage("lblWouldYouLikeProceedWithOptionalAbility") + " " + sa.getHostCard() + "?", null)) {
+                    Localizer.getInstance().getMessage("lblWouldYouLikeProceedWithOptionalAbility") + " " + sa.getHostCard() + "?", tgtSACard, null)) {
                 return;
             }
 
-            final Card tgtSACard = tgtSA.getHostCard();
             // should remember even that spell cannot be countered
             // currently all effects using this are targeted in case the spell gets countered before
             // so don't need to worry about LKI (else X amounts would be missing)

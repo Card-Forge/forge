@@ -4,9 +4,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.util.BuildInfo;
 import forge.util.ScryfallRateLimiter;
 import org.tinylog.Logger;
 
@@ -156,7 +156,7 @@ final class ScryfallSetSync {
         conn.setRequestProperty("Accept", "application/json");
         conn.setRequestProperty("Accept-Encoding", "gzip");
         // Scryfall asks for a descriptive User-Agent and rate-limits harder without one.
-        conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+        conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
         conn.connect();
         if (conn instanceof HttpURLConnection) {
             int status = ((HttpURLConnection) conn).getResponseCode();

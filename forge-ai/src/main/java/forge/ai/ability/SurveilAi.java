@@ -45,10 +45,10 @@ public class SurveilAi extends SpellAbilityAi {
         if (sa.getPayCosts().hasTapCost()
                 && (sa.getPayCosts().hasManaCost() || (sa.getHostCard() != null && sa.getHostCard().isCreature()))
                 && !isSorcerySpeed(sa, ai)) {
-            return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
+            return ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN);
         }
         if (sa.getHostCard() != null && !sa.getHostCard().isPermanent() && !isSorcerySpeed(sa, ai))
-            return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
+            return ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN);
         // in the player's turn Surveil should only be done in Main1 or in Upkeep if able
         if (ph.isPlayerTurn(ai)) {
             if (isSorcerySpeed(sa, ai)) {
@@ -76,13 +76,15 @@ public class SurveilAi extends SpellAbilityAi {
             }
         }
 
-        // TODO If EOT and I'm the next turn, the percent should probably be higher
+        // Instant-speed selection is most useful immediately before the AI untaps and draws.
+        final PhaseHandler phase = ai.getGame().getPhaseHandler();
+        final boolean atOpponentEndStep = !isSorcerySpeed(sa, ai);
         double chance = .4; // 40 percent chance for instant speed
         if (isSorcerySpeed(sa, ai)) {
             chance = .667; // 66.7% chance for sorcery speed (since it will never activate EOT)
         }
 
-        boolean randomReturn = MyRandom.getRandom().nextFloat() <= chance;
+        boolean randomReturn = atOpponentEndStep || MyRandom.getRandom().nextFloat() <= chance;
         if (playReusable(ai, sa)) {
             randomReturn = true;
         }

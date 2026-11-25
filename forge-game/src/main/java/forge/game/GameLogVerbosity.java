@@ -6,10 +6,12 @@ import java.util.Set;
 public enum GameLogVerbosity {
     LOW("Low",
         EnumSet.of(GameLogEntryType.GAME_OUTCOME, GameLogEntryType.MATCH_RESULTS,
+                   GameLogEntryType.SIDEBOARD,
                    GameLogEntryType.TURN, GameLogEntryType.MULLIGAN,
                    GameLogEntryType.ANTE, GameLogEntryType.DAMAGE)),
     MEDIUM("Medium",
         EnumSet.of(GameLogEntryType.GAME_OUTCOME, GameLogEntryType.MATCH_RESULTS,
+                   GameLogEntryType.SIDEBOARD,
                    GameLogEntryType.TURN, GameLogEntryType.MULLIGAN,
                    GameLogEntryType.ANTE, GameLogEntryType.DAMAGE,
                    GameLogEntryType.ZONE_CHANGE, GameLogEntryType.LAND,

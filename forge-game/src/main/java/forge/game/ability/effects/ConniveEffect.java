@@ -58,7 +58,7 @@ public class ConniveEffect extends SpellAbilityEffect {
             return;
         }
 
-        PlayerCollection controllers = new PlayerCollection(game.getPlayersInTurnOrder(game.getPhaseHandler().getPlayerTurn()));
+        PlayerCollection controllers = game.getPlayersInTurnOrder(game.getPhaseHandler().getPlayerTurn());
         controllers.retainAll(toConnive.stream().map(Card::getController).collect(Collectors.toSet()));
 
         for (final Player p : controllers) {
@@ -96,7 +96,7 @@ public class ConniveEffect extends SpellAbilityEffect {
                     // if the card is not in the game anymore, this might still return true, but it's no problem
                     if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithGameTimestamp(conniver)) {
                         int numCntrs = CardLists.count(toBeDiscarded, CardPredicates.NON_LANDS);
-                        conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, counterPlacements);
+                        gamec.addCounter(CounterEnumType.P1P1, numCntrs, p, counterPlacements);
                     }
 
                     moveParams = AbilityKey.newMap();

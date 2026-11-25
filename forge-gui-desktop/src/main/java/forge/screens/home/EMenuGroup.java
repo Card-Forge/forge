@@ -13,6 +13,7 @@ public enum EMenuGroup {
     QUEST ("lblQuests"),
     PUZZLE ("lblPuzzles"),
     GAUNTLET ("lblGauntlets"),
+    ROGUE ("lblRogueCommander"),
     SETTINGS ("lblGameSettings");
 
     private final String strTitle;

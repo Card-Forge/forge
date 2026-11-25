@@ -106,7 +106,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
             private void showCard(MouseEvent e) {
                 final Achievement achievement = getAchievementAt(e.getX(), e.getY());
-                if (achievement != null) {
+                if (achievement != null && !(achievement.isHidden() && !achievement.isActive())) {
                     final IPaperCard pc = achievement.getPaperCard();
                     if (pc != null) {
                         preventMouseOut = true;
@@ -338,11 +338,12 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                 g2d.setFont(font);
 
                 fm = g2d.getFontMetrics();
-                label = achievement.getDisplayName();
+                boolean isHiddenAndUnearned = achievement.isHidden() && !achievement.isActive();
+                label = isHiddenAndUnearned ? Localizer.getInstance().getMessage("lblRogueHiddenAchievement") : achievement.getDisplayName();
                 textY = plateY + (trophyPlateSize.height * 2 / 3 - fm.getHeight()) / 2 + fm.getAscent();
                 g2d.drawString(label, x + plateOffset + (trophyPlateSize.width - fm.stringWidth(label)) / 2, textY);
 
-                label = achievement.getSubTitle(false);
+                label = isHiddenAndUnearned ? null : achievement.getSubTitle(false);
                 if (label != null) {
                     textY += fm.getAscent();
                     g2d.setFont(subFont);
@@ -364,12 +365,13 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
             //draw tooltip for selected achievement if needed
             if (selectRect != null) {
-                String subTitle = selectedAchievement.getSubTitle(true);
-                String sharedDesc = selectedAchievement.getSharedDesc();
-                String mythicDesc = selectedAchievement.getMythicDesc();
-                String rareDesc = selectedAchievement.getRareDesc();
-                String uncommonDesc = selectedAchievement.getUncommonDesc();
-                String commonDesc = selectedAchievement.getCommonDesc();
+                boolean selectedHidden = selectedAchievement.isHidden() && !selectedAchievement.isActive();
+                String subTitle = selectedHidden ? null : selectedAchievement.getSubTitle(true);
+                String sharedDesc = selectedHidden ? null : selectedAchievement.getSharedDesc();
+                String mythicDesc = selectedHidden ? null : selectedAchievement.getMythicDesc();
+                String rareDesc = selectedHidden ? null : selectedAchievement.getRareDesc();
+                String uncommonDesc = selectedHidden ? null : selectedAchievement.getUncommonDesc();
+                String commonDesc = selectedHidden ? null : selectedAchievement.getCommonDesc();
 
                 int nameHeight = NAME_FONT.getFontMetrics().getHeight();
                 int descHeight = DESC_FONT.getFontMetrics().getHeight();
@@ -423,7 +425,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 fm = g2d.getFontMetrics();
                 y += fm.getAscent();
-                g2d.drawString(selectedAchievement.getDisplayName(), x, y);
+                g2d.drawString(selectedHidden ? Localizer.getInstance().getMessage("lblRogueHiddenAchievement") : selectedAchievement.getDisplayName(), x, y);
                 y += nameHeight;
 
                 FSkin.setGraphicsFont(g2d, DESC_FONT);

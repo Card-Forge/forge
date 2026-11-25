@@ -49,7 +49,7 @@ Name=Miku
 1 Krosan Verge|moc
 1 Lathiel, the Bounteous Dawn|cmr
 1 Lazotep Quarry|m3c
-1 Llanowar Elves|gnt
+1 Elvish Mystic|sld|[805]
 1 Mirari's Wake|mh2
 1 Nature's Lore|cmm
 1 Nykthos Paragon|mh2
@@ -90,3 +90,14 @@ Name=Miku
 1 Voice of Resurgence|2xm
 1 Voice of the Blessed|inr
 1 Vorinclex, Voice of Hunger|sld|[2439]
+[Sideboard]
+1 Scrying Sheets|sld|[1606]
+1 Shelter|sld|[1587]
+1 Harmonize|sld|[1596]
+1 Azusa, Lost but Seeking|sld|[1597]
+1 Thespian's Stage|sld|[1607]
+1 Elspeth Tirel|sld|[1585]
+1 Freyalise, Llanowar's Fury|sld|[1598]
+1 Giada, Font of Hope|sld|[1586]
+1 Youthful Valkyrie|sld|[1588]
+1 Tigereye Cameo|sld|[7093]

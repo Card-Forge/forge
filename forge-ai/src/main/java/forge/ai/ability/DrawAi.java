@@ -21,6 +21,9 @@ package forge.ai.ability;
 import java.util.Map;
 
 import forge.ai.*;
+import forge.ai.simulation.AiCardLists;
+import forge.ai.simulation.AlurenPlan;
+import forge.ai.simulation.DoomsdayPile;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -44,7 +47,7 @@ public class DrawAi extends SpellAbilityAi {
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         Card hostCard = sa.getHostCard();
         PhaseHandler ph = ai.getGame().getPhaseHandler();
-        boolean aboutToBeMyTurn = ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
+        boolean aboutToBeMyTurn = ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN);
 
         if (!targetAI(ai, sa, false)) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
@@ -52,7 +55,7 @@ public class DrawAi extends SpellAbilityAi {
 
         if (sa.usesTargeting()) {
             final Player player = sa.getTargets().getFirstTargetedPlayer();
-            if (player != null && player.isOpponentOf(ai)) {
+            if (player != null && player.isOpponentOf(ai) && !killsOpponent(ai, player, sa)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
@@ -160,6 +163,9 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
+        if (drawsThroughDoomsdayPile(ai, sa)) {
+            return true; // the pile is drawn through in the main phase it was made in, with the cards in hand
+        }
         // Sacrificing a creature in response to something dangerous is generally good in any phase
         boolean isSacCost = false;
         if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
@@ -185,6 +191,9 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
+        if (drawsThroughDoomsdayPile(ai, sa)) {
+            return true;
+        }
         if (logic.equals("VeilOfSummer")) {
             return SpecialCardAi.VeilOfSummer.consider(ai, sa); // this is more of a counterspell than a true draw card, so it's timed by the card-specific logic
         } else if (logic.startsWith("LifeLessThan.")) {
@@ -193,7 +202,7 @@ public class DrawAi extends SpellAbilityAi {
             return true;
         } else if (logic.equals("RespondToOwnActivation")) {
             return !ai.getGame().getStack().isEmpty() && ai.getGame().getStack().peekAbility().getHostCard().equals(sa.getHostCard());
-        } else if ((!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
+        } else if ((!ph.isPlayerNextTurn(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
                 && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
                 && ai.getCardsIn(ZoneType.Hand).size() > 1 && !ComputerUtil.activateForCost(sa, ai)
                 && !"YawgmothsBargain".equals(logic)) {
@@ -202,9 +211,52 @@ public class DrawAi extends SpellAbilityAi {
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
 
+    /**
+     * Whether this draw, aimed at an opponent, ends the game for them: it takes their whole library (they lose at their
+     * next draw, targetAI aims it there) or comes with a life loss of the same size that kills them. Every other draw
+     * at an opponent is a gift and is not made.
+     */
+    private static boolean killsOpponent(final Player ai, final Player opp, final SpellAbility sa) {
+        try {
+            final SpellAbility root = sa.getRootAbility();
+            int n;
+            if (sa.costHasManaX() && root.getXManaCostPaid() != null) {
+                n = root.getXManaCostPaid();
+            } else {
+                n = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("NumCards", "1"), sa);
+            }
+            if (n <= 0) {
+                return false;
+            }
+            if (n >= opp.getCardsIn(ZoneType.Library).size() && opp.canDraw() && !opp.cantLoseCheck(GameLossReason.Milled)
+                    && !opp.isCardInPlay("Laboratory Maniac")) {
+                return true;
+            }
+            final SpellAbility loseLife = sa.findSubAbilityByType(ApiType.LoseLife);
+            return loseLife != null && "Targeted".equals(loseLife.getParam("Defined")) && opp.canLoseLife()
+                    && n >= opp.getLife();
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
+    /** The draw of an ability that takes cards out of a library that is already a Doomsday pile (see DoomsdayPile). */
+    private static boolean drawsThroughDoomsdayPile(final Player ai, final SpellAbility sa) {
+        try {
+            if (sa.usesTargeting() && !sa.canTarget(ai)) {
+                return false;
+            }
+            final int numCards = sa.hasParam("NumCards")
+                    ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
+            return DoomsdayPile.drawsThroughPile(ai, numCards);
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
-        if (targetAI(ai, sa, sa.isTrigger() && sa.getHostCard().isInPlay())) {
+        if (targetAI(ai, sa, sa.isTrigger() && !sa.isOptionalTrigger())) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
@@ -276,6 +328,12 @@ public class DrawAi extends SpellAbilityAi {
         int numCards = 1;
         if (sa.hasParam("NumCards")) {
             numCards = AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa);
+        }
+
+        if (sa.costHasManaX() && sa.getRootAbility().getXManaCostPaid() == null && source != null
+                && AiCardLists.has(AiCardLists.Role.DREDGE_REFILL, source)) {
+            // Breakthrough for the dredge line: X=0 draws four and throws the hand away, which is the point.
+            sa.getRootAbility().setXManaCostPaid(0);
         }
 
         boolean xPaid = false;
@@ -416,7 +474,7 @@ public class DrawAi extends SpellAbilityAi {
             // checks what the ai prevent from casting it on itself
             // if spell is not mandatory
             if (aiTarget && !ai.cantLose()) {
-                if (numCards >= computerLibrarySize - 3) {
+                if (numCards >= computerLibrarySize - 3 && !DoomsdayPile.drawsThroughPile(ai, numCards)) {
                     if (xPaid) {
                         numCards = computerLibrarySize - 1;
                         if (numCards <= 0 && !mandatory) {
@@ -534,7 +592,7 @@ public class DrawAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (numCards >= computerLibrarySize - 3) {
+            if (numCards >= computerLibrarySize - 3 && !DoomsdayPile.drawsThroughPile(ai, numCards)) {
                 if (ai.isCardInPlay("Laboratory Maniac") && !ai.cantWin()) {
                     return true;
                 }
@@ -542,7 +600,8 @@ public class DrawAi extends SpellAbilityAi {
                 return false;
             }
 
-            if ((computerHandSize + numCards > computerMaxHandSize)) {
+            if (computerHandSize + numCards > computerMaxHandSize
+                    && !AlurenPlan.digging(ai)) {
                 // Don't draw too many cards and then risk discarding cards at EOT
                  if (game.getPhaseHandler().isPlayerTurn(ai)
                         && !sa.isTrigger()
@@ -573,6 +632,10 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        if ("AttackTaxDraw".equals(sa.getParam("AILogic"))
+                && !forge.ai.AttackRestrictionDeal.worthTaking(player, sa.getHostCard().getController())) {
+            return false; // The Second Doctor: the card is not worth an attack it wants to make
+        }
         int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
         // AI shouldn't mill itself
         if (numCards < player.getZone(ZoneType.Library).size())
