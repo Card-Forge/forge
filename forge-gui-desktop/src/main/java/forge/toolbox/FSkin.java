@@ -1685,6 +1685,7 @@ public class FSkin {
         private final Color FORE_COLOR = getColor(Colors.CLR_TEXT).color;
         private final Color BACK_COLOR = getColor(Colors.CLR_THEME2).color;
         private final Color HIGHLIGHT_COLOR = BACK_COLOR.brighter();
+        private final Color MENU_HIGHLIGHT_COLOR = getColor(Colors.CLR_ACTIVE).color;
         private final Border LINE_BORDER = BorderFactory.createLineBorder(FORE_COLOR.darker(), 1);
         private final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(2, 2, 2, 2);
 
@@ -1738,7 +1739,7 @@ public class FSkin {
             UIManager.put("Menu.foreground", FORE_COLOR);
             UIManager.put("Menu.background", BACK_COLOR);
             UIManager.put("Menu.borderPainted", false);
-            UIManager.put("Menu.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("Menu.selectionBackground", MENU_HIGHLIGHT_COLOR);
             UIManager.put("Menu.selectionForeground", FORE_COLOR);
             UIManager.put("Menu.border", EMPTY_BORDER);
             UIManager.put("Menu.opaque", false);
@@ -1750,7 +1751,7 @@ public class FSkin {
             UIManager.put("MenuItem.foreground", FORE_COLOR);
             UIManager.put("MenuItem.background", BACK_COLOR);
             UIManager.put("MenuItem.border", EMPTY_BORDER);
-            UIManager.put("MenuItem.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("MenuItem.selectionBackground", MENU_HIGHLIGHT_COLOR);
             UIManager.put("MenuItem.selectionForeground", FORE_COLOR);
             UIManager.put("MenuItem.acceleratorForeground", FORE_COLOR.darker());
             UIManager.put("MenuItem.opaque", true);
@@ -1760,14 +1761,14 @@ public class FSkin {
             // JRadioButtonMenuItem
             UIManager.put("RadioButtonMenuItem.foreground", FORE_COLOR);
             UIManager.put("RadioButtonMenuItem.background", BACK_COLOR);
-            UIManager.put("RadioButtonMenuItem.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("RadioButtonMenuItem.selectionBackground", MENU_HIGHLIGHT_COLOR);
             UIManager.put("RadioButtonMenuItem.selectionForeground", FORE_COLOR);
             UIManager.put("RadioButtonMenuItem.border", EMPTY_BORDER);
             UIManager.put("RadioButtonMenuItem.acceleratorForeground", FORE_COLOR.darker());
             // JCheckboxMenuItem
             UIManager.put("CheckBoxMenuItem.foreground", FORE_COLOR);
             UIManager.put("CheckBoxMenuItem.background", BACK_COLOR);
-            UIManager.put("CheckBoxMenuItem.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("CheckBoxMenuItem.selectionBackground", MENU_HIGHLIGHT_COLOR);
             UIManager.put("CheckBoxMenuItem.selectionForeground", FORE_COLOR);
             UIManager.put("CheckBoxMenuItem.border", EMPTY_BORDER);
             UIManager.put("CheckBoxMenuItem.acceleratorForeground", FORE_COLOR.darker());

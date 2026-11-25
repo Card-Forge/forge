@@ -1,0 +1,6 @@
+Name:Wound - Right Leg
+ManaCost:no cost
+Types:Wound
+R:Event$ Moved | ValidCard$ Artifact.YouCtrl,Creature.YouCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Command | Description$ Artifacts and creatures you control enter tapped.
+SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
+Oracle:Artifacts and creatures you control enter tapped.

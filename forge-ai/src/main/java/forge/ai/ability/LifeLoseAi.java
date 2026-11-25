@@ -8,6 +8,9 @@ import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
+import forge.game.card.CardCollectionView;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPayEnergy;
 import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -18,6 +21,35 @@ import forge.game.spellability.SpellAbility;
 import forge.util.collect.FCollectionView;
 
 public class LifeLoseAi extends SpellAbilityAi {
+
+    /**
+     * An amount that is the toughness, power or mana value of what the cost sacrifices (Catapult Captain) is 0 until the
+     * cost is paid: it is the creature the AI would sacrifice for it that counts (#6719).
+     */
+    private static int sacrificedAmount(final Player ai, final SpellAbility sa, final String amountStr) {
+        // LifeAmount$ X with SVar:X:Sacrificed$CardToughness: look through the variable
+        final String expr = amountStr != null && sa.hasSVar(amountStr) ? sa.getSVar(amountStr) : amountStr;
+        if (expr == null || !expr.startsWith("Sacrificed$") || sa.getPayCosts() == null) {
+            return 0;
+        }
+        for (final CostPart part : sa.getPayCosts().getCostParts()) {
+            if (part instanceof CostSacrifice sac && !sac.payCostFromSource() && !"All".equals(sac.getAmount())) {
+                final CardCollectionView list = ComputerUtil.chooseSacrificeType(ai, sac.getType(), sa, sa.getTargetCard(), false, 1, null);
+                if (list == null || list.isEmpty()) {
+                    return 0;
+                }
+                final Card c = list.getFirst();
+                if (expr.endsWith("CardToughness")) {
+                    return c.getNetToughness();
+                }
+                if (expr.endsWith("CardPower")) {
+                    return c.getNetPower();
+                }
+                return c.getCMC();
+            }
+        }
+        return 0;
+    }
 
     /*
      * (non-Javadoc)
@@ -105,6 +137,9 @@ public class LifeLoseAi extends SpellAbilityAi {
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
+        if (amount <= 0) {
+            amount = sacrificedAmount(ai, sa, amountStr);
+        }
 
         if (amount <= 0) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -148,7 +183,21 @@ public class LifeLoseAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
+        if (spendsEnergyAndItself(sa) && tgtPlayers.anyMatch(p -> p.isOpponentOf(ai) && p.canLoseLife())) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
+
+    /**
+     * "Pay {E}{E}, Sacrifice this: each opponent loses 3 life" (Gonti's Machinations): the permanent only collects the energy
+     * that this ability spends and does nothing else, so there is no better moment to wait for than having enough of it. The
+     * AI used to cast it only for the last points of the opponent's life (#13049).
+     */
+    private static boolean spendsEnergyAndItself(final SpellAbility sa) {
+        final Cost cost = sa.getPayCosts();
+        return cost != null && cost.hasSpecificCostType(CostPayEnergy.class) && ComputerUtilCost.isSacrificeSelfCost(cost);
     }
 
     /*

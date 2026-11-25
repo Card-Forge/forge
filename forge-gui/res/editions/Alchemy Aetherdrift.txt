@@ -4,7 +4,43 @@ Date=2025-03-04
 Name=Alchemy: Aetherdrift
 Type=Online
 ScryfallCode=YDFT
-Booster=1 UncommonRareMythic:fromsheet("YDFT cards"), 8 Common:fromsheet("DFT cards"), 3 Uncommon:fromSheet("DFT cards"), 1 UncommonRareMythic:fromSheet("DFT cards"), 1 RareMythic:fromSheet("DFT cards"), 1 BasicLand:fromSheet("DFT cards")
+BoosterSlots=Common,Common-Guest,Alchemy,Uncommon,RareMythic,AnyLand,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-Guest, 1 Alchemy, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 WildcardFoil+
+
+[Common]
+Base=Common:!fromSheet("DFT gain lands"):fromSheet("DFT cards")
+
+[Common-Guest]
+Base=Common:!fromSheet("DFT gain lands"):fromSheet("DFT cards")
+Replace=.015625F fromSheet("DFT special guests")
+
+[Alchemy]
+#Extra slot. 55% uncommon, and each rare twice each mythic. 15 rares and 5 mythics make those 38.57% and 6.43%.
+Base=Uncommon:fromSheet("YDFT cards")
+Replace=0.385714F Rare:fromSheet("YDFT cards")
+Replace=0.064286F Mythic:fromSheet("YDFT cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("DFT cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("DFT cards")
+
+[AnyLand]
+Base=fromSheet("DFT gain lands")
+Replace=.5F BasicLand:fromSheet("DFT cards"):!fromSheet("DFT gain lands")
+
+[Wildcard]
+Base=Uncommon:fromSheet("DFT cards")
+Replace=.083F Common:fromSheet("DFT cards")
+Replace=.163F Rare:fromSheet("DFT cards")
+Replace=.026F Mythic:fromSheet("DFT cards")
+
+[WildcardFoil]
+Base=Common:fromSheet("DFT cards")
+Replace=.30F Uncommon:fromSheet("DFT cards")
+Replace=.064F Rare:fromSheet("DFT cards")
+Replace=.011F Mythic:fromSheet("DFT cards")
 
 [cards]
 1 R Hangarback Assembler @Aaron J. Riley

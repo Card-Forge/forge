@@ -827,6 +827,8 @@ public class Player extends GameEntity implements Comparable<Player> {
                 if (c.getController().equals(source.getController())) {
                     restDamage *= 2;
                 }
+            } else if (c.getName().equals("Stronghold Furnace")) {
+                restDamage *= 2;
             } else if (c.getName().equals("Mishra")) {
                 if (c.isCreature() && c.getController().equals(source.getController())) {
                     restDamage *= 2;
@@ -896,7 +898,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (counterType.is(CounterEnumType.RAD) && newValue > 0) {
             String setCode = null;
-            if (params.containsKey(AbilityKey.Cause)) {
+            if (params != null && params.containsKey(AbilityKey.Cause)) {
                 SpellAbility cause = (SpellAbility) params.get(AbilityKey.Cause);
                 setCode = cause.getHostCard().getSetCode();
             }

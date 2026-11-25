@@ -1,0 +1,5 @@
+Name:Aetherwork - Fractured Binding 4
+ManaCost:no cost
+Types:Trait
+S:Mode$ ReduceCost | ValidCard$ Card.IsCommander+YouOwn | Type$ Spell | Amount$ 4 | EffectZone$ Command | Description$ Your commander costs {4} less to cast from the command zone.
+Oracle:Your commander costs {4} less to cast from the command zone.

@@ -322,8 +322,9 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
 
         try {
             if (bossGroup != null) {
-                bossGroup.shutdownGracefully().sync();
-                workerGroup.shutdownGracefully().sync();
+                // Netty's default 2 s quiet period per group made every stop take about 4 s
+                bossGroup.shutdownGracefully(0, 15, TimeUnit.SECONDS).sync();
+                workerGroup.shutdownGracefully(0, 15, TimeUnit.SECONDS).sync();
             }
         } catch (final InterruptedException e) {
             Thread.currentThread().interrupt();

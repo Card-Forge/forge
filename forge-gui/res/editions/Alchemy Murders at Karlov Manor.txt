@@ -4,7 +4,33 @@ Date=2024-03-05
 Name=Alchemy: Murders at Karlov Manor
 Type=Online
 ScryfallCode=YMKM
-Booster=1 UncommonRareMythic:fromsheet("YMKM cards"), 8 Common:fromsheet("MKM cards"), 3 Uncommon:fromSheet("MKM cards"), 1 UncommonRareMythic:fromSheet("MKM cards"), 1 RareMythic:fromSheet("MKM cards"), 1 BasicLand:fromSheet("MKM cards")
+BoosterSlots=Common,Common-Guest,Alchemy,Uncommon,RareMythic,BasicLand,Wildcard
+Booster=6 Common, 1 Common-Guest, 1 Alchemy, 3 Uncommon, 1 RareMythic, 1 BasicLand, 1 Wildcard+
+
+[Common]
+Base=Common:fromSheet("MKM cards")
+
+[Common-Guest]
+Base=Common:fromSheet("MKM cards")
+Replace=.125F fromSheet("MKM karlov surprise")
+
+[Alchemy]
+#Extra slot. 55% uncommon, and each rare twice each mythic. 15 rares and 5 mythics make those 38.57% and 6.43%.
+Base=Uncommon:fromSheet("YMKM cards")
+Replace=0.385714F Rare:fromSheet("YMKM cards")
+Replace=0.064286F Mythic:fromSheet("YMKM cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("MKM cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("MKM cards")
+
+[BasicLand]
+Base=BasicLand:fromSheet("MKM cards")
+
+[Wildcard]
+Base=Any:fromSheet("MKM cards")
 
 [cards]
 1 U Scrutiny of the Guildpact @Camille Alquier

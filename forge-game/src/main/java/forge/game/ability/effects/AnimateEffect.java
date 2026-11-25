@@ -19,6 +19,12 @@ import forge.util.TextUtil;
 
 
 public class AnimateEffect extends AnimateEffectBase {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Abilities", "AtEOT", "AtEOTCondition", "AtEOTDesc", "Colors", "Defined", "DefinedDesc",
+        "Duration", "HiddenKeywords", "IfDesc", "ImprintCards", "Keywords", "Name",
+        "OptionQuestion", "Optional", "Power", "RememberObjects", "RemoveTypes", "Replacements",
+        "Toughness", "Triggers", "Types", "sVars", "staticAbilities",
+    };
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
@@ -234,7 +240,8 @@ public class AnimateEffect extends AnimateEffectBase {
             sb.append(" ");
         }
 
-        sb.append(sa.hasParam("DefinedDesc") ? sa.getParam("DefinedDesc") : Lang.joinHomogenous(tgts));
+        // nothing to name yet (Defined$ Remembered before the earlier part of the ability has resolved): "It", not a missing subject
+        sb.append(sa.hasParam("DefinedDesc") ? sa.getParam("DefinedDesc") : tgts.isEmpty() ? "It" : Lang.joinHomogenous(tgts));
         sb.append(" ");
         int initial = sb.length();
         boolean becomes = false;

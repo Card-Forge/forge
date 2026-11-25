@@ -19,9 +19,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
@@ -46,7 +48,9 @@ public class PerfPatchUnitTest {
     }
 
     private static void eq(Object actual, Object expected, String ctx) {
-        check(Objects.equals(actual, expected), ctx + "\n  expected=" + expected + "\n  actual  =" + actual);
+        if (!Objects.equals(actual, expected)) {
+            Assert.fail(ctx + "\n  expected=" + expected + "\n  actual  =" + actual);
+        }
     }
 
     private static void expectUnsupported(Runnable r, String ctx) {
@@ -457,15 +461,20 @@ public class PerfPatchUnitTest {
             // full invariant after every operation
             eq(new ArrayList<>(fc), ref, ctx + " content/order");
             eq(fc.size(), ref.size(), ctx + " size");
-            Set<E> refSet = new HashSet<>(ref);
+            Map<E, E> stored = new HashMap<>();
+            for (E x : ref) stored.putIfAbsent(x, x);
             for (int k = 0; k < domain; k++) {
                 E probe = mk.apply(k);
-                boolean in = refSet.contains(probe);
-                eq(fc.contains(probe), in, ctx + " contains(" + probe + ")");
+                boolean in = stored.containsKey(probe);
+                if (fc.contains(probe) != in) {
+                    Assert.fail(ctx + " contains(" + probe + ")\n  expected=" + in);
+                }
                 if (in) {
-                    check(fc.get(probe) == ref.get(ref.indexOf(probe)), ctx + " get(T) must return the STORED instance");
-                } else {
-                    check(fc.get(probe) == probe, ctx + " get(T) of absent element returns the argument");
+                    if (fc.get(probe) != stored.get(probe)) {
+                        Assert.fail(ctx + " get(T) must return the STORED instance");
+                    }
+                } else if (fc.get(probe) != probe) {
+                    Assert.fail(ctx + " get(T) of absent element returns the argument");
                 }
             }
             eq(fc.contains(null), false, ctx + " contains(null)");

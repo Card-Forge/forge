@@ -67,6 +67,7 @@ public class GameState {
         private String precast = null;
         private String putOnStack = null;
         private final Map<ZoneType, String> cardTexts = new EnumMap<>(ZoneType.class);
+        private String name = null;
     }
     private final List<PlayerState> playerStates = new ArrayList<>();
 
@@ -598,6 +599,8 @@ public class GameState {
             getPlayerState(categoryName).manaPool = categoryValue;
         } else if (categoryName.endsWith("persistentmana")) {
             getPlayerState(categoryName).persistentMana = categoryValue;
+        } else if (categoryName.endsWith("name")) {
+            getPlayerState(categoryName).name = categoryValue;
         } else {
             System.err.println("Unknown key: " + categoryName);
         }
@@ -633,12 +636,11 @@ public class GameState {
         PhaseType newPhase = tChangePhase.equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tChangePhase);
         PhaseType advPhase = tAdvancePhase.equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tAdvancePhase);
 
-        // Set stack to resolving so things won't trigger/effects be checked right away
-        game.getStack().setResolving(true);
+        // Set stack to frozen so things won't trigger/effects be checked right away
+        game.getStack().setFrozen(true);
+        game.getTriggerHandler().setSuppressAllTriggers(true);
 
         game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn, turn);
-
-        game.getTriggerHandler().setSuppressAllTriggers(true);
 
         for (int i = 0; i < playerStates.size(); i++) {
             setupPlayerState(game.getPlayers().get(i), playerStates.get(i));
@@ -665,7 +667,6 @@ public class GameState {
             }
         }
 
-        game.getStack().setResolving(false);
         game.getStack().unfreezeStack();
 
         // Advance to a certain phase, activating all triggered abilities
@@ -1165,6 +1166,9 @@ public class GameState {
 
     private void setupPlayerState(final Player p, final PlayerState state) {
         // Lock check static as we setup player state
+        if (state.name != null && !state.name.isEmpty()) {
+            p.setName(state.name);
+        }
 
         // Clear all zones first, this ensures that any lingering cards and effects (e.g. in command zone) get cleared up
         // before setting up a new state
@@ -1460,5 +1464,9 @@ public class GameState {
             cl.add(c);
         }
         return cl;
+    }
+
+    public String getAIName() {
+        return playerStates.get(1).name;
     }
 }

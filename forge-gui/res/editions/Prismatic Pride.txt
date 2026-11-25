@@ -1,0 +1,28 @@
+[metadata]
+Code=PUNK
+Date=2026-11-13
+Name=Prismatic Pride
+Type=Funny
+ScryfallCode=PUNK
+
+[cards]
+2027-01 R Tomik, Devoted to Chaos @
+2027-02 R Yahenni, Slayer @
+2027-03 R Alena, Frontline Rush @
+2027-04 R Chandra, Pride of Avishkar @
+2027-05 R Halana, Covering Fire @
+2027-06 R Nissa, Pride of Zendikar @
+2027-07 R Yuma, Plant Parent @
+2027-08 R Niko, Spark of Victory @
+2027-09 R Ashiok, Genderfear @
+2027-10 R Xantcha, Contains Multitudes @
+2027-11 R Huatli, Inventor's Inspiration @
+2027-12 R Ral, Smitten with Order @
+2027-13 R Saheeli, Poet's Muse @
+2027-14 R Segante, Doing Crimes @
+2027-15 R King Kynaios of Meletis @
+2027-16 R King Tiro of Meletis @
+2027-17 R Rocco, Snack Supplier @
+2027-18 R Felothar, Rights and Wrongs @
+2027-19 R Zinnia, Born for the Stage @
+2027-20 R Alesha, Who Makes History @

@@ -1,0 +1,11 @@
+Name:Tecton, Malignant Ruin
+ManaCost:6 B B
+Types:Legendary Creature Elemental Kraken
+PT:5/5
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Fathomless descent — This spell costs {1} less to cast for each permanent card in your graveyard.
+K:Menace
+K:Deathtouch
+T:Mode$ Sacrificed | ValidCard$ Permanent.Other | ValidPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice another permanent, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+Oracle:Fathomless descent — This spell costs {1} less to cast for each permanent card in your graveyard.\nMenace, deathtouch\nWhenever you sacrifice another permanent, draw a card.

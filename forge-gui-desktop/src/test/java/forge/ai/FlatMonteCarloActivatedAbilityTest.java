@@ -387,4 +387,12 @@ public class FlatMonteCarloActivatedAbilityTest extends AITest {
         AssertJUnit.assertTrue("four lands pay for both", forge.ai.simulation.FlatMonteCarloPicker.sparesMana(ai, token));
     }
 
+
+    @Test
+    public void aSelfPumpWithoutADefinedIsPointlessOutsideCombat() {
+        setUp();
+        game.getPhaseHandler().devModeSet(forge.game.phase.PhaseType.MAIN1, ai);
+        final SpellAbility leech = mine("Putrid Leech"); // "Pay 2 life: +2/+2": no target and no Defined
+        AssertJUnit.assertEquals("pump-outside-combat", PlayRelevance.pointlessPump(ai, leech));
+    }
 }

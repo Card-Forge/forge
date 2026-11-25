@@ -75,8 +75,9 @@ import org.apache.commons.lang3.StringUtils;
  * and the choice doesn't matter.
  * <ul>
  * <li>If minSelection is 0, there will be a Cancel button.</li>
- * <li>If minSelection is -1, 0 or 1, double-clicking a choice will also close
- * the dialog.</li>
+ * <li>If maxSelection is 1, or minSelection is -1, double-clicking a choice
+ * will also close the dialog.</li>
+ * <li>If more than one choice is allowed, clicking a choice toggles it.</li>
  * <li>If the number of selections is out of bounds, the "OK" button is
  * disabled.</li>
  * <li>The dialog was "committed" if "OK" was clicked or a choice was double
@@ -96,6 +97,7 @@ public class ListChooser<T> {
     private final List<T> allItems;
     private List<T> displayedItems;
     private final int minChoices, maxChoices;
+    private final boolean toggleOnClick;
     private final Function<T, String> display;
     private final boolean hasHeadings;
     private static final int HEADING_INDENT = 12;
@@ -117,7 +119,8 @@ public class ListChooser<T> {
         this.displayedItems = new ArrayList<>(this.allItems);
         this.hasHeadings = this.allItems.stream().anyMatch(ListHeading.class::isInstance);
         this.listModel = new ChooserListModel();
-        this.lstChoices = new FList<>(this.listModel);
+        this.toggleOnClick = maxChoices > 1 && minChoices != -1;
+        this.lstChoices = this.toggleOnClick ? new ToggleOnClickList() : new FList<>(this.listModel);
         if (this.hasHeadings) {
             this.lstChoices.setSelectionModel(new HeadingSkipSelectionModel());
         }
@@ -199,11 +202,14 @@ public class ListChooser<T> {
                 }
             }
         });
-        this.lstChoices.addMouseListener(new FMouseAdapter() {
-            @Override public void onLeftDoubleClick(final MouseEvent e) {
-                    ListChooser.this.commit();
-            }
-        });
+        // A double click toggles the row off again, so it only commits when one choice is allowed
+        if (!this.toggleOnClick) {
+            this.lstChoices.addMouseListener(new FMouseAdapter() {
+                @Override public void onLeftDoubleClick(final MouseEvent e) {
+                        ListChooser.this.commit();
+                }
+            });
+        }
     }
 
     private void applyFilter(final FTextField searchField) {
@@ -245,7 +251,11 @@ public class ListChooser<T> {
         }
 
         listModel.fireDataChanged();
-        if (!displayedItems.isEmpty() && maxChoices > 0) {
+        if (toggleOnClick) {
+            // clearSelection keeps the anchor, which may point past the filtered rows
+            lstChoices.getSelectionModel().setAnchorSelectionIndex(-1);
+            lstChoices.getSelectionModel().setLeadSelectionIndex(-1);
+        } else if (!displayedItems.isEmpty() && maxChoices > 0) {
             lstChoices.setSelectedIndex(0);
         }
     }
@@ -297,7 +307,7 @@ public class ListChooser<T> {
                             .toArray();
                     lstChoices.setSelectedIndices(indices);
                 }
-                else {
+                else if (!toggleOnClick) {
                     lstChoices.setSelectedIndex(0);
                 }
             });
@@ -422,6 +432,44 @@ public class ListChooser<T> {
             if (index >= 0 && index < displayedItems.size()) {
                 super.setSelectionInterval(index, index);
             }
+        }
+    }
+
+    /** A click toggles its row and Shift-click adds a range, so picking several choices needs no modifier key. */
+    private class ToggleOnClickList extends FList<T> {
+        private static final long serialVersionUID = 1L;
+
+        ToggleOnClickList() {
+            super(listModel);
+        }
+
+        // Consumed events are skipped by the list UI, which would otherwise replace the selection
+        @Override
+        protected void processMouseEvent(final MouseEvent e) {
+            if (e.getID() == MouseEvent.MOUSE_PRESSED && SwingUtilities.isLeftMouseButton(e) && isEnabled()) {
+                e.consume();
+                requestFocusInWindow();
+                final int row = locationToIndex(e.getPoint());
+                if (row >= 0 && getCellBounds(row, row).contains(e.getPoint())) {
+                    final int anchor = getAnchorSelectionIndex();
+                    if (e.isShiftDown() && anchor >= 0) {
+                        addSelectionInterval(anchor, row);
+                    } else if (isSelectedIndex(row)) {
+                        removeSelectionInterval(row, row);
+                    } else {
+                        addSelectionInterval(row, row);
+                    }
+                }
+            }
+            super.processMouseEvent(e);
+        }
+
+        @Override
+        protected void processMouseMotionEvent(final MouseEvent e) {
+            if (e.getID() == MouseEvent.MOUSE_DRAGGED) {
+                e.consume();
+            }
+            super.processMouseMotionEvent(e);
         }
     }
 

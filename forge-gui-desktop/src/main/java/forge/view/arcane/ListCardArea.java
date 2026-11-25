@@ -5,213 +5,245 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.view.arcane;
 
-import java.awt.BorderLayout;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JScrollBar;
+import javax.swing.WindowConstants;
+
+import com.google.common.collect.Iterables;
+
+import forge.Singletons;
 import forge.game.card.CardView;
+import forge.game.zone.ZoneType;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FButton;
+import forge.toolbox.FSkin;
 import forge.util.Localizer;
+import forge.view.FFrame;
 import forge.view.arcane.util.CardPanelMouseAdapter;
 
-// Show a list of cards in a new window, containing the moveable cards
-// Allow moves of the moveable cards to top, to bottom, or anywhere
-// Return a list of cards with the results of the moves
-// Really should have a difference between visible cards and moveable cards,
-// but that would require consirable changes to card panels and elsewhere
+/**
+ * Lets the player sort cards into the top of their library and a second pile. Only the moveable cards are shown, in a
+ * section for each pile. Clicking a card moves it to the other section, and dragging places it.
+ */
 public class ListCardArea extends FloatingCardArea {
 
-    private static ArrayList<CardView> cardList;
-    private static ArrayList<CardView> moveableCards;
+    private static final int HEADER_HEIGHT = 30;
+    private static final int DIVIDER_GAP = 14;
+    private static final int DIVIDER_TEXT_GAP = 8;
+    private static final int CARD_GAP = 6;
 
-    private static ListCardArea storedArea;
-    private static FButton doneButton;
-    private boolean toTop, toBottom, toAnywhere;
+    private static Rectangle lastBounds;
 
-    private ListCardArea(final CMatchUI matchUI) {
-		super(matchUI);
-		window.add(getScrollPane(),"grow, push");
-		window.setModal(true);
-		getScrollPane().setViewportView(this);
-		doneButton = new FButton(Localizer.getInstance().getMessage("lblDone"));
-		doneButton.addActionListener(e -> window.setVisible(false));
-		window.add(doneButton,BorderLayout.SOUTH);
-		setOpaque(false);
-    }
+    private final List<CardView> topSection = new ArrayList<>();
+    private final List<CardView> bottomSection = new ArrayList<>();
+    private final List<CardView> otherCards = new ArrayList<>();
+    private final String topLabel;
+    private final String bottomLabel;
+    private final String dividerText;
 
-    public static ListCardArea show(final CMatchUI matchUI, final String title0, final Iterable<CardView> cardList0, final Iterable<CardView> moveableCards0, final boolean toTop0, final boolean toBottom0, final boolean toAnywhere0) {
-		if (storedArea==null) {
-			storedArea = new ListCardArea(matchUI);
-		}
-		cardList = new ArrayList<>();
-		for ( CardView cv : cardList0 ) { cardList.add(cv) ; } 
-		moveableCards = new ArrayList<>();  // make sure moveable cards are in cardlist
-		for ( CardView card : moveableCards0 ) {
-			if ( cardList.contains(card) ) {
-				moveableCards.add(card);
-			}
-		}
-		storedArea.title = title0;
-		storedArea.toTop = toTop0;
-		storedArea.toBottom = toBottom0;
-		storedArea.toAnywhere = toAnywhere0;
-		storedArea.setDragEnabled(true);
-		storedArea.setVertical(true);
-		storedArea.showWindow(); 
-		return storedArea;
-    }
+    private int dividerY;
 
-    public ListCardArea(final CMatchUI matchUI, final String title0, final List<CardView> cardList0, final List<CardView> moveableCards0, final boolean toTop0, final boolean toBottom0, final boolean toAnywhere0) {
+    private ListCardArea(final CMatchUI matchUI, final String title, final Iterable<CardView> cards, final Iterable<CardView> moveableCards, final ZoneType secondPile) {
         super(matchUI);
-		window.add(getScrollPane(),"grow, push");
-		getScrollPane().setViewportView(this);
-		setOpaque(false);
-		doneButton = new FButton(Localizer.getInstance().getMessage("lblDone"));
-		doneButton.addActionListener(e -> window.setVisible(false));
-		window.add(doneButton,BorderLayout.SOUTH);
-		cardList = new ArrayList<>(cardList0);  // this is modified - pfps - is there a better way?
-		moveableCards = new ArrayList<>(moveableCards0);
-		title = title0;
-		toTop = toTop0;
-		toBottom = toBottom0;
-		toAnywhere = toAnywhere0;
-		this.setDragEnabled(true);
-		this.setVertical(true);
-		storedArea = this;
+        this.title = title;
+        for (final CardView card : cards) {
+            (Iterables.contains(moveableCards, card) ? topSection : otherCards).add(card);
+        }
+        final Localizer localizer = Localizer.getInstance();
+        topLabel = localizer.getMessage("lblTopOfLibrary");
+        bottomLabel = localizer.getMessage(secondPile == ZoneType.Library ? "lblBottomOfLibrary" : "lblGraveyard");
+        dividerText = secondPile == ZoneType.Library ? localizer.getMessage("lblOtherCardsInLibrary", otherCards.size()) : "";
+
+        window.add(getScrollPane(), "grow, push, wrap, gap 6 6 6 6");
+        window.setModal(true);
+        // Only Done closes the dialog, so that a stray Esc doesn't accept the arrangement
+        window.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        getScrollPane().setViewportView(this);
+        final FButton doneButton = new FButton(localizer.getMessage("lblDone"));
+        doneButton.addActionListener(e -> {
+            lastBounds = window.getBounds();
+            window.dispose();
+        });
+        window.add(doneButton, "align center, gapbottom 8, w 140, h 24");
+        setOpaque(false);
+        setDragEnabled(true);
+        addCardPanelMouseListener(new CardPanelMouseAdapter() {
+            @Override
+            public void mouseDragged(final CardPanel dragPanel, final int dragOffsetX, final int dragOffsetY, final MouseEvent evt) {
+                placeCard(dragPanel.getCard(), evt.getX(), evt.getY());
+                revalidate();
+            }
+
+            @Override
+            public void mouseDragEnd(final CardPanel dragPanel, final MouseEvent evt) {
+                placeCard(dragPanel.getCard(), evt.getX(), evt.getY());
+                refresh();
+            }
+        });
     }
 
-    public List<CardView> getCards() {
-		return cardList;
+    public static List<CardView> arrange(final CMatchUI matchUI, final String title, final Iterable<CardView> cards, final Iterable<CardView> moveableCards, final ZoneType secondPile) {
+        final ListCardArea area = new ListCardArea(matchUI, title, cards, moveableCards, secondPile);
+        area.showWindow();
+        final List<CardView> arranged = new ArrayList<>(area.topSection);
+        arranged.addAll(area.otherCards);
+        arranged.addAll(area.bottomSection);
+        return arranged;
+    }
+
+    @Override
+    protected Iterable<CardView> getCards() {
+        return Iterables.concat(topSection, bottomSection);
     }
 
     @Override
     protected void showWindow() {
-        onShow();
-        getWindow().setFocusableWindowState(true);
-        getWindow().setVisible(true);
+        if (lastBounds == null) {
+            final FFrame mainFrame = Singletons.getView().getFrame();
+            window.setSize(mainFrame.getWidth() / 4, mainFrame.getHeight() * 2 / 3 - 50);
+        } else {
+            window.setBounds(lastBounds);
+        }
+        window.setVisible(true);
     }
 
     @Override
-    protected void onShow() {
-		super.onShow();
-        if (!hasBeenShown) {
-			this.addCardPanelMouseListener(new CardPanelMouseAdapter() {
-				@Override
-				public void mouseDragEnd(final CardPanel dragPanel, final MouseEvent evt) {
-					dragEnd(dragPanel);
-				}
-			});
-			this.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyPressed(final KeyEvent e) {
-					switch (e.getKeyCode()) {
-						case KeyEvent.VK_ENTER:
-							doneButton.doClick();
-							break;
-						default:
-							break;
-					}
-				}
-			});
-		}
+    protected void finishDoLayout() {
+        final Rectangle rect = getScrollPane().getVisibleRect();
+        final Insets insets = getScrollPane().getInsets();
+        int width = rect.width - insets.left - insets.right;
+        final JScrollBar scrollBar = getScrollPane().getVerticalScrollBar();
+        if (scrollBar.isVisible()) {
+            width -= scrollBar.getWidth();
+        }
+        final int height = rect.height - insets.top - insets.bottom;
+        final int sectionHeight = (height - 2 * GUTTER_Y - 2 * DIVIDER_GAP) / 2;
+
+        int cardWidth = getCardWidthMax();
+        while (cardWidth > getCardWidthMin() && !(fits(topSection, cardWidth, width, sectionHeight) && fits(bottomSection, cardWidth, width, sectionHeight))) {
+            cardWidth--;
+        }
+
+        layoutSection(topSection, cardWidth, width, GUTTER_Y);
+        // The divider stays in the middle, unless the top section is too tall even with the smallest cards
+        dividerY = GUTTER_Y + Math.max(sectionHeight, sectionHeight(topSection, cardWidth, width)) + DIVIDER_GAP;
+        final int bottomY = dividerY + DIVIDER_GAP;
+        layoutSection(bottomSection, cardWidth, width, bottomY);
+
+        final Dimension size = new Dimension(width, Math.max(height, bottomY + sectionHeight(bottomSection, cardWidth, width) + GUTTER_Y));
+        if (!size.equals(getPreferredSize())) {
+            setPreferredSize(size);
+            getParent().invalidate();
+            getParent().validate();
+        }
+        repaint();
     }
 
-    // is this a valid place to move the card?
-    private boolean validIndex(final CardView card, final int index) {
-		if (toAnywhere) { return true; }
-		int oldIndex = cardList.indexOf(card);
-		boolean topMove = true;
-		for(int i=0; i<index+(oldIndex<index?1:0); i++) {
-			if (!moveableCards.contains(cardList.get(i))) { topMove=false; break; }
-		}
-		if (toTop && topMove) { return true; }
-		boolean bottomMove = true;
-		for(int i=index+1-(oldIndex>index?1:0); i<cardList.size(); i++) {
-			if (!moveableCards.contains(cardList.get(i))) { bottomMove=false; break; }
-		}
-        return toBottom && bottomMove;
+    private static int cardHeight(final int cardWidth) {
+        return Math.round(cardWidth * CardPanel.ASPECT_RATIO);
+    }
+
+    private static int columns(final int cardWidth, final int width) {
+        return Math.max(1, (width - 2 * GUTTER_X + CARD_GAP) / (cardWidth + CARD_GAP));
+    }
+
+    private static int sectionHeight(final List<CardView> section, final int cardWidth, final int width) {
+        final int columns = columns(cardWidth, width);
+        final int rows = (section.size() + columns - 1) / columns;
+        return HEADER_HEIGHT + rows * (cardHeight(cardWidth) + CARD_GAP);
+    }
+
+    private static boolean fits(final List<CardView> section, final int cardWidth, final int width, final int height) {
+        return cardWidth <= width - 2 * GUTTER_X && sectionHeight(section, cardWidth, width) <= height;
+    }
+
+    private void layoutSection(final List<CardView> section, final int cardWidth, final int width, final int top) {
+        final int columns = columns(cardWidth, width);
+        final int cardHeight = cardHeight(cardWidth);
+        for (int i = 0; i < section.size(); i++) {
+            final int column = i % columns;
+            final int rowSize = Math.min(columns, section.size() - (i - column));
+            final int rowWidth = rowSize * (cardWidth + CARD_GAP) - CARD_GAP;
+            getCardPanel(section.get(i).getId()).setCardBounds((width - rowWidth) / 2 + column * (cardWidth + CARD_GAP),
+                    top + HEADER_HEIGHT + i / columns * (cardHeight + CARD_GAP), cardWidth, cardHeight);
+        }
     }
 
     @Override
-    protected boolean cardPanelDraggable(final CardPanel panel) {
-		return moveableCards.contains(panel.getCard());
+    protected void paintComponent(final Graphics g) {
+        super.paintComponent(g);
+        final Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        FSkin.setGraphicsFont(g2, FSkin.getBoldFont(13));
+        FSkin.setGraphicsColor(g2, FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        drawCentered(g2, topLabel, GUTTER_Y + HEADER_HEIGHT / 2);
+        drawCentered(g2, bottomLabel, dividerY + DIVIDER_GAP + HEADER_HEIGHT / 2);
+
+        FSkin.setGraphicsFont(g2, FSkin.getFont(12));
+        FSkin.setGraphicsColor(g2, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        final int lineEnd = dividerText.isEmpty() ? getWidth() / 2 : (getWidth() - g2.getFontMetrics().stringWidth(dividerText)) / 2 - DIVIDER_TEXT_GAP;
+        g2.drawLine(GUTTER_X, dividerY, lineEnd, dividerY);
+        g2.drawLine(getWidth() - lineEnd, dividerY, getWidth() - GUTTER_X, dividerY);
+        drawCentered(g2, dividerText, dividerY);
     }
 
-    private void dragEnd(final CardPanel dragPanel) {
-		// if drag is not allowed, don't move anything
-		final CardView dragCard = dragPanel.getCard();
-		if (moveableCards.contains(dragCard)) {
-			//update index of dragged card in hand zone to match new index within hand area
-			final int index = getCardPanels().indexOf(dragPanel);
-			if (validIndex(dragCard,index)) { 
-				synchronized (cardList) {
-					cardList.remove(dragCard);
-					cardList.add(index, dragCard);
-				}
-			}
-		}		
-		refresh();
+    private void drawCentered(final Graphics2D g2, final String text, final int centerY) {
+        final FontMetrics fm = g2.getFontMetrics();
+        g2.drawString(text, (getWidth() - fm.stringWidth(text)) / 2, centerY + (fm.getAscent() - fm.getDescent()) / 2);
     }
 
-    // move to beginning of list if allowable else to beginning of bottom if allowable
+    private void placeCard(final CardView card, final int x, final int y) {
+        final List<CardView> section = y < dividerY ? topSection : bottomSection;
+        topSection.remove(card);
+        bottomSection.remove(card);
+        section.add((int) section.stream().filter(other -> isBefore(getCardPanel(other.getId()), x, y)).count(), card);
+    }
+
+    private static boolean isBefore(final CardPanel panel, final int x, final int y) {
+        if (y < panel.getCardY()) {
+            return false;
+        }
+        return y > panel.getCardY() + panel.getCardHeight() || panel.getCardX() + panel.getCardWidth() / 2 < x;
+    }
+
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-		final CardView clickCard = panel.getCard();
-		if ( moveableCards.contains(clickCard) ) {
-			if ( toTop || toBottom ) {
-				synchronized (cardList) {
-					cardList.remove(clickCard);
-					int position;
-					if ( toTop ) {
-						position = 0 ;
-			    	} else { // to beginning of bottom: warning, untested
-						for ( position = cardList.size() ; 
-							  position>0 && moveableCards.contains(cardList.get(position-1)) ; 
-							  position-- );
-					}
-					cardList.add(position,clickCard);
-				}
-				refresh();
-			}
-		}
-        super.mouseLeftClicked(panel, evt);
-    }
-    @Override
-    public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-		final CardView clickCard = panel.getCard();
-		if (moveableCards.contains(clickCard)) {
-			if ( toTop || toBottom ) {
-				synchronized (cardList) {
-					cardList.remove(clickCard);
-					int position;
-					if ( toBottom ) {
-						position = cardList.size() ;
-		    		} else { // to end of top
-						for ( position = 0 ;
-							  position<cardList.size() && moveableCards.contains(cardList.get(position)) ;
-							  position++ );
-					}
-					cardList.add(position,clickCard);
-				}
-				refresh();
-			}
-		}
-        super.mouseRightClicked(panel, evt);
+        switchSection(panel.getCard());
     }
 
+    @Override
+    public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
+        switchSection(panel.getCard());
+    }
+
+    private void switchSection(final CardView card) {
+        if (topSection.remove(card)) {
+            bottomSection.add(card);
+        } else {
+            bottomSection.remove(card);
+            topSection.add(card);
+        }
+        refresh();
+    }
 }

@@ -7,6 +7,7 @@ import forge.ai.AiProfileUtil;
 import forge.ai.AiProps;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
+import forge.ai.simulation.AlurenPlan;
 import forge.card.ICardFace;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -54,6 +55,10 @@ public class VentureAi extends SpellAbilityAi {
     // AI that handles choosing the next room in a dungeon
     @Override
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells, Map<String, Object> params) {
+        final SpellAbility loopRoom = AlurenPlan.preferredRoom(player, spells);
+        if (loopRoom != null) {
+            return loopRoom; // the Acererak loop goes to the Dark Pool
+        }
         List<SpellAbility> viableRooms = Lists.newArrayList();
 
         for (SpellAbility room : spells) {
@@ -78,6 +83,14 @@ public class VentureAi extends SpellAbilityAi {
             return faces.get(0);
         }
 
+        final String loopDungeon = AlurenPlan.dungeon(ai);
+        if (loopDungeon != null) {
+            for (final ICardFace f : faces) {
+                if (loopDungeon.equals(f.getName())) {
+                    return f;
+                }
+            }
+        }
         // Don't choose Tomb of Annihilation when life in danger unless we can win right away or can't lose for 0 life
         int lifeInDanger = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_THRESHOLD);
         if ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife())

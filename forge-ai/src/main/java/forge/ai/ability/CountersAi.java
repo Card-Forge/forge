@@ -22,6 +22,7 @@ import forge.ai.SpellAbilityAi;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
@@ -102,7 +103,26 @@ public abstract class CountersAi extends SpellAbilityAi {
                 choice = ComputerUtilCard.getBestLandToAnimate(list);
             }
         } else if (counterType.is(CounterEnumType.CHARGE)) {
-            final CardCollection boon = CardLists.filter(list, c -> c.getCounters(CounterEnumType.CHARGE) < c.getKeywordMagnitude(Keyword.STATION) || c.getOracleText().matches(".*(for|number|emove) \\w+ (?:charge )counter.*"));
+            final String removePattern = ".*(for|number|emove) \\w+ (?:charge )counter.*";
+            final CardCollection boon = CardLists.filter(list, c ->  {
+                if (c.getOracleText().matches(removePattern)) {
+                    return true;
+                }
+                if (c.hasKeyword(Keyword.STATION)) {
+                    Integer maxStation = null;
+                    for (StaticAbility st : c.getStaticAbilities()) {
+                        if (!st.isIntrinsic() || !st.hasParam("Station")) {
+                            continue;
+                        }
+                        int value = Integer.valueOf(st.getParam("Station"));
+                        maxStation = maxStation == null ? value : Math.max(maxStation, value);
+                    }
+                    if (maxStation != null && c.getCounters(CounterEnumType.CHARGE) < maxStation) {
+                        return true;
+                    }
+                }
+                return false;
+            });
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
         } else if (counterType.isKeywordCounter()) {
             choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, type));

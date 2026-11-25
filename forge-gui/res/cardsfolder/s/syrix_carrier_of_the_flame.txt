@@ -5,7 +5,7 @@ PT:3/3
 K:Flying
 K:Haste
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigPhoenix | CheckSVar$ X | TriggerDescription$ At the beginning of each end step, if a creature card left your graveyard this turn, target Phoenix you control deals damage equal to its power to any target.
-SVar:TrigPhoenix:DB$ Pump | ValidTgts$ Phoenix.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target Phoenix you control | SubAbility$ DBDamage
+SVar:TrigPhoenix:DB$ TargetOnly | ValidTgts$ Phoenix.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target Phoenix you control | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | AILogic$ PowerDmg | NumDmg$ Y | DamageSource$ ParentTarget
 SVar:X:Count$LeftGraveyardThisTurn Card.Creature+YouOwn
 SVar:Y:ParentTargeted$CardPower

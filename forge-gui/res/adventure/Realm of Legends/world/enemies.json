@@ -11261,18 +11261,6 @@
         "cardName": "Feldon, Ronom Excavator"
       },
       {
-        "type": "card",
-        "count": 1,
-        "cardName": "Fruitcake Elemental",
-        "editions": [ "HHO" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Season's Beatings",
-        "editions": [ "HHO" ]
-      },
-      {
         "type": "deckCard",
         "count": 4,
         "addMaxCount": 4, 

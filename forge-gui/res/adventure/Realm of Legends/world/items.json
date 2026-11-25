@@ -5020,10 +5020,11 @@
   },
   {
     "name": "Mad Hat",
-    "description": "Randomly swap permanents each upkeep.",
+    "description": "Randomly swap permanents each upkeep. Must have non-legal cards enabled for this item.",
     "equipmentSlot": "Neck",
     "iconName": "MadHat",
     "effect": {
+      "lifeModifier": -5,
       "startBattleWithCard": [
       "Power Struggle"
    ]
@@ -5031,7 +5032,7 @@
   },
   {
     "name": "Faerie Anklet",
-    "description": "1/3 flier. Pay 1GG for a random effect.",
+    "description": "1/3 flier. Pay 1GG for a random effect. Must have non-legal cards enabled for this item.",
     "equipmentSlot": "Boots",
     "iconName": "FaerieAnklet",
     "effect": {

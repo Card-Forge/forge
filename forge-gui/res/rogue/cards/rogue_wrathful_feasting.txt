@@ -1,0 +1,6 @@
+Name:Wrathful - Feasting
+ManaCost:no cost
+Types:Wrathful
+T:Mode$ ChangesZone | TriggerZones$ Command | ValidCard$ Creature.OppCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature your opponents control enters, that player gains 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ Opponent | LifeAmount$ 1
+Oracle:Whenever a creature your opponents control enters, that player gains 1 life.

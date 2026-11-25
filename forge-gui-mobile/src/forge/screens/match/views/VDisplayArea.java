@@ -2,7 +2,6 @@ package forge.screens.match.views;
 
 import forge.Graphics;
 import forge.screens.match.MatchScreen;
-import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
 
@@ -70,14 +69,31 @@ public abstract class VDisplayArea extends FScrollPane {
             MatchScreen.setPotentialListener(Arrays.asList(selectedChild));
         }
     }
+    //a display that builds new panels on refresh drops the selected one, so switch to the same card's new panel
+    private void refreshSelectedChild() {
+        if (!(selectedChild instanceof VCardDisplayArea.CardAreaPanel selected)) { return; }
+        for (FDisplayObject child : getChildren()) {
+            if (child instanceof VCardDisplayArea.CardAreaPanel panel && panel.getCard().getId() == selected.getCard().getId()) {
+                if (panel != selected) {
+                    selected.setHovered(false);
+                    selectedChild = panel;
+                    panel.setHovered(true);
+                    MatchScreen.setPotentialListener(Arrays.asList(panel));
+                }
+                return;
+            }
+        }
+    }
     public void tapChild() {
-        if (selectedChild instanceof FCardPanel)
-            VCardDisplayArea.CardAreaPanel.get(((FCardPanel) selectedChild).getCard()).selectCard(false);
+        refreshSelectedChild();
+        if (selectedChild instanceof VCardDisplayArea.CardAreaPanel panel)
+            panel.selectCard(false);
         else if (selectedChild instanceof VManaPool.ManaLabel)
             ((VManaPool.ManaLabel) selectedChild).activate();
     }
     public void showZoom() {
-        if (selectedChild instanceof FCardPanel)
-            VCardDisplayArea.CardAreaPanel.get(((FCardPanel) selectedChild).getCard()).showZoom();
+        refreshSelectedChild();
+        if (selectedChild instanceof VCardDisplayArea.CardAreaPanel panel)
+            panel.showZoom();
     }
 }

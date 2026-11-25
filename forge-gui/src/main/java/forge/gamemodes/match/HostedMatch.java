@@ -71,7 +71,7 @@ public class HostedMatch {
     public void setEndGameHook(Runnable hook) { endGameHook = hook; }
     public void setOnMatchOver(Runnable callback) { onMatchOver = callback; }
 
-    private static GameRules getDefaultRules(final GameType gameType) {
+    public static GameRules getDefaultRules(final GameType gameType) {
         final GameRules gameRules = new GameRules(gameType);
         gameRules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
         gameRules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
@@ -378,6 +378,33 @@ public class HostedMatch {
     }
     public GameView getGameView() {
         return game == null ? null : game.getView();
+    }
+
+    // Recomputes the "X vs Y" match title from the players' current in-game names
+    // and re-pushes it to any open guis. Needed after a puzzle renames a player
+    // (e.g. via AIName) since the title is normally captured once at match start,
+    // before the puzzle's GameState has been applied.
+    public void refreshTitle() {
+        if (game == null || match == null) {
+            return;
+        }
+        final FCollectionView<Player> players = game.getPlayers();
+        if (players.size() != 2) {
+            return;
+        }
+        match.setTitle(TextUtil.concatNoSpace(players.get(0).getName(), " vs ", players.get(1).getName()));
+
+        final GameView gameView = getGameView();
+        if (gameView == null) {
+            return;
+        }
+        gameView.updateTitle();
+
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final IGuiGame gui : guis.values()) {
+                gui.setGameView(gameView);
+            }
+        });
     }
 
     public void endCurrentGame() {

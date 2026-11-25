@@ -78,6 +78,10 @@ public class SpellAbilityPicker {
             writeIndex++;
         }
         candidateSAs.subList(writeIndex, candidateSAs.size()).clear();
+        // a land that makes no mana yet (Temple of the False God) waits while another land can be played
+        if (candidateSAs.stream().anyMatch(sa -> sa.isLandAbility() && !LegalityGuard.isDormantLand(player, sa.getHostCard()))) {
+            candidateSAs.removeIf(sa -> sa.isLandAbility() && LegalityGuard.isDormantLand(player, sa.getHostCard()));
+        }
         return candidateSAs;
     }
 
@@ -326,6 +330,12 @@ public class SpellAbilityPicker {
         if (!sa.checkRestrictions(sa.getHostCard(), player)) {
             return AiPlayDecision.CantPlaySa;
         }
+        if (ComputerUtilAbility.shouldWaitForUginLabyrinthReturn(player, sa)) {
+            return AiPlayDecision.AnotherTime;
+        }
+        if (ComputerUtilAbility.shouldWaitForSpectacleEnabler(player, sa)) {
+            return AiPlayDecision.AnotherTime;
+        }
 
         if (sa.isLandAbility()) {
             return AiPlayDecision.WillPlay;
@@ -350,9 +360,23 @@ public class SpellAbilityPicker {
         if (!ComputerUtilAbility.isFullyTargetable(sa)) {
             return AiPlayDecision.TargetingFailed;
         }
+        if (forge.ai.AiController.isPunishedForFreeCast(sa)) {
+            return AiPlayDecision.CantAfford;
+        }
+        if (forge.ai.ability.UntapAi.isPointlessSelfUntap(player, sa)) {
+            return AiPlayDecision.TimingRestrictions;
+        }
         // the board evaluation can't tell that e.g. animating a tapped manland does nothing useful
         if (AnimateAi.isPointlessSelfAnimate(player, sa)) {
             return AiPlayDecision.DoesntImpactCombat;
+        }
+        if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX()
+                && sa.getSVar("X").equals("Count$xPaid")
+                && (ComputerUtilMana.determineLeftoverMana(sa.getRootAbility(), player, false) <= 0
+                    || AnimateAi.isRedundantPermanentPtSet(player, sa))) {
+            // an {X} ability paid with X=0, or one that would change nothing: the simulation would happily "play" it at
+            // every priority pass
+            return AiPlayDecision.CantAffordX;
         }
         if (shouldWaitForLater(sa)) {
             return AiPlayDecision.AnotherTime;
@@ -451,6 +475,9 @@ public class SpellAbilityPicker {
             Card source = ability.getHostCard();
             CardCollection cardList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, ability);
             cardList = CardLists.filter(cardList, CardPredicates.canBeSacrificedBy(ability, effect));
+            if (exclude != null) {
+                cardList.removeAll(exclude); // already chosen for another part of the same cost
+            }
             if (cardList.size() >= 2) {
                 if (interceptor != null) {
                     return new CardCollection(interceptor.chooseCard(cardList));
