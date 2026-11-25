@@ -729,7 +729,23 @@ public class AiReportScenarioTest extends AITest {
                     if (sa.getTargets().size() != 1 || !sa.getTargets().contains(c.opp)) {
                         return "Fireball targeted " + sa.getTargets() + " instead of the player alone";
                     }
-                    return null;
+                    // {5}{R}: X is what kills, one land stays untapped
+                    return sa.getXManaCostPaid() != null && sa.getXManaCostPaid() == 5 ? null
+                            : "Fireball was cast with X=" + sa.getXManaCostPaid() + ", not the 5 that is lethal";
+                }));
+        // two planeswalkers on 3 loyalty: both as targets cost {1} more and take 2 each (X=5 of 7 lands), neither dies
+        l.add(new Scenario("13073-fireball-walkers", "Fireball does not aim at two planeswalkers that would each take 2 of their 3 loyalty", Fid.EXACT, "MAIN1", true,
+                c -> { c.bf("Mountain", 4, c.ai); c.bf("Swamp", 3, c.ai); c.hand("Fireball", c.ai);
+                    c.counters(c.bf("Jace Beleren", c.opp), CounterEnumType.LOYALTY, 3);
+                    c.counters(c.bf("Liliana of the Veil", c.opp), CounterEnumType.LOYALTY, 3); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Fireball");
+                    if (sa == null) { return null; } // holding it is fine, killing neither is what is wrong
+                    int walkers = 0;
+                    for (final Card k : sa.getTargets().getTargetCards()) {
+                        if (k.isPlaneswalker()) { walkers++; }
+                    }
+                    return walkers >= 2 ? "Fireball targeted both planeswalkers, 2 damage each: " + sa.getTargets() : null;
                 }));
         // #13049: Pay {E}{E}, sacrifice Gonti's Machinations: the opponent loses 3 and the AI gains 3, with 10 life and 3 energy
         l.add(play("13049", "Gonti's Machinations is spent as soon as there is the energy for it, not only for lethal", Fid.EXACT, M1, true, "Gonti's Machinations",

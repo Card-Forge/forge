@@ -284,7 +284,10 @@ public class DamageDealAi extends DamageAiBase {
         if ((damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) ||
                 sourceName.equals("Crater's Claws")) {
             // If I can kill my target by paying less mana, do it
-            if (sa.usesTargeting() && !sa.getTargets().isTargetingAnyPlayer() && !sa.isDividedAsYouChoose()) {
+            final Integer lethalX = sa.usesTargeting() ? minimalX(sa, dmg, source, sa.hasParam("NoPrevention")) : null;
+            if (lethalX != null) {
+                sa.setXManaCostPaid(lethalX);
+            } else if (sa.usesTargeting() && !sa.getTargets().isTargetingAnyPlayer() && !sa.isDividedAsYouChoose()) {
                 int actualPay = dmg;
                 final boolean noPrevention = sa.hasParam("NoPrevention");
                 for (final Card c : sa.getTargets().getTargetCards()) {
@@ -632,6 +635,12 @@ public class DamageDealAi extends DamageAiBase {
                 break;
             }
             totalTargetedSoFar = tcs.size();
+            if (dividedEvenly) {
+                // what the next target would really take, whatever kind it is (a creature, a planeswalker, the player): one more
+                // target costs {1} of X and the rest is split between one more. Always from the full amount, not from what the
+                // last pass left, or every pass cuts it again
+                dmg = Math.max(0, (fullDmg - tcs.size()) / (tcs.size() + 1));
+            }
             if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
                 // canPlayAI (sa activated by ai)
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
@@ -645,6 +654,12 @@ public class DamageDealAi extends DamageAiBase {
             if (tgt.canTgtPlaneswalker()) {
                 // We can damage planeswalkers with this, consider targeting.
                 Card c = dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, enemy, false);
+                // the chooser also offers a walker it can only hurt; an extra target of an evenly divided spell that does not die
+                // to its share only takes {1} and damage away from the others
+                if (c != null && dividedEvenly && !tcs.isEmpty()
+                        && ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention) > dmg) {
+                    c = null;
+                }
                 if (c != null && !shouldTgtP(ai, sa, dmg, noPrevention)) {
                     tcs.add(c);
                     if (divided) {
@@ -671,12 +686,6 @@ public class DamageDealAi extends DamageAiBase {
                         break; // Fireball for exactly what it takes: a second target only costs {1} and halves the damage
                     }
                     continue;
-                }
-                if (dividedEvenly) {
-                    // one more target: {1} less for X, and the rest split between one more. Always from the full amount, not from
-                    // what the last pass left, or every pass halves it again
-                    final int shares = tcs.size() + 1;
-                    dmg = Math.max(0, (fullDmg - tcs.size()) / shares);
                 }
 
                 // look for creature targets; currently also catches planeswalkers that can be killed immediately
@@ -742,7 +751,9 @@ public class DamageDealAi extends DamageAiBase {
                 }
                 return false;
             }
-            if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
+            // the player as one more target of an evenly divided spell is not a free ping: only when its share is lethal
+            final boolean diluting = dividedEvenly && !tcs.isEmpty() && !killsAlone(enemy, dmg, source, noPrevention);
+            if (sa.canTarget(enemy) && sa.canAddMoreTarget() && !diluting) {
                 boolean freePing = immediately || sa.getTargets().size() > 0;
                 if (sa.isActivatedAbility()) {
                     if (phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai) && sa.getPayCosts().isReusuableResource()) {
@@ -1014,13 +1025,11 @@ public class DamageDealAi extends DamageAiBase {
             //target is a player
             if (!sa.getTargets().isTargetingAnyCard()) {
                 actualPay = dmg;
-                // a player that dies to less is paid for no more (X is what it takes, not all the mana)
-                if (com.google.common.collect.Iterables.size(sa.getTargets().getTargetPlayers()) == 1) {
-                    final Player victim = sa.getTargets().getFirstTargetedPlayer();
-                    if (victim.getLife() > 0 && victim.getLife() < dmg && killsAlone(victim, victim.getLife(), source, noPrevention)) {
-                        actualPay = victim.getLife();
-                    }
-                }
+            }
+            final Integer lethalX = minimalX(sa, dmg, source, noPrevention);
+            if (lethalX != null) {
+                sa.setXManaCostPaid(lethalX);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
             for (final Card c : sa.getTargets().getTargetCards()) {
                 final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
@@ -1033,6 +1042,36 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    /**
+     * The X that kills what is targeted for as little mana as possible, for X spells that hit a player alone or split their damage
+     * evenly (Fireball): null when this does not apply and the caller decides. {@code maxX} is what one target could take; each target
+     * beyond the first costs {1}, and the split is rounded down, so n targets that need N each take N*n.
+     */
+    private static Integer minimalX(final SpellAbility sa, final int maxX, final Card source, final boolean noPrevention) {
+        final boolean evenly = sa.hasParam("DivideEvenly");
+        final TargetChoices tcs = sa.getTargets();
+        final int targets = tcs.size();
+        final boolean lonePlayer = targets == 1 && tcs.isTargetingAnyPlayer();
+        if (targets == 0 || !(evenly || lonePlayer) || sa.isDividedAsYouChoose()) {
+            return null;
+        }
+        final int cap = evenly ? maxX - (targets - 1) : maxX;
+        if (cap <= 0) {
+            return null;
+        }
+        int need = 0;
+        for (final Card c : tcs.getTargetCards()) {
+            need = Math.max(need, ComputerUtilCombat.getEnoughDamageToKill(c, cap, source, false, noPrevention));
+        }
+        for (final Player p : tcs.getTargetPlayers()) {
+            if (!killsAlone(p, p.getLife(), source, noPrevention)) {
+                return null; // it does not die to its life in damage (prevention, cannot lose life): no cheaper X to find
+            }
+            need = Math.max(need, p.getLife());
+        }
+        return Math.min(cap, evenly ? need * targets : need);
     }
 
     /** Whether this much damage, all of it to one player, is lethal for that player. */
