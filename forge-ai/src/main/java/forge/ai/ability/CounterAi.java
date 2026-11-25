@@ -16,6 +16,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostExile;
 import forge.game.cost.CostSacrifice;
@@ -27,6 +28,28 @@ import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
 public class CounterAi extends SpellAbilityAi {
+
+    /**
+     * The ability on the stack lets this AI pay a mana price to stop its effect ("that player may pay {2}", "unless that player
+     * pays {1}"): when it can pay it and the price is lower than the counterspell, paying is the cheaper answer and the counterspell
+     * stays in the hand. The AI used to spend a 3 mana Disallow on the Treasure of a Smothering Tithe.
+     */
+    private static boolean cheaperToPayUnlessCost(final Player ai, final SpellAbility counter, final SpellAbility topSA) {
+        if (topSA.isSpell() || !topSA.hasParam("UnlessCost") || topSA.getHostCard() == null) {
+            return false;
+        }
+        if (!AbilityUtils.getDefinedPlayers(topSA.getHostCard(), topSA.getParamOrDefault("UnlessPayer", "You"), topSA).contains(ai)) {
+            return false;
+        }
+        final Cost price = AbilityUtils.calculateUnlessCost(topSA, topSA.getParam("UnlessCost"), false);
+        if (price == null || price.getTotalMana() == null || price.getCostParts().size() != 1 || price.getTotalMana().countX() > 0) {
+            return false;
+        }
+        final int counterCost = counter.getHostCard() == null ? 0 : counter.getHostCard().getCMC();
+        // the colours count, not only the amount: {U}{U} cannot be paid with four Plains
+        return price.getTotalMana().getCMC() < counterCost
+                && ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(price.getTotalMana()), topSA, ai, false);
+    }
 
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
@@ -73,6 +96,11 @@ public class CounterAi extends SpellAbilityAi {
                     }
                 }
                 // TODO check if Player can pay the unless cost?
+            }
+
+            if (cheaperToPayUnlessCost(ai, sa, topSA)) {
+                // Smothering Tithe, Rhystic Study: the AI is the one who may pay, and the price is less than the counterspell
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             if (PlayRelevance.isBait(ai, topSA)) {

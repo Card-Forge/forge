@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainControl:DB$ GainControl | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 2 damage to you.
 SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2
-SVar:NeedsToPlay:Creature.YouCtrl+toughnessGT3,Creature.YouCtrl+powerGE3
+SVar:AICastLogic:SleeperAgent
 AI:RemoveDeck:Random
 Oracle:When Sleeper Agent enters, target opponent gains control of it.\nAt the beginning of your upkeep, Sleeper Agent deals 2 damage to you.
