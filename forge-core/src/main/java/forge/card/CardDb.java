@@ -157,6 +157,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     // Placeholder to setup default art Preference - to be moved from Static Data!
     private CardArtPreference defaultCardArtPreference;
+    private String preferredCardLanguage = "en";
     private BiPredicate<String, String> preferredLanguageAvailability;
     private boolean initialized;
 
@@ -841,6 +842,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         CardEdition bestEdition = null;
         int bestBorder = 0;
         int bestLanguage = 0;
+        int bestPrintingLanguage = 0;
         int bestFrame = -1;
         for (PaperCard pc : cards) {
             if (pc.getRarity().equals(CardRarity.Special))
@@ -848,12 +850,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             CardEdition edition = editions.get(pc.getEdition());
             int border = isBorderMismatch(edition) ? 1 : 0;
             int language = isPreferredLanguagePrint(pc, edition) ? 0 : 1;
+            int printingLanguage = getPrintingLanguageRank(pc);
             int frame = -1;
             if (best != null) {
                 // A full tie keeps the earlier print
                 int c = Integer.compare(bestBorder, border);
                 if (c == 0)
                     c = Integer.compare(bestLanguage, language);
+                if (c == 0)
+                    c = Integer.compare(bestPrintingLanguage, printingLanguage);
                 if (c == 0)
                     c = defaultCardArtPreference.compare(bestEdition, edition);
                 if (c == 0) {
@@ -872,6 +877,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             bestEdition = edition;
             bestBorder = border;
             bestLanguage = language;
+            bestPrintingLanguage = printingLanguage;
             bestFrame = frame;
         }
         return best != null ? best : cards.iterator().next();
@@ -891,6 +897,65 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return false;
         }
         return preferredLanguageAvailability.test(edition.getScryfallCode(), pc.getCollectorNumber());
+    }
+
+    private int getPrintingLanguageRank(final PaperCard card) {
+        if (isPrintingLanguage(card, preferredCardLanguage)) {
+            return 0;
+        }
+        return isPrintingLanguage(card, "en") ? 1 : 2;
+    }
+
+    private List<PaperCard> preferPrintingLanguage(final List<PaperCard> cards, final CardArtPreference artPreference) {
+        List<PaperCard> candidates = cards;
+        // Black Border stays a hard requirement: language only chooses among acceptable borders.
+        if (artPreference.blackBorderOnly) {
+            List<PaperCard> blackBordered = cards.stream()
+                    .filter(card -> {
+                        CardEdition edition = editions.get(card.getEdition());
+                        return edition != null && edition.getBorderColor() == CardEdition.BorderColor.BLACK;
+                    })
+                    .collect(Collectors.toList());
+            if (!blackBordered.isEmpty()) {
+                candidates = blackBordered;
+            }
+        }
+        List<PaperCard> preferredCards = candidates.stream()
+                .filter(card -> isPrintingLanguage(card, preferredCardLanguage))
+                .collect(Collectors.toList());
+        if (!preferredCards.isEmpty()) {
+            return preferredCards;
+        }
+        if (!"en".equals(preferredCardLanguage)) {
+            List<PaperCard> englishCards = candidates.stream()
+                    .filter(card -> isPrintingLanguage(card, "en"))
+                    .collect(Collectors.toList());
+            if (!englishCards.isEmpty()) {
+                return englishCards;
+            }
+        }
+        return candidates;
+    }
+
+    private boolean isPrintingLanguage(final PaperCard card, final String language) {
+        CardEdition edition = editions.get(card.getEdition());
+        return edition != null && !CardEdition.UNKNOWN.equals(edition)
+                && language.equalsIgnoreCase(edition.getCardsLangCode());
+    }
+
+    public void setPreferredCardLanguage(final String locale) {
+        String normalizedLocale = StringUtils.defaultIfBlank(locale, "en-US").trim().replace('_', '-').toLowerCase(Locale.ROOT);
+        if (normalizedLocale.startsWith("zh-hk") || normalizedLocale.startsWith("zh-mo") || normalizedLocale.startsWith("zh-tw")) {
+            preferredCardLanguage = "zht";
+        } else if (normalizedLocale.startsWith("zh")) {
+            preferredCardLanguage = "zhs";
+        } else {
+            int separatorIndex = normalizedLocale.indexOf('-');
+            preferredCardLanguage = separatorIndex < 0 ? normalizedLocale : normalizedLocale.substring(0, separatorIndex);
+        }
+        if (!allCardsByRules.isEmpty()) {
+            reIndex();
+        }
     }
 
     public boolean setPreferredArt(String cardName, String setCode, int artIndex) {
@@ -1185,6 +1250,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         if (cards.isEmpty())
             return null;
+        cards = preferPrintingLanguage(cards, artPref);
         if (cards.size() == 1)  // if only one candidate, there's not much else we should do
             return preferTraditionalFrame(cards.get(0), cr);
 

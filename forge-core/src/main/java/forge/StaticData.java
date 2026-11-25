@@ -84,6 +84,11 @@ public class StaticData {
         this(cardReader, tokenReader, customCardReader, customTokenReader, editionFolder, customEditionsFolder, blockDataFolder, setLookupFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, allowCustomCardsInDecksConformance, enableSmartCardArtSelection, null);
     }
     public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection, BiPredicate<String, String> preferredLanguageAvailability) {
+        this(cardReader, tokenReader, customCardReader, customTokenReader, editionFolder, customEditionsFolder,
+                blockDataFolder, setLookupFolder, cardArtPreference, "en-US", enableUnknownCards, loadNonLegalCards,
+                allowCustomCardsInDecksConformance, enableSmartCardArtSelection, preferredLanguageAvailability);
+    }
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, String preferredCardLanguage, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection, BiPredicate<String, String> preferredLanguageAvailability) {
         this.cardReader = cardReader;
         this.customCardReader = customCardReader;
         this.tokenReader = tokenReader;
@@ -131,6 +136,8 @@ public class StaticData {
             commonCards = new CardDb(regularRules, editions, filtered);
             variantCards = new CardDb(variantRules, editions, filtered);
 
+            commonCards.setPreferredCardLanguage(preferredCardLanguage);
+            variantCards.setPreferredCardLanguage(preferredCardLanguage);
             commonCards.setCardArtPreference(cardArtPreference);
             variantCards.setCardArtPreference(cardArtPreference);
             commonCards.setPreferredLanguageAvailability(preferredLanguageAvailability);
