@@ -2,7 +2,9 @@ package forge.screens.match.winlose;
 
 import forge.LobbyPlayer;
 import forge.game.GameView;
+import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.RogueWinLoseController;
+import forge.gamemodes.rogue.effect.RogueEffectComposite;
 import forge.gamemodes.rogue.flow.RogueFlow;
 import forge.gui.FThreads;
 import forge.gui.interfaces.IWinLoseView;
@@ -43,7 +45,10 @@ public class RogueWinLose extends ControlWinLose {
         LobbyPlayer human = GamePlayerUtil.getGuiPlayer();
         boolean won = lastGame.getOutcome() != null ? lastGame.getOutcome().isWinner(human) : lastGame.isMatchWonBy(human);
         view.setTitle(localizer.getMessage(won ? "lblRogueBattleWon" : "lblRogueBattleLost"));
-        view.getBtnQuit().setText(localizer.getMessage("lblContinue"));
+        // A loss ends the run unless an effect such as the Continuum Engine revives the player
+        RogueRun run = flow().run();
+        boolean ends = !won && run != null && !RogueEffectComposite.INSTANCE.wouldRevive(run);
+        view.getBtnQuit().setText(localizer.getMessage(ends ? "lblRogueEndRun" : "lblRogueContinueRun"));
         view.getBtnQuit().setEnabled(true);
         view.revalidate();
     }

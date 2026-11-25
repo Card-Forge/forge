@@ -134,6 +134,9 @@ public enum AetherEffect implements RogueEffect {
         public int getChargesForRank(int rank) { return rank > 0 ? 1 : 0; }
 
         @Override
+        public boolean revivesOnDefeat() { return true; }
+
+        @Override
         public void onDefeat(DefeatContext ctx, RogueRun run) {
             ctx.revived = true;
             ctx.reviveLife = getEffectValueAtRank(run.getRunEffectRank(getId()));
