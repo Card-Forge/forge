@@ -78,8 +78,24 @@ SECTION_RULES = {
 
 `python printtags.py` regenerates the file. The script writes nothing if too few cards match Scryfall.
 
+A set that Scryfall misses, for example during preview season, can be tagged as a whole with a `Tags=` line in the `[metadata]` section of its edition file, such as `Tags=UniversesBeyond`.
+
 ### Defining custom tags
-The daily Scryfall update rewrites `printtags.txt`, so a tag added there by hand is lost at the next run. Custom categories go in `res/blockdata/printtags-manual.txt` instead, which the update never changes. Forge reads both files, and a custom category appears in the Excluded Sets list after a restart.
+Players can define their own categories, separate from the daily Scryfall tags. Custom categories are kept in the user data folder, so Forge updates never overwrite them.
+
+To add a custom category:
+1. Create a file named `printtags.txt` in the `custom` folder of the user data folder. The table below gives its location.
+2. Add the category to the file, in the format described below.
+3. Restart Forge. The category appears in the Excluded Sets list.
+
+| Platform | File |
+|---|---|
+| Windows | `%APPDATA%/Forge/custom/printtags.txt` |
+| macOS | `~/Library/Application Support/Forge/custom/printtags.txt` |
+| Linux | `~/.forge/custom/printtags.txt` |
+| Mobile | `custom/printtags.txt` in the folder shown under Files > Storage Locations > Data Location |
+
+If the user data folder has been moved, the file goes in the new folder. See [User data migration](User-Guide.md#user-data-migration).
 
 Each `[Tag]` line starts a category. Under it, a set code alone adds the whole set. A set code followed by collector numbers adds only those printings, and `1..20` stands for 1 to 20. Lines starting with `#` are comments.
 
@@ -93,9 +109,7 @@ SLD F869 1458
 UST 1..20
 ```
 
-Custom tags add to the built-in ones. A printing can carry several tags. Using the name of a built-in category, such as `UniversesBeyond`, adds cards to that category.
-
-Forge replaces the `res` folder when it updates, so keep a copy of the file.
+Custom tags add to the built-in ones. A printing can carry several tags. Using the name of a built-in category, such as `UniversesBeyond`, adds cards to that category. Custom categories can also include custom sets.
 
 ### Naming a category
 An `lblTag<Name>` key in `res/languages/en-US.properties` gives a category its name in the list:

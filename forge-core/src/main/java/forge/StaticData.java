@@ -87,7 +87,6 @@ public class StaticData {
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         editions.loadPrintTags(new File(blockDataFolder, "printtags.txt"));
-        editions.loadPrintTags(new File(blockDataFolder, "printtags-manual.txt"));
         this.blockDataFolder = blockDataFolder;
         this.allowCustomCardsInDecksConformance = allowCustomCardsInDecksConformance;
         this.enableSmartCardArtSelection = enableSmartCardArtSelection;
@@ -95,6 +94,8 @@ public class StaticData {
         lastInstance = this;
 
         editions.append(new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder), true)));
+        // a player's own tags sit beside their custom editions, so they survive updates and can tag those editions
+        editions.loadPrintTags(new File(new File(customEditionsFolder).getParentFile(), "printtags.txt"));
 
         {
             for (CardRules card : cardReader.loadCards()) {
