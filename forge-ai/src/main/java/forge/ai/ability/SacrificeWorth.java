@@ -8,6 +8,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -39,6 +40,7 @@ public final class SacrificeWorth {
     /** Whether this is an optional sacrifice of the AI's permanents that has no logic of its own. */
     public static boolean applies(final SpellAbility sa) {
         return sa != null && !sa.hasParam("AILogic") && sa.getActivatingPlayer() != null
+                && !sa.isKeyword(Keyword.DEVOUR)
                 && !"Self".equals(sa.getParamOrDefault("SacValid", "Self"))
                 && (sa.getHostCard() == null || !"Scapeshift".equals(sa.getHostCard().getName()));
     }
