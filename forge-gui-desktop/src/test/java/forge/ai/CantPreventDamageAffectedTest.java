@@ -10,10 +10,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-/**
- * Whippoorwill: "Damage that would be dealt to that creature this turn can't be prevented." Its CantPreventDamage
- * static names the affected creature with Affected$; damage dealt to any other permanent stays preventable.
- */
 public class CantPreventDamageAffectedTest extends AITest {
 
     private void whippoorwill(Player p, Card target) {
