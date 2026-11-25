@@ -68,6 +68,7 @@ import forge.util.storage.StorageBase;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -136,14 +137,18 @@ public final class FModel {
         return getSetExclusions().getTags();
     }
 
-    /** Every tag in the edition files, on whole editions or on single prints. */
+    /** Every tag in the edition files, on whole editions or on single prints, with Universes Beyond first. */
     public static Set<String> getEditionTags() {
         Set<String> tags = SetExclusions.newCodeSet();
         for (CardEdition edition : getMagicDb().getEditions()) {
             tags.addAll(edition.getTags());
             tags.addAll(edition.getPrintTags());
         }
-        return tags;
+        Set<String> ordered = new LinkedHashSet<>();
+        if (tags.remove("UniversesBeyond"))
+            ordered.add("UniversesBeyond");
+        ordered.addAll(tags);
+        return ordered;
     }
 
     /** The editions carrying the tag as a whole. */
