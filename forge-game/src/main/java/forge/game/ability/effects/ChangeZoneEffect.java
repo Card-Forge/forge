@@ -911,8 +911,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // FCollection already does use set.
                     pl.add(tgtC.getOwner());
                 }
-                // a targeted ability with no target card chosen (TargetMin$ 0, e.g. Turn the Earth)
-                // names no card and no owner, so no library is shuffled
                 if (pl.isEmpty() && !sa.usesTargeting()) {
                     pl.add(activator);
                 }

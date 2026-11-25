@@ -13,10 +13,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-/**
- * Turn the Earth ("Choose up to three target cards in graveyards. The owners of those cards shuffle them into
- * their libraries.") cast with zero targets names no card and no owner, so no library is shuffled (CR 701.24c).
- */
 public class ChangeZoneNoTargetNoShuffleTest extends AITest {
 
     @Test
