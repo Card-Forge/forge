@@ -438,24 +438,33 @@ public class CardImageRenderer {
             clearFrameCache();
         }
     }
-    private static final int FRAME_CACHE_SIZE = 48;
-    private static final Map<String, FBufferedImage> frameCache = new LinkedHashMap<>(64, 0.75f, true) {
-        @Override
-        protected boolean removeEldestEntry(Map.Entry<String, FBufferedImage> eldest) {
-            if (size() > FRAME_CACHE_SIZE) {
-                eldest.getValue().clear();
-                return true;
+    // Kept in a class of its own so Forge.resume() can clear it without initializing CardImageRenderer: the static
+    // initializer of CardImageRenderer needs the skin and the assets (textures), so it must not run before GL is ready.
+    public static final class FrameCache {
+        private static final int SIZE = 48;
+        static final Map<String, FBufferedImage> MAP = new LinkedHashMap<>(64, 0.75f, true) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<String, FBufferedImage> eldest) {
+                if (size() > SIZE) {
+                    eldest.getValue().clear();
+                    return true;
+                }
+                return false;
             }
-            return false;
+        };
+
+        public static void clear() {
+            for (FBufferedImage image : MAP.values()) {
+                image.clear();
+            }
+            MAP.clear();
         }
-    };
+    }
+    private static final Map<String, FBufferedImage> frameCache = FrameCache.MAP;
 
     /** Drops all cached frames, for example after the GL context was lost. */
     public static void clearFrameCache() {
-        for (FBufferedImage image : frameCache.values()) {
-            image.clear();
-        }
-        frameCache.clear();
+        FrameCache.clear();
     }
 
     public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText, boolean isChoiceList, boolean showArtist, boolean showArtBox, boolean useEditionLabel) {

@@ -31,6 +31,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.assets.ImageCache;
+import forge.card.CardImageRenderer;
 import forge.error.ExceptionHandler;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gui.FThreads;
@@ -1094,7 +1095,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void resume() {
         lifecycleClosing = false;
-        forge.card.CardImageRenderer.clearFrameCache(); //the contents of frame buffers are lost with the GL context
+        CardImageRenderer.FrameCache.clear(); //the contents of frame buffers are lost with the GL context; does not initialize CardImageRenderer
         setWindowFocus(true);
         try {
             Texture.setAssetManager(getAssets().manager());
