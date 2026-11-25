@@ -41,6 +41,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordWithTypeInterface;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.GameLossReason;
@@ -321,8 +322,18 @@ public class ComputerUtil {
     public static Card getCardPreference(final Player ai, final Card activate, final String pref, final CardCollection typeList) {
         return getCardPreference(ai, activate, pref, typeList, null);
     }
-    public static Card getCardPreference(final Player ai, final Card activate, final String pref, final CardCollection typeList, SpellAbility sa) {
+    public static Card getCardPreference(final Player ai, final Card activate, final String pref, CardCollection typeList, SpellAbility sa) {
         final Game game = ai.getGame();
+        final boolean aristocratCounters = pref.contains("SacCost") && sa != null
+                && sa.getParamOrDefault("AILogic", "").startsWith("AristocratCounters");
+        if (aristocratCounters) {
+            typeList = SpecialAiLogic.aristocratSacrificeOptions(ai, sa, typeList);
+            final CardCollection threatened = CardLists.filter(typeList,
+                    c -> predictThreatenedObjects(ai, null, true).contains(c) || shouldSacrificeThreatenedCard(ai, c, sa));
+            if (!threatened.isEmpty()) {
+                return ComputerUtilCard.getWorstAI(threatened);
+            }
+        }
         String prefDef = "";
         if (activate != null) {
             prefDef = activate.getSVar("AIPreference");
@@ -372,16 +383,6 @@ public class ComputerUtil {
             }
         }
         if (pref.contains("SacCost")) {
-            if (sa != null && sa.getParamOrDefault("AILogic", "").startsWith("AristocratCounters")) {
-                final CardCollection rawThreatenedList = CardLists.filter(typeList,
-                        c -> predictThreatenedObjects(c.getController(), null, true).contains(c)
-                );
-                if (!rawThreatenedList.isEmpty()) {
-                    CardLists.shuffle(rawThreatenedList);
-                    return rawThreatenedList.getFirst();
-                }
-            }
-
             // search for permanents with SacMe. priority 1 is the lowest, priority 5 the highest
             for (int ip = 0; ip < 6; ip++) {
                 final int priority = 6 - ip;
@@ -450,6 +451,9 @@ public class ComputerUtil {
                     // TODO make sure survival is possible in case the creature blocks a trampler
                     return ComputerUtilCard.getWorstAI(typeList);
                 }
+            }
+            if (aristocratCounters && !typeList.isEmpty()) {
+                return ComputerUtilCard.getWorstAI(typeList);
             }
         }
         else if (pref.contains("DiscardCost")) { // search for permanents with DiscardMe
@@ -621,6 +625,9 @@ public class ComputerUtil {
 
         // don't sacrifice the card we're pumping
         typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, ability, ai);
+        if (ability.getParamOrDefault("AILogic", "").startsWith("AristocratCounters")) {
+            typeList = SpecialAiLogic.aristocratSacrificeOptions(ai, ability, typeList);
+        }
 
         // if the source has "Casualty", don't sacrifice cards that may have granted the effect
         // TODO: is there a surefire way to determine which card added Casualty?
@@ -960,6 +967,9 @@ public class ComputerUtil {
 
         boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
         boolean removedSelf = false;
+        if (exceptSelf && isOptional) {
+            remaining.remove(host);
+        }
 
         if (isOptional && source.isKeyword(Keyword.DEVOUR)) {
             return chooseDevourSacrifices(source, remaining, ai, amount, considerSacThreshold);
@@ -1009,10 +1019,13 @@ public class ComputerUtil {
     private static CardCollection chooseDevourSacrifices(final SpellAbility source, final CardCollection remaining,
             final Player ai, final int amount, final int considerSacThreshold) {
         final Card host = source.getHostCard();
-        final int devourAmount = getDevourAmount(source, host);
-        if (devourAmount > 0 && host.isCreature() && ElfLoop.devourAll(ai, host)) {
+        final String valid = source.getKeyword() instanceof KeywordWithTypeInterface typed
+                ? typed.getValidType() + ".Other" : source.getParamOrDefault("SacValid", "Creature.Other");
+        final CardCollection legal = CardLists.getValidCards(remaining, valid, ai, host, source);
+        legal.removeIf(c -> !c.canBeSacrificedBy(source, true));
+        if (host.isCreature() && ElfLoop.devourAll(ai, host)) {
             final CardCollection sacrificed = new CardCollection();
-            for (final Card card : remaining) {
+            for (final Card card : legal) {
                 if (sacrificed.size() >= amount) {
                     break;
                 }
@@ -1022,59 +1035,70 @@ public class ComputerUtil {
             }
             return sacrificed;
         }
-        final CardCollection candidates = filterOptionalSacrificeCandidates(source, remaining, ai, considerSacThreshold);
+        final CardCollection creatureFodder = filterOptionalSacrificeCandidates(source, legal, ai, considerSacThreshold);
+        final CardCollection candidates = CardLists.filter(legal, c -> c.isLand() || creatureFodder.contains(c)
+                || (!c.isCreature() && (c.isToken() || getCardPreference(ai, host, "SacCost", new CardCollection(c), source) != null)));
         final CardCollection sacrificed = new CardCollection();
 
         if (!host.isCreature() || candidates.isEmpty()) {
             return sacrificed;
         }
 
-        if (devourAmount <= 0) {
-            return sacrificed;
+        final CardCollection nonlands = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
+        nonlands.addAll(CardLists.getNotType(ai.getCardsIn(ZoneType.Library), "Land"));
+        final int landReserve = Math.max(6, Aggregates.max(nonlands, Card::getCMC));
+        final int landsInHand = Math.min(2, CardLists.getType(ai.getCardsIn(ZoneType.Hand), "Land").size());
+        int landBudget = Math.max(0, ai.getLandsInPlay().size() + landsInHand - landReserve);
+        if (landBudget == 0 && host.getNetToughness() <= 0) {
+            landBudget = 1; // A single land can keep an otherwise dead Devour creature alive.
         }
 
-        int currentScore = ComputerUtilCard.evaluateCreature(host, true, false);
+        final int initialScore = evaluateDevourCreature(source, sacrificed);
+        final CardCollection prefix = new CardCollection();
+        double sacrificeValue = 0;
+        double bestGain = 0;
         final int max = Math.min(candidates.size(), amount);
 
-        for (int i = 0; i < max && !candidates.isEmpty(); ) {
-            final Card next = chooseCardToSacrifice(source, candidates, ai, false);
-            if (next == null || !next.isCreature()) {
+        while (prefix.size() < max && !candidates.isEmpty()) {
+            if (landBudget == 0) {
+                candidates.removeIf(Card::isLand);
+            }
+            if (candidates.isEmpty()) {
                 break;
             }
-
-            final int nextScore = evaluateDevourCreature(host, devourAmount * (i + 1));
-            final int sacrificedScore = ComputerUtilCard.evaluateCreature(next, true, false);
-            final int devourGain = nextScore - currentScore;
-            final double requiredGain = sacrificedScore * DEVOUR_SACRIFICE_VALUE_FACTOR;
-            if (devourGain < requiredGain) {
-                candidates.remove(next);
-                continue;
+            final Card next = chooseCardToSacrifice(source, candidates, ai, false);
+            if (next == null) {
+                break;
             }
-
             candidates.remove(next);
-            sacrificed.add(next);
-            currentScore = nextScore;
-            i++;
+            prefix.add(next);
+            if (next.isLand()) {
+                landBudget--;
+            }
+            sacrificeValue += next.isCreature() ? ComputerUtilCard.evaluateCreature(next, true, false)
+                    : ManaSacrifice.sacrificeValue(ai, next);
+            final double gain = evaluateDevourCreature(source, prefix) - initialScore
+                    - sacrificeValue * DEVOUR_SACRIFICE_VALUE_FACTOR;
+            if (gain > bestGain) {
+                sacrificed.clear();
+                sacrificed.addAll(prefix);
+                bestGain = gain;
+            }
         }
 
         return sacrificed;
     }
 
-    private static int evaluateDevourCreature(final Card host, final int addedCounters) {
+    private static int evaluateDevourCreature(final SpellAbility source, final CardCollection sacrifices) {
+        final Card host = source.getHostCard();
         final Card copy = CardCopyService.getLKICopy(host);
+        copy.clearRemembered();
+        copy.addRemembered(sacrifices);
+        final SpellAbility counter = source.findSubAbilityByType(ApiType.PutCounter).copy(copy, true);
+        final int addedCounters = AbilityUtils.calculateAmount(copy, counter.getParam("CounterNum"), counter);
         copy.setCounters(CounterEnumType.P1P1, copy.getCounters(CounterEnumType.P1P1) + addedCounters);
         copy.setZone(host.getZone());
-        return ComputerUtilCard.evaluateCreature(copy, true, false);
-    }
-
-    private static int getDevourAmount(final SpellAbility source, final Card host) {
-        if (source != null && source.getKeyword() != null && source.getKeyword().getKeyword() == Keyword.DEVOUR) {
-            final int amount = source.getKeyword().getAmount();
-            if (amount > 0) {
-                return amount;
-            }
-        }
-        return host.getKeywordMagnitude(Keyword.DEVOUR);
+        return copy.getNetToughness() <= 0 ? 0 : ComputerUtilCard.evaluateCreature(copy, true, false);
     }
 
     private static CardCollection filterOptionalSacrificeCandidates(final SpellAbility source, final CardCollection remaining,

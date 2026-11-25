@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import forge.ai.AITest;
 import forge.ai.AiCostDecision;
+import forge.ai.ComputerUtil;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.cost.CostPart;
@@ -82,22 +83,20 @@ public class SacrificeCostTest extends AITest {
     }
 
     @Test
-    public void outletExclusionAlsoRetainsEarlierSacrificePayments() {
-        setUp("Grixis Grimblade", "Raging Goblin", "Phyrexian Obliterator");
-        // Combine the outlet hint with overlapping sacrifice cost parts.
-        tutor.getMapParams().put("AILogic", "AristocratCounters");
-        final AiCostDecision decision = new AiCostDecision(ai, tutor, false);
-        final Set<Card> chosen = new HashSet<>();
-        for (final CostPart part : tutor.getPayCosts().getCostParts()) {
-            if (part instanceof CostSacrifice) {
-                final PaymentDecision pay = decision.visit((CostSacrifice) part);
-                AssertJUnit.assertNotNull("a different creature can pay each part", pay);
-                for (final Card card : pay.cards) {
-                    AssertJUnit.assertFalse("the outlet must survive its own payment", card == tutor.getHostCard());
-                    AssertJUnit.assertTrue("earlier payments remain excluded", chosen.add(card));
-                }
-            }
-        }
-        AssertJUnit.assertEquals(3, chosen.size());
+    public void counterOutletCannotPayWithItself() {
+        final Game game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        final Card feeder = addCard("Carrion Feeder", ai);
+        final SpellAbility growth = feeder.getSpellAbilities().stream()
+                .filter(sa -> sa.isActivatedAbility() && "AristocratCounters".equals(sa.getParam("AILogic")))
+                .findFirst().get();
+        growth.setActivatingPlayer(ai);
+        final CostSacrifice cost = (CostSacrifice) growth.getPayCosts().getCostParts().get(0);
+        AssertJUnit.assertNull("the outlet cannot pay when it is the only creature",
+                new AiCostDecision(ai, growth, false).visit(cost));
+        final Card goat = addToken("w_0_1_goat", ai);
+        AssertJUnit.assertTrue(ComputerUtil.playNoStack(ai, growth, game, false));
+        AssertJUnit.assertTrue(ai.getCreaturesInPlay().contains(feeder));
+        AssertJUnit.assertFalse(ai.getCreaturesInPlay().contains(goat));
     }
 }
