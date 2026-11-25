@@ -22,11 +22,15 @@ public class SettingsScreen extends TabPageScreen<SettingsScreen> {
     private final SettingsPage settingsPage;
 
     public static void show(boolean fromHomeScreen0) {
+        Forge.openScreen(getInstance(fromHomeScreen0));
+    }
+
+    public static SettingsScreen getInstance(boolean fromHomeScreen0) {
         if (settingsScreen == null) {
             settingsScreen = new SettingsScreen();
         }
         fromHomeScreen = fromHomeScreen0;
-        Forge.openScreen(settingsScreen);
+        return settingsScreen;
     }
 
     public static boolean launchedFromHomeScreen() {

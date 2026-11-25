@@ -7,7 +7,7 @@ SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredPlayer | Amount$ X | MinAmoun
 SVar:DBUntap:DB$ RepeatEach | DefinedCards$ ChosenCard | RepeatSubAbility$ UntapEach | SubAbility$ DBCleanup
 SVar:UntapEach:DB$ Untap | Defined$ Remembered | UnlessCost$ U | UnlessPayer$ RememberedController | UnlessSwitched$ True | ShowCurrentCard$ Remembered
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:X:Count$Valid Creature.tapped+Blue+ActivePlayerCtrl
+SVar:X:Count$Valid Creature.tapped+Blue+ControlledBy TriggeredPlayer
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
 Oracle:Blue creatures don't untap during their controllers' untap steps.\nAt the beginning of each player's upkeep, that player may choose any number of tapped blue creatures they control and pay {U} for each creature chosen this way. If the player does, untap those creatures.

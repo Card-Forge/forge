@@ -987,26 +987,33 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
-    public List<Card> manipulateCardList(final String title, final Iterable<Card> cards, final Iterable<Card> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+    public List<Card> manipulateCardList(final String title, final Iterable<Card> cards, final Iterable<Card> manipulable, final ZoneType secondPile) {
         GameEntityViewMap<Card, CardView> gameCacheManipulate = GameEntityView.getMap(cards);
         gameCacheManipulate.putAll(manipulable);
-        List<CardView> views = getGui().manipulateCardList(title, CardView.getCollection(cards), CardView.getCollection(manipulable), toTop, toBottom, toAnywhere);
+        List<CardView> views = getGui().manipulateCardList(title, CardView.getCollection(cards), CardView.getCollection(manipulable), secondPile);
         return gameCacheManipulate.addToList(views, new CardCollection());
     }
 
-    public ImmutablePair<CardCollection, CardCollection> arrangeForMove(final String title, final FCollectionView<Card> cards, final List<Card> manipulable, final boolean topOK, final boolean bottomOK) {
-        List<Card> result = manipulateCardList(title, cards, manipulable, topOK, bottomOK, false);
+    public ImmutablePair<CardCollection, CardCollection> arrangeForMove(final String title, final FCollectionView<Card> cards, final List<Card> manipulable, final ZoneType secondPile) {
+        List<Card> result = manipulateCardList(title, cards, manipulable, secondPile);
+        if (result.isEmpty()) { // the remote player disconnected
+            return ImmutablePair.of(new CardCollection(manipulable), new CardCollection());
+        }
         CardCollection toBottom = new CardCollection();
         CardCollection toTop = new CardCollection();
         for (int i = 0; i < cards.size() && manipulable.contains(result.get(i)); i++) {
             toTop.add(result.get(i));
         }
-        if (toTop.size() < cards.size()) { // the top isn't everything
-            for (int i = result.size() - 1; i >= 0 && manipulable.contains(result.get(i)); i--) {
-                toBottom.add(0, result.get(i));
-            }
+        for (int i = result.size() - 1; i >= 0 && manipulable.contains(result.get(i)); i--) {
+            toBottom.add(0, result.get(i));
         }
         return ImmutablePair.of(toTop, toBottom);
+    }
+
+    // arrangeForMove tells the piles apart by the rest of the library between them
+    private boolean canArrangeForMove(final CardCollection topN) {
+        return FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !getGui().isLibgdxPort()
+                && player.getCardsIn(ZoneType.Library).size() > topN.size();
     }
 
     @Override
@@ -1021,10 +1028,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         CardCollection toTop = null;
 
         tempShowCards(topN);
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !getGui().isLibgdxPort()) {
+        if (canArrangeForMove(topN)) {
             CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
             ImmutablePair<CardCollection, CardCollection> result =
-                    arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
+                    arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, ZoneType.Library);
             toTop = result.getLeft();
             toBottom = result.getRight();
         } else if (topN.size() == 1) {
@@ -1066,7 +1073,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         CardCollection toTop = null;
 
         tempShowCards(topN);
-        if (topN.size() == 1) {
+        if (canArrangeForMove(topN)) {
+            ImmutablePair<CardCollection, CardCollection> result =
+                    arrangeForMove(localizer.getMessage("lblMoveCardsToTopOfLibraryOrGraveyard"), player.getCardsIn(ZoneType.Library), topN, ZoneType.Graveyard);
+            toTop = result.getLeft();
+            toGrave = result.getRight();
+        } else if (topN.size() == 1) {
             final Card c = topN.getFirst();
             final CardView view = CardView.get(c);
 
@@ -1191,12 +1203,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public CardCollectionView chooseCardsToDiscardFrom(final Player p, final SpellAbility sa,
                                                        final CardCollection valid, final int min, final int max,
-                                                       final CardCollectionView visibleToChooser) {
+                                                       final DelayedReveal delayedReveal) {
         boolean optional = min == 0;
 
         if (p != player) {
-            tempShowCards(visibleToChooser);
-            if (useSelectCardsInput(valid, sa)) {
+            final boolean selectFromDisplay = useSelectCardsInput(valid, sa);
+            if (delayedReveal != null) {
+                if (selectFromDisplay) {
+                    yieldController.maybeInterruptOnReveal();
+                    tempShow(delayedReveal.getCards());
+                } else {
+                    // the list offers only the valid cards, so a revealed hand is shown first
+                    reveal(delayedReveal);
+                }
+            }
+            tempShowCards(valid);
+            if (selectFromDisplay) {
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
                 inp.setMessage(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min));
                 inp.setCancelAllowed(optional);
@@ -1767,7 +1789,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final UndoManager undo = getGame().getUndoManager();
         undo.setMode(undoModeFromPrefs());      // the host's setting decides, for every player in the game
         if (!isMacroActive()) {
-            if (UndoManager.OWN_TURN_ONLY && getGame().getPhaseHandler().getPlayerTurn() != player) {
+            if (UndoManager.OWN_TURN_ONLY && !getGame().getPhaseHandler().isPlayerTurn(player)) {
                 undo.barrier("Opponent's turn");
             } else {
                 undo.checkpoint(getGame(), player);      // must come BEFORE the prompt is built
@@ -2460,6 +2482,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         List<SpellAbility> orderedSAs = orderSimultaneousSa(activePlayerSAs);
         for (int i = orderedSAs.size() - 1; i >= 0; i--) {
             final SpellAbility next = orderedSAs.get(i);
+            if (playedByTeammate(next)) {
+                continue;
+            }
             if (next.isTrigger() && !next.isCopied()) {
                 PlaySpellAbility.playSpellAbility(this, player, next);
             } else {
@@ -3543,7 +3568,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                 // controlled by chosen player.
                                 sa.setActivatingPlayer(p);
                                 sa.setCastFromPlayEffect(true);
+                                final int stackSize = getGame().getStack().size();
                                 PlaySpellAbility.playSaWithoutPayingManaCost(PlayerControllerHuman.this, sa, true);
+                                if (getGame().getStack().size() > stackSize) {
+                                    // as if p had just cast it: everyone gets to respond before it resolves (CR 117.3c)
+                                    getGame().getPhaseHandler().setPriority(p);
+                                }
                             }
                             // playSa could fire some triggers
                             getGame().getStack().addAllTriggeredAbilitiesToStack();
@@ -3989,6 +4019,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (macros != null && macros.isReplaying()) {
             return false;
         }
+        // a team that shares its turns stops where any of its players has a stop
+        if (getGui().getGameView() != null) {
+            return getGui().getGameView().getPlayers().stream().filter(turnPlayer::sharesTeamWith).allMatch(p -> playerSkipsPhase(p, phase));
+        }
+        return playerSkipsPhase(turnPlayer, phase);
+    }
+
+    private boolean playerSkipsPhase(final PlayerView turnPlayer, final PhaseType phase) {
         if (isRemoteClient()) {
             return yieldController.isSkippingPhase(turnPlayer, phase);
         }

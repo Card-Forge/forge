@@ -22,6 +22,7 @@ import com.google.common.collect.*;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
+import forge.ai.simulation.RampPlan;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -83,6 +84,7 @@ public class ComputerUtil {
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Consumer<SpellAbility> chooseTargets) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
+        RunawayLoop.note(ai, sa);
         if (!sa.isCopied() && !sa.isTrigger() && ai.getController() instanceof PlayerControllerAi pc) {
             if (pc.getAi().hasFailedToCast(sa)) {
                 return false;
@@ -263,6 +265,7 @@ public class ComputerUtil {
         }
 
         final Card source = sa.getHostCard();
+        final int waitingMark = game.getTriggerHandler().getWaitingTriggerCount();
 
         Zone fromZone = game.getZoneOf(source);
         int zonePosition = 0;
@@ -280,7 +283,7 @@ public class ComputerUtil {
 
         // do this after card got added to stack
         if (!sa.checkRestrictions(ai)) {
-            GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay, source);
+            GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay, source, waitingMark);
             return false;
         }
 
@@ -928,6 +931,21 @@ public class ComputerUtil {
             }
             // Otherwise, continue to choose permanents to sacrifice to avoid dying
         }
+
+        if ("Scapeshift".equals(host.getName()) && RampPlan.valakutAccessible(ai)) {
+            // Keep the payoff and the existing Mountains needed for the fetched Mountains to trigger it.
+            remaining.removeIf(c -> c.getName().startsWith("Valakut"));
+            final CardCollection mountains = CardLists.filter(remaining, c -> c.getType().hasSubtype("Mountain"));
+            for (int i = 0; i < RampPlan.scapeshiftMountainsToKeep(ai) && !mountains.isEmpty(); i++) {
+                final Card keep = ComputerUtilCard.getBestLandAI(mountains);
+                if (keep == null) {
+                    break;
+                }
+                remaining.remove(keep);
+                mountains.remove(keep);
+            }
+        }
+
         boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
         boolean removedSelf = false;
 
@@ -970,8 +988,9 @@ public class ComputerUtil {
                     sacThreshold = considerSacThreshold;
                 }
 
-                if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < sacThreshold) {
-                    return true;
+                if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < sacThreshold
+                        || source.isKeyword(Keyword.DEVOUR) && forge.ai.simulation.ElfLoop.devourAll(ai, source.getHostCard())) {
+                    return true; // a Predator Dragon that kills this turn eats the whole board
                 }
 
                 if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
@@ -982,7 +1001,10 @@ public class ComputerUtil {
             });
         }
 
-        final int max = Math.min(remaining.size(), amount);
+        int max = Math.min(remaining.size(), amount);
+        if ("Scapeshift".equals(host.getName()) && RampPlan.valakutAccessible(ai)) {
+            max = Math.min(max, RampPlan.scapeshiftLandsToSacrifice(ai));
+        }
 
         if (exceptSelf && max < remaining.size()) {
             removedSelf = remaining.remove(host);
@@ -1376,6 +1398,11 @@ public class ComputerUtil {
             return true;
         }
 
+        // an instant or sorcery before combat pumps a prowess creature that is going to attack
+        if (ProwessTiming.worthBeforeCombat(ai, sa)) {
+            return true;
+        }
+
         if (sub != null) {
             final ApiType api = sub.getApi();
             if (ApiType.Encode == api && !ai.getCreaturesInPlay().isEmpty()) {
@@ -1435,6 +1462,10 @@ public class ComputerUtil {
     public static boolean preventRunAwayActivations(final SpellAbility sa) {
         if (!sa.isActivatedAbility()) {
             return false;
+        }
+
+        if (RunawayLoop.exceeded(sa)) {
+            return true;
         }
 
         int activations = sa.getActivationsThisTurn();
@@ -1883,7 +1914,7 @@ public class ComputerUtil {
                     }
                 } else if (o instanceof Player p) {
                     if (source.hasKeyword(Keyword.INFECT)) {
-                        if (p.canReceiveCounters(CounterEnumType.POISON) && ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= 10 - p.getPoisonCounters()) {
+                        if (p.canReceiveCounters(CounterEnumType.POISON) && ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getGame().getRules().getPoisonCountersToLose() - p.getPoisonCounters()) {
                             threatened.add(p);
                         }
                     } else if (ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getLife()) {
@@ -2510,7 +2541,10 @@ public class ComputerUtil {
             // TODO
             // computer will need to choose a type based on whether it needs a creature or land,
             // otherwise, lib search for most common type left then, reveal chosenType to Human
-            if (game.getPhaseHandler().is(PhaseType.UNTAP) && logic == null) { // Storage Matrix
+            if ("Turnabout".equals(logic)) {
+                // the lands are what a mana loop untaps
+                chosen = validTypes.contains("Land") ? "Land" : "";
+            } else if (game.getPhaseHandler().is(PhaseType.UNTAP) && logic == null) { // Storage Matrix
                 double amount = 0;
                 for (String type : validTypes) {
                     CardCollection list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type), CardPredicates.TAPPED);
@@ -3409,5 +3443,101 @@ public class ComputerUtil {
             sa.setSkip(false);
         }
         return result;
+    }
+
+    /**
+     * What a pact (Pact of Negation, Slaughter Pact...) asks for at the beginning of its controller's next upkeep, or
+     * null for any other spell: the spell has a delayed "pay this or lose the game" clause, written as an SVar that
+     * loses the game for its owner unless they pay.
+     */
+    public static String pactCost(final SpellAbility sa) {
+        if (sa == null || !sa.isSpell() || sa.getHostCard() == null) {
+            return null;
+        }
+        for (final String svar : sa.getHostCard().getSVars().values()) {
+            if (svar.startsWith("DB$ LosesGame") && svar.contains("UnlessPayer$ You")) {
+                final int at = svar.indexOf("UnlessCost$ ");
+                if (at < 0) {
+                    continue;
+                }
+                String cost = svar.substring(at + "UnlessCost$ ".length());
+                final int end = cost.indexOf(" |");
+                return (end >= 0 ? cost.substring(0, end) : cost).trim();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * A pact that the AI could not pay for at its next upkeep (it loses the game then): the mana sources it has (they
+     * untap before the upkeep, a land played later is too late) cannot make the cost, together with the pacts it has
+     * already cast this turn. Checks the total and each colour, which "five lands" (NumLands GE5) does not: five Mountains
+     * cannot pay {3}{U}{U}.
+     */
+    public static boolean cannotPayPact(final Player ai, final SpellAbility sa) {
+        final String cost = pactCost(sa);
+        if (cost == null) {
+            return false;
+        }
+        final List<String> owed = new ArrayList<>();
+        owed.add(cost);
+        for (final SpellAbility cast : ai.getGame().getStack().getSpellsCastThisTurn()) {
+            if (cast != sa && ai.equals(cast.getActivatingPlayer()) && pactCost(cast) != null) {
+                owed.add(pactCost(cast));
+            }
+        }
+        int total = 0;
+        final Map<String, Integer> colors = new HashMap<>();
+        for (final String c : owed) {
+            for (final String symbol : c.split(" ")) {
+                if (symbol.matches("\\d+")) {
+                    total += Integer.parseInt(symbol);
+                } else if (!symbol.isEmpty()) {
+                    total++;
+                    colors.merge(symbol, 1, Integer::sum);
+                }
+            }
+        }
+        if (ComputerUtilMana.getAvailableManaEstimate(ai, false) < total) {
+            return true;
+        }
+        for (final Map.Entry<String, Integer> need : colors.entrySet()) {
+            int sources = 0;
+            for (final Card src : ai.getCardsIn(ZoneType.Battlefield)) {
+                for (final SpellAbility ma : src.getManaAbilities()) {
+                    if (ma.canProduce(need.getKey())) {
+                        sources++;
+                        break;
+                    }
+                }
+            }
+            if (sources < need.getValue()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Sacrificing this noncreature token would cost the AI: an opposing permanent punishes it (Bloodroot Apothecary: the
+     * player who sacrifices a noncreature token gets two poison counters, and a Treasure or a Clue is such a token).
+     */
+    public static boolean sacrificePunished(final Player ai, final Card card) {
+        if (card == null || !card.isToken() || card.isCreature()) {
+            return false;
+        }
+        for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+            for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+                if (t.getMode() != forge.game.trigger.TriggerType.Sacrificed || !t.hasParam("ValidCard")
+                        || !t.getParam("ValidCard").contains("token") || !t.getParam("ValidCard").toLowerCase().contains("noncreature")) {
+                    continue;
+                }
+                final String valid = t.getParamOrDefault("ValidPlayer", "");
+                if (valid.contains("Opponent") || valid.contains("Player")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

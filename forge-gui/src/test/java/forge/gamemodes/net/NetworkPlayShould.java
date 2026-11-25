@@ -10,7 +10,9 @@ import forge.gamemodes.net.event.GuiGameEvent;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
 import forge.gamemodes.net.server.DeltaSyncManager;
+import forge.gui.GuiBase;
 import forge.gui.control.GameEventForwarder;
+import forge.gui.interfaces.IGuiBase;
 import forge.interfaces.IGameController;
 import forge.player.HumanControlledGame;
 import forge.trackable.TrackableCollection;
@@ -28,6 +30,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 
 /**
  * What a network host sends and how each side resolves it. Most cases pin one way a card or player reference could
@@ -44,9 +47,14 @@ public class NetworkPlayShould {
     private Tracker client;
     private CompatibleObjectEncoder encoder;
     private EmbeddedChannel channel;
+    private IGuiBase previousGuiBase;
 
     @BeforeMethod
     public void connect() {
+        previousGuiBase = GuiBase.getInterface();
+        final IGuiBase guiBase = Mockito.mock(IGuiBase.class);
+        Mockito.doAnswer(inv -> { ((Runnable) inv.getArgument(0)).run(); return null; }).when(guiBase).invokeInEdtLater(any());
+        GuiBase.setInterface(guiBase);
         host = new Tracker();
         client = new Tracker();
         encoder = new CompatibleObjectEncoder(null);
@@ -60,6 +68,7 @@ public class NetworkPlayShould {
     @AfterMethod
     public void disconnect() {
         channel.finishAndReleaseAll();
+        GuiBase.setInterface(previousGuiBase);
     }
 
     @Test

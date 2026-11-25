@@ -20,3 +20,4 @@ ScryfallCode=PSPL
 12 R Riddles in the Dark @Tomas Duchek
 13 M Jace Beleren @Cristi Balanescu
 14 M Jean-Luc Picard, Luminary @Alexander Mokhov
+15 R Harbinger of the Seas @Yigit Koroglu

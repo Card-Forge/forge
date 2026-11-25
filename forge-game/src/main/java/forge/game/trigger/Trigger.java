@@ -23,6 +23,7 @@ import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardState;
@@ -42,6 +43,7 @@ import org.apache.commons.lang3.Strings;
 
 import java.util.*;
 import java.util.function.BooleanSupplier;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -216,7 +218,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             } else {
                 saDesc = "<take no action>"; // printed in case nothing is chosen for the ability (e.g. Charm with Up to X)
             }
-            result = TextUtil.fastReplace(result, "ABILITY", saDesc);
+            result = SpellAbilityEffect.tidyDescription(TextUtil.fastReplace(result, "ABILITY", saDesc), true);
 
             result = CardTranslation.translateMultipleDescriptionText(result, sa.getHostCard());
             String translatedName = sa.getHostCard().getTranslatedName();
@@ -291,6 +293,22 @@ public abstract class Trigger extends TriggerReplacementBase {
 
         return true;
     }
+
+    /** True if the trigger's condition or effect names this triggering object, as in "that player", so it applies to each one separately (CR 805.4d, 805.10c). */
+    protected final boolean refersToTriggering(final AbilityKey key) {
+        final String name = "Triggered" + key;
+        final Predicate<String> names = v -> v.contains(name) || getHostCard().hasSVar(v) && getHostCard().getSVar(v).contains(name);
+        if (getMapParams().values().stream().anyMatch(names)) {
+            return true;
+        }
+        for (SpellAbility sa = ensureAbility(); sa != null; sa = sa.getSubAbility()) {
+            if (sa.getMapParams().values().stream().anyMatch(names)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * <p>
      * requirementsCheck.

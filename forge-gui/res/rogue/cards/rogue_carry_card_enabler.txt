@@ -1,0 +1,5 @@
+Name:Rogue - Carry Card Enabler
+ManaCost:no cost
+Types:RogueCommander Modifier
+S:Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ Artifact.YouOwn,Creature.!IsCommander+YouOwn,Instant.YouOwn,Sorcery.YouOwn | AffectedZone$ Command | Description$ You can play Items, Fellows and Scrolls from your Command Zone.
+Oracle:You can play Items, Fellows and Scrolls from your Command Zone.

@@ -73,6 +73,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         cb.addItem(FModel.getAchievements(GameType.PlanarConquest));
         cb.addItem(FModel.getAchievements(GameType.Puzzle));
         cb.addItem(FModel.getAchievements(GameType.Adventure));
+        cb.addItem(FModel.getAchievements(GameType.RogueCommander));
         cb.addItem(AltWinAchievements.instance);
         cb.addItem(PlaneswalkerAchievements.instance);
         cb.addItem(CardActivationAchievements.instance);

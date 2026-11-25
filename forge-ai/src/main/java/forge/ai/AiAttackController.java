@@ -33,6 +33,7 @@ import forge.game.combat.GlobalAttackRestrictions;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.Protection;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -42,6 +43,8 @@ import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementType;
 import forge.game.zone.ZoneType;
 import forge.util.*;
 import forge.util.collect.FCollection;
@@ -105,7 +108,7 @@ public class AiAttackController {
         myList = ai.getCreaturesInPlay();
         this.nextTurn = false;
         this.attackers = new ArrayList<>();
-        if (CombatUtil.canAttack(attacker, defendingOpponent)) {
+        if (CombatUtil.canAttack(attacker, defendingOpponent) && !isPointlessAttackOnProtectedPlayer(attacker, defendingOpponent)) {
             attackers.add(attacker);
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
@@ -119,11 +122,39 @@ public class AiAttackController {
         }
         this.attackers = new ArrayList<>();
         for (Card c : myList) {
-            if (canAttackWrapper(c, defender)) {
+            if (canAttackWrapper(c, defender) && !isPointlessAttackOnProtectedPlayer(c, defender)) {
                 attackers.add(c);
             }
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
+    }
+
+    /**
+     * Attacking is legal into a player with protection (e.g. Teferi's Protection: protection from everything), but
+     * every point of damage is prevented, so the attack gains nothing and only exposes the creature. Creatures that
+     * have to attack anyway stay in the list.
+     */
+    private boolean isPointlessAttackOnProtectedPlayer(final Card attacker, final GameEntity defender) {
+        if (nextTurn || !(defender instanceof Player) || attacker.getSVar("MustAttack").equals("True")) {
+            return false;
+        }
+        return isDamageProtected((Player) defender, attacker);
+    }
+
+    /** @return true if the player has protection (from everything, a colour, a type ...) that prevents damage from the source. */
+    public static boolean isDamageProtected(final Player p, final Card source) {
+        for (final KeywordInterface kw : p.getKeywords()) {
+            final String orig = kw.getOriginal();
+            if (!orig.startsWith("Protection")) {
+                continue;
+            }
+            final String valid = Protection.getProtectionValid(orig, true);
+            // getProtectionValid is a comma list ("Card.ControlledBy Player.PlayerUID_1,Emblem.ControlledBy ..."): one restriction each
+            if (valid.isEmpty() || source.isValid(valid.split(","), p, null, null)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static List<Card> getOpponentCreatures(final Player defender) {
@@ -197,7 +228,7 @@ public class AiAttackController {
     public static Player choosePreferredDefenderPlayer(Player ai, boolean forCombatDmg) {
         PlayerCollection opponents = ai.getOpponents();
         if (opponents.size() < 2) {
-            return Iterables.getFirst(opponents, null);
+            return opponents.getFirst();
         }
 
         Map<Player, Integer> threatScores = Maps.newHashMap();
@@ -255,6 +286,23 @@ public class AiAttackController {
         return result;
     }
 
+    /**
+     * @return true if a permanent the AI controls prevents the attacker's damage to the defender and replaces it with
+     * an effect of its own ("prevent that damage and each opponent mills that many cards").
+     */
+    private static boolean hasOwnDamageConversion(final Player ai, final Card attacker, final GameEntity defender) {
+        for (final Card c : ai.getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Command))) {
+            for (final ReplacementEffect re : c.getReplacementEffects()) {
+                // combat damage only ("IsCombat$ False" is for noncombat damage); the valid lists are comma separated and matchesValidParam tries each
+                if (re.getMode() == ReplacementType.DamageDone && re.hasParam("ReplaceWith") && !"False".equals(re.getParam("IsCombat"))
+                        && re.matchesValidParam("ValidSource", attacker) && re.matchesValidParam("ValidTarget", defender)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // Is there any reward for attacking? (for 0/1 creatures there is not)
     /**
      * <p>
@@ -291,6 +339,10 @@ public class AiAttackController {
             if (!onlyIfExalted || this.attackers.size() == 1 || aiAggression == 6 /* 6 is Exalted attack */) {
                 return true;
             }
+        }
+        // The Mindskinner: no damage gets through, but a replacement we control turns it into an effect (a mill), so the attack still does something
+        if (defender instanceof Player && hasOwnDamageConversion(ai, attacker, defender)) {
+            return true;
         }
         // Poison opponent if unblocked
         if (defender instanceof Player player
@@ -382,7 +434,7 @@ public class AiAttackController {
                 return false;
             }
             int dmg = c.getNetCombatDamage();
-            if (dmg <= 0 && ComputerUtilCombat.predictPowerBonusOfAttacker(c, null, null, true) - dmg <= 0) {
+            if (dmg <= 0 && ComputerUtilCombat.attackerDamageBonus(c, null, true) - dmg <= 0) {
                 return false;
             }
             return ComputerUtilCombat.canAttackNextTurn(c);
@@ -482,7 +534,7 @@ public class AiAttackController {
                 }
                 final int totalExaltedAttack = defendingOpponent.isCardInPlay("Rafiq of the Many") ? 2 * humanBasePower
                         : humanBasePower;
-                if (ai.getLife() - 3 <= totalExaltedAttack) {
+                if (!ai.cantLoseForZeroOrLessLife() && ai.getLife() - 3 <= totalExaltedAttack) {
                     // We will lose if there is an Exalted attack -- keep one blocker
                     if (blockersNeeded == 0 && !notNeededAsBlockers.isEmpty()) {
                         notNeededAsBlockers.remove(0);
@@ -536,7 +588,7 @@ public class AiAttackController {
             for (Card c : bandingCreatures) {
                 Card bestBand = null;
 
-                if (c.getNetPower() <= 0) {
+                if (c.getNetCombatDamage() <= 0) {
                     // Don't band a zero power creature if there's already a banding creature in a band
                     attackers = CardLists.filter(attackers, card -> combat.getBandOfAttacker(card).getAttackers().size() == 1);
                 }
@@ -558,7 +610,7 @@ public class AiAttackController {
                     bestBand = bestAttacker;
                 }
 
-                if (c.getNetPower() <= 0) {
+                if (c.getNetCombatDamage() <= 0) {
                     attackers = combat.getAttackers(); // restore the unfiltered attackers
                 }
 
@@ -750,7 +802,7 @@ public class AiAttackController {
         }
 
         int totalPoisonDamage = ComputerUtilCombat.sumPoisonIfUnblocked(unblockedAttackers, defendingOpponent);
-        if (totalPoisonDamage >= 10 - defendingOpponent.getPoisonCounters()) {
+        if (totalPoisonDamage >= defendingOpponent.getGame().getRules().getPoisonCountersToLose() - defendingOpponent.getPoisonCounters()) {
             return true;
         }
         for (Card trampler : trampleDmg.keySet()) {
@@ -759,7 +811,7 @@ public class AiAttackController {
                 totalPoisonDamage += dmg;
             }
             totalPoisonDamage += ComputerUtilCombat.predictExtraPoisonWithDamage(trampler, defendingOpponent, dmg);
-            if (totalPoisonDamage >= 10 - defendingOpponent.getPoisonCounters()) {
+            if (totalPoisonDamage >= defendingOpponent.getGame().getRules().getPoisonCountersToLose() - defendingOpponent.getPoisonCounters()) {
                 return true;
             }
         }
@@ -779,8 +831,8 @@ public class AiAttackController {
             return prefDefender;
         }
 
-        // 2. attack planeswalkers
-        List<Card> pwDefending = c.getDefendingPlaneswalkers();
+        // 2. attack planeswalkers (unless Sanctum Lurker keeps them alive)
+        List<Card> pwDefending = c.getDefendingPlaneswalkers().filter(pw -> pw.getCounters(CounterEnumType.LOYALTY) > 0);
         if (!pwDefending.isEmpty()) {
             final Card pwNearUlti = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
             return pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
@@ -791,6 +843,10 @@ public class AiAttackController {
         List<Card> ownBattleDefending = CardLists.filter(defBattles, CardPredicates.isController(ai));
         List<Card> allyBattleDefending = CardLists.filter(defBattles, CardPredicates.isControlledByAnyOf(ai.getAllies()));
         List<Card> prefBattleList = ownBattleDefending.isEmpty() ? allyBattleDefending : ownBattleDefending;
+        // not a battle whose back is a legend the AI already has (see LegalityGuard.redundantDefeat)
+        final int battleDamage = ComputerUtilCombat.totalCombatDamage(attackers);
+        prefBattleList = CardLists.filter(prefBattleList,
+                b -> !forge.ai.simulation.LegalityGuard.redundantDefeat(ai, b, battleDamage));
         if (!prefBattleList.isEmpty()) {
             // TODO try to be less predictable here, should really check if something would make the back uncastable
             return Collections.min(prefBattleList, CardPredicates.compareByCounterType(CounterEnumType.DEFENSE));
@@ -809,6 +865,7 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
+        // TODO plan the attack with teammates, so lethal that needs both players' creatures is found (CR 805.10b)
         final long id = AITimeoutTracker.key(ai.getGame().getId(), ai.getId());
         final long timeoutNanos = TimeUnit.SECONDS.toNanos(ai.getGame().getAITimeout());
         // predicting a HUMAN player's attack must not light up that player's timer bar
@@ -1053,7 +1110,7 @@ public class AiAttackController {
                         System.out.println("Exalted");
                     aiAggression = 6;
                     for (Card attacker : this.attackers) {
-                        if (canAttackWrapper(attacker, defender) && shouldAttack(attacker, this.blockers, combat, defender)) {
+                        if (canAttackWrapper(attacker, defender) && shouldAttack(attacker, this.blockers, combat, defender, true)) {
                             combat.addAttacker(attacker, defender);
                             return aiAggression;
                         }
@@ -1148,13 +1205,13 @@ public class AiAttackController {
 
             // find the potential counter attacking damage compared to AI life total
             double aiLifeToPlayerDamageRatio = 1000000;
-            if (candidateCounterAttackDamage > 0) {
+            if (candidateCounterAttackDamage > 0 && !ai.cantLoseForZeroOrLessLife()) {
                 aiLifeToPlayerDamageRatio = (double) ai.getLife() / candidateCounterAttackDamage;
             }
 
             // find the potential damage ratio the AI can cause
             double humanLifeToDamageRatio = 1000000;
-            if (candidateUnblockedDamage > 0) {
+            if (candidateUnblockedDamage > 0 && !defendingOpponent.cantLoseForZeroOrLessLife()) {
                 humanLifeToDamageRatio = (double) (defendingOpponent.getLife() - ComputerUtil.possibleNonCombatDamage(ai, defendingOpponent)) / candidateUnblockedDamage;
             }
 
@@ -1188,7 +1245,8 @@ public class AiAttackController {
             }
             // until the attackers are used up or the player would run out of life
             int attackRounds = 1;
-            while (!attritionalAttackers.isEmpty() && humanLife > 0 && attackRounds < 99) {
+            while (!defendingOpponent.cantLoseForZeroOrLessLife() && !attritionalAttackers.isEmpty()
+                    && humanLife > 0 && attackRounds < 99) {
                 // sum attacker damage
                 int damageThisRound = 0;
                 for (Card attritionalAttacker : attritionalAttackers) {
@@ -1250,7 +1308,7 @@ public class AiAttackController {
             if (unblockableDamage > 0 && !defendingOpponent.cantLoseForZeroOrLessLife() && defendingOpponent.canLoseLife()) {
                 turnsUntilDeathByUnblockable = 1 + (defendingOpponent.getLife() - unblockableDamage) / nextUnblockableDamage;
             }
-            if (defendingOpponent.canLoseLife()) {
+            if (!defendingOpponent.cantLoseForZeroOrLessLife() && defendingOpponent.canLoseLife()) {
                 doUnblockableAttack = true;
             }
             // *****************
@@ -1268,7 +1326,7 @@ public class AiAttackController {
             } else if (MyRandom.percentTrue(chanceToAttackToTrade) && humanLifeToDamageRatio > 1
                     && defendingOpponent != null
                     && ComputerUtil.countUsefulCreatures(ai) > ComputerUtil.countUsefulCreatures(defendingOpponent)
-                    && ai.getLife() > defendingOpponent.getLife()
+                    && (ai.cantLoseForZeroOrLessLife() || ai.getLife() > defendingOpponent.getLife())
                     && !ComputerUtilCombat.lifeInDanger(ai, combat) // this isn't really doing anything unless the attacking player in combat isn't the AI (which currently isn't used like that)
                     // our own mana: ATTACK_INTO_TRADE_WHEN_TAPPED_OUT lets us swing while tapped out,
                     // otherwise we want mana open so we can bluff or use a trick
@@ -1314,7 +1372,9 @@ public class AiAttackController {
                 System.out.println("attackersLeft = " + left);
 
             FCollection<GameEntity> possibleDefenders = new FCollection<>(defendingOpponent);
-            possibleDefenders.addAll(defendingOpponent.getPlaneswalkersInPlay());
+            // a planeswalker with no loyalty left that stays in play (Sanctum Lurker) is a waste of an attack
+            possibleDefenders.addAll(CardLists.filter(defendingOpponent.getPlaneswalkersInPlay(),
+                    pw -> pw.getCounters(CounterEnumType.LOYALTY) > 0));
 
             while (!left.isEmpty()) {
                 AITimeoutTracker.check();
@@ -1324,7 +1384,9 @@ public class AiAttackController {
                     final Card attacker = left.get(i);
                     if (aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
                             && ComputerUtilCombat.getTotalFirstStrikeBlockPower(attacker, defendingOpponent)
-                            >= ComputerUtilCombat.getDamageToKill(attacker, false)) {
+                            >= ComputerUtilCombat.getDamageToKill(attacker, false)
+                            // a first strike deathtouch blocker takes only one attacker: the rest are for shouldAttack to judge
+                            && !(aiAggression >= 2 && worthTheDeathtouchTax(attacker, this.blockers, combat))) {
                         continue;
                     }
 
@@ -1436,7 +1498,7 @@ public class AiAttackController {
             );
 
             // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
-            defPower = CardLists.getTotalPower(validBlockers, null);
+            defPower = ComputerUtilCombat.totalCombatDamage(validBlockers); // Doran: toughness, not power
 
             // look at the attacker in relation to the blockers to establish a
             // number of factors about the attacking context that will be relevant
@@ -1473,7 +1535,7 @@ public class AiAttackController {
                                     && ((PlayerControllerAi) ai.getController()).getAi().getBoolProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK);
                             boolean attackerWillDie = defPower >= attacker.getNetToughness();
                             boolean uselessAttack = !hasCombatEffect && !hasAttackEffect;
-                            boolean noContributionToAttack = attackers.size() <= defenders.size() || attacker.getNetPower() <= 0;
+                            boolean noContributionToAttack = attackers.size() <= defenders.size() || attacker.getNetCombatDamage() <= 0;
 
                             // We are attacking too recklessly if we can't kill a single blocker and:
                             // - our creature will die for sure (chump attack)
@@ -1515,6 +1577,12 @@ public class AiAttackController {
      * @return a boolean.
      */
     public final boolean shouldAttack(final Card attacker, final List<Card> defenders, final Combat combat, final GameEntity defender) {
+        return shouldAttack(attacker, defenders, combat, defender, false);
+    }
+
+    /** The dedicated Exalted solo-attacker path is the only strategy allowed to bypass the animated-land gift check. */
+    private final boolean shouldAttack(final Card attacker, final List<Card> defenders, final Combat combat, final GameEntity defender,
+                                       final boolean exaltedStrategy) {
         AITimeoutTracker.check();
         // Is it a creature that has a more valuable ability with a tap cost than what it can do by attacking?
         if (attacker.hasSVar("NonCombatPriority") && !attacker.hasKeyword(Keyword.VIGILANCE)) {
@@ -1522,7 +1590,7 @@ public class AiAttackController {
             // so a priority of 4 means the creature will not attack unless it can defeat that player in 4 successful attacks.
             // the lower the priroity, the less willing the AI is to use the creature for attacking.
             // TODO Somehow subtract expected damage of other attacking creatures from enemy life total (how? other attackers not yet declared? Can the AI guesstimate which of their creatures will not get blocked?)
-            if (attacker.getCurrentPower() * Integer.parseInt(attacker.getSVar("NonCombatPriority")) < ai.getOpponentsSmallestLifeTotal()) {
+            if (Math.max(0, attacker.getNetCombatDamage()) * Integer.parseInt(attacker.getSVar("NonCombatPriority")) < ai.getOpponentsSmallestLifeTotal()) {
                 // Check if the card actually has an ability the AI can and wants to play, if not, attacking is fine!
                 for (SpellAbility sa : attacker.getSpellAbilities()) {
                     // Do not attack if we can afford using the ability.
@@ -1541,6 +1609,18 @@ public class AiAttackController {
             return false;
         }
 
+        // a creature that is sacrificed for attacking (decayed, "sacrifice it at end of combat") is not "free damage" while
+        // nothing can block it, so it goes in only when that sacrifice buys something (otherwise the Monte Carlo
+        // refinement would call the attack back)
+        if (isLostByAttacking(attacker) && !lostAttackerIsWorthIt(attacker, defender)) {
+            return false;
+        }
+
+        // Aggression 6 is also used by attack-limit and Reconnaissance paths; only the explicit Exalted path may bypass this.
+        if (shouldDeclineLandGift(ai, attacker, combat, exaltedStrategy)) {
+            return false;
+        }
+
         SpellAbilityFactors saf = new SpellAbilityFactors(attacker);
         if (aiAggression != 5) {
             saf.calculate(defenders, combat);
@@ -1556,6 +1636,14 @@ public class AiAttackController {
         if (!saf.canBeKilled && !saf.dangerousBlockersPresent && saf.canTrampleOverDefenders) {
             if (LOG_AI_ATTACKS)
                 System.out.println(attacker.getName() + " = expecting to survive and get some Trample damage through");
+            return true;
+        }
+
+        // a deathtouch blocker kills what it blocks, but it blocks one attacker, dies to it, and costs the opponent a card:
+        // it is a tax on the attack, not a wall
+        if (aiAggression >= 2 && aiAggression < 5 && worthTheDeathtouchTax(attacker, defenders, combat)) {
+            if (LOG_AI_ATTACKS)
+                System.out.println(attacker.getName() + " = attacking into deathtouch: more attackers than they have deathtouch blockers");
             return true;
         }
 
@@ -1608,6 +1696,296 @@ public class AiAttackController {
                 break;
         }
         return false; // don't attack
+    }
+
+    /**
+     * The opponent holds deathtouch blockers (a 1/1 with Gorgon's Head is enough). Each blocks as many attackers as it is able
+     * to (one, unless it can block additional creatures), so what it costs the AI is an assignment, not a wall: see
+     * {@link #deathtouchPlan}. Whether this attacker is one of those that go in.
+     */
+    private boolean worthTheDeathtouchTax(final Card attacker, final List<Card> defenders, final Combat combat) {
+        return deathtouchPlan(defenders, combat).go.contains(attacker);
+    }
+
+    /** The attackers that the deathtouch blockers leave alone (or trade evenly with), worked out once per combat evaluation. */
+    private static final class DeathtouchPlan {
+        static final DeathtouchPlan NONE = new DeathtouchPlan();
+        final Set<Card> go = new HashSet<>();
+    }
+
+    private DeathtouchPlan dtPlan;
+    private List<Card> dtPlanDefenders;
+    private Combat dtPlanCombat;
+
+    private DeathtouchPlan deathtouchPlan(final List<Card> defenders, final Combat combat) {
+        if (dtPlan != null && dtPlanDefenders == defenders && dtPlanCombat == combat) {
+            return dtPlan;
+        }
+        dtPlan = computeDeathtouchPlan(defenders, combat);
+        dtPlanDefenders = defenders;
+        dtPlanCombat = combat;
+        return dtPlan;
+    }
+
+    /**
+     * The opponent takes the most valuable attackers that its deathtouch blockers can block and kill (a maximum matching, a
+     * blocker that takes an attacker and lives, first strike or indestructible, is preferred; a blocker that can block several
+     * creatures holds several). An attacker that the opponent would take goes in only as an even trade: the blocker dies to it
+     * and is worth about as much. The attackers that are not taken go in, whatever kills the one that is taken. The matching is
+     * then worked out again for the attackers that go: if the blockers take all of them (the valuable creature stays home and
+     * the small one would be sent into its blocker), nothing goes in. Nor does anything when another blocker of theirs (not
+     * deathtouch) kills the attacker: that is for the ordinary checks.
+     */
+    private DeathtouchPlan computeDeathtouchPlan(final List<Card> defenders, final Combat combat) {
+        boolean anyDeathtouch = false;
+        for (final Card blocker : defenders) {
+            if (blocker.hasKeyword(Keyword.DEATHTOUCH)) {
+                anyDeathtouch = true;
+                break;
+            }
+        }
+        if (!anyDeathtouch) {
+            return DeathtouchPlan.NONE;
+        }
+        final Map<Card, List<Card>> takes = new HashMap<>(); // the deathtouch blockers that can block and kill each attacker
+        for (final Card a : attackers) {
+            final List<Card> killers = new ArrayList<>();
+            boolean otherKiller = false;
+            for (final Card blocker : defenders) {
+                if (!CombatUtil.canBlock(a, blocker) || !ComputerUtilCombat.canDestroyAttacker(ai, a, blocker, combat, false)) {
+                    continue;
+                }
+                if (!blocker.hasKeyword(Keyword.DEATHTOUCH)) {
+                    otherKiller = true; // something else kills it
+                    break;
+                }
+                killers.add(blocker);
+            }
+            if (otherKiller || killers.isEmpty()) {
+                continue;
+            }
+            // the ones that live first: the opponent prefers to take an attacker for free
+            killers.sort((x, y) -> Boolean.compare(ComputerUtilCombat.canDestroyBlocker(ai, x, a, combat, false),
+                    ComputerUtilCombat.canDestroyBlocker(ai, y, a, combat, false)));
+            takes.put(a, killers);
+        }
+        final DeathtouchPlan plan = new DeathtouchPlan();
+        final List<Card> exposed = new ArrayList<>(takes.keySet());
+        exposed.sort((x, y) -> ComputerUtilCard.evaluateCreature(y) - ComputerUtilCard.evaluateCreature(x));
+        final Map<Card, List<Card>> held = new HashMap<>(); // blocker -> the attackers that it takes
+        final List<Card> going = new ArrayList<>();
+        for (final Card a : exposed) {
+            if (!takeAttacker(a, takes, held, new HashSet<>())) {
+                going.add(a); // the opponent has no blocker left for it
+            }
+        }
+        addFavorableDeathtouchGroupTrades(plan, held);
+        for (final Map.Entry<Card, List<Card>> e : held.entrySet()) {
+            for (final Card a : e.getValue()) {
+                final Card b = e.getKey();
+                // a taken attacker goes in only as an even trade: the blocker dies to it and is worth about as much
+                if (ComputerUtilCombat.canDestroyBlocker(ai, b, a, combat, false)
+                        && ComputerUtilCard.evaluateCreature(a) <= ComputerUtilCard.evaluateCreature(b) + 40) {
+                    going.add(a);
+                }
+            }
+        }
+        // The taken attackers that stay home free their blockers: the ones that go must still leave something unblocked,
+        // or they only feed the blockers that were meant for the others (a small creature sent in beside a Wurm that stays).
+        final Map<Card, List<Card>> heldByGoing = new HashMap<>();
+        boolean someGetThrough = false;
+        for (final Card a : going) {
+            if (!takeAttacker(a, takes, heldByGoing, new HashSet<>())) {
+                someGetThrough = true;
+            }
+        }
+        if (someGetThrough) {
+            plan.go.addAll(going);
+        }
+        return plan.go.isEmpty() ? DeathtouchPlan.NONE : plan;
+    }
+
+    /**
+     * A deathtouch blocker can block multiple creatures, but it must still assign at least one damage to each creature
+     * it wants to kill. If the blocked group kills it and it cannot assign lethal damage to every attacker, the group
+     * can be a favorable trade: the blocker dies, while only its damage-assignment capacity is lost.
+     *
+     * This handles the ordinary damage step. Strike-step groups remain on the existing per-attacker path because their
+     * damage assignment depends on which creatures survive the first-strike step.
+     */
+    private void addFavorableDeathtouchGroupTrades(final DeathtouchPlan plan,
+            final Map<Card, List<Card>> held) {
+        for (final Map.Entry<Card, List<Card>> entry : held.entrySet()) {
+            final Card blocker = entry.getKey();
+            final List<Card> blockedAttackers = entry.getValue();
+            final int killCapacity = Math.max(0, blocker.getNetCombatDamage());
+            if (blockedAttackers.size() <= killCapacity || blocker.hasFirstStrike() || blocker.hasDoubleStrike()) {
+                continue;
+            }
+
+            boolean hasStrikeAttacker = false;
+            for (final Card attacker : blockedAttackers) {
+                if (attacker.hasFirstStrike() || attacker.hasDoubleStrike()) {
+                    hasStrikeAttacker = true;
+                    break;
+                }
+            }
+            if (hasStrikeAttacker) {
+                continue;
+            }
+
+            // The defending player assigns the blocker's limited damage to the most valuable attackers first.
+            final List<Card> likelyKilled = new ArrayList<>(blockedAttackers);
+            likelyKilled.sort((x, y) -> Integer.compare(ComputerUtilCard.evaluateCreature(y),
+                    ComputerUtilCard.evaluateCreature(x)));
+            int attackersLostValue = 0;
+            for (int i = 0; i < killCapacity; i++) {
+                attackersLostValue += ComputerUtilCard.evaluateCreature(likelyKilled.get(i));
+            }
+            if (attackersLostValue > ComputerUtilCard.evaluateCreature(blocker) + 40) {
+                continue;
+            }
+
+            // Reuse the combat damage estimator with all of these attackers assigned to this blocker. A single
+            // attacker is not enough to kill (for example) a 1/4 Palace Guard, but their combined damage is.
+            final Combat groupCombat = new Combat(ai);
+            final Player defender = blocker.getController();
+            for (final Card attacker : blockedAttackers) {
+                groupCombat.addAttacker(attacker, defender);
+                groupCombat.addBlocker(attacker, blocker);
+            }
+            for (final Card attacker : blockedAttackers) {
+                if (ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, groupCombat, false)) {
+                    plan.go.addAll(blockedAttackers);
+                    break;
+                }
+            }
+        }
+    }
+
+    /** How many attackers this blocker can take: one, more with an effect that lets it block additional creatures or any number. */
+    private static int blockCapacity(final Card blocker) {
+        return blocker.canBlockAny() ? Integer.MAX_VALUE : 1 + Math.max(0, blocker.canBlockAdditional());
+    }
+
+    /** One step of the matching of attackers to the blockers that take them (augmenting path: a taken attacker may be moved). */
+    private static boolean takeAttacker(final Card attacker, final Map<Card, List<Card>> takes, final Map<Card, List<Card>> held,
+                                        final Set<Card> visited) {
+        for (final Card blocker : takes.get(attacker)) {
+            if (!visited.add(blocker)) {
+                continue;
+            }
+            final List<Card> current = held.computeIfAbsent(blocker, k -> new ArrayList<>(1));
+            if (current.size() < blockCapacity(blocker)) {
+                current.add(attacker);
+                return true;
+            }
+            for (int i = 0; i < current.size(); i++) {
+                if (takeAttacker(current.get(i), takes, held, visited)) {
+                    current.set(i, attacker);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Some creature of theirs can block the attacker and kill it without dying, and the attacker has no effect that would
+     * make that worth it: attacking just hands the blocker a free kill.
+     */
+    static boolean shouldDeclineLandGift(final Player ai, final Card attacker, final Combat combat, final boolean exaltedStrategy) {
+        return attacker.isLand() && !exaltedStrategy && isGiftToABlocker(ai, attacker, combat);
+    }
+
+    /** Shared blocker check used by the attack decision and report scenarios. */
+    static boolean isGiftToABlocker(final Player ai, final Card attacker, final Combat combat) {
+        if (attacker.hasSVar("SacMe") || attacker.hasSVar("HasAttackEffect") || attacker.hasSVar("HasCombatEffect")) {
+            return false;
+        }
+        for (final Player opp : ai.getOpponents()) {
+            for (final Card blocker : opp.getCreaturesInPlay()) {
+                if (CombatUtil.canBlock(attacker, blocker) && ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)
+                        && !ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, false)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** Whether some creature of an opponent of {@code attacker}'s controller could block it. */
+    static boolean canBeBlockedByAnyOpponent(final Card attacker) {
+        for (final Player opp : attacker.getController().getOpponents()) {
+            for (final Card blocker : opp.getCreaturesInPlay()) {
+                if (CombatUtil.canBlock(attacker, blocker)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** The creature is sacrificed, destroyed or exiled by its own attack (decayed, or a mandatory self trigger on attack / at end of combat). */
+    static boolean isLostByAttacking(final Card attacker) {
+        if (attacker.hasKeyword(Keyword.DECAYED)) {
+            return true;
+        }
+        for (final Trigger t : attacker.getTriggers()) {
+            final boolean onAttack = TriggerType.Attacks.equals(t.getMode()) && "Card.Self".equals(t.getParam("ValidCard"));
+            final boolean atEndOfCombat = TriggerType.Phase.equals(t.getMode()) && "End of Combat".equals(t.getParam("Phase"));
+            if (!(onAttack || atEndOfCombat) || t.hasParam("OptionalDecider")) {
+                continue;
+            }
+            if (removesItself(t.ensureAbility(), 0)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean removesItself(final SpellAbility sa, final int depth) {
+        if (sa == null || depth > 4) {
+            return false;
+        }
+        if (!sa.hasParam("UnlessCost") && !sa.hasParam("Optional") && !sa.hasParam("OptionalDecider") && !sa.hasParam("ConditionCheckSVar")
+                && !sa.hasParam("ConditionPresent")) {
+            if (ApiType.Sacrifice.equals(sa.getApi()) && "Self".equals(sa.getParam("SacValid"))) {
+                return true;
+            }
+            if ((ApiType.Destroy.equals(sa.getApi()) || ApiType.ChangeZone.equals(sa.getApi())) && "Self".equals(sa.getParam("Defined"))
+                    && (ApiType.Destroy.equals(sa.getApi()) || "Battlefield".equals(sa.getParam("Origin")))) {
+                return true;
+            }
+        }
+        return removesItself(sa.getSubAbility(), depth + 1);
+    }
+
+    /**
+     * Whether giving up an attacker that its attack costs pays: it wants to die (SacMe) or has an attack effect, or the
+     * attackers that the blockers cannot all stop are lethal on the defending player.
+     */
+    private boolean lostAttackerIsWorthIt(final Card attacker, final GameEntity defender) {
+        // not aggression 5: "attack at all costs" is a war of attrition, which a creature that is gone after one attack
+        // cannot wage (an empty opposing board is enough to set it)
+        if (attacker.hasSVar("SacMe") || attacker.hasSVar("HasAttackEffect")) {
+            return true;
+        }
+        // a token nothing can block is damage for nothing (it can't block either, or it would not be lost for attacking)
+        if (aiAggression >= 4 && attacker.isToken() && !canBeBlockedByAnyOpponent(attacker)) {
+            return true;
+        }
+        if (!(defender instanceof Player)) {
+            return false;
+        }
+        final List<Card> byPower = new ArrayList<>(this.attackers);
+        CardLists.sortByPowerDesc(byPower);
+        int damage = 0;
+        // the strongest ones are the ones that get blocked
+        for (int i = this.blockers.size(); i < byPower.size(); i++) {
+            damage += ComputerUtilCombat.damageIfUnblocked(byPower.get(i), defender, null, false);
+        }
+        return damage >= ((Player) defender).getLife();
     }
 
     public static List<Card> exertAttackers(final List<Card> attackers, int aggression) {
@@ -1779,7 +2157,7 @@ public class AiAttackController {
             // running simulations.
             CardCollection blkSorted = new CardCollection(this.blockers);
             CardLists.sortByPowerDesc(blkSorted);
-            refPowerValue += blkSorted.get(0).getCurrentPower();
+            refPowerValue += Math.max(0, blkSorted.get(0).getNetCombatDamage());
         }
 
         for (Card cre : attSorted) {

@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.utils.Timer;
@@ -70,11 +69,12 @@ public class MapStage extends GameStage {
     //Map properties.
     //These maps are defined as embedded properties within the Tiled maps.
     private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
+    private boolean ignoreGlobalEffect;    //Duels in this map skip the plane-wide effect.
+    private boolean ignoreBiomeEffect;     //Duels in this map skip the effect of the biome the map is in.
     private String battleBackground;       //Optional battle background folder for this map or floor.
     private String currentMap;
     private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
 
-    public InputEvent eventTouchDown, eventTouchUp;
     private boolean respawnEnemies;
     private boolean canFailDungeon = false;
     protected ArrayList<EnemySprite> enemies = new ArrayList<>();
@@ -107,6 +107,8 @@ public class MapStage extends GameStage {
     public void clearIsInMap() {
         isInMap = false;
         effect = null; //Reset effect so battles outside the dungeon don't use the last visited dungeon's effects.
+        ignoreGlobalEffect = false;
+        ignoreBiomeEffect = false;
         battleBackground = null;
         currentMap = null;
         preventEscape = false;
@@ -133,12 +135,6 @@ public class MapStage extends GameStage {
     protected MapStage() {
         disposeWorld();
         createNewWorld();
-        eventTouchDown = new InputEvent();
-        eventTouchDown.setPointer(-1);
-        eventTouchDown.setType(InputEvent.Type.touchDown);
-        eventTouchUp = new InputEvent();
-        eventTouchUp.setPointer(-1);
-        eventTouchUp.setType(InputEvent.Type.touchUp);
     }
 
     public static MapStage getInstance() {
@@ -257,6 +253,10 @@ public class MapStage extends GameStage {
         if (MP.get("dungeonEffect") != null && !MP.get("dungeonEffect").toString().isEmpty()) {
             effect = JSONStringLoader.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
         }
+        if (MP.get("ignoreGlobalEffect") != null)
+            ignoreGlobalEffect = Boolean.parseBoolean(MP.get("ignoreGlobalEffect").toString());
+        if (MP.get("ignoreBiomeEffect") != null)
+            ignoreBiomeEffect = Boolean.parseBoolean(MP.get("ignoreBiomeEffect").toString());
         battleBackground = MP.get("battleBackground", String.class);
         if (MP.get("respawnEnemies") != null && MP.get("respawnEnemies") instanceof Boolean && (Boolean) MP.get("respawnEnemies")) {
             respawnEnemies = true;
@@ -538,6 +538,14 @@ public class MapStage extends GameStage {
                             dialogObject = prop.get("ignoreDungeonEffect"); //Check for special effects.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.ignoreDungeonEffect = Boolean.parseBoolean(dialogObject.toString());
+                            }
+                            dialogObject = prop.get("ignoreGlobalEffect");
+                            if (dialogObject != null && !dialogObject.toString().isEmpty()) {
+                                mob.ignoreGlobalEffect = Boolean.parseBoolean(dialogObject.toString());
+                            }
+                            dialogObject = prop.get("ignoreBiomeEffect");
+                            if (dialogObject != null && !dialogObject.toString().isEmpty()) {
+                                mob.ignoreBiomeEffect = Boolean.parseBoolean(dialogObject.toString());
                             }
                             dialogObject = prop.get("reward"); //Check for additional rewards.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
@@ -1112,12 +1120,17 @@ public class MapStage extends GameStage {
 
                     if (rewards.size == 1) {
                         Reward reward = rewards.get(0);
+                        int goldRoom = AdventurePlayer.current().getGoldRoom();
+                        if (reward.getType() == Reward.Type.Gold && reward.getCount() > goldRoom)
+                            reward = new Reward(goldRoom);
                         final String rewardTypeName = reward.getType().name();
 
                         switch (reward.getType()) {
                             case Life:
                             case Shards:
                             case Gold:
+                                if (reward.getCount() == 0)
+                                    break;
                                 String message = Forge.getLocalizer().getMessageorUseDefault(reward.getType().getLabelKey(), rewardTypeName);
                                 AdventurePlayer.current().addStatusMessage(rewardTypeName, message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
                                 AdventurePlayer.current().addReward(reward);
@@ -1174,8 +1187,7 @@ public class MapStage extends GameStage {
                     Forge.setTransitionScreen(new TransitionScreen(() -> {
                         started = false;
                         duelScene.initDuels(player, mob);
-                        if (isInMap && effect != null && !mob.ignoreDungeonEffect)
-                            duelScene.setDungeonEffect(effect);
+                        duelScene.setEffectLayers(getBiomeEffect(), getDungeonEffect(), ignoresGlobalEffect());
                         Forge.switchScene(duelScene);
                     }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                 }
@@ -1189,6 +1201,25 @@ public class MapStage extends GameStage {
 
     public boolean isInMap() {
         return isInMap;
+    }
+
+    public EffectData getDungeonEffect() {
+        return isInMap ? effect : null;
+    }
+
+    private BiomeData getPointOfInterestBiome() {
+        PointOfInterest poi = TileMapScene.instance().rootPoint;
+        return !isInMap || poi == null ? null : GameScene.instance().getBiomeDataByPosition(poi.getPosition());
+    }
+
+    public EffectData getBiomeEffect() {
+        BiomeData biome = getPointOfInterestBiome();
+        return biome == null || ignoreBiomeEffect ? null : biome.effect;
+    }
+
+    public boolean ignoresGlobalEffect() {
+        BiomeData biome = getPointOfInterestBiome();
+        return isInMap && (ignoreGlobalEffect || biome != null && biome.ignoreGlobalEffect);
     }
 
     public String getBattleBackground() {
@@ -1254,68 +1285,6 @@ public class MapStage extends GameStage {
 
     public void resetQuestFlags() {
         changes.getMapFlags().clear();
-    }
-
-    public boolean dialogInput(int keycode) {
-        if (dialogOnlyInput) {
-            if (KeyBinding.Up.isPressed(keycode)) {
-                selectPreviousDialogButton();
-            }
-            if (KeyBinding.Down.isPressed(keycode)) {
-                selectNextDialogButton();
-            }
-            if (KeyBinding.Use.isPressed(keycode)) {
-                performTouch(dialogStage.getKeyboardFocus());
-            }
-        }
-        return true;
-    }
-
-    public void performTouch(Actor actor) {
-        if (actor == null)
-            return;
-        actor.fire(eventTouchDown);
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                actor.fire(eventTouchUp);
-            }
-        }, 0.10f);
-    }
-
-    private void selectNextDialogButton() {
-        if (dialogButtonMap.size < 2)
-            return;
-        if (!(dialogStage.getKeyboardFocus() instanceof Button)) {
-            dialogStage.setKeyboardFocus(dialogButtonMap.first());
-            return;
-        }
-        for (int i = 0; i < dialogButtonMap.size; i++) {
-            if (dialogStage.getKeyboardFocus() == dialogButtonMap.get(i)) {
-                i += 1;
-                i %= dialogButtonMap.size;
-                dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
-                return;
-            }
-        }
-    }
-
-    private void selectPreviousDialogButton() {
-        if (dialogButtonMap.size < 2)
-            return;
-        if (!(dialogStage.getKeyboardFocus() instanceof Button)) {
-            dialogStage.setKeyboardFocus(dialogButtonMap.first());
-            return;
-        }
-        for (int i = 0; i < dialogButtonMap.size; i++) {
-            if (dialogStage.getKeyboardFocus() == dialogButtonMap.get(i)) {
-                i -= 1;
-                if (i < 0)
-                    i = dialogButtonMap.size - 1;
-                dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
-                return;
-            }
-        }
     }
 
     public void clearOnExit() {

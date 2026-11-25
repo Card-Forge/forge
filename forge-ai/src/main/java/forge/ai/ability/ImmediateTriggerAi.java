@@ -38,7 +38,7 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // always add to stack, targeting happens after payment
-        if (mandatory) {
+        if (mandatory || "Always".equals(sa.getParamOrDefault("AILogic", ""))) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 

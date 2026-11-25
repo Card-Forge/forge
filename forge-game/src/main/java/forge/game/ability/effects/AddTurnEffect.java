@@ -16,6 +16,11 @@ import forge.util.Lang;
 import forge.util.Localizer;
 
 public class AddTurnEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined", "ExtraTurnDelayedTrigger", "ExtraTurnDelayedTriggerExecute", "NoSchemes",
+        "ShowMessage", "SkipUntap",
+    };
+    public static final String[][] REQUIRED_PARAMS = {{"NumTurns"}};
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
@@ -39,7 +44,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final int numTurns = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumTurns"), sa);
 
-        for (final Player p : getTargetPlayers(sa)) {
+        for (final Player p : getTargetPlayersOnePerTeam(sa)) {
             if (!p.isInGame()) {
                 continue;
             }

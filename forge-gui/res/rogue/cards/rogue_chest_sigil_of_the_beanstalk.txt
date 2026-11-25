@@ -1,0 +1,6 @@
+Name:Chest Trait - Sigil Of The Beanstalk
+ManaCost:no cost
+Types:Trait
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a spell with mana value 5 or greater, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Whenever you cast a spell with mana value 5 or greater, draw a card.

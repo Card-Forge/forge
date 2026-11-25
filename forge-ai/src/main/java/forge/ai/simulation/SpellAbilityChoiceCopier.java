@@ -52,7 +52,12 @@ final class SpellAbilityChoiceCopier {
                 GameObject destinationTarget = gameObjectMapper.apply(sourceTarget);
                 destinationAbility.getTargets().add(destinationTarget);
                 if (sourceAbility.isDividedAsYouChoose()) {
-                    destinationAbility.addDividedAllocation(destinationTarget, sourceAbility.getDividedValue(sourceTarget));
+                    // a target that has no share yet (Comet Storm before its damage is divided) is not an allocation of 0:
+                    // unboxing the null ended a whole game with a NullPointerException
+                    final Integer share = sourceAbility.getDividedValue(sourceTarget);
+                    if (share != null) {
+                        destinationAbility.addDividedAllocation(destinationTarget, share);
+                    }
                 }
             }
         }

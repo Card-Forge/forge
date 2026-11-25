@@ -1,0 +1,25 @@
+[metadata]
+Name=Dwarven Warrior
+[Main]
+20 Mountain|3ED
+1 Dwarven Hold|FEM
+3 Dwarven Ruins|FEM
+4 Dwarven Warriors|3ED
+4 Dwarven Nomad|MIR
+4 Dwarven Vigilantes|VIS
+4 Dwarven Lieutenant|FEM
+2 Heart Wolf|HML
+2 Spirit Shield|FEM
+2 Zelyon Sword|FEM
+3 Aeolipile|FEM
+2 Dwarven Catapult|FEM
+1 Runesword|DRK
+3 Volcanic Hammer|POR
+1 Ring of Renewal|FEM
+1 Lava Axe|POR
+1 Lava Axe|PO2
+2 Hearth Charm|VIS
+[StartInBattle_Reference]
+1 Dwarven Hold|FEM
+1 Dwarven Ruins|FEM
+1 Dwarven Warriors|3ED

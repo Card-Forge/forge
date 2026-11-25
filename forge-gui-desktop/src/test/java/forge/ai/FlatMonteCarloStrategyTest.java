@@ -199,9 +199,22 @@ public class FlatMonteCarloStrategyTest extends AITest {
         fill(ai, "Island", "Grizzly Bears", "Air Elemental");
         fill(opp, "Mountain");
         setPhase(game, PhaseType.END_OF_TURN, opp);
-        final String play = nextPlay(ai);
+        // FlatMC seeds each rollout from MyRandom. Pin the decision's starting state so that CI and local runs
+        // compare the same hidden library order and rollout samples.
+        final String play = nextPlayWithSeed(ai, 0x494D50554C53454CL);
         System.out.println("impulseIsCastAtTheOpponentsEndStep -> " + play);
         AssertJUnit.assertEquals("a Dig spell that selects a card should use otherwise-unused end-step mana", "Impulse", play);
+    }
+
+    /** Runs one FlatMC decision from a known random state and restores the shared RNG afterwards. */
+    private static String nextPlayWithSeed(final Player ai, final long seed) {
+        final Random previousRandom = MyRandom.getRandom();
+        try {
+            MyRandom.setRandom(new Random(seed));
+            return nextPlay(ai);
+        } finally {
+            MyRandom.setRandom(previousRandom);
+        }
     }
 
     @Test(timeOut = LONG_TIMEOUT_MS)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="149">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="152">
  <editorsettings>
   <export target="waste_town.abandoned.tmx" format="tmx"/>
  </editorsettings>
@@ -26,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztWEtOwzAQHUQLLVK7YtUgNbBqVVggEHtW9AIsuAzKHQq06hHgAuWz6EVAiDMAZQESdlKrxrKT8S8Jap9k1UkdZ57ffBwDrLACDqMQoqJtKAKTCkDwT9tDZcHjvCrnd1Xzv4aHdbvnedv5/qBWjE8e7QMckxY009//3AF46SyuVTx84CbEjTtZ059bh8fpFkCrGa/VH7S56yFpsx7AVy/73XcBwGMze1waSC6LgeGxsZ40ysMFWLxNCYcn4j/j0H5ODI/LRvLrigcP4kPRd9t+niweAy5XUR4sDl1C1GNgkB9lPLqKHOhDDwad9ZHVAd04V4H4OYwAIqw9rnR9205+RR5pmr4SHpv19FYU8qwfPqHD4zawe5fP/U0aD1ZjVNizrGEugdFDjJkdS/tlMR5yc5ropuLB8oApVLa4qN0ylCXO24LGU03NdXi0DPxJtzab7lFc6cH7POtfH+DG0X2vGDO7HvXAgH5jDEP9/2xhyoPq/zP3gXHGecbFfL88a+DmzqpTsm8WEx4fuGEx8vi2p1DxEGO6U0+aCuxb6548d9YF6Hfx8SH2TVCWvMuD8petgQhS4yLWT+OBPYvBnh/Mx0ay+0PFfWzettUD4/9Ztkwc7NNc+hVm7bB7Zl1uvO3vVb/nlbF9ns5FPzU1ENc8y69EjcuSS3SxjDzyqpkmWEY9eJRNm2XXo2zIm8cv4t5zgw==
+   eJztWElOwzAU/YgWWqR2xapBamDVqrBAUPas4AIsuAzKHQq06hHgAmVY9CIgxBmYFiBhJ7VqLDv5npKg9klWndRx/vP7g2OAJZbAYRRCVLQNRWBSAQj+abuvzHmcVeX8Lmv+13C/bvc8bzvfH9SK8cmDXYBD0oJm+vufOgDPnfm1iocPXIe4cUcr+nPr8DjeAGg147X6gzZ3PSTtswfw1ct+920A8NDMHpcGkstiYHisrSaN8nABFm9TwuGR+M84tJ8Tw+Oikfy64sGD+FD03bafJ4vHgMtVlAeLQ5cQ9RgY5EcZj64iB5rq0e/Pmwo66yOrA7pxrgLxcxgBRDJ7eB6MiytdXzeTX5FHmqYvhMd6Pb0VhTzrh0/o8LgJ7N7lc3+TxoPVGBV2LGuYS2D0EGNmy9J+WYyH3Jwmuql4sDxgCpUtLmq3DGWJ87ag8VRTcx0eLQN/0q3NpnsUV3rwPs/6V3u4cXTfK8bMtkc9MKDfGMNQ/z9bmPKg+v/MfGCccZ5xPtsvfzZwc2fVKdk3iwmPd9ywGHl821OoeIgx3aknTQX2rXVHnjvpApx28fEh9k1QlrzLg/KXrYEIUuMi1k/jgT2LwZ4fzMZGsvtDxX1s3rbVA+P/WbZMHOzTXPoVZu2we2Zdbrztb1W/55WxfZ7ORT80NRDXPMuvRI3Lkkt0sYg88qqZJlhEPXiUTZtF16NsyJvHL+dudmk=
   </data>
  </layer>
  <layer id="5" name="Overlay" width="50" height="40">

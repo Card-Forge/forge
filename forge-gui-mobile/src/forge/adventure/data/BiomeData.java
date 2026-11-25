@@ -36,6 +36,8 @@ public class BiomeData implements Serializable {
     public String[] enemies;
     public String[] pointsOfInterest;
     public BiomeStructureData[] structures;
+    public EffectData effect;
+    public boolean ignoreGlobalEffect;
 
     private ArrayList<EnemyData> enemyList;
     private ArrayList<PointOfInterestData> pointOfInterestList;

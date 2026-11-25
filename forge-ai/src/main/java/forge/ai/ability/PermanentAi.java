@@ -36,8 +36,35 @@ public class PermanentAi extends SpellAbilityAi {
             return false;
         }
 
+        // Temporary evaluation copies can inspect spells held for Main 2.
+        if (sa.isSpell() && ph.is(PhaseType.MAIN1, ai) && "True".equals(sa.getParam("AIIgnoreMain2Preference"))) {
+            return true;
+        }
+
         // Wait for Main2 if possible
-        return !ph.is(PhaseType.MAIN1) || !ph.isPlayerTurn(ai) || sa.hasParam("WithoutManaCost") || ComputerUtil.castPermanentInMain1(ai, sa);
+        return !ph.is(PhaseType.MAIN1) || !ph.isPlayerTurn(ai) || sa.hasParam("WithoutManaCost") || ComputerUtil.castPermanentInMain1(ai, sa)
+                || paysOffForSpellInHand(ai, sa);
+    }
+
+    /**
+     * A permanent that pays off for a spell in hand that the mana also covers (Up the Beanstalk with a 5+ spell) is cast
+     * first, not held for the second main phase: after the spell it only misses the card (#4278).
+     */
+    public static boolean paysOffForSpellInHand(final Player ai, final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        final int mana = ComputerUtilMana.getAvailableManaEstimate(ai);
+        for (final Card inHand : ai.getCardsIn(ZoneType.Hand)) {
+            if (inHand == host) {
+                continue;
+            }
+            for (final SpellAbility other : inHand.getSpellAbilities()) {
+                if (other.isSpell() && ComputerUtilAbility.paysOffFor(sa, other)
+                        && host.getCMC() + inHand.getCMC() <= mana) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -93,6 +120,8 @@ public class PermanentAi extends SpellAbilityAi {
                     }
                 }
             } else if (xPay <= 0) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
+            } else if (diesAsItEnters(ai, source, xPay)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
         } else if (mana.isZero()) {
@@ -325,6 +354,11 @@ public class PermanentAi extends SpellAbilityAi {
                     dontCast = false;
                     break; // disregard other preferences, always cast as a last resort
                 }
+            } else if (param.equals("MinOtherCardsInHand")) {
+                // Only cast with enough other cards to pay for it (Solitary Confinement discards one every upkeep)
+                if (ai.getCardsIn(ZoneType.Hand).size() - (source.isInZone(ZoneType.Hand) ? 1 : 0) < Integer.parseInt(value)) {
+                    dontCast = true;
+                }
             } else if (param.equals("OnlyFromZone")) {
                 if (!source.getZone().getZoneType().toString().equals(value)) {
                     dontCast = true;
@@ -412,4 +446,39 @@ public class PermanentAi extends SpellAbilityAi {
         }
         return checkApiLogic(ai, sa);
      }
+
+    /**
+     * A creature that enters with X +1/+1 counters on a base toughness of 0 (Omarthis, Ghostfire Initiate) and is made too
+     * small by what is on the battlefield (Elesh Norn, Grand Cenobite's -2/-2): it dies as it enters, whatever X the
+     * mana allows, and the cast only costs mana and (for a commander) tax.
+     */
+    static boolean diesAsItEnters(final Player ai, final Card source, final int x) {
+        if (!source.isCreature()) {
+            return false;
+        }
+        boolean xCounters = false;
+        for (final KeywordInterface k : source.getKeywords()) {
+            if (k.getOriginal().startsWith("etbCounter:P1P1:X")) {
+                xCounters = true;
+            }
+        }
+        if (!xCounters) {
+            return false;
+        }
+        int toughness = source.getState(CardStateName.Original).getBaseToughness() + x;
+        for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            for (final StaticAbility st : c.getStaticAbilities()) {
+                if (!st.checkMode(StaticAbilityMode.Continuous) || !st.hasParam("AddToughness") || !st.hasParam("Affected")
+                        || !source.isValid(st.getParam("Affected"), c.getController(), c, st)) {
+                    continue;
+                }
+                try {
+                    toughness += Integer.parseInt(st.getParam("AddToughness").trim());
+                } catch (final NumberFormatException e) {
+                    // a count: not known here
+                }
+            }
+        }
+        return toughness <= 0;
+    }
 }

@@ -25,6 +25,7 @@ public enum AbilityKey {
     Attackers("Attackers"),
     AttackingPlayer("AttackingPlayer"),
     AttackedTarget("AttackedTarget"),
+    OneOfAttackingTeam("OneOfAttackingTeam"),
     Blocker("Blocker"),
     Blockers("Blockers"),
     CanReveal("CanReveal"),

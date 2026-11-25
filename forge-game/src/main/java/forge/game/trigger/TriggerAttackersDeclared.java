@@ -56,6 +56,13 @@ public class TriggerAttackersDeclared extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        // a team's attack runs once per attacking player for triggers keyed to one, and once whole for the rest (CR 805.10c)
+        if (runParams.containsKey(AbilityKey.OneOfAttackingTeam)) {
+            final boolean perAttackingPlayer = hasParam("AttackingPlayer") || refersToTriggering(AbilityKey.AttackingPlayer);
+            if ((boolean) runParams.get(AbilityKey.OneOfAttackingTeam) != perAttackingPlayer) {
+                return false;
+            }
+        }
         if (!matchesValidParam("AttackingPlayer", runParams.get(AbilityKey.AttackingPlayer))) {
             return false;
         }

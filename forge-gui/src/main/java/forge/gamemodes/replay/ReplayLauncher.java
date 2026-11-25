@@ -34,7 +34,7 @@ public final class ReplayLauncher implements IHasForgeLog {
             final List<ReplayStore.Info> replays = ReplayStore.list();
             if (replays.isEmpty()) {
                 SOptionPane.showMessageDialog("No replays yet. Games you play are recorded automatically "
-                        + "(Preferences: record replays).", "Replays", FSkinProp.ICO_INFORMATION);
+                        + "(Preferences: record replays). Replays from older versions cannot be played.", "Replays", FSkinProp.ICO_INFORMATION);
                 return;
             }
             final ReplayStore.Info choice = SGuiChoose.oneOrNone("Watch which game?", replays);

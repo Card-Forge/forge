@@ -1,5 +1,6 @@
 package forge.game.staticability;
 
+import com.google.common.collect.Iterables;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
@@ -15,8 +16,10 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -55,17 +58,18 @@ public class StaticAbilityPanharmonicon {
             return n;
         }
 
-        CardCollectionView cardList = null;
-        // if LTB look back
+        Set<ZoneType> zones = ZoneType.STATIC_ABILITIES_SOURCE_ZONES;
+        Iterable<Card> cardList;
         if (t.looksBackInTime()) {
-            if (runParams.containsKey(AbilityKey.LastStateBattlefield)) {
-                cardList = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+            CardCollectionView lki = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+            if (lki == null) {
+                lki = game.getLastStateBattlefield();
             }
-            if (cardList == null) {
-                cardList = game.getLastStateBattlefield();
-            }
+            zones = new HashSet<>(zones);
+            zones.remove(ZoneType.Battlefield);
+            cardList = Iterables.concat(lki, game.getCardsIn(zones));
         } else {
-            cardList = game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+            cardList = game.getCardsIn(zones);
         }
 
         for (final Card ca : cardList) {

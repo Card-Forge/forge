@@ -133,6 +133,8 @@ public enum ItemManagerConfig {
             null, null, 3, 0),
     NET_ARCHIVE_BLOCK_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
             null, null, 3, 0),
+    NET_ARCHIVE_COMMANDER_DECKS(SColumnUtil.getDecksDefaultColumns(false, false, true), false, false, false,
+            null, null, 3, 0),
     ADVENTURE_EDITOR_POOL(SColumnUtil.getAdventureCollectionDefaultColumns(), false, false, false,
             null, null, 6, 0),
     ADVENTURE_STORE_POOL(SColumnUtil.getAdventureCollectionDefaultColumns(), false, false, true,

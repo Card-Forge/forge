@@ -142,9 +142,15 @@ public class VAvatar extends FDisplayObject {
     }
 
     public Vector2 getTargetingArrowOrigin() {
+        return getTargetingArrowOrigin(false);
+    }
+
+    public Vector2 getTargetingArrowOrigin(boolean panelOnRight) {
+        if (!isVisible() || getWidth() <= 0f || getHeight() <= 0f) { return null; }
         Vector2 origin = new Vector2(this.screenPos.x, this.screenPos.y);
-        origin.x += getWidth()-getWidth()/8f;
-        origin.y += getWidth()-getWidth()/8f;
+        //Use the edge facing the battlefield, not the outer edge beside the player's labels.
+        origin.x += panelOnRight ? getWidth() / 8f : getWidth() - getWidth() / 8f;
+        origin.y += getHeight() - getHeight() / 8f;
         return origin;
     }
 
@@ -189,7 +195,7 @@ public class VAvatar extends FDisplayObject {
             }
         }
         //turn indicator
-        if (player == MatchController.instance.getGameView().getPlayerTurn()) {
+        if (player.sharesTeamWith(MatchController.instance.getGameView().getPlayerTurn())) {
             float alpha = displayPriority ? 1f : 0.8f;
             if (alphaModifier < 1)
                 alpha = alphaModifier;

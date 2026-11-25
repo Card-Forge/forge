@@ -158,6 +158,9 @@ public final class StifleCombo {
         for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
             stifle |= counterSpell(c) != null;
         }
+        if (cast != null && cast.getActivatingPlayer() == null) {
+            cast.setActivatingPlayer(ai); // the checks below want an activator
+        }
         return "sacrificeUnless=" + isSelfSacrificeUnless(host)
                 + ", inHand=" + (host != null && host.isInZone(ZoneType.Hand))
                 + ", stackEmpty=" + ai.getGame().getStack().isEmpty()

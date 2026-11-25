@@ -1,0 +1,27 @@
+[metadata]
+Name=Dwarven Soldier
+[Main]
+19 Mountain|3ED
+1 Dwarven Hold|FEM
+3 Dwarven Ruins|FEM
+4 Dwarven Soldier|FEM|[53a]
+4 Dwarven Soldier|FEM|[53b]
+4 Dwarven Soldier|FEM|[53c]
+2 Dwarven Lieutenant|FEM
+2 Dwarven Recruiter|ODY
+4 Dwarven Warriors|3ED
+1 Dwarven Vigilantes|VIS
+1 Dwarven Nomad|MIR
+4 Volcanic Hammer|7ED
+1 Ring of Renewal|FEM
+1 Lava Axe|POR
+1 Lava Axe|PO2
+2 Spirit Shield|FEM
+1 Zelyon Sword|FEM
+2 Aeolipile|FEM
+2 Dwarven Catapult|FEM
+1 Runesword|DRK
+[StartInBattle_Reference]
+1 Dwarven Hold|FEM
+1 Dwarven Ruins|FEM
+1 Dwarven Soldier|FEM
