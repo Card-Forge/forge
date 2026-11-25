@@ -11,11 +11,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-/**
- * Primal Surge repeats while its Dig step remembers a permanent card. When the library is empty the Dig step digs
- * nothing, and ForgetOtherRemembered$ must still forget the card from the previous pass; otherwise the follow-up
- * "you may put it onto the battlefield" step asks again about the permanent already put onto the battlefield.
- */
 public class DigForgetOtherRememberedTest extends AITest {
 
     @Test
