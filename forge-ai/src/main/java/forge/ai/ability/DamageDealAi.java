@@ -106,6 +106,9 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = calculateDamageAmount(sa, source, damage);
 
+        // Crater's Claws deals X plus 2 with ferocious; the 2 is not paid for, so it is kept apart from X and added to dmg below
+        final int ferociousBonus = sourceName.equals("Crater's Claws") && ai.hasFerocious() ? 2 : 0;
+
         // Crater's Claws deals Y, which is already X plus 2 with ferocious, so it is not 0 before X is chosen and needs asking for here
         if (damage.equals("X") || sourceName.equals("Crater's Claws")
                 || (dmg == 0 && source.getSVar("X").equals("Count$xPaid"))) {
@@ -117,8 +120,9 @@ public class DamageDealAi extends DamageAiBase {
                 if (MyRandom.percentTrue(holdChance)) {
                     int threshold = AiProfileUtil.getIntProperty(ai, AiProps.HOLD_X_DAMAGE_SPELLS_THRESHOLD);
                     boolean inDanger = ComputerUtil.aiLifeInDanger(ai, false, 0);
-                    boolean isLethal = sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer() && dmg >= ai.getWeakestOpponent().getLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife();
-                    if (dmg < threshold && ai.getGame().getPhaseHandler().getTurn() / 2 < threshold && !inDanger && !isLethal) {
+                    final int totalDmg = dmg + ferociousBonus; // what the spell will deal, not only what X pays for
+                    boolean isLethal = sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer() && totalDmg >= ai.getWeakestOpponent().getLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife();
+                    if (totalDmg < threshold && ai.getGame().getPhaseHandler().getTurn() / 2 < threshold && !inDanger && !isLethal) {
                         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                 }
@@ -150,12 +154,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
-        // Crater's Claws deals X plus 2 with ferocious; the 2 is not paid for, so it must not count as X below
-        int ferociousBonus = 0;
-        if (sourceName.equals("Crater's Claws") && ai.hasFerocious()) {
-            ferociousBonus = 2;
-            dmg += ferociousBonus;
-        }
+        dmg += ferociousBonus;
 
         String logic = sa.getParamOrDefault("AILogic", "");
         if ("DiscardLands".equals(logic)) {

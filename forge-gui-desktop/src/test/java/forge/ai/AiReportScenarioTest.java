@@ -753,6 +753,16 @@ public class AiReportScenarioTest extends AITest {
                     return sa.getXManaCostPaid() != null && sa.getXManaCostPaid() == 3 ? null
                             : "Crater's Claws was cast with X=" + sa.getXManaCostPaid() + ", ferocious needs only 3";
                 }));
+        // four lands pay at most X=3, which is 5 damage with ferocious: exactly lethal on 5 life, so the early-game hold for more damage must not apply
+        l.add(new Scenario("13073-claws-ferocious-hold", "Crater's Claws is cast for exactly lethal on 5 life from four lands when ferocious (X=3 plus 2)", Fid.EXACT, "MAIN1", true,
+                c -> { c.bf("Mountain", 2, c.ai); c.bf("Swamp", 2, c.ai); c.hand("Crater's Claws", c.ai); c.bf("Craw Wurm", c.ai); c.opp.setLife(5, null); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Crater's Claws");
+                    if (sa == null) { return "AI held Crater's Claws, X=3 plus 2 is lethal on 5 life" + c.why("Crater's Claws"); }
+                    if (!sa.getTargets().contains(c.opp)) { return "Crater's Claws targeted " + sa.getTargets(); }
+                    return sa.getXManaCostPaid() != null && sa.getXManaCostPaid() == 3 ? null
+                            : "Crater's Claws was cast with X=" + sa.getXManaCostPaid() + ", four lands and ferocious make lethal with 3";
+                }));
         // seven lands pay at most X=6 ({X}{R}), so 8 damage with ferocious cannot kill 9 life: the bonus must not be counted twice
         // when working out the most X there is (that gave 10 damage and X=7, more than the mana can pay)
         l.add(new Scenario("13073-claws-ferocious-cap", "Crater's Claws never pays more than X=6 from seven lands for a player on 9 life when ferocious", Fid.EXACT, "MAIN1", true,
