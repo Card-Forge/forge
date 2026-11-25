@@ -294,7 +294,7 @@ public class ControlGainAi extends SpellAbilityAi {
      * "When this enters, target opponent gains control of it" and it hurts its controller each turn (Sleeper Agent): the opponent gets a
      * body, and takes the damage. That is a race the AI takes when it can survive the body: it has a creature that blocks it well, or
      * it is not behind on life and has life to spare for a few hits. The trigger itself is mandatory, so this is asked when
-     * deciding to cast the creature (PermanentAi, AILogic SleeperAgent on its spell). The card's own NeedsToPlay asked for a big
+     * deciding to cast the creature (PermanentAi, SVar AICastLogic SleeperAgent on the card). The card's own NeedsToPlay asked for a big
      * creature of the AI and kept it out of every deck without one, burn decks included (#13048).
      */
     public static AiAbilityDecision lendToOpponent(final Player ai, final Card host) {
