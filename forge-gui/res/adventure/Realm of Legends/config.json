@@ -292,7 +292,7 @@
     ],
   "modifiers": [
     {
-      "name": "Permadeath",
+      "name": "Vow of Loss",
       "description": "Lose a match: lose your commander and 5 random cards.",
       "icon": "BasilicaSkullbomb",
       "type": "CardLoss",
@@ -300,31 +300,31 @@
       "loseCommander": true
     },
     {
-      "name": "Rarity limit",
-      "description": "Cards must be this rarity or lower.",
+      "name": "Vow of Restraint",
+      "description": "Cards must be the chosen rarity or lower.",
       "icon": "Treasure",
       "type": "RarityLimit"
     },
     {
-      "name": "Color limit",
+      "name": "Vow of Devotion",
       "description": "Every card in your deck must be within the colors picked below. Colorless cards are always allowed.",
       "icon": "Shard",
       "type": "ColorLimit"
     },
     {
       "name": "Vow of Poverty",
-      "description": "Your gold stays at 0.",
+      "description": "Your gold stays permanently at 0.",
       "icon": "BronzeChallengeCoin",
       "maxGold": 0
     },
     {
-      "name": "Limited Looting",
+      "name": "Vow of Respect",
       "description": "Enemies drop no random cards. Gold, shards, items and named cards still drop.",
       "icon": "SteelSword",
       "blockedEnemyRewards": ["deckCard", "randomCard"]
     },
     {
-      "name": "Endless Library",
+      "name": "Vow of the Keeper",
       "description": "You have only one deck. Cards cannot be removed once added. Your deck has no size limit.",
       "icon": "TomeoftheBuilder",
       "singleDeck": true,
@@ -332,7 +332,7 @@
       "noMaxDeckSize": true
     },
     {
-      "name": "Lingering Wounds",
+      "name": "Vow of Pain",
       "description": "+10 max life. Lose a fight: lose 1 max life for good.",
       "icon": "TokenofBlood",
       "maxLifeBonus": 10,
