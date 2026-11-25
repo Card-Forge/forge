@@ -106,7 +106,9 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = calculateDamageAmount(sa, source, damage);
 
-        if (damage.equals("X") || (dmg == 0 && source.getSVar("X").equals("Count$xPaid"))) {
+        // Crater's Claws deals Y, which is already X plus 2 with ferocious, so it is not 0 before X is chosen and needs asking for here
+        if (damage.equals("X") || sourceName.equals("Crater's Claws")
+                || (dmg == 0 && source.getSVar("X").equals("Count$xPaid"))) {
             if (sa.getSVar("X").equals("Count$xPaid") || sa.getSVar(damage).equals("Count$xPaid")) {
                 dmg = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
 
@@ -148,8 +150,11 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
+        // Crater's Claws deals X plus 2 with ferocious; the 2 is not paid for, so it must not count as X below
+        int ferociousBonus = 0;
         if (sourceName.equals("Crater's Claws") && ai.hasFerocious()) {
-            dmg += 2;
+            ferociousBonus = 2;
+            dmg += ferociousBonus;
         }
 
         String logic = sa.getParamOrDefault("AILogic", "");
@@ -284,7 +289,8 @@ public class DamageDealAi extends DamageAiBase {
         if ((damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) ||
                 sourceName.equals("Crater's Claws")) {
             // If I can kill my target by paying less mana, do it
-            final Integer lethalX = sa.usesTargeting() ? minimalX(sa, dmg, source, sa.hasParam("NoPrevention")) : null;
+            // minimalX adds the ferocious bonus itself, so it is given the most X that can be paid, not the damage that makes
+            final Integer lethalX = sa.usesTargeting() ? minimalX(sa, dmg - ferociousBonus, source, sa.hasParam("NoPrevention")) : null;
             if (lethalX != null) {
                 sa.setXManaCostPaid(lethalX);
             } else if (sa.usesTargeting() && !sa.getTargets().isTargetingAnyPlayer() && !sa.isDividedAsYouChoose()) {
@@ -296,8 +302,8 @@ public class DamageDealAi extends DamageAiBase {
                         actualPay = adjDamage;
                     }
                 }
-                if (sourceName.equals("Crater's Claws") && ai.hasFerocious()) {
-                    actualPay = actualPay > 2 ? actualPay - 2 : 0;
+                if (ferociousBonus > 0) {
+                    actualPay = Math.max(0, actualPay - ferociousBonus);
                 }
                 sa.setXManaCostPaid(actualPay);
             }
@@ -1046,8 +1052,9 @@ public class DamageDealAi extends DamageAiBase {
 
     /**
      * The X that kills what is targeted for as little mana as possible, for X spells that hit a player alone or split their damage
-     * evenly (Fireball): null when this does not apply and the caller decides. {@code maxX} is what one target could take; each target
-     * beyond the first costs {1}, and the split is rounded down, so n targets that need N each take N*n.
+     * evenly (Fireball): null when this does not apply and the caller decides. {@code maxX} is the most X that can be paid, before any
+     * damage that X does not pay for (Crater's Claws' ferocious bonus, which is added here, once); each target beyond the first costs
+     * {1}, and the split is rounded down, so n targets that need N each take N*n.
      */
     private static Integer minimalX(final SpellAbility sa, final int maxX, final Card source, final boolean noPrevention) {
         final boolean evenly = sa.hasParam("DivideEvenly");

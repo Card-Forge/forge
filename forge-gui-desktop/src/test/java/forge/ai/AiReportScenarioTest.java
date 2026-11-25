@@ -753,6 +753,16 @@ public class AiReportScenarioTest extends AITest {
                     return sa.getXManaCostPaid() != null && sa.getXManaCostPaid() == 3 ? null
                             : "Crater's Claws was cast with X=" + sa.getXManaCostPaid() + ", ferocious needs only 3";
                 }));
+        // seven lands pay at most X=6 ({X}{R}), so 8 damage with ferocious cannot kill 9 life: the bonus must not be counted twice
+        // when working out the most X there is (that gave 10 damage and X=7, more than the mana can pay)
+        l.add(new Scenario("13073-claws-ferocious-cap", "Crater's Claws never pays more than X=6 from seven lands for a player on 9 life when ferocious", Fid.EXACT, "MAIN1", true,
+                c -> { c.bf("Mountain", 4, c.ai); c.bf("Swamp", 3, c.ai); c.hand("Crater's Claws", c.ai); c.bf("Craw Wurm", c.ai); c.opp.setLife(9, null); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Crater's Claws");
+                    if (sa == null) { return null; } // holding it is fine, 8 damage does not kill 9 life; paying more than the mana allows is what is wrong
+                    final Integer x = sa.getXManaCostPaid();
+                    return x != null && x > 6 ? "Crater's Claws was cast with X=" + x + ", seven lands pay at most 6" : null;
+                }));
         // two planeswalkers on 3 loyalty: both as targets cost {1} more and take 2 each (X=5 of 7 lands), neither dies
         l.add(new Scenario("13073-fireball-walkers", "Fireball does not aim at two planeswalkers that would each take 2 of their 3 loyalty", Fid.EXACT, "MAIN1", true,
                 c -> { c.bf("Mountain", 4, c.ai); c.bf("Swamp", 3, c.ai); c.hand("Fireball", c.ai);
