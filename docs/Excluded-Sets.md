@@ -43,20 +43,20 @@ Owned cards and saved decks do not change. A deck with an excluded card still lo
 Some content keeps excluded cards, and Forge shows a message once per session when it does. Quest, Planar Conquest and Adventure opponents play their decks as written. A message at the start of a match names any opponent whose deck holds excluded cards. In Adventure, a message also appears when a shop's stock is missing cards because of the list.
 
 ## How It Works
-Sets and individual printings carry tags, and each category is one tag. Tags come from the generated `res/blockdata/printtags.txt`, the hand-written `res/blockdata/printtags-manual.txt`, and `Tags=` lines in edition files.
+Each category is a tag on sets and individual printings. The built-in tags update daily from Scryfall, and custom tags can be added by hand (see [Defining custom tags](#defining-custom-tags)).
 
-One preference stores the list. A set code excludes a set, `#Tag` excludes a category, and `!Code` keeps a set inside an excluded category. Forge stores the category rather than its sets, so it excludes sets tagged later without any change to the list.
+An excluded category also covers sets and cards added to it later, so new releases are excluded without changing the list.
 
-When Forge picks a card's default printing, it skips excluded printings if an allowed one exists. Adventure adds excluded sets to the plane's restricted editions. It swaps an excluded printing for an allowed one from the plane's editions, or drops the card if none exists.
+Excluded printings are skipped whenever Forge picks a card's art or generates Adventure content, as long as another printing is allowed.
 
-Excluded Un-cards and playtest cards still load. Forge hides them from its card pools but still finds them by name, which is why saved decks keep working.
+Excluding Un-cards and playtest cards hides them rather than removing them from Forge, so decks that use them keep working.
 
-Closing the list rebuilds the card pools and booster sheets, so no restart is needed. Planar Conquest planes are the exception. They keep their card pool until Forge restarts.
+Changes apply when the list closes, with no restart. Planar Conquest is the exception and picks up changes after a restart.
 
 ## Defining Categories
 `forge-gui/tools/printtags.py` generates `res/blockdata/printtags.txt`. The Update Print Tags workflow runs the script daily and commits the file when it changes. Do not edit the file by hand.
 
-Every tag in the file appears in the Excluded Sets list. No Java change is needed.
+Every tag in the file appears as a category in the Excluded Sets list.
 
 ### Automated Scryfall tagging
 Most categories come from Scryfall card data. Each entry in `RULES` pairs a tag name with a test on a Scryfall card object:
