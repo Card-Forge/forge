@@ -27,6 +27,7 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.token.TokenInfo;
 import forge.game.card.CardZoneTable;
 import forge.game.event.GameEventCombatChanged;
@@ -187,6 +188,11 @@ public class TokenEffect extends TokenEffectBase {
 
         int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("TokenAmount", "1"), sa);
         if (amount < 1) {
+            // CR 603.7a: "create X tokens ... sacrifice them at the beginning of the next end step" (Mobilize X with
+            // X = 0) still creates its delayed trigger; with no token it does nothing (CR 603.7c)
+            if (sa.hasParam("AtEOT")) {
+                registerDelayedTrigger(sa, sa.getParam("AtEOT"), new CardCollection());
+            }
             return;
         }
 
