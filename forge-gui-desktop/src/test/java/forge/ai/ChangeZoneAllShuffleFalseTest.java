@@ -14,11 +14,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-/**
- * A ChangeZoneAll with Shuffle$ False must not shuffle any library. Wakanda Forever!'s last step
- * ("Put the rest into your graveyard") carries Shuffle$ False; the effect tested only that the
- * parameter was present, so it shuffled every player's library.
- */
 public class ChangeZoneAllShuffleFalseTest extends AITest {
 
     @Test
@@ -32,7 +27,6 @@ public class ChangeZoneAllShuffleFalseTest extends AITest {
         List<Card> before = new ArrayList<>(p.getCardsIn(ZoneType.Library));
         List<Card> oppBefore = new ArrayList<>(opp.getCardsIn(ZoneType.Library));
 
-        // nothing is remembered, so the step moves no card
         SpellAbility rest = AbilityFactory.getAbility(wakanda, "DBRestGrave");
         rest.setActivatingPlayer(p);
         AbilityUtils.resolve(rest);
