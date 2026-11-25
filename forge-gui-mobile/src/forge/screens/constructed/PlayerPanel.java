@@ -498,19 +498,11 @@ public class PlayerPanel extends FContainer {
             if (allowNetworking) {
                 if (isOpenAiSlotToggle()) {
                     LobbySlotType newType = toggled ? LobbySlotType.AI : LobbySlotType.OPEN;
-                    setType(newType);
-
-                    LobbySlot slot = screen.getLobby().getSlot(index);
-                    slot.setType(newType);
-
                     if (newType == LobbySlotType.AI && getPlayerName().isEmpty()) {
                         setPlayerName(NameGenerator.getRandomName("Any", "Any", screen.getPlayerNames()));
                     }
 
-                    screen.update(index, newType);
-
-                    setMayEdit(screen.getLobby().mayEdit(index));
-                    screen.firePlayerChangeListener(index);
+                    screen.updateType(index, newType);
                 } else {
                     setIsReady(toggled);
                     screen.setReady(index, toggled);
@@ -832,7 +824,7 @@ public class PlayerPanel extends FContainer {
             }
             if (!isArchenemyApplied) {
                 cbTeam.setVisible(true);
-                cbTeam.setEnabled(mayEdit);
+                cbTeam.setEnabled(mayEdit && !screen.hasVariant(GameType.TwoHeadedGiant));
                 cbArchenemyTeam.setVisible(false);
             } else {
                 cbTeam.setVisible(false);

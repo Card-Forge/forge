@@ -1,0 +1,6 @@
+Name:Chest Trait - Sigil Of The Kingdom
+ManaCost:no cost
+Types:Trait
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ Landfall - Whenever a land you control enters, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Landfall - Whenever a land you control enters, put a +1/+1 counter on target creature you control.

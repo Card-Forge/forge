@@ -1,0 +1,7 @@
+Name:Chest Trait - Sigil Of Multicolor
+ManaCost:no cost
+Types:Trait
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Command | TriggerDescription$ Whenever you cast a multicolored spell, Sigil Of Multicolor deals X damage to any target, where X is the number of colors that spell is.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:TriggeredCard$CardNumColors
+Oracle:Whenever you cast a multicolored spell, Sigil Of Multicolor deals X damage to any target, where X is the number of colors that spell is.

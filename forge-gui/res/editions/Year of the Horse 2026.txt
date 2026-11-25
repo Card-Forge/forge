@@ -4,6 +4,7 @@ Date=2026-02-17
 Name=Year of the Horse 2026
 Type=Promo
 ScryfallCode=PL26
+TokensCode=PL26
 
 [cards]
 1 R Caustic Bronco @Song Qijin

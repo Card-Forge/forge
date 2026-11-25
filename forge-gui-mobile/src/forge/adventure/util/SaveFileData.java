@@ -10,7 +10,11 @@ import io.sentry.Sentry;
 import org.tinylog.Logger;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SaveFileData extends HashMap<String, byte[]> {
     public void store(String key, SaveFileData subData) {
@@ -179,10 +183,16 @@ public class SaveFileData extends HashMap<String, byte[]> {
     public Object readObject(String key) {
         if (!containsKey(key))
             return null;
+        byte[] data = get(key);
         try {
-            ByteArrayInputStream stream = new ByteArrayInputStream(get(key));
-            ObjectInputStream objStream = new DecompressibleInputStream(stream);
-            return objStream.readObject();
+            try {
+                return new DecompressibleInputStream(new ByteArrayInputStream(data)).readObject();
+            } catch (InvalidClassException e) {
+                byte[] adopted = DecompressibleInputStream.adoptPinnedUids(data);
+                if (adopted == data)
+                    throw e;
+                return new DecompressibleInputStream(new ByteArrayInputStream(adopted)).readObject();
+            }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             Forge.delayedSwitchBack("", "SaveFileData Error\nPress Resume on the Main Menu to try with missing " + key);
@@ -330,8 +340,62 @@ public class SaveFileData extends HashMap<String, byte[]> {
 
         //private static Logger logger = LoggerFactory.getLogger(DecompressibleInputStream.class);
 
+        private static final byte[] FORGE_PACKAGE = "forge.".getBytes(StandardCharsets.UTF_8);
+        private static final Map<String, Optional<Long>> pinnedUids = new ConcurrentHashMap<>();
+
         public DecompressibleInputStream(InputStream in) throws IOException {
             super(in);
+        }
+
+        // Rewrites pre-pin stream UIDs to the pinned one, since desktop and Android computed different defaults.
+        static byte[] adoptPinnedUids(byte[] data) {
+            byte[] result = data;
+            for (int i = 0; i + 3 < data.length; i++) {
+                if (data[i] != ObjectStreamConstants.TC_CLASSDESC)
+                    continue;
+                int nameStart = i + 3;
+                int uidStart = nameStart + (((data[i + 1] & 0xFF) << 8) | (data[i + 2] & 0xFF));
+                if (uidStart + 8 > data.length || !startsWith(data, nameStart, FORGE_PACKAGE))
+                    continue;
+                Long pinned = pinnedUid(new String(data, nameStart, uidStart - nameStart, StandardCharsets.UTF_8));
+                if (pinned == null || readLong(data, uidStart) == pinned)
+                    continue;
+                if (result == data)
+                    result = data.clone();
+                for (int b = 0; b < 8; b++)
+                    result[uidStart + b] = (byte) (pinned >>> (56 - 8 * b));
+            }
+            return result;
+        }
+
+        private static Long pinnedUid(String className) {
+            return pinnedUids.computeIfAbsent(className, name -> {
+                try {
+                    Class<?> cls = Class.forName(name, false, SaveFileData.class.getClassLoader());
+                    cls.getDeclaredField("serialVersionUID");
+                    ObjectStreamClass desc = ObjectStreamClass.lookup(cls);
+                    return desc == null ? Optional.empty() : Optional.of(desc.getSerialVersionUID());
+                } catch (ClassNotFoundException | NoSuchFieldException | LinkageError e) {
+                    return Optional.empty();
+                }
+            }).orElse(null);
+        }
+
+        private static boolean startsWith(byte[] data, int offset, byte[] prefix) {
+            if (offset + prefix.length > data.length)
+                return false;
+            for (int j = 0; j < prefix.length; j++) {
+                if (data[offset + j] != prefix[j])
+                    return false;
+            }
+            return true;
+        }
+
+        private static long readLong(byte[] data, int offset) {
+            long value = 0;
+            for (int b = 0; b < 8; b++)
+                value = (value << 8) | (data[offset + b] & 0xFF);
+            return value;
         }
 
         @Override

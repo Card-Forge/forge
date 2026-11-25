@@ -1,0 +1,10 @@
+Name:Searing Soloist
+ManaCost:2 R R
+Types:Creature Orc Bard
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When this creature enters, conjure a card named Aria of Flame onto the battlefield.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Aria of Flame | Zone$ Battlefield
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.RedSource+YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus1 | Description$ If a red source you control would deal damage to a permanent or player, it deals that much damage plus 1 instead.
+SVar:DmgPlus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.1
+Oracle:When this creature enters, conjure a card named Aria of Flame onto the battlefield.\nIf a red source you control would deal damage to a permanent or player, it deals that much damage plus 1 instead.

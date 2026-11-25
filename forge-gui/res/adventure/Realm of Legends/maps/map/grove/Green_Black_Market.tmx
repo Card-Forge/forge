@@ -61,7 +61,7 @@
     &quot;text&quot;: &quot;'The forbidden spell I'm selling is Natural Order. Sacrifice a green creature and turn it into any other - something small into the fiercest creatures to exist.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,0000 gold)&quot;,
+        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 100000 }
         ],
@@ -77,7 +77,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,0000 gold)&quot;,
+        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 100000, &quot;not&quot;: true }
         ],
@@ -101,7 +101,7 @@
     &quot;text&quot;: &quot;'I have two powerful tutors to find what you need. Survival of the Fittest can repeatedly discard creatures to find new better ones and Finale of Devastation can get any creature into play and with enough mana provide a devastating boost to your forces.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I want the Survival of the Fittest. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Survival of the Fittest. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -116,7 +116,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Survival of the Fittest. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Survival of the Fittest. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -124,7 +124,7 @@
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
       {
-        &quot;name&quot;: &quot;I want the Finale of Devastation. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Finale of Devastation. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -139,7 +139,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Finale of Devastation. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Finale of Devastation. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -163,7 +163,7 @@
     &quot;text&quot;: &quot;'I have two efficient ways to search for any creatures you want. Green Sun's Zenith pulls creatures from your library to the battlefield. Chord of Calling does the same, but faster and your creatures can help pay, but its a bit more expensive up front.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I want the Green Sun's Zenith. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Green Sun's Zenith. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -178,7 +178,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Green Sun's Zenith. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Green Sun's Zenith. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -186,7 +186,7 @@
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
       {
-        &quot;name&quot;: &quot;I want the Chord of Calling. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Chord of Calling. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -201,7 +201,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Chord of Calling. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Chord of Calling. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -225,7 +225,7 @@
     &quot;text&quot;: &quot;'I have two powerful sources of card advantage for sale. The Great Henge turns every creature into draw while gaining life, making mana, AND making them stronger. Sylvan Library lets you dig deep for advantage if you pay life, or just reorder things for free.'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I want The Great Henge. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want The Great Henge. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -240,7 +240,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want The Great Henge. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want The Great Henge. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],
@@ -248,7 +248,7 @@
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
       {
-        &quot;name&quot;: &quot;I want the Sylvan Library. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Sylvan Library. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000 }
         ],
@@ -263,7 +263,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I want the Sylvan Library. (Spend 20,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I want the Sylvan Library. (Spend 20,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
         ],

@@ -37,6 +37,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardState;
+import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.phase.PhaseHandler;
@@ -409,7 +410,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
         if (hasParam("PlayerTurn")) {
             List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("PlayerTurn"), this);
-            if (!players.contains(ph.getPlayerTurn())) {
+            if (players.stream().noneMatch(ph::isPlayerTurn)) {
                 return false;
             }
         }
@@ -455,6 +456,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             final int level = this.hostCard.getClassLevel();
             final int levelMin = Integer.parseInt(getParam("ClassLevel"));
             if (level < levelMin) {
+                return false;
+            }
+        }
+
+        if (hasParam("Station")) {
+            final int counters = this.hostCard.getCounters(CounterEnumType.CHARGE);
+            final int station = Integer.parseInt(getParam("Station"));
+            if (counters < station) {
                 return false;
             }
         }

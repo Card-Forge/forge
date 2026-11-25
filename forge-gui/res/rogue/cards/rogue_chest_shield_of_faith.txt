@@ -1,0 +1,5 @@
+Name:Chest Trait - Shield Of Faith
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Vigilance & Lifelink & Hexproof | Condition$ FatefulHour | Description$ As long as you have 5 or less life, creatures you control have vigilance, lifelink, and hexproof.
+Oracle:As long as you have 5 or less life, creatures you control have vigilance, lifelink, and hexproof.

@@ -20,6 +20,11 @@ import forge.game.trigger.TriggerHandler;
  *
  */
 public class AddPhaseEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AfterPhase", "BeforeFirstPostCombatMainEnd", "ExtraPhaseDelayedTrigger",
+        "ExtraPhaseDelayedTriggerExecute", "FollowedBy", "NumPhases",
+    };
+    public static final String[][] REQUIRED_PARAMS = {{"ExtraPhase"}};
 
     @Override
     public void resolve(SpellAbility sa) {
@@ -69,7 +74,7 @@ public class AddPhaseEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("ExtraPhaseDelayedTrigger")) {
                 final Trigger delTrig = TriggerHandler.parseTrigger(sa.getSVar(sa.getParam("ExtraPhaseDelayedTrigger")), host, true);
-                SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(sa.getParam("ExtraPhaseDelayedTriggerExcute")), host);
+                SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(sa.getParam("ExtraPhaseDelayedTriggerExecute")), host);
                 overridingSA.setActivatingPlayer(activator);
                 delTrig.setOverridingAbility(overridingSA);
                 delTrig.setSpawningAbility(sa.copy(host, true));

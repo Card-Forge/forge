@@ -65,6 +65,7 @@ public class PlayerControllerAi extends PlayerController {
     private final AiController brains;
 
     private boolean pilotsNonAggroDeck = false;
+    private ManaCostShard shardBeingPaid;
 
     /** Snapshot the whole game before a targeted AI cast so it can be taken back. Heavy on memory, so off. */
     public static final boolean AI_ROLLBACK = false;
@@ -83,6 +84,17 @@ public class PlayerControllerAi extends PlayerController {
     public boolean takesShortcuts() {
         final int threshold = brains.getIntProperty(AiProps.SHORTCUT_MIN_CREATURES);
         return threshold >= 0 && CardLists.count(getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES) >= threshold;
+    }
+
+    // lets mana triggered while paying, like Fertile Ground's, take this shard's color
+    public void runPayingShard(ManaCostShard shard, Runnable proc) {
+        ManaCostShard previous = shardBeingPaid;
+        shardBeingPaid = shard;
+        try {
+            proc.run();
+        } finally {
+            shardBeingPaid = previous;
+        }
     }
 
     public void setupAutoProfile(Deck deck) {
@@ -115,7 +127,7 @@ public class PlayerControllerAi extends PlayerController {
      */
     private boolean sideboardsAgainstOpponentDeck() {
         return brains.getGame().getRules().getAISideboardingEnabled() && brains.getGame().getAIFlatMonteCarlo()
-                && brains.getBoolProperty(AiProps.FLAT_MC_ENABLED);
+                && brains.getBoolProperty(AiProps.FLAT_MC_ENABLED) && !brains.getGame().getRules().getSideboardForAI();
     }
 
     @Override
@@ -255,12 +267,10 @@ public class PlayerControllerAi extends PlayerController {
                         if (!cMain.getRules().getType().sharesCardTypeWith(cSide.getRules().getType())) {
                             continue; // Only equivalent types allowed
                         }
-                    } else {
-                        if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
-                                || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
-                            if (!(sbPlaneswalkerException && (cMain.getRules().getType().isPlaneswalker() || cSide.getRules().getType().isPlaneswalker()))) {
-                                continue; // Creature exception: only trade a creature for another creature unless planeswalkers are allowed as a replacement
-                            }
+                    } else if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
+                            || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
+                        if (!(sbPlaneswalkerException && (cMain.getRules().getType().isPlaneswalker() || cSide.getRules().getType().isPlaneswalker()))) {
+                            continue; // Creature exception: only trade a creature for another creature unless planeswalkers are allowed as a replacement
                         }
                     }
 
@@ -359,7 +369,11 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView choosePermanentsToSacrifice(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message) {
-        return ComputerUtil.choosePermanentsToSacrifice(player, validTargets, max, sa, false, min == 0);
+        final CardCollectionView sacrificed = ComputerUtil.choosePermanentsToSacrifice(player, validTargets, max, sa, false, min == 0);
+        if (sacrificed != null && min == 0 && max > 1 && forge.ai.ability.SacrificeWorth.applies(sa)) {
+            return forge.ai.ability.MayDecisions.limitSacrifices(player, sa, sacrificed); // "any number": not all of them
+        }
+        return sacrificed;
     }
 
     @Override
@@ -683,6 +697,17 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
         } else if (destinationZone == ZoneType.Library) {
+            // Doomsday: the five cards go on top in the order that draws through to the winner
+            if (source != null && forge.ai.simulation.DoomsdayPile.isDoomsday(source.getHostCard())) {
+                try {
+                    final CardCollectionView pile = forge.ai.simulation.DoomsdayPile.order(player, cards);
+                    if (pile != null) {
+                        return pile;
+                    }
+                } catch (final RuntimeException e) {
+                    // fall through to the general ordering
+                }
+            }
             // Ponder and similar cards
             Player p = cards.getFirst().getController(); // whose library are we reordering?
             CardCollection reordered = new CardCollection();
@@ -749,9 +774,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser) {
+    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max, DelayedReveal delayedReveal) {
         if (p == player) {
             return brains.getCardsToDiscard(min, max, validCards, sa);
+        }
+
+        if (delayedReveal != null) {
+            reveal(delayedReveal);
         }
 
         boolean isTargetFriendly = !p.isOpponentOf(player);
@@ -869,8 +898,18 @@ public class PlayerControllerAi extends PlayerController {
         return Aggregates.random(swapChoices);
     }
 
+    /** Momir Basic and MoJhoSto: every deck is basic lands, the avatar in the command zone is the whole game. */
+    private boolean isBasicLandDeckVariant() {
+        final forge.game.GameRules rules = player.getGame().getRules();
+        return rules.hasAppliedVariant(forge.game.GameType.MomirBasic) || rules.hasAppliedVariant(forge.game.GameType.MoJhoSto)
+                || player.isCardInCommand("Momir Vig, Simic Visionary Avatar");
+    }
+
     @Override
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
+        if (isBasicLandDeckVariant()) {
+            return true; // Momir Basic / MoJhoSto: the deck is all basic lands and the avatar does the work, there is nothing to mulligan for
+        }
         if (brains.useSmartMulligan()) {
             try {
                 return OpeningHand.keep(player, player.getCardsIn(ZoneType.Hand), cardsToReturn,
@@ -943,6 +982,12 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void declareBlockers(Player defender, Combat combat) {
         brains.declareBlockersFor(defender, combat);
+        // CR 805.10d: an illegal team block is declared again, so drop this player's blocks rather than repeat it
+        if (defender.getSharedTeam().size() > 1 && CombatUtil.validateTeamBlock(combat, defender) != null) {
+            for (final Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), defender)) {
+                combat.undoBlockingAssignment(blocker);
+            }
+        }
     }
 
     @Override
@@ -1117,7 +1162,20 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultVal) {
         switch (kindOfChoice) {
-            case TapOrUntap: return true;
+            case TapOrUntap:
+                // the effect says what is natural for the target (tap an opponent's permanent, untap one's own); with no
+                // such hint (Turnabout) the player it is aimed at decides: untap one's own, tap the opponent's
+                if (defaultVal != null) {
+                    return defaultVal;
+                }
+                for (SpellAbility node = sa; node != null; node = node.getSubAbility()) {
+                    if (node.usesTargeting() && node.getTargets() != null) {
+                        for (final forge.game.player.Player p : node.getTargets().getTargetPlayers()) {
+                            return !p.equals(player);
+                        }
+                    }
+                }
+                return true;
             case UntapOrLeaveTapped:
                 Card source = sa.getHostCard();
                 if (source != null && source.hasSVar("AIUntapPreference")) {
@@ -1227,6 +1285,9 @@ public class PlayerControllerAi extends PlayerController {
         // You may switch on sa.getApi() here and use sa.getParam("AILogic")
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         if (sa.getApi() == ApiType.Mana) {
+            if (shardBeingPaid != null) {
+                return ComputerUtilMana.chooseColorForShard(shardBeingPaid, colors.getColor());
+            }
             hand = CardCollection.combine(hand, player.getCardsIn(ZoneType.Stack));
         }
         final String c = ComputerUtilCard.getMostProminentColor(hand);
@@ -1455,7 +1516,24 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
+        final AiController brains = getAi();
+        final int previousValakutTriggers = brains.getSimultaneousValakutDamageTriggers();
+        int valakutTriggers = 0;
+        for (final SpellAbility pending : activePlayerSAs) {
+            final Card host = pending.getHostCard();
+            if (pending.isTrigger() && pending.getApi() == forge.game.ability.ApiType.DealDamage
+                    && host != null && "Valakut, the Molten Pinnacle".equals(host.getName())) {
+                valakutTriggers++;
+            }
+        }
+        if (valakutTriggers > 0) {
+            brains.setSimultaneousValakutDamageTriggers(valakutTriggers);
+        }
+        try {
         for (final SpellAbility sa : orderSimultaneousSa(activePlayerSAs)) {
+            if (playedByTeammate(sa)) {
+                continue;
+            }
             if (sa.isTrigger() && !sa.isCopied()) {
                 if (prepareSingleSa(sa.getHostCard(), sa, true)) {
                     ComputerUtil.playStack(sa, player, getGame());
@@ -1470,7 +1548,7 @@ public class PlayerControllerAi extends PlayerController {
                         }
                     }
 
-                    if (sa.isMayChooseNewTargets()) {
+                    if (sa.isMayChooseNewTargets() && !sa.getAllTargetChoices().isEmpty()) {
                         chooseNewTargetsForCopy(sa);
                         // FIXME: the new implementation (below) requires implementing setupNewTargets in the AI controller, among other possible changes, otherwise breaks AI
                         // sa.setupNewTargets(player);
@@ -1480,9 +1558,12 @@ public class PlayerControllerAi extends PlayerController {
                 getGame().getStack().add(sa);
             }
         }
+        } finally {
+            brains.setSimultaneousValakutDamageTriggers(previousValakutTriggers);
+        }
     }
 
-    private void chooseNewTargetsForCopy(final SpellAbility copy) {
+    void chooseNewTargetsForCopy(final SpellAbility copy) {
         List<TargetChoices> oldTargets = new ArrayList<>();
         boolean targetingPlayer = false;
         for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
@@ -1514,6 +1595,10 @@ public class PlayerControllerAi extends PlayerController {
                 s.setTargets(oldTargets.get(i++));
             }
         }
+        if (!targetingPlayer) {
+            // a copy that would do what the original or another copy already does goes for another target
+            CopyTargets.awayFromTheOthers(player, copy);
+        }
     }
 
     private boolean prepareSingleSa(final Card host, SpellAbility sa, boolean isMandatory) {
@@ -1529,6 +1614,7 @@ public class PlayerControllerAi extends PlayerController {
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
+            sa.clearTargets();
             return targetingPlayer.getController().chooseTargetsFor(sa);
         }
         return brains.doTrigger(sa, isMandatory);
@@ -1562,7 +1648,12 @@ public class PlayerControllerAi extends PlayerController {
                 return ComputerUtil.playStack(tgtSA, player, getGame());
             }
             // TODO if mandatory AI is only forced to use mana when it's already in the pool
-            if (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional) {
+            // Suspend is optional in the rules, but declining after the last TIME counter leaves the card exiled.
+            final Card host = tgtSA.getHostCard();
+            final boolean lastSuspendCast = tgtSA.isCastFromPlayEffect() && host != null
+                    && host.isInZone(ZoneType.Exile) && host.hasKeyword(Keyword.SUSPEND)
+                    && host.getCounters(CounterEnumType.TIME) == 0;
+            if (brains.canPlayFromEffectAI(spell, !optional || lastSuspendCast, noManaCost) == AiPlayDecision.WillPlay || !optional) {
                 return ComputerUtil.playStack(tgtSA, player, getGame());
             }
             return false; // didn't play spell
@@ -1702,31 +1793,107 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
         final Map<Card, ManaCostShard> chosen = ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, artifacts, creatures);
-        // improvise and waterbend don't record the cards they tap, which the AI checks before casting
-        if (kept.isEmpty() || !creatures || artifacts) {
+        // Improvise and waterbend don't record the cards they tap. Their existing selection
+        // logic is intentionally left unchanged here.
+        if (!creatures || artifacts) {
             return chosen;
         }
+        final boolean hasTapTypeManaSource = !chosen.isEmpty() && hasTapTypeManaAbility(ai);
+        if (!hasTapTypeManaSource && (kept.isEmpty() || sa.costHasManaX())) {
+            return chosen;
+        }
+
+        ManaCostBeingPaid rest = new ManaCostBeingPaid(manaCost);
+        for (final ManaCostShard shard : chosen.values()) {
+            rest.decreaseShard(shard, 1);
+        }
+
+        // CostAdjustment records the selected convoke creatures only after this callback returns.
+        // Include them temporarily when estimating the remaining mana so a tap-type mana ability
+        // cannot count the same Elves again (for example, Heritage Druid's tap-three-Elves cost).
+        if (canPayWithConvokeSelection(sa, rest, ai, chosen.keySet())) {
+            return chosen;
+        }
+
+        // If the remaining cost cannot be paid with the chosen creatures tapped, try releasing
+        // them from convoke. A creature may be more valuable as part of a mana ability's tap cost
+        // than as a one-mana convoke payment.
+        final Map<Card, ManaCostShard> originalChoice = new HashMap<>(chosen);
+        final List<Card> releaseCandidates = new ArrayList<>(chosen.keySet());
+        releaseCandidates.sort(Comparator.comparing((Card c) -> CombatUtil.canAttack(c))
+                .thenComparing(ComputerUtilCard.getCachedCreatureComparator()));
+        for (final Card c : releaseCandidates) {
+            final ManaCostShard shard = chosen.remove(c);
+            if (shard == null) {
+                continue;
+            }
+            rest.increaseShard(shard, 1);
+            if (canPayWithConvokeSelection(sa, rest, ai, chosen.keySet())) {
+                return chosen;
+            }
+        }
+
+        // No convoke subset made the remaining cost payable. Keep the original choice and retain
+        // the existing combat-preservation behavior below.
+        chosen.clear();
+        chosen.putAll(originalChoice);
+        rest = new ManaCostBeingPaid(manaCost);
+        for (final ManaCostShard shard : chosen.values()) {
+            rest.decreaseShard(shard, 1);
+        }
+
         // an X spell would size X to include the creatures kept for combat
         if (sa.costHasManaX()) {
             return chosen;
         }
-        // creatures kept for combat pay only what mana can't, those that can't attack first, then the weakest
-        final ManaCostBeingPaid rest = new ManaCostBeingPaid(manaCost);
-        chosen.values().forEach(shard -> rest.decreaseShard(shard, 1));
-        if (rest.isPaid() || ComputerUtilMana.canPayManaCost(rest, sa, ai, false)) {
+        if (kept.isEmpty()) {
             return chosen;
         }
+        // creatures kept for combat pay only what mana can't, those that can't attack first, then the weakest
         kept.sort(Comparator.comparing((Card c) -> CombatUtil.canAttack(c)).thenComparing(ComputerUtilCard.getCachedCreatureComparator()));
         for (final Card c : kept) {
-            ComputerUtilMana.getConvokeOrImproviseFromList(rest.toManaCost(), Lists.newArrayList(c), artifacts, creatures).forEach((card, shard) -> {
-                chosen.put(card, shard);
-                rest.decreaseShard(shard, 1);
-            });
-            if (rest.isPaid() || ComputerUtilMana.canPayManaCost(rest, sa, ai, false)) {
+            final Map<Card, ManaCostShard> additional = ComputerUtilMana.getConvokeOrImproviseFromList(
+                    rest.toManaCost(), Lists.newArrayList(c), artifacts, creatures);
+            for (final Map.Entry<Card, ManaCostShard> entry : additional.entrySet()) {
+                chosen.put(entry.getKey(), entry.getValue());
+                rest.decreaseShard(entry.getValue(), 1);
+            }
+            if (canPayWithConvokeSelection(sa, rest, ai, chosen.keySet())) {
                 break;
             }
         }
         return chosen;
+    }
+
+    private static boolean hasTapTypeManaAbility(final Player ai) {
+        for (final ZoneType zone : Arrays.asList(ZoneType.Battlefield, ZoneType.Command)) {
+            for (final Card source : ai.getCardsIn(zone)) {
+                for (final SpellAbility mana : source.getManaAbilities()) {
+                    final Cost cost = mana.getPayCosts();
+                    if (cost != null && cost.hasSpecificCostType(CostTapType.class)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean canPayWithConvokeSelection(final SpellAbility sa, final ManaCostBeingPaid remainingCost,
+            final Player ai, final Collection<Card> convoked) {
+        if (remainingCost.isPaid()) {
+            return true;
+        }
+
+        final CardCollection previous = new CardCollection(sa.getTappedForConvoke());
+        sa.clearTappedForConvoke();
+        sa.getTappedForConvoke().addAll(convoked);
+        try {
+            return ComputerUtilMana.canPayManaCost(remainingCost, sa, ai, false);
+        } finally {
+            sa.clearTappedForConvoke();
+            sa.getTappedForConvoke().addAll(previous);
+        }
     }
 
     @Override
@@ -1784,7 +1951,7 @@ public class PlayerControllerAi extends PlayerController {
                 name = SpecialCardAi.CursedScroll.chooseCard(player, sa);
             } else if (logic.equals("PithingNeedle") || logic.equals("PhyrexianRevoker") || logic.equals("SorcerousSpyglass")) {
                 name = SpecialCardAi.PithingNeedle.chooseCard(player, sa);
-            } else if (logic.equals(NamedDiscard.LOGIC)) {
+            } else if (NamedDiscard.isNamingLogic(logic)) {
                 name = NamedDiscard.chooseName(player, sa, valid);
             }
 
@@ -1792,10 +1959,44 @@ public class PlayerControllerAi extends PlayerController {
                 return name;
             }
         } else {
+            final String outside = forge.ai.simulation.ConsultationWin.nameOutsideLibrary(player, sa);
+            if (outside != null) {
+                return outside; // Demonic Consultation with Thassa's Oracle: a card that is not in the library
+            }
             CardCollectionView list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
             list = CardLists.filter(list, CardPredicates.NON_LANDS);
             if (!list.isEmpty()) {
-                return list.get(0).getName();
+                // Meddling Mage: not the name another copy already holds, and a key card of the opponent's deck first (#12801)
+                final Set<String> taken = SpecialCardAi.namesTakenByOtherCopies(player, sa);
+                CardCollectionView pool = CardLists.filter(list, c -> !taken.contains(c.getName()));
+                if (pool.isEmpty()) {
+                    pool = list;
+                }
+                // the opponent lists its key cards in the order it wants them answered: the first one that is still to come
+                // (not taken by another copy, not already on the battlefield) is the name, and only then the next one
+                for (final Player opp : player.getOpponents()) {
+                    if (opp.getRegisteredPlayer() == null || opp.getRegisteredPlayer().getDeck() == null) {
+                        continue;
+                    }
+                    final CardCollectionView inPlay = opp.getCardsIn(ZoneType.Battlefield);
+                    for (final String key : opp.getRegisteredPlayer().getDeck().getKeyCards()) {
+                        if (taken.contains(key) || CardLists.count(inPlay, c -> c.getName().equals(key)) > 0) {
+                            continue;
+                        }
+                        if (CardLists.count(pool, c -> c.getName().equals(key)) > 0) {
+                            return key;
+                        }
+                    }
+                }
+                // none of them is left to name: the best of the key cards in the pool (even one already in play), then the best card
+                final CardCollection keyCards = new CardCollection();
+                for (final Player opp : player.getOpponents()) {
+                    if (opp.getRegisteredPlayer() != null && opp.getRegisteredPlayer().getDeck() != null) {
+                        final List<String> keys = opp.getRegisteredPlayer().getDeck().getKeyCards();
+                        keyCards.addAll(CardLists.filter(pool, c -> keys.contains(c.getName())));
+                    }
+                }
+                return ComputerUtilCard.getBestAI(keyCards.isEmpty() ? pool : keyCards).getName();
             }
         }
         return "Morphling";
@@ -1864,10 +2065,18 @@ public class PlayerControllerAi extends PlayerController {
         SpellAbility oldSA = sa;
         // TODO maybe add some more Logic into it
         for (final Card c : cards) {
+            final SpellAbility first = c.getFirstSpellAbility();
+            if (first != null && "ManaRitual".equals(first.getParam("AILogic"))) {
+                continue; // a ritual spliced onto a ritual earns one mana for {1}{R} more, and the second red was not there
+            }
             SpellAbility newSA = oldSA.copy();
             AbilityUtils.addSpliceEffect(newSA, c);
             // check if AI still wants or can play the card with spliced effect
-            if (AiPlayDecision.WillPlay == getAi().canPlayFromEffectAI((Spell) newSA, false, false)) {
+            // the splice cost is paid with the spell's: without this check the AI spliced a second Desperate Ritual onto the
+            // first with one red source and was left unable to pay, and the spell was lost
+            newSA.setActivatingPlayer(player);
+            if (ComputerUtilCost.canPayCost(newSA, player, false)
+                    && AiPlayDecision.WillPlay == getAi().canPlayFromEffectAI((Spell) newSA, false, false)) {
                 oldSA = newSA;
                 result.add(c);
             }
@@ -1892,6 +2101,11 @@ public class PlayerControllerAi extends PlayerController {
             return 0;
         }
 
+        if (keyword.getKeyword() == Keyword.REPLICATE) {
+            // a copy is worth its mana only with a target of its own when a second go at one target does nothing
+            max = Math.min(max, replicateCopiesWorthPaying(sa));
+        }
+
         int chosenAmount = 0;
 
         Cost costSoFar = sa.getPayCosts().copy();
@@ -1907,6 +2121,39 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         return chosenAmount;
+    }
+
+    private int replicateTargetCount(final SpellAbility sa) {
+        if (sa.getApi() == ApiType.Counter) {
+            int n = 0;
+            for (final SpellAbilityStackInstance si : player.getGame().getStack()) {
+                final SpellAbility onStack = si.getSpellAbility();
+                if (onStack.getActivatingPlayer() != null && onStack.getActivatingPlayer().isOpponentOf(player)
+                        && sa.canTargetSpellAbility(onStack)) {
+                    n++;
+                }
+            }
+            return n;
+        }
+        return sa.getTargetRestrictions().getAllCandidates(sa, false).size();
+    }
+    /**
+     * How many times replicate is worth paying: a counterspell, a tap, a bounce or a removal spell does nothing the
+     * second time on the same target (Consign to Memory, Gigadrowse, Vacuumelt), so the copies are limited to the
+     * other targets there are (one spell and each copy aimed at its own). Burn, pumps and the like stack, and an
+     * untargeted spell does its work for each copy: those are paid for as far as the mana goes.
+     */
+    private int replicateCopiesWorthPaying(final SpellAbility sa) {
+        if (!sa.usesTargeting() || sa.getTargetRestrictions() == null) {
+            return Integer.MAX_VALUE;
+        }
+        if (!CopyTargets.repeatsDoNothing(sa)) {
+            return Integer.MAX_VALUE;
+        }
+        sa.setActivatingPlayer(player);
+        final int perCopy = Math.max(1, sa.getTargetRestrictions().getMaxTargets(sa.getHostCard(), sa));
+        final int candidates = replicateTargetCount(sa);
+        return Math.max(0, candidates / perCopy - 1);
     }
 
     @Override

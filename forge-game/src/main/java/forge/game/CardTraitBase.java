@@ -14,7 +14,9 @@ import com.google.common.collect.Lists;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.IHasForgeParams;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -36,7 +38,16 @@ import forge.util.ITranslatable;
  * Base class for Triggers,ReplacementEffects and StaticAbilities.
  *
  */
-public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVars {
+public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVars, IHasForgeParams {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Adamant", "Blessing", "Bloodthirst", "CheckDefinedPlayer", "CheckSVar", "CheckSecondSVar",
+        "ClassLevel", "DayTime", "DefinedPlayerCompare", "Delirium", "EnduringStory", "FatefulHour",
+        "Hellbent", "IsPresent", "IsPresent2", "LifeAmount", "LifeTotal", "ManaNotSpent",
+        "ManaSpent", "Metalcraft", "Monarch", "PresentCompare", "PresentCompare2", "PresentDefined",
+        "PresentPlayer", "PresentPlayer2", "PresentZone", "PresentZone2", "Revolt", "SVarCompare",
+        "SecondSVarCompare", "Secondary", "Threshold", "WerewolfTransformCondition",
+        "WerewolfUntransformCondition",
+    };
 
     /** The host card. */
     protected Card hostCard;
@@ -388,9 +399,6 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
             if (player.equals("OpponentGreatest")) {
                 life = hostController.getOpponentsGreatestLifeTotal();
             }
-            if (player.equals("ActivePlayer")) {
-                life = game.getPhaseHandler().getPlayerTurn().getLife();
-            }
 
             final String rightString = lifeCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
@@ -552,6 +560,11 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
     }
     protected Optional<IHasSVars> findSVar(final String name) {
         return getSVarFallback(name).stream().filter(f -> f.hasSVar(name)).findFirst();
+    }
+
+    /** The object a reference such as TriggeredPlayer names, if this trait has triggering objects */
+    public Object getTriggeringObject(final AbilityKey type) {
+        return null;
     }
 
     @Override

@@ -1,0 +1,4 @@
+Name:Tyvar Trait - Tyvar's Sanctum
+ManaCost:no cost
+Types:Trait
+Oracle:Start each match with a Sanctum of Eternity on the battlefield.

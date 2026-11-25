@@ -1,0 +1,8 @@
+Name:Rom and Leeta, Unlikely Pair
+ManaCost:3 R
+Types:Legendary Creature Ferengi Bajoran
+PT:4/3
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Seek out — Whenever you draw your second card each turn, create two tapped Treasure tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenTapped$ True
+DeckHas:Ability$Token
+Oracle:Seek out — Whenever you draw your second card each turn, create two tapped Treasure tokens.

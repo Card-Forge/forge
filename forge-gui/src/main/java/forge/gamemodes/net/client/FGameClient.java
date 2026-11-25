@@ -106,6 +106,8 @@ public class FGameClient implements IToServer, IHasForgeLog {
              .handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 public void initChannel(final SocketChannel ch) throws Exception {
+                    // Set before the login goes out: a refused login closes the channel at once, and channelInactive ignores any other channel
+                    channel = ch;
                     final ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(
                             new LoggingHandler(LogLevel.INFO),
@@ -125,7 +127,6 @@ public class FGameClient implements IToServer, IHasForgeLog {
                     newChannel.close();
                     return;
                 }
-                channel = newChannel;
             }
             final ChannelFuture ch = newChannel.closeFuture();
             attached = true;

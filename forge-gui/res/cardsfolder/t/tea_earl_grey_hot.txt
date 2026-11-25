@@ -1,0 +1,9 @@
+Name:Tea, Earl Grey, Hot
+ManaCost:2
+Types:Artifact Food
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this artifact enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ Charm | Cost$ 2 T Sac<1/CARDNAME/this artifact> | Choices$ DBDamage,DBGainLife
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ 2 | SpellDescription$ This artifact deals 2 damage to target opponent.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+Oracle:When this artifact enters, draw a card.\n{2}, {T}, Sacrifice this artifact: Choose one —\n• This artifact deals 2 damage to target opponent.\n• You gain 3 life.

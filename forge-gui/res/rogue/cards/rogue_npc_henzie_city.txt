@@ -1,0 +1,4 @@
+Name:Henzie Trait - Henzie's City
+ManaCost:no cost
+Types:Trait
+Oracle:Start each match with a City of Brass on the battlefield.

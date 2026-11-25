@@ -1,0 +1,7 @@
+Name:Chest Trait - Sigil Of Abzan
+ManaCost:no cost
+Types:Trait
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Command | Execute$ TrigCounterAttacker | TriggerDescription$ Whenever you attack, put a +1/+1 counter on target attacking creature. It gains menace until end of turn.
+SVar:TrigCounterAttacker:DB$ PutCounter | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Menace
+Oracle:Whenever you attack, put a +1/+1 counter on target attacking creature. It gains menace until end of turn.

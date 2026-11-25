@@ -123,11 +123,14 @@ public class HostedMatch {
         }
 
         final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
-        sortedPlayers.sort((p1, p2) -> {
-            final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
-            final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
-            return Integer.compare(v1, v2);
-        });
+        // teammates must keep their adjacent seats (CR 805.1)
+        if (!gameRules.hasSharedTeamTurns()) {
+            sortedPlayers.sort((p1, p2) -> {
+                final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
+                final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
+                return Integer.compare(v1, v2);
+            });
+        }
 
         if (sortedPlayers.size() == 2) {
             title = TextUtil.concatNoSpace(sortedPlayers.get(0).getPlayer().getName(), " vs ", sortedPlayers.get(1).getPlayer().getName());
@@ -219,7 +222,6 @@ public class HostedMatch {
             if (p.getController() instanceof PlayerControllerHuman humanController) {
                 final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                 humanController.setGui(gui);
-                gui.setGameView(null); //clear out game view first so we don't copy into old game view
                 gui.setGameView(gameView);
                 gui.setOriginalGameController(p.getView(), humanController);
 
@@ -265,7 +267,6 @@ public class HostedMatch {
 
         if (humanCount == 0) { //watch game but do not participate
             final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
-            gui.setGameView(null); //clear the view so when the game restarts again, it updates correctly
             gui.setGameView(gameView);
             registerSpectator(gui, new WatchLocalGame(game, new LobbyPlayerHuman("Spectator"), gui));
         }
@@ -379,6 +380,33 @@ public class HostedMatch {
         return game == null ? null : game.getView();
     }
 
+    // Recomputes the "X vs Y" match title from the players' current in-game names
+    // and re-pushes it to any open guis. Needed after a puzzle renames a player
+    // (e.g. via AIName) since the title is normally captured once at match start,
+    // before the puzzle's GameState has been applied.
+    public void refreshTitle() {
+        if (game == null || match == null) {
+            return;
+        }
+        final FCollectionView<Player> players = game.getPlayers();
+        if (players.size() != 2) {
+            return;
+        }
+        match.setTitle(TextUtil.concatNoSpace(players.get(0).getName(), " vs ", players.get(1).getName()));
+
+        final GameView gameView = getGameView();
+        if (gameView == null) {
+            return;
+        }
+        gameView.updateTitle();
+
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final IGuiGame gui : guis.values()) {
+                gui.setGameView(gameView);
+            }
+        });
+    }
+
     public void endCurrentGame() {
         if (game == null) { return; }
         boolean isMatchOver = game.getView().isMatchOver();
@@ -475,11 +503,9 @@ public class HostedMatch {
                     if (p.getController() instanceof PlayerControllerHuman humanController) {
                         final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                         humanController.setGui(gui);
-                        gui.setGameView(null);
                         gui.setGameView(gameView);
                         gui.setOriginalGameController(p.getView(), humanController);
                         gui.openView(new TrackableCollection<>(p.getView()));
-                        gui.setGameView(null);
                         gui.setGameView(gameView);
                         event.subgame().subscribeToEvents(new FControlGameEventHandler(humanController));
                         event.subgame().subscribeToEvents(humanController.getYieldController());
@@ -507,11 +533,9 @@ public class HostedMatch {
                 for (final Player p : event.maingame().getPlayers()) {
                     if (p.getController() instanceof PlayerControllerHuman humanController) {
                         final IGuiGame gui = guis.get(p.getRegisteredPlayer());
-                        gui.setGameView(null);
                         gui.setGameView(gameView);
                         gui.setOriginalGameController(p.getView(), humanController);
                         gui.openView(new TrackableCollection<>(p.getView()));
-                        gui.setGameView(null);
                         gui.setGameView(gameView);
                         gui.handleGameEvent(new GameEventTurnPhase(
                                 gameView.getPlayerTurn(), gameView.getPhase(), ""));

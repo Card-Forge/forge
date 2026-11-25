@@ -1,0 +1,8 @@
+Name:Hologram Janeway
+ManaCost:2 W
+Types:Legendary Artifact Creature Illusion Officer
+PT:3/3
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | CheckSVar$ X | SVarCompare$ GE8 | NoResolvingCheck$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack while creatures you control have total power 8 or greater, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$Valid Creature.YouCtrl$CardPower
+Oracle:Whenever you attack while creatures you control have total power 8 or greater, put a +1/+1 counter on target creature.

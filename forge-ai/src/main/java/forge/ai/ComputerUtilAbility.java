@@ -14,16 +14,19 @@ import com.google.common.collect.Multimap;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPayEnergy;
 import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
@@ -31,6 +34,7 @@ import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
@@ -78,7 +82,8 @@ public class ComputerUtilAbility {
                 all.add(p.getCardsIn(ZoneType.Library).get(0));
             }
         }
-        all.addAll(IterableUtil.filter(player.getCardsIn(ZoneType.Command), c -> !c.isImmutable() || c.isEmblem()));
+        all.addAll(IterableUtil.filter(player.getCardsIn(ZoneType.Command), c -> !c.isImmutable() || c.isEmblem()
+            || "Planar Dice".equals(c.getName())));
         all.addAll(game.getCardsIn(ZoneType.Exile));
         all.addAll(game.getCardsIn(ZoneType.Battlefield));
         return all;
@@ -98,6 +103,271 @@ public class ComputerUtilAbility {
             spellAbilities.addAll(possible);
         }
         return spellAbilities;
+    }
+
+    /**
+     * Returns whether an unpromised Gift spell has a delayed trigger that returns its exiled target to the battlefield.
+     * Check both the parsed Execute ability and its SVar text because copied or constructed abilities may only retain
+     * one of those representations.
+     */
+    public static boolean hasUnpromisedGiftReturn(final SpellAbility sa) {
+        if (sa == null) {
+            return false;
+        }
+        final SpellAbility root = sa.getRootAbility();
+        if (!root.isSpell() || root.isGiftPromised() || root.getHostCard() == null) {
+            return false;
+        }
+        for (SpellAbility sub = root.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            if (sub.getApi() != ApiType.DelayedTrigger
+                    || !sub.getParamOrDefault("ConditionPresent", "").contains("PromisedGift")
+                    || !"EQ0".equals(sub.getParamOrDefault("ConditionCompare", ""))) {
+                continue;
+            }
+            final SpellAbility execute = sub.getAdditionalAbility("Execute");
+            final String executeName = sub.getParamOrDefault("Execute", "");
+            final String executeText = executeName.isEmpty() ? "" : root.getHostCard().getSVar(executeName);
+            final boolean returnsFromExile = execute != null && execute.getApi() == ApiType.ChangeZone
+                    && "Exile".equals(execute.getParam("Origin"))
+                    && "Battlefield".equals(execute.getParam("Destination"));
+            final boolean scriptReturnsFromExile = executeText != null && executeText.contains("DB$ ChangeZone")
+                    && executeText.contains("Origin$ Exile") && executeText.contains("Destination$ Battlefield");
+            if (returnsFromExile || scriptReturnsFromExile) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Do not spend mana on a Spectacle spell at its full cost while a damage activation can enable its cheaper cost.
+     * The enabler and the Spectacle spell must both remain payable from the current mana sources; otherwise the AI
+     * could spend the only source for the Spectacle cost and end up unable to cast the discounted spell.
+     */
+    public static boolean shouldWaitForSpectacleEnabler(final Player player, final SpellAbility sa) {
+        if (player == null || sa == null || !sa.isSpell() || sa.isSpectacle()
+                || sa.getHostCard() == null || !sa.getHostCard().hasKeyword(Keyword.SPECTACLE)
+                || player.getOpponentLostLifeThisTurn() > 0) {
+            return false;
+        }
+
+        sa.setActivatingPlayer(player);
+        final Cost baseCost = sa.getPayCosts();
+        if (!baseCost.isOnlyManaCost()) {
+            return false;
+        }
+
+        for (final SpellAbility spectacle : sa.getHostCard().getSpellAbilities()) {
+            if (!spectacle.isSpell() || !spectacle.isSpectacle() || !spectacle.getPayCosts().isOnlyManaCost()
+                    || spectacle.getPayCosts().getTotalMana().compareTo(baseCost.getTotalMana()) >= 0) {
+                continue;
+            }
+            spectacle.setActivatingPlayer(player);
+
+            // An unused damage activation on the battlefield can be used before paying for the Spectacle spell.
+            for (final Card card : player.getCardsIn(ZoneType.Battlefield)) {
+                if (hasOpponentDamageActivation(card, player, true, spectacle)) {
+                    return true;
+                }
+            }
+
+            // A permanent in hand such as Seal of Fire can be cast first, then its activated damage ability can enable
+            // Spectacle on the next priority check. Reserve enough mana for both the permanent and the follow-up spell.
+            for (final Card card : player.getCardsIn(ZoneType.Hand)) {
+                if (card == sa.getHostCard() || !card.isPermanent()
+                        || !canCastPermanent(card, player, spectacle)) {
+                    continue;
+                }
+                if (hasOpponentDamageActivation(card, player, false, spectacle)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean canCastPermanent(final Card card, final Player player, final SpellAbility followUp) {
+        for (final SpellAbility cast : card.getSpellAbilities()) {
+            if (!cast.isSpell()) {
+                continue;
+            }
+            cast.setActivatingPlayer(player);
+            if (cast.canPlay() && ComputerUtilCost.canPayCost(cast, player, false)
+                    && canPayCostsTogether(cast, followUp, player)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Check that paying an action does not consume the mana needed for the cheaper follow-up spell. */
+    private static boolean canPayCostsTogether(final SpellAbility action, final SpellAbility followUp, final Player player) {
+        if (action.getPayCosts() == null || followUp.getPayCosts() == null) {
+            return false;
+        }
+        final Cost combined = action.getPayCosts().copy();
+        combined.add(followUp.getPayCosts().copy());
+        // An ability that taps its own permanent cannot also use that permanent as a mana source for the follow-up.
+        final Card source = action.getHostCard();
+        final boolean tapsSource = action.isActivatedAbility() && action.getPayCosts().hasTapCost()
+                && source != null && source.isInPlay();
+        final boolean wasTapped = source != null && source.isTapped();
+        if (tapsSource && wasTapped) {
+            return false;
+        }
+        try {
+            if (tapsSource) {
+                source.setTapped(true);
+            }
+            // Check both spell/ability contexts because mana sources can impose different payment restrictions.
+            return ComputerUtilMana.canPayManaCost(combined, action, player, 0, false)
+                    && ComputerUtilMana.canPayManaCost(combined, followUp, player, 0, false);
+        } finally {
+            if (tapsSource) {
+                source.setTapped(wasTapped);
+            }
+        }
+    }
+
+    private static boolean hasOpponentDamageActivation(final Card card, final Player player, final boolean requirePlayable,
+                                                        final SpellAbility followUp) {
+        for (final SpellAbility ability : card.getSpellAbilities()) {
+            if (!ability.isActivatedAbility() || ability.getApi() != ApiType.DealDamage) {
+                continue;
+            }
+            final TargetRestrictions restrictions = ability.getTargetRestrictions();
+            if (restrictions == null || !restrictions.canTgtPlayer()) {
+                continue;
+            }
+
+            final String damageParam = ability.getParam("NumDmg");
+            if (damageParam == null) {
+                continue;
+            }
+            if (!requirePlayable && (!ability.getPayCosts().getTotalMana().isZero()
+                    || (!ability.getPayCosts().isFree() && !ComputerUtilCost.isSacrificeSelfCost(ability.getPayCosts())))) {
+                continue;
+            }
+            final int damage = AbilityUtils.calculateAmount(card, damageParam, ability);
+            if (damage <= 0) {
+                continue;
+            }
+
+            ability.setActivatingPlayer(player);
+            if (requirePlayable && (!ability.canPlay() || !ComputerUtilCost.canPayCost(ability, player, false)
+                    || !canPayCostsTogether(ability, followUp, player))) {
+                continue;
+            }
+            for (final Player opponent : player.getOpponents()) {
+                final int predicted = ability.hasParam("NoPrevention")
+                        ? opponent.staticReplaceDamage(damage, card, false)
+                        : ComputerUtilCombat.predictDamageTo(opponent, damage, card, false);
+                if (opponent.canLoseLife() && ability.canTarget(opponent) && predicted > 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Ugin's Labyrinth normally returns its imprinted card at the opponent's end step. It can be returned sooner
+     * when the Labyrinth is threatened, but only when the card will still be castable without using the Labyrinth's
+     * mana ability (which is paid for by tapping the Labyrinth itself).
+     */
+    public static boolean shouldWaitForUginLabyrinthReturn(final Player player, final SpellAbility sa) {
+        if (player == null || sa == null || !"ReturnCastable".equals(sa.getParam("AILogic"))) {
+            return false;
+        }
+        final Card labyrinth = sa.getHostCard();
+        if (labyrinth == null || labyrinth.getExiledCards().isEmpty()) {
+            return false;
+        }
+
+        final Game game = player.getGame();
+        final boolean opponentEndStep = game.getPhaseHandler().is(PhaseType.END_OF_TURN)
+                && game.getPhaseHandler().isPlayerNextTurn(player);
+        final boolean responseNeeded = isUginLabyrinthThreatened(player, labyrinth);
+        if (!opponentEndStep && !responseNeeded) {
+            return true;
+        }
+        if (labyrinth.isTapped()) {
+            return true;
+        }
+
+        final boolean wasTapped = labyrinth.isTapped();
+        try {
+            labyrinth.setTapped(true);
+            return !canCastCardNow(player, labyrinth.getExiledCards().getFirst(), labyrinth);
+        } finally {
+            labyrinth.setTapped(wasTapped);
+        }
+    }
+
+    private static boolean isUginLabyrinthThreatened(final Player player, final Card labyrinth) {
+        final Game game = player.getGame();
+        if (game.getStack().isEmpty()) {
+            return false;
+        }
+        final SpellAbility top = game.getStack().peekAbility();
+        if (top == null || top.getHostCard() == null || top.getActivatingPlayer() == null
+                || !top.getActivatingPlayer().isOpponentOf(player)) {
+            return false;
+        }
+        if (top.usesTargeting() && top.findTargetedCards().contains(labyrinth)) {
+            if (top.getApi() == ApiType.Destroy) {
+                return true;
+            }
+            if (top.getApi() == ApiType.ChangeZone) {
+                final String destination = top.getParamOrDefault("Destination", "");
+                if (!destination.isEmpty() && !"Battlefield".equals(destination)) {
+                    return true;
+                }
+            }
+        }
+
+        // Pithing Needle / Disruptor Flute choose a name as they enter. Take the card back while the return ability
+        // is still available, before that name choice can disable it.
+        for (final StaticAbility ability : top.getHostCard().getStaticAbilities()) {
+            if (ability.checkMode(StaticAbilityMode.CantBeActivated)
+                    && ability.getParamOrDefault("ValidCard", "").contains("NamedCard")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether at least one normal or alternative spell cost on this card can be paid now. */
+    public static boolean canCastCardNow(final Player player, final Card card) {
+        return canCastCardNow(player, card, null);
+    }
+
+    private static boolean canCastCardNow(final Player player, final Card card, final Card excludedManaSource) {
+        if (player == null || card == null) {
+            return false;
+        }
+        final List<SpellAbility> options = getOriginalAndAltCostAbilities(Lists.newArrayList(card.getSpellAbilities()), player);
+        for (final SpellAbility candidate : options) {
+            if (!candidate.isSpell()) {
+                continue;
+            }
+            candidate.setActivatingPlayer(player);
+            if (!ComputerUtilCost.canPayCost(candidate, player, false)) {
+                continue;
+            }
+            if (excludedManaSource != null && candidate.getPayCosts() != null
+                    && candidate.getPayCosts().hasManaCost()) {
+                final ManaCostBeingPaid manaCost = ComputerUtilMana.calculateManaCost(
+                        candidate.getPayCosts(), candidate, player, true, 0, false);
+                final CardCollection usedSources = ComputerUtilMana.getManaSourcesToPayCost(
+                        manaCost, candidate, player, false);
+                if (usedSources == null || usedSources.contains(excludedManaSource)) {
+                    continue;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public static List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player activator) {
@@ -156,6 +426,44 @@ public class ComputerUtilAbility {
         }
 
         return result;
+    }
+
+    /**
+     * A permanent that pays off for each spell its controller casts (Up the Beanstalk draws a card for each spell of mana
+     * value 5 or more) goes before the first spell of the list it would pay off for: cast after it, it only misses the card (#4278).
+     */
+    public static void putCastPayoffsFirst(final List<SpellAbility> list) {
+        for (int i = 1; i < list.size(); i++) {
+            final SpellAbility payoff = list.get(i);
+            if (!payoff.isSpell() || payoff.getHostCard() == null || !payoff.getHostCard().isPermanent()) {
+                continue;
+            }
+            for (int j = 0; j < i; j++) {
+                if (paysOffFor(payoff, list.get(j))) {
+                    list.remove(i);
+                    list.add(j, payoff);
+                    break;
+                }
+            }
+        }
+    }
+
+    public static boolean paysOffFor(final SpellAbility payoff, final SpellAbility spell) {
+        final Card host = payoff.getHostCard();
+        final Card cast = spell.getHostCard();
+        if (!spell.isSpell() || cast == null || cast == host) {
+            return false;
+        }
+        for (final Trigger t : host.getTriggers()) {
+            if (t.getMode() != TriggerType.SpellCast || !"You".equals(t.getParam("ValidActivatingPlayer"))
+                    || !t.hasParam("TriggerZones") || !t.getParam("TriggerZones").contains("Battlefield")) {
+                continue;
+            }
+            if (!t.hasParam("ValidCard") || cast.isValid(t.getParam("ValidCard").split(","), host.getController(), host, t)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static SpellAbility getTopSpellAbilityOnStack(Game game, SpellAbility sa) {
@@ -253,7 +561,7 @@ public class ComputerUtilAbility {
      * (e.g. "FreeSpellAI" returned -1 in both directions) and so could contradict itself.
      */
     public static final class SortKey implements Comparable<SortKey> {
-        private final int activateLast, lowPriorityDie, energyPump, zeroCmcFirst, freeSpellFirst, score;
+        private final int activateLast, lowPriorityDie, energyPump, zeroCmcFirst, freeSpellFirst, enablerFirst, score;
 
         private SortKey(SpellAbility sa, boolean safeToEvaluateCreatures) {
             // we want the highest costs first
@@ -271,6 +579,8 @@ public class ComputerUtilAbility {
             zeroCmcFirst = cmc == 0 && ApiType.Mana != sa.getApi() ? 0 : 1;
             final Card host = sa.getHostCard();
             freeSpellFirst = host != null && host.hasSVar("FreeSpellAI") ? 0 : 1;
+            // a cheap permanent that rewards casting big spells (Up the Beanstalk) goes before the big spell it pays off on (#4278)
+            enablerFirst = sa.isSpell() && rewardsBigSpellInHand(sa) ? 0 : 1;
 
             int s = cmc + getSpellAbilityPriority(sa);
             // if both are creature spells sort them after
@@ -293,8 +603,39 @@ public class ComputerUtilAbility {
             if (r != 0) return r;
             r = Integer.compare(freeSpellFirst, o.freeSpellFirst);
             if (r != 0) return r;
+            r = Integer.compare(enablerFirst, o.enablerFirst);
+            if (r != 0) return r;
             // higher score first
             return Integer.compare(o.score, score);
+        }
+
+        /** The permanent has a "whenever you cast a spell with mana value N or greater" trigger and another spell in hand qualifies. */
+        private static boolean rewardsBigSpellInHand(SpellAbility sa) {
+            final Card host = sa.getHostCard();
+            if (host == null || !host.isPermanent() || !host.isInZone(ZoneType.Hand) || host.getController() == null) {
+                return false;
+            }
+            for (final Trigger t : host.getTriggers()) {
+                if (t.getMode() != TriggerType.SpellCast || !"You".equals(t.getParam("ValidActivatingPlayer"))) {
+                    continue;
+                }
+                final String valid = t.getParamOrDefault("ValidCard", "");
+                final int at = valid.indexOf("cmcGE");
+                if (at < 0) {
+                    continue;
+                }
+                try {
+                    final int min = Integer.parseInt(valid.substring(at + 5).replaceAll("\\D.*$", ""));
+                    for (final Card c : host.getController().getCardsIn(ZoneType.Hand)) {
+                        if (c != host && !c.isLand() && c.getCMC() >= min) {
+                            return true;
+                        }
+                    }
+                } catch (final NumberFormatException e) {
+                    // not a plain number: no preference
+                }
+            }
+            return false;
         }
 
         private static boolean isLowPriorityPlanarDieRoll(SpellAbility sa) {

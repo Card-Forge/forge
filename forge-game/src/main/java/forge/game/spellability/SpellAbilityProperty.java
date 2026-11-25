@@ -39,6 +39,8 @@ public class SpellAbilityProperty {
             int y = AbilityUtils.calculateAmount(sa.getHostCard(), property.substring(22), sa);
             Integer removed = sa.getSVarInt("CostCountersRemoved");
             return Expressions.compare(removed == null ? 0 : removed, comparator, y);
+        } else if (property.equals("SacrificedToPay")) {
+            return sa.getPaidList("Sacrificed").iterator().hasNext();
         } else if (property.equals("hasTapCost")) {
             Cost cost = sa.getPayCosts();
             return cost != null && cost.hasTapCost();

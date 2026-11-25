@@ -1,0 +1,10 @@
+Name:Salinae, the Ocean Mother
+ManaCost:6 U U
+Types:Legendary Creature Whale God
+PT:5/7
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is your devotion to blue. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)
+K:Trample
+T:Mode$ SpellCast | ValidCard$ Artifact,Creature | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact or creature spell, copy it, except the copy is a 1/1 Fish creature in addition to its other types. (The copy becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | SetPower$ 1 | SetToughness$ 1 | AddTypes$ Creature & Fish
+SVar:X:Count$Devotion.Blue
+Oracle:This spell costs {X} less to cast, where X is your devotion to blue. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)\nTrample\nWhenever you cast an artifact or creature spell, copy it, except the copy is a 1/1 Fish creature in addition to its other types. (The copy becomes a token.)

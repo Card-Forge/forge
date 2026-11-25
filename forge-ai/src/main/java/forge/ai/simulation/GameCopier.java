@@ -352,6 +352,15 @@ public class GameCopier {
             }
         }
 
+        // Planechase: the planes sit in the command zone, but which of them are face up is a field of the game
+        if (origGame.getActivePlanes() != null) {
+            final List<Card> planes = new ArrayList<>();
+            for (Card plane : origGame.getActivePlanes()) {
+                planes.add(plane == null ? null : cardMap.get(plane));
+            }
+            newGame.setActivePlanes(planes);
+        }
+
         copyLeftThisTurn(newGame, aiPlayer);
     }
 

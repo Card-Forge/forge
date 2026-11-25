@@ -211,7 +211,11 @@ public class CharmEffect extends SpellAbilityEffect {
         if (random) {
             runParams.put(AbilityKey.Random, true);
         }
-        chooser.getGame().getTriggerHandler().runTrigger(TriggerType.FacesDilemma, runParams, false);
+        // Modes are chosen while casting/activating, before costs are paid and before the stack is frozen.
+        // Hold the trigger as waiting so it only goes on the stack once the spell/ability was actually put on
+        // the stack (unfreezeStack runs waiting triggers); if the player backs out, GameActionUtil.rollbackAbility
+        // clears the waiting triggers so "whenever you face a dilemma" doesn't fire for a cancelled cast.
+        chooser.getGame().getTriggerHandler().runTrigger(TriggerType.FacesDilemma, runParams, true);
     }
 
     public static boolean makeChoices(SpellAbility sa) {

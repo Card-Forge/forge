@@ -4,7 +4,62 @@ Date=2026-02-03
 Name=Alchemy: Lorwyn Eclipsed
 Type=Online
 ScryfallCode=YECL
-Booster=1 UncommonRareMythic:fromsheet("YECL cards"), 8 Common:fromsheet("ECL cards"), 3 Uncommon:fromSheet("ECL cards"), 1 UncommonRareMythic:fromSheet("ECL cards"), 1 RareMythic:fromSheet("ECL cards"), 1 BasicLand:fromSheet("ECL cards")
+BoosterSlots=Common,Common-SPG,Alchemy,Uncommon,RareMythic,Land,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-SPG, 1 Alchemy, 3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+
+[Common]
+Base=Common:fromSheet("ECL cards")
+
+[Common-SPG]
+Base=Common:fromSheet("ECL cards")
+Replace=0.01818F fromSheet("ECL special guests")
+
+[Alchemy]
+#Extra slot. 55% uncommon, and each rare twice each mythic. 15 rares and 5 mythics make those 38.57% and 6.43%.
+Base=Uncommon:fromSheet("YECL cards")
+Replace=0.385714F Rare:fromSheet("YECL cards")
+Replace=0.064286F Mythic:fromSheet("YECL cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("ECL cards")
+Replace=0.1F fromSheet("ECL showcase")
+
+[RareMythic]
+Base=Rare:fromSheet("ECL cards")
+Replace=.136F Mythic:fromSheet("ECL cards")
+Replace=.046F Rare:fromSheet("ECL showcase")
+Replace=.012F Mythic:fromSheet("ECL showcase")
+Replace=0.006F Rare:fromSheet("ECL borderless")
+Replace=0.004F Mythic:fromSheet("ECL borderless")
+Replace=0.006F fromSheet("ECL reversible shocklands")
+
+[Wildcard]
+Base=Uncommon:fromSheet("ECL cards")
+Replace=0.18F Common:fromSheet("ECL cards")
+Replace=0.19 Rare:fromSheet("ECL cards")
+Replace=0.02F Mythic:fromSheet("ECL cards")
+Replace=0.02F Uncommon:fromSheet("ECL showcase")
+Replace=0.006F Rare:fromSheet("ECL showcase")
+Replace=0.002F Mythic:fromSheet("ECL showcase")
+Replace=0.01F Rare:fromSheet("ECL borderless")
+Replace=0.004F Mythic:fromSheet("ECL borderless")
+Replace=0.006 fromSheet("ECL reversible shocklands")
+
+[WildcardFoil]
+Base=Common:fromSheet("ECL cards")
+Replace=0.298F Uncommon:fromSheet("ECL cards")
+Replace=0.065F Rare:fromSheet("ECL cards")
+Replace=0.011F Mythic:fromSheet("ECL cards")
+Replace=0.008F Uncommon:fromSheet("ECL showcase")
+Replace=0.008F Rare:fromSheet("ECL showcase")
+Replace=0.002F Mythic:fromSheet("ECL showcase")
+Replace=0.004F Rare:fromSheet("ECL reversible shocklands")
+
+[Land]
+Base=BasicLand:fromSheet("ECL cards")
+Replace=.1F BasicLand:fromSheet("ECL cards")+
+Replace=.4F fromSheet("ECL full art")
+Replace=.1F fromSheet("ECL full art")+
 
 [cards]
 1 R Adaptive Armorer @Edgar Sánchez Hidalgo

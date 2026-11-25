@@ -9,8 +9,10 @@ import forge.adventure.world.WorldSave;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.deck.Deck;
+import forge.gamemodes.quest.QuestController;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
+import forge.item.PreconDeck;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.IterableUtil;
@@ -58,6 +60,9 @@ public class RewardData implements Serializable {
     public RewardData[] rotation;
     public Deck cardPack;
     public String sourceDeck;
+    public String precon;
+    public String commanderPrecon;
+    public int cost;
     public String minDate;
 
     public RewardData() { }
@@ -92,13 +97,18 @@ public class RewardData implements Serializable {
         deckNeeds        = rewardData.deckNeeds == null ? null : rewardData.deckNeeds.clone();
         cardPack         = rewardData.cardPack;
         sourceDeck       = rewardData.sourceDeck;
+        precon           = rewardData.precon;
+        commanderPrecon  = rewardData.commanderPrecon;
+        cost             = rewardData.cost;
         minDate          = rewardData.minDate;
     }
 
-    private static Iterable<PaperCard> allCards;
-    private static Iterable<PaperCard> allEnemyCards;
+    private static volatile Iterable<PaperCard> allCards;
+    private static volatile Iterable<PaperCard> allEnemyCards;
 
-    static private void initializeAllCards() {
+    static private synchronized void initializeAllCards() {
+        if (allCards != null && allEnemyCards != null)
+            return; // another thread finished first
         ConfigData configData = Config.instance().getConfigData();
         RewardData legals = configData.legalCards;
 
@@ -130,15 +140,18 @@ public class RewardData implements Serializable {
         filters.add(pc -> !restrictedCards.contains(pc.getName()));
 
         // Filter out specific cards.
-        allCards = CardUtil.getFullCardPool(false).stream()
+        List<PaperCard> pool = CardUtil.getFullCardPool(false).stream()
                 .filter(IterableUtil.and(filters))
                 .collect(Collectors.toList());
 
-        //Filter AI cards for enemies.
-        allEnemyCards = IterableUtil.filter(allCards, input -> {
-            if (input == null) return false;
-            return !input.getRules().getAiHints().getRemAIDecks();
-        });
+        //Filter AI cards for enemies. Evaluated once; a lazy filter re-runs the FlatMC check on every template scan.
+        List<PaperCard> enemyPool = new ArrayList<>(pool.size());
+        for (PaperCard input : pool) {
+            if (input != null && !forge.card.CardAiHints.isRemovedFromAiDecks(input.getRules()))
+                enemyPool.add(input);
+        }
+        allEnemyCards = enemyPool;
+        allCards = pool; // assigned last: allCards != null implies the enemy pool is ready
     }
 
     static public Iterable<PaperCard> getAllCards() {
@@ -149,6 +162,7 @@ public class RewardData implements Serializable {
 
     public static void invalidateCardPool() {
         allCards = null;
+        allEnemyCards = null;
     }
 
     public Array<Reward> generate(boolean isForEnemy, boolean useSeedlessRandom) {
@@ -318,6 +332,14 @@ public class RewardData implements Serializable {
                         ret.add(new Reward(cardPack, isNoSell));
                     }
                     break;
+                case "deck": {
+                    Deck deck = loadRewardDeck();
+                    if (deck != null) {
+                        deck.getTags().add(Reward.DECK_TAG);
+                        ret.add(new Reward(deck, isNoSell, cost));
+                    }
+                    break;
+                }
                 case "deckCard":
                     if (cards == null)
                         return ret;
@@ -339,6 +361,23 @@ public class RewardData implements Serializable {
             }
         }
         return ret;
+    }
+
+    private Deck loadRewardDeck() {
+        if (precon != null && !precon.isEmpty()) {
+            PreconDeck found = QuestController.getPrecons().get(precon);
+            if (found != null)
+                return (Deck) found.getDeck().copyTo(found.getDeck().getName());
+            System.err.println("Missing precon: " + precon);
+        } else if (commanderPrecon != null && !commanderPrecon.isEmpty()) {
+            Deck found = FModel.getDecks().getCommanderPrecons().get(commanderPrecon);
+            if (found != null)
+                return (Deck) found.copyTo(found.getName());
+            System.err.println("Missing commander precon: " + commanderPrecon);
+        } else if (sourceDeck != null && !sourceDeck.isEmpty()) {
+            return CardUtil.getDeck(sourceDeck, false, false, "", false, false);
+        }
+        return null;
     }
 
     static public List<PaperCard> generateAllCards(Iterable<RewardData> dataList, boolean isForEnemy) {

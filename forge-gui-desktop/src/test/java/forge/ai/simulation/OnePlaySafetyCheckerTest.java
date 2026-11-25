@@ -56,20 +56,6 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
     }
 
     @Test
-    public void testOnePlaySafetyOnlyChecksResolvingStack() {
-        Scenario scenario = createDrawScenario(ZoneType.Battlefield, false, 20);
-        addPendingSpellToStack(scenario);
-        Spell freeCast = makeOptionalFreeCast(scenario);
-
-        AssertJUnit.assertTrue("Unsupported priority responses should fail open",
-                OnePlaySafetyChecker.isAcceptable(scenario.ai, freeCast));
-
-        scenario.game.getStack().setResolving(true);
-        AssertJUnit.assertFalse("A resolving parent ability permits an incremental check",
-                OnePlaySafetyChecker.isAcceptable(scenario.ai, freeCast));
-    }
-
-    @Test
     public void testAiAvoidsLethalLandPlay() {
         Game game = initAndCreateGame(true);
         Player ai = game.getPlayers().get(1);

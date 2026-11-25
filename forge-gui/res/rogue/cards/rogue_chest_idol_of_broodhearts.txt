@@ -1,0 +1,6 @@
+Name:Chest Trait - Idol Of Broodhearts
+ManaCost:no cost
+Types:Trait
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 1.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+Oracle:At the beginning of your upkeep, surveil 1.

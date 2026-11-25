@@ -1,0 +1,5 @@
+Name:Event Trait - Greed
+ManaCost:no cost
+Types:Trait
+S:Mode$ CantGainLife | ValidPlayer$ You | EffectZone$ Command | Description$ You can't gain life.
+Oracle:You can't gain life.

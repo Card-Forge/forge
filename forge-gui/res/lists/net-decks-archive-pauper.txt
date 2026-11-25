@@ -3799,8 +3799,77 @@
 2026-09-30 12855452 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-09-30-12855452-pauper-challenge-32.zip
 2026-10-01 11153 Pauper League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-01-11153-pauper-league.zip
 2026-10-01 12855463 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-01-12855463-pauper-challenge-32.zip
+2026-10-01 12856148 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-01-12856148-pauper-challenge-32.zip
 2026-10-02 11153 Pauper League (29 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-02-11153-pauper-league.zip
 2026-10-02 12855468 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-02-12855468-pauper-challenge-32.zip
 2026-10-03 11153 Pauper League (17 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-03-11153-pauper-league.zip
 2026-10-03 12855476 Pauper Challenge 16 (28 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-03-12855476-pauper-challenge-16.zip
+2026-10-03 12855502 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-03-12855502-pauper-challenge-32.zip
 2026-10-04 12855493 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-04-12855493-pauper-challenge-32.zip
+2026-10-05 11153 Pauper League (30 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-05-11153-pauper-league.zip
+2026-10-06 11153 Pauper League (28 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-06-11153-pauper-league.zip
+2026-10-06 12855509 Pauper Challenge 16 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-06-12855509-pauper-challenge-16.zip
+2026-10-07 11153 Pauper League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-07-11153-pauper-league.zip
+2026-10-07 12855517 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-07-12855517-pauper-challenge-32.zip
+2026-10-08 11153 Pauper League (22 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-08-11153-pauper-league.zip
+2026-10-08 12856164 Pauper Challenge 16 (30 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-08-12856164-pauper-challenge-16.zip
+2026-10-09 11153 Pauper League (21 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-09-11153-pauper-league.zip
+2026-10-09 12856155 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-09-12856155-pauper-challenge-32.zip
+2026-10-10 11153 Pauper League (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-10-11153-pauper-league.zip
+2026-10-11 11153 Pauper League (26 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-11-11153-pauper-league.zip
+2026-10-11 12856180 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-11-12856180-pauper-challenge-32.zip
+2026-10-12 11153 Pauper League (21 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-12-11153-pauper-league.zip
+2026-10-12 12856189 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-12-12856189-pauper-challenge-32.zip
+2026-10-13 11153 Pauper League (23 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-13-11153-pauper-league.zip
+2026-10-13 12856196 Pauper Challenge 16 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-13-12856196-pauper-challenge-16.zip
+2026-10-14 11153 Pauper League (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-14-11153-pauper-league.zip
+2026-10-14 12856206 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-14-12856206-pauper-challenge-32.zip
+2026-10-15 11153 Pauper League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-15-11153-pauper-league.zip
+2026-10-15 12856578 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-15-12856578-pauper-challenge-32.zip
+2026-10-16 11153 Pauper League (26 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-16-11153-pauper-league.zip
+2026-10-16 12856583 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-16-12856583-pauper-challenge-32.zip
+2026-10-17 11153 Pauper League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-17-11153-pauper-league.zip
+2026-10-17 12856591 Pauper Challenge 16 (31 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-17-12856591-pauper-challenge-16.zip
+2026-10-18 11153 Pauper League (14 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-18-11153-pauper-league.zip
+2026-10-18 12856607 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-18-12856607-pauper-challenge-32.zip
+2026-10-19 11153 Pauper League (22 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-19-11153-pauper-league.zip
+2026-10-19 12856616 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-19-12856616-pauper-challenge-32.zip
+2026-10-20 11153 Pauper League (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-20-11153-pauper-league.zip
+2026-10-20 12856623 Pauper Challenge 16 (28 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-20-12856623-pauper-challenge-16.zip
+2026-10-21 11153 Pauper League (22 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-21-11153-pauper-league.zip
+2026-10-22 11153 Pauper League (22 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-22-11153-pauper-league.zip
+2026-10-22 12856962 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-22-12856962-pauper-challenge-32.zip
+2026-10-23 11153 Pauper League (24 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-23-11153-pauper-league.zip
+2026-10-23 12856967 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-23-12856967-pauper-challenge-32.zip
+2026-10-24 11153 Pauper League (21 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-24-11153-pauper-league.zip
+2026-10-24 12856975 Pauper Challenge 16 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-24-12856975-pauper-challenge-16.zip
+2026-10-25 11153 Pauper League (23 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-25-11153-pauper-league.zip
+2026-10-25 12856992 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-25-12856992-pauper-challenge-32.zip
+2026-10-26 11153 Pauper League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-26-11153-pauper-league.zip
+2026-10-26 12857001 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-26-12857001-pauper-challenge-32.zip
+2026-10-27 11153 Pauper League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-27-11153-pauper-league.zip
+2026-10-27 12857008 Pauper Challenge 16 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-27-12857008-pauper-challenge-16.zip
+2026-10-28 11153 Pauper League (17 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-28-11153-pauper-league.zip
+2026-10-28 12857017 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-28-12857017-pauper-challenge-32.zip
+2026-10-29 11153 Pauper League (27 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-29-11153-pauper-league.zip
+2026-10-29 12857378 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-29-12857378-pauper-challenge-32.zip
+2026-10-30 11153 Pauper League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-30-11153-pauper-league.zip
+2026-10-30 12857383 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-30-12857383-pauper-challenge-32.zip
+2026-10-31 11153 Pauper League (19 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-31-11153-pauper-league.zip
+2026-10-31 12857391 Pauper Challenge 16 (25 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-10-31-12857391-pauper-challenge-16.zip
+2026-11-01 11153 Pauper League (23 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-01-11153-pauper-league.zip
+2026-11-01 12857406 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-01-12857406-pauper-challenge-32.zip
+2026-11-02 11153 Pauper League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-02-11153-pauper-league.zip
+2026-11-02 12857414 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-02-12857414-pauper-challenge-32.zip
+2026-11-03 11153 Pauper League (20 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-03-11153-pauper-league.zip
+2026-11-03 12857421 Pauper Challenge 16 (28 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-03-12857421-pauper-challenge-16.zip
+2026-11-04 11153 Pauper League (9 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-04-11153-pauper-league.zip
+2026-11-04 12857717 Pauper Challenge 16 (25 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-04-12857717-pauper-challenge-16.zip
+2026-11-05 11153 Pauper League (16 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-05-11153-pauper-league.zip
+2026-11-05 12857671 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-05-12857671-pauper-challenge-32.zip
+2026-11-06 11153 Pauper League (22 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-06-11153-pauper-league.zip
+2026-11-06 12857676 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-06-12857676-pauper-challenge-32.zip
+2026-11-07 11153 Pauper League (26 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-07-11153-pauper-league.zip
+2026-11-07 12857684 Pauper Challenge 16 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-07-12857684-pauper-challenge-16.zip
+2026-11-08 11153 Pauper League (6 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-08-11153-pauper-league.zip
+2026-11-08 12857699 Pauper Challenge 32 (32 decks) | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/archive/pauper/2026-11-08-12857699-pauper-challenge-32.zip

@@ -1,0 +1,6 @@
+Name:Wrathful - Aggression
+ManaCost:no cost
+Types:Wrathful
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.OppCtrl | TriggerZones$ Command | ValidTarget$ You | Execute$ TrigDraw | TriggerDescription$ Whenever one or more creatures your opponents control deal combat damage to you, your opponents draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ Opponent | NumCards$ 1
+Oracle:Whenever one or more creatures your opponents control deal combat damage to you, your opponents draw a card.

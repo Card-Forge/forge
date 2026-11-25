@@ -1,0 +1,2348 @@
+//Rank|Name|Rarity|Set
+#1|Multani, Yavimaya's Avatar|M|MB2
+#2|Sheoldred, Whispering One|M|PLST
+#3|Battle Angels of Tyr|M|PLST
+#4|The Eternal Wanderer|R|PLST
+#5|Writhing Chrysalis|C|PLST
+#6|Elesh Norn, Mother of Machines|M|PLST
+#7|Tyvar, the Pummeler|M|PLST
+#8|Sol Ring|U|MB2
+#9|Spyglass Siren|U|PLST
+#10|Imodane's Recruiter|U|PLST
+#11|The Scarab God|M|PLST
+#12|Temur Sabertooth|U|PLST
+#13|Subterranean Tremors|M|PLST
+#14|Dragonhawk, Fate's Tempest|M|PLST
+#15|Glarb, Calamity's Augur|M|PLST
+#16|Sheltered by Ghosts|U|PLST
+#17|Ire Shaman|U|PLST
+#18|Hunter's Talent|U|PLST
+#19|Akroma's Will|R|PLST
+#20|Odric, Lunarch Marshal|R|PLST
+#21|Toby, Beastie Befriender|R|PLST
+#22|Crashing Footfalls|R|MB2
+#23|Anim Pakal, Thousandth Moon|R|PLST
+#24|Athreos, God of Passage|M|PLST
+#25|Mikaeus, the Unhallowed|M|PLST
+#26|Phelia, Exuberant Shepherd|R|PLST
+#27|The Reality Chip|R|PLST
+#28|Hostage Taker|R|MB2
+#29|Walking Ballista|R|MB2
+#30|Fludge, Gunk Guardian|R|MB2
+#31|Wrath of Leknif|R|MB2
+#32|Lassoed by the Law|U|PLST
+#33|Arc Lightning|C|PLST
+#34|Path of Annihilation|U|PLST
+#35|Spinewoods Armadillo|U|PLST
+#36|Adeline, Resplendent Cathar|R|PLST
+#37|Rakdos, Patron of Chaos|M|PLST
+#38|Shoreline Looter|U|PLST
+#39|Animate Dead|U|PLST
+#40|Fell|U|PLST
+#41|A Killer Among Us|U|PLST
+#42|Avatar of Growth|M|PLST
+#43|Barrowgoyf|R|PLST
+#44|Biomechan Engineer|U|PLST
+#45|Coercive Portal|M|PLST
+#46|Phyrexian Triniform|M|PLST
+#47|Sire of Stagnation|M|PLST
+#48|Akroma, Vision of Ixidor|M|PLST
+#49|Ashaya, Soul of the Wild|M|PLST
+#50|Baeloth Barrityl, Entertainer|M|PLST
+#51|Brallin, Skyshark Rider|M|PLST
+#52|Bria, Riptide Rogue|M|PLST
+#53|Emiel the Blessed|M|PLST
+#54|Gisa, Glorious Resurrector|R|PLST
+#55|God-Eternal Kefnet|M|PLST
+#56|God-Eternal Oketra|M|PLST
+#57|Greensleeves, Maro-Sorcerer|M|PLST
+#58|Greymond, Avacyn's Stalwart|M|PLST
+#59|Jarad, Golgari Lich Lord|M|PLST
+#60|Jetmir, Nexus of Revels|M|PLST
+#61|Kamahl, Heart of Krosa|M|PLST
+#62|Karazikar, the Eye Tyrant|M|PLST
+#63|Karlach, Fury of Avernus|M|PLST
+#64|Kess, Dissident Mage|M|PLST
+#65|Kethis, the Hidden Hand|M|PLST
+#66|Kiki-Jiki, Mirror Breaker|M|PLST
+#67|Korvold, Fae-Cursed King|M|PLST
+#68|Maeve, Insidious Singer|M|PLST
+#69|Mr. Foxglove|M|PLST
+#70|Narset, Enlightened Exile|M|PLST
+#71|Orvar, the All-Form|M|PLST
+#72|Otharri, Suns' Glory|M|PLST
+#73|Shabraz, the Skyshark|M|PLST
+#74|Shanid, Sleepers' Scourge|M|PLST
+#75|Tevesh Szat, Doom of Fools|M|PLST
+#76|Thassa, Deep-Dwelling|M|PLST
+#77|Tivit, Seller of Secrets|M|PLST
+#78|Volo, Itinerant Scholar|M|PLST
+#79|Xyris, the Writhing Storm|M|PLST
+#80|Yidris, Maelstrom Wielder|M|PLST
+#81|Zellix, Sanity Flayer|M|PLST
+#82|Swords to Plowshares|U|MB2
+#83|Gix, Yawgmoth Praetor|M|MB2
+#84|Codecracker Hound|U|PLST
+#85|Mischievous Mystic|U|PLST
+#86|Bloodchief's Thirst|U|PLST
+#87|Fell Gravship|U|PLST
+#88|Hollow Marauder|U|PLST
+#89|Marionette Apprentice|U|PLST
+#90|Oblivion Strike|C|PLST
+#91|Flametongue Kavu|U|PLST
+#92|Kappa Tech-Wrecker|U|PLST
+#93|Streetwise Negotiator|U|PLST
+#94|Arabella, Abandoned Doll|U|PLST
+#95|Buried in the Garden|U|PLST
+#96|Talrand, Sky Summoner|R|PLST
+#97|Ulamog, the Ceaseless Hunger|M|PLST
+#98|Zopandrel, Hunger Dominus|M|PLST
+#99|Mother of Runes|U|PLST
+#100|Palace Jailer|U|PLST
+#101|Twinmaw Stormbrood|U|PLST
+#102|Coastal Piracy|U|PLST
+#103|Roiling Dragonstorm|U|PLST
+#104|Indulgent Tormentor|U|PLST
+#105|Fanatic of Mogis|U|PLST
+#106|Goblin Bombardment|U|PLST
+#107|Abzan Beastmaster|U|PLST
+#108|Glacier Godmaw|U|PLST
+#109|Nissa's Judgment|U|PLST
+#110|Toski, Bearer of Secrets|R|PLST
+#111|Varchild, Betrayer of Kjeldor|R|PLST
+#112|Bolshack Dragon|R|MB2
+#113|Consul's Lieutenant|U|PLST
+#114|Fiend Hunter|U|PLST
+#115|Ossification|U|PLST
+#116|Stasis Snare|U|PLST
+#117|Fact or Fiction|U|PLST
+#118|Forbid|U|PLST
+#119|Mulldrifter|C|PLST
+#120|Fatal Push|U|PLST
+#121|Hopeless Nightmare|C|PLST
+#122|Vampire Gourmand|U|PLST
+#123|Artistic Process|U|PLST
+#124|Fiery Impulse|C|PLST
+#125|Geistblast|U|PLST
+#126|Heroes' Bane|U|PLST
+#127|Overprotect|U|PLST
+#128|Vine Mare|U|PLST
+#129|Blade of Selves|R|PLST
+#130|Clown Car|R|PLST
+#131|Saryth, the Viper's Fang|R|PLST
+#132|Meekstone|R|MB2
+#133|Urza, Lord High Artificer|M|MB2
+#134|The Colossal Dreadmaw|R|MB2
+#135|Aerial Responder|U|PLST
+#136|Armored Ascension|U|PLST
+#137|Banishing Slash|U|PLST
+#138|Journey to Nowhere|C|PLST
+#139|Lingering Souls|U|PLST
+#140|Rally the Monastery|U|PLST
+#141|Splitskin Doll|U|PLST
+#142|Kasmina, Enigmatic Mentor|U|PLST
+#143|Murmuring Mystic|U|PLST
+#144|Reality Shift|U|PLST
+#145|Stock Up|U|PLST
+#146|Epic Downfall|U|PLST
+#147|Falkenrath Noble|U|PLST
+#148|Infernal Vessel|U|PLST
+#149|Liliana's Specter|C|PLST
+#150|Power Word Kill|U|PLST
+#151|Skullport Merchant|U|PLST
+#152|Burst Lightning|C|PLST
+#153|Cathartic Pyre|U|PLST
+#154|Lightning Bolt|C|PLST
+#155|Sunset Strikemaster|U|PLST
+#156|Witch's Mark|C|PLST
+#157|Disruptive Stormbrood|U|PLST
+#158|Masked Admirers|U|PLST
+#159|Song of Freyalise|U|PLST
+#160|Earthquake|R|PLST
+#161|Endrek Sahr, Master Breeder|R|PLST
+#162|Ghoulcaller Gisa|R|PLST
+#163|Rankle, Master of Pranks|R|PLST
+#164|Selvala, Heart of the Wilds|M|PLST
+#165|Mirri, Weatherlight Duelist|M|MB2
+#166|Built Bear|R|MB2
+#167|Plant a Sapling|R|MB2
+#168|Questing Cosplayer|R|MB2
+#169|Battle Screech|U|PLST
+#170|Griffin Guide|U|PLST
+#171|Healer's Hawk|C|PLST
+#172|Helpful Hunter|C|PLST
+#173|Seeker of the Way|U|PLST
+#174|Prodigal Sorcerer|U|PLST
+#175|Essence Extraction|U|PLST
+#176|Morbid Opportunist|U|PLST
+#177|Reaping the Graves|C|PLST
+#178|Stir the Sands|U|PLST
+#179|Blaze|U|PLST
+#180|Fireball|U|PLST
+#181|Reckless Rage|U|PLST
+#182|Collective Resistance|U|PLST
+#183|Grizzly Fate|U|PLST
+#184|Nature's Way|U|PLST
+#185|Rancor|U|PLST
+#186|Colossal Skyturtle|U|PLST
+#187|Herald of Secret Streams|R|PLST
+#188|Shadow of the Second Sun|M|PLST
+#189|Spiritmonger|U|PLST
+#190|Braids, Arisen Nightmare|R|PLST
+#191|Equilibrium|R|MB2
+#192|Mind Twist|R|MB2
+#193|Power Matrix|R|MB2
+#194|Oracle of the Alpha|U|MBC
+#195|A Girl and Her Dogs|R|MB2
+#196|Flavor Disaster|R|MB2
+#197|Lutri, Pauper Otter|R|MB2
+#198|Luxior, Ignited|R|MB2
+#199|Penumbra Umbra|R|MB2
+#200|Value Town|R|MB2
+#201|Clarion Spirit|U|PLST
+#202|Fairgrounds Warden|U|PLST
+#203|Fearless Fledgling|U|PLST
+#204|Inspiring Overseer|C|PLST
+#205|Reveille Squad|U|PLST
+#206|Wispweaver Angel|U|PLST
+#207|Eldrazi Skyspawner|C|PLST
+#208|Military Intelligence|U|PLST
+#209|Spectral Sailor|U|PLST
+#210|Waker of Waves|U|PLST
+#211|Archetype of Finality|U|PLST
+#212|Attempted Murder|U|PLST
+#213|Blood Curdle|C|PLST
+#214|Bone Shredder|U|PLST
+#215|Call the Bloodline|U|PLST
+#216|Fell Stinger|U|PLST
+#217|Hero's Downfall|U|PLST
+#218|Markov Baron|U|PLST
+#219|Nekrataal|U|PLST
+#220|Order of Midnight|U|PLST
+#221|Paragon of Open Graves|U|PLST
+#222|Revenge of Ravens|U|PLST
+#223|Terror|C|PLST
+#224|Ultimate Price|U|PLST
+#225|Unburial Rites|U|PLST
+#226|Abrade|C|PLST
+#227|Chandra, Novice Pyromancer|U|PLST
+#228|Glimpse the Impossible|C|PLST
+#229|Needletooth Raptor|U|PLST
+#230|Shower of Coals|U|PLST
+#231|Stoke the Flames|U|PLST
+#232|Thopter Engineer|U|PLST
+#233|Call of the Herd|U|PLST
+#234|Changeling Titan|U|PLST
+#235|Cudgel Troll|U|PLST
+#236|Dance of the Tumbleweeds|C|PLST
+#237|Dragon Sniper|U|PLST
+#238|Poison Dart Frog|C|PLST
+#239|Sarulf's Packmate|C|PLST
+#240|Skullwinder|U|PLST
+#241|Stormkeld Vanguard|U|PLST
+#242|Thrashing Brontodon|U|PLST
+#243|Up the Beanstalk|U|PLST
+#244|Birds of Paradise|R|PLST
+#245|Raff, Weatherlight Stalwart|U|PLST
+#246|Anzrag, the Quake-Mole|M|PLST
+#247|Scalelord Reckoner|R|MB2
+#248|Chatzuk, Mighty Guitarist|R|MB2
+#249|Defender of the Queue|R|MB2
+#250|Immersturm Battlefield|R|MB2
+#251|Sliver of Hope|R|MB2
+#252|Starting Town NPC|R|MB2
+#253|Archon of Absolution|U|PLST
+#254|Banishing Light|U|PLST
+#255|Cenn's Enlistment|C|PLST
+#256|Crystal Dragon|U|PLST
+#257|Dalkovan Packbeasts|U|PLST
+#258|Flickerwisp|U|PLST
+#259|Imperial Oath|C|PLST
+#260|On Serra's Wings|U|PLST
+#261|Phyrexian Missionary|U|PLST
+#262|Spirit Mantle|U|PLST
+#263|Take Up the Shield|C|PLST
+#264|Thraben Charm|C|PLST
+#265|Touch the Spirit Realm|U|PLST
+#266|Wall of Omens|U|PLST
+#267|Cryogen Relic|C|PLST
+#268|Essence Scatter|C|PLST
+#269|Hard Evidence|C|PLST
+#270|Invisible Stalker|U|PLST
+#271|Man-o'-War|U|PLST
+#272|Memory Lapse|C|PLST
+#273|Repulse|C|PLST
+#274|Tolarian Kraken|U|PLST
+#275|Dockside Chef|U|PLST
+#276|Dusk Mangler|U|PLST
+#277|Gilt-Leaf Winnower|U|PLST
+#278|Grim Bounty|C|PLST
+#279|Liliana's Devotee|U|PLST
+#280|Mad Auntie|U|PLST
+#281|Noxious Ghoul|U|PLST
+#282|Orzhov Enforcer|U|PLST
+#283|Skinthinner|C|PLST
+#284|Thirsting Bloodlord|U|PLST
+#285|Underworld Hermit|U|PLST
+#286|Virus Beetle|C|PLST
+#287|Diamond Pick-Axe|U|PLST
+#288|Glarewielder|U|PLST
+#289|Hordeling Outburst|C|PLST
+#290|Rites of Initiation|C|PLST
+#291|Volcanic Spite|C|PLST
+#292|Young Pyromancer|U|PLST
+#293|Avacyn's Pilgrim|C|PLST
+#294|Basking Broodscale|C|PLST
+#295|Bellowing Tanglewurm|U|PLST
+#296|Bookwurm|U|PLST
+#297|Cartouche of Strength|C|PLST
+#298|Contagious Vorrac|C|PLST
+#299|Feral Hydra|U|PLST
+#300|Great Oak Guardian|U|PLST
+#301|Insidious Fungus|U|PLST
+#302|Jewel Thief|C|PLST
+#303|Kraul Harpooner|U|PLST
+#304|Regrowth|U|PLST
+#305|Rise of the Ants|U|PLST
+#306|Ezuri, Claw of Progress|M|PLST
+#307|Kitsa, Otterball Elite|M|PLST
+#308|Linvala, the Preserver|M|PLST
+#309|Massacre Girl, Known Killer|M|PLST
+#310|Arcane Signet|C|MB2
+#311|Goblin Recruiter|U|MB2
+#312|Snuff Out|C|MB2
+#313|Rot Hulk|M|MB2
+#314|Alberix, the Trade Planet|R|MB2
+#315|Boulder Jockey|R|MB2
+#316|Champion of the Hareish|R|MB2
+#317|Jeskai Baller|R|MB2
+#318|Muraganda Eldrazi|R|MB2
+#319|No-Regrets Egret|R|MB2
+#320|Stone Drake|R|MB2
+#321|Banisher Priest|U|PLST
+#322|Belfry Spirit|U|PLST
+#323|Beloved Chaplain|U|PLST
+#324|Cloudgoat Ranger|U|PLST
+#325|Constricting Sliver|U|PLST
+#326|Grateful Apparition|U|PLST
+#327|Jötun Owl Keeper|U|PLST
+#328|Metastatic Evangel|U|PLST
+#329|Nearheath Pilgrim|U|PLST
+#330|Noble Purpose|U|PLST
+#331|Planar Disruption|C|PLST
+#332|Prava of the Steel Legion|U|PLST
+#333|Prismatic Strands|C|PLST
+#334|Prison Term|U|PLST
+#335|Spirited Companion|C|PLST
+#336|Stonecloaker|U|PLST
+#337|Valorous Stance|U|PLST
+#338|Acquisition Octopus|U|PLST
+#339|Apprentice Wizard|R|PLST
+#340|Deepchannel Mentor|U|PLST
+#341|Meeting of Minds|C|PLST
+#342|Omni-Changeling|U|PLST
+#343|Reconnaissance Mission|U|PLST
+#344|Serra Sphinx|U|PLST
+#345|Serum Visions|U|PLST
+#346|Sword Coast Serpent|C|PLST
+#347|Wing Splicer|U|PLST
+#348|Zephid's Embrace|U|PLST
+#349|Accursed Marauder|C|PLST
+#350|Ancient Craving|R|PLST
+#351|Aphetto Exterminator|U|PLST
+#352|Blood Artist|U|PLST
+#353|Blot Out|U|PLST
+#354|Corpse Augur|U|PLST
+#355|Death Pulse|U|PLST
+#356|Diabolic Servitude|U|PLST
+#357|Diregraf Horde|C|PLST
+#358|Elspeth's Nightmare|U|PLST
+#359|Gatekeeper of Malakir|U|PLST
+#360|Heartless Act|U|PLST
+#361|Marchesa's Decree|U|PLST
+#362|Marsh Flitter|U|PLST
+#363|Necrologia|U|PLST
+#364|Olivia's Bloodsworn|U|PLST
+#365|Order of Yawgmoth|U|PLST
+#366|Osseous Sticktwister|U|PLST
+#367|Reaper's Talisman|U|PLST
+#368|Weaponcraft Enthusiast|U|PLST
+#369|Zulaport Cutthroat|U|PLST
+#370|Anax, Hardened in the Forge|U|PLST
+#371|Breath of Darigaaz|U|PLST
+#372|Changeling Berserker|U|PLST
+#373|Experimental Synthesizer|C|PLST
+#374|Galvanic Blast|C|PLST
+#375|Meria's Outrider|C|PLST
+#376|Pyrohemia|U|PLST
+#377|Thunderdrum Soloist|U|PLST
+#378|Thunderwave|U|PLST
+#379|Beast Attack|U|PLST
+#380|Brood Monitor|U|PLST
+#381|Cankerbloom|U|PLST
+#382|Druid's Familiar|U|PLST
+#383|Garruk's Packleader|U|PLST
+#384|Hunter's Mark|U|PLST
+#385|Llanowar Visionary|C|PLST
+#386|Predator's Howl|U|PLST
+#387|Trollbred Guardian|U|PLST
+#388|Wood Elves|C|PLST
+#389|Aboleth Spawn|R|PLST
+#390|Agate Instigator|R|PLST
+#391|Angel of Indemnity|R|PLST
+#392|Balmor, Battlemage Captain|U|PLST
+#393|Blade of the Bloodchief|R|PLST
+#394|Bothersome Quasit|R|PLST
+#395|Brainstealer Dragon|R|PLST
+#396|Cave-In|R|PLST
+#397|Conclave Evangelist|R|PLST
+#398|Court of Ambition|R|PLST
+#399|Court of Embereth|R|PLST
+#400|Court of Garenbrig|R|PLST
+#401|Court of Grace|R|PLST
+#402|Court of Vantress|R|PLST
+#403|Elas il-Kor, Sadistic Pilgrim|U|PLST
+#404|Ertha Jo, Frontier Mentor|U|PLST
+#405|Escape Tunnel|C|PLST
+#406|Ghoulish Impetus|R|PLST
+#407|Goldlust Triad|R|PLST
+#408|Green Slime|R|PLST
+#409|Guardian of Faith|R|PLST
+#410|Ink-Treader Nephilim|R|PLST
+#411|Keeper of Keys|R|PLST
+#412|Kutzil, Malamet Exemplar|U|PLST
+#413|Life of the Party|R|PLST
+#414|Mikokoro, Center of the Sea|R|PLST
+#415|Misleading Signpost|R|PLST
+#416|Mortuary|R|PLST
+#417|New Frontiers|R|PLST
+#418|Perch Protection|R|PLST
+#419|Ravenous Slime|R|PLST
+#420|Reverent Mantra|R|PLST
+#421|Rogue's Passage|U|PLST
+#422|Scurry of Squirrels|R|PLST
+#423|Share the Spoils|R|PLST
+#424|Siege-Gang Lieutenant|R|PLST
+#425|Sunscorch Regent|R|PLST
+#426|Tempt with Bunnies|R|PLST
+#427|Thunderfoot Baloth|R|PLST
+#428|Vile Consumption|R|PLST
+#429|Wheel and Deal|R|PLST
+#430|Baba Lysaga, Night Witch|R|PLST
+#431|Baldin, Century Herdmaster|R|PLST
+#432|Commander Eesha|R|PLST
+#433|Cromat|R|PLST
+#434|Deekah, Fractal Theorist|R|PLST
+#435|Delina, Wild Mage|R|PLST
+#436|Edric, Spymaster of Trest|R|PLST
+#437|Fain, the Broker|R|PLST
+#438|Gluntch, the Bestower|R|PLST
+#439|Gorm the Great|R|PLST
+#440|Gornog, the Red Reaper|R|PLST
+#441|Grazilaxx, Illithid Scholar|R|PLST
+#442|Jaheira, Friend of the Forest|R|PLST
+#443|Jeska, Warrior Adept|R|PLST
+#444|Jolene, the Plunder Queen|R|PLST
+#445|Kami of the Crescent Moon|R|PLST
+#446|Kira, Great Glass-Spinner|R|PLST
+#447|Kokusho, the Evening Star|R|PLST
+#448|Konda, Lord of Eiganjo|R|PLST
+#449|Krark, the Thumbless|R|PLST
+#450|Lae'zel, Vlaakith's Champion|R|PLST
+#451|Lim-Dûl the Necromancer|R|PLST
+#452|Mannichi, the Fevered Dream|R|PLST
+#453|Masako the Humorless|R|PLST
+#454|Neheb, the Eternal|M|PLST
+#455|Nezahal, Primal Tide|R|PLST
+#456|Nils, Discipline Enforcer|R|PLST
+#457|Orthion, Hero of Lavabrink|R|PLST
+#458|Pir, Imaginative Rascal|R|PLST
+#459|Plagon, Lord of the Beach|R|PLST
+#460|Plargg and Nassari|R|PLST
+#461|Rev, Tithe Extractor|R|PLST
+#462|Reya Dawnbringer|R|PLST
+#463|Rionya, Fire Dancer|R|PLST
+#464|Runadi, Behemoth Caller|R|PLST
+#465|Shroofus Sproutsire|R|PLST
+#466|Surrak and Goreclaw|R|PLST
+#467|Sygg, River Cutthroat|R|PLST
+#468|Toothy, Imaginary Friend|R|PLST
+#469|Torbran, Thane of Red Fell|R|PLST
+#470|Virtus the Veiled|R|PLST
+#471|Visara the Dreadful|R|PLST
+#472|Zara, Renegade Recruiter|R|PLST
+#473|Arzakon|R|MBC
+#474|Ashaya's Enduring Bond|R|MBC
+#475|Autumn Willow, Harmony|R|MBC
+#476|Balefang the Unslayable|R|MBC
+#477|Blor the Impervious|R|MBC
+#478|Boss Uramon, Shadow's Reach|R|MBC
+#479|Chief Magistrate of Mercadia|R|MBC
+#480|Chira, All In|R|MBC
+#481|Davvol, Evincar of Rath|R|MBC
+#482|Dragon's Smile|R|MBC
+#483|Dyfed, the Guiding Hand|R|MBC
+#484|Ekthi, Contaminator Priest|R|MBC
+#485|Elda, Conjurer of Spectacle|R|MBC
+#486|Feroz, Ulgrotha's Warden|R|MBC
+#487|Flitwing, Lyev Detective|R|MBC
+#488|Glava, Five-Advents Mage|R|MBC
+#489|Grakk the Pacifist|R|MBC
+#490|Grandmother Goby|R|MBC
+#491|Greensleeves|R|MBC
+#492|Grizzlegom, Hurloon Hero|R|MBC
+#493|Gustha Ebbasdotter|R|MBC
+#494|Homer, the Hermit|R|MBC
+#495|Istvan, Butcher of Eln|R|MBC
+#496|Itazura, Lingering Wick|R|MBC
+#497|Jabs, Mistress of Mockery|R|MBC
+#498|Jandor, Fortuned Traveler|R|MBC
+#499|Joven and Chandler|R|MBC
+#500|Kuroki, Thief of Talents|R|MBC
+#501|Lyna, Veil of Vengeance|R|MBC
+#502|Massimo, the Magician|R|MBC
+#503|Matoc, Lavamancer|R|MBC
+#504|Maular, the Next Evolution|R|MBC
+#505|Meatsqueak, Hoard Lord|R|MBC
+#506|Miss Highwater|R|MBC
+#507|Nephilim Epochal|R|MBC
+#508|Nivea, Beloved Battlemage|R|MBC
+#509|Olag and Miau, New Friends|R|MBC
+#510|Olinda the Oblivious|R|MBC
+#511|Rikala, Homarid King|R|MBC
+#512|Sahir, Visitor in Darkness|R|MBC
+#513|Sash and Waistcoat, Unmen|R|MBC
+#514|Selenia, the Cursed Heart|R|MBC
+#515|Seluma, Light of Aysen|R|MBC
+#516|Sifa Grent|R|MBC
+#517|The Everforger|R|MBC
+#518|The Madcap Jester|R|MBC
+#519|The Muckslinger Gang|R|MBC
+#520|The Unluckiest Planeswalker|R|MBC
+#521|The Weaver King|R|MBC
+#522|Thomil, the Destroyer|R|MBC
+#523|Tolabow, Loch Rascal|R|MBC
+#524|Tresserhorn's Lord, Returned|R|MBC
+#525|Tsagan, Raider Warlord|R|MBC
+#526|Uugguu, the Omniplasm|R|MBC
+#527|Valko Indorian|R|MBC
+#528|Venser, Visionary Traveler|R|MBC
+#529|Whtz, the Bibliophile|R|MBC
+#530|Worzel, the Protector|R|MBC
+#531|Yume, Chronicler of Valor|R|MBC
+#532|Zagorka, Mother of Sanctum|R|MBC
+#533|Counterspell|C|MB2
+#534|Exotic Orchard|R|MBC
+#535|Final Fortune|R|MB2
+#536|Gerrard, Weatherlight Hero|R|MB2
+#537|Giver of Runes|R|MB2
+#538|Hogaak, Arisen Necropolis|R|MB2
+#539|O-Kagachi, Vengeful Kami|M|MB2
+#540|Titania, Protector of Argoth|M|MB2
+#541|Chea, Friend to Maybe Too Many|R|MB2
+#542|Cleaver Blow|R|MB2
+#543|Glimpse, the Unthinkable|R|MB2
+#544|Hish of the Snake Cult|R|MB2
+#545|Jund 'Em Out|R|MB2
+#546|Knight of Lost Causes|R|MB2
+#547|Kozilek, Compleated|R|MB2
+#548|Liliana's Other Contract|R|MB2
+#549|Marchesa's Surprise Party|R|MB2
+#550|Mox Poison|R|MB2
+#551|Night of the Flying Merfolk|R|MB2
+#552|Oddric, Lunar Marquis|R|MB2
+#553|Planeswalkerificate|R|MB2
+#554|Rin and Seri, Inseparabler|R|MB2
+#555|Terry Pin, Turboturtle|R|MB2
+#556|Toofer, Keeper of the Full Grip|R|MB2
+#557|Werewhat|R|MB2
+#558|Who's That Praetor?|R|MB2
+#559|Wisedrafter's Will|R|MB2
+#560|Wrenn and One|R|MB2
+#561|Ajani's Pridemate|U|PLST
+#562|Baird, Steward of Argive|U|PLST
+#563|Cleric Class|U|PLST
+#564|Dauntless Cathar|C|PLST
+#565|Evangel of Heliod|U|PLST
+#566|Hammers of Moradin|U|PLST
+#567|Master Splicer|U|PLST
+#568|Oathsworn Giant|U|PLST
+#569|Oblivion Ring|C|PLST
+#570|Porcelain Legionnaire|C|PLST
+#571|Spectral Procession|U|PLST
+#572|Syr Alin, the Lion's Claw|U|PLST
+#573|Youthful Valkyrie|U|PLST
+#574|Battlewing Mystic|U|PLST
+#575|Emrakul's Messenger|U|PLST
+#576|Moon-Circuit Hacker|C|PLST
+#577|Pore Over the Pages|U|PLST
+#578|Sprite Noble|U|PLST
+#579|Talrand's Invocation|U|PLST
+#580|Time of Ice|U|PLST
+#581|Cast Down|C|PLST
+#582|Chainer's Edict|U|PLST
+#583|Cloudkill|U|PLST
+#584|Corpse Connoisseur|U|PLST
+#585|Crippling Fatigue|C|PLST
+#586|Go for the Throat|U|PLST
+#587|Havoc Demon|U|PLST
+#588|Lively Dirge|U|PLST
+#589|Nameless Inversion|C|PLST
+#590|Nezumi Prowler|U|PLST
+#591|Phyrexian Gargantua|U|PLST
+#592|Phyrexian Rager|C|PLST
+#593|Predatory Nightstalker|C|PLST
+#594|Reanimate|U|PLST
+#595|Send in the Pest|C|PLST
+#596|Shade's Form|C|PLST
+#597|Balduvian Warlord|U|PLST
+#598|Bloodmark Mentor|U|PLST
+#599|Flame Javelin|U|PLST
+#600|Jaya, Venerated Firemage|U|PLST
+#601|Pyrokinesis|U|PLST
+#602|Rabbit Battery|U|PLST
+#603|Searing Spear|C|PLST
+#604|Spiteful Prankster|U|PLST
+#605|Staggershock|U|PLST
+#606|Storm-Kiln Artist|U|PLST
+#607|Sunshot Militia|C|PLST
+#608|Thermo-Alchemist|C|PLST
+#609|Tibalt, Rakish Instigator|U|PLST
+#610|Torch Breath|U|PLST
+#611|Cytoplast Root-Kin|U|PLST
+#612|Fynn, the Fangbearer|U|PLST
+#613|Gaea's Embrace|U|PLST
+#614|Noose Constrictor|U|PLST
+#615|Nyxborn Hydra|C|PLST
+#616|Orochi Eggwatcher|U|PLST
+#617|Patagia Viper|U|PLST
+#618|Rampant Growth|C|PLST
+#619|Skyshroud Claim|C|PLST
+#620|Strangleroot Geist|U|PLST
+#621|Symbiosis|C|PLST
+#622|Tail Swipe|U|PLST
+#623|Treetop Village|U|PLST
+#624|Tyvar's Stand|U|PLST
+#625|Everflowing Chalice|U|PLST
+#626|Meteor Golem|U|PLST
+#627|Loot, Exuberant Explorer|R|PLST
+#628|Mangara, the Diplomat|R|PLST
+#629|Omnath, Locus of Creation|M|PLST
+#630|Ramos, Dragon Engine|M|PLST
+#631|The Mindskinner|R|PLST
+#632|Goblin Gang Leader|U|MB2
+#633|Mind Stone|U|MBC
+#634|Urza's Bauble|U|MB2
+#635|Avacyn's Collar, the Symbol of Her Church|R|MB2
+#636|Blurry Visionary|R|MB2
+#637|Boltfire|R|MB2
+#638|Common Black Removal|R|MB2
+#639|Rule with an Even Hand|R|MB2
+#640|Angel of Vitality|U|PLST
+#641|Azorius Herald|U|PLST
+#642|Condemn|U|PLST
+#643|Contraband Livestock|U|PLST
+#644|Daxos, Blessed by the Sun|U|PLST
+#645|Destroy Evil|C|PLST
+#646|Ethereal Armor|C|PLST
+#647|Fierce Retribution|C|PLST
+#648|Flock Impostor|U|PLST
+#649|Healer of the Pride|U|PLST
+#650|Kabira Vindicator|U|PLST
+#651|Militia Bugler|C|PLST
+#652|Personify|U|PLST
+#653|Plate Armor|U|PLST
+#654|Recumbent Bliss|C|PLST
+#655|Shattered Angel|U|PLST
+#656|Sigil of the New Dawn|U|PLST
+#657|Slaughter the Strong|U|PLST
+#658|Subjugator Angel|U|PLST
+#659|Thunderous Orator|U|PLST
+#660|Traveling Minister|C|PLST
+#661|Blink of an Eye|C|PLST
+#662|Body Double|U|PLST
+#663|Chemister's Insight|U|PLST
+#664|Cone of Cold|U|PLST
+#665|Divide by Zero|U|PLST
+#666|Fumble|U|PLST
+#667|Kelpie Guide|U|PLST
+#668|Merfolk Seastalkers|U|PLST
+#669|Merfolk Trickster|U|PLST
+#670|Mystic Subdual|U|PLST
+#671|Sapphire Dragon|U|PLST
+#672|Startle|C|PLST
+#673|Symbol of Unsummoning|C|PLST
+#674|Wall of Tears|U|PLST
+#675|Wizard Class|U|PLST
+#676|Bastion of Remembrance|U|PLST
+#677|Corrupt|C|PLST
+#678|Dakmor Plague|U|PLST
+#679|Dreadhound|U|PLST
+#680|Foulmire Knight|U|PLST
+#681|Ghost Lantern|U|PLST
+#682|Graveshifter|U|PLST
+#683|Nightfire Giant|U|PLST
+#684|Savage Gorger|C|PLST
+#685|Urborg Repossession|C|PLST
+#686|Vow of Malice|U|PLST
+#687|Young Necromancer|U|PLST
+#688|Alena, Kessig Trapper|U|PLST
+#689|Barbed Batterfist|C|PLST
+#690|Battle Cry Goblin|U|PLST
+#691|Desert of the Fervent|C|PLST
+#692|Exuberant Fuseling|U|PLST
+#693|Forked Lightning|U|PLST
+#694|Frenzied Saddlebrute|U|PLST
+#695|Furnace Punisher|U|PLST
+#696|Gnoll War Band|U|PLST
+#697|Hellspark Elemental|U|PLST
+#698|Incinerate|C|PLST
+#699|Kyren Negotiations|U|PLST
+#700|Lunar Frenzy|U|PLST
+#701|Monastery Swiftspear|U|PLST
+#702|Renegade Warlord|U|PLST
+#703|Seize the Spoils|C|PLST
+#704|Two-Handed Axe|U|PLST
+#705|Annoyed Altisaur|C|PLST
+#706|Blossoming Defense|U|PLST
+#707|Crashing Boars|U|PLST
+#708|Destiny Spinner|U|PLST
+#709|Experiment One|U|PLST
+#710|Fyndhorn Elves|C|PLST
+#711|Krosan Tusker|C|PLST
+#712|Master's Rebuke|C|PLST
+#713|Mutagenic Growth|C|PLST
+#714|Outmuscle|C|PLST
+#715|Penumbra Kavu|U|PLST
+#716|Plated Crusher|U|PLST
+#717|Prosperous Innkeeper|U|PLST
+#718|Scurry Oak|U|PLST
+#719|Sporemound|C|PLST
+#720|Trumpeting Herd|C|PLST
+#721|Utopia Sprawl|C|PLST
+#722|Warbriar Blessing|C|PLST
+#723|Extract from Darkness|U|PLST
+#724|Imoti, Celebrant of Bounty|U|PLST
+#725|Tura Kennerüd, Skyknight|U|PLST
+#726|Yahenni, Undying Partisan|R|PLST
+#727|Contagion|U|MB2
+#728|Hoodwink|C|MB2
+#729|Standstill|U|MB2
+#730|Thought Vessel|U|MBC
+#731|Catch of the Day|R|MB2
+#732|Wormhole Warp|R|MB2
+#733|Abzan Battle Priest|U|PLST
+#734|Accorder Paladin|U|PLST
+#735|Alharu, Solemn Ritualist|U|PLST
+#736|Baffling End|U|PLST
+#737|Barbed Spike|U|PLST
+#738|Basri's Acolyte|C|PLST
+#739|Benevolent Bodyguard|C|PLST
+#740|Blessed Hippogriff|C|PLST
+#741|Devouring Light|U|PLST
+#742|Exile|C|PLST
+#743|Glimmerpoint Stag|U|PLST
+#744|Goldnight Commander|U|PLST
+#745|Karoo|U|PLST
+#746|Ministrant of Obligation|U|PLST
+#747|Momentary Blink|C|PLST
+#748|Radiant's Judgment|C|PLST
+#749|Raffine's Informant|C|PLST
+#750|Release the Dogs|U|PLST
+#751|Samurai of the Pale Curtain|U|PLST
+#752|Settle Beyond Reality|C|PLST
+#753|Shepherd of the Flock|U|PLST
+#754|Shepherd of the Lost|U|PLST
+#755|Shrike Force|U|PLST
+#756|Temporal Isolation|C|PLST
+#757|Thraben Watcher|U|PLST
+#758|Totem-Guide Hartebeest|C|PLST
+#759|Veteran Armorer|C|PLST
+#760|You're Confronted by Robbers|C|PLST
+#761|Cephalid Broker|U|PLST
+#762|Cerulean Wyvern|U|PLST
+#763|Curious Obsession|U|PLST
+#764|Deep Analysis|C|PLST
+#765|Faerie Swarm|U|PLST
+#766|Forbidden Alchemy|C|PLST
+#767|Frost Trickster|C|PLST
+#768|Gigadrowse|C|PLST
+#769|Mana Leak|C|PLST
+#770|Mistwalker|C|PLST
+#771|Nevermaker|U|PLST
+#772|Oneirophage|U|PLST
+#773|Peregrine Drake|U|PLST
+#774|Preordain|C|PLST
+#775|Scholar of the Ages|U|PLST
+#776|Snap|C|PLST
+#777|Specimen Collector|U|PLST
+#778|Spin into Myth|U|PLST
+#779|Submerge|U|PLST
+#780|Tempest Caller|U|PLST
+#781|Tetsuko Umezawa, Fugitive|U|PLST
+#782|Thassa's Emissary|U|PLST
+#783|Undo|U|PLST
+#784|Viral Drake|U|PLST
+#785|Watcher for Tomorrow|U|PLST
+#786|Whirler Rogue|U|PLST
+#787|Archfiend of Sorrows|U|PLST
+#788|Bloodthirsty Aerialist|U|PLST
+#789|Cartouche of Ambition|C|PLST
+#790|Charcoal Diamond|U|PLST
+#791|Corpse Harvester|U|PLST
+#792|Dauthi Horror|C|PLST
+#793|Davriel, Rogue Shadowmage|U|PLST
+#794|Expunge|C|PLST
+#795|Feast or Famine|C|PLST
+#796|Gurmag Angler|C|PLST
+#797|Hand of Death|C|PLST
+#798|Oubliette|U|PLST
+#799|Pawn of Ulamog|U|PLST
+#800|Public Execution|U|PLST
+#801|Scrapwork Rager|C|PLST
+#802|Sengir Autocrat|U|PLST
+#803|Sever Soul|C|PLST
+#804|Shepherd of Rot|C|PLST
+#805|Undead Augur|U|PLST
+#806|Vampiric Link|C|PLST
+#807|Battle Squadron|U|PLST
+#808|Big Score|C|PLST
+#809|Blade Sliver|U|PLST
+#810|Breath Weapon|C|PLST
+#811|Bronzeplate Boar|U|PLST
+#812|Embereth Shieldbreaker|U|PLST
+#813|Falkenrath Celebrants|C|PLST
+#814|Fanning the Flames|U|PLST
+#815|Fireblast|C|PLST
+#816|Firewing Phoenix|U|PLST
+#817|Flame Slash|C|PLST
+#818|Gempalm Incinerator|U|PLST
+#819|Giant Cindermaw|U|PLST
+#820|Go for Blood|C|PLST
+#821|Havoc Jester|U|PLST
+#822|Hoarding Dragon|U|PLST
+#823|Inspired Tinkering|U|PLST
+#824|Lightning Mauler|U|PLST
+#825|Pyreheart Wolf|U|PLST
+#826|Reckless Abandon|C|PLST
+#827|Reckless Bushwhacker|U|PLST
+#828|Reckless Impulse|C|PLST
+#829|Rupture|U|PLST
+#830|Seal of Fire|C|PLST
+#831|Shiv's Embrace|U|PLST
+#832|Skewer the Critics|C|PLST
+#833|Slavering Nulls|U|PLST
+#834|Toggo, Goblin Weaponsmith|U|PLST
+#835|Vampires' Vengeance|U|PLST
+#836|Volcanic Hammer|C|PLST
+#837|Argothian Opportunist|C|PLST
+#838|Baloth Woodcrasher|U|PLST
+#839|Blanchwood Prowler|C|PLST
+#840|Bloom Hulk|C|PLST
+#841|Bushwhack|U|PLST
+#842|Challenger Troll|U|PLST
+#843|Drumhunter|U|PLST
+#844|Elemental Bond|U|PLST
+#845|Elven Bow|U|PLST
+#846|Elven Riders|U|PLST
+#847|Epic Confrontation|C|PLST
+#848|Fa'adiyah Seer|C|PLST
+#849|Gaea's Anthem|U|PLST
+#850|Giant Ankheg|U|PLST
+#851|Gift of the Viper|C|PLST
+#852|Hunter's Edge|C|PLST
+#853|Muscle Sliver|C|PLST
+#854|Penumbra Wurm|U|PLST
+#855|Restock|U|PLST
+#856|Saber Ants|U|PLST
+#857|Scale Up|U|PLST
+#858|Squirrel Nest|U|PLST
+#859|Struggle for Skemfar|C|PLST
+#860|Symbiotic Beast|U|PLST
+#861|Travel Preparations|C|PLST
+#862|Wasteland Viper|U|PLST
+#863|Stonespeaker Crystal|U|PLST
+#864|Gwenna, Eyes of Gaea|R|PLST
+#865|Ratadrabik of Urborg|R|PLST
+#866|Six|R|PLST
+#867|Tinybones, the Pickpocket|M|PLST
+#868|Command Tower|C|MB2
+#869|Lightning Greaves|U|MB2
+#870|Tinder Wall|C|MB2
+#871|Karn, Legacy Reforged|M|MB2
+#872|Mirri's Guile|R|MB2
+#873|Nalathni Dragon|R|MB2
+#874|Rain of Daggers|R|MB2
+#875|Spike Weaver|R|MB2
+#876|Velukan Dragon|R|MB2
+#877|Zombie Master|R|MB2
+#878|Dairy Cow|R|MB2
+#879|Gobland|R|MB2
+#880|Keeper of the Crown|R|MB2
+#881|Lifening Elemental|R|MB2
+#882|Narod, the Beige Flower|R|MB2
+#883|Vuzzle Spaceship|R|MB2
+#884|Akroan Phalanx|U|PLST
+#885|Angelic Exaltation|U|PLST
+#886|Angelic Favor|U|PLST
+#887|Aven Squire|C|PLST
+#888|Basri's Solidarity|U|PLST
+#889|Custodi Squire|C|PLST
+#890|Doomed Traveler|C|PLST
+#891|Elite Scaleguard|U|PLST
+#892|Elspeth's Smite|U|PLST
+#893|Gods Willing|C|PLST
+#894|Goldmeadow Harrier|C|PLST
+#895|Irregular Cohort|C|PLST
+#896|Keleth, Sunmane Familiar|U|PLST
+#897|Knight of Meadowgrain|U|PLST
+#898|Knight of the Holy Nimbus|U|PLST
+#899|Master Decoy|C|PLST
+#900|Myth Realized|U|PLST
+#901|Pacifism|C|PLST
+#902|Pegasus Guardian|C|PLST
+#903|Rally the Peasants|C|PLST
+#904|Ramosian Rally|C|PLST
+#905|Renewed Faith|C|PLST
+#906|Resolute Reinforcements|U|PLST
+#907|Rumor Gatherer|U|PLST
+#908|Shieldhide Dragon|U|PLST
+#909|Surge of Salvation|U|PLST
+#910|Ward Sliver|U|PLST
+#911|Whipcorder|U|PLST
+#912|You Hear Something on Watch|C|PLST
+#913|Aethersnipe|C|PLST
+#914|Aven Fisher|C|PLST
+#915|Dreamscape Artist|C|PLST
+#916|Drift of Phantasms|C|PLST
+#917|Echo Tracer|C|PLST
+#918|Expel from Orazca|U|PLST
+#919|Hada Spy Patrol|U|PLST
+#920|Halimar Depths|C|PLST
+#921|Horizon Scholar|U|PLST
+#922|Illusory Ambusher|U|PLST
+#923|Impulse|C|PLST
+#924|Irenicus's Vile Duplication|U|PLST
+#925|Majestic Metamorphosis|C|PLST
+#926|Mirror Image|U|PLST
+#927|Mirrorshell Crab|C|PLST
+#928|Narcolepsy|C|PLST
+#929|Omen of the Sea|C|PLST
+#930|Referee Squad|U|PLST
+#931|Rise from the Tides|U|PLST
+#932|Ruin Crab|U|PLST
+#933|Rushing River|C|PLST
+#934|Shifting Sliver|U|PLST
+#935|Spellstutter Sprite|C|PLST
+#936|Spiketail Drake|U|PLST
+#937|Spreading Seas|C|PLST
+#938|Telekinetic Sliver|U|PLST
+#939|Think Twice|C|PLST
+#940|Tolarian Terror|C|PLST
+#941|Tromokratis|U|PLST
+#942|Vedalken Dismisser|C|PLST
+#943|Windstorm Drake|U|PLST
+#944|Bloodthrone Vampire|C|PLST
+#945|Brood of Cockroaches|U|PLST
+#946|Carrier Thrall|C|PLST
+#947|Deadly Dispute|C|PLST
+#948|Endless Scream|C|PLST
+#949|Eyeblight's Ending|C|PLST
+#950|Gonti, Lord of Luxury|U|PLST
+#951|Grimdancer|U|PLST
+#952|Incremental Blight|U|PLST
+#953|Injector Crocodile|C|PLST
+#954|Keeper of the Dead|U|PLST
+#955|Killing Wave|U|PLST
+#956|Plague Spitter|U|PLST
+#957|Shadow Prophecy|C|PLST
+#958|Shambling Ghast|C|PLST
+#959|Shimmercreep|U|PLST
+#960|Shoreline Salvager|U|PLST
+#961|Snarling Gorehound|C|PLST
+#962|Street Wraith|U|PLST
+#963|Syr Konrad, the Grim|U|PLST
+#964|Undercity Informer|U|PLST
+#965|Aftershock|C|PLST
+#966|Blazing Crescendo|C|PLST
+#967|Bombard|C|PLST
+#968|Burning Prophet|C|PLST
+#969|Chaos Channeler|U|PLST
+#970|Crimson Fleet Commodore|C|PLST
+#971|Dark-Dweller Oracle|C|PLST
+#972|Explosive Welcome|U|PLST
+#973|Fury Sliver|U|PLST
+#974|Ghitu Slinger|C|PLST
+#975|Goblin Wardriver|U|PLST
+#976|Keldon Strike Team|C|PLST
+#977|Light Up the Stage|U|PLST
+#978|Mad Ratter|U|PLST
+#979|Orcish Lumberjack|C|PLST
+#980|Pillaging Horde|R|PLST
+#981|Punishing Fire|U|PLST
+#982|Purifying Dragon|U|PLST
+#983|Scrapwork Mutt|C|PLST
+#984|Searing Blaze|C|PLST
+#985|Solar Blast|C|PLST
+#986|Spitebellows|U|PLST
+#987|Spitting Earth|C|PLST
+#988|Storm Caller|C|PLST
+#989|Swelter|U|PLST
+#990|Thunderclap|C|PLST
+#991|Twinferno|U|PLST
+#992|Volcanic Geyser|U|PLST
+#993|Voldaren Epicure|C|PLST
+#994|Young Red Dragon|C|PLST
+#995|Ancient Silverback|U|PLST
+#996|Blight Mamba|C|PLST
+#997|Dread Linnorm|C|PLST
+#998|Dreampod Druid|U|PLST
+#999|Gaea's Gift|C|PLST
+#1000|Gamekeeper|U|PLST
+#1001|Hunger of the Howlpack|C|PLST
+#1002|Hunting Pack|U|PLST
+#1003|Joraga Treespeaker|U|PLST
+#1004|Kavu Primarch|C|PLST
+#1005|Khalni Garden|C|PLST
+#1006|Leatherback Baloth|U|PLST
+#1007|Oakhame Adversary|U|PLST
+#1008|Overrun|U|PLST
+#1009|Prizefight|C|PLST
+#1010|Quirion Dryad|U|PLST
+#1011|Ram Through|C|PLST
+#1012|Rust Goliath|C|PLST
+#1013|Spore Swarm|U|PLST
+#1014|Tear Asunder|U|PLST
+#1015|Vines of Vastwood|C|PLST
+#1016|Werebear|C|PLST
+#1017|Young Wolf|C|PLST
+#1018|Baleful Strix|U|PLST
+#1019|Geode Golem|U|PLST
+#1020|Patriar's Seal|U|PLST
+#1021|Sakashima of a Thousand Faces|M|PLST
+#1022|Basalt Monolith|U|MB2
+#1023|Eater of the Dead|U|MB2
+#1024|Sensei's Divining Top|U|MB2
+#1025|Captain Sisay|R|MB2
+#1026|Death's Shadow|R|MB2
+#1027|Future Sight|R|MB2
+#1028|Goblin King|R|MB2
+#1029|Pox|R|MB2
+#1030|Squee, Goblin Nabob|R|MB2
+#1031|Thassa's Oracle|R|MB2
+#1032|Xantcha, Sleeper Agent|R|MB2
+#1033|Fetching Garden|R|MB2
+#1034|Lazotep Archway|R|MB2
+#1035|Madlands|R|MB2
+#1036|Omenpath to Naya|R|MB2
+#1037|Pinchy McStingbutt|R|MB2
+#1038|Processing Plant|R|MB2
+#1039|Slumbering Waterways|R|MB2
+#1040|Teferi, Druid of Argoth|R|MB2
+#1041|TL;DR|R|MB2
+#1042|Bane's Invoker|C|PLST
+#1043|Bellowing Aegisaur|U|PLST
+#1044|Bond of Discipline|U|PLST
+#1045|Citadel Gate|C|PLST
+#1046|Dauntless Dismantler|U|PLST
+#1047|Guardian Naga|C|PLST
+#1048|Hand of Honor|U|PLST
+#1049|Imposing Vantasaur|C|PLST
+#1050|Minimus Containment|C|PLST
+#1051|Reverent Hoplite|U|PLST
+#1052|Sensor Splicer|C|PLST
+#1053|Sentinel Sliver|C|PLST
+#1054|Silver Knight|U|PLST
+#1055|Sky Crier|C|PLST
+#1056|Splendor Mare|U|PLST
+#1057|Tabaxi Toucaneers|C|PLST
+#1058|Trostani's Judgment|C|PLST
+#1059|Wall of Swords|U|PLST
+#1060|Wanderer's Strike|C|PLST
+#1061|Archaeomancer|C|PLST
+#1062|Belltoll Dragon|U|PLST
+#1063|Blur|C|PLST
+#1064|Code of Constraint|U|PLST
+#1065|Combat Research|U|PLST
+#1066|Daring Saboteur|U|PLST
+#1067|Eel Umbra|C|PLST
+#1068|Enclave Cryptologist|U|PLST
+#1069|Faerie Seer|C|PLST
+#1070|Flux Channeler|U|PLST
+#1071|Gudul Lurker|U|PLST
+#1072|Horseshoe Crab|C|PLST
+#1073|Hulking Metamorph|U|PLST
+#1074|Looter il-Kor|C|PLST
+#1075|Nephalia Smuggler|U|PLST
+#1076|Neutralize|U|PLST
+#1077|Rescind|C|PLST
+#1078|Rush of Knowledge|C|PLST
+#1079|Sea Gate|C|PLST
+#1080|Serpentine Curve|C|PLST
+#1081|Set Adrift|U|PLST
+#1082|Shimmering Glasskite|C|PLST
+#1083|Shipwreck Dowser|U|PLST
+#1084|Slip Out the Back|U|PLST
+#1085|Tezzeret's Gambit|U|PLST
+#1086|Thought Scour|C|PLST
+#1087|Turnabout|U|PLST
+#1088|Witness Protection|C|PLST
+#1089|Ambition's Cost|U|PLST
+#1090|Balustrade Spy|C|PLST
+#1091|Battle-Rage Blessing|C|PLST
+#1092|Black Dragon Gate|C|PLST
+#1093|Bladewing's Thrall|U|PLST
+#1094|Boggart Harbinger|U|PLST
+#1095|Dreadmalkin|U|PLST
+#1096|Feed the Swarm|C|PLST
+#1097|Fell Specter|U|PLST
+#1098|Moan of the Unhallowed|C|PLST
+#1099|Moment of Defiance|C|PLST
+#1100|Nezumi Graverobber|U|PLST
+#1101|Nirkana Cutthroat|U|PLST
+#1102|Puppet Conjurer|U|PLST
+#1103|Ruthless Knave|U|PLST
+#1104|Severed Strands|C|PLST
+#1105|Sneering Shadewriter|C|PLST
+#1106|Stromgald Crusader|U|PLST
+#1107|Summon Undead|C|PLST
+#1108|Twisted Abomination|C|PLST
+#1109|Urborg Uprising|C|PLST
+#1110|Vampire of the Dire Moon|U|PLST
+#1111|Vile Requiem|U|PLST
+#1112|Vindictive Vampire|U|PLST
+#1113|Wall of Corpses|C|PLST
+#1114|Wicked Pact|U|PLST
+#1115|Will-o'-the-Wisp|U|PLST
+#1116|Ancient Hydra|U|PLST
+#1117|Bhaal's Invoker|C|PLST
+#1118|Bitter Reunion|C|PLST
+#1119|Boots of Speed|C|PLST
+#1120|Cheering Fanatic|U|PLST
+#1121|Cinder Cloud|U|PLST
+#1122|Cliffgate|C|PLST
+#1123|Cone of Flame|U|PLST
+#1124|Dwarven Hammer|U|PLST
+#1125|Empty the Warrens|C|PLST
+#1126|Fire Servant|U|PLST
+#1127|Firecat Blitz|U|PLST
+#1128|Genasi Enforcers|C|PLST
+#1129|Hatchet Bully|U|PLST
+#1130|Mardu Warshrieker|C|PLST
+#1131|Plundering Barbarian|C|PLST
+#1132|Pyrite Spellbomb|C|PLST
+#1133|Rapacious Dragon|C|PLST
+#1134|Shivan Raptor|U|PLST
+#1135|Stingscourger|C|PLST
+#1136|Strafe|U|PLST
+#1137|Unexpected Windfall|C|PLST
+#1138|Untimely Malfunction|U|PLST
+#1139|Zada, Hedron Grinder|U|PLST
+#1140|Assault Formation|U|PLST
+#1141|Biogenic Upgrade|U|PLST
+#1142|Briar Patch|U|PLST
+#1143|Changeling Wayfinder|C|PLST
+#1144|Devoted Druid|C|PLST
+#1145|Elvish Harbinger|U|PLST
+#1146|Enlarge|U|PLST
+#1147|Evolution Charm|C|PLST
+#1148|Evolution Sage|U|PLST
+#1149|Giant Spider|C|PLST
+#1150|Hedge Troll|U|PLST
+#1151|Hydra's Growth|U|PLST
+#1152|Krosan Vorine|C|PLST
+#1153|Lure|U|PLST
+#1154|Manor Gate|C|PLST
+#1155|Priest of Titania|C|PLST
+#1156|Seton's Scout|U|PLST
+#1157|Silverglade Elemental|C|PLST
+#1158|Stingerfling Spider|U|PLST
+#1159|Timberland Ancient|C|PLST
+#1160|Tower Above|U|PLST
+#1161|Vastwood Surge|U|PLST
+#1162|Wall of Roots|C|PLST
+#1163|Wrap in Vigor|C|PLST
+#1164|Campfire|C|PLST
+#1165|Relic of Legends|U|PLST
+#1166|Brainstorm|C|MB2
+#1167|Triumph of Ferocity|U|MB2
+#1168|Dakmor Sorceress|R|MB2
+#1169|Elvish Reclaimer|R|MB2
+#1170|Rishadan Port|R|MB2
+#1171|Brigid, Who's Seen Some Stuff|R|MB2
+#1172|Panglacial Shinobi|R|MB2
+#1173|Ancestral Blade|C|PLST
+#1174|Angelic Protector|U|PLST
+#1175|Aven Liberator|C|PLST
+#1176|Avian Changeling|C|PLST
+#1177|Empty-Shrine Kannushi|U|PLST
+#1178|Faith Unbroken|U|PLST
+#1179|Field of Souls|U|PLST
+#1180|Generous Gift|U|PLST
+#1181|Heliod's Punishment|U|PLST
+#1182|Hope and Glory|U|PLST
+#1183|Kitsune Blademaster|C|PLST
+#1184|Kor Celebrant|C|PLST
+#1185|Mentor of the Meek|U|PLST
+#1186|Moon-Blessed Cleric|U|PLST
+#1187|Phantom Flock|U|PLST
+#1188|Requisition Raid|U|PLST
+#1189|Rootborn Defenses|C|PLST
+#1190|Seraph of Dawn|C|PLST
+#1191|Shelter|C|PLST
+#1192|Shoulder to Shoulder|C|PLST
+#1193|Soltari Trooper|C|PLST
+#1194|Spirit en-Dal|U|PLST
+#1195|Sunder the Gateway|C|PLST
+#1196|Supply Runners|C|PLST
+#1197|Suture Priest|C|PLST
+#1198|Swell of Courage|U|PLST
+#1199|Teferi's Honor Guard|U|PLST
+#1200|Temple Acolyte|C|PLST
+#1201|Your Temple Is Under Attack|C|PLST
+#1202|Boomerang|C|PLST
+#1203|Brilliant Plan|U|PLST
+#1204|Brinelin, the Moon Kraken|U|PLST
+#1205|Cloud Spirit|C|PLST
+#1206|Curiosity|U|PLST
+#1207|Deceiver Exarch|U|PLST
+#1208|Dreamtail Heron|C|PLST
+#1209|Echoing Truth|C|PLST
+#1210|Experimental Augury|C|PLST
+#1211|Lazotep Plating|U|PLST
+#1212|Mental Note|C|PLST
+#1213|Mystic of the Hidden Way|C|PLST
+#1214|Omen|C|PLST
+#1215|Ophidian Eye|C|PLST
+#1216|Pendrell Drake|C|PLST
+#1217|Psychic Corrosion|U|PLST
+#1218|Rishadan Cutpurse|C|PLST
+#1219|Sejiri Merfolk|U|PLST
+#1220|Silver Myr|C|PLST
+#1221|Stinging Barrier|C|PLST
+#1222|Stormbound Geist|C|PLST
+#1223|Surgical Skullbomb|C|PLST
+#1224|Tide Skimmer|U|PLST
+#1225|Time Ebb|C|PLST
+#1226|Voyager Drake|U|PLST
+#1227|Wash Away|U|PLST
+#1228|Witching Well|C|PLST
+#1229|Arrogant Vampire|U|PLST
+#1230|Blood Speaker|U|PLST
+#1231|Bone Shards|C|PLST
+#1232|Bushmeat Poacher|C|PLST
+#1233|Carrion Feeder|U|PLST
+#1234|Corrupted Conviction|C|PLST
+#1235|Dimir House Guard|C|PLST
+#1236|Disturbed Burial|C|PLST
+#1237|Evil Eye of Urborg|U|PLST
+#1238|Filth|U|PLST
+#1239|Footbottom Feast|C|PLST
+#1240|Gloomfang Mauler|C|PLST
+#1241|Ill-Gotten Inheritance|C|PLST
+#1242|Lampad of Death's Vigil|C|PLST
+#1243|Mindwrack Harpy|C|PLST
+#1244|Novice Occultist|C|PLST
+#1245|Peat Bog|C|PLST
+#1246|Priest of Gix|U|PLST
+#1247|Read the Bones|C|PLST
+#1248|Sheoldred's Edict|U|PLST
+#1249|Sign in Blood|C|PLST
+#1250|Skeletal Wurm|U|PLST
+#1251|Supernatural Stamina|C|PLST
+#1252|Tragic Slip|C|PLST
+#1253|Treasure Dredger|U|PLST
+#1254|Unseal the Necropolis|C|PLST
+#1255|Village Rites|C|PLST
+#1256|Void Beckoner|U|PLST
+#1257|Wall of Blood|U|PLST
+#1258|Withered Wretch|U|PLST
+#1259|Zulaport Enforcer|C|PLST
+#1260|Anarchist|C|PLST
+#1261|Anger|U|PLST
+#1262|Ardent Elementalist|C|PLST
+#1263|Arms Dealer|U|PLST
+#1264|Blood Knight|U|PLST
+#1265|Bolt Bend|U|PLST
+#1266|Charging Tuskodon|U|PLST
+#1267|Coruscation Mage|U|PLST
+#1268|Cragsmasher Yeti|C|PLST
+#1269|Fearless Skald|U|PLST
+#1270|Flame Elemental|U|PLST
+#1271|Goblin Wizardry|C|PLST
+#1272|Grapeshot|C|PLST
+#1273|Immolating Souleater|C|PLST
+#1274|Kessig Flamebreather|C|PLST
+#1275|Magmaw|U|PLST
+#1276|Ogre Arsonist|U|PLST
+#1277|Outmaneuver|U|PLST
+#1278|Rapacious One|U|PLST
+#1279|Reckless Barbarian|C|PLST
+#1280|Sabertooth Wyvern|U|PLST
+#1281|Sarkhan's Whelp|U|PLST
+#1282|Scoria Cat|U|PLST
+#1283|Swarming Goblins|C|PLST
+#1284|You Find Some Prisoners|U|PLST
+#1285|Armorcraft Judge|U|PLST
+#1286|Arrogant Wurm|U|PLST
+#1287|Blightwidow|C|PLST
+#1288|Curse of Predation|U|PLST
+#1289|Dawntreader Elk|C|PLST
+#1290|Elite Cat Warrior|C|PLST
+#1291|Gemhide Sliver|C|PLST
+#1292|Harvester Druid|C|PLST
+#1293|Haywire Mite|U|PLST
+#1294|Heart Warden|C|PLST
+#1295|Horned Sliver|U|PLST
+#1296|Incremental Growth|U|PLST
+#1297|Indrik Stomphowler|U|PLST
+#1298|Iwamori of the Open Fist|U|PLST
+#1299|Keen Sense|U|PLST
+#1300|Masked Vandal|C|PLST
+#1301|Muscle Burst|C|PLST
+#1302|Nantuko Vigilante|C|PLST
+#1303|Nylea's Presence|C|PLST
+#1304|Overwhelming Encounter|U|PLST
+#1305|Pollenbright Druid|C|PLST
+#1306|Predator's Strike|C|PLST
+#1307|Quirion Elves|C|PLST
+#1308|Quirion Ranger|C|PLST
+#1309|River Bear|U|PLST
+#1310|Roar of Challenge|U|PLST
+#1311|Scragnoth|U|PLST
+#1312|Seedguide Ash|U|PLST
+#1313|Skullmulcher|U|PLST
+#1314|Skysnare Spider|U|PLST
+#1315|Spike Colony|C|PLST
+#1316|Stand Together|U|PLST
+#1317|Storm the Seedcore|U|PLST
+#1318|Tireless Provisioner|U|PLST
+#1319|Titanoth Rex|U|PLST
+#1320|Wall of Blossoms|U|PLST
+#1321|Wild Hunger|C|PLST
+#1322|Wirewood Guardian|C|PLST
+#1323|Woodland Mystic|C|PLST
+#1324|Yavimaya Granger|C|PLST
+#1325|Debt to the Deathless|U|PLST
+#1326|Manifold Key|U|PLST
+#1327|Su-Chi Cave Guard|U|PLST
+#1328|Aether Vial|U|MB2
+#1329|Hunting Cheetah|C|MB2
+#1330|Lotus Petal|C|MB2
+#1331|Seeker of Skybreak|C|MB2
+#1332|Engineered Explosives|R|MB2
+#1333|Natural Order|M|MB2
+#1334|Creepy Crawler|R|MB2
+#1335|Glade of the Pump Spells|R|MB2
+#1336|Omnipresent Impostor|R|MB2
+#1337|Temur Elevator|R|MB2
+#1338|Two by Four|R|MB2
+#1339|Adamant Will|C|PLST
+#1340|Alseid of Life's Bounty|U|PLST
+#1341|Angel of Light|U|PLST
+#1342|Aven Mindcensor|U|PLST
+#1343|Breath of Life|C|PLST
+#1344|Dauntless Bodyguard|U|PLST
+#1345|Dawnbringer Cleric|C|PLST
+#1346|Desperate Lunge|C|PLST
+#1347|Faerie Guidemother|C|PLST
+#1348|Kor Cartographer|C|PLST
+#1349|Miraculous Recovery|U|PLST
+#1350|Nightwind Glider|C|PLST
+#1351|Omen of the Sun|C|PLST
+#1352|Raise the Alarm|C|PLST
+#1353|Starlit Angel|U|PLST
+#1354|Steadfast Unicorn|C|PLST
+#1355|Stir the Pride|U|PLST
+#1356|Stonehorn Dignitary|C|PLST
+#1357|Sunblade Angel|C|PLST
+#1358|Swift Justice|C|PLST
+#1359|Syndic of Tithes|C|PLST
+#1360|Tenacity|U|PLST
+#1361|Teyo, the Shieldmage|U|PLST
+#1362|To Arms!|U|PLST
+#1363|Valorous Steed|C|PLST
+#1364|Vizier of Remedies|U|PLST
+#1365|Wakestone Gargoyle|U|PLST
+#1366|Wall of Glare|C|PLST
+#1367|Alchemist's Retrieval|C|PLST
+#1368|Amoeboid Changeling|C|PLST
+#1369|Breakthrough|U|PLST
+#1370|Candlekeep Inspiration|U|PLST
+#1371|Careful Study|C|PLST
+#1372|Cold-Water Snapper|C|PLST
+#1373|Complicate|U|PLST
+#1374|Dream Fracture|C|PLST
+#1375|Dream Thrush|C|PLST
+#1376|Fade Away|C|PLST
+#1377|Fatestitcher|U|PLST
+#1378|Freed from the Real|C|PLST
+#1379|Ghostly Flicker|C|PLST
+#1380|Grip of the Roil|U|PLST
+#1381|Killer Whale|U|PLST
+#1382|Krovikan Sorcerer|C|PLST
+#1383|Mistblade Shinobi|C|PLST
+#1384|Owl Familiar|C|PLST
+#1385|Pemmin's Aura|U|PLST
+#1386|Perilous Research|C|PLST
+#1387|Scion of Glaciers|U|PLST
+#1388|Sea Scryer|C|PLST
+#1389|Seal of Removal|C|PLST
+#1390|Shadow Rift|C|PLST
+#1391|Shoreline Ranger|C|PLST
+#1392|Sorcerous Sight|C|PLST
+#1393|Supreme Will|U|PLST
+#1394|Thought Courier|C|PLST
+#1395|Thoughtcast|C|PLST
+#1396|Tolaria West|U|PLST
+#1397|Tome Raider|C|PLST
+#1398|Totally Lost|C|PLST
+#1399|Turtleshell Changeling|U|PLST
+#1400|Unsubstantiate|U|PLST
+#1401|Whirlpool Drake|U|PLST
+#1402|Blood Fountain|C|PLST
+#1403|Butcher Ghoul|C|PLST
+#1404|Cabal Pit|U|PLST
+#1405|Cling to Dust|U|PLST
+#1406|Dark Triumph|U|PLST
+#1407|Dauthi Trapper|U|PLST
+#1408|Feral Shadow|C|PLST
+#1409|Flesh-Eater Imp|U|PLST
+#1410|Fleshbag Marauder|U|PLST
+#1411|Mesmeric Fiend|C|PLST
+#1412|Mischievous Poltergeist|U|PLST
+#1413|Mogis's Favor|C|PLST
+#1414|Moonglove Changeling|C|PLST
+#1415|Reckoner's Bargain|C|PLST
+#1416|Rite of Consumption|C|PLST
+#1417|Skeletal Changeling|C|PLST
+#1418|Skirge Familiar|U|PLST
+#1419|Spark Reaper|C|PLST
+#1420|Spectral Sliver|U|PLST
+#1421|Tavern Swindler|U|PLST
+#1422|Vendetta|C|PLST
+#1423|You Are Already Dead|C|PLST
+#1424|Zombie Cutthroat|C|PLST
+#1425|Acidic Soil|U|PLST
+#1426|Arrow Storm|C|PLST
+#1427|Axgard Cavalry|C|PLST
+#1428|Boldwyr Intimidator|U|PLST
+#1429|Brute Force|C|PLST
+#1430|Burning Palm Efreet|U|PLST
+#1431|Faithless Salvaging|C|PLST
+#1432|Fire-Belly Changeling|C|PLST
+#1433|Fireslinger|C|PLST
+#1434|Fists of Flame|C|PLST
+#1435|Flowstone Hellion|U|PLST
+#1436|Footfall Crater|U|PLST
+#1437|Frenzied Fugue|U|PLST
+#1438|Goblin Taskmaster|C|PLST
+#1439|Grab the Reins|U|PLST
+#1440|Hematite Golem|C|PLST
+#1441|Hoarding Ogre|C|PLST
+#1442|Honor the God-Pharaoh|C|PLST
+#1443|Lava Dart|C|PLST
+#1444|Merchant of the Vale|C|PLST
+#1445|Mogg Raider|C|PLST
+#1446|Nimble Birdsticker|C|PLST
+#1447|Pardic Collaborator|U|PLST
+#1448|Rock Slide|C|PLST
+#1449|Scourge Devil|C|PLST
+#1450|Smash to Dust|C|PLST
+#1451|Sticky Fingers|C|PLST
+#1452|Sure Strike|C|PLST
+#1453|Taunting Kobold|U|PLST
+#1454|Tiamat's Fanatics|C|PLST
+#1455|Titan's Strength|C|PLST
+#1456|Torrent of Fire|C|PLST
+#1457|Unchained Berserker|U|PLST
+#1458|Wild Magic Surge|U|PLST
+#1459|Argothian Elder|U|PLST
+#1460|Axebane Guardian|C|PLST
+#1461|Colossal Dreadmaw|C|PLST
+#1462|Commune with Nature|C|PLST
+#1463|Fae Offering|U|PLST
+#1464|Fangren Marauder|C|PLST
+#1465|Far Wanderings|C|PLST
+#1466|Fyndhorn Elder|U|PLST
+#1467|Hunted Wumpus|U|PLST
+#1468|Invigorating Surge|U|PLST
+#1469|Longshot Squad|C|PLST
+#1470|Massive Might|C|PLST
+#1471|Moment's Peace|C|PLST
+#1472|Nantuko Elder|U|PLST
+#1473|Overgrowth|C|PLST
+#1474|Phantom Tiger|C|PLST
+#1475|Presence of Gond|C|PLST
+#1476|Primal Growth|C|PLST
+#1477|Sheltering Word|C|PLST
+#1478|Spidersilk Armor|C|PLST
+#1479|Twin-Silk Spider|C|PLST
+#1480|Venomspout Brackus|U|PLST
+#1481|Viridian Shaman|U|PLST
+#1482|Vivien's Grizzly|C|PLST
+#1483|Wall of Mulch|U|PLST
+#1484|Winding Way|C|PLST
+#1485|Woodland Changeling|C|PLST
+#1486|Black Vise|U|MB2
+#1487|Gush|C|MB2
+#1488|Swiftfoot Boots|U|MBC
+#1489|Chaos Warp|R|MBC
+#1490|City of Brass|R|MB2
+#1491|Collected Company|R|MB2
+#1492|Doomsday|M|MB2
+#1493|Greater Good|R|MB2
+#1494|Pact of Negation|R|MB2
+#1495|Reflecting Pool|R|MB2
+#1496|Arcanum Things|R|MB2
+#1497|Dwarven Confluencer|R|MB2
+#1498|Flanking Licid|R|MB2
+#1499|Friarball|R|MB2
+#1500|Heart of a Duelist|R|MB2
+#1501|New Master of Arms|R|MB2
+#1502|Tax Taker|R|MB2
+#1503|Toddler's Rage|R|MB2
+#1504|Under-Construction Skyscraper|R|MB2
+#1505|Adanto Vanguard|U|PLST
+#1506|Afterlife Insurance|U|PLST
+#1507|All That Glitters|U|PLST
+#1508|Angel of Renewal|U|PLST
+#1509|Angel of the Ruins|U|PLST
+#1510|Angelic Page|C|PLST
+#1511|Archetype of Courage|U|PLST
+#1512|Ardenn, Intrepid Archaeologist|U|PLST
+#1513|Blessed Spirits|U|PLST
+#1514|Boonweaver Giant|U|PLST
+#1515|Cast Out|U|PLST
+#1516|Cut a Deal|U|PLST
+#1517|Darksteel Mutation|U|PLST
+#1518|Dawn Charm|U|PLST
+#1519|Defensive Formation|U|PLST
+#1520|Encircling Fissure|U|PLST
+#1521|Entangler|U|PLST
+#1522|Felidar Guardian|U|PLST
+#1523|Felidar Umbra|U|PLST
+#1524|Herald of the Host|U|PLST
+#1525|Impostor of the Sixth Pride|C|PLST
+#1526|Jubilant Mascot|U|PLST
+#1527|Kangee's Lieutenant|U|PLST
+#1528|Kor Firewalker|U|PLST
+#1529|Loyal Unicorn|U|PLST
+#1530|Mistmeadow Skulk|U|PLST
+#1531|Nahiri's Machinations|U|PLST
+#1532|Nikko-Onna|U|PLST
+#1533|Nyx-Fleece Ram|U|PLST
+#1534|Otherworldly Journey|U|PLST
+#1535|Portal Manipulator|U|PLST
+#1536|Promise of Bunrei|U|PLST
+#1537|Refuse to Yield|U|PLST
+#1538|Restoration Specialist|U|PLST
+#1539|Retreat to Emeria|U|PLST
+#1540|Scars of the Veteran|U|PLST
+#1541|Secret Rendezvous|U|PLST
+#1542|Sentinel of the Eternal Watch|U|PLST
+#1543|Seraph of the Suns|U|PLST
+#1544|Sunscape Familiar|C|PLST
+#1545|The Birth of Meletis|U|PLST
+#1546|Twinblade Paladin|U|PLST
+#1547|Unbounded Potential|C|PLST
+#1548|Unquestioned Authority|U|PLST
+#1549|Valor|U|PLST
+#1550|Vanish into Eternity|C|PLST
+#1551|Vow of Duty|U|PLST
+#1552|War Priest of Thune|U|PLST
+#1553|Alirios, Enraptured|U|PLST
+#1554|Apprentice Sorcerer|U|PLST
+#1555|Archetype of Imagination|U|PLST
+#1556|Brine Elemental|U|PLST
+#1557|Broodbirth Viper|U|PLST
+#1558|Chakram Retriever|U|PLST
+#1559|Citywatch Sphinx|U|PLST
+#1560|Concentrate|U|PLST
+#1561|Distortion Strike|U|PLST
+#1562|Dive Down|C|PLST
+#1563|Esior, Wardwing Familiar|U|PLST
+#1564|Exclude|U|PLST
+#1565|Fog Bank|U|PLST
+#1566|Frogify|C|PLST
+#1567|Lay Claim|U|PLST
+#1568|Lore Weaver|U|PLST
+#1569|Loyal Drake|U|PLST
+#1570|Merfolk Looter|U|PLST
+#1571|Mothdust Changeling|C|PLST
+#1572|Mystic Retrieval|U|PLST
+#1573|Mystic Speculation|U|PLST
+#1574|Ophidian|C|PLST
+#1575|Opportunity|U|PLST
+#1576|Out of Bounds|U|PLST
+#1577|Phyrexian Ingester|U|PLST
+#1578|Piracy Charm|C|PLST
+#1579|Propaganda|U|PLST
+#1580|Run Away Together|C|PLST
+#1581|Sealock Monster|U|PLST
+#1582|Sigiled Starfish|U|PLST
+#1583|Siren Stormtamer|U|PLST
+#1584|Spined Megalodon|C|PLST
+#1585|Squelch|U|PLST
+#1586|Steal Enchantment|U|PLST
+#1587|Thwart|U|PLST
+#1588|Triton Tactics|U|PLST
+#1589|Vedalken Mastermind|U|PLST
+#1590|View from Above|U|PLST
+#1591|Voidmage Husher|U|PLST
+#1592|Walker of Secret Ways|U|PLST
+#1593|Weatherseed Faeries|C|PLST
+#1594|Web of Inertia|U|PLST
+#1595|Whirlwind Denial|U|PLST
+#1596|Willbender|U|PLST
+#1597|Wonder|U|PLST
+#1598|Aphotic Wisps|C|PLST
+#1599|Armix, Filigree Thrasher|U|PLST
+#1600|Augur of Skulls|C|PLST
+#1601|Bad Deal|U|PLST
+#1602|Baleful Ammit|U|PLST
+#1603|Banshee of the Dread Choir|U|PLST
+#1604|Batwing Brume|U|PLST
+#1605|Blightbeetle|U|PLST
+#1606|Curse of Disturbance|U|PLST
+#1607|Curse of Shallow Graves|U|PLST
+#1608|Deathgreeter|C|PLST
+#1609|Deepwood Legate|U|PLST
+#1610|Destined Lead|U|PLST
+#1611|Extinguish All Hope|U|PLST
+#1612|Fallen Angel|U|PLST
+#1613|Falthis, Shadowcat Familiar|U|PLST
+#1614|Ghost-Lit Stalker|U|PLST
+#1615|Gifted Aetherborn|U|PLST
+#1616|Go Blank|U|PLST
+#1617|Gruesome Encore|U|PLST
+#1618|Inner Demon|U|PLST
+#1619|Leech Collector|U|PLST
+#1620|Lord of the Accursed|U|PLST
+#1621|Loyal Subordinate|U|PLST
+#1622|Merciless Executioner|U|PLST
+#1623|Noxious Dragon|U|PLST
+#1624|Phyrexian Reclamation|U|PLST
+#1625|Prakhata Pillar-Bug|C|PLST
+#1626|Price of Fame|U|PLST
+#1627|Quest for the Gravelord|U|PLST
+#1628|Ravenous Chupacabra|U|PLST
+#1629|Rush of Vitality|C|PLST
+#1630|Skeletal Scrying|U|PLST
+#1631|Skullsnatcher|C|PLST
+#1632|Smiting Helix|U|PLST
+#1633|Songs of the Damned|U|PLST
+#1634|Souldrinker|U|PLST
+#1635|Stitch Together|U|PLST
+#1636|Strands of Night|U|PLST
+#1637|Stronghold Rats|U|PLST
+#1638|Syphon Flesh|U|PLST
+#1639|Trial of Ambition|U|PLST
+#1640|Unspeakable Symbol|U|PLST
+#1641|Vampire Hexmage|U|PLST
+#1642|Vengeful Reaper|U|PLST
+#1643|Wight of Precinct Six|U|PLST
+#1644|Act on Impulse|U|PLST
+#1645|Arc Trail|U|PLST
+#1646|Armed Dangerous|U|PLST
+#1647|Beetleback Chief|U|PLST
+#1648|Bloodfire Expert|C|PLST
+#1649|Boarding Party|C|PLST
+#1650|Chakram Slinger|U|PLST
+#1651|Charging Monstrosaur|U|PLST
+#1652|Coastline Marauders|U|PLST
+#1653|Coronation of Chaos|C|PLST
+#1654|Curse of Opulence|U|PLST
+#1655|Electric Revelation|C|PLST
+#1656|Falter|C|PLST
+#1657|Fathom Fleet Swordjack|U|PLST
+#1658|Flame Jab|U|PLST
+#1659|Ganax, Astral Hunter|U|PLST
+#1660|Gathan Raiders|C|PLST
+#1661|General Kreat, the Boltbringer|U|PLST
+#1662|Goblin Assault|U|PLST
+#1663|Haze of Rage|U|PLST
+#1664|Humble Defector|U|PLST
+#1665|Inferno Jet|U|PLST
+#1666|Kediss, Emberclaw Familiar|U|PLST
+#1667|Loyal Apprentice|U|PLST
+#1668|Mindclaw Shaman|U|PLST
+#1669|Mogg Maniac|U|PLST
+#1670|Orcish Settlers|U|PLST
+#1671|Painter's Studio Defaced Gallery|U|PLST
+#1672|Pitchstone Wall|U|PLST
+#1673|Pyrotechnics|U|PLST
+#1674|Quest for Pure Flame|U|PLST
+#1675|Reckless Charge|C|PLST
+#1676|Rite of the Raging Storm|U|PLST
+#1677|Rivals' Duel|U|PLST
+#1678|Rograkh, Son of Rohgahh|U|PLST
+#1679|Seething Anger|C|PLST
+#1680|Skyline Despot|U|PLST
+#1681|Strike It Rich|U|PLST
+#1682|Tectonic Rift|U|PLST
+#1683|Thermopod|C|PLST
+#1684|Thrill of Possibility|C|PLST
+#1685|Tibalt's Rager|U|PLST
+#1686|Treasonous Ogre|U|PLST
+#1687|Volcanic Dragon|U|PLST
+#1688|Vow of Lightning|U|PLST
+#1689|Wall of Fire|C|PLST
+#1690|Warchief Giant|U|PLST
+#1691|You See a Pair of Goblins|U|PLST
+#1692|Acidic Slime|U|PLST
+#1693|Ainok Survivalist|U|PLST
+#1694|Anara, Wolvid Familiar|U|PLST
+#1695|Beanstalk Giant|U|PLST
+#1696|Bestial Menace|U|PLST
+#1697|Broodhatch Nantuko|U|PLST
+#1698|Caller of the Pack|U|PLST
+#1699|Canopy Cover|U|PLST
+#1700|Chain of Acid|U|PLST
+#1701|Charge Through|C|PLST
+#1702|Explosive Vegetation|U|PLST
+#1703|Farseek|C|PLST
+#1704|Gelatinous Genesis|U|PLST
+#1705|Gilanra, Caller of Wirewood|U|PLST
+#1706|Harmonize|U|PLST
+#1707|Imperious Perfect|U|PLST
+#1708|Invigorate|C|PLST
+#1709|Kenrith's Transformation|U|PLST
+#1710|Ley Weaver|U|PLST
+#1711|Loyal Guardian|U|PLST
+#1712|Manglehorn|U|PLST
+#1713|Overgrown Battlement|U|PLST
+#1714|Pelakka Wurm|U|PLST
+#1715|Phantom Centaur|U|PLST
+#1716|Plaguemaw Beast|U|PLST
+#1717|Primal Rage|U|PLST
+#1718|Rain of Thorns|U|PLST
+#1719|Rampaging Brontodon|U|PLST
+#1720|Reap|U|PLST
+#1721|Rhonas's Monument|U|PLST
+#1722|Salvage|C|PLST
+#1723|Slurrk, All-Ingesting|U|PLST
+#1724|Stinging Shot|C|PLST
+#1725|Sumala Rumblers|U|PLST
+#1726|Tajuru Warcaller|U|PLST
+#1727|Tempting Licid|U|PLST
+#1728|The Crowd Goes Wild|U|PLST
+#1729|Thornscape Battlemage|U|PLST
+#1730|Venom Sliver|U|PLST
+#1731|Araumi of the Dead Tide|U|PLST
+#1732|Azra Oddsmaker|U|PLST
+#1733|Binding the Old Gods|U|PLST
+#1734|Blasting Station|U|PLST
+#1735|Bloodthirsty Blade|U|PLST
+#1736|Breaker of Armies|U|PLST
+#1737|Cadira, Caller of the Small|U|PLST
+#1738|Caltrops|U|PLST
+#1739|Claws of Gix|U|PLST
+#1740|Commander Liara Portyr|U|PLST
+#1741|Component Pouch|U|PLST
+#1742|Deathreap Ritual|U|PLST
+#1743|Ebony Fly|U|PLST
+#1744|General Marhault Elsdragon|U|PLST
+#1745|Gold-Forged Thopteryx|U|PLST
+#1746|Grafted Exoskeleton|U|PLST
+#1747|Hero's Blade|U|PLST
+#1748|Idol of Oblivion|U|PLST
+#1749|Knights of the Black Rose|U|PLST
+#1750|Loxodon Warhammer|U|PLST
+#1751|Mage Slayer|U|PLST
+#1752|Mindcrank|U|PLST
+#1753|Myriad Landscape|U|PLST
+#1754|Nemesis Mask|U|PLST
+#1755|Rakdos Charm|U|PLST
+#1756|Tor Wauki the Younger|U|PLST
+#1757|Trailblazer's Boots|U|PLST
+#1758|Chain of Vapor|U|MB2
+#1759|Dust to Dust|U|MBC
+#1760|Fellwar Stone|U|MBC
+#1761|Jeweled Amulet|U|MBC
+#1762|Flusterstorm|R|MB2
+#1763|Temporal Manipulation|M|MB2
+#1764|Case of the Lost Witness|U|MBC
+#1765|Emerald Collector|U|MBC
+#1766|Euru, Acorn Scrounger|U|MBC
+#1767|Jet Collector|U|MBC
+#1768|Overcooked|U|MBC
+#1769|Pearl Collector|U|MBC
+#1770|Perforator Crocodile|U|MBC
+#1771|Ruby Collector|U|MBC
+#1772|Sapphire Collector|U|MBC
+#1773|Naturalize 2|R|MB2
+#1774|Plain Walker|R|MB2
+#1775|Against All Odds|U|PLST
+#1776|Decree of Justice|U|PLST
+#1777|Lagonna-Band Trailblazer|C|PLST
+#1778|Orzhov Advokist|U|PLST
+#1779|Spirit Link|U|PLST
+#1780|Striped Riverwinder|C|PLST
+#1781|Apprentice Necromancer|U|PLST
+#1782|Blood Pact|C|PLST
+#1783|Night's Whisper|C|PLST
+#1784|Parasitic Impetus|C|PLST
+#1785|Suffocating Fumes|C|PLST
+#1786|Electrostatic Field|U|PLST
+#1787|Invigorated Rampage|U|PLST
+#1788|Molten Birth|U|PLST
+#1789|Ramunap Ruins|U|PLST
+#1790|Rending Volley|U|PLST
+#1791|Shiny Impetus|C|PLST
+#1792|Sting-Slinger|U|PLST
+#1793|Volatile Claws|C|PLST
+#1794|Abundant Growth|C|PLST
+#1795|Fangs of Kalonia|U|PLST
+#1796|Peerless Recycling|U|PLST
+#1797|Wickerbough Elder|C|PLST
+#1798|Wilt|C|PLST
+#1799|Descent into Avernus|R|PLST
+#1800|Stormcatch Mentor|U|PLST
+#1801|Ashling, Flame Dancer|M|PLST
+#1802|Echo of Eons|M|MB2
+#1803|Goblin Charbelcher|R|MB2
+#1804|Afterlife|U|PLST
+#1805|Banishing Stroke|U|PLST
+#1806|Congregate|U|PLST
+#1807|Crossbow Infantry|C|PLST
+#1808|Daru Spiritualist|C|PLST
+#1809|Devout Witness|C|PLST
+#1810|Genju of the Fields|U|PLST
+#1811|Kami of False Hope|C|PLST
+#1812|Make a Stand|U|PLST
+#1813|Master of Arms|U|PLST
+#1814|Rebuff the Wicked|U|PLST
+#1815|Tireless Tribe|C|PLST
+#1816|Tormented Angel|C|PLST
+#1817|Warrior en-Kor|U|PLST
+#1818|Aphetto Alchemist|U|PLST
+#1819|Cephalid Illusionist|U|PLST
+#1820|Cloak of Feathers|C|PLST
+#1821|Cloud Djinn|U|PLST
+#1822|Dakra Mystic|U|PLST
+#1823|Diplomatic Escort|U|PLST
+#1824|Exhaustion|R|PLST
+#1825|Flux|U|PLST
+#1826|Force Spike|C|PLST
+#1827|Guildpact Informant|C|PLST
+#1828|Halimar Wavewatch|C|PLST
+#1829|Legacy's Allure|U|PLST
+#1830|Legerdemain|U|PLST
+#1831|Merfolk Thaumaturgist|C|PLST
+#1832|Pirate's Prize|C|PLST
+#1833|Rewind|C|PLST
+#1834|Thrummingbird|U|PLST
+#1835|Windfall|U|PLST
+#1836|Betrayal of Flesh|U|PLST
+#1837|Dauthi Embrace|U|PLST
+#1838|Feign Death|C|PLST
+#1839|Gloom Sower|C|PLST
+#1840|Massacre|U|PLST
+#1841|Raiders' Wake|U|PLST
+#1842|Soul Snuffers|U|PLST
+#1843|Tortured Existence|C|PLST
+#1844|Unexpected Fangs|C|PLST
+#1845|Virtue's Ruin|U|PLST
+#1846|Convulsing Licid|U|PLST
+#1847|Dragon Mage|U|PLST
+#1848|Electrickery|C|PLST
+#1849|End the Festivities|C|PLST
+#1850|Expedite|C|PLST
+#1851|Forge Devil|C|PLST
+#1852|Gorilla Shaman|U|PLST
+#1853|Ground Rift|C|PLST
+#1854|Guttersnipe|U|PLST
+#1855|Needle Drop|C|PLST
+#1856|Shredded Sails|C|PLST
+#1857|Avenging Druid|C|PLST
+#1858|Broken Wings|C|PLST
+#1859|Diligent Farmhand|C|PLST
+#1860|Jaspera Sentinel|C|PLST
+#1861|Mobilize|C|PLST
+#1862|Mwonvuli Acid-Moss|C|PLST
+#1863|One with Nature|U|PLST
+#1864|Reclamation Sage|U|PLST
+#1865|Recross the Paths|U|PLST
+#1866|Silverglade Pathfinder|U|PLST
+#1867|Snake Pit|U|PLST
+#1868|Sudden Spinnerets|C|PLST
+#1869|Wirewood Channeler|U|PLST
+#1870|Control of the Court|U|MB2
+#1871|Forest Bear|C|MB2
+#1872|Goblin Settler|U|MB2
+#1873|Nomads en-Kor|C|MB2
+#1874|Tormod's Crypt|U|MB2
+#1875|Arena|R|MB2
+#1876|Chromatic Lantern|R|MBC
+#1877|Mana Short|R|MB2
+#1878|Norwood Priestess|R|MB2
+#1879|Serum Powder|R|MB2
+#1880|Stifle|R|MB2
+#1881|Abbot of the Sacred Meeple|R|MB2
+#1882|All-Star Kicker|R|MB2
+#1883|Call from the Grave|R|MB2
+#1884|Don't Worry About It|R|MB2
+#1885|Magus of the Chains|R|MB2
+#1886|Noble Ox|R|MB2
+#1887|Phyrexian Seedling|R|MB2
+#1888|Pokey, the Scallywagg|R|MB2
+#1889|Pyromancy 101|R|MB2
+#1890|Runed Terror|R|MB2
+#1891|Search Elemental|R|MB2
+#1892|Spuzzem Strategist|R|MB2
+#1893|Subgoyf|R|MB2
+#1894|There They're Their|R|MB2
+#1895|Yawgmoth's Day Planner|R|MB2
+#1896|Your Wish Is My Command|R|MB2
+#1897|Rambunctious Mutt|C|PLST
+#1898|Sage's Reverie|U|PLST
+#1899|True Love's Kiss|C|PLST
+#1900|Negate|C|PLST
+#1901|Riverwheel Aerialists|C|PLST
+#1902|Twisted Image|U|PLST
+#1903|Barter in Blood|U|PLST
+#1904|Vat of Rebirth|U|PLST
+#1905|Ancient Grudge|U|PLST
+#1906|Demand Answers|C|PLST
+#1907|First Day of Class|C|PLST
+#1908|Atraxa's Fall|C|PLST
+#1909|Bassara Tower Archer|U|PLST
+#1910|Commune with the Gods|C|PLST
+#1911|Kavu Predator|U|PLST
+#1912|Season of Growth|U|PLST
+#1913|Graaz, Unstoppable Juggernaut|R|PLST
+#1914|Ancient Stirrings|C|MB2
+#1915|Foil|C|MB2
+#1916|Ball Lightning|R|MB2
+#1917|An Offer You Can't Refuse|U|PLST
+#1918|Ancestral Mask|U|PLST
+#1919|Fog|C|PLST
+#1920|Dark Ritual|C|MB2
+#1921|Ensnaring Bridge|R|MB2
+#1922|Ajani's Welcome|U|PLST
+#1923|Burrenton Forge-Tender|U|PLST
+#1924|Faithbearer Paladin|C|PLST
+#1925|Aetherize|U|PLST
+#1926|Rapid Hybridization|U|PLST
+#1927|Kaya's Ghostform|C|PLST
+#1928|Victimize|U|PLST
+#1929|Furious Rise|U|PLST
+#1930|Beast Within|U|PLST
+#1931|Nature's Claim|C|PLST
+#1932|Tangle|U|PLST
+#1933|Third Path Iconoclast|U|PLST
+#1934|Back to Basics|R|MB2
+#1935|Mana Flare|R|MB2
+#1936|Pongify|U|PLST
+#1937|Return the Favor|U|PLST
+#1938|Memnite|U|MB2
+#1939|Underworld Breach|R|MB2
+#1940|Abolish|U|PLST
+#1941|Angelic Gift|C|PLST
+#1942|Ballynock Cohort|C|PLST
+#1943|Benevolent Ancestor|C|PLST
+#1944|Benevolent Blessing|C|PLST
+#1945|Cloudshift|C|PLST
+#1946|Coalition Honor Guard|C|PLST
+#1947|Dawnglare Invoker|C|PLST
+#1948|Deftblade Elite|C|PLST
+#1949|Dragon Bell Monk|C|PLST
+#1950|Emerge Unscathed|C|PLST
+#1951|Encampment Keeper|C|PLST
+#1952|Ethereal Haze|C|PLST
+#1953|Expedition Raptor|C|PLST
+#1954|Exultant Skymarcher|C|PLST
+#1955|Fanatical Devotion|C|PLST
+#1956|Fencing Ace|C|PLST
+#1957|Forsake the Worldly|C|PLST
+#1958|Fortify|C|PLST
+#1959|Fragmentize|C|PLST
+#1960|Geist of the Moors|C|PLST
+#1961|Gideon's Lawkeeper|C|PLST
+#1962|Gideon's Sacrifice|C|PLST
+#1963|Gleam of Resistance|C|PLST
+#1964|Guided Strike|C|PLST
+#1965|Humble|C|PLST
+#1966|Iona's Judgment|C|PLST
+#1967|Kinsbaile Courier|C|PLST
+#1968|Knight of Cliffhaven|C|PLST
+#1969|Knight of the Tusk|C|PLST
+#1970|Kor Hookmaster|C|PLST
+#1971|Lieutenants of the Guard|C|PLST
+#1972|Loyal Sentry|C|PLST
+#1973|Mask of Law and Grace|C|PLST
+#1974|Midnight Guard|C|PLST
+#1975|Moonlit Strider|C|PLST
+#1976|Palace Sentinels|C|PLST
+#1977|Paladin of the Bloodstained|C|PLST
+#1978|Pegasus Courser|C|PLST
+#1979|Pentarch Ward|C|PLST
+#1980|Pilgrim of the Ages|C|PLST
+#1981|Pressure Point|C|PLST
+#1982|Reprobation|C|PLST
+#1983|Sacred Cat|C|PLST
+#1984|Sanctum Gargoyle|C|PLST
+#1985|Skyhunter Skirmisher|C|PLST
+#1986|Soltari Visionary|C|PLST
+#1987|Soul's Attendant|C|PLST
+#1988|Standard Bearer|C|PLST
+#1989|Sunlance|C|PLST
+#1990|Take Vengeance|C|PLST
+#1991|Unwavering Initiate|C|PLST
+#1992|Academy Journeymage|C|PLST
+#1993|Aether Tradewinds|C|PLST
+#1994|Amphin Pathmage|C|PLST
+#1995|Aqueous Form|C|PLST
+#1996|Arcane Denial|C|PLST
+#1997|Augur of Bolas|C|PLST
+#1998|Azure Fleet Admiral|C|PLST
+#1999|Bastion Inventor|C|PLST
+#2000|Behold the Multiverse|C|PLST
+#2001|Bewilder|C|PLST
+#2002|Borrowing 100,000 Arrows|C|PLST
+#2003|Canal Courier|C|PLST
+#2004|Cartouche of Knowledge|C|PLST
+#2005|Choking Tethers|C|PLST
+#2006|Claustrophobia|C|PLST
+#2007|Cloud Elemental|C|PLST
+#2008|Cloudreader Sphinx|C|PLST
+#2009|Confound|C|PLST
+#2010|Coralhelm Guide|C|PLST
+#2011|Court Hussar|C|PLST
+#2012|Diminish|C|PLST
+#2013|Divination|C|PLST
+#2014|Errant Ephemeron|C|PLST
+#2015|Faerie Mechanist|C|PLST
+#2016|Fall from Favor|C|PLST
+#2017|Familiar's Ruse|U|PLST
+#2018|Flash of Insight|U|PLST
+#2019|Ghost Ship|C|PLST
+#2020|Glacial Crasher|C|PLST
+#2021|Helm of the Ghastlord|C|PLST
+#2022|Hieroglyphic Illumination|C|PLST
+#2023|Hydrolash|U|PLST
+#2024|Jace's Phantasm|C|PLST
+#2025|Jwar Isle Avenger|C|PLST
+#2026|Kitesail Skirmisher|C|PLST
+#2027|Laboratory Maniac|U|PLST
+#2028|Leap|C|PLST
+#2029|Mystical Teachings|C|PLST
+#2030|Ninja of the Deep Hours|C|PLST
+#2031|Omenspeaker|C|PLST
+#2032|Opt|C|PLST
+#2033|Portent|C|PLST
+#2034|Prosperous Pirates|C|PLST
+#2035|Ravenform|C|PLST
+#2036|Retraction Helix|C|PLST
+#2037|Ringwarden Owl|C|PLST
+#2038|River Serpent|C|PLST
+#2039|Saprazzan Skerry|C|PLST
+#2040|Sea Gate Oracle|C|PLST
+#2041|Secrets of the Golden City|C|PLST
+#2042|Shaper Parasite|C|PLST
+#2043|Shimmerscale Drake|C|PLST
+#2044|Sigil of Sleep|C|PLST
+#2045|Skittering Crustacean|C|PLST
+#2046|Slip Through Space|C|PLST
+#2047|Steady Progress|C|PLST
+#2048|Stitched Drake|C|PLST
+#2049|Storm Sculptor|C|PLST
+#2050|Strategic Planning|C|PLST
+#2051|Tandem Lookout|C|PLST
+#2052|Temporal Fissure|C|PLST
+#2053|Thornwind Faeries|C|PLST
+#2054|Tidal Wave|C|PLST
+#2055|Treasure Hunt|C|PLST
+#2056|Trove Tracker|C|PLST
+#2057|Vapor Snag|C|PLST
+#2058|Vigean Graftmage|C|PLST
+#2059|Wave-Wing Elemental|C|PLST
+#2060|Whiplash Trap|C|PLST
+#2061|Windrider Eel|C|PLST
+#2062|Words of Wisdom|C|PLST
+#2063|Absorb Vis|C|PLST
+#2064|Accursed Spirit|C|PLST
+#2065|Altar's Reap|C|PLST
+#2066|Black Cat|C|PLST
+#2067|Blessing of Belzenlok|C|PLST
+#2068|Blessing of Leeches|C|PLST
+#2069|Blightsoil Druid|C|PLST
+#2070|Blood Celebrant|C|PLST
+#2071|Bloodrite Invoker|C|PLST
+#2072|Briarblade Adept|C|PLST
+#2073|Caligo Skin-Witch|C|PLST
+#2074|Carrion Imp|C|PLST
+#2075|Catacomb Crocodile|C|PLST
+#2076|Changeling Outcast|C|PLST
+#2077|Costly Plunder|C|PLST
+#2078|Cower in Fear|C|PLST
+#2079|Crypt Rats|C|PLST
+#2080|Daring Demolition|C|PLST
+#2081|Death Denied|C|PLST
+#2082|Dirge of Dread|C|PLST
+#2083|Dread Drone|C|PLST
+#2084|Driver of the Dead|C|PLST
+#2085|Dusk Charger|C|PLST
+#2086|Dusk Legion Zealot|C|PLST
+#2087|Epicure of Blood|C|PLST
+#2088|Eternal Thirst|C|PLST
+#2089|Evincar's Justice|C|PLST
+#2090|Executioner's Capsule|C|PLST
+#2091|Exhume|C|PLST
+#2092|Exquisite Huntmaster|C|PLST
+#2093|Feral Abomination|C|PLST
+#2094|Festercreep|C|PLST
+#2095|Fungal Infection|C|PLST
+#2096|Ghostly Changeling|C|PLST
+#2097|Gravedigger|C|PLST
+#2098|Gray Merchant of Asphodel|C|PLST
+#2099|Grim Affliction|C|PLST
+#2100|Grimclaw Bats|C|PLST
+#2101|Gruesome Fate|C|PLST
+#2102|Innocent Blood|C|PLST
+#2103|Lethal Sting|C|PLST
+#2104|Okiba-Gang Shinobi|C|PLST
+#2105|Painful Lesson|C|PLST
+#2106|Pit Keeper|C|PLST
+#2107|Plagued Rusalka|C|PLST
+#2108|Queen's Agent|C|PLST
+#2109|Rabid Bloodsucker|C|PLST
+#2110|Recover|C|PLST
+#2111|Regicide|C|PLST
+#2112|Rotfeaster Maggot|C|PLST
+#2113|Sadistic Glee|C|PLST
+#2114|Seal of Doom|C|PLST
+#2115|Shadowcloak Vampire|C|PLST
+#2116|Syphon Mind|C|PLST
+#2117|Tainted Strike|C|PLST
+#2118|Tendrils of Corruption|C|PLST
+#2119|Thorn of the Black Rose|C|PLST
+#2120|Thrull Parasite|U|PLST
+#2121|Tidy Conclusion|C|PLST
+#2122|Trespasser's Curse|C|PLST
+#2123|Typhoid Rats|C|PLST
+#2124|Wake of Vultures|C|PLST
+#2125|Wander in Death|C|PLST
+#2126|Windgrace Acolyte|C|PLST
+#2127|Azra Bladeseeker|C|PLST
+#2128|Balduvian Horde|C|PLST
+#2129|Blastfire Bolt|C|PLST
+#2130|Blazing Volley|C|PLST
+#2131|Blindblast|C|PLST
+#2132|Blood Ogre|C|PLST
+#2133|Bloodlust Inciter|C|PLST
+#2134|Brazen Wolves|C|PLST
+#2135|Brute Strength|C|PLST
+#2136|Chandra's Pyrohelix|C|PLST
+#2137|Crowd's Favor|C|PLST
+#2138|Crown-Hunter Hireling|C|PLST
+#2139|Dead Gone|C|PLST
+#2140|Destructive Tampering|C|PLST
+#2141|Direct Current|C|PLST
+#2142|Dragon Fodder|C|PLST
+#2143|Dynacharge|C|PLST
+#2144|Furnace Whelp|C|PLST
+#2145|Generator Servant|C|PLST
+#2146|Geomancer's Gambit|C|PLST
+#2147|Goblin War Party|C|PLST
+#2148|Gorehorn Minotaurs|C|PLST
+#2149|Granitic Titan|C|PLST
+#2150|Gravitic Punch|C|PLST
+#2151|Hardened Berserker|C|PLST
+#2152|Impulsive Pilferer|C|PLST
+#2153|Inferno Fist|C|PLST
+#2154|Ingot Chewer|C|PLST
+#2155|Keldon Halberdier|C|PLST
+#2156|Kiln Fiend|C|PLST
+#2157|Madcap Skills|C|PLST
+#2158|Magmatic Insight|U|PLST
+#2159|Mana Geyser|C|PLST
+#2160|Miner's Bane|C|PLST
+#2161|Ondu Champion|C|PLST
+#2162|Outnumber|C|PLST
+#2163|Price of Progress|U|PLST
+#2164|Quakefoot Cyclops|C|PLST
+#2165|Reckless Fireweaver|C|PLST
+#2166|Reckless Wurm|C|PLST
+#2167|Ruinous Gremlin|C|PLST
+#2168|Samut's Sprint|C|PLST
+#2169|Sandstone Needle|C|PLST
+#2170|Sarkhan's Rage|C|PLST
+#2171|Shenanigans|C|PLST
+#2172|Sparkmage Apprentice|C|PLST
+#2173|Temur Battle Rage|C|PLST
+#2174|Valakut Invoker|C|PLST
+#2175|Valakut Predator|C|PLST
+#2176|Vandalize|C|PLST
+#2177|Volcanic Rush|C|PLST
+#2178|Wayward Giant|C|PLST
+#2179|Wrenn's Resolve|C|PLST
+#2180|Adventurous Impulse|C|PLST
+#2181|Aerie Bowmasters|C|PLST
+#2182|Aggressive Urge|C|PLST
+#2183|Ambassador Oak|C|PLST
+#2184|Arbor Elf|C|PLST
+#2185|Aura Gnarlid|C|PLST
+#2186|Baloth Gorger|C|PLST
+#2187|Beneath the Sands|C|PLST
+#2188|Birchlore Rangers|C|PLST
+#2189|Bitterbow Sharpshooters|C|PLST
+#2190|Blossom Dryad|C|PLST
+#2191|Borderland Ranger|C|PLST
+#2192|Bristling Boar|C|PLST
+#2193|Caustic Caterpillar|C|PLST
+#2194|Citanul Woodreaders|C|PLST
+#2195|Clip Wings|C|PLST
+#2196|Combo Attack|C|PLST
+#2197|Conifer Strider|C|PLST
+#2198|Crop Rotation|C|PLST
+#2199|Crowned Ceratok|C|PLST
+#2200|Cultivate|C|PLST
+#2201|Daggerback Basilisk|C|PLST
+#2202|Dawn's Reflection|C|PLST
+#2203|Death-Hood Cobra|C|PLST
+#2204|Deglamer|C|PLST
+#2205|Dissenter's Deliverance|C|PLST
+#2206|Earthen Arms|C|PLST
+#2207|Elvish Visionary|C|PLST
+#2208|Ember Weaver|C|PLST
+#2209|Entourage of Trest|C|PLST
+#2210|Explore|C|PLST
+#2211|Ezuri's Archers|C|PLST
+#2212|Ferocious Zheng|C|PLST
+#2213|Fertile Ground|C|PLST
+#2214|Fin-Clade Fugitives|C|PLST
+#2215|Frog Tongue|C|PLST
+#2216|Gnarlid Pack|C|PLST
+#2217|Grazing Gladehart|C|PLST
+#2218|Harrow|C|PLST
+#2219|Hickory Woodlot|C|PLST
+#2220|Hunter's Ambush|C|PLST
+#2221|Ivy Lane Denizen|C|PLST
+#2222|Kavu Climber|C|PLST
+#2223|Kozilek's Predator|C|PLST
+#2224|Larger Than Life|C|PLST
+#2225|Might of the Masses|C|PLST
+#2226|Night Soil|C|PLST
+#2227|Oakgnarl Warrior|C|PLST
+#2228|Peema Outrider|C|PLST
+#2229|Pick Your Poison|C|PLST
+#2230|Relic Crush|C|PLST
+#2231|Roots|C|PLST
+#2232|Scatter the Seeds|C|PLST
+#2233|Shinen of Life's Roar|C|PLST
+#2234|Spore Frog|C|PLST
+#2235|Viridian Joiner|C|PLST
+#2236|Wildheart Invoker|C|PLST
+#2237|Yavimaya Elder|C|PLST
+#2238|Commander's Sphere|C|PLST
+#2239|Crashing Drawbridge|C|PLST
+#2240|Ulamog's Crusher|C|PLST
+#2241|Whispersilk Cloak|C|PLST
+#2242|Counterbalance|U|MB2
+#2243|Hydroblast|C|MB2
+#2244|Kobolds of Kher Keep|C|MB2
+#2245|Merchant Scroll|C|MB2
+#2246|Path of Ancestry|C|MBC
+#2247|Relic of Progenitus|C|MB2
+#2248|Grafdigger's Cage|R|MB2
+#2249|Proteus Staff|R|MB2
+#2250|Serenity|R|MB2
+#2251|Tower of the Magistrate|R|MB2
+#2252|Essence of Ajani|R|MB2
+#2253|Maestros' Totally Safe Hideout|R|MB2
+#2254|You Compleat Me|R|MB2
+#2255|Diabolic Tutor|U|PLST
+#2256|Garruk's Uprising|U|PLST
+#2257|Dragon's Approach|C|MB2
+#2258|Daydream|U|PLST
+#2259|Intangible Virtue|U|PLST
+#2260|Perimeter Captain|U|PLST
+#2261|Reconnaissance|U|PLST
+#2262|Annex|U|PLST
+#2263|Cerulean Wisps|C|PLST
+#2264|Clinquant Skymage|U|PLST
+#2265|Compulsion|U|PLST
+#2266|Curse of Verbosity|U|PLST
+#2267|Disrupt|C|PLST
+#2268|Muddle the Mixture|C|PLST
+#2269|Beseech the Queen|U|PLST
+#2270|Bubbling Muck|C|PLST
+#2271|Buried Alive|U|PLST
+#2272|Exsanguinate|U|PLST
+#2273|Footsteps of the Goryo|U|PLST
+#2274|Nadier's Nightblade|U|PLST
+#2275|Rain of Filth|U|PLST
+#2276|About Face|C|PLST
+#2277|Ainok Tracker|C|PLST
+#2278|Barrage of Boulders|C|PLST
+#2279|Blood Frenzy|C|PLST
+#2280|Bulk Up|U|PLST
+#2281|Crimson Wisps|C|PLST
+#2282|Flame Wave|U|PLST
+#2283|Goblinslide|U|PLST
+#2284|Impact Tremors|C|PLST
+#2285|Lava Hounds|U|PLST
+#2286|Mercadia's Downfall|U|PLST
+#2287|Onslaught|C|PLST
+#2288|Shattering Spree|U|PLST
+#2289|Spellshock|U|PLST
+#2290|Volcanic Torrent|U|PLST
+#2291|Canopy Surge|U|PLST
+#2292|Chomping Changeling|U|PLST
+#2293|Compost|U|PLST
+#2294|Land Grant|C|PLST
+#2295|Whip Silk|C|PLST
+#2296|Cabal Ritual|C|MB2
+#2297|Energy Flux|U|MB2
+#2298|Krark-Clan Ironworks|U|MB2
+#2299|Mindbreak Trap|M|MB2
+#2300|Oath of Druids|M|MB2
+#2301|Anax and Cymede & Kynaios and Tiro|R|MB2
+#2302|Duelists' Convocation International|R|MB2
+#2303|Halving Season|R|MB2
+#2304|Intangible Vibes|R|MB2
+#2305|Lich's Duel Mastery|R|MB2
+#2306|Microscope|R|MB2
+#2307|Mothers Yamazaki|R|MB2
+#2308|Orb of Origin|R|MB2
+#2309|Snap Judgment|R|MB2
+#2310|The Heron Moon|R|MB2
+#2311|Wowzer, the Aspirational|R|MB2
+#2312|Zone of Flame|R|MB2
+#2313|Winds of Change|U|MB2
+#2314|Show and Tell|M|MB2
+#2315|Rest in Peace|R|MB2
+#2316|Brave the Sands|U|PLST
+#2317|Ghostly Prison|U|PLST
+#2318|Mistveil Plains|U|PLST
+#2319|Soul Warden|C|PLST
+#2320|Ideas Unbound|C|PLST
+#2321|Mind Bend|U|PLST
+#2322|Paradox Haze|U|PLST
+#2323|Chain of Smog|U|PLST
+#2324|Liliana's Caress|U|PLST
+#2325|Dwarven Blastminer|U|PLST
+#2326|Dwarven Miner|U|PLST
+#2327|Flaring Pain|C|PLST
+#2328|Price of Glory|U|PLST
+#2329|Ricochet Trap|U|PLST
+#2330|Evolutionary Escalation|U|PLST
+#2331|Demonic Consultation|U|MB2
+#2332|Grinding Station|U|MB2
+#2333|Pyroblast|C|MB2
+#2334|Reset|U|MB2
+#2335|The Rack|U|MB2
+#2336|Cunning Wish|R|MB2
+#2337|Kataki, War's Wage|R|MB2
+#2338|Maddening Hex|R|MB2
+#2339|Manabond|R|MB2
+#2340|Ruination|R|MB2
+#2341|Torpor Orb|R|MB2
+#2342|Tsabo's Web|R|MB2
+#2343|Can't Quite Recall|R|MB2
+#2344|Indicate|R|MB2
+#2345|Map to Lorthos's Temple|R|MB2
+#2346|Meandered Towershell|R|MB2
+#2347|The Many Deeds of Belzenlok|R|MB2

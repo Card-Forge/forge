@@ -29,6 +29,7 @@ import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
@@ -50,6 +51,11 @@ import java.util.Map;
  * @version $Id: AbilityFactoryGainControl.java 17764 2012-10-29 11:04:18Z Sloth $
  */
 public class ControlGainAi extends SpellAbilityAi {
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        return MayDecisions.gainControl(player, sa);
+    }
+
     @Override
     protected AiAbilityDecision canPlay(final Player ai, final SpellAbility sa) {
         final List<String> lose = Lists.newArrayList();
@@ -290,6 +296,9 @@ public class ControlGainAi extends SpellAbilityAi {
 
         // Special card logic that is processed elsewhere
         if (sa.hasParam("AILogic")) {
+            if ("DonateJunk".equals(sa.getParam("AILogic"))) {
+                return PlaceholderTargetAi.donate(ai, sa);
+            }
             if ("DonateTargetPerm".equals(sa.getParam("AILogic"))) {
                 // Donate step 2 - target a donatable permanent.
                 return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);

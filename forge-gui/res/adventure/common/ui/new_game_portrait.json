@@ -221,6 +221,17 @@
       "height": 28,
       "x": 165,
       "y": 376
+    },
+    {
+      "type": "TextButton",
+      "name": "modifiers",
+      "style": "goldframe",
+      "text": "tr(lblModifiers)",
+      "selectable": true,
+      "width": 100,
+      "height": 28,
+      "x": 85,
+      "y": 420
     }
   ]
 }

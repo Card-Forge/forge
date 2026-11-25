@@ -232,6 +232,17 @@ public class LandPlannerTest extends FlatMcTestBase {
     }
 
     @Test
+    public void colourChosenOnResolutionMakesAllItsManaOneColour() {
+        setUpGame();
+        put("Nyx Lotus", ai, ZoneType.Battlefield);
+        put("Leatherback Baloth", ai, ZoneType.Battlefield); // three green pips
+        put("Merfolk of the Pearl Trident", ai, ZoneType.Battlefield); // one blue pip
+        final List<LandPlanner.Src> s = LandPlanner.battlefieldSources(ai);
+        assertTrue(LandPlanner.canPay(costs(G, G, G), 0, s), "devotion to green makes three green");
+        assertFalse(LandPlanner.canPay(costs(G, U), 0, s), "the Lotus makes one colour, not green and blue");
+    }
+
+    @Test
     public void permanentsWithoutManaAbilitiesAreNoSources() {
         setUpGame();
         put("Grizzly Bears", ai, ZoneType.Battlefield);

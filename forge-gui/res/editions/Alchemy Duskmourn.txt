@@ -4,7 +4,41 @@ Date=2024-10-15
 Name=Alchemy: Duskmourn
 Type=Online
 ScryfallCode=YDSK
-Booster=1 UncommonRareMythic:fromsheet("YDSK cards"), 8 Common:fromsheet("DSK cards"), 3 Uncommon:fromSheet("DSK cards"), 1 UncommonRareMythic:fromSheet("DSK cards"), 1 RareMythic:fromSheet("DSK cards"), 1 BasicLand:fromSheet("DSK cards")
+BoosterSlots=Common,Common-Guest,Alchemy,Uncommon,RareMythic,AnyLand,Wildcard
+Booster=6 Common, 1 Common-Guest, 1 Alchemy, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 Wildcard+
+
+[Common]
+Base=Common:fromSheet("DSK cards")
+
+[Common-Guest]
+Base=Common:fromSheet("DSK cards")
+Replace=.015625F fromSheet("DSK special guests")
+
+[Alchemy]
+#Extra slot. 55% uncommon, and each rare twice each mythic. 15 rares and 5 mythics make those 38.57% and 6.43%.
+Base=Uncommon:fromSheet("YDSK cards")
+Replace=0.385714F Rare:fromSheet("YDSK cards")
+Replace=0.064286F Mythic:fromSheet("YDSK cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("DSK cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("DSK cards")
+
+[AnyLand]
+Base=fromSheet("DSK thirteen lands")
+Replace=.10F fromSheet("DSK thirteen lands")+
+Replace=.267F BasicLand:fromSheet("DSK cards"):!fromSheet("DSK thirteen lands")
+Replace=.067F BasicLand:fromSheet("DSK cards"):!fromSheet("DSK thirteen lands")+
+Replace=.133F Land:Rare:fromSheet("DSK cards")
+Replace=.033F Land:Rare:fromSheet("DSK cards")+
+
+[Wildcard]
+Base=Common:fromSheet("DSK cards")
+# I don't know about these numbers, so i'm just copying them from BLB
+Replace=.417F Uncommon:fromSheet("DSK cards")
+Replace=.078F RareMythic:fromSheet("DSK cards")
 
 [cards]
 1 M Ethrimik, Imagined Fiend @John Tedrick

@@ -1,0 +1,13 @@
+Name:Jace's Saga
+ManaCost:no cost
+Types:Enchantment Land Saga
+K:Chapter:3:Animate1,Animate2,EmpowerJace
+SVar:Animate1:DB$ Animate | Defined$ Self | Abilities$ ABMana | Duration$ Permanent | SpellDescription$ This Saga gains "{T}: Add {U}."
+SVar:ABMana:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+SVar:Animate2:DB$ Animate | Defined$ Self | Abilities$ ABConjure | Duration$ Permanent | SpellDescription$ This Saga gains "{U}, {T}: Conjure a card named Jace's Sentinel onto the battlefield."
+SVar:ABConjure:AB$ MakeCard | Cost$ T U | Conjure$ True | Name$ Jace's Sentinel | Zone$ Battlefield | SpellDescription$ Conjure a card named Jace's Sentinel onto the battlefield.
+SVar:EmpowerJace:DB$ Empower | Type$ Jace | Num$ X | SpellDescription$ Empower Jace X, where X is the number of Islands you control.
+SVar:X:Count$Valid Island.YouCtrl
+DeckHas:Type$Merfolk|Warrior|Planeswalker
+DeckHints:Type$Jace
+Oracle:I — This Saga gains "{T}: Add {U}."\nII — This Saga gains "{U}, {T}: Conjure a card named Jace's Sentinel onto the battlefield."\nIII — Empower Jace 3.

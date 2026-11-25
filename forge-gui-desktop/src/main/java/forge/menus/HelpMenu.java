@@ -12,6 +12,7 @@ import javax.swing.KeyStroke;
 
 import forge.error.ExceptionHandler;
 import forge.localinstance.properties.ForgeConstants;
+import forge.screens.home.welcome.WelcomeWizardDialog;
 import forge.toolbox.FOptionPane;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
@@ -30,6 +31,7 @@ public final class HelpMenu {
         menu.setMnemonic(KeyEvent.VK_H);
         menu.add(getMenu_GettingStarted());
         menu.add(getMenuItem_KeyboardShortcuts());
+        menu.add(getMenuItem_ReplayWelcomeWizard());
         menu.addSeparator();
         menu.add(getMenuItem_OpenLogFile());
         menu.add(getMenuItem_OpenLogFileDirectory());
@@ -71,6 +73,13 @@ public final class HelpMenu {
         final Localizer localizer = Localizer.getInstance();
         JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblKeyboardShortcuts"));
         menuItem.addActionListener(e -> new KeyboardShortcutsDialog().setVisible(true));
+        return menuItem;
+    }
+
+    private static JMenuItem getMenuItem_ReplayWelcomeWizard() {
+        final Localizer localizer = Localizer.getInstance();
+        JMenuItem menuItem = new JMenuItem(localizer.getMessage("btnReplayWelcomeWizard"));
+        menuItem.addActionListener(e -> WelcomeWizardDialog.replay());
         return menuItem;
     }
 

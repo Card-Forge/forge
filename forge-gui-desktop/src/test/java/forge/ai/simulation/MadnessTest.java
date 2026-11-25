@@ -15,6 +15,7 @@ import static org.testng.Assert.assertTrue;
 
 import forge.ai.AiController;
 import forge.ai.ComputerUtilCost;
+import forge.ai.ability.DigAi;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -483,6 +484,26 @@ public class MadnessTest extends FlatMcTestBase {
         final Card rootwalla = put("Basking Rootwalla", ai, ZoneType.Library);
         final Card bears = put("Grizzly Bears", ai, ZoneType.Library);
         assertSame(ComboPlan.scan(ai).tutorPick(ai, collection(bears, rootwalla)), rootwalla);
+    }
+
+    @Test
+    public void impulseDigSelectsTheMissingComboPieceOverAGenericCreature() {
+        setUpGame();
+        addMadnessDeck();
+        put("Wild Mongrel", ai, ZoneType.Battlefield);
+        final Card impulse = put("Impulse", ai, ZoneType.Hand);
+        final Card rootwalla = put("Basking Rootwalla", ai, ZoneType.Library);
+        final Card bears = put("Grizzly Bears", ai, ZoneType.Library);
+
+        final DeckPlan plan = brain().deckPlan(ai);
+        if (!plan.combos.has(ComboPlan.Kind.MADNESS)) {
+            throw new SkipException("deck-plan integration is disabled or the test deck was not recognized");
+        }
+
+        final SpellAbility sa = impulse.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+        final Card chosen = new DigAi().chooseSingleCard(ai, sa, collection(bears, rootwalla), false, ai, null);
+        assertSame(chosen, rootwalla, "Impulse should select the missing madness piece, not the generic creature");
     }
 
     @Test
