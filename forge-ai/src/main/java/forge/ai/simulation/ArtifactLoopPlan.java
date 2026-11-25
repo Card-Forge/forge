@@ -325,9 +325,7 @@ final class ArtifactLoopPlan {
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             final boolean mark = c.isArtifact() && (any || c.isToken() || "Sword of the Meek".equals(c.getName()));
             if (mark) {
-                c.setSVar("SacMe", "6");
-            } else if (c.hasSVar("SacMe") && c.getSVar("SacMe").equals("6")) {
-                c.removeSVar("SacMe");
+                SacMarks.mark(c);
             }
         }
     }
@@ -361,7 +359,7 @@ final class ArtifactLoopPlan {
         if (make == null || RunawayLoop.exceeded(make, LIMIT)) {
             return null;
         }
-        sword.setSVar("SacMe", "6");
+        SacMarks.mark(sword);
         make.setActivatingPlayer(ai);
         make.resetTargets();
         if (!approve.test(make)) {

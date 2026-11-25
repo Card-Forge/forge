@@ -124,22 +124,34 @@ public final class ExtraCombatPlan {
         return out;
     }
 
-    /** Whether no creature that can block the engine kills it (or takes it with deathtouch). */
+    /**
+     * Whether the engine can attack safely, taking the worst case in which every creature that can block it does so
+     * together: their damage added up must not kill it, none of them may have deathtouch, and an engine that has to hurt the
+     * player needs trample with more power than the toughness that they add up to (without trample one blocker stops it).
+     */
     public static boolean safeToAttack(final Card engine, final Iterable<Card> blockers) {
         final boolean connect = mustConnect(engine);
+        int damage = 0;
+        int toughness = 0;
+        boolean blocked = false;
         for (final Card b : blockers) {
             if (!CombatUtil.canBlock(engine, b)) {
                 continue;
             }
-            if (connect && (!engine.hasKeyword(forge.game.keyword.Keyword.TRAMPLE) || b.getNetToughness() >= engine.getNetPower())) {
-                return false; // blocked, nothing reaches the player: no combat is added
-            }
-            if (b.hasKeyword(forge.game.keyword.Keyword.DEATHTOUCH)
-                    || ComputerUtilCombat.getDamageToKill(engine, false) <= b.getNetCombatDamage()) {
+            if (b.hasKeyword(forge.game.keyword.Keyword.DEATHTOUCH)) {
                 return false;
             }
+            blocked = true;
+            damage += Math.max(0, b.getNetCombatDamage());
+            toughness += Math.max(0, b.getLethalDamage());
         }
-        return true;
+        if (!blocked) {
+            return true;
+        }
+        if (damage >= ComputerUtilCombat.getDamageToKill(engine, false)) {
+            return false;
+        }
+        return !connect || engine.hasKeyword(forge.game.keyword.Keyword.TRAMPLE) && engine.getNetCombatDamage() > toughness;
     }
 
     /** The equip that puts a Helm of the Host that nobody wears on the engine, or null. */

@@ -52,6 +52,24 @@ public final class LoopRunner {
         if (ai == null || candidates == null || candidates.isEmpty()) {
             return null;
         }
+        SacMarks.restore(ai);
+        // a plan that is turned down takes its sacrifice marks back at once, as does a step that finds nothing to do
+        final Predicate<SpellAbility> guarded = sa -> {
+            final boolean ok = approve.test(sa);
+            if (!ok) {
+                SacMarks.restore(ai);
+            }
+            return ok;
+        };
+        final SpellAbility step = step(ai, candidates, guarded);
+        if (step == null) {
+            SacMarks.restore(ai);
+        }
+        return step;
+    }
+
+    private static SpellAbility step(final Player ai, final List<SpellAbility> candidates,
+                                     final Predicate<SpellAbility> approve) {
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
         final boolean dip = doubleDip(ai);
         if (!ai.getGame().getStack().isEmpty()

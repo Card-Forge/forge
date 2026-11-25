@@ -1933,6 +1933,115 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
                 + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
     }
 
+    private static boolean drains(final SpellAbility sa) {
+        for (SpellAbility part = sa; part != null; part = part.getSubAbility()) {
+            if (forge.ai.simulation.TriggerLoopPlan.makesTheAiGainOrAnOpponentLose(part)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Test(timeOut = 120000)
+    public void lifeThatTheOpponentGainsIsNoStartForBloodAndBond() {
+        elfDeckWith(0, "Devour Flesh", "Soul Feast", "Vampire's Kiss");
+        AssertJUnit.assertFalse("Devour Flesh gives the targeted player the life", drains(spellOf("Devour Flesh")));
+        AssertJUnit.assertTrue("Soul Feast: the opponent loses it, the AI gains it", drains(spellOf("Soul Feast")));
+        AssertJUnit.assertTrue("Vampire's Kiss too", drains(spellOf("Vampire's Kiss")));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithBloodAndBondIgnoresDevourFleshForTheDrain() {
+        elfDeckWith(0, "Devour Flesh", "Soul Feast");
+        addCards("Swamp", 5, ai); // Devour Flesh would leave too little for the Soul Feast
+        addCardToZone("Exquisite Blood", ai, ZoneType.Battlefield);
+        addCardToZone("Sanguine Bond", ai, ZoneType.Battlefield);
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Soul Feast starts it, not the Devour Flesh\n" + trace + gameStateToString(game),
+                game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void severalBlockersTogetherDecideWhetherAnEngineAttacks() {
+        elfDeckWith(0);
+        final Card aurelia = addCardToZone("Aurelia, the Warleader", ai, ZoneType.Battlefield); // 3/4 flier
+        aurelia.setSickness(false);
+        addCardToZone("Wind Drake", opp, ZoneType.Battlefield).setSickness(false);
+        AssertJUnit.assertTrue("one 2/2 does not kill it", forge.ai.simulation.ExtraCombatPlan.safeToAttack(aurelia,
+                opp.getCardsIn(ZoneType.Battlefield)));
+        addCardToZone("Wind Drake", opp, ZoneType.Battlefield).setSickness(false);
+        AssertJUnit.assertFalse("two 2/2s that block together do" + gameStateToString(game),
+                forge.ai.simulation.ExtraCombatPlan.safeToAttack(aurelia, opp.getCardsIn(ZoneType.Battlefield)));
+    }
+
+    @Test(timeOut = 120000)
+    public void aStepThatIsTurnedDownLeavesNoSacrificeMarkBehind() {
+        elfDeckWith(0);
+        addCards("Swamp", 2, ai);
+        final Card trader = addCardToZone("Warren Soultrader", ai, ZoneType.Battlefield);
+        addCardToZone("Blood Artist", ai, ZoneType.Battlefield);
+        final Card crawler = addCardToZone("Gravecrawler", ai, ZoneType.Battlefield);
+        trader.setSickness(false);
+        crawler.setSickness(false);
+        final SpellAbility accepted = LoopRunner.next(ai, abilitiesOf(trader), s -> true);
+        AssertJUnit.assertNotNull("the plan has a step" + gameStateToString(game), accepted);
+        AssertJUnit.assertEquals("the accepted step keeps the mark for the payment", "6", crawler.getSVar("SacMe"));
+        AssertJUnit.assertNull("turned down", LoopRunner.next(ai, abilitiesOf(trader), s -> false));
+        // the Gravecrawler's own script says SacMe:3, and that is what it has again: the plan's 6 is gone
+        AssertJUnit.assertEquals("the plan's mark is not left behind", "3", crawler.getSVar("SacMe"));
+        AssertJUnit.assertFalse(crawler.hasSVar("SacMeWas"));
+    }
+
+    @Test(timeOut = 120000)
+    public void aCardThatAlreadyHadASacrificeMarkGetsItBack() {
+        elfDeckWith(0);
+        final Card token = addCardToZone("Gravecrawler", ai, ZoneType.Battlefield);
+        token.setSVar("SacMe", "3");
+        forge.ai.simulation.SacMarks.mark(token);
+        AssertJUnit.assertEquals("6", token.getSVar("SacMe"));
+        forge.ai.simulation.SacMarks.restore(ai);
+        AssertJUnit.assertEquals("3", token.getSVar("SacMe"));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithNivMizzetStartsTheLoopAfterAnEarlierLifeLoss() {
+        elfDeckWith(0, "Curiosity", "Opt");
+        addCards("Island", 3, ai);
+        addCards("Mountain", 3, ai);
+        addCardToZone("Niv-Mizzet, Parun", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(10, null);
+        opp.loseLife(1, false, false, null); // combat damage, say: not the Niv-Mizzet chain
+        runTurn();
+        AssertJUnit.assertTrue("Niv-Mizzet has not hit anyone yet, so an instant still starts it\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void upheavalNeedsTheColoursFromDifferentLands() {
+        elfDeckWith(0, "Upheaval", "Psychatog");
+        addCards("Island", 2, ai);
+        addCards("Underground Sea", 1, ai); // blue or black, not both: three blue and a black need four such lands
+        addCards("Plains", 6, ai);
+        addCards("Plains", 5, opp);
+        addCardToZone("Grizzly Bears", opp, ZoneType.Battlefield);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        AssertJUnit.assertFalse("nine lands, but one dual land cannot be the third blue and the black",
+                forge.ai.simulation.UpheavalPlan.ready(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void upheavalIsReadyWhenTwoDualLandsCoverTheMissingColours() {
+        elfDeckWith(0, "Upheaval", "Psychatog");
+        addCards("Island", 2, ai);
+        addCards("Underground Sea", 2, ai);
+        addCards("Plains", 5, ai);
+        addCards("Plains", 5, opp);
+        addCardToZone("Grizzly Bears", opp, ZoneType.Battlefield);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        AssertJUnit.assertTrue("the Islands and the dual lands: one more blue and the black", forge.ai.simulation.UpheavalPlan.ready(ai));
+    }
+
     @Test(timeOut = 120000)
     public void aWholeTurnWithThopterFoundrySwordOfTheMeekAndTimeSieveTakesAnExtraTurn() {
         elfDeckWith(0);

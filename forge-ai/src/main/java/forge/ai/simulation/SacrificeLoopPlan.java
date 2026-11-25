@@ -167,9 +167,7 @@ public final class SacrificeLoopPlan {
         // the payment of the sacrifice picks the creature marked for it: the one that has no counter, nothing else
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             if (c == spare) {
-                c.setSVar("SacMe", "6");
-            } else if (c.hasSVar("SacMe") && c.getSVar("SacMe").equals("6")) {
-                c.removeSVar("SacMe");
+                SacMarks.mark(c);
             }
         }
         VetoLog.note(ai, "sacrifice-loop | Yawgmoth sacrifices " + spare.getName());
@@ -273,9 +271,7 @@ public final class SacrificeLoopPlan {
         }
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             if (c == victim) {
-                c.setSVar("SacMe", "6");
-            } else if (c.hasSVar("SacMe") && c.getSVar("SacMe").equals("6")) {
-                c.removeSVar("SacMe");
+                SacMarks.mark(c);
             }
         }
         sac.setActivatingPlayer(ai);
@@ -366,9 +362,7 @@ public final class SacrificeLoopPlan {
         }
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             if (c == victim) {
-                c.setSVar("SacMe", "6");
-            } else if (c.hasSVar("SacMe") && c.getSVar("SacMe").equals("6")) {
-                c.removeSVar("SacMe");
+                SacMarks.mark(c);
             }
         }
         sac.setActivatingPlayer(ai);
@@ -384,9 +378,7 @@ public final class SacrificeLoopPlan {
     static void markVictim(final Player ai, final Card victim) {
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             if (c == victim) {
-                c.setSVar("SacMe", "6");
-            } else if (c.hasSVar("SacMe") && c.getSVar("SacMe").equals("6")) {
-                c.removeSVar("SacMe");
+                SacMarks.mark(c);
             }
         }
     }
@@ -640,9 +632,7 @@ public final class SacrificeLoopPlan {
         final Card target = squirrels.get(0);
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             if (c != target && squirrels.contains(c)) {
-                c.setSVar("SacMe", "6");
-            } else if (c.hasSVar("SacMe") && c.getSVar("SacMe").equals("6")) {
-                c.removeSVar("SacMe");
+                SacMarks.mark(c);
             }
         }
         pump.setActivatingPlayer(ai);

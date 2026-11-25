@@ -135,7 +135,7 @@ public final class TriggerLoopPlan {
                 cheapest = sa;
             }
         }
-        if (cheapest != null && !started(ai)) {
+        if (cheapest != null && !started(niv)) {
             cheapest.setActivatingPlayer(ai);
             if (approve.test(cheapest)) {
                 VetoLog.note(ai, "trigger-loop | " + cheapest.getHostCard().getName() + " starts " + niv.getName());
@@ -145,12 +145,22 @@ public final class TriggerLoopPlan {
         return null;
     }
 
-    /** Whether an opponent has lost life this turn: the chain is going, or the AI has hit already. */
-    private static boolean started(final Player ai) {
-        for (final Player opp : ai.getOpponents()) {
-            if (opp.getLifeLostThisTurn() > 0) {
-                return true;
-            }
+    /** Whether Niv-Mizzet has already hit an opponent this turn: its trigger chain is going, whatever else cost them life. */
+    private static boolean started(final Card niv) {
+        return niv.hasDealtDamageToOpponentThisTurn();
+    }
+
+    /**
+     * Whether this part of an ability makes the AI gain life or an opponent lose it, which is what Exquisite Blood and
+     * Sanguine Bond feed on. Life that an opponent gains (Devour Flesh) or that the AI loses does not start them.
+     */
+    public static boolean makesTheAiGainOrAnOpponentLose(final SpellAbility part) {
+        final String who = part.getParamOrDefault("Defined", "");
+        if (part.getApi() == ApiType.GainLife) {
+            return !part.usesTargeting() && (who.isEmpty() || "You".equals(who));
+        }
+        if (part.getApi() == ApiType.LoseLife) {
+            return part.usesTargeting() || who.contains("Opponent") || who.startsWith("Targeted");
         }
         return false;
     }
@@ -174,7 +184,7 @@ public final class TriggerLoopPlan {
             boolean drains = false;
             SpellAbility part = sa;
             while (part != null) {
-                drains |= part.getApi() == ApiType.GainLife || part.getApi() == ApiType.LoseLife;
+                drains |= makesTheAiGainOrAnOpponentLose(part);
                 part = part.getSubAbility();
             }
             if (!drains || !forge.ai.ComputerUtilMana.canPayManaCost(sa, ai, 0, false)) {

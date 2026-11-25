@@ -55,25 +55,42 @@ public final class UpheavalPlan {
         return ai.getLandsPlayedThisTurn() < ai.getMaxLandPlays();
     }
 
-    /** Mana from the untapped lands and the pool, and the sources of blue and black among them. */
+    /**
+     * Mana from the untapped lands and the pool, and what the lands can do about the colours: {total, blue in the pool, black in
+     * the pool, lands that make blue and not black, lands that make black and not blue, lands that make either}. A land is
+     * one mana, so a dual land is a blue source or a black one, not both at once.
+     */
     private static int[] mana(final Player ai) {
         int total = ai.getManaPool().totalMana();
-        int blue = ai.getManaPool().getAmountOfColor(MagicColor.BLUE);
-        int black = ai.getManaPool().getAmountOfColor(MagicColor.BLACK);
+        int blueOnly = 0;
+        int blackOnly = 0;
+        int either = 0;
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             if (!c.isLand() || c.isTapped()) {
                 continue;
             }
             total++;
             final byte colors = OpeningHand.producedColors(c);
-            if ((colors & MagicColor.BLUE) != 0) {
-                blue++;
-            }
-            if ((colors & MagicColor.BLACK) != 0) {
-                black++;
+            final boolean blue = (colors & MagicColor.BLUE) != 0;
+            final boolean black = (colors & MagicColor.BLACK) != 0;
+            if (blue && black) {
+                either++;
+            } else if (blue) {
+                blueOnly++;
+            } else if (black) {
+                blackOnly++;
             }
         }
-        return new int[] {total, blue, black};
+        return new int[] {total, ai.getManaPool().getAmountOfColor(MagicColor.BLUE),
+                ai.getManaPool().getAmountOfColor(MagicColor.BLACK), blueOnly, blackOnly, either};
+    }
+
+    /** Whether the blue and the black that are still missing from the pool can come from different lands. */
+    static boolean colorsCoverable(final int needBlue, final int needBlack, final int poolBlue, final int poolBlack,
+                                   final int blueOnly, final int blackOnly, final int either) {
+        final int blueShort = Math.max(0, needBlue - poolBlue - blueOnly);
+        final int blackShort = Math.max(0, needBlack - poolBlack - blackOnly);
+        return blueShort + blackShort <= either;
     }
 
     /** Whether Upheaval is worth casting now: the mana, the Psychatog to put back, and something to bounce. */
@@ -90,7 +107,7 @@ public final class UpheavalPlan {
         }
         final int[] m = mana(ai);
         final int need = UPHEAVAL_COST + PSYCHATOG_COST - (landDropFree(ai) ? 1 : 0);
-        if (m[0] < need || m[1] < 3 || m[2] < 1) {
+        if (m[0] < need || !colorsCoverable(3, 1, m[1], m[2], m[3], m[4], m[5])) {
             return false;
         }
         int theirs = 0;
