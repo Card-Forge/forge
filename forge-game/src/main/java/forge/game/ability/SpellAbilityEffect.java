@@ -648,6 +648,14 @@ public abstract class SpellAbilityEffect implements IHasForgeParams {
     }
 
     protected static void registerDelayedTrigger(final SpellAbility sa, String location, final Iterable<Card> crds) {
+        // CR 603.7a: an unconditional "exile it at the beginning of the next end step" creates its delayed trigger
+        // even when nothing was affected; it then does nothing (CR 603.7c). Only a text that makes the delayed
+        // trigger conditional on an affected card (Myriad, CR 702.116a: "If one or more tokens are created this way,
+        // exile the tokens at end of combat") skips it over an empty set.
+        if (sa.hasParam("AtEOTNeedsCard") && !crds.iterator().hasNext()) {
+            return;
+        }
+
         boolean intrinsic = sa.isIntrinsic();
         boolean your = location.startsWith("Your");
         boolean combat = location.endsWith("Combat");

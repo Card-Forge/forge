@@ -20,7 +20,7 @@ import forge.util.TextUtil;
 
 public class AnimateEffect extends AnimateEffectBase {
     public static final String[] OPTIONAL_PARAMS = {
-        "Abilities", "AtEOT", "AtEOTCondition", "AtEOTDesc", "Colors", "Defined", "DefinedDesc",
+        "Abilities", "AtEOT", "AtEOTCondition", "AtEOTDesc", "AtEOTNeedsCard", "Colors", "Defined", "DefinedDesc",
         "Duration", "HiddenKeywords", "IfDesc", "ImprintCards", "Keywords", "Name",
         "OptionQuestion", "Optional", "Power", "RememberObjects", "RemoveTypes", "Replacements",
         "Toughness", "Triggers", "Types", "sVars", "staticAbilities",

@@ -28,7 +28,7 @@ import forge.util.Localizer;
 
 public class AmassEffect extends TokenEffectBase {
     public static final String[] OPTIONAL_PARAMS = {
-        "AddTriggersFrom", "AtEOT", "AtEOTCondition", "AtEOTDesc", "AtEOTTrig", "AttachAfter",
+        "AddTriggersFrom", "AtEOT", "AtEOTCondition", "AtEOTDesc", "AtEOTNeedsCard", "AtEOTTrig", "AttachAfter",
         "AttachedTo", "CleanupForEach", "Defined", "ForEach", "ImprintTokens", "Num",
         "PumpDuration", "PumpKeywords", "RememberAmass", "RememberOriginalTokens",
         "RememberSource", "RememberTokens", "TokenAttacking", "TokenBlocking", "TokenRemembered",

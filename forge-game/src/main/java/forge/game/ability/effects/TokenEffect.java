@@ -36,7 +36,7 @@ import forge.game.spellability.SpellAbility;
 
 public class TokenEffect extends TokenEffectBase {
     public static final String[] OPTIONAL_PARAMS = {
-        "AddTriggersFrom", "AtEOT", "AtEOTCondition", "AtEOTDesc", "AtEOTTrig", "AttachAfter",
+        "AddTriggersFrom", "AtEOT", "AtEOTCondition", "AtEOTDesc", "AtEOTNeedsCard", "AtEOTTrig", "AttachAfter",
         "AttachedTo", "ChangeZoneTable", "CleanupForEach", "ForEach", "ImprintTokens",
         "PumpDuration", "PumpKeywords", "RememberOriginalTokens", "RememberSource",
         "RememberTokens", "TokenAmount", "TokenAttacking", "TokenBlocking", "TokenOwner",
