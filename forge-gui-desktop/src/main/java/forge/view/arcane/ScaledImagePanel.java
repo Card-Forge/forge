@@ -23,7 +23,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import forge.gui.GuiBase;
+import forge.toolbox.FUiScale;
 
 /**
  * <p>
@@ -109,7 +109,7 @@ public class ScaledImagePanel extends JPanel {
         //ResampleOp resizer = new ResampleOp(DimensionConstrain.createMaxDimension(this.getWidth(), this.getHeight(), !scaleLarger));
         //resizer.setUnsharpenMask(UnsharpenMask.Soft);
         BufferedImage img = getSrcImage(); //resizer.filter(getSrcImage(), null);
-        float screenScale = GuiBase.getInterface().getScreenScale();
+        float screenScale = FUiScale.of(g);
 
         boolean needsScale = Math.round(img.getWidth() / screenScale) < sz.width;
         float scaleFactor = ((float)img.getWidth() / screenScale) / sz.width;

@@ -21,6 +21,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -46,7 +47,6 @@ import forge.deck.DeckRule;
 import forge.deck.DeckRuleColorIdentity;
 import forge.deck.DeckSection;
 import forge.game.GameType;
-import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
@@ -74,6 +74,7 @@ import forge.toolbox.ContextMenuBuilder;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
+import forge.toolbox.FUiScale;
 import forge.util.*;
 import forge.view.FView;
 
@@ -135,15 +136,15 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             .fontSize(14)
             .text(localizer.getMessage("lblAddBasicLands"))
             .tooltip(localizer.getMessage("ttAddBasicLands"))
-            .icon(FSkin.getImage(FSkinProp.IMG_LAND,
-                Math.round(18 * GuiBase.getInterface().getScreenScale()),
-                Math.round(18 * GuiBase.getInterface().getScreenScale())))
             .iconScaleAuto(false).hoverable().build();
 
     protected ACEditorBase(final FScreen screen0, final CDetailPicture cDetailPicture0, final GameType gameType0) {
         this.screen = screen0;
         this.cDetailPicture = cDetailPicture0;
         this.gameType = gameType0;
+        int iconSize = Math.round(18 * FUiScale.of(btnAddBasicLands));
+        btnAddBasicLands.setIcon(FSkin.getImage(FSkinProp.IMG_LAND, iconSize, iconSize));
+        FUiScale.addScaleChangeListener(new LandIconScaleListener(btnAddBasicLands, iconSize));
     }
 
     public FScreen getScreen() {
@@ -737,6 +738,32 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     }
                 }, true, true);
             }
+        }
+    }
+
+    /** Rebuilds the land icon when the display scale changes, without retaining the label. */
+    private static final class LandIconScaleListener implements Runnable {
+        private final WeakReference<FLabel> labelRef;
+        private int size;
+
+        private LandIconScaleListener(final FLabel label, final int size) {
+            labelRef = new WeakReference<>(label);
+            this.size = size;
+        }
+
+        @Override
+        public void run() {
+            FLabel label = labelRef.get();
+            if (label == null) {
+                FUiScale.removeScaleChangeListener(this);
+                return;
+            }
+            int imageSize = Math.round(18 * FUiScale.of(label));
+            if (imageSize == size) { return; }
+            size = imageSize;
+            label.setIcon(FSkin.getImage(FSkinProp.IMG_LAND, imageSize, imageSize));
+            label.revalidate();
+            label.repaint();
         }
     }
 }

@@ -1,11 +1,11 @@
 package forge.itemmanager.filters;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JPanel;
 
-import forge.gui.GuiBase;
 import forge.gui.UiCommand;
 import forge.item.InventoryItem;
 import forge.item.ItemPredicate;
@@ -16,6 +16,7 @@ import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
+import forge.toolbox.FUiScale;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 
@@ -42,9 +43,10 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         }
         tooltip.append(")");
 
-        int imageSize = Math.round(18 * GuiBase.getInterface().getScreenScale());
+        int imageSize = Math.round(18 * FUiScale.of(widget));
         final FLabel button = addToggleButton(widget, FSkin.getImage(st.skinProp, imageSize, imageSize), tooltip.toString());
         buttonMap.put(st, button);
+        FUiScale.addScaleChangeListener(new IconScaleListener(widget, button, st, imageSize));
 
         //hook so right-clicking a button toggles itself on and toggles off all other buttons
         button.setRightClickCommand((UiCommand) () -> {
@@ -82,5 +84,36 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         }
 
         getWidget().revalidate();
+    }
+
+    /** Rebuilds a construction-time icon when the output scale changes, without retaining the UI. */
+    private static final class IconScaleListener implements Runnable {
+        private final WeakReference<JPanel> widgetRef;
+        private final WeakReference<FLabel> buttonRef;
+        private final StatTypes stat;
+        private int size;
+
+        private IconScaleListener(final JPanel widget, final FLabel button, final StatTypes stat, final int size) {
+            widgetRef = new WeakReference<>(widget);
+            buttonRef = new WeakReference<>(button);
+            this.stat = stat;
+            this.size = size;
+        }
+
+        @Override
+        public void run() {
+            JPanel widget = widgetRef.get();
+            FLabel button = buttonRef.get();
+            if (widget == null || button == null) {
+                FUiScale.removeScaleChangeListener(this);
+                return;
+            }
+            int imageSize = Math.round(18 * FUiScale.of(widget));
+            if (imageSize == size) { return; }
+            size = imageSize;
+            button.setIcon(FSkin.getImage(stat.skinProp, imageSize, imageSize));
+            button.revalidate();
+            button.repaint();
+        }
     }
 }

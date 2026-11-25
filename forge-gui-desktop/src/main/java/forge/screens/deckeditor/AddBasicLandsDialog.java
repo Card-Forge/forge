@@ -40,7 +40,6 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
-import forge.gui.GuiBase;
 import forge.gui.UiCommand;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
@@ -54,6 +53,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextField;
+import forge.toolbox.FUiScale;
 import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.util.MyRandom;
@@ -423,7 +423,7 @@ public class AddBasicLandsDialog {
 
                 final Graphics2D g2d = (Graphics2D) g;
 
-                final float screenScale = GuiBase.getInterface().getScreenScale();
+                final float screenScale = FUiScale.of(this);
                 final int drawWidth = getWidth();
                 final int drawHeight = getHeight();
                 final int imageWidth = Math.round(drawWidth * screenScale);

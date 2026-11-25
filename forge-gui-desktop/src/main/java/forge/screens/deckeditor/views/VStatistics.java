@@ -1,6 +1,9 @@
 package forge.screens.deckeditor.views;
 
 import java.awt.Font;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -8,13 +11,13 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.gui.GuiBase;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.screens.deckeditor.controllers.CStatistics;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
+import forge.toolbox.FUiScale;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
@@ -54,6 +57,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
 
     // Total and color count labels
+    private final List<IconBinding> iconBindings = new ArrayList<>();
     private final JPanel pnlStats = new JPanel();
     private final FLabel lblMulti = buildLabel(StatTypes.MULTICOLOR, true);
     private final FLabel lblBlack = buildLabel(StatTypes.BLACK, false);
@@ -95,6 +99,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
     //========== Constructor
     VStatistics() {
         scroller.getViewport().setBorder(null);
+        FUiScale.addScaleChangeListener(this::updateIcons);
 
         // Color stats
         lblMulti.setToolTipText(Localizer.getInstance().getMessage("lblMulticolorCardCount"));
@@ -314,8 +319,33 @@ public enum VStatistics implements IVDoc<CStatistics> {
         return lbl;
     }
 
-    private static FLabel buildLabel(final StatTypes statType, final boolean zebra) {
-        int imageSize = Math.round(18 * GuiBase.getInterface().getScreenScale());
-        return buildLabel(FSkin.getImage(statType.skinProp, imageSize, imageSize), zebra);
+    private FLabel buildLabel(final StatTypes statType, final boolean zebra) {
+        int imageSize = Math.round(18 * FUiScale.of(pnlStats));
+        FLabel label = buildLabel(FSkin.getImage(statType.skinProp, imageSize, imageSize), zebra);
+        iconBindings.add(new IconBinding(label, statType, imageSize));
+        return label;
+    }
+
+    private void updateIcons() {
+        int imageSize = Math.round(18 * FUiScale.of(pnlStats));
+        for (IconBinding binding : iconBindings) {
+            FLabel label = binding.labelRef.get();
+            if (label == null || imageSize == binding.size) { continue; }
+            binding.size = imageSize;
+            label.setIcon(FSkin.getImage(binding.stat.skinProp, imageSize, imageSize));
+            label.repaint();
+        }
+    }
+
+    private static final class IconBinding {
+        private final WeakReference<FLabel> labelRef;
+        private final StatTypes stat;
+        private int size;
+
+        private IconBinding(final FLabel label, final StatTypes stat, final int size) {
+            labelRef = new WeakReference<>(label);
+            this.stat = stat;
+            this.size = size;
+        }
     }
 }

@@ -143,7 +143,7 @@
                 </executions>
                 <configuration>
                     <basedir>${basedir}/${configSourceDirectory}</basedir>
-                    <filesToInclude>forge.sh, forge.command, forge.cmd</filesToInclude>
+                    <filesToInclude>forge.sh, forge-wayland.sh, forge.command, forge.cmd</filesToInclude>
                     <outputBasedir>${project.build.directory}</outputBasedir>
                     <outputDir>.</outputDir>
                     <regex>false</regex>
@@ -337,6 +337,11 @@ try {
             <groupId>forge</groupId>
             <artifactId>forge-gui</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.runtime</groupId>
+            <artifactId>jbr-api</artifactId>
+            <version>1.12.0</version>
         </dependency>
         <dependency>
             <groupId>com.miglayout</groupId>

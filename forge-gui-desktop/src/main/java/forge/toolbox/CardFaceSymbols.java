@@ -11,7 +11,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.gui.GuiBase;
 import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin.SkinImage;
 
@@ -215,7 +214,7 @@ public class CardFaceSymbols {
     }
     public static void drawSymbol(final String imageName, final Graphics g, final int x, final int y, final int size) {
         // Obtain screen DPI scale
-        float screenScale = GuiBase.getInterface().getScreenScale();
+        float screenScale = FUiScale.of(g);
         int imageSize = Math.round(size * screenScale);
 
         FSkin.drawImage(g, MANA_IMAGES.get(imageName).resize(imageSize, imageSize),
@@ -226,7 +225,7 @@ public class CardFaceSymbols {
             return;
         }
         // Obtain screen DPI scale
-        float screenScale = GuiBase.getInterface().getScreenScale();
+        float screenScale = FUiScale.of(g);
         int imageSize = Math.round(size * screenScale);
 
         FSkin.drawImage(g, FSkin.getImage(skinProp).resize(imageSize, imageSize),
