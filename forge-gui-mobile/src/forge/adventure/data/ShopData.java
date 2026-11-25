@@ -27,6 +27,15 @@ public class ShopData {
         return true;
     }
 
+    public boolean losesExcludedCards() {
+        if (rewards == null)
+            return false;
+        for (RewardData reward : new Array.ArrayIterator<>(rewards))
+            if (reward.losesExcludedCards())
+                return true;
+        return false;
+    }
+
     public String getDescription() {
         return forge.Forge.getLocalizer().getMessageorUseDefault(
             "adv.shop." + name + ".description", description);

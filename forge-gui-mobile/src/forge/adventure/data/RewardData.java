@@ -177,6 +177,20 @@ public class RewardData implements Serializable {
         return false;
     }
 
+    /** True when the player's exclusions leave out some of the cards this reward would give. */
+    public boolean losesExcludedCards() {
+        if (!Config.instance().appliesUserExclusions())
+            return false;
+        if (editions != null && editions.length > 0) {
+            return Arrays.stream(editions).anyMatch(Config.instance().getExcludedEditionCodes()::contains);
+        }
+        if (sourceDeck != null && !sourceDeck.isEmpty()) {
+            List<PaperCard> cards = CardUtil.getDeck(sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList();
+            return CardUtil.withAllowedPrints(cards).size() < cards.size();
+        }
+        return false;
+    }
+
     public Array<Reward> generate(boolean isForEnemy, boolean useSeedlessRandom) {
         return generate(isForEnemy, null, useSeedlessRandom);
     }
