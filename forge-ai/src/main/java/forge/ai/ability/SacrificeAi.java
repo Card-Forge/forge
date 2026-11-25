@@ -3,6 +3,7 @@ package forge.ai.ability;
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.PlaceholderTargetAi;
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -137,6 +138,18 @@ public class SacrificeAi extends SpellAbilityAi {
             return humanList.size() >= amount ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if (defined.equals("You") && !mandatory) {
             List<Card> computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
+            final boolean hasSacCostPreference = source.hasSVar("AIPreference") && source.getSVar("AIPreference").contains("SacCost$");
+            final boolean isNarrowNonCreatureSacrifice = !computerList.isEmpty()
+                    && CardLists.getType(computerList, "Creature").isEmpty()
+                    && !valid.contains("Permanent");
+            // Reuse sacrifice-cost heuristics for explicit preferences and narrow noncreature sacrifice effects.
+            // Broad permanent sacrifice effects stay on the conservative fallback below.
+            if (hasSacCostPreference || isNarrowNonCreatureSacrifice) {
+                final Card preferredSacrifice = ComputerUtil.getCardPreference(ai, source, "SacCost", new CardCollection(computerList), sa);
+                if (preferredSacrifice != null && !preferredSacrifice.equals(source)) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+            }
             for (Card c : computerList) {
                 if ("Lethal".equals(aiLogic)) {
                     boolean isLethal = false;
@@ -158,7 +171,7 @@ public class SacrificeAi extends SpellAbilityAi {
                     }
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
-                if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) <= 135) {
+                if (c.hasSVar("SacMe") || (c.isCreature() && ComputerUtilCard.evaluateCreature(c) <= 135)) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }

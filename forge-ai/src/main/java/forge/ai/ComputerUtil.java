@@ -949,6 +949,9 @@ public class ComputerUtil {
 
         boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
         boolean removedSelf = false;
+        if (exceptSelf && isOptional) {
+            remaining.remove(host);
+        }
 
         if (isOptional && (source.isKeyword(Keyword.DEVOUR) || source.isKeyword(Keyword.EXPLOIT))) {
             if (source.isKeyword(Keyword.EXPLOIT)) {
@@ -1062,7 +1065,10 @@ public class ComputerUtil {
             c = ComputerUtilCard.getWorstLand(CardLists.filter(remaining, CardPredicates.LANDS));
         }
         else {
-            c = ComputerUtilCard.getWorstPermanentAI(remaining, false, false, false, false);
+            c = choosePreferredSacrificeTypePermanent(ai, source, remaining);
+            if (c == null) {
+                c = ComputerUtilCard.getWorstPermanentAI(remaining, false, false, false, false);
+            }
         }
 
         if (c != null && c.isEnchanted()) {
@@ -1074,6 +1080,49 @@ public class ComputerUtil {
             }
         }
         return c;
+    }
+
+    private static Card choosePreferredSacrificeTypePermanent(final Player ai, final SpellAbility source,
+            final CardCollection remaining) {
+        if (source == null || !"DeckMostProminentType".equals(source.getParam("AIPermanentSacPreference"))) {
+            return null;
+        }
+
+        final EnumSet<CardType.CoreType> validTypes = EnumSet.noneOf(CardType.CoreType.class);
+        final CardCollection nonlandTokens = new CardCollection();
+        for (Card card : remaining) {
+            validTypes.addAll(card.getType().getCoreTypes());
+            if (card.isToken() && !card.isLand()) {
+                nonlandTokens.add(card);
+            }
+        }
+
+        validTypes.remove(CardType.CoreType.Land);
+        if (validTypes.isEmpty()) {
+            return null;
+        }
+
+        CardType.CoreType preferredType = null;
+        if (!nonlandTokens.isEmpty()) {
+            preferredType = ComputerUtilCard.getMostProminentCardType(nonlandTokens, validTypes);
+        }
+        if (preferredType == null) {
+            preferredType = ComputerUtilCard.getMostProminentCardType(ai.getAllCards(), validTypes);
+        }
+
+        return chooseWorstPermanentWithSacrificeTypeBias(remaining, preferredType);
+    }
+
+    private static Card chooseWorstPermanentWithSacrificeTypeBias(final CardCollection remaining,
+            final CardType.CoreType preferredType) {
+        if (preferredType == null) {
+            return null;
+        }
+        return ComputerUtilCard.getWorstPermanentAI(remaining,
+                preferredType == CardType.CoreType.Enchantment,
+                false,
+                preferredType == CardType.CoreType.Artifact,
+                preferredType == CardType.CoreType.Creature);
     }
 
     public static boolean canRegenerate(Player ai, final Card card) {
