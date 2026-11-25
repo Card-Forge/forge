@@ -301,14 +301,6 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
-        addSettingField(localizer.getMessage("lblExcludeAlchemyVariants"), Config.instance().getSettingData().excludeAlchemyVariants, new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Config.instance().getSettingData().excludeAlchemyVariants = ((CheckBox) actor).isChecked();
-                Config.instance().saveSettings();
-                RewardData.invalidateCardPool();
-            }
-        });
         TextraButton excludedSets = Controls.newTextButton(String.valueOf(FModel.getExcludedEditionCodes().size()));
         excludedSets.addListener(new ClickListener() {
             @Override
@@ -317,12 +309,10 @@ public class SettingsScene extends UIScene {
                     () -> excludedSets.setText(String.valueOf(FModel.getExcludedEditionCodes().size()))));
             }
         });
-        addLabel(localizer.getMessage("lblExcludedSets") + " (" + localizer.getMessage("lblExcludedSetsNote") + ")");
+        addLabel(localizer.getMessage("lblExcludedSets"));
         settingGroup.add(excludedSets).align(Align.right).pad(2);
         addCheckBox(localizer.getMessage("lblEnableUnknownCards") + " (" +
             localizer.getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_UNKNOWN_CARDS, this::restartForge);
-        addCheckBox(localizer.getMessage("lblEnableNonLegalCards") + " (" +
-            localizer.getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_NONLEGAL_CARDS, this::restartForge);
         addSettingField(localizer.getMessage("lblGenerateLDADecks"), Config.instance().getSettingData().generateLDADecks, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

@@ -66,6 +66,7 @@ import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -86,19 +87,32 @@ public final class FModel {
     private FModel() { } //don't allow creating instance
 
     private static CardStorageReader reader, tokenReader, customReader, customTokenReader;
-    private static final Supplier<StaticData> magicDb = Suppliers.memoize(() ->
-        new StaticData(reader, tokenReader, customReader, customTokenReader, ForgeConstants.EDITIONS_DIR,
+    private static final Supplier<StaticData> magicDb = Suppliers.memoize(() -> {
+        StaticData db = new StaticData(reader, tokenReader, customReader, customTokenReader, ForgeConstants.EDITIONS_DIR,
             ForgeConstants.USER_CUSTOM_EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR, ForgeConstants.SETLOOKUP_DIR,
             getPreferences().getPref(FPref.UI_PREFERRED_ART),
             getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS),
-            getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS),
             getPreferences().getPrefBoolean(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE),
             getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART),
             buildPreferredLanguageAvailability(),
-            buildPrintExclusion()));
+            buildPrintExclusion());
+        db.setHiddenPrints(buildHiddenPrints());
+        return db;
+    });
 
     private static SetExclusions getSetExclusions() {
         return new SetExclusions(getPreferences().getPrefSet(FPref.UI_EXCLUDED_SETS));
+    }
+
+    private static BiPredicate<CardEdition, String> buildHiddenPrints() {
+        SetExclusions exclusions = getSetExclusions();
+        return exclusions.getTags().contains(CardEdition.FUNNY_TAG) ? exclusions::hides : null;
+    }
+
+    private static void applyExclusions() {
+        getMagicDb().setPrintExclusion(buildPrintExclusion());
+        getMagicDb().setHiddenPrints(buildHiddenPrints());
+        cardPools.forEach(CardPoolCache::reset);
     }
 
     // must not reach getMagicDb(): it runs while the card database is still being built
@@ -158,8 +172,17 @@ public final class FModel {
             return false;
         }
         getPreferences().setPrefSet(FPref.UI_EXCLUDED_SETS, entries);
-        getMagicDb().setPrintExclusion(buildPrintExclusion());
+        applyExclusions();
         return true;
+    }
+
+    /** Adds a tag to the excluded sets, for a setting that became a tag exclusion. */
+    public static void excludeTag(String tag) {
+        Set<String> entries = getPreferences().getPrefSet(FPref.UI_EXCLUDED_SETS);
+        if (entries.add(SetExclusions.tagEntry(tag))) {
+            getPreferences().setPrefSet(FPref.UI_EXCLUDED_SETS, entries);
+            applyExclusions();
+        }
     }
 
     private static BiPredicate<String, String> buildPreferredLanguageAvailability() {
@@ -218,19 +241,21 @@ public final class FModel {
         return w;
     });
     private static final Supplier<GameFormat.Collection> formats = Suppliers.memoize(() -> new GameFormat.Collection(new GameFormat.Reader( new File(ForgeConstants.FORMATS_DATA_DIR), new File(ForgeConstants.USER_FORMATS_DIR), getPreferences().getPrefBoolean(FPref.LOAD_ARCHIVED_FORMATS))));
-    private static final Supplier<ItemPool<PaperCard>> allCards = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> planechaseCards = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_PLANE_OR_PHENOMENON)), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> archenemyCards = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_SCHEME)), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> brawlCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(getFormats().get("Brawl").getFilterPrinted().and(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_BRAWL_COMMANDER))), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> oathbreakerCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_OATHBREAKER.or(CardRulesPredicates.CAN_BE_SIGNATURE_SPELL))), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> tinyLeadersCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_TINY_LEADERS_COMMANDER)), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> commanderPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.CAN_BE_COMMANDER), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> avatarPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_VANGUARD)), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> conspiracyPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONSPIRACY)), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> dungeonPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_DUNGEON)), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> attractionPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_ATTRACTION)), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> contraptionPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> stickerSheetPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_STICKER_SHEET)), PaperCard.class));
+    // card pools built on first use and rebuilt after the hidden cards change
+    private static final List<CardPoolCache> cardPools = new ArrayList<>();
+    private static final CardPoolCache allCards = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(), PaperCard.class));
+    private static final CardPoolCache planechaseCards = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_PLANE_OR_PHENOMENON)), PaperCard.class));
+    private static final CardPoolCache archenemyCards = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_SCHEME)), PaperCard.class));
+    private static final CardPoolCache brawlCommander = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(getFormats().get("Brawl").getFilterPrinted().and(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_BRAWL_COMMANDER))), PaperCard.class));
+    private static final CardPoolCache oathbreakerCommander = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_OATHBREAKER.or(CardRulesPredicates.CAN_BE_SIGNATURE_SPELL))), PaperCard.class));
+    private static final CardPoolCache tinyLeadersCommander = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_TINY_LEADERS_COMMANDER)), PaperCard.class));
+    private static final CardPoolCache commanderPool = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.CAN_BE_COMMANDER), PaperCard.class));
+    private static final CardPoolCache avatarPool = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_VANGUARD)), PaperCard.class));
+    private static final CardPoolCache conspiracyPool = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONSPIRACY)), PaperCard.class));
+    private static final CardPoolCache dungeonPool = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_DUNGEON)), PaperCard.class));
+    private static final CardPoolCache attractionPool = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_ATTRACTION)), PaperCard.class));
+    private static final CardPoolCache contraptionPool = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)), PaperCard.class));
+    private static final CardPoolCache stickerSheetPool = new CardPoolCache(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_STICKER_SHEET)), PaperCard.class));
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
         ImageKeys.initializeDirs(
@@ -565,4 +590,31 @@ public final class FModel {
     public static TournamentData getTournamentData() { return tournamentData; }
 
     public static void setTournamentData(TournamentData tournamentData0) { tournamentData = tournamentData0;  }
+
+    private static final class CardPoolCache implements Supplier<ItemPool<PaperCard>> {
+        private final Supplier<ItemPool<PaperCard>> source;
+        private volatile ItemPool<PaperCard> pool;
+
+        CardPoolCache(Supplier<ItemPool<PaperCard>> source) {
+            this.source = source;
+            cardPools.add(this);
+        }
+
+        @Override
+        public ItemPool<PaperCard> get() {
+            ItemPool<PaperCard> result = pool;
+            if (result == null) {
+                synchronized (this) {
+                    if (pool == null)
+                        pool = source.get();
+                    result = pool;
+                }
+            }
+            return result;
+        }
+
+        void reset() {
+            pool = null;
+        }
+    }
 }

@@ -560,24 +560,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         );
                 }
             }, 3);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_NONLEGAL_CARDS,
-            Forge.getLocalizer().getMessage("lblEnableNonLegalCards"),
-            Forge.getLocalizer().getMessage("nlEnableNonLegalCards")) {
-                @Override
-                public void select() {
-                    super.select();
-                    FOptionPane.showConfirmDialog(
-                        Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
-                        Forge.getLocalizer().getMessage("lblRestartForge"),
-                        Forge.getLocalizer().getMessage("lblRestart"),
-                        Forge.getLocalizer().getMessage("lblLater"), result -> {
-                            if (result) {
-                                Forge.restart(true);
-                            }
-                        }
-                    );
-                }
-            }, 3);
         lstSettings.addItem(new BooleanSetting(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE,
             Forge.getLocalizer().getMessage("lblAllowCustomCardsInDecks"),
             Forge.getLocalizer().getMessage("nlAllowCustomCardsInDecks")) {

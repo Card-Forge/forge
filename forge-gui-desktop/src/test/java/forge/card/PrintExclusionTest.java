@@ -36,6 +36,7 @@ public class PrintExclusionTest extends CardMockTestCase {
     public void restoreDb() {
         if (cardDb != null)
             cardDb.setPrintExclusion(null);
+        FModel.getMagicDb().setHiddenPrints(null);
     }
 
     private CardEdition edition(String code) {
@@ -123,6 +124,22 @@ public class PrintExclusionTest extends CardMockTestCase {
         assertTrue(sld.hasTag(UB, "1458☇"));
         assertFalse(sld.hasTag(UB));  // SLD is tagged per print, not as a whole
         assertTrue(edition("LTR").hasTag(UB));
+    }
+
+    @Test
+    public void rebalancedPrintsAreTaggedFromTheirSection() {
+        CardEdition kaldheim = edition("KHM");
+        assertTrue(kaldheim.hasTag(CardEdition.REBALANCED_TAG, "A-40"));  // A-Alrund, God of the Cosmos
+        assertFalse(kaldheim.hasTag(CardEdition.REBALANCED_TAG, "40"));
+    }
+
+    @Test
+    public void aHiddenCardLeavesThePoolsButIsStillFoundByName() {
+        FModel.getMagicDb().setHiddenPrints((edition, collectorNumber) -> edition.hasTag(CardEdition.FUNNY_TAG, collectorNumber));
+        assertTrue(cardDb.streamUniqueCards().noneMatch(card -> card.getName().equals("Blacker Lotus")));
+        // the Secret Lair print is not tagged, but the card is hidden by name, as Un-cards always were
+        assertTrue(cardDb.getAllCards().stream().noneMatch(card -> card.getName().equals("Blacker Lotus")));
+        assertNotNull(cardDb.getCard("Blacker Lotus"));
     }
 
     @Test

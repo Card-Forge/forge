@@ -20,7 +20,6 @@ import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
-import forge.item.PaperCardPredicates;
 import forge.item.SealedTemplate;
 import forge.item.generation.BoosterGenerator;
 import forge.item.generation.IUnOpenedProduct;
@@ -962,9 +961,6 @@ public class CardUtil {
                 editionFilter = card -> (!Arrays.asList(configData.restrictedEditions).contains(card.getEdition()));
             }
             Predicate<PaperCard> combined_predicate = editionFilter;
-            if (Config.instance().getSettingData().excludeAlchemyVariants) {
-                combined_predicate = editionFilter.and(PaperCardPredicates.IS_REBALANCED.negate());
-            }
             if (Config.instance().appliesUserExclusions()) {
                 CardDb cardDb = FModel.getMagicDb().getCommonCards();
                 combined_predicate = combined_predicate.and(card -> !cardDb.isPrintExcluded(card));
@@ -1003,8 +999,6 @@ public class CardUtil {
         if (validCards.isEmpty() && Config.instance().appliesUserExclusions()) {
             // a card named by the plane is still given when only the player's exclusions rule it out
             Predicate<PaperCard> planeFilter = card -> Config.instance().isPlaneEdition(card.getEdition());
-            if (Config.instance().getSettingData().excludeAlchemyVariants)
-                planeFilter = planeFilter.and(PaperCardPredicates.IS_REBALANCED.negate());
             validCards = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(cardName, planeFilter);
         }
         if (validCards.isEmpty()) {

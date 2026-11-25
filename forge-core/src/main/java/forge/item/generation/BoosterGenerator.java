@@ -52,6 +52,10 @@ public class BoosterGenerator {
     private final static Map<String, PrintSheet> cachedSheets = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     private static final ThreadLocal<Collection<String>> EXCLUDED_NAMES = new ThreadLocal<>();
 
+    public static synchronized void clearCachedSheets() {
+        cachedSheets.clear();
+    }
+
     private static synchronized PrintSheet getPrintSheet(String key) {
         if (!cachedSheets.containsKey(key))
             cachedSheets.put(key, makeSheet(key, StaticData.instance().getCommonCards().getAllCards()));

@@ -440,7 +440,7 @@ public class QuestEventDraft implements IQuestEvent {
 
                 if (card.rarity() == CardRarity.Rare || card.rarity() == CardRarity.MythicRare) {
                     final PaperCard cardToAdd = StaticData.instance().fetchCard(card.name(), edition.getCode(), card.collectorNumber());
-                    if (cardToAdd != null) {
+                    if (cardToAdd != null && !StaticData.instance().isHidden(cardToAdd)) {
                         possibleCards.add(cardToAdd);
                         cardNames.add(card.name());
                     }

@@ -714,6 +714,11 @@ public class Config {
     }
 
     public void loadResources() {
+        if (settingsData.excludeAlchemyVariants) {
+            FModel.excludeTag(CardEdition.REBALANCED_TAG);
+            settingsData.excludeAlchemyVariants = false;
+            saveSettings();
+        }
         AdventureOverrides.instance().load(prefix, FModel.getMagicDb().getEditions(), configData);
         applyUserExclusions();
         applyTokenEditionFilter();

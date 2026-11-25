@@ -125,9 +125,6 @@ public class RewardData implements Serializable {
         else
             filters.add(PaperCardPredicates.isObtainableAnyEdition());
 
-        if (Config.instance().getSettingData().excludeAlchemyVariants)
-            filters.add(PaperCardPredicates.IS_REBALANCED.negate());
-
         if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE))
             filters.add(pc -> !pc.getRules().hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante."));
 
@@ -442,6 +439,12 @@ public class RewardData implements Serializable {
      */
     private static PaperCard resolveNamedCard(String cardName, String[] editions, Random rewardRandom,
                                               boolean allCardVariants) {
+        PaperCard card = resolveNamedPrint(cardName, editions, rewardRandom, allCardVariants);
+        return StaticData.instance().isHidden(card) ? null : card;
+    }
+
+    private static PaperCard resolveNamedPrint(String cardName, String[] editions, Random rewardRandom,
+                                               boolean allCardVariants) {
         CardDb.CardRequest request = CardDb.CardRequest.fromString(cardName);
         String edition = request.edition;
         if (edition == null && editions != null && editions.length > 0) {

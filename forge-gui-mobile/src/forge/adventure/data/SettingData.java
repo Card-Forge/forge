@@ -26,6 +26,7 @@ public class SettingData {
     public boolean showShopOverlay;
     public boolean useAllCardVariants;
     public boolean disableCrackedItems;
+    // read only to move it to the excluded sets, since an unknown field would reset every setting
     public boolean excludeAlchemyVariants;
     public boolean generateLDADecks;
     public boolean bindEquipmentLoadoutsToDecks;

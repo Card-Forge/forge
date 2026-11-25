@@ -72,7 +72,7 @@ public class CardDatabaseHelper {
                 ForgeConstants.USER_CUSTOM_EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR, "",
                 "Latest Art All Editions",
                 true,
-                false, false, false);
+                false, false);
     }
 
     private static boolean hasBeenInitialized() {

@@ -224,7 +224,7 @@ public class ConquestPlane {
     }
 
     private void addCard(PaperCard pc) {
-        if (pc == null) { return; }
+        if (pc == null || FModel.getMagicDb().isHidden(pc)) { return; }
 
         cardPool.add(pc);
         // Add unique commanders

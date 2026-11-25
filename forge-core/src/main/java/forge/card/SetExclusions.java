@@ -46,7 +46,7 @@ public final class SetExclusions {
         Set<String> covered = newCodeSet();
         Set<String> entries = newCodeSet();
         for (String tag : excludedTags) {
-            entries.add(TAG_ENTRY + tag);
+            entries.add(tagEntry(tag));
             covered.addAll(setsWithTag.apply(tag));
         }
         for (String code : covered) {
@@ -62,6 +62,10 @@ public final class SetExclusions {
         return entries;
     }
 
+    public static String tagEntry(String tag) {
+        return TAG_ENTRY + tag;
+    }
+
     public static Set<String> newCodeSet() {
         return new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
     }
@@ -72,6 +76,11 @@ public final class SetExclusions {
 
     public Set<String> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /** True for a Funny print outside a kept set, whose card is left out of the card pools once Funny is excluded. */
+    public boolean hides(CardEdition edition, String collectorNumber) {
+        return !kept.contains(edition.getCode()) && edition.hasTag(CardEdition.FUNNY_TAG, collectorNumber);
     }
 
     /** A null collector number asks about the edition as a whole. */
