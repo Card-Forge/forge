@@ -12,9 +12,12 @@ import forge.game.zone.ZoneType;
 /**
  * Griselbrand ("Pay 7 life: Draw seven cards") and the like. The rollouts like seven fresh cards, so the play is offered
  * whenever it can be paid, and an AI at 10 life pays 7 and loses to the next attack, or draws out its own library.
- * The play is refused when the life that is left or the library cannot take it, unless the AI is about to win anyway.
+ * The play is refused when the life that is left, the library or the hand cannot take it, unless the AI is about to win
+ * anyway. The hand: seven cards into a hand of four is eleven, and the cleanup step throws away what the AI has not played;
+ * used again and again it drew twenty cards for twenty-one life and discarded down to seven. Both the Flat Monte Carlo guard
+ * ({@link ComboGuard}) and the plain AI ({@code DrawAi}) ask here.
  */
-final class LifeDrawGuard {
+public final class LifeDrawGuard {
     private LifeDrawGuard() {
     }
 
@@ -23,7 +26,10 @@ final class LifeDrawGuard {
     /** Cards the library must still have after the draw (a library-out deck draws on purpose). */
     static final int LIBRARY_MARGIN = 3;
 
-    static boolean reckless(final Player ai, final SpellAbility sa, final ComboPlan plan) {
+    /** Cards over the maximum hand size that a draw may leave: the worst of them is discarded for little. */
+    static final int HAND_OVERFLOW = 2;
+
+    public static boolean reckless(final Player ai, final SpellAbility sa, final ComboPlan plan) {
         if (ai == null || sa == null || !sa.isActivatedAbility() || sa.getPayCosts() == null
                 || !sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
             return false;
@@ -58,6 +64,10 @@ final class LifeDrawGuard {
             final int cards = amount == null ? 1 : AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
             decks = ai.getCardsIn(ZoneType.Library).size() < cards + LIBRARY_MARGIN;
         }
-        return (dies || decks) && !ComboGuard.winLikelySoon(ai, plan);
+        final String drawn = sa.getParam("NumCards");
+        final int cardsDrawn = drawn == null ? 1 : AbilityUtils.calculateAmount(sa.getHostCard(), drawn, sa);
+        final boolean overflows = !ai.isUnlimitedHandSize()
+                && ai.getCardsIn(ZoneType.Hand).size() + cardsDrawn > ai.getMaxHandSize() + HAND_OVERFLOW;
+        return (dies || decks || overflows) && !ComboGuard.winLikelySoon(ai, plan);
     }
 }

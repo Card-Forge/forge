@@ -77,4 +77,23 @@ public class FlatMonteCarloLifeDrawGuardTest extends AITest {
         }
         AssertJUnit.assertEquals("life-draw-reckless", ComboGuard.problem(ai, draw, null, ComboPlan.EMPTY));
     }
+
+    private static void handOf(final Player ai, final int cards, final AITest t) {
+        for (int i = 0; i < cards; i++) {
+            t.addCardToZone("Island", ai, ZoneType.Hand);
+        }
+    }
+
+    @Test
+    public void aSecondDrawIntoAFullHandIsRefused() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        fillLibrary(ai, 40);
+        final SpellAbility draw = drawAbility(addCard("Griselbrand", ai), ai);
+        ai.setLife(40, null);
+        AssertJUnit.assertNull("an empty hand: seven fresh cards", ComboGuard.problem(ai, draw, null, ComboPlan.EMPTY));
+        handOf(ai, 7, this); // what the first draw left, nothing played
+        AssertJUnit.assertEquals("fourteen cards, seven of them to be discarded", "life-draw-reckless",
+                ComboGuard.problem(ai, draw, null, ComboPlan.EMPTY));
+    }
 }
