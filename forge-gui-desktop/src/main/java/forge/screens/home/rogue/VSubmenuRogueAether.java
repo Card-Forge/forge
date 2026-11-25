@@ -20,6 +20,7 @@ import forge.toolbox.FSkin;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.UncheckedIOException;
 import java.util.*;
 import java.util.List;
 import java.util.function.Consumer;
@@ -136,7 +137,12 @@ public enum VSubmenuRogueAether implements IVSubmenu<CSubmenuRogueAether> {
     VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(headerPanel, "w 98%!, gap 1% 0 10px 10px");
 
     // Aetherwork grid in a scroll pane — takes all remaining vertical space
-    RogueMetaProgress progress = RogueMetaProgress.getInstance();
+    RogueMetaProgress progress;
+    try {
+      progress = RogueMetaProgress.getInstance();
+    } catch (UncheckedIOException e) {
+      return; // The controller's update() runs next and says so
+    }
     int upgradeLevel = progress.getAetherUpgradeLevel();
     AetherUpgrade next = AetherUpgrade.forLevel(upgradeLevel + 1);
     JComponent cardToShow;
@@ -188,7 +194,7 @@ public enum VSubmenuRogueAether implements IVSubmenu<CSubmenuRogueAether> {
     panel.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
     FLabel lblInfo = new FLabel.Builder()
-        .text(Localizer.getInstance().getMessage("lblRogueAetherEnergyHint"))
+        .text(RogueUIHelper.html(Localizer.getInstance().getMessage("lblRogueAetherEnergyHint"), true))
         .icon(FSkin.getImage(FSkinProp.ICO_LOCK).resize(20, 20))
         .iconScaleAuto(false)
         .fontSize(13)
@@ -208,18 +214,13 @@ public enum VSubmenuRogueAether implements IVSubmenu<CSubmenuRogueAether> {
     lblSparks.setText(localizer.getMessage("lblRogueSparkTotal", sparks));
     lblSparks.setVisible(descensionUnlocked);
 
-    // Compute actual slot count for label
-    int energyCapacity = 3;
-    for (int l = 1; l <= upgradeLevel; l++) {
-      AetherUpgrade u = AetherUpgrade.forLevel(l);
-      if (u != null) energyCapacity += u.extraEnergy;
-    }
-    lblAetherEnergy.setText(localizer.getMessage("lblRogueAetherEnergy", activeAetherworkCount, energyCapacity));
+    lblAetherEnergy.setText(localizer.getMessage("lblRogueAetherEnergy", activeAetherworkCount,
+        RogueMetaProgress.getInstance().getActiveAetherEffectSlots()));
 
     // Update upgrade card if visible
     AetherUpgrade next = AetherUpgrade.forLevel(upgradeLevel + 1);
     if (next != null && descensionUnlocked) {
-      upgradeCard.update(next, echoes, sparks);
+      upgradeCard.update(next);
     }
 
     // Update Aetherwork panels
@@ -228,7 +229,7 @@ public enum VSubmenuRogueAether implements IVSubmenu<CSubmenuRogueAether> {
       AetherworkPanel panel = entry.getValue();
       int rank = effectRanks.getOrDefault(aetherEffect, 0);
       boolean isActive = activeEffects.contains(aetherEffect);
-      panel.update(rank, isActive, echoes, activeAetherworkCount, upgradeLevel);
+      panel.update(rank, isActive, upgradeLevel);
     }
   }
 
@@ -309,12 +310,12 @@ public enum VSubmenuRogueAether implements IVSubmenu<CSubmenuRogueAether> {
       add(btnUpgrade, "ax center, w 220px!, h 30px!");
     }
 
-    void update(AetherUpgrade upgrade, int echoes, int sparks) {
+    void update(AetherUpgrade upgrade) {
       lblName.setText(upgrade.name);
       lblDescription.setText(upgrade.description);
       btnUpgrade.setText(Localizer.getInstance().getMessage("lblRogueUpgradeLabel"));
       btnUpgrade.setIcon(new UpgradeCostIcon(upgrade.sparkCost, upgrade.echoCost));
-      btnUpgrade.setEnabled(sparks >= upgrade.sparkCost && echoes >= upgrade.echoCost);
+      btnUpgrade.setEnabled(RogueMetaProgress.getInstance().canAffordUpgrade(upgrade));
     }
 
     FButton getBtnUpgrade() { return btnUpgrade; }
@@ -577,32 +578,35 @@ public enum VSubmenuRogueAether implements IVSubmenu<CSubmenuRogueAether> {
     /**
      * Update the panel display based on the current Aetherwork state.
      */
-    public void update(int rank, boolean active, int echoes, int activeAetherworkCount,
-        int upgradeLevel) {
+    private String describeRanks(int rank, int upgradeLevel) {
+      List<String> values = new ArrayList<>();
+      List<Integer> rankValues = aetherEffect.getRankValues(upgradeLevel);
+      for (int i = 0; i < rankValues.size(); i++) {
+        values.add(i + 1 == rank ? "<b><u>" + rankValues.get(i) + "</u></b>" : String.valueOf(rankValues.get(i)));
+      }
+      return "<html>" + String.format(aetherEffect.getRawDescription(), String.join(" / ", values)) + "</html>";
+    }
+
+    public void update(int rank, boolean active, int upgradeLevel) {
       this.currentRank = rank;
       this.isActive = active;
       int effectiveMax = aetherEffect.getEffectiveMaxRank(upgradeLevel);
-      // Compute actual Aether Energy capacity
-      int energyCapacity = 3;
-      for (int l = 1; l <= upgradeLevel; l++) {
-        AetherUpgrade u = AetherUpgrade.forLevel(l);
-        if (u != null) energyCapacity += u.extraEnergy;
-      }
-      this.canToggle = rank > 0 && (active || activeAetherworkCount < energyCapacity);
+      RogueMetaProgress progress = RogueMetaProgress.getInstance();
+      this.canToggle = progress.canToggleAether(aetherEffect);
 
       Localizer localizer = Localizer.getInstance();
       lblRank.setText(localizer.getMessage("lblRogueRank", rank, effectiveMax));
 
       // Update description to show all rank values with current rank highlighted
-      lblDescription.setText(aetherEffect.getDescriptionWithAllRanks(rank, upgradeLevel));
+      lblDescription.setText(describeRanks(rank, upgradeLevel));
 
-      if (rank >= effectiveMax) {
+      int cost = progress.nextRankCost(aetherEffect);
+      if (cost < 0) {
         btnUpgrade.setText(localizer.getMessage("lblRogueMaxRank"));
         btnUpgrade.setEnabled(false);
       } else {
-        int cost = aetherEffect.getEchoCostForRank(rank + 1);
         btnUpgrade.setText(localizer.getMessage(rank == 0 ? "lblRogueBuildCost" : "lblRogueUpgradeCost", cost));
-        btnUpgrade.setEnabled(echoes >= cost);
+        btnUpgrade.setEnabled(progress.canAffordNextRank(aetherEffect));
       }
 
       // Update cursor based on toggle ability

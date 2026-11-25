@@ -23,6 +23,10 @@ import forge.util.IgnoringXStream;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
@@ -196,9 +200,9 @@ public class RogueIO {
         } catch (final ConversionException e) {
             BugReporter.reportException(e);
             return null;
-        } catch (final Exception e) { // If there's a non-IO exception, delete the corrupt file
+        } catch (final Exception e) { // If there's a non-IO exception, set the corrupt file aside
             Logger.error(e, "Error loading Rogue run save: {}", xmlSaveFile);
-            deleteRunFile(xmlSaveFile);
+            setAside(xmlSaveFile);
             return null;
         }
         return data;
@@ -214,12 +218,35 @@ public class RogueIO {
         }
     }
 
-    private static void savePacked(final XStream xStream0, final RogueRun rd, final File file) throws IOException {
-        ensureRogueDirectoryExists();
-        try (final BufferedOutputStream bout = new BufferedOutputStream(Files.newOutputStream(file.toPath()));
-             final GZIPOutputStream zout = new GZIPOutputStream(bout)) {
-            xStream0.toXML(rd, zout);
-            zout.flush();
+    static void savePacked(final XStream xStream, final Object value, final File target) throws IOException {
+        final Path file = target.toPath();
+        Files.createDirectories(file.getParent());
+        final Path temp = Files.createTempFile(file.getParent(), "save", ".tmp");
+        try {
+            try (final BufferedOutputStream bout = new BufferedOutputStream(Files.newOutputStream(temp));
+                 final GZIPOutputStream zout = new GZIPOutputStream(bout)) {
+                xStream.toXML(value, zout);
+                zout.flush();
+            }
+            moveOver(temp, file);
+        } finally {
+            deleteRunFile(temp.toFile());
+        }
+    }
+
+    /** Windows does not replace a file that another program has open; the old save then stays. */
+    private static void moveOver(final Path source, final Path target) throws IOException {
+        for (int attempt = 1; ; attempt++) {
+            try {
+                // Without ATOMIC_MOVE, Windows deletes the target before the move
+                Files.move(source, target, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+                return;
+            } catch (final IOException e) {
+                if (attempt == 3) {
+                    throw e;
+                }
+                pause(50);
+            }
         }
     }
 
@@ -236,6 +263,23 @@ public class RogueIO {
             Files.deleteIfExists(file.toPath());
         } catch (IOException | InvalidPathException | SecurityException e) {
             Logger.error(e, "Error deleting Rogue run save: {}", file);
+        }
+    }
+
+    static void setAside(final File file) {
+        final String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss-SSS"));
+        try {
+            Files.move(file.toPath(), file.toPath().getParent().resolve(file.getName() + "." + timestamp + ".broken"));
+        } catch (IOException | InvalidPathException | SecurityException e) {
+            Logger.error(e, "Error setting aside Rogue save: {}", file);
+        }
+    }
+
+    static void pause(final long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (final InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 

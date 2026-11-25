@@ -1,6 +1,8 @@
 package forge.gamemodes.rogue;
 
 import com.google.common.collect.ImmutableList;
+import forge.item.PaperCard;
+import forge.model.FModel;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -23,6 +25,11 @@ public final class TextHelper {
     private static final Pattern CARD_MARKER_PATTERN = Pattern.compile("(!)?\\[\\[(.+?)]]");
     private static final Pattern KEYWORD_MARKER_PATTERN = Pattern.compile("(!)?\\{\\{(.+?)}}");
     private static final Pattern PREVIEW_MARKER_PATTERN = Pattern.compile("(!)?\\[\\[(.+?)]]|(!)?\\{\\{(.+?)}}");
+    private static final int PART_EMPHASIS_GROUP = 5;
+    private static final Pattern PART_PATTERN = Pattern.compile(PREVIEW_MARKER_PATTERN.pattern() + "|\\*\\*(.+?)\\*\\*");
+
+    /** A piece of a description. Type and token are null for plain text, and the text of a hidden reference is empty. */
+    public record Part(PreviewReferenceType type, String text, String token) { }
 
     private TextHelper() {
     }
@@ -62,6 +69,71 @@ public final class TextHelper {
         }
         matcher.appendTail(sb);
         return sb.toString();
+    }
+
+    /**
+     * The text of the parts together is what {@link #stripPreviewMarkers} gives, without the asterisks of a
+     * {@code **name**} mark. Such a mark is a card part when the name is a card or the display name of the effect card,
+     * and plain text otherwise. effectCardReference may be null.
+     */
+    public static List<Part> parts(String raw, String effectCardReference) {
+        String effectCardName = extractEffectCardDisplayNameFromReference(effectCardReference);
+        List<Part> parts = new ArrayList<>();
+        if (raw == null || raw.isEmpty()) {
+            return parts;
+        }
+
+        // The gap a hidden reference leaves is closed with the text on both sides, so its part comes before that text
+        StringBuilder text = new StringBuilder();
+        boolean atStart = true;
+        int end = 0;
+        Matcher matcher = PART_PATTERN.matcher(raw);
+        while (matcher.find()) {
+            text.append(raw, end, matcher.start());
+            end = matcher.end();
+            String emphasis = matcher.group(PART_EMPHASIS_GROUP);
+            if (emphasis != null) {
+                String name = emphasis.trim();
+                String reference = resolveCard(name) != null ? name
+                    : name.equals(effectCardName) && resolveCard(effectCardReference) != null ? effectCardReference : null;
+                if (reference == null) {
+                    text.append(emphasis);
+                    continue;
+                }
+                addText(parts, text.toString(), atStart, false);
+                atStart = false;
+                text.setLength(0);
+                parts.add(new Part(PreviewReferenceType.CARD, name, reference));
+                continue;
+            }
+            boolean isCard = matcher.group(PREVIEW_CARD_TOKEN_GROUP) != null;
+            PreviewReferenceType type = isCard ? PreviewReferenceType.CARD : PreviewReferenceType.KEYWORD;
+            String token = matcher.group(isCard ? PREVIEW_CARD_TOKEN_GROUP : PREVIEW_KEYWORD_TOKEN_GROUP).trim();
+            if (matcher.group().startsWith("!")) {
+                parts.add(new Part(type, "", token));
+                continue;
+            }
+            addText(parts, text.toString(), atStart, false);
+            atStart = false;
+            text.setLength(0);
+            parts.add(new Part(type, isCard ? extractCardNameFromReference(token) : token, token));
+        }
+        text.append(raw, end, raw.length());
+        addText(parts, text.toString(), atStart, true);
+        return parts;
+    }
+
+    private static void addText(List<Part> parts, String text, boolean atStart, boolean atEnd) {
+        String closed = closeGaps(text);
+        if (atStart) {
+            closed = StringUtils.stripStart(closed, null);
+        }
+        if (atEnd) {
+            closed = StringUtils.stripEnd(closed, null);
+        }
+        if (!closed.isEmpty()) {
+            parts.add(new Part(null, closed, null));
+        }
     }
 
     public static List<PreviewReference> extractPreviewReferences(String text) {
@@ -142,6 +214,35 @@ public final class TextHelper {
         return new CardReference(cardName, setCode, artIndex);
     }
 
+    public static PaperCard resolveCard(String cardReference) {
+        if (StringUtils.isBlank(cardReference)) {
+            return null;
+        }
+
+        CardReference referenceParts = parseCardReference(cardReference);
+        if (referenceParts.cardName().isEmpty()) {
+            return null;
+        }
+
+        PaperCard card = RogueConfig.getRogueCard(referenceParts.cardName());
+        if (card != null) {
+            return card;
+        }
+        if (referenceParts.setCode() == null || referenceParts.setCode().isEmpty()) {
+            card = FModel.getMagicDb().getCommonCards().getCard(referenceParts.cardName());
+        } else if (referenceParts.artIndex() == null) {
+            card = FModel.getMagicDb().getCommonCards().getCard(referenceParts.cardName(),
+                referenceParts.setCode());
+        } else {
+            card = FModel.getMagicDb().getCommonCards().getCard(referenceParts.cardName(),
+                referenceParts.setCode(), referenceParts.artIndex());
+        }
+        if (card == null) {
+            card = FModel.getMagicDb().getVariantCards().getCard(referenceParts.cardName());
+        }
+        return card;
+    }
+
     public static String formatHoursMinutesSeconds(long millis) {
         long totalSeconds = Math.max(0, millis) / 1000;
         long seconds = totalSeconds % 60;
@@ -152,11 +253,14 @@ public final class TextHelper {
     }
 
     private static String normalizeStrippedPreviewText(String text) {
+        return closeGaps(text).trim();
+    }
+
+    private static String closeGaps(String text) {
         return text
             .replaceAll("[ \\t]{2,}", " ")
             .replaceAll("\\s+([,.;:!?])", "$1")
             .replaceAll("\\(\\s+", "(")
-            .replaceAll("\\s+\\)", ")")
-            .trim();
+            .replaceAll("\\s+\\)", ")");
     }
 }

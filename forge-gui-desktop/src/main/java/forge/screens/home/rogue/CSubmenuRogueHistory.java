@@ -33,6 +33,9 @@ public enum CSubmenuRogueHistory implements ICDoc {
 
   @Override
   public void update() {
+    if (!RogueUIHelper.progressReadable()) {
+      return;
+    }
     view.displayHistory(
         RogueMetaProgress.getInstance().getRunHistory(),
         entry -> FDeckViewer.show(entry.getDeckSnapshot())

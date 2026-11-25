@@ -1,14 +1,11 @@
 package forge.screens.home.rogue;
 
-import forge.gamemodes.rogue.CardReference;
 import forge.gamemodes.rogue.KeywordHint;
 import forge.gamemodes.rogue.PreviewReference;
 import forge.gamemodes.rogue.PreviewReferenceType;
-import forge.gamemodes.rogue.RogueConfig;
 import forge.gamemodes.rogue.TextHelper;
 import forge.gui.CardPicturePanel;
 import forge.item.PaperCard;
-import forge.model.FModel;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
@@ -340,35 +337,6 @@ public class RoguePreviewPopup {
         return width;
     }
 
-    private static PaperCard resolveCard(String cardReference) {
-        if (cardReference == null || cardReference.isBlank()) {
-            return null;
-        }
-
-        CardReference referenceParts = TextHelper.parseCardReference(cardReference);
-        if (referenceParts.cardName().isEmpty()) {
-            return null;
-        }
-
-        PaperCard card = RogueConfig.getRogueCard(referenceParts.cardName());
-        if (card != null) {
-            return card;
-        }
-        if (referenceParts.setCode() == null || referenceParts.setCode().isEmpty()) {
-            card = FModel.getMagicDb().getCommonCards().getCard(referenceParts.cardName());
-        } else if (referenceParts.artIndex() == null) {
-            card = FModel.getMagicDb().getCommonCards().getCard(referenceParts.cardName(),
-                referenceParts.setCode());
-        } else {
-            card = FModel.getMagicDb().getCommonCards().getCard(referenceParts.cardName(),
-                referenceParts.setCode(), referenceParts.artIndex());
-        }
-        if (card == null) {
-            card = FModel.getMagicDb().getVariantCards().getCard(referenceParts.cardName());
-        }
-        return card;
-    }
-
     private List<ResolvedPreviewItem> resolvePreviewItems(List<PreviewReference> references) {
         if (references == null || references.isEmpty()) {
             return List.of();
@@ -378,7 +346,7 @@ public class RoguePreviewPopup {
         List<ResolvedPreviewItem> keywordItems = new ArrayList<>();
         for (PreviewReference reference : references) {
             if (reference.type() == PreviewReferenceType.CARD) {
-                PaperCard card = resolveCard(reference.token());
+                PaperCard card = TextHelper.resolveCard(reference.token());
                 if (card != null) {
                     cardItems.add(ResolvedPreviewItem.forCard(card));
                 }

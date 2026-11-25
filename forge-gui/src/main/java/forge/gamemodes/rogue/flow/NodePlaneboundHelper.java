@@ -1,4 +1,4 @@
-package forge.screens.home.rogue;
+package forge.gamemodes.rogue.flow;
 
 import forge.LobbyPlayer;
 import forge.deck.Deck;
@@ -9,36 +9,34 @@ import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.rogue.CodexHelper;
 import forge.gamemodes.rogue.RogueConfig;
+import forge.gamemodes.rogue.RogueIO;
 import forge.gamemodes.rogue.RoguePlanebound;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.RogueRun.CarryCard;
-import forge.gamemodes.rogue.RogueTutorial;
 import forge.gamemodes.rogue.effect.*;
+import forge.gamemodes.rogue.flow.RogueDecisions.RogueMatch;
 import forge.gamemodes.rogue.path.NodePlanebound;
-import forge.gui.FThreads;
 import forge.gui.GuiBase;
-import forge.gui.SOverlayUtils;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.player.GamePlayerUtil;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FSkin;
-import forge.toolbox.FSkin.SkinnedPanel;
 import forge.util.Localizer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumSet;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import net.miginfocom.swing.MigLayout;
 import org.tinylog.Logger;
 
 class NodePlaneboundHelper {
+    private final RogueFlow flow;
+    private Runnable restoreHuman;
+
+    NodePlaneboundHelper(RogueFlow flow) {
+        this.flow = flow;
+    }
 
     void handlePlaneboundNode(NodePlanebound node, RogueRun currentRun) {
         if (currentRun == null || currentRun.getHostedMatch() != null) {
@@ -49,17 +47,13 @@ class NodePlaneboundHelper {
 
         if (ForgePreferences.DEV_MODE) {
             RoguePlanebound current = node.getRoguePlanebound();
-            RoguePlanebound picked = RogueUIHelper.chooseDevOverride(
-                Localizer.getInstance().getMessage("lblRogueDevPickPlanebound"), RogueConfig.loadPlanebounds(), current);
+            RoguePlanebound picked = flow.decisions().devPick(
+                Localizer.getInstance().getMessage("lblRogueDevPickPlanebound"), RogueConfig.loadPlanebounds(),
+                Collections.singletonList(current), 1).get(0);
             if (picked != current) {
                 node.setRoguePlanebound(picked);
             }
         }
-
-        SwingUtilities.invokeLater(() -> {
-            SOverlayUtils.startGameOverlay();
-            SOverlayUtils.showOverlay();
-        });
 
         try {
             MatchSetupContext setupCtx = new MatchSetupContext();
@@ -78,14 +72,22 @@ class NodePlaneboundHelper {
             );
             human.setStartingLife(currentRun.getCurrentLife());
 
-            LobbyPlayer lobbyPlayer = GamePlayerUtil.getGuiPlayer();
-            lobbyPlayer.setName(currentRun.getCurrentCommanderName());
-            lobbyPlayer.setAvatarIndex(RogueUIHelper.getAvailableAvatarIndex(currentRun.getSelectedRogueDeck().getAvatarIndex()));
-            lobbyPlayer.setSleeveIndex(currentRun.getSelectedRogueDeck().getSleeveIndex());
-            human.setPlayer(lobbyPlayer);
+            // RogueWinLoseController recognises the winner by this player
+            LobbyPlayer humanLobbyPlayer = GamePlayerUtil.getGuiPlayer();
+            String name = humanLobbyPlayer.getName();
+            int avatar = humanLobbyPlayer.getAvatarIndex();
+            int sleeve = humanLobbyPlayer.getSleeveIndex();
+            restoreHuman = () -> {
+                humanLobbyPlayer.setName(name);
+                humanLobbyPlayer.setAvatarIndex(avatar);
+                humanLobbyPlayer.setSleeveIndex(sleeve);
+            };
+            humanLobbyPlayer.setName(currentRun.getCurrentCommanderName());
+            humanLobbyPlayer.setAvatarIndex(availableAvatar(currentRun.getSelectedRogueDeck().getAvatarIndex()));
+            humanLobbyPlayer.setSleeveIndex(currentRun.getSelectedRogueDeck().getSleeveIndex());
+            human.setPlayer(humanLobbyPlayer);
 
             if (!currentRun.getCarryCards().isEmpty()) {
-                RogueTutorialHelper.showIfNotSeen(RogueTutorial.CARRY_CARDS);
                 RogueEffect.addCardToCommandZone("Rogue - Carry Card Enabler", human);
             }
             for (CarryCard card : currentRun.getCarryCards()) {
@@ -105,7 +107,7 @@ class NodePlaneboundHelper {
             );
             LobbyPlayer aiLobbyPlayer = GamePlayerUtil.createAiPlayer(
                 planebound.planeboundName(),
-                RogueUIHelper.getAvailableAvatarIndex(planebound.avatarIndex()),
+                availableAvatar(planebound.avatarIndex()),
                 0);
             ai.setPlayer(aiLobbyPlayer);
 
@@ -115,31 +117,38 @@ class NodePlaneboundHelper {
             RogueEffectComposite.INSTANCE.onMatchStart(human, ai, currentRun);
 
             List<RegisteredPlayer> players = Arrays.asList(human, ai);
-            HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-            if (!RogueTutorialHelper.hasSeenTutorial(RogueTutorial.MATCH_UI)
-                    || !RogueTutorialHelper.hasSeenTutorial(RogueTutorial.MATCH_CARD_HIGHLIGHTING)
-                    || !RogueTutorialHelper.hasSeenTutorial(RogueTutorial.MATCH_PHASES_AND_YIELDS)) {
-                hostedMatch.setStartGameHook(() -> {
-                    RogueTutorialHelper.registerMatchTutorials(hostedMatch.getGame());
-                    FThreads.invokeInEdtAndWait(() -> RogueTutorialHelper.showIfNotSeen(RogueTutorial.MATCH_UI));
-                    hostedMatch.setStartGameHook(null);
-                });
-            }
-            hostedMatch.setEndGameHook(() -> recordPlaneboundPublicCards(planebound, hostedMatch, aiLobbyPlayer));
-            currentRun.setHostedMatch(hostedMatch);
-
-            hostedMatch.startMatch(
-                GameType.RogueCommander,
+            flow.decisions().startMatch(new RogueMatch(
+                currentRun,
+                node,
                 appliedVariants,
                 players,
                 human,
-                GuiBase.getInterface().getNewGuiGame()
-            );
+                hostedMatch -> recordPlaneboundPublicCards(planebound, hostedMatch, aiLobbyPlayer)
+            ));
         } catch (Exception e) {
             Logger.error(e, "Could not start Rogue match for Planebound {}", node.getRoguePlanebound());
-        } finally {
-            SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
+            restoreHuman();
+            // Charges and event effects are spent before a match exists, so the last save is the only state to return to
+            currentRun.setHostedMatch(null);
+            flow.setRun(RogueIO.loadRun(RogueIO.getRogueFile(currentRun)));
+            flow.decisions().showMessage(
+                Localizer.getInstance().getMessage("lblRogueRogueCommanderMap"),
+                Localizer.getInstance().getMessage("lblRogueMatchNotStarted"));
+            flow.decisions().mapChanged(flow.run());
         }
+    }
+
+    /** The human plays as the commander only during the match. */
+    void restoreHuman() {
+        if (restoreHuman != null) {
+            restoreHuman.run();
+            restoreHuman = null;
+        }
+    }
+
+    /** The avatar tiles end with the question mark at 125, and a skin may have fewer. */
+    private static int availableAvatar(int index) {
+        return index >= 0 && index < Math.min(126, GuiBase.getInterface().getAvatarCount()) ? index : 0;
     }
 
     private static List<PaperCard> getSharedPlaneDeck(RoguePlanebound planebound, boolean includePlanes) {
@@ -148,14 +157,12 @@ class NodePlaneboundHelper {
             return sharedPlaneDeck;
         }
 
-        String planeName = planebound.planeName();
-        for (PaperCard card : RogueConfig.getAllPlanes().toFlatList()) {
-            if (planeName.equalsIgnoreCase(card.getName())) {
-                sharedPlaneDeck.add(card);
-                return sharedPlaneDeck;
-            }
+        PaperCard plane = CodexHelper.getPlaneCard(planebound);
+        if (plane == null) {
+            Logger.warn("Could not find plane card: {}", planebound.planeName());
+        } else {
+            sharedPlaneDeck.add(plane);
         }
-        Logger.warn("Could not find plane card: {}", planeName);
         return sharedPlaneDeck;
     }
 
@@ -181,54 +188,21 @@ class NodePlaneboundHelper {
             return;
         }
 
-        ImageIcon flameIcon = NodePlaneboundPanel.createFlameIcon(14, 18);
-        ImageIcon pentagramIcon = NodePlaneboundPanel.createPentagramIcon(14, 18);
-        FSkin.SkinnedPanel effectsPanel = new FSkin.SkinnedPanel(
-            new MigLayout("insets 5, gap 0, wrap", "[grow]"));
-        effectsPanel.setOpaque(false);
-
-        Set<WrathfulEffect> usedWrathfulEffect = new HashSet<>();
+        Set<WrathfulEffect> usedWrathfulEffect = new LinkedHashSet<>();
         for (int i = 0; i < wrathfulCount; i++) {
             WrathfulEffect w = WrathfulEffect.getRandomExcluding(usedWrathfulEffect);
             usedWrathfulEffect.add(w);
             currentRun.addWrathful(w);
-            createEffectLabel(flameIcon, effectsPanel, w.getDisplayName(), w.getDescription());
         }
 
-        Set<CursedEffect> usedCursedEffect = new HashSet<>();
+        Set<CursedEffect> usedCursedEffect = new LinkedHashSet<>();
         for (int i = 0; i < cursedCount; i++) {
             CursedEffect c = CursedEffect.getRandomExcluding(usedCursedEffect);
             usedCursedEffect.add(c);
             currentRun.addCursed(c);
-            createEffectLabel(pentagramIcon, effectsPanel, c.getDisplayName(), c.getDescription());
         }
 
-        boolean hasWrathful = wrathfulCount > 0;
-        boolean hasCursed = cursedCount > 0;
-        String titleKey;
-        String messageKey;
-        if (hasWrathful && hasCursed) {
-            titleKey = "lblRogueWrathfulAndCursed";
-            messageKey = "lblRogueWrathfulAndCursedMessage";
-        } else if (hasCursed) {
-            titleKey = "lblRogueCursed";
-            messageKey = "lblRogueCursedMessage";
-        } else {
-            titleKey = "lblRogueWrathful";
-            messageKey = "lblRogueWrathfulMessage";
-        }
-        Localizer localizer = Localizer.getInstance();
-        FOptionPane.showOptionDialog(localizer.getMessage(messageKey), localizer.getMessage(titleKey),
-            null, effectsPanel, List.of(localizer.getMessage("lblOK")), 0);
-    }
-
-    private void createEffectLabel(ImageIcon pentagramIcon, SkinnedPanel effectsPanel,
-        String displayName, String description) {
-        JLabel lbl = new JLabel(displayName + " - " + description, pentagramIcon, SwingConstants.LEFT);
-        lbl.setFont(FSkin.getRelativeFont(12).getBaseFont());
-        lbl.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
-        lbl.setIconTextGap(5);
-        lbl.setOpaque(false);
-        effectsPanel.add(lbl, "growx, h 24px!, wrap");
+        flow.decisions().showPlaneboundEffects(node,
+            new ArrayList<>(usedWrathfulEffect), new ArrayList<>(usedCursedEffect));
     }
 }

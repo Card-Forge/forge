@@ -49,6 +49,11 @@ public class RogueUnlockCondition {
         }
     }
 
+    /** A commander without a condition is always unlocked, and dev mode can unlock them all. */
+    public static boolean isUnlocked(RogueUnlockCondition condition) {
+        return RogueMetaProgress.getInstance().isDevUnlockAll() || condition == null || condition.evaluate();
+    }
+
     /**
      * Evaluate whether this condition is met based on current meta progress.
      * For conditions with multiple parts, ALL conditions must be met (AND logic).

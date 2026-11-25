@@ -10,6 +10,8 @@ public enum KeywordHint {
         "A Creature added to your command zone as a carry card. It persists between matches unless it ends a match neither in the command zone nor on the battlefield."),
     SCROLL("Scroll",
         "An Instant or Sorcery added to your command zone as a carry card. It persists between matches unless it ends a match outside the command zone."),
+    CARRY_CARD("Carry Card",
+        "Carry cards persist across matches and can be cast from your command zone. There are three types: Items, Fellows and Scrolls."),
     TRAIT("Trait",
         "A permanent effect that lasts for the rest of the Run, or until its last charge is consumed."),
     AETHERWORK("Aetherwork",
@@ -72,6 +74,7 @@ public enum KeywordHint {
                 return hint;
             }
         }
-        return null;
+        // Some descriptions mark the plural
+        return token.endsWith("s") ? fromToken(token.substring(0, token.length() - 1)) : null;
     }
 }

@@ -22,20 +22,13 @@ public class NodePanelFactory {
    */
   public static NodePanel createPanel(RoguePathNode node, boolean isFaceDown,
       int planeboundRowCount, boolean animateReveal) {
-    if (node instanceof NodePlanebound nodePlanebound) {
-      return new NodePlaneboundPanel(nodePlanebound, isFaceDown, planeboundRowCount,
-          animateReveal);
-    } else if (node instanceof NodeSanctum nodeSanctum) {
-      return new NodeSanctumPanel(nodeSanctum);
-    } else if (node instanceof NodeBazaar nodeBazaar) {
-      return new NodeBazaarPanel(nodeBazaar);
-    } else if (node instanceof NodeChest nodeChest) {
-      return new NodeChestPanel(nodeChest);
-    } else if (node instanceof NodeEvent nodeEvent) {
-      return new NodeEventPanel(nodeEvent);
-    }
-
-    // Fallback: Create a generic panel for unknown node types
-    return new NodeGenericPanel(node);
+    return switch (node.getType()) {
+      case PLANEBOUND -> new NodePlaneboundPanel((NodePlanebound) node, isFaceDown,
+          planeboundRowCount, animateReveal);
+      case SANCTUM -> new NodeSanctumPanel((NodeSanctum) node);
+      case BAZAAR -> new NodeBazaarPanel((NodeBazaar) node);
+      case CHEST -> new NodeChestPanel((NodeChest) node);
+      case EVENT -> new NodeEventPanel((NodeEvent) node);
+    };
   }
 }

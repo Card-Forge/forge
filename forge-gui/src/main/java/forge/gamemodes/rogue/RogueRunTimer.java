@@ -11,13 +11,13 @@ public class RogueRunTimer {
     @XStreamOmitField
     private transient Long startedAtMillis;
 
-    public void start() {
+    public synchronized void start() {
         if (startedAtMillis == null) {
             startedAtMillis = System.currentTimeMillis();
         }
     }
 
-    public void checkpoint() {
+    public synchronized void checkpoint() {
         if (startedAtMillis == null) {
             return;
         }
@@ -27,16 +27,16 @@ public class RogueRunTimer {
         startedAtMillis = now;
     }
 
-    public void stop() {
+    public synchronized void stop() {
         checkpoint();
         startedAtMillis = null;
     }
 
-    public boolean isRunning() {
+    public synchronized boolean isRunning() {
         return startedAtMillis != null;
     }
 
-    public long getElapsedMillis() {
+    public synchronized long getElapsedMillis() {
         if (startedAtMillis == null) {
             return elapsedMillis;
         }

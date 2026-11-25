@@ -10,7 +10,6 @@ import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import forge.gamemodes.rogue.effect.DescensionLevel;
 import forge.gamemodes.rogue.effect.AetherEffect;
 import forge.gamemodes.rogue.effect.RogueEffect;
-import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.localinstance.achievements.RogueCommanderAchievements;
@@ -21,15 +20,15 @@ import forge.model.FModel;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.IgnoringXStream;
-import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
 /**
  * Tracks persistent meta-progression for Rogue Commander mode.
@@ -113,6 +112,7 @@ public class RogueMetaProgress {
 
     /**
      * Get the singleton instance, loading from disk if needed.
+     * @throws UncheckedIOException if the file cannot be read. It is left as it is, and the next call tries again.
      */
     public static synchronized RogueMetaProgress getInstance() {
         if (instance == null) {
@@ -125,7 +125,11 @@ public class RogueMetaProgress {
      * Force reload from disk (useful after external changes).
      */
     public static synchronized void reload() {
-        instance = load();
+        RogueMetaProgress loaded = load();
+        if (instance != null) {
+            loaded.devUnlockAll = instance.devUnlockAll;
+        }
+        instance = loaded;
     }
 
     /**
@@ -328,14 +332,14 @@ public class RogueMetaProgress {
         String key = stat.getConditionKey();
 
         boolean changed = false;
-        for (RogueDeck deck : RogueConfig.loadRogueDecks()) {
-            RogueUnlockCondition condition = deck.getUnlockCondition();
+        for (RogueConfig.CommanderUnlock unlock : RogueConfig.getCommanderUnlocks()) {
+            RogueUnlockCondition condition = unlock.condition();
             if (condition == null || condition.isDefault() || !condition.hasCondition(key)) {
                 continue;
             }
 
-            String name = deck.getCommanderCardName();
-            if (deck.isUnlocked() && !notifiedCommanderUnlocks.contains(name)) {
+            String name = unlock.commanderName();
+            if (unlock.isUnlocked() && !notifiedCommanderUnlocks.contains(name)) {
                 notifiedCommanderUnlocks.add(name);
                 changed = true;
 
@@ -566,7 +570,7 @@ public class RogueMetaProgress {
             .createLayeredImage(card, forge.localinstance.skin.FSkinProp.IMG_SPECIAL_TROPHY,
                 forge.localinstance.properties.ForgeConstants.CACHE_ACHIEVEMENTS_DIR
                     + "/descension_" + commanderName.replace(" ", "_") + "_1.png", 1f);
-        showDescensionUnlockDialog(image,
+        GuiBase.getInterface().showImageDialog(image,
             "You unlocked Descension Mode for " + commanderName + "!",
             "Descension Level 1 Unlocked!");
     }
@@ -589,7 +593,7 @@ public class RogueMetaProgress {
                         forge.localinstance.properties.ForgeConstants.CACHE_ACHIEVEMENTS_DIR
                             + "/descension_" + commanderName.replace(" ", "_") + "_" + unlockedLevel + ".png", 1f);
               if (descensionLevel == null) return false;
-              showDescensionUnlockDialog(image,
+              GuiBase.getInterface().showImageDialog(image,
                     "You unlocked Descension Level " + unlockedLevel + ": " + descensionLevel.name + " for " + commanderName + "!",
                     "Descension Level " + unlockedLevel + " Unlocked!");
             }
@@ -597,10 +601,6 @@ public class RogueMetaProgress {
             return true;
         }
         return false;
-    }
-
-    private static void showDescensionUnlockDialog(ISkinImage image, String message, String title) {
-        FThreads.invokeInEdtLater(() -> GuiBase.getInterface().showImageDialog(image, message, title));
     }
 
     public boolean isDescensionModeUnlocked() {
@@ -661,6 +661,27 @@ public class RogueMetaProgress {
             if (u != null) slots += u.extraEnergy;
         }
         return slots;
+    }
+
+    /** Built, and either on already or with Aether Energy to spare. */
+    public boolean canToggleAether(AetherEffect aetherEffect) {
+        return getAetherEffectRank(aetherEffect) > 0
+            && (getActiveAetherEffects().contains(aetherEffect) || getActiveAetherEffectCount() < getActiveAetherEffectSlots());
+    }
+
+    /** The Echoes the next rank costs, or -1 at the highest rank. */
+    public int nextRankCost(AetherEffect aetherEffect) {
+        int rank = getAetherEffectRank(aetherEffect);
+        return rank >= aetherEffect.getEffectiveMaxRank(aetherUpgradeLevel) ? -1 : aetherEffect.getEchoCostForRank(rank + 1);
+    }
+
+    public boolean canAffordNextRank(AetherEffect aetherEffect) {
+        int cost = nextRankCost(aetherEffect);
+        return cost >= 0 && totalEchoes >= cost;
+    }
+
+    public boolean canAffordUpgrade(AetherUpgrade upgrade) {
+        return totalSparks >= upgrade.sparkCost && totalEchoes >= upgrade.echoCost;
     }
 
     public void addEchoes(int amount) {
@@ -1130,30 +1151,42 @@ public class RogueMetaProgress {
             return new RogueMetaProgress();
         }
 
-        try (GZIPInputStream zin = new GZIPInputStream(Files.newInputStream(file.toPath()));
+        byte[] bytes = readBytes(file);
+        try (GZIPInputStream zin = new GZIPInputStream(new ByteArrayInputStream(bytes));
              InputStreamReader reader = new InputStreamReader(zin)) {
             return (RogueMetaProgress) getSerializer().fromXML(reader);
         } catch (Exception e) {
             Logger.error(e, "Error loading Rogue meta progress from {}, starting fresh", file);
+            RogueIO.setAside(file);
+            if (file.exists()) { // The next save would overwrite it
+                throw new UncheckedIOException(new IOException("Could not set aside " + file, e));
+            }
             return new RogueMetaProgress();
+        }
+    }
+
+    private static byte[] readBytes(File file) {
+        for (int attempt = 1; ; attempt++) {
+            try {
+                return Files.readAllBytes(file.toPath());
+            } catch (IOException e) {
+                if (attempt == 3) {
+                    throw new UncheckedIOException(e);
+                }
+                RogueIO.pause(100);
+            }
         }
     }
 
     public void save() {
         File file = getMetaProgressFile();
         try {
-            Files.createDirectories(file.toPath().getParent());
-            savePacked(file);
+            // Not this object's lock, because reload() replaces the instance
+            synchronized (RogueMetaProgress.class) {
+                RogueIO.savePacked(getSerializer(), this, file);
+            }
         } catch (Exception e) {
             Logger.error(e, "Error saving Rogue meta progress: {}", file);
-        }
-    }
-
-    private void savePacked(File file) throws IOException {
-        try (BufferedOutputStream bout = new BufferedOutputStream(Files.newOutputStream(file.toPath()));
-             GZIPOutputStream zout = new GZIPOutputStream(bout)) {
-            getSerializer().toXML(this, zout);
-            zout.flush();
         }
     }
 }

@@ -102,15 +102,16 @@ public final class RogueCustomDeckGenerator {
         return null;
     }
 
-    public static RogueDeck generateForChosenCommander(List<PaperCard> chosenCommanders) {
+    /** Empty when they cannot command a deck together. */
+    public static List<PaperCard> findChosenCommanders(List<PaperCard> chosenCommanders) {
         if (chosenCommanders == null || chosenCommanders.isEmpty() || chosenCommanders.size() > 2) {
-            return null;
+            return Collections.emptyList();
         }
         PaperCard commander = getEligibleCommanders().stream()
             .filter(card -> card.getName().equals(chosenCommanders.get(0).getName()))
             .findFirst().orElse(null);
         if (commander == null) {
-            return null;
+            return Collections.emptyList();
         }
         List<PaperCard> commanders = new ArrayList<>();
         commanders.add(commander);
@@ -119,9 +120,17 @@ public final class RogueCustomDeckGenerator {
                 .filter(card -> card.getName().equals(chosenCommanders.get(1).getName()))
                 .findFirst().orElse(null);
             if (partner == null) {
-                return null;
+                return Collections.emptyList();
             }
             commanders.add(partner);
+        }
+        return commanders;
+    }
+
+    public static RogueDeck generateForChosenCommander(List<PaperCard> chosenCommanders) {
+        List<PaperCard> commanders = findChosenCommanders(chosenCommanders);
+        if (commanders.isEmpty()) {
+            return null;
         }
 
         Map<String, List<Map.Entry<PaperCard, Integer>>> matrix = getSynergyMatrix();
