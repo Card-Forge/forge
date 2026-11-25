@@ -34,9 +34,16 @@ public final class LifeDrawGuard {
                 || !sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
             return false;
         }
+        // the cards come from the Draw part, which is a sub-ability for some cards (Avacyn and Griselbrand: "then draw a card for each
+        // creature you control"): its amount is read from there, not from the ability that is activated
+        int cardsDrawn = 0;
         boolean draws = false;
         for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
-            draws |= a.getApi() == ApiType.Draw;
+            if (a.getApi() == ApiType.Draw) {
+                draws = true;
+                final String amount = a.getParam("NumCards");
+                cardsDrawn += amount == null ? 1 : AbilityUtils.calculateAmount(a.getHostCard(), amount, a);
+            }
         }
         if (!draws || ai.cantLoseForZeroOrLessLife()) {
             return false;
@@ -60,12 +67,8 @@ public final class LifeDrawGuard {
                 || ComputerUtil.predictNextCombatsDanger(ai, ai.getOpponents()) > 0;
         boolean decks = false;
         if (plan == null || !plan.has(ComboPlan.Kind.LIBRARY_OUT)) {
-            final String amount = sa.getParam("NumCards");
-            final int cards = amount == null ? 1 : AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
-            decks = ai.getCardsIn(ZoneType.Library).size() < cards + LIBRARY_MARGIN;
+            decks = ai.getCardsIn(ZoneType.Library).size() < cardsDrawn + LIBRARY_MARGIN;
         }
-        final String drawn = sa.getParam("NumCards");
-        final int cardsDrawn = drawn == null ? 1 : AbilityUtils.calculateAmount(sa.getHostCard(), drawn, sa);
         final boolean overflows = !ai.isUnlimitedHandSize()
                 && ai.getCardsIn(ZoneType.Hand).size() + cardsDrawn > ai.getMaxHandSize() + HAND_OVERFLOW;
         return (dies || decks || overflows) && !ComboGuard.winLikelySoon(ai, plan);

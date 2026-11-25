@@ -96,4 +96,30 @@ public class FlatMonteCarloLifeDrawGuardTest extends AITest {
         AssertJUnit.assertEquals("fourteen cards, seven of them to be discarded", "life-draw-reckless",
                 ComboGuard.problem(ai, draw, null, ComboPlan.EMPTY));
     }
+
+    @Test
+    public void aDrawThatIsASubAbilityCountsItsOwnAmount() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        fillLibrary(ai, 40);
+        final Card avacyn = addCard("Avacyn and Griselbrand", ai);
+        SpellAbility draw = null;
+        for (final SpellAbility sa : avacyn.getSpellAbilities()) {
+            if (sa.isActivatedAbility()) {
+                sa.setActivatingPlayer(ai);
+                draw = sa;
+            }
+        }
+        AssertJUnit.assertNotNull(draw);
+        ai.setLife(40, null);
+        AssertJUnit.assertNull("one creature: one card, into an empty hand", ComboGuard.problem(ai, draw, null, ComboPlan.EMPTY));
+        for (int i = 0; i < 4; i++) {
+            addCard("Grizzly Bears", ai);
+        }
+        for (int i = 0; i < 7; i++) {
+            addCardToZone("Island", ai, ZoneType.Hand);
+        }
+        AssertJUnit.assertEquals("five creatures draw five: twelve cards in a hand of seven", "life-draw-reckless",
+                ComboGuard.problem(ai, draw, null, ComboPlan.EMPTY));
+    }
 }
