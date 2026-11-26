@@ -512,12 +512,13 @@ ScryfallCode=UNK
 20260532 R Colorless Ultimatum @
 20260533 U Crow Scarer @
 20260534 R Everyone's an Impostor @
-20260535 R The Five Stages of Grief @
-20260536 M The Strixhaven-Lorwyn Rover @
-20260537 U Tinfoil Helm @
-20260538 R Wurmcoil Broodmother @
-20260539 R The Goblin Sparring Grounds @
-20260540 U P-Artist Alley @
+20260535 R Sharp Eraser @
+20260536 R The Five Stages of Grief @
+20260537 M The Strixhaven-Lorwyn Rover @
+20260538 U Tinfoil Helm @
+20260539 R Wurmcoil Broodmother @
+20260540 R The Goblin Sparring Grounds @
+20260541 U P-Artist Alley @
 20260701 R Bobby, Another Dwarf @
 20260702 C I'm Going On An Adventure! @
 20260703 R Robby, Another Dwarf @
