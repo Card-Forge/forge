@@ -720,6 +720,73 @@ public class AiReportScenarioTest extends AITest {
                     c.resolveAll();
                     return agent.getController().equals(c.opp) ? null : "Sleeper Agent stayed with " + agent.getController();
                 }));
+        // #13073: Fireball with 7 lands against a player on 5 life: X=5 at the player alone is lethal, not X=5 split between the player and a creature
+        l.add(new Scenario("13073-fireball-lethal", "Fireball goes at the player alone when that is lethal, not split with a creature (#13073)", Fid.EXACT, "MAIN1", true,
+                c -> { c.bf("Mountain", 4, c.ai); c.bf("Swamp", 3, c.ai); c.hand("Fireball", c.ai); c.bf("Whirling Dervish", c.opp); c.opp.setLife(5, null); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Fireball");
+                    if (sa == null) { return "AI did not cast Fireball" + c.why("Fireball"); }
+                    if (sa.getTargets().size() != 1 || !sa.getTargets().contains(c.opp)) {
+                        return "Fireball targeted " + sa.getTargets() + " instead of the player alone";
+                    }
+                    // {5}{R}: X is what kills, one land stays untapped
+                    return sa.getXManaCostPaid() != null && sa.getXManaCostPaid() == 5 ? null
+                            : "Fireball was cast with X=" + sa.getXManaCostPaid() + ", not the 5 that is lethal";
+                }));
+        // damage that is doubled (Furnace of Rath): 5 life dies to 3 damage, so X=3, not the 5 of the life total
+        l.add(new Scenario("13073-fireball-furnace", "Fireball pays X=3 for a player on 5 life under Furnace of Rath", Fid.EXACT, "MAIN1", true,
+                c -> { c.bf("Mountain", 4, c.ai); c.bf("Swamp", 3, c.ai); c.hand("Fireball", c.ai); c.bf("Furnace of Rath", c.opp); c.opp.setLife(5, null); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Fireball");
+                    if (sa == null) { return "AI did not cast Fireball" + c.why("Fireball"); }
+                    if (sa.getTargets().size() != 1 || !sa.getTargets().contains(c.opp)) { return "Fireball targeted " + sa.getTargets(); }
+                    return sa.getXManaCostPaid() != null && sa.getXManaCostPaid() == 3 ? null
+                            : "Fireball was cast with X=" + sa.getXManaCostPaid() + ", the doubled damage needs only 3";
+                }));
+        // Crater's Claws deals X plus 2 with a creature of power 4 or more: 5 life dies to X=3
+        l.add(new Scenario("13073-claws-ferocious", "Crater's Claws pays X=3 for a player on 5 life when ferocious (X plus 2)", Fid.EXACT, "MAIN1", true,
+                c -> { c.bf("Mountain", 4, c.ai); c.bf("Swamp", 3, c.ai); c.hand("Crater's Claws", c.ai); c.bf("Craw Wurm", c.ai); c.opp.setLife(5, null); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Crater's Claws");
+                    if (sa == null) { return "AI did not cast Crater's Claws" + c.why("Crater's Claws"); }
+                    if (!sa.getTargets().contains(c.opp)) { return "Crater's Claws targeted " + sa.getTargets(); }
+                    return sa.getXManaCostPaid() != null && sa.getXManaCostPaid() == 3 ? null
+                            : "Crater's Claws was cast with X=" + sa.getXManaCostPaid() + ", ferocious needs only 3";
+                }));
+        // four lands pay at most X=3, which is 5 damage with ferocious: exactly lethal on 5 life, so the early-game hold for more damage must not apply
+        l.add(new Scenario("13073-claws-ferocious-hold", "Crater's Claws is cast for exactly lethal on 5 life from four lands when ferocious (X=3 plus 2)", Fid.EXACT, "MAIN1", true,
+                c -> { c.bf("Mountain", 2, c.ai); c.bf("Swamp", 2, c.ai); c.hand("Crater's Claws", c.ai); c.bf("Craw Wurm", c.ai); c.opp.setLife(5, null); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Crater's Claws");
+                    if (sa == null) { return "AI held Crater's Claws, X=3 plus 2 is lethal on 5 life" + c.why("Crater's Claws"); }
+                    if (!sa.getTargets().contains(c.opp)) { return "Crater's Claws targeted " + sa.getTargets(); }
+                    return sa.getXManaCostPaid() != null && sa.getXManaCostPaid() == 3 ? null
+                            : "Crater's Claws was cast with X=" + sa.getXManaCostPaid() + ", four lands and ferocious make lethal with 3";
+                }));
+        // seven lands pay at most X=6 ({X}{R}), so 8 damage with ferocious cannot kill 9 life: the bonus must not be counted twice
+        // when working out the most X there is (that gave 10 damage and X=7, more than the mana can pay)
+        l.add(new Scenario("13073-claws-ferocious-cap", "Crater's Claws never pays more than X=6 from seven lands for a player on 9 life when ferocious", Fid.EXACT, "MAIN1", true,
+                c -> { c.bf("Mountain", 4, c.ai); c.bf("Swamp", 3, c.ai); c.hand("Crater's Claws", c.ai); c.bf("Craw Wurm", c.ai); c.opp.setLife(9, null); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Crater's Claws");
+                    if (sa == null) { return null; } // holding it is fine, 8 damage does not kill 9 life; paying more than the mana allows is what is wrong
+                    final Integer x = sa.getXManaCostPaid();
+                    return x != null && x > 6 ? "Crater's Claws was cast with X=" + x + ", seven lands pay at most 6" : null;
+                }));
+        // two planeswalkers on 3 loyalty: both as targets cost {1} more and take 2 each (X=5 of 7 lands), neither dies
+        l.add(new Scenario("13073-fireball-walkers", "Fireball does not aim at two planeswalkers that would each take 2 of their 3 loyalty", Fid.EXACT, "MAIN1", true,
+                c -> { c.bf("Mountain", 4, c.ai); c.bf("Swamp", 3, c.ai); c.hand("Fireball", c.ai);
+                    c.counters(c.bf("Jace Beleren", c.opp), CounterEnumType.LOYALTY, 3);
+                    c.counters(c.bf("Liliana of the Veil", c.opp), CounterEnumType.LOYALTY, 3); },
+                c -> {
+                    final SpellAbility sa = c.playOf("Fireball");
+                    if (sa == null) { return null; } // holding it is fine, killing neither is what is wrong
+                    int walkers = 0;
+                    for (final Card k : sa.getTargets().getTargetCards()) {
+                        if (k.isPlaneswalker()) { walkers++; }
+                    }
+                    return walkers >= 2 ? "Fireball targeted both planeswalkers, 2 damage each: " + sa.getTargets() : null;
+                }));
         // Griselbrand: pay 7 life, draw seven. Not into a hand that is already full (the cleanup step throws the cards away), not again and
         // again until the life or the library is gone
         l.add(play("griselbrand-empty-hand", "Griselbrand refills an empty hand when the life and the library can take it", Fid.APPROX, "MAIN2", true, "Griselbrand",
