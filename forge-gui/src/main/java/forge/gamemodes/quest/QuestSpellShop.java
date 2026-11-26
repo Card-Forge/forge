@@ -269,6 +269,7 @@ public class QuestSpellShop {
         }
 
         shopManager.removeItems(itemsToBuy);
+        FModel.getQuest().getCards().removeFromShop(itemsToBuy);
         inventoryManager.addItems(itemsToAdd);
     }
 
@@ -327,6 +328,7 @@ public class QuestSpellShop {
 
         inventoryManager.removeItems(itemsToSell);
         shopManager.addItems(itemsToSell);
+        FModel.getQuest().getCards().addToShop(itemsToSell);
     }
 
     public static void sellExtras(IItemManager<InventoryItem> shopManager, IItemManager<InventoryItem> inventoryManager) {
@@ -363,6 +365,7 @@ public class QuestSpellShop {
 
         inventoryManager.removeItems(cardsToRemove);
         shopManager.addItems(cardsToRemove);
+        FModel.getQuest().getCards().addToShop(cardsToRemove);
 
         for (Entry<InventoryItem, Integer> item : cardsToRemove) {
 

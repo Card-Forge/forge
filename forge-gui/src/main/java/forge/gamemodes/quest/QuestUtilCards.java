@@ -740,9 +740,20 @@ public final class QuestUtilCards {
         if (questAssets.getShopList().isEmpty()) {
             generateCardsInShop();
         }
-        // the stock is saved with the quest, so it can predate the cards the player now hides
-        questAssets.getShopList().removeIf(item -> item instanceof PaperCard card && FModel.getMagicDb().isHidden(card));
-        return questAssets.getShopList();
+        // the saved stock can predate the cards the player now hides, and keeps them so that unhiding brings them back
+        ItemPool<InventoryItem> shown = ItemPool.createFrom(questAssets.getShopList(), InventoryItem.class);
+        shown.removeIf(item -> item instanceof PaperCard card && FModel.getMagicDb().isHidden(card));
+        return shown;
+    }
+
+    /** Takes items bought from the shop list out of the saved stock, which {@link #getShopList()} only copies. */
+    public void removeFromShop(final Iterable<Entry<InventoryItem, Integer>> items) {
+        questAssets.getShopList().removeAll(items);
+    }
+
+    /** Puts items sold to the shop into the saved stock, which {@link #getShopList()} only copies. */
+    public void addToShop(final Iterable<Entry<InventoryItem, Integer>> items) {
+        questAssets.getShopList().addAll(items);
     }
 
     /**
