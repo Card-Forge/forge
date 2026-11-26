@@ -12,7 +12,6 @@ import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 
 import java.util.*;
@@ -390,34 +389,17 @@ public class GameSimulator {
         }, sim);
     }
 
-    /**
-     * Resolves the triggered abilities that sit on top of one of {@code owner}'s spells (prowess, storm and other cast
-     * triggers), until a spell is on top. Does nothing when {@code owner} has no spell on the stack.
-     */
-    public static void resolveTriggersAboveSpell(final Game game, final Player owner, final Player opponent) {
+    /** Resolves only the top object of the stack, then checks state based effects and adds what triggered. */
+    public static void resolveTop(final Game game, final Player opponent) {
         AITimeoutTracker.check();
         PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
         sim.getAi().setUseSimulation(AIOption.USE_FULL_SIMULATION);
         opponent.runWithController(() -> {
             final Set<Card> allAffectedCards = new HashSet<>();
-            while (!game.isGameOver() && !game.getStack().isEmpty() && game.getStack().peekAbility().isTrigger()
-                    && hasSpellOnStack(game, owner)) {
-                AITimeoutTracker.check();
-                game.getStack().resolveStack();
-                game.getAction().checkStateEffects(false, allAffectedCards);
-                game.getStack().addAllTriggeredAbilitiesToStack();
-            }
+            game.getStack().resolveStack();
+            game.getAction().checkStateEffects(false, allAffectedCards);
+            game.getStack().addAllTriggeredAbilitiesToStack();
         }, sim);
-    }
-
-    private static boolean hasSpellOnStack(final Game game, final Player owner) {
-        for (final SpellAbilityStackInstance si : game.getStack()) {
-            final SpellAbility sa = si.getSpellAbility();
-            if (sa.isSpell() && !sa.isTrigger() && owner.equals(sa.getActivatingPlayer())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /** The copy of the AI player (given to the constructor) living in the simulated game. */

@@ -14,6 +14,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -225,7 +226,7 @@ public final class FlatMonteCarloPicker {
          */
         public int lookaheadMaxCandidates = 0;
         /**
-         * Whether the opponent's heuristic AI may answer the AI's spells in a rollout (a counterspell, instant speed
+         * Whether the opponents' heuristic AIs may answer the AI's spells in a rollout (a counterspell, instant speed
          * removal), using the hand it was dealt in that sample. Costs one more heuristic decision per spell.
          */
         public boolean opponentResponses = true;
@@ -1883,7 +1884,7 @@ public final class FlatMonteCarloPicker {
                 lastRolloutProblem = "apply";
                 return null;
             }
-            resolveWithResponses(simGame, simAi, cfg);
+            resolveWithResponses(simGame, simAi, cfg, 0);
             playOut(simGame, simAi, playoutPlays, cfg);
         }
 
@@ -2149,13 +2150,13 @@ public final class FlatMonteCarloPicker {
                                        final Candidate cand, final Config cfg, final int playoutPlays) {
         final Player simOpp = simAi.getWeakestOpponent();
         if (!cand.isHold()) {
+            final int below = simGame.getStack().size();
             if (!sim.applySpellAbility(cand.sa, false)) {
                 lastRolloutProblem = "apply";
                 return null;
             }
-            letOpponentRespond(simGame, simAi, simOpp, cfg);
-            GameSimulator.resolveOwnTop(simGame, simAi, simOpp);
-            playOutResponding(simGame, simAi, simOpp, Math.min(RESPONSE_FOLLOW_UPS, playoutPlays));
+            resolveWithResponses(simGame, simAi, cfg, below);
+            playOutResponding(simGame, simAi, cfg, Math.min(RESPONSE_FOLLOW_UPS, playoutPlays));
         }
         // Mana and instants still open for the rest of the turn are worth something, but the turn is nearly over.
         final long held = simGame.isGameOver() ? 0 : holdUpBonus(simAi, cfg) / 2;
@@ -2180,12 +2181,12 @@ public final class FlatMonteCarloPicker {
                                        final Candidate cand, final Config cfg, final int playoutPlays) {
         final Player simOpp = simAi.getWeakestOpponent();
         if (!cand.isHold()) {
+            final int below = simGame.getStack().size();
             if (!sim.applySpellAbility(cand.sa, false)) {
                 lastRolloutProblem = "apply";
                 return null;
             }
-            letOpponentRespond(simGame, simAi, simOpp, cfg);
-            GameSimulator.resolveOwnTop(simGame, simAi, simOpp);
+            resolveWithResponses(simGame, simAi, cfg, below);
         }
         final PhaseHandler ph = simGame.getPhaseHandler();
         if (!simGame.isGameOver()) {
@@ -3008,7 +3009,7 @@ public final class FlatMonteCarloPicker {
                 lastRolloutProblem = "apply";
                 return null;
             }
-            resolveWithResponses(simGame, simAi, cfg);
+            resolveWithResponses(simGame, simAi, cfg, 0);
         }
         final PhaseHandler ph = simGame.getPhaseHandler();
         if (!simGame.isGameOver()
@@ -3030,7 +3031,7 @@ public final class FlatMonteCarloPicker {
     /** Follow-up plays the AI may make after its response while the opponent's spell is still on the stack. */
     private static final int RESPONSE_FOLLOW_UPS = 3;
 
-    private static void playOutResponding(final Game simGame, final Player simAi, final Player simOpp, final int maxPlays) {
+    private static void playOutResponding(final Game simGame, final Player simAi, final Config cfg, final int maxPlays) {
         if (!(simAi.getController() instanceof PlayerControllerAi)) {
             return;
         }
@@ -3042,56 +3043,71 @@ public final class FlatMonteCarloPicker {
             if (next == null || next.isEmpty()) {
                 return;
             }
+            final int below = simGame.getStack().size();
             pc.playChosenSpellAbility(next.get(0));
-            GameSimulator.resolveOwnTop(simGame, simAi, simOpp);
+            // the follow-up and any answers to it resolve; what was there before stays
+            resolveWithResponses(simGame, simAi, cfg, below);
         }
     }
 
-    /** Resolves what the AI just put on the stack, after the opponent has had the chance to answer it. */
-    private static void resolveWithResponses(final Game simGame, final Player simAi, final Config cfg) {
-        final Player simOpp = simAi.getWeakestOpponent();
-        if (letOpponentRespond(simGame, simAi, simOpp, cfg)) {
-            // with the answer still on the stack, the AI may answer it in turn (a counter for their counter)
-            playOutResponding(simGame, simAi, simOpp, RESPONSE_FOLLOW_UPS);
+    /** The most answers players may add while one play resolves, so an exchange cannot run on forever. */
+    private static final int MAX_RESPONSES = 8;
+
+    /**
+     * Resolves the stack down to {@code floor} objects: what was put on top of those. Whenever a spell is about to
+     * resolve, the other side gets priority first, so players can answer the AI's spells, each other's answers, and
+     * the spell beneath once an exchange or its cast triggers have resolved. Triggers and abilities resolve without
+     * anybody being asked.
+     */
+    static void resolveWithResponses(final Game simGame, final Player simAi, final Config cfg, final int floor) {
+        // who has already passed on a spell: asking again would only give the heuristic another roll of its dice
+        final Map<SpellAbilityStackInstance, Set<Player>> passed = new IdentityHashMap<>();
+        int responses = 0;
+        while (!simGame.isGameOver()) {
+            AITimeoutTracker.check();
+            // cast triggers go on the stack before anybody gets priority
+            simGame.getAction().checkStateEffects(false);
+            simGame.getStack().addAllTriggeredAbilitiesToStack();
+            if (simGame.isGameOver() || simGame.getStack().size() <= floor) {
+                return;
+            }
+            if (cfg.opponentResponses && responses < MAX_RESPONSES && simGame.getStack().peekAbility().isSpell()
+                    && offerPriority(simGame,
+                            passed.computeIfAbsent(simGame.getStack().peek(), k -> new HashSet<>()))) {
+                responses++;
+                continue; // the answer is on top now: a new round of priority
+            }
+            GameSimulator.resolveTop(simGame, simAi.getWeakestOpponent());
         }
-        GameSimulator.resolveStack(simGame, simOpp);
     }
 
     /**
-     * Gives the opponent's heuristic AI one chance to answer the spell the AI has on top of the stack, from the hand
-     * it was dealt in this sample, so the AI learns nothing about the real one. Only the weakest opponent is asked.
+     * Offers the opponents of the top spell's controller, in turn order after that player, the chance to answer it.
+     * Each plays from the hand it was dealt in this sample, so the AI learns nothing about the real ones.
      *
-     * @return true if the opponent put something on the stack
+     * @return true as soon as one of them puts something on the stack; false when all of them pass
      */
-    private static boolean letOpponentRespond(final Game simGame, final Player simAi, final Player simOpp,
-                                              final Config cfg) {
-        if (!cfg.opponentResponses || simOpp == null || simGame.isGameOver() || !simOpp.isInGame()
-                || simOpp.getCardsIn(ZoneType.Hand).isEmpty()
-                || !(simOpp.getController() instanceof PlayerControllerAi)) {
-            return false;
+    private static boolean offerPriority(final Game simGame, final Set<Player> passed) {
+        final Player caster = simGame.getStack().peekAbility().getActivatingPlayer();
+        for (final Player p : simGame.getPlayersInTurnOrder(caster)) {
+            if (passed.contains(p) || !p.isInGame() || !p.isOpponentOf(caster)
+                    || p.getCardsIn(ZoneType.Hand).isEmpty() || !(p.getController() instanceof PlayerControllerAi)) {
+                continue;
+            }
+            AITimeoutTracker.check();
+            checkRolloutDeadline();
+            final PlayerControllerAi pc = (PlayerControllerAi) p.getController();
+            final List<SpellAbility> answer = pc.chooseSpellAbilityToPlay();
+            if (answer != null && !answer.isEmpty() && !answer.get(0).isLandAbility()) {
+                final int before = simGame.getStack().size();
+                pc.playChosenSpellAbility(answer.get(0));
+                if (simGame.getStack().size() > before) {
+                    return true;
+                }
+            }
+            passed.add(p);
         }
-        // cast triggers go on the stack before anybody gets priority
-        simGame.getAction().checkStateEffects(false);
-        simGame.getStack().addAllTriggeredAbilitiesToStack();
-        // those resolve first (the opponent lets them), so that the spell beneath them can be answered
-        GameSimulator.resolveTriggersAboveSpell(simGame, simAi, simOpp);
-        if (simGame.isGameOver() || !simOpp.isInGame()) {
-            return false;
-        }
-        final SpellAbility top = simGame.getStack().isEmpty() ? null : simGame.getStack().peekAbility();
-        if (top == null || !top.isSpell() || !simAi.equals(top.getActivatingPlayer())) {
-            return false;
-        }
-        AITimeoutTracker.check();
-        checkRolloutDeadline();
-        final PlayerControllerAi pc = (PlayerControllerAi) simOpp.getController();
-        final List<SpellAbility> answer = pc.chooseSpellAbilityToPlay();
-        if (answer == null || answer.isEmpty() || answer.get(0).isLandAbility()) {
-            return false;
-        }
-        final int before = simGame.getStack().size();
-        pc.playChosenSpellAbility(answer.get(0));
-        return simGame.getStack().size() > before;
+        return false;
     }
 
     /** As {@link #playOut(Game, Player, int)} for the AI's own plays, which the opponent may answer. */
@@ -3107,8 +3123,9 @@ public final class FlatMonteCarloPicker {
             if (next == null || next.isEmpty()) {
                 return;
             }
+            final int below = simGame.getStack().size();
             pc.playChosenSpellAbility(next.get(0));
-            resolveWithResponses(simGame, simAi, cfg);
+            resolveWithResponses(simGame, simAi, cfg, below);
         }
     }
 

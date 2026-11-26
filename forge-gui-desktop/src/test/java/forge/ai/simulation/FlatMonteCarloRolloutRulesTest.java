@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import forge.ai.PlayerControllerAi;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -94,5 +95,65 @@ public class FlatMonteCarloRolloutRulesTest extends FlatMcTestBase {
     public void aCastTriggerOnTopDoesNotHideTheSpellFromTheOpponent() {
         final FlatMonteCarloPicker.Result r = axeIntoCounterspell(true, "Monastery Swiftspear");
         assertNotEquals(r.reason, "wins", String.valueOf(r));
+    }
+
+    // three players, in the order they were seated: opponent, AI, third
+    private Player third;
+
+    /** The AI casts a Lava Axe at the first opponent in a three player game; the stack then plays out. */
+    private void axeAtTheFirstOpponent(final boolean firstHasCancel, final int aiCancels, final boolean thirdHasCancel) {
+        game = initAndCreateThreePlayerGame();
+        opp = game.getPlayers().get(0);
+        ai = game.getPlayers().get(1);
+        third = game.getPlayers().get(2);
+        put("Mountain", 5, ai, ZoneType.Battlefield);
+        put("Island", 3, ai, ZoneType.Battlefield);
+        put("Island", 3, opp, ZoneType.Battlefield);
+        put("Island", 3, third, ZoneType.Battlefield);
+        final SpellAbility axe = put("Lava Axe", ai, ZoneType.Hand).getFirstSpellAbility();
+        put("Cancel", aiCancels, ai, ZoneType.Hand);
+        // the first opponent is the weakest one; without a Cancel it still holds a card
+        put(firstHasCancel ? "Cancel" : "Mountain", opp, ZoneType.Hand);
+        put(thirdHasCancel ? "Cancel" : "Mountain", third, ZoneType.Hand);
+        opp.setLife(10, null);
+        third.setLife(20, null);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+        axe.setActivatingPlayer(ai);
+        FlatMonteCarloPicker.applyTarget(axe, opp);
+        assertEquals(ai.getWeakestOpponent(), opp);
+
+        final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(
+                ((PlayerControllerAi) ai.getController()).getAi(), ai);
+        ((PlayerControllerAi) ai.getController()).playChosenSpellAbility(axe);
+        FlatMonteCarloPicker.resolveWithResponses(game, ai, cfg, 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void nobodyHasAnAnswerSoTheSpellResolves() {
+        axeAtTheFirstOpponent(false, 0, false);
+        assertEquals(opp.getLife(), 5);
+    }
+
+    @Test(timeOut = 120000)
+    public void anOpponentOtherThanTheWeakestCanAnswer() {
+        axeAtTheFirstOpponent(false, 0, true);
+        assertEquals(opp.getLife(), 10);
+        assertEquals(third.getCardsIn(ZoneType.Hand).size(), 0, "the third player used the Cancel");
+    }
+
+    @Test(timeOut = 120000)
+    public void theAiCanCounterTheCounter() {
+        axeAtTheFirstOpponent(true, 1, false);
+        assertEquals(opp.getLife(), 5);
+    }
+
+    @Test(timeOut = 120000)
+    public void anotherOpponentCanJoinACounterExchange() {
+        axeAtTheFirstOpponent(true, 1, true);
+        assertEquals(opp.getLife(), 10);
+        assertEquals(opp.getCardsIn(ZoneType.Hand).size(), 0);
+        assertEquals(ai.getCardsIn(ZoneType.Hand).size(), 0);
+        assertEquals(third.getCardsIn(ZoneType.Hand).size(), 0);
     }
 }
