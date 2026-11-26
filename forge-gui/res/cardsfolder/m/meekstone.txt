@@ -4,8 +4,8 @@ Types:Artifact
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.powerGE3 | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Creatures with power 3 or greater don't untap during their controllers' untap steps.
 SVar:NonStackingEffect:True
 SVar:NeedsToPlayVar:CountOpps GTCountMe
-SVar:CountOpps:Count$Valid Creature.OppCtrl+PowerGE3/LimitMax.5
-SVar:CountMe:Count$Valid Creature.YouCtrl+PowerGE3
+SVar:CountOpps:Count$Valid Creature.OppCtrl+powerGE3/LimitMax.5
+SVar:CountMe:Count$Valid Creature.YouCtrl+powerGE3
 AI:RemoveDeck:Random
 DeckHints:Type$Enchantment|Artifact|Planeswalker & Type$Wall & Keyword$Defender
 Oracle:Creatures with power 3 or greater don't untap during their controllers' untap steps.
