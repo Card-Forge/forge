@@ -189,6 +189,43 @@ public class AiSacrificeDecisionTest extends AITest {
         AssertJUnit.assertEquals(1, ai.getCreaturesInPlay().size());
     }
 
+    @Test
+    public void devourFindsABetterBundleThanTheGenericSacrificeOrder() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        ((LobbyPlayerAi) ai.getLobbyPlayer()).setAiProfile("Default");
+        Card host = addCardToZone("Thromok the Insatiable", ai, ZoneType.Hand);
+        final SpellAbility cast = host.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        host = game.getAction().moveToStack(host, cast);
+        cast.setHostCard(host);
+        final Card buzzard = addCard("Screeching Buzzard", ai);
+        final Card goat = addToken("w_0_1_goat", ai);
+        final Card otherGoat = addToken("w_0_1_goat", ai);
+        final SpellAbility devour = devourAbility(host, ai);
+        final CardCollection options = new CardCollection(ai.getCreaturesInPlay());
+        AssertJUnit.assertTrue("Buzzard's discard trigger has no payoff here",
+                game.getPlayers().get(0).getCardsIn(ZoneType.Hand).isEmpty());
+        AssertJUnit.assertTrue("the existing sacrifice order puts the marked flyer first",
+                ComputerUtil.choosePermanentsToSacrifice(ai, options, 1, devour, false, false).contains(buzzard));
+
+        final CardCollection chosen = ComputerUtil.choosePermanentsToSacrifice(ai, options, 2, devour, false, true);
+        AssertJUnit.assertEquals("honor the requested maximum", 2, chosen.size());
+        AssertJUnit.assertTrue(chosen.contains(goat));
+        AssertJUnit.assertTrue(chosen.contains(otherGoat));
+        AssertJUnit.assertFalse("the better bundle retains the more valuable flyer", chosen.contains(buzzard));
+        AssertJUnit.assertEquals("evaluation leaves the live host unchanged", 0, host.getCounters(CounterEnumType.P1P1));
+        AssertJUnit.assertFalse(host.hasRemembered());
+        AssertJUnit.assertEquals(3, ai.getCreaturesInPlay().size());
+
+        game.copyLastState();
+        host = game.getAction().moveToPlay(host, cast, AbilityKey.newMap());
+        AssertJUnit.assertEquals("real Devour resolution uses the two-Goat bundle", 4, host.getCounters(CounterEnumType.P1P1));
+        AssertJUnit.assertTrue(ai.getCreaturesInPlay().contains(buzzard));
+        AssertJUnit.assertFalse(ai.getCreaturesInPlay().contains(goat));
+        AssertJUnit.assertFalse(ai.getCreaturesInPlay().contains(otherGoat));
+    }
+
     private SpellAbility devourAbility(final Card host, final Player ai) {
         for (final ReplacementEffect replacement : host.getReplacementEffects()) {
             final SpellAbility ability = replacement.ensureAbility();

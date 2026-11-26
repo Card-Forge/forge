@@ -1035,6 +1035,14 @@ public class ComputerUtil {
             landBudget = 1; // A single land can keep an otherwise dead Devour creature alive.
         }
 
+        final int searchLandBudget = landBudget;
+        final CardCollection rankedCandidates = new CardCollection(candidates);
+        final Map<Card, Integer> sacrificeValues = new HashMap<>();
+        for (final Card card : candidates) {
+            sacrificeValues.put(card, card.isCreature() ? ComputerUtilCard.evaluateCreature(card, true, false)
+                    : ManaSacrifice.sacrificeValue(ai, card));
+        }
+
         final int initialScore = evaluateDevourCreature(source, sacrificed);
         final CardCollection prefix = new CardCollection();
         double sacrificeValue = 0;
@@ -1057,13 +1065,51 @@ public class ComputerUtil {
             if (next.isLand()) {
                 landBudget--;
             }
-            sacrificeValue += next.isCreature() ? ComputerUtilCard.evaluateCreature(next, true, false)
-                    : ManaSacrifice.sacrificeValue(ai, next);
+            sacrificeValue += sacrificeValues.get(next);
             final double gain = evaluateDevourCreature(source, prefix) - initialScore
                     - sacrificeValue * DEVOUR_SACRIFICE_VALUE_FACTOR;
             if (gain > bestGain) {
                 sacrificed.clear();
                 sacrificed.addAll(prefix);
+                bestGain = gain;
+            }
+        }
+
+        final int searchCandidateLimit = 6; // At most 63 additional bundle evaluations.
+        rankedCandidates.sort(Comparator.comparingInt(sacrificeValues::get));
+        final CardCollection searchCandidates = new CardCollection(searchCandidateLimit);
+        int searchLands = 0;
+        for (final Card card : rankedCandidates) {
+            if (card.isLand() && searchLands >= searchLandBudget) {
+                continue;
+            }
+            searchCandidates.add(card);
+            if (card.isLand()) {
+                searchLands++;
+            }
+            if (searchCandidates.size() == searchCandidateLimit) {
+                break;
+            }
+        }
+
+        for (int mask = 1; mask < (1 << searchCandidates.size()); mask++) {
+            if (Integer.bitCount(mask) > max) {
+                continue;
+            }
+            final CardCollection combination = new CardCollection();
+            double combinationValue = 0;
+            for (int i = 0; i < searchCandidates.size(); i++) {
+                if ((mask & (1 << i)) != 0) {
+                    final Card card = searchCandidates.get(i);
+                    combination.add(card);
+                    combinationValue += sacrificeValues.get(card);
+                }
+            }
+            final double gain = evaluateDevourCreature(source, combination) - initialScore
+                    - combinationValue * DEVOUR_SACRIFICE_VALUE_FACTOR;
+            if (gain > bestGain) {
+                sacrificed.clear();
+                sacrificed.addAll(combination);
                 bestGain = gain;
             }
         }
