@@ -16,7 +16,6 @@ public class NodeChestPanel extends NodeCircularPanel {
    */
   public NodeChestPanel(NodeChest node) {
     super(node);
-    setToolTipText(node.getType().sideTooltip());
   }
 
   @Override

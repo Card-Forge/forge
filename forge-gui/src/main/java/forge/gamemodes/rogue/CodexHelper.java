@@ -534,6 +534,7 @@ public final class CodexHelper {
             .collect(Collectors.toList());
     }
 
+    /** Codex card lists group by card type, then sort by name. */
     public static final Comparator<PaperCard> CODEX_CARD_ORDER = Comparator.comparingInt(CodexHelper::codexCardTypeOrder)
         .thenComparing(PaperCard::getName, String.CASE_INSENSITIVE_ORDER);
 

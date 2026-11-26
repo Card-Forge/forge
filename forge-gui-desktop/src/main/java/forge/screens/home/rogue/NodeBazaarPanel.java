@@ -16,7 +16,6 @@ public class NodeBazaarPanel extends NodeCircularPanel {
    */
   public NodeBazaarPanel(NodeBazaar node) {
     super(node);
-    setToolTipText(node.getType().sideTooltip());
   }
 
   @Override

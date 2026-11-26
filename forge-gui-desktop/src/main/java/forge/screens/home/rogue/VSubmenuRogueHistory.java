@@ -292,7 +292,6 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
       return label;
     }
 
-
     private static FScrollPane createEffectsScroller(List<RogueRunHistoryEntry.EffectSnapshot> effects) {
       JPanel pnlEffects = RogueUIHelper.createEffectPanel();
       RogueUIHelper.populateEffectPanelFromSnapshots(pnlEffects, effects);

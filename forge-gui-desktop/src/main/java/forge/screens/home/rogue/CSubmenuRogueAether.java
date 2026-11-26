@@ -112,7 +112,7 @@ public enum CSubmenuRogueAether implements ICDoc {
   }
 
   private void upgradeAetherwork(AetherEffect type) {
-    if (RogueMetaProgress.getInstance().upgradeAndActivateAetherEffect(type)) {
+    if (RogueMetaProgress.getInstance().upgradeAetherEffect(type)) {
       SoundSystem.instance.play(SoundEffectType.Artifact, SoundEffectType.Artifact.isSynced());
       refreshDisplay();
     }

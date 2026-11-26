@@ -137,7 +137,7 @@ public class RogueAetherScreen extends RogueScreen {
         RogueController.get().submit(() -> {
             RogueMetaProgress progress = progress();
             int echoes = progress.getTotalEchoes();
-            boolean done = progress.upgradeAndActivateAetherEffect(effect);
+            boolean done = progress.upgradeAetherEffect(effect);
             if (done) {
                 SoundSystem.instance.play(SoundEffectType.Artifact, SoundEffectType.Artifact.isSynced());
             }

@@ -17,7 +17,6 @@ public class NodeEventPanel extends NodeCircularPanel {
    */
   public NodeEventPanel(NodeEvent node) {
     super(node);
-    setToolTipText(node.getType().sideTooltip());
   }
 
   @Override

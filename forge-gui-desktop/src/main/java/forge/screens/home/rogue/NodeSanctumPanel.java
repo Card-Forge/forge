@@ -17,7 +17,6 @@ public class NodeSanctumPanel extends NodeCircularPanel {
    */
   public NodeSanctumPanel(NodeSanctum node) {
     super(node);
-    setToolTipText(node.getType().sideTooltip());
   }
 
   @Override
