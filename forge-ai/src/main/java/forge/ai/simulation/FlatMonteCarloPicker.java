@@ -14,7 +14,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -227,7 +226,7 @@ public final class FlatMonteCarloPicker {
         public int lookaheadMaxCandidates = 0;
         /**
          * Whether the opponents' heuristic AIs may answer the AI's spells in a rollout (a counterspell, instant speed
-         * removal), using the hand it was dealt in that sample. Costs one more heuristic decision per spell.
+         * removal), using the hand it was dealt in that sample. Costs more heuristic decisions per play.
          */
         public boolean opponentResponses = true;
 
@@ -3054,14 +3053,12 @@ public final class FlatMonteCarloPicker {
     private static final int MAX_RESPONSES = 8;
 
     /**
-     * Resolves the stack down to {@code floor} objects: what was put on top of those. Whenever a spell is about to
-     * resolve, the other side gets priority first, so players can answer the AI's spells, each other's answers, and
-     * the spell beneath once an exchange or its cast triggers have resolved. Triggers and abilities resolve without
-     * anybody being asked.
+     * Resolves the stack down to {@code floor} objects: what was put on top of those. Before each spell, activated
+     * ability or triggered ability resolves, the other side gets priority, so players can answer the AI's plays and
+     * each other's answers. Every response and every resolution starts a new round: having passed before does not
+     * keep a player from answering what is on top now.
      */
     static void resolveWithResponses(final Game simGame, final Player simAi, final Config cfg, final int floor) {
-        // who has already passed on a spell: asking again would only give the heuristic another roll of its dice
-        final Map<SpellAbilityStackInstance, Set<Player>> passed = new IdentityHashMap<>();
         int responses = 0;
         while (!simGame.isGameOver()) {
             AITimeoutTracker.check();
@@ -3071,9 +3068,7 @@ public final class FlatMonteCarloPicker {
             if (simGame.isGameOver() || simGame.getStack().size() <= floor) {
                 return;
             }
-            if (cfg.opponentResponses && responses < MAX_RESPONSES && simGame.getStack().peekAbility().isSpell()
-                    && offerPriority(simGame,
-                            passed.computeIfAbsent(simGame.getStack().peek(), k -> new HashSet<>()))) {
+            if (cfg.opponentResponses && responses < MAX_RESPONSES && offerPriority(simGame)) {
                 responses++;
                 continue; // the answer is on top now: a new round of priority
             }
@@ -3082,15 +3077,16 @@ public final class FlatMonteCarloPicker {
     }
 
     /**
-     * Offers the opponents of the top spell's controller, in turn order after that player, the chance to answer it.
+     * Offers the opponents of the controller of what is on top, in turn order after that player, the chance to answer
+     * it.
      * Each plays from the hand it was dealt in this sample, so the AI learns nothing about the real ones.
      *
      * @return true as soon as one of them puts something on the stack; false when all of them pass
      */
-    private static boolean offerPriority(final Game simGame, final Set<Player> passed) {
+    private static boolean offerPriority(final Game simGame) {
         final Player caster = simGame.getStack().peekAbility().getActivatingPlayer();
         for (final Player p : simGame.getPlayersInTurnOrder(caster)) {
-            if (passed.contains(p) || !p.isInGame() || !p.isOpponentOf(caster)
+            if (!p.isInGame() || !p.isOpponentOf(caster)
                     || p.getCardsIn(ZoneType.Hand).isEmpty() || !(p.getController() instanceof PlayerControllerAi)) {
                 continue;
             }
@@ -3105,7 +3101,6 @@ public final class FlatMonteCarloPicker {
                     return true;
                 }
             }
-            passed.add(p);
         }
         return false;
     }

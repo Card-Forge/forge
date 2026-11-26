@@ -1,11 +1,14 @@
 package forge.ai.simulation;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.Test;
 
 import forge.ai.PlayerControllerAi;
+import forge.game.card.Card;
+import forge.game.Game;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -102,6 +105,11 @@ public class FlatMonteCarloRolloutRulesTest extends FlatMcTestBase {
 
     /** The AI casts a Lava Axe at the first opponent in a three player game; the stack then plays out. */
     private void axeAtTheFirstOpponent(final boolean firstHasCancel, final int aiCancels, final boolean thirdHasCancel) {
+        axeAtTheFirstOpponent(firstHasCancel, aiCancels, thirdHasCancel, false);
+    }
+
+    private void axeAtTheFirstOpponent(final boolean firstHasCancel, final int aiCancels, final boolean thirdHasCancel,
+                                       final boolean thirdWaits) {
         game = initAndCreateThreePlayerGame();
         opp = game.getPlayers().get(0);
         ai = game.getPlayers().get(1);
@@ -126,7 +134,12 @@ public class FlatMonteCarloRolloutRulesTest extends FlatMcTestBase {
         final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(
                 ((PlayerControllerAi) ai.getController()).getAi(), ai);
         ((PlayerControllerAi) ai.getController()).playChosenSpellAbility(axe);
-        FlatMonteCarloPicker.resolveWithResponses(game, ai, cfg, 0);
+        if (thirdWaits) {
+            third.runWithController(() -> FlatMonteCarloPicker.resolveWithResponses(game, ai, cfg, 0),
+                    new AnswersTheSecondTime(game, third, "Lava Axe"));
+        } else {
+            FlatMonteCarloPicker.resolveWithResponses(game, ai, cfg, 0);
+        }
     }
 
     @Test(timeOut = 120000)
@@ -155,5 +168,69 @@ public class FlatMonteCarloRolloutRulesTest extends FlatMcTestBase {
         assertEquals(opp.getCardsIn(ZoneType.Hand).size(), 0);
         assertEquals(ai.getCardsIn(ZoneType.Hand).size(), 0);
         assertEquals(third.getCardsIn(ZoneType.Hand).size(), 0);
+    }
+
+    /** The AI puts a play on the stack with the opponent holding a Stifle, and the stack plays out. */
+    private void playIntoStifle(final SpellAbility sa) {
+        put("Island", opp, ZoneType.Battlefield);
+        put("Stifle", opp, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+        sa.setActivatingPlayer(ai);
+        assertTrue(FlatMonteCarloPicker.applyTarget(sa, opp) || !sa.usesTargeting());
+        final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(
+                ((PlayerControllerAi) ai.getController()).getAi(), ai);
+        ((PlayerControllerAi) ai.getController()).playChosenSpellAbility(sa);
+        FlatMonteCarloPicker.resolveWithResponses(game, ai, cfg, 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void anOpponentCanStifleATrigger() {
+        setUpGame();
+        put("Mountain", 2, ai, ZoneType.Battlefield);
+        final SpellAbility pyromancer = put("Viashino Pyromancer", ai, ZoneType.Hand).getFirstSpellAbility();
+        playIntoStifle(pyromancer);
+        assertEquals(opp.getCardsIn(ZoneType.Hand).size(), 0, "the Stifle was used");
+        assertEquals(opp.getLife(), 20);
+    }
+
+    @Test(timeOut = 120000)
+    public void anOpponentCanStifleAnActivatedAbility() {
+        setUpGame();
+        final Card pinger = put("Prodigal Pyromancer", ai, ZoneType.Battlefield);
+        pinger.setSickness(false);
+        SpellAbility ping = null;
+        for (final SpellAbility sa : pinger.getSpellAbilities()) {
+            if (sa.isActivatedAbility() && !sa.isManaAbility()) {
+                ping = sa;
+            }
+        }
+        playIntoStifle(ping);
+        assertEquals(opp.getCardsIn(ZoneType.Hand).size(), 0, "the Stifle was used");
+        assertEquals(opp.getLife(), 20);
+    }
+
+    /** Passes on everything until it is asked about the named spell for the second time; then plays as usual. */
+    private static final class AnswersTheSecondTime extends PlayerControllerAi {
+        private final String spell;
+        private int timesAsked;
+
+        AnswersTheSecondTime(final Game game, final Player player, final String spell) {
+            super(game, player, player.getLobbyPlayer());
+            this.spell = spell;
+        }
+
+        @Override
+        public List<SpellAbility> chooseSpellAbilityToPlay() {
+            final boolean aboutIt = getGame().getStack().peekAbility().getHostCard().getName().equals(spell);
+            return aboutIt && ++timesAsked >= 2 ? super.chooseSpellAbilityToPlay() : null;
+        }
+    }
+
+    @Test(timeOut = 120000)
+    public void aPlayerWhoPassedIsAskedAgainAfterACounterExchange() {
+        axeAtTheFirstOpponent(true, 1, true, true);
+        assertEquals(third.getCardsIn(ZoneType.Hand).size(), 0, "the third player answered the second time");
+        assertEquals(opp.getLife(), 10);
     }
 }
