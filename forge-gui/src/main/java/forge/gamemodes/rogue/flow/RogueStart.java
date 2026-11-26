@@ -13,6 +13,7 @@ import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /** What the player chose on the start page. A generated commander is played instead of the deck, which may then be null. */
 public record RogueStart(RogueDeck deck, boolean custom, Set<CustomRunModification> modifications, int descension) {
@@ -119,7 +120,7 @@ public record RogueStart(RogueDeck deck, boolean custom, Set<CustomRunModificati
     /** The traits the run would begin with: the active Aether effects, its Descension levels, then the custom run's changes. */
     public List<RogueEffect> startingTraits(RogueMetaProgress progress) {
         // In the Aether page's order, as the active effects are kept in no order
-        List<RogueEffect> traits = new ArrayList<>(progress.getActiveAetherEffects().stream().sorted().toList());
+        List<RogueEffect> traits = new ArrayList<>(progress.getActiveAetherEffects().stream().sorted().collect(Collectors.toList()));
         for (int level = 1; level <= descension; level++) {
             DescensionLevel descensionLevel = DescensionLevel.forLevel(level);
             if (descensionLevel != null) {
