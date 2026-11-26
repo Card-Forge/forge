@@ -2208,9 +2208,9 @@ public class ComputerUtil {
             return 0; // the classic mulligan path must not count creature Auras as playable without a creature (#12929)
         }
 
-        // a free artifact stands in for a land only if it makes mana: not a Memnite or an Ornithopter
+        // a free artifact stands in for a land only if it makes mana with nothing else: not a Memnite or a Mox Diamond
         final CardCollectionView lands = CardLists.filter(handList, c -> c.getManaCost().getCMC() <= 0 && !c.hasSVar("NeedsToPlay")
-                && (c.isLand() || c.isArtifact() && !c.getManaAbilities().isEmpty()));
+                && (c.isLand() || c.isArtifact() && OpeningHand.isFreeManaSource(c)));
 
         final int handSize = handList.size();
         final int landSize = lands.size();

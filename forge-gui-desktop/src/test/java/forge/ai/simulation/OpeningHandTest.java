@@ -140,6 +140,72 @@ public class OpeningHandTest extends AITest {
                 "Air Elemental", "Grizzly Bears");
     }
 
+    // an artifact with a mana ability is only a source if it can be cast and used as it is
+
+    /** Two of the artifact, no land: the classic mulligan must not count them as two lands. */
+    private boolean classicSendsBackTwo(final String artifact) {
+        setUp(9, 8);
+        hand(artifact, artifact, "Grizzly Bears", "Hill Giant", "Shock", "Air Elemental", "Grizzly Bears");
+        return ComputerUtil.wantMulligan(ai, 0);
+    }
+
+    @Test
+    public void moxDiamondsWithoutALandToDiscardAreNoLands() {
+        AssertJUnit.assertTrue(classicSendsBackTwo("Mox Diamond"));
+    }
+
+    @Test
+    public void moxOpalsWithoutMetalcraftAreNoLands() {
+        AssertJUnit.assertTrue(classicSendsBackTwo("Mox Opal"));
+    }
+
+    @Test
+    public void otherArtifactsThatNeedSomethingFirstAreNoLands() {
+        final StringBuilder kept = new StringBuilder();
+        for (final String name : new String[] {"Mox Amber", "Chrome Mox", "Lion's Eye Diamond", "Everflowing Chalice",
+                "Mox Tantalite"}) {
+            if (!classicSendsBackTwo(name)) {
+                kept.append(name).append("; ");
+            }
+        }
+        AssertJUnit.assertEquals("", kept.toString());
+    }
+
+    @Test
+    public void freeArtifactsThatWorkAsTheyAreStillCount() {
+        for (final String name : new String[] {"Mox Emerald", "Lotus Petal", "Mana Crypt"}) {
+            AssertJUnit.assertFalse(name, classicSendsBackTwo(name));
+        }
+    }
+
+    /**
+     * The hard rule of the default mulligan, which comes before its score: whether two of the artifact make up for
+     * there being only one land.
+     */
+    private boolean oneLandAndTwoPass(final String artifact) {
+        setUp(9, 8);
+        return OpeningHand.playable(
+                hand("Island", artifact, artifact, "Grizzly Bears", "Hill Giant", "Shock", "Air Elemental"), 7);
+    }
+
+    @Test
+    public void moxDiamondsDoNotMakeUpForASingleLand() {
+        AssertJUnit.assertFalse(oneLandAndTwoPass("Mox Diamond"));
+    }
+
+    @Test
+    public void moxOpalsDoNotMakeUpForASingleLand() {
+        AssertJUnit.assertFalse(oneLandAndTwoPass("Mox Opal"));
+    }
+
+    @Test
+    public void manaArtifactsThatWorkStillMakeUpForASingleLand() {
+        // free ones, and one that enters tapped: that is a delay, not a condition
+        for (final String name : new String[] {"Mox Emerald", "Lotus Petal", "Fire Diamond", "Azorius Signet"}) {
+            AssertJUnit.assertTrue(name, oneLandAndTwoPass(name));
+        }
+    }
+
     @Test
     public void aTempleOfTheFalseGodIsNoLandForTheFirstTurns() {
         setUp(9, 8);

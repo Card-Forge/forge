@@ -13,6 +13,9 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates;
+import forge.game.cost.CostSacrifice;
+import forge.game.cost.CostTap;
+import forge.game.replacement.ReplacementType;
 import forge.card.CardStateName;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
@@ -650,11 +653,51 @@ public final class OpeningHand {
             return false;
         }
         for (final SpellAbility sa : c.getSpellAbilities()) {
-            if (sa.getApi() == ApiType.Mana && sa.isAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+            if (sa.getApi() == ApiType.Mana && sa.isAbility() && sa.getPayCosts() != null
+                    && sa.getPayCosts().hasTapCost() && worksAsItIs(c, sa)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Whether the card is a source of mana for nothing but tapping it, perhaps sacrificing it too: a Mox Emerald or a
+     * Lotus Petal can stand in for a land. A Mox Diamond, a Mox Opal or a Lion's Eye Diamond cannot.
+     */
+    public static boolean isFreeManaSource(final Card c) {
+        for (final SpellAbility sa : c.getManaAbilities()) {
+            if (sa.getApi() == ApiType.Mana && sa.getPayCosts() != null
+                    && sa.getPayCosts().getCostParts().stream().allMatch(part -> part instanceof CostTap
+                            || part instanceof CostSacrifice && part.payCostFromSource())
+                    && worksAsItIs(c, sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether the mana ability can be counted on from an opening hand. Judged from the script, and to the safe side:
+     * the card can be cast (Mox Tantalite cannot, it has to be suspended), entering asks for nothing (Mox Diamond),
+     * the ability has no condition (Mox Opal's metalcraft) and the amount is a fixed one (Everflowing Chalice).
+     */
+    private static boolean worksAsItIs(final Card c, final SpellAbility sa) {
+        if (c.getManaCost().isNoCost()) {
+            return false;
+        }
+        for (final String condition : new String[] {"Activation", "IsPresent", "CheckSVar", "ActivationPhases"}) {
+            if (sa.hasParam(condition)) {
+                return false;
+            }
+        }
+        if (!sa.getParamOrDefault("Amount", "1").matches("\\d+")) {
+            return false;
+        }
+        // a replacement of its own entering that only changes how it enters (tapped, with counters) is "Updated"
+        return c.getReplacementEffects().stream().noneMatch(r -> r.getMode() == ReplacementType.Moved
+                && "Battlefield".equals(r.getParam("Destination")) && "Card.Self".equals(r.getParam("ValidCard"))
+                && !"Updated".equals(r.getParam("ReplacementResult")));
     }
 
     /** The cards that make the plan work, read from what the card does. */
