@@ -5,9 +5,11 @@ import org.testng.annotations.Test;
 
 import forge.ai.AITest;
 import forge.ai.ComputerUtil;
+import forge.ai.PlayerControllerAi;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.mulligan.MulliganService;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -48,6 +50,94 @@ public class OpeningHandTest extends AITest {
         System.arraycopy(b, 0, r, 0, b.length);
         System.arraycopy(a, 0, r, b.length, a.length);
         return r;
+    }
+
+    /**
+     * Runs the real mulligan service (London) for an AI that mulligans twice, then looks at the given hand.
+     *
+     * @return what the third question was: the cards in hand, how many it was told it still has to put back, and what
+     *         the AI answers for the five cards given
+     */
+    private String thirdLookAfterTwoMulligans(final String... five) {
+        setUp(12, 12);
+        final Game game = ai.getGame();
+        final Player other = game.getPlayers().get(0);
+        for (int i = 0; i < 20; i++) {
+            addCardToZone("Island", other, ZoneType.Library);
+        }
+        final String[] third = new String[1];
+        final PlayerControllerAi judge = new PlayerControllerAi(game, ai, ai.getLobbyPlayer()) {
+            private int asked;
+
+            @Override
+            public boolean mulliganKeepHand(final Player first, final int cardsToReturn) {
+                if (++asked < 3) {
+                    return false;
+                }
+                if (third[0] == null) {
+                    final int size = ai.getCardsIn(ZoneType.Hand).size();
+                    for (final Card c : new CardCollection(ai.getCardsIn(ZoneType.Hand))) {
+                        game.getAction().moveToLibrary(c, null);
+                    }
+                    hand(five);
+                    third[0] = size + " cards, " + cardsToReturn + " to put back, keep="
+                            + super.mulliganKeepHand(first, cardsToReturn);
+                }
+                return true;
+            }
+        };
+        final PlayerControllerAi keeps = new PlayerControllerAi(game, other, other.getLobbyPlayer()) {
+            @Override
+            public boolean mulliganKeepHand(final Player first, final int cardsToReturn) {
+                return true;
+            }
+        };
+        // as a game does before the mulligans
+        ai.drawCards(7);
+        other.drawCards(7);
+        other.runWithController(() -> ai.runWithController(() -> new MulliganService(ai).perform(), judge), keeps);
+        return third[0];
+    }
+
+    @Test
+    public void afterTwoLondonMulligansTheFiveCardsAreJudgedAsFive() {
+        // the two cards were put back while the hand was drawn: there is nothing left to put back
+        AssertJUnit.assertEquals("5 cards, 0 to put back, keep=false", thirdLookAfterTwoMulligans(
+                "Mountain", "Mountain", "Dissipate", "Spectral Flight", "Invisible Stalker"));
+    }
+
+    @Test
+    public void aGoodFiveCardHandIsStillKeptAfterTwoLondonMulligans() {
+        AssertJUnit.assertEquals("5 cards, 0 to put back, keep=true", thirdLookAfterTwoMulligans(
+                "Island", "Island", "Dissipate", "Spectral Flight", "Invisible Stalker"));
+    }
+
+    // Card-Forge/forge#4209: spells that cost no mana are no reason to keep a hand without lands
+
+    private void assertNoKeepWithoutLands(final String... cards) {
+        setUp(9, 8);
+        final CardCollection hand = hand(cards);
+        AssertJUnit.assertFalse("the default mulligan", OpeningHand.keep(ai, hand, 0, true,
+                DeckPlan.of(DeckPlan.Archetype.AGGRO), 5));
+        AssertJUnit.assertTrue("the classic mulligan", ComputerUtil.wantMulligan(ai, 0));
+    }
+
+    @Test
+    public void freeCreaturesDoNotMakeUpForHavingNoLands() {
+        assertNoKeepWithoutLands("Memnite", "Memnite", "Ornithopter", "Ornithopter", "Hill Giant", "Shock",
+                "Air Elemental");
+    }
+
+    @Test
+    public void aPhyrexianManaSpellDoesNotMakeUpForHavingNoLands() {
+        assertNoKeepWithoutLands("Mutagenic Growth", "Mutagenic Growth", "Grizzly Bears", "Hill Giant", "Shock",
+                "Air Elemental", "Grizzly Bears");
+    }
+
+    @Test
+    public void aCardWithAPregameActionDoesNotMakeUpForHavingNoLands() {
+        assertNoKeepWithoutLands("Leyline of Sanctity", "Memnite", "Grizzly Bears", "Hill Giant", "Shock",
+                "Air Elemental", "Grizzly Bears");
     }
 
     @Test

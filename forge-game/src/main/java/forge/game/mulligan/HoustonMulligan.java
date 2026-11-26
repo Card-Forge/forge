@@ -22,6 +22,11 @@ public class HoustonMulligan extends AbstractMulligan {
         return TUCK_COUNT;
     }
 
+    @Override
+    public int cardsToBottomIfKept() {
+        return TUCK_COUNT; // put back by keep()
+    }
+
     public void beforeFirstMulligan() {
         player.drawCards(TUCK_COUNT);
     }

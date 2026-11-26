@@ -29,6 +29,14 @@ public abstract class AbstractMulligan {
         return 0;
     }
 
+    /**
+     * How many cards of the hand as it is now still go to the bottom if it is kept: what the player is told when asked
+     * whether to keep. This is not {@link #tuckCardsDuringMulligan} for a rule that has them put back already.
+     */
+    public int cardsToBottomIfKept() {
+        return 0;
+    }
+
     public void mulligan() {
         CardCollection toMulligan = new CardCollection(player.getCardsIn(ZoneType.Hand));
         if (toMulligan.isEmpty()) return;
