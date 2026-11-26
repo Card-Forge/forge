@@ -613,6 +613,11 @@ public class DialogChooseSets {
 
 		FButton clearButton = new FButton(localizer.getMessage("lblClearSelection"));
 		clearButton.addActionListener(e -> {
+			boolean anySelected = tagBoxes.values().stream().anyMatch(JCheckBox::isSelected)
+					|| getEditionNodes().stream().anyMatch(edition -> edition.isSelected || edition.isPartial);
+			if (anySelected && !FOptionPane.showConfirmDialog(localizer.getMessage("lblConfirmClearExcludedSets"),
+					localizer.getMessage("lblClearSelection"), localizer.getMessage("lblYes"), localizer.getMessage("lblNo"), false))
+				return;
 			tagBoxes.values().forEach(box -> box.setSelected(false));
 			getEditionNodes().forEach(edition -> {
 				edition.isSelected = false;

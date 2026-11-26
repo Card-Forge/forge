@@ -27,6 +27,7 @@ import forge.toolbox.FCheckBox;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
 import forge.toolbox.FTextField;
@@ -91,10 +92,19 @@ public class ExcludedSetsScreen extends MultiSetSelect {
             tagBoxes.put(tag, box);
         }
         btnClear.setCommand(e -> {
-            tagBoxes.values().forEach(box -> box.setSelected(false));
-            selectedSets.clear();
-            partlySelectedSets.clear();
-            partialNotes.clear();
+            boolean anySelected = !selectedSets.isEmpty() || !partlySelectedSets.isEmpty()
+                    || tagBoxes.values().stream().anyMatch(FCheckBox::isSelected);
+            if (!anySelected) {
+                clearSelection();
+                return;
+            }
+            // the button sits beside the search field, so a stray tap must not wipe a carefully built list
+            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblConfirmClearExcludedSets"),
+                    Forge.getLocalizer().getMessage("lblClearSelection"), Forge.getLocalizer().getMessage("lblYes"),
+                    Forge.getLocalizer().getMessage("lblNo"), false, confirmed -> {
+                        if (confirmed)
+                            clearSelection();
+                    });
         });
         updatePartialNotes();
         partlySelectedSets.addAll(editionsOf(FModel.getPartlyExcludedEditionCodes()));
@@ -107,6 +117,13 @@ public class ExcludedSetsScreen extends MultiSetSelect {
         helpShown = !helpShown;
         updateHelpLabel();
         lstSets.revalidate();
+    }
+
+    private void clearSelection() {
+        tagBoxes.values().forEach(box -> box.setSelected(false));
+        selectedSets.clear();
+        partlySelectedSets.clear();
+        partialNotes.clear();
     }
 
     private void updateHelpLabel() {
