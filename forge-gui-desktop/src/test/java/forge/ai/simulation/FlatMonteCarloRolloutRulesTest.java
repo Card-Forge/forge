@@ -232,6 +232,56 @@ public class FlatMonteCarloRolloutRulesTest extends FlatMcTestBase {
         assertTrue(bears.isInPlay(), "the creature was protected");
     }
 
+    /** The AI and the third player are a team; the AI puts a spell on the stack and the stack plays out. */
+    private void castWithATeammate(final SpellAbility sa) {
+        ai.setTeam(1);
+        third.setTeam(1);
+        opp.setTeam(2);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+        sa.setActivatingPlayer(ai);
+        final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(
+                ((PlayerControllerAi) ai.getController()).getAi(), ai);
+        ((PlayerControllerAi) ai.getController()).playChosenSpellAbility(sa);
+        FlatMonteCarloPicker.resolveWithResponses(game, ai, cfg, 0);
+    }
+
+    private void setUpTeams() {
+        game = initAndCreateThreePlayerGame();
+        opp = game.getPlayers().get(0);
+        ai = game.getPlayers().get(1);
+        third = game.getPlayers().get(2);
+    }
+
+    @Test(timeOut = 120000)
+    public void aTeammateCanAnswer() {
+        setUpTeams();
+        final Card mother = put("Mother of Runes", third, ZoneType.Battlefield);
+        mother.setSickness(false);
+        final Card bears = put("Grizzly Bears", third, ZoneType.Battlefield);
+        put("Mountain", ai, ZoneType.Battlefield);
+        final SpellAbility shock = put("Shock", ai, ZoneType.Hand).getFirstSpellAbility();
+        shock.resetTargets();
+        shock.getTargets().add(bears);
+        castWithATeammate(shock);
+        assertTrue(mother.isTapped(), "the teammate activated Mother of Runes");
+        assertTrue(bears.isInPlay(), "the creature was protected");
+    }
+
+    @Test(timeOut = 120000)
+    public void aTeammateDoesNotCounterTheTeamsOwnSpell() {
+        setUpTeams();
+        put("Island", 3, third, ZoneType.Battlefield);
+        put("Cancel", third, ZoneType.Hand);
+        put("Mountain", 5, ai, ZoneType.Battlefield);
+        final SpellAbility axe = put("Lava Axe", ai, ZoneType.Hand).getFirstSpellAbility();
+        FlatMonteCarloPicker.applyTarget(axe, opp);
+        opp.setLife(20, null);
+        castWithATeammate(axe);
+        assertEquals(third.getCardsIn(ZoneType.Hand).size(), 1, "the Cancel was kept");
+        assertEquals(opp.getLife(), 15);
+    }
+
     /** Passes on everything until it is asked about the named spell for the second time; then plays as usual. */
     private static final class AnswersTheSecondTime extends PlayerControllerAi {
         private final String spell;

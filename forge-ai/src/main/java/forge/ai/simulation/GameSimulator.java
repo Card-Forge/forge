@@ -389,17 +389,33 @@ public class GameSimulator {
         }, sim);
     }
 
-    /** Resolves only the top object of the stack, then checks state based effects and adds what triggered. */
-    public static void resolveTop(final Game game, final Player opponent) {
-        AITimeoutTracker.check();
-        PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
-        sim.getAi().setUseSimulation(AIOption.USE_FULL_SIMULATION);
-        opponent.runWithController(() -> {
-            final Set<Card> allAffectedCards = new HashSet<>();
-            game.getStack().resolveStack();
-            game.getAction().checkStateEffects(false, allAffectedCards);
-            game.getStack().addAllTriggeredAbilitiesToStack();
-        }, sim);
+    /**
+     * Resolves a stack one object at a time, for a caller that has something to do in between. As in
+     * {@link #resolveStack}, one controller and one set of affected cards serve all of them: a controller builds a
+     * whole {@code AiController}, too much to repeat for every trigger.
+     */
+    public static final class TopResolver {
+        private final Game game;
+        private final Player opponent;
+        private final PlayerControllerAi controller;
+        private final Set<Card> allAffectedCards = new HashSet<>();
+
+        public TopResolver(final Game game, final Player opponent) {
+            this.game = game;
+            this.opponent = opponent;
+            controller = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
+            controller.getAi().setUseSimulation(AIOption.USE_FULL_SIMULATION);
+        }
+
+        /** Resolves only the top object, then checks state based effects and adds what triggered. */
+        public void resolveTop() {
+            AITimeoutTracker.check();
+            opponent.runWithController(() -> {
+                game.getStack().resolveStack();
+                game.getAction().checkStateEffects(false, allAffectedCards);
+                game.getStack().addAllTriggeredAbilitiesToStack();
+            }, controller);
+        }
     }
 
     /** The copy of the AI player (given to the constructor) living in the simulated game. */

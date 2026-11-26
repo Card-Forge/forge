@@ -225,8 +225,9 @@ public final class FlatMonteCarloPicker {
          */
         public int lookaheadMaxCandidates = 0;
         /**
-         * Whether the opponents' heuristic AIs may answer the AI's spells in a rollout (a counterspell, instant speed
-         * removal), using the hand it was dealt in that sample. Costs more heuristic decisions per play.
+         * Whether the other players' heuristic AIs, a teammate's too, may respond to what is on the stack in a rollout
+         * (a counterspell, instant speed removal), using the hand dealt in that sample. Costs more heuristic decisions
+         * per play.
          */
         public boolean opponentResponses = true;
 
@@ -3054,31 +3055,37 @@ public final class FlatMonteCarloPicker {
 
     /**
      * Resolves the stack down to {@code floor} objects: what was put on top of those. Before each spell, activated
-     * ability or triggered ability resolves, the other side gets priority, so players can answer the AI's plays and
+     * ability or triggered ability resolves, the other players get priority, so they can answer the AI's plays and
      * each other's answers. Every response and every resolution starts a new round: having passed before does not
      * keep a player from answering what is on top now.
      */
     static void resolveWithResponses(final Game simGame, final Player simAi, final Config cfg, final int floor) {
         int responses = 0;
-        while (!simGame.isGameOver()) {
+        GameSimulator.TopResolver resolver = null;
+        putTriggersOnStack(simGame);
+        while (!simGame.isGameOver() && simGame.getStack().size() > floor) {
             AITimeoutTracker.check();
-            // cast triggers go on the stack before anybody gets priority
-            simGame.getAction().checkStateEffects(false);
-            simGame.getStack().addAllTriggeredAbilitiesToStack();
-            if (simGame.isGameOver() || simGame.getStack().size() <= floor) {
-                return;
-            }
             if (cfg.opponentResponses && responses < MAX_RESPONSES && offerPriority(simGame)) {
                 responses++;
+                putTriggersOnStack(simGame);
                 continue; // the answer is on top now: a new round of priority
             }
-            GameSimulator.resolveTop(simGame, simAi.getWeakestOpponent());
+            if (resolver == null) {
+                resolver = new GameSimulator.TopResolver(simGame, simAi.getWeakestOpponent());
+            }
+            resolver.resolveTop();
         }
     }
 
+    /** Cast triggers go on the stack before anybody gets priority. */
+    private static void putTriggersOnStack(final Game simGame) {
+        simGame.getAction().checkStateEffects(false);
+        simGame.getStack().addAllTriggeredAbilitiesToStack();
+    }
+
     /**
-     * Offers the opponents of the controller of what is on top, in turn order after that player, the chance to answer
-     * it.
+     * Offers every other player, teammates of its controller included, in turn order after that controller, the chance
+     * to answer what is on top.
      * Hidden cards are the ones dealt in this sample, so the AI learns nothing about the real ones.
      *
      * @return true as soon as one of them puts something on the stack; false when all of them pass
@@ -3086,8 +3093,9 @@ public final class FlatMonteCarloPicker {
     private static boolean offerPriority(final Game simGame) {
         final Player caster = simGame.getStack().peekAbility().getActivatingPlayer();
         for (final Player p : simGame.getPlayersInTurnOrder(caster)) {
-            // an empty hand is no reason to skip: abilities can be activated from the battlefield and other zones
-            if (!p.isInGame() || !p.isOpponentOf(caster) || !(p.getController() instanceof PlayerControllerAi)) {
+            // teammates get priority too, and an empty hand is no reason to skip: abilities can be activated from the
+            // battlefield and other zones
+            if (p == caster || !p.isInGame() || !(p.getController() instanceof PlayerControllerAi)) {
                 continue;
             }
             AITimeoutTracker.check();
