@@ -1,7 +1,6 @@
 package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.path.NodeEvent;
-import forge.util.Localizer;
 import java.awt.*;
 
 /**
@@ -18,7 +17,7 @@ public class NodeEventPanel extends NodeCircularPanel {
    */
   public NodeEventPanel(NodeEvent node) {
     super(node);
-    setToolTipText(Localizer.getInstance().getMessage("lblRogueEventTooltip"));
+    setToolTipText(node.getType().sideTooltip());
   }
 
   @Override

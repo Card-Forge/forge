@@ -737,6 +737,18 @@ public class RogueMetaProgress {
         return true;
     }
 
+    public boolean upgradeAndActivateAetherEffect(AetherEffect aetherEffect) {
+        int rankBefore = getAetherEffectRank(aetherEffect);
+        if (!upgradeAetherEffect(aetherEffect)) {
+            return false;
+        }
+        // Auto-activate the Aetherwork when first built (rank goes from 0 to 1)
+        if (rankBefore == 0) {
+            activateAetherEffect(aetherEffect);
+        }
+        return true;
+    }
+
     /**
      * Get all currently active Aetherworks.
      */

@@ -73,7 +73,7 @@ class DesktopRogueDecisions implements RogueDecisions {
 
     @Override
     public List<PaperCard> chooseCards(CardChoice choice) {
-        return new CardSelectionDialog(choice.title(), choice.subtitle(), choice.candidates(), choice.run(),
+        return new CardSelectionDialog(choice.title(), choice.subtitle(), choice.shown(), choice.run(),
             choice.min(), choice.max(), choice.preview()).show();
     }
 

@@ -7,6 +7,7 @@ import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.rogue.BazaarPricing;
 import forge.gamemodes.rogue.CardRewardHelper;
+import forge.gamemodes.rogue.CodexHelper;
 import forge.gamemodes.rogue.RogueCustomDeckGenerator;
 import forge.gamemodes.rogue.RogueEvent;
 import forge.gamemodes.rogue.RogueRun;
@@ -23,6 +24,7 @@ import forge.gamemodes.rogue.path.NodePlanebound;
 import forge.item.PaperCard;
 import forge.util.Localizer;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -92,6 +94,14 @@ public interface RogueDecisions extends CardRewardHelper.RewardDialog {
             }
             List<PaperCard> left = new ArrayList<>(candidates);
             return picked.stream().allMatch(left::remove);
+        }
+
+        public List<PaperCard> shown() {
+            // Sort by type (Deck Editor order), then by CMC
+            List<PaperCard> shown = new ArrayList<>(candidates);
+            shown.sort(Comparator.comparingInt(CodexHelper::codexCardTypeOrder)
+                .thenComparingInt(c -> c.getRules().getManaCost().getCMC()));
+            return shown;
         }
     }
     record Section(String label, String text, List<PaperCard> cards) { }
