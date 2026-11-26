@@ -528,13 +528,7 @@ public class RogueMapScreen extends RogueScreen {
 
     /** The node's kind and desktop's tooltip text for it. */
     static String[] sideText(RoguePathNode node) {
-        Localizer localizer = Localizer.getInstance();
-        String text = switch (node.getType()) {
-            case SANCTUM -> localizer.getMessage("lblRogueSanctumTooltip");
-            case BAZAAR -> localizer.getMessage("lblRogueBazaarTooltip");
-            case CHEST -> localizer.getMessage("lblRogueChestTooltip");
-            case EVENT, PLANEBOUND -> localizer.getMessage("lblRogueEventTooltip");
-        };
+        String text = node.getType().sideTooltip();
         String[] parts = text.split(": ", 2);
         return parts.length == 2 ? parts : new String[]{text, ""};
     }

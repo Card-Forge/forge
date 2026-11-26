@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.flow;
 
+import forge.LobbyPlayer;
 import forge.ai.AITest;
 import forge.game.Game;
 import forge.game.GameEndReason;
@@ -18,6 +19,7 @@ import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.RogueRunHistoryEntry;
 import forge.gamemodes.rogue.RogueRunState;
 import forge.gamemodes.rogue.RogueWinLoseController;
+import forge.gamemodes.rogue.effect.AetherEffect;
 import forge.gamemodes.rogue.effect.ChestEffect;
 import forge.gamemodes.rogue.flow.RogueDecisions.Pick;
 import forge.gamemodes.rogue.flow.RogueDecisions.RogueMatch;
@@ -225,6 +227,17 @@ public class RogueFlowTest extends AITest {
     }
 
     @Test
+    public void replacingTheRunRestoresThePlayersNameAvatarAndSleeve() {
+        start(NodePlanebound.class);
+        LobbyPlayer human = GamePlayerUtil.getGuiPlayer();
+        human.setName("Human");
+        startedMatch();
+        Assert.assertEquals(human.getName(), run.getCurrentCommanderName());
+        flow.setRun(null);
+        Assert.assertEquals(human.getName(), "Human");
+    }
+
+    @Test
     public void aWonBattlePaysAndLeavesTheMatch() {
         start(NodePlanebound.class);
         // The elite, which pays 4 gold and 4 echoes and adds a second pick of mythics
@@ -263,6 +276,18 @@ public class RogueFlowTest extends AITest {
         Assert.assertEquals(asked, List.of("startMatch", "runEnded"));
         Assert.assertNull(flow.run());
         Assert.assertTrue(flow.load().isEmpty());
+    }
+
+    @Test
+    public void aBuiltAetherworkIsSwitchedOnWhileEnergyLasts() {
+        RogueMetaProgress progress = RogueMetaProgress.getInstance();
+        List<AetherEffect> works = List.of(AetherEffect.ZHALFIRIN_SANCTUARY, AetherEffect.AETHER_EXCHANGE,
+            AetherEffect.RESTORATION_CHAMBER, AetherEffect.SPECTRAL_EXPANDER);
+        Assert.assertFalse(progress.upgradeAetherEffect(works.get(0)));
+
+        progress.addEchoes(1000);
+        works.forEach(work -> Assert.assertTrue(progress.upgradeAetherEffect(work)));
+        Assert.assertEquals(progress.getActiveAetherEffects(), Set.copyOf(works.subList(0, 3)));
     }
 
     @Test

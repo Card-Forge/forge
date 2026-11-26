@@ -31,8 +31,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -332,14 +330,11 @@ public class RogueCodexScreen extends RogueScreen {
     private void traits(RogueMetaProgress progress) {
         Localizer l = Localizer.getInstance();
         Map<CodexHelper.TraitCategory, List<RogueEffect>> byCategory = CodexHelper.getCodexTraitsByCategory();
-        CodexHelper.TraitCategory[] order = {CodexHelper.TraitCategory.CHEST, CodexHelper.TraitCategory.NPC,
-            CodexHelper.TraitCategory.EVENT, CodexHelper.TraitCategory.WOUND};
-        String[] titles = {l.getMessage("lblRogueChest"), l.getMessage("lblRogueNpc"), l.getMessage("lblRogueEvent"), l.getMessage("lblRogueWound")};
         List<CodexState> states = new ArrayList<>();
         List<Runnable> sections = new ArrayList<>();
-        for (int i = 0; i < order.length; i++) {
+        for (CodexHelper.TraitCategory category : CodexHelper.TraitCategory.values()) {
             List<TraitTile> tiles = new ArrayList<>();
-            for (RogueEffect effect : byCategory.getOrDefault(order[i], List.of())) {
+            for (RogueEffect effect : byCategory.getOrDefault(category, List.of())) {
                 if (effect.getEffectCard() == null) {
                     continue;
                 }
@@ -347,9 +342,8 @@ public class RogueCodexScreen extends RogueScreen {
                 states.add(state);
                 tiles.add(new TraitTile(effect, state));
             }
-            String title = titles[i];
             sections.add(() -> {
-                main.put(new Head(title, 1.2f, RogueLook.DEEP));
+                main.put(new Head(category.label(), 1.2f, RogueLook.DEEP));
                 main.put(new TraitColumns(tiles));
             });
         }
@@ -414,21 +408,14 @@ public class RogueCodexScreen extends RogueScreen {
     /** One entry per card, but a basic land only once. */
     private static List<Entry> deckEntries(List<PaperCard> cards, StateFor state) {
         List<Entry> entries = new ArrayList<>();
-        Set<String> basics = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        for (PaperCard card : cards) {
-            if (card == null || card.getRules() == null) {
-                continue;
-            }
-            if (!card.getRules().getType().isBasicLand() || basics.add(card.getName())) {
-                entries.add(new Entry(card, state.of(card)));
-            }
+        for (PaperCard card : CodexHelper.eachBasicOnce(cards)) {
+            entries.add(new Entry(card, state.of(card)));
         }
         return entries;
     }
 
     private static void sort(List<Entry> entries) {
-        entries.sort(Comparator.comparingInt((Entry e) -> CodexHelper.codexCardTypeOrder(e.card()))
-            .thenComparing(e -> e.card().getName(), String.CASE_INSENSITIVE_ORDER));
+        entries.sort(Comparator.comparing(Entry::card, CodexHelper.CODEX_CARD_ORDER));
     }
 
     @Override

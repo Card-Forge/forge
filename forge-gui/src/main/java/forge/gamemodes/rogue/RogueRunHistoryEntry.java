@@ -6,6 +6,7 @@ import forge.gamemodes.rogue.effect.EndlessMode;
 import forge.gamemodes.rogue.effect.RogueEffect;
 import forge.gamemodes.rogue.effect.RogueEffectComposite;
 import forge.gamemodes.rogue.path.*;
+import forge.util.Localizer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,6 +87,24 @@ public class RogueRunHistoryEntry {
         }
 
         return pathLabels;
+    }
+
+    /** The outcome as History shows it. An Endless run was won before it went Endless, so its defeat shows as a victory. */
+    public String getShownOutcome() {
+        return endlessLevel > 0 && "DEFEAT".equals(outcome) ? "VICTORY" : outcome;
+    }
+
+    /** Who was beaten for a victory or who won a defeat, or empty when neither is known. */
+    public String getOutcomeDetail() {
+        String key = switch (outcome) {
+            case "VICTORY" -> "lblRogueHistoryBossSlain";
+            case "DEFEAT" -> "lblRogueHistoryDefeatedBy";
+            default -> null;
+        };
+        if (key == null || bossOrDefeatedBy == null || bossOrDefeatedBy.isEmpty()) {
+            return "";
+        }
+        return Localizer.getInstance().getMessage(key, bossOrDefeatedBy);
     }
 
     // Getters
