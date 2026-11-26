@@ -33,6 +33,14 @@ public class ProwessTimingTest extends FlatMcTestBase {
     }
 
     @Test
+    public void nestedDamageAbilityUsesItsRootSpellForProwessTiming() {
+        put("Monastery Swiftspear", ai, ZoneType.Battlefield);
+        final SpellAbility skullcrack = spellOf(put("Skullcrack", ai, ZoneType.Hand));
+        at(PhaseType.MAIN1, ai);
+        AssertJUnit.assertTrue(ProwessTiming.worthBeforeCombat(ai, skullcrack.getSubAbility()));
+    }
+
+    @Test
     public void boltwaveAfterCombatGetsNoSuchPush() {
         put("Monastery Swiftspear", ai, ZoneType.Battlefield);
         final SpellAbility boltwave = spellOf(put("Boltwave", ai, ZoneType.Hand));
@@ -54,5 +62,6 @@ public class ProwessTimingTest extends FlatMcTestBase {
         swiftspear.setTapped(true);
         final SpellAbility boltwave = spellOf(put("Boltwave", ai, ZoneType.Hand));
         at(PhaseType.MAIN1, ai);
+        AssertJUnit.assertFalse(ProwessTiming.worthBeforeCombat(ai, boltwave));
     }
 }

@@ -2131,6 +2131,35 @@ public final class FlatMonteCarloPicker {
         return sa.getHostCard() != null && (sa.getHostCard().hasSVar("MustCastInUpkeep") || sa.isTrigger());
     }
 
+    /**
+     * Whether a spell is better left for later in an upkeep or draw step with nothing on the stack (Ephemerate with nothing to
+     * blink in its own upkeep, Kozilek's Command in the draw step, #12930). Deliberately narrow: it only defers a plain spell
+     * that has no reason to be cast now. Whatever is lost when the step ends stays castable: floating mana, a card that is
+     * only castable then, a tutor that finds its card for the whole turn, an ability that names its phases.
+     */
+    public static boolean shouldDeferEarlySpell(final Player player, final SpellAbility sa) {
+        if (!sa.isSpell() || sa.isCopied() || sa.getApi() == ApiType.Counter) {
+            return false;
+        }
+        final Card host = sa.getHostCard();
+        if (host == null || host.hasSVar("MustCastInUpkeep") || sa.isTrigger()) {
+            return false;
+        }
+        final Game game = host.getGame();
+        // "cast only during your upkeep and end step": it can wait while a permitted step is still to come this turn
+        if (sa.getRestrictions() != null && sa.getRestrictions().getPhases() != null && !sa.getRestrictions().getPhases().isEmpty()) {
+            final PhaseType now = game.getPhaseHandler().getPhase();
+            if (sa.getRestrictions().getPhases().stream().noneMatch(ph -> ph.isAfter(now))) {
+                return false; // this is the last window it has
+            }
+        }
+        if (!player.getManaPool().isEmpty()) {
+            return false; // mana from an upkeep effect is gone when the step ends
+        }
+        // a tutor in the player's own turn: the card is in hand for the draw step and the main phase
+        return !(TutorPlan.isLibraryTutor(sa) && game.getPhaseHandler().isPlayerTurn(player));
+    }
+
     public static boolean isCombatTrick(final SpellAbility sa) {
         if (sa == null || sa.isLandAbility() || sa.isManaAbility() || sa.getHostCard() == null || sa.isPwAbility()) {
             return false;

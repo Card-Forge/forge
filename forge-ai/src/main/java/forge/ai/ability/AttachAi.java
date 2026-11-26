@@ -1011,6 +1011,16 @@ public class AttachAi extends SpellAbilityAi {
             && sa.getParent().getApi() == ApiType.Token && sa.getParent().hasParam("RememberTokens")) {
             // Living Weapon or similar
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else if ("Remembered".equals(sa.getParam("Defined")) && sa.getParent() != null
+            && sa.getParent().getApi() == ApiType.ChangeZone && sa.getParent().hasParam("RememberChanged")
+            && !sa.usesTargeting()) {
+            // Nim Deathmantle and the like: returns the card, then attaches itself to what came back
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else if ("TriggeredCardLKICopy".equals(sa.getParam("Defined")) && sa.getParent() != null
+            && sa.getParent().getApi() == ApiType.ChangeZone && "Self".equals(sa.getParent().getParam("Defined"))
+            && !sa.usesTargeting()) {
+            // Sword of the Meek: comes back from the graveyard, then attaches itself to the 1/1 that entered
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }

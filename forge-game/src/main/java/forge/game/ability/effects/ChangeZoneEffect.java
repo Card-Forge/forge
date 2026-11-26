@@ -911,7 +911,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // FCollection already does use set.
                     pl.add(tgtC.getOwner());
                 }
-                if (pl.isEmpty()) {
+                if (pl.isEmpty() && !sa.usesTargeting()) {
                     pl.add(activator);
                 }
             }

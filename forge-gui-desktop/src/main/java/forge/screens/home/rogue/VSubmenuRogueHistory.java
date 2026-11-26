@@ -202,7 +202,7 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
       lblOutcome = createOutcomeLabel(entry);
       add(lblOutcome);
 
-      lblDetail = new FLabel.Builder().text(getOutcomeDetail(entry)).fontSize(12)
+      lblDetail = new FLabel.Builder().text(entry.getOutcomeDetail()).fontSize(12)
           .fontAlign(SwingConstants.LEFT).build();
       add(lblDetail);
 
@@ -243,7 +243,7 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
         lblEndless = new FLabel.Builder()
             .text(localizer.getMessage("lblRogueEndlessLevel", entry.getEndlessLevel()))
             .fontSize(12).fontAlign(SwingConstants.LEFT).build();
-        lblEndless.setToolTipText(EndlessMode.getModifiersDescription(entry.getEndlessLevel()));
+        lblEndless.setToolTipText(RogueUIHelper.html(EndlessMode.getModifiersDescription(entry.getEndlessLevel()), false));
         add(lblEndless);
       } else {
         lblEndless = null;
@@ -270,9 +270,7 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
     }
 
     private static FLabel createOutcomeLabel(RogueRunHistoryEntry entry) {
-      String outcome = entry.getOutcome();
-      String displayedOutcome = entry.getEndlessLevel() > 0 && OUTCOME_DEFEAT.equals(outcome)
-          ? OUTCOME_VICTORY : outcome;
+      String displayedOutcome = entry.getShownOutcome();
       Color outcomeColor = switch (displayedOutcome) {
         case OUTCOME_VICTORY -> new Color(0, 200, 0);
         case OUTCOME_DEFEAT -> new Color(220, 50, 50);
@@ -292,19 +290,6 @@ public enum VSubmenuRogueHistory implements IVSubmenu<CSubmenuRogueHistory> {
           .build();
       label.setForeground(outcomeColor);
       return label;
-    }
-
-    private static String getOutcomeDetail(RogueRunHistoryEntry entry) {
-      String key = switch (entry.getOutcome()) {
-        case OUTCOME_VICTORY -> "lblRogueHistoryBossSlain";
-        case OUTCOME_DEFEAT -> "lblRogueHistoryDefeatedBy";
-        default -> null;
-      };
-      String opponent = entry.getBossOrDefeatedBy();
-      if (key == null || opponent.isEmpty()) {
-        return "";
-      }
-      return Localizer.getInstance().getMessage(key, opponent);
     }
 
     private static FScrollPane createEffectsScroller(List<RogueRunHistoryEntry.EffectSnapshot> effects) {

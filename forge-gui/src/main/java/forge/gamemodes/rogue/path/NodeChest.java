@@ -36,6 +36,11 @@ public class NodeChest extends RoguePathNode {
     }
 
     @Override
+    public NodeType getType() {
+        return NodeType.CHEST;
+    }
+
+    @Override
     public String toString() {
         List<ChestEffect> effects = getChestEffects();
         return effects.isEmpty()

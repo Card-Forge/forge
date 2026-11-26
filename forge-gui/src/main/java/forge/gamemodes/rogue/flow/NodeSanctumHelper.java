@@ -1,4 +1,4 @@
-package forge.screens.home.rogue;
+package forge.gamemodes.rogue.flow;
 
 import forge.card.CardRulesPredicates;
 import forge.gamemodes.rogue.RogueMetaProgress;
@@ -8,12 +8,15 @@ import forge.gamemodes.rogue.RogueTutorial;
 import forge.gamemodes.rogue.effect.ChoiceRerollContext;
 import forge.gamemodes.rogue.effect.RogueEffectComposite;
 import forge.gamemodes.rogue.effect.SanctumContext;
+import forge.gamemodes.rogue.flow.RogueDecisions.ResultKind;
+import forge.gamemodes.rogue.flow.RogueDecisions.SanctumAnswer;
+import forge.gamemodes.rogue.flow.RogueDecisions.SanctumOffer;
+import forge.gamemodes.rogue.flow.RogueDecisions.Section;
 import forge.gamemodes.rogue.npc.NPCContext;
 import forge.gamemodes.rogue.npc.NPCEncounterComposite;
 import forge.gamemodes.rogue.path.NodeSanctum;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
-import forge.toolbox.FOptionPane;
 import forge.util.Aggregates;
 import forge.util.Localizer;
 import java.util.List;
@@ -23,10 +26,10 @@ class NodeSanctumHelper {
 
     private static final String SANCTUM_COOK_SOURCE_ID = "sanctum_cook";
 
-    private final CSubmenuRogueMap map;
+    private final RogueFlow flow;
 
-    NodeSanctumHelper(CSubmenuRogueMap map) {
-        this.map = map;
+    NodeSanctumHelper(RogueFlow flow) {
+        this.flow = flow;
     }
 
     void handleSanctumNode(NodeSanctum sanctumNode, RogueRun currentRun) {
@@ -35,11 +38,11 @@ class NodeSanctumHelper {
         }
 
         resolveSanctum(currentRun, sanctumNode);
-        map.completeSideNode(sanctumNode);
+        flow.completeSideNode(sanctumNode);
     }
 
     void resolveSanctum(RogueRun currentRun, NodeSanctum sanctumNode) {
-        RogueTutorialHelper.showIfNotSeen(RogueTutorial.SANCTUM);
+        flow.decisions().showTutorial(RogueTutorial.SANCTUM);
         RogueMetaProgress progress = RogueMetaProgress.getInstance();
         SanctumContext sanctumCtx = new SanctumContext();
         RogueEffectComposite.INSTANCE.onBeforeSanctum(sanctumCtx, currentRun);
@@ -50,10 +53,10 @@ class NodeSanctumHelper {
         if (!sanctumCtx.restLifeGainDisabled) {
             baseHealAmount = sanctumCtx.restFullHeal ? currentRun.getMaxLife() : sanctumNode.getHealAmount();
         }
-        SanctumDialog dialog = createSanctumDialog(sanctumCtx, currentRun, baseHealAmount);
-        SanctumDialog.SanctumChoice choice = dialog.show();
+        SanctumAnswer answer = flow.decisions().chooseSanctum(
+            createSanctumOffer(sanctumCtx, currentRun, baseHealAmount));
 
-        switch (choice) {
+        switch (answer.action()) {
             case HEAL:
                 if (!sanctumCtx.restLifeGainDisabled && sanctumCtx.restMaxLifeCost > 0) {
                     currentRun.loseMaxLife(sanctumCtx.restMaxLifeCost);
@@ -66,19 +69,16 @@ class NodeSanctumHelper {
             case COOK:
                 PaperCard craftedFood = craftSanctumFood(currentRun);
                 if (craftedFood == null) {
-                    FOptionPane.showMessageDialog(
-                        Localizer.getInstance().getMessage("lblRogueNoFoodAvailable"),
-                        Localizer.getInstance().getMessage("lblRogueSanctum"));
+                    flow.decisions().showMessage(
+                        Localizer.getInstance().getMessage("lblRogueSanctum"),
+                        Localizer.getInstance().getMessage("lblRogueNoFoodAvailable"));
                     break;
                 }
                 currentRun.addCarryCard(craftedFood, CarryCardType.ITEM, SANCTUM_COOK_SOURCE_ID);
-                map.showNodeResultDialog(
+                flow.decisions().showResult(ResultKind.SANCTUM,
                     Localizer.getInstance().getMessage("lblRogueSanctum"),
                     Localizer.getInstance().getMessage("lblRogueYouCooked"),
-                    List.of(new NodeResultPanel.CardSection(null, List.of(craftedFood))),
-                    900,
-                    700,
-                    NodeResultPanel.MessageAlignment.CENTER);
+                    List.of(new Section(null, null, List.of(craftedFood))));
                 break;
 
             case REFLECT:
@@ -86,7 +86,7 @@ class NodeSanctumHelper {
                 break;
 
             case CUSTOM:
-                SanctumContext.SanctumChoice customChoice = dialog.getCustomChoice();
+                SanctumContext.SanctumChoice customChoice = answer.custom();
                 if (customChoice != null) {
                     RogueEffectComposite.INSTANCE.onSanctumChoice(customChoice, currentRun);
                     showNpcDialogs(NPCEncounterComposite.INSTANCE.onSanctumChoice(
@@ -99,8 +99,8 @@ class NodeSanctumHelper {
         }
     }
 
-    private static SanctumDialog createSanctumDialog(SanctumContext sanctumCtx, RogueRun currentRun,
-                                                       int baseHealAmount) {
+    private static SanctumOffer createSanctumOffer(SanctumContext sanctumCtx, RogueRun currentRun,
+                                                   int baseHealAmount) {
         int missingLife = Math.max(0, currentRun.getMaxLife() - currentRun.getCurrentLife());
         int effectiveHealAmount = Math.min(baseHealAmount, missingLife);
         boolean hasWounds = !currentRun.getActiveWoundEffects().isEmpty();
@@ -129,12 +129,12 @@ class NodeSanctumHelper {
             }
             restDisabledReason = localizer.getMessage(reasonKey);
         }
-        return new SanctumDialog(restDescription, restEnabled, restDisabledReason, sanctumCtx);
+        return new SanctumOffer(restDescription, restEnabled, restDisabledReason, sanctumCtx, currentRun);
     }
 
     private void showNpcDialogs(List<NPCContext> contexts) {
         for (NPCContext context : contexts) {
-            new NPCDialog(context, new ChoiceRerollContext()).show();
+            flow.decisions().chooseBoon(context, new ChoiceRerollContext());
         }
     }
 

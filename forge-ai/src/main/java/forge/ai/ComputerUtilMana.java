@@ -586,6 +586,41 @@ public class ComputerUtilMana {
         return produced.startsWith("Combo ") ? StringUtils.repeat("C", " ", ma.amountOfManaGenerated(false)) : produced;
     }
 
+    /**
+     * The colour that the spells still to be paid for lack the most of, among the offered ones, or 0 when the pool covers
+     * them all: an any-colour mana ability (Lion's Eye Diamond, a Lotus Petal) chose the most common colour of the hand,
+     * which was the black of Dark Ritual and Infernal Tutor when the Burning Wish in the same hand needed a red, and
+     * the white of nothing at all once the Diamond had discarded the hand. Pips of one colour only count (hybrid and
+     * phyrexian shards are left out).
+     */
+    public static byte colorShortfall(final Player ai, final Iterable<Card> spells, final byte offered) {
+        final int[] need = new int[MagicColor.WUBRG.length];
+        for (final Card c : spells) {
+            if (c.isLand() || c.getManaCost() == null) {
+                continue;
+            }
+            for (final ManaCostShard shard : c.getManaCost()) {
+                final int mask = shard.getColorMask();
+                for (int i = 0; i < MagicColor.WUBRG.length; i++) {
+                    if (mask == MagicColor.WUBRG[i]) {
+                        need[i]++;
+                    }
+                }
+            }
+        }
+        byte best = 0;
+        int most = 0;
+        for (int i = 0; i < MagicColor.WUBRG.length; i++) {
+            final byte color = MagicColor.WUBRG[i];
+            final int lacks = need[i] - ai.getManaPool().getAmountOfColor(color);
+            if ((offered & color) != 0 && lacks > most) {
+                most = lacks;
+                best = color;
+            }
+        }
+        return best;
+    }
+
     // shared by predictMana and the AI's real choice, so a payment makes the color it was planned with
     public static byte chooseColorForShard(ManaCostShard shard, byte offered) {
         final int colors = offered & shard.getColorMask();
@@ -1510,6 +1545,14 @@ public class ComputerUtilMana {
         if (ma != sa && ma.getPayCosts() != null && ma.getPayCosts().hasSpecificCostType(forge.game.cost.CostDiscard.class)
                 && ai.isAI()
                 && ComboPlan.holdsKillPiece(ai)) {
+            return false;
+        }
+
+        // a mana ability that exiles another creature (Food Chain) is for a loop that goes round it, not for paying a
+        // spell: paid like that it exiled the Craterhoof Behemoth that had just been cast, to cast a Squee
+        if (ma != sa && ma.getPayCosts() != null && ai.isAI() && ma.getPayCosts().getCostParts().stream()
+                .anyMatch(part -> part instanceof CostExile && !part.payCostFromSource()
+                        && String.valueOf(part.getType()).contains("Creature"))) {
             return false;
         }
 

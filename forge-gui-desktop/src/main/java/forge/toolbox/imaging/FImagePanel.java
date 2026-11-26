@@ -31,6 +31,7 @@ import javax.swing.Timer;
 import com.mortennobel.imagescaling.DimensionConstrain;
 import com.mortennobel.imagescaling.ResampleOp;
 
+import forge.ImageCache;
 import forge.gui.GuiBase;
 
 /**
@@ -227,9 +228,16 @@ public class FImagePanel extends JPanel {
         if (this.imageScale != 1) {
             if (isResampleEnabled) {
                 isResampleEnabled = false;
-                DimensionConstrain constrain = DimensionConstrain.createRelativeDimension((float)this.imageScale);
-                ResampleOp resampler = new ResampleOp(constrain);
-                this.scaledImage = resampler.filter(sourceImage, null);
+                final int destWidth = (int) (sourceImage.getWidth() * this.imageScale);
+                final int destHeight = (int) (sourceImage.getHeight() * this.imageScale);
+                if (!ImageCache.isSupportedImageSize(destWidth, destHeight)) {
+                    // too small for the resampler, which needs at least 3x3; nothing worth drawing at this size
+                    this.scaledImage = null;
+                } else {
+                    DimensionConstrain constrain = DimensionConstrain.createRelativeDimension((float)this.imageScale);
+                    ResampleOp resampler = new ResampleOp(constrain);
+                    this.scaledImage = resampler.filter(sourceImage, null);
+                }
             }
         } else {
             this.scaledImage = sourceImage;

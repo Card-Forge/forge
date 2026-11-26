@@ -1,12 +1,14 @@
 package forge.game.staticability;
 
+import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantPreventDamage {
 
-    public static boolean cantPreventDamage(final Card source, final boolean isCombat) {
+    // target is null when the caller only knows the source (AI forecasts)
+    public static boolean cantPreventDamage(final Card source, final GameEntity target, final boolean isCombat) {
         CardCollection list = new CardCollection(source.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         list.add(source);
         for (final Card ca : list) {
@@ -14,7 +16,7 @@ public class StaticAbilityCantPreventDamage {
                 if (!stAb.checkConditions(StaticAbilityMode.CantPreventDamage)) {
                     continue;
                 }
-                if (applyCantPreventDamage(stAb, source, isCombat)) {
+                if (applyCantPreventDamage(stAb, source, target, isCombat)) {
                     return true;
                 }
             }
@@ -22,7 +24,7 @@ public class StaticAbilityCantPreventDamage {
         return false;
     }
 
-    public static boolean applyCantPreventDamage(final StaticAbility stAb, final Card source, final boolean isCombat) {
+    public static boolean applyCantPreventDamage(final StaticAbility stAb, final Card source, final GameEntity target, final boolean isCombat) {
         if (stAb.hasParam("IsCombat")) {
             if (stAb.getParam("IsCombat").equals("True") != isCombat) {
                 return false;
@@ -31,6 +33,11 @@ public class StaticAbilityCantPreventDamage {
 
         if (!stAb.matchesValidParam("ValidSource", source)) {
             return false;
+        }
+        if (stAb.hasParam("Affected")) {
+            if (target == null || !stAb.matchesValidParam("Affected", target)) {
+                return false;
+            }
         }
         return true;
     }

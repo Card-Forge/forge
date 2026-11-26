@@ -75,6 +75,20 @@ public class PermanentAi extends SpellAbilityAi {
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
 
+        if ("SleeperAgent".equals(sa.getParam("AILogic"))) {
+            final AiAbilityDecision lend = ControlGainAi.lendToOpponent(ai, source);
+            if (!lend.willingToPlay()) {
+                return lend;
+            }
+        }
+
+        if ("SleeperAgent".equals(source.getSVar("AICastLogic"))) {
+            final AiAbilityDecision lend = ControlGainAi.lendToOpponent(ai, source);
+            if (!lend.willingToPlay()) {
+                return lend;
+            }
+        }
+
         // check on legendary
         if (!source.ignoreLegendRule() && ai.isCardInPlay(source.getName())) {
             // TODO check the risk we'd lose the effect with bad timing

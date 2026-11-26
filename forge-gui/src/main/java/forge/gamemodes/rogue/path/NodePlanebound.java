@@ -126,6 +126,11 @@ public class NodePlanebound extends RoguePathNode {
     }
 
     @Override
+    public NodeType getType() {
+        return NodeType.PLANEBOUND;
+    }
+
+    @Override
     public String toString() {
         RoguePlaneboundType type = getPlaneboundType();
         String typeStr = type == RoguePlaneboundType.BOSS ? "Boss" :

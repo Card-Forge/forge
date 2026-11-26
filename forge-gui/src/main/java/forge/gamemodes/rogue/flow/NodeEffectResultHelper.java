@@ -1,4 +1,4 @@
-package forge.screens.home.rogue;
+package forge.gamemodes.rogue.flow;
 
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.effect.EffectResultContext;
@@ -10,20 +10,17 @@ import forge.gamemodes.rogue.path.RoguePathNode;
 
 class NodeEffectResultHelper {
 
-    private final CSubmenuRogueMap map;
+    private final RogueFlow flow;
     private final NodeBazaarHelper bazaarHelper;
     private final NodeChestHelper chestHelper;
     private final NodeSanctumHelper sanctumHelper;
-    private final NodePlaneboundHelper planeboundHelper;
 
-    NodeEffectResultHelper(CSubmenuRogueMap map, NodeBazaarHelper bazaarHelper,
-                           NodeChestHelper chestHelper, NodeSanctumHelper sanctumHelper,
-                           NodePlaneboundHelper planeboundHelper) {
-        this.map = map;
+    NodeEffectResultHelper(RogueFlow flow, NodeBazaarHelper bazaarHelper,
+                           NodeChestHelper chestHelper, NodeSanctumHelper sanctumHelper) {
+        this.flow = flow;
         this.bazaarHelper = bazaarHelper;
         this.chestHelper = chestHelper;
         this.sanctumHelper = sanctumHelper;
-        this.planeboundHelper = planeboundHelper;
     }
 
     NodeFlowOutcome handleEffectTrigger(RoguePathNode sourceNode, EffectResultContext ctx, RogueRun currentRun) {
@@ -31,33 +28,30 @@ class NodeEffectResultHelper {
             return NodeFlowOutcome.COMPLETE_NODE;
         }
 
-        switch (ctx.trigger) {
-            case BAZAAR:
+        return switch (ctx.trigger) {
+            case BAZAAR -> {
                 ctx.addedCards = bazaarHelper.runBazaarShopping(currentRun, ctx.bazaarContext);
-                return NodeFlowOutcome.COMPLETE_NODE;
-            case PLANEBOUND:
-                return handlePlaneboundTrigger(sourceNode, ctx, currentRun);
-            case CHEST:
-                return handleChestTrigger(sourceNode, currentRun);
-            case SANCTUM:
+                yield NodeFlowOutcome.COMPLETE_NODE;
+            }
+            case PLANEBOUND -> handlePlaneboundTrigger(sourceNode, ctx);
+            case CHEST -> handleChestTrigger(sourceNode, currentRun);
+            case SANCTUM -> {
                 sanctumHelper.resolveSanctum(currentRun, new NodeSanctum());
-                map.completeSideNode(sourceNode);
-                return NodeFlowOutcome.NODE_ALREADY_COMPLETED;
-            case MOVE:
-                return handleMoveTrigger(ctx, currentRun);
-            case CARD_REMOVAL, CARD_ADDITION, CARD_REWARD, MYTHIC_CARD_REWARD:
-                return EffectResultHelper.handleTrigger(ctx, currentRun)
+                flow.completeSideNode(sourceNode);
+                yield NodeFlowOutcome.NODE_ALREADY_COMPLETED;
+            }
+            case MOVE -> handleMoveTrigger(ctx, currentRun);
+            case CARD_REMOVAL, CARD_ADDITION, CARD_REWARD, MYTHIC_CARD_REWARD ->
+                EffectResultHelper.handleTrigger(ctx, currentRun, flow.decisions())
                     ? NodeFlowOutcome.COMPLETE_NODE
                     : NodeFlowOutcome.DO_NOT_COMPLETE_NODE;
-            default:
-                return NodeFlowOutcome.COMPLETE_NODE;
-        }
+        };
     }
 
     private NodeFlowOutcome handleChestTrigger(RoguePathNode sourceNode, RogueRun currentRun) {
         NodeFlowOutcome chestOutcome = chestHelper.resolveChest(currentRun, new NodeChest());
         if (chestOutcome == NodeFlowOutcome.COMPLETE_NODE) {
-            map.completeSideNode(sourceNode);
+            flow.completeSideNode(sourceNode);
             return NodeFlowOutcome.NODE_ALREADY_COMPLETED;
         }
         return chestOutcome;
@@ -82,12 +76,11 @@ class NodeEffectResultHelper {
             node -> node.getRowIndex() >= resetFromRow,
             node -> node.setCompleted(false));
         currentRun.setCurrentNodeIndex(ctx.moveNodeIndex);
-        map.enterNode();
+        flow.enterNode();
         return NodeFlowOutcome.DO_NOT_COMPLETE_NODE;
     }
 
-    private NodeFlowOutcome handlePlaneboundTrigger(RoguePathNode sourceNode, EffectResultContext ctx,
-                                                    RogueRun currentRun) {
+    private NodeFlowOutcome handlePlaneboundTrigger(RoguePathNode sourceNode, EffectResultContext ctx) {
         if (ctx.planebound == null) {
             return NodeFlowOutcome.COMPLETE_NODE;
         }
@@ -98,7 +91,7 @@ class NodeEffectResultHelper {
 
         NodePlanebound tempNode = new NodePlanebound(ctx.planebound);
         tempNode.setRowIndex(sourceNode.getRowIndex());
-        planeboundHelper.handlePlaneboundNode(tempNode, currentRun);
+        flow.battle(tempNode);
         return NodeFlowOutcome.DO_NOT_COMPLETE_NODE;
     }
 }

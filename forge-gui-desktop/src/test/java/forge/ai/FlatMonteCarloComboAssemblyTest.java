@@ -196,6 +196,22 @@ public class FlatMonteCarloComboAssemblyTest extends AITest {
     }
 
     @Test
+    public void flashIsCastWithTheManaOfFlashAloneNotOfTheHulkToo() {
+        setUp();
+        addCards("Island", 2, ai); // Flash is {1}{U}: the Hulk is put onto the battlefield, it is never cast
+        final Card hulk = addCardToZone("Protean Hulk", ai, ZoneType.Hand);
+        final Card flash = addCardToZone("Flash", ai, ZoneType.Hand);
+        final SpellAbility sa = flash.getFirstSpellAbility();
+        sa.setActivatingPlayer(ai);
+        final List<SpellAbility> sas = new ArrayList<>();
+        sas.add(sa);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        final SpellAbility next = ComboAssembly.next(ai, sas, s -> true);
+        AssertJUnit.assertNotNull("Flash and Protean Hulk in hand with two lands: cast Flash (" + hulk + " costs nothing here)", next);
+        AssertJUnit.assertEquals("Flash", next.getHostCard().getName());
+    }
+
+    @Test
     public void thePiecesAreHeldWithoutTheManaForAll() {
         setUp();
         addCards("Plains", 3, ai); // 3 + 4 mana are needed, only 3 are there

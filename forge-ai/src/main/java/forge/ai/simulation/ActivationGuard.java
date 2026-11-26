@@ -40,6 +40,8 @@ import forge.game.GameEntity;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 /**
@@ -534,6 +536,70 @@ public final class ActivationGuard {
     }
 
     /**
+     * Evoking an elemental by exiling a card from the hand (Solitude, Fury) spends two cards for one enter-the-battlefield
+     * removal: against a mana dork the AI gives up a good removal and a card for a card that only ramped them (#13026).
+     * Judged on everything the removal could hit, so a creature of theirs that is worth the second card keeps the play
+     * open. Only single-target creature removal is judged (Fury divides its damage and may kill several): Grief, Endurance and Subtlety do not aim at creatures.
+     */
+    public static boolean evokeOnlyHitsManaDorks(final Player ai, final SpellAbility sa) {
+        if (sa == null || !sa.isSpell() || !sa.isEvoke() || sa.getPayCosts() == null || sa.getHostCard() == null) {
+            return false;
+        }
+        boolean pitchesACard = false;
+        for (final CostPart part : sa.getPayCosts().getCostParts()) {
+            pitchesACard |= part instanceof CostExile && ((CostExile) part).getFrom().contains(ZoneType.Hand);
+        }
+        if (!pitchesACard) {
+            return false; // paying mana for an evoke (Shriekmaw) is a different trade
+        }
+        boolean anyTarget = false;
+        for (final Trigger t : sa.getHostCard().getTriggers()) {
+            if (t.getMode() != TriggerType.ChangesZone || !"Battlefield".equals(t.getParam("Destination"))
+                    || !"Card.Self".equals(t.getParam("ValidCard"))) {
+                continue;
+            }
+            final SpellAbility shared = t.ensureAbility(); // cached on the trigger and shared with the card state: never modified here
+            final String valid = shared == null ? "" : shared.getParamOrDefault("ValidTgts", "");
+            if (!valid.startsWith("Creature") || valid.contains("Player")) {
+                continue;
+            }
+            if (shared == null || !shared.usesTargeting()) {
+                continue;
+            }
+            // Targetability depends on the controller of this trigger: hexproof, shroud and protection
+            // must not make an otherwise valuable creature look like a legal alternative to a mana dork.
+            final SpellAbility etb;
+            try {
+                etb = shared.copy(ai);
+            } catch (final RuntimeException e) {
+                return false;
+            }
+            if (etb.hasParam("DividedAsYouChoose") || etb.hasParam("TargetMax") && !"1".equals(etb.getParam("TargetMax"))) {
+                continue; // Fury: 4 damage divided can kill two mana dorks, a two-for-two. Only a single-target removal is judged here
+            }
+            for (final Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
+                final boolean targetable;
+                try {
+                    targetable = etb.canTarget(c);
+                } catch (final RuntimeException e) {
+                    return false; // fail open if an unusual target restriction cannot be evaluated
+                }
+                if (!targetable) {
+                    continue;
+                }
+                if (!c.isCreature()) {
+                    return false; // a legal planeswalker target is an alternative worth preserving the evoke for
+                }
+                anyTarget = true;
+                if (!isSmallBody(c) || c.getManaAbilities().isEmpty()) {
+                    return false; // a creature that is worth the second card
+                }
+            }
+        }
+        return anyTarget;
+    }
+
+    /**
      * A bounce spell or ability aimed at the permanent of an opponent that is not worth the card (see {@link BounceValue}):
      * the creature that gives them a second enter-the-battlefield trigger (Vendilion Clique, Mulldrifter), that comes back
      * with flash, or that costs nothing to cast again. Judged on the chosen targets, else on everything it could be aimed at:
@@ -766,6 +832,7 @@ public final class ActivationGuard {
             return false;
         }
         final Player opp = ai.getWeakestOpponent();
+        final boolean goblinCombo = root.getHostCard() != null && root.getHostCard().getName().equals("Conspicuous Snoop");
         int copies = 0;
         int power = 0;
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
@@ -774,7 +841,8 @@ public final class ActivationGuard {
                 power += Math.max(0, c.getNetPower());
             }
         }
-        return copies >= MAX_COPIES || opp != null && copies > 0 && power >= opp.getLife() + 3;
+        // the Snoops are worth a life each to Sling-Gang Lieutenant, whatever their power
+        return copies >= MAX_COPIES || !goblinCombo && opp != null && copies > 0 && power >= opp.getLife() + 3;
     }
 
     static boolean poorSacrifice(final Player ai, final SpellAbility sa) {

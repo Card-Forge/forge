@@ -1041,6 +1041,12 @@ public class AiController {
             return AiPlayDecision.TargetingFailed; // Path to Exile on a mana dork only gives them a land
         }
 
+        if (ActivationGuard.evokeOnlyHitsManaDorks(player, sa)) {
+            sa.resetTargets();
+            VetoLog.refused(player, sa, "evoke-on-mana-dork", "heuristic");
+            return AiPlayDecision.TargetingFailed; // Solitude pitching a card to exile a Noble Hierarch is two cards for one (#13026)
+        }
+
         if (PlayRelevance.pointlessPump(player, sa) != null) {
             sa.resetTargets();
             VetoLog.refused(player, sa, "pump-outside-combat", "heuristic");
@@ -1689,9 +1695,10 @@ public class AiController {
         combat.clearAttackers();
         for (final Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
             // an attacker the rollouts added to what the heuristics sent still must not be a plain gift to a blocker
-            // (Dryad Arbor into Lyra Dawnbringer)
+            // (Dryad Arbor into Lyra Dawnbringer), nor one with nothing to do in combat (a 0/4 Spellskite)
             if (CombatUtil.canAttack(e.getKey(), e.getValue())
-                    && (before.containsKey(e.getKey()) || !AiAttackController.isGiftToABlocker(player, e.getKey(), combat))) {
+                    && (before.containsKey(e.getKey()) || !AiAttackController.isGiftToABlocker(player, e.getKey(), combat, e.getValue())
+                    && !AiAttackController.isPointlessAttacker(player, e.getKey(), e.getValue(), result.attackers))) {
                 combat.addAttacker(e.getKey(), e.getValue());
             }
         }
@@ -1747,6 +1754,11 @@ public class AiController {
             }
             if (defender == null || !CombatUtil.canAttack(c, defender)
                     || attackMax != null && combat.getAttackers().size() >= attackMax) {
+                continue;
+            }
+            // The attack heuristics left this land creature at home, and committing it here would skip their gift check
+            // (shouldAttack): a blocker that kills it for free must not get it (Dryad Arbor into Lyra Dawnbringer, #12927)
+            if (AiAttackController.shouldDeclineLandGift(attacker, c, combat, defender, false)) {
                 continue;
             }
             combat.addAttacker(c, defender);
@@ -2313,6 +2325,12 @@ public class AiController {
                     return response;
                 }
             }
+            // Basalt Monolith with Rings of Brighthearth: the Monolith taps again with its own untap on the stack
+            final SpellAbility ringsTap = forge.ai.simulation.StackLoops.response(player, top,
+                    ComputerUtilAbility.getSpellAbilities(cards, player), this::loopApproved);
+            if (ringsTap != null) {
+                return ringsTap;
+            }
             // Thassa's Oracle trigger on the stack: Demonic Consultation exiles the library in response, the Oracle wins
             final SpellAbility consultation = ConsultationWin.response(player);
             if (consultation != null) {
@@ -2499,9 +2517,27 @@ public class AiController {
                 }
                 final SpellAbility solved = stormSolver.next(player, deckPlan(player).combos);
                 if (solved != null) {
-                    return solved; // a line that wins this turn was found: follow it instead of guessing
+                    // a step that the mana cannot pay (the colour of the Diamond's mana was wrong, a land is tapped) is
+                    // not cast: cast like that it failed to pay, was skipped, and the whole turn went on without it
+                    solved.setActivatingPlayer(player);
+                    if (solved.isManaAbility() || ComputerUtilCost.canPayCost(solved, player, false)) {
+                        return solved; // a line that wins this turn was found: follow it instead of guessing
+                    }
+                    VetoLog.note(player, "storm-step-unpayable " + solved.getHostCard().getName());
+                    stormSolver.drop();
                 }
             }
+        }
+
+        if (!mustRespond && game.getStack().isEmpty()
+                && (game.getPhaseHandler().is(PhaseType.UPKEEP) || game.getPhaseHandler().is(PhaseType.DRAW))) {
+            // Nothing to answer in an upkeep or draw step, whoever's turn it is: a spell waits for the main phase, the attack or
+            // the end step, when there is more to see (Ephemerate in its own upkeep, Kozilek's Command in the player's draw
+            // step, #12930). This is checked here, for every way of choosing below: Monte Carlo only handles the AI's main
+            // phases and a response, so the upkeep and the draw step were always decided by the plain heuristics. That makes it
+            // apply to every AI profile, not only FlatMC. A spell that is only castable then ("cast only during your upkeep") or
+            // is marked MustCastInUpkeep stays (FlatMonteCarloPicker.mustBeCastNow).
+            saList.removeIf(sa -> FlatMonteCarloPicker.shouldDeferEarlySpell(player, sa));
         }
 
         List<SpellAbility> planarRolls = Lists.newArrayList();
@@ -2691,8 +2727,7 @@ public class AiController {
                 && (game.getPhaseHandler().is(PhaseType.UPKEEP) || game.getPhaseHandler().is(PhaseType.DRAW))) {
             // Nothing to answer in an upkeep or draw step: an instant waits for the main phase, the attack or the end step,
             // when there is more to see (Ephemerate in its own upkeep, Kozilek's Command in the draw step)
-            final Predicate<SpellAbility> tooEarly = sa -> sa.isSpell() && !sa.isCopied() && sa.getApi() != ApiType.Counter
-                    && !FlatMonteCarloPicker.mustBeCastNow(player, sa);
+            final Predicate<SpellAbility> tooEarly = sa -> FlatMonteCarloPicker.shouldDeferEarlySpell(player, sa);
             extras.removeIf(tooEarly);
             approved.removeIf(tooEarly);
         }

@@ -1,6 +1,8 @@
 package forge.gamemodes.rogue.path;
 
+import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.effect.PathUpdateContext;
+import forge.gamemodes.rogue.effect.RogueEffectComposite;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
@@ -333,6 +335,42 @@ public class RoguePath {
         }
 
         return new ArrayList<>(visibleIndices);
+    }
+
+    public boolean isFaceDown(RogueRun run, RoguePathNode node) {
+        if (node instanceof NodePlanebound planebound && planebound.isRevealed()) {
+            return false;
+        }
+
+        RoguePathNode currentNode = run.getCurrentNode();
+        int currentRow = currentNode != null ? currentNode.getRowIndex() : 0;
+        int nodeIndex = nodes.indexOf(node);
+        int row = node.getRowIndex();
+        if (row < currentRow) {
+            // Use reachability for that row without applying the current effects
+            return !getVisibleNodesInCurrentRow(row, new PathUpdateContext()).contains(nodeIndex);
+        }
+
+        // Check wound effects (e.g. Wounded Eye hides planes)
+        PathUpdateContext pathCtx = new PathUpdateContext();
+        RogueEffectComposite.INSTANCE.onPathUpdate(pathCtx, run);
+        if (pathCtx.hidePlanes && node instanceof NodePlanebound && !node.isCompleted()) {
+            return true;
+        }
+        List<Integer> visibleNodes = row == currentRow
+            ? getVisibleNodesInCurrentRow(currentRow, pathCtx)
+            : getVisibleNodesInFuturePlaneboundRows(currentRow, pathCtx);
+        return !visibleNodes.contains(nodeIndex);
+    }
+
+    /** Planes stay revealed. Returns the ones that were not revealed before. */
+    public List<NodePlanebound> revealVisible(RogueRun run) {
+        List<NodePlanebound> newlyRevealed = new ArrayList<>();
+        updatePlanebounds(plane -> !plane.isRevealed() && !isFaceDown(run, plane), plane -> {
+            plane.setRevealed(true);
+            newlyRevealed.add(plane);
+        });
+        return newlyRevealed;
     }
 
     private List<Integer> getReachableNodeIndicesInRow(List<Integer> fromNodeIndices, int row) {

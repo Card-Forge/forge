@@ -13,6 +13,7 @@ import forge.screens.gauntlet.LoadGauntletScreen;
 import forge.screens.limited.LoadDraftScreen;
 import forge.screens.limited.LoadSealedScreen;
 import forge.screens.planarconquest.LoadConquestScreen;
+import forge.screens.rogue.RogueLoadScreen;
 import forge.screens.quest.LoadQuestScreen;
 
 public class LoadGameMenu extends FPopupMenu {
@@ -21,6 +22,7 @@ public class LoadGameMenu extends FPopupMenu {
         SealedDeck("lblSealedDeck", FSkinImage.MENU_SEALED, LoadSealedScreen.class),
         QuestMode("lblQuestMode", FSkinImage.QUEST_ZEP, LoadQuestScreen.class),
         PlanarConquest("lblPlanarConquest", FSkinImage.MENU_GALAXY, LoadConquestScreen.class),
+        RogueCommander("lblRogueCommander", FSkinImage.QUEST_MAP, RogueLoadScreen.class),
         Gauntlet("lblGauntlet", FSkinImage.MENU_GAUNTLET, LoadGauntletScreen.class);
 
         private final FMenuItem item;

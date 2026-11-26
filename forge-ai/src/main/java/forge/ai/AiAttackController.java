@@ -101,6 +101,13 @@ public class AiAttackController {
         refreshCombatants(defendingOpponent);
     } // overloaded constructor to evaluate attackers that should attack next turn
 
+    /** Evaluates attack triggers against the exact set of attackers chosen by a simulation. */
+    private AiAttackController(final Player ai, final Collection<Card> plannedAttackers) {
+        this.ai = ai;
+        this.nextTurn = false;
+        this.attackers = new ArrayList<>(plannedAttackers);
+    }
+
     public AiAttackController(final Player ai, Card attacker) {
         this.ai = ai;
         defendingOpponent = choosePreferredDefenderPlayer(ai, true);
@@ -360,12 +367,96 @@ public class AiAttackController {
         final CardCollectionView controlledByCompy = ai.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         for (final Card c : controlledByCompy) {
             for (final Trigger trigger : c.getTriggers()) {
-                if (ComputerUtilCombat.combatTriggerWillTrigger(attacker, null, trigger, combat, this.attackers)) {
+                if (ComputerUtilCombat.combatTriggerWillTrigger(attacker, null, trigger, combat, this.attackers)
+                        && attackTriggerReaches(attacker, trigger)) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    /**
+     * Whether an attack trigger that {@link ComputerUtilCombat#combatTriggerWillTrigger} reports does something for this
+     * attacker. That method also reports "Whenever ~ attacks" of a creature that is already attacking for every other
+     * candidate (battle cry pumps the others), so a Goblin Guide in the attack would make a 0/4 Spellskite look like
+     * worth attacking with. Only an effect that reaches the other attackers may do that.
+     */
+    static boolean attackTriggerReaches(final Card attacker, final Trigger trigger) {
+        if (!TriggerType.Attacks.equals(trigger.getMode()) || !trigger.hasParam("ValidCard")
+                || trigger.matchesValidParam("ValidCard", attacker)) {
+            return true; // the trigger is about this attacker (or about any attacker): nothing to filter
+        }
+        for (SpellAbility sa = trigger.ensureAbility(); sa != null; sa = sa.getSubAbility()) {
+            if (ApiType.PumpAll.equals(sa.getApi()) || ApiType.PutCounterAll.equals(sa.getApi())) {
+                return true;
+            }
+            // "another target attacking creature gets +X/+X" (Wildwood Mentor), "put two +1/+1 counters on another target
+            // attacking creature" (Goliath Truck): a targeted effect reaches this candidate when it is a legal target for it
+            if ((ApiType.Pump.equals(sa.getApi()) || ApiType.PutCounter.equals(sa.getApi())) && addsPower(trigger, sa)
+                    && canBeTargetedOnceAttacking(attacker, trigger, sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether the effect adds power: only that makes a creature without any worth attacking for (a 0/4 that gets flying from
+     * Aerial Guide, a -1/-1, a loyalty or charge counter deal no damage). Power from "+X" is judged by the trigger's source.
+     */
+    private static boolean addsPower(final Trigger trigger, final SpellAbility sa) {
+        final Card host = trigger.getHostCard();
+        if (host == null) {
+            return false;
+        }
+        if (ApiType.Pump.equals(sa.getApi())) {
+            return amount(host, sa, "NumAtt") > 0;
+        }
+        final String counterType = sa.getParamOrDefault("CounterType", "");
+        return ("P1P1".equals(counterType) || "P2P2".equals(counterType)) && amount(host, sa, "CounterNum") > 0;
+    }
+
+    private static int amount(final Card host, final SpellAbility sa, final String param) {
+        String value = sa.getParamOrDefault(param, "0").trim();
+        if (value.startsWith("+")) {
+            value = value.substring(1);
+        }
+        return AbilityUtils.calculateAmount(host, value, sa);
+    }
+
+    /**
+     * Whether the candidate would be a legal target of a targeted ability of an attack trigger once it is attacking: the
+     * trigger is evaluated while the candidate is still at home, so the "attacking" part of the restriction is left out.
+     */
+    private static boolean canBeTargetedOnceAttacking(final Card attacker, final Trigger trigger, final SpellAbility sa) {
+        if (!sa.usesTargeting() || sa.getTargetRestrictions() == null || trigger.getHostCard() == null) {
+            return false;
+        }
+        final Card host = trigger.getHostCard();
+        for (final String valid : sa.getTargetRestrictions().getValidTgts()) {
+            if (attacker.isValid(valid.replace(".attacking+", ".").replace("+attacking", "").replace(".attacking", ""), host.getController(), host, sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * An attacker with no damage to deal and no effect when it attacks (a 0/4 Spellskite) only gets tapped and exposed
+     * by attacking. The rollouts of the Monte Carlo attack search must not add it either.
+     */
+    static boolean isPointlessAttacker(final Player ai, final Card attacker, final GameEntity defender,
+                                       final Map<Card, GameEntity> plannedAttackers) {
+        // The candidate is not yet attacking, but its teammates' attack triggers can still affect it.
+        final Combat otherAttackers = new Combat(ai);
+        for (final Map.Entry<Card, GameEntity> entry : plannedAttackers.entrySet()) {
+            if (entry.getKey() != attacker) {
+                otherAttackers.addAttacker(entry.getKey(), entry.getValue());
+            }
+        }
+        return !new AiAttackController(ai, plannedAttackers.keySet())
+                .isEffectiveAttacker(ai, attacker, otherAttackers, defender);
     }
 
     public final static List<Card> getPossibleBlockers(final List<Card> blockers, final List<Card> attackers, final boolean nextTurn) {
@@ -1434,6 +1525,14 @@ public class AiAttackController {
                 }
             }
 
+            // a creature whose first attack adds a combat phase (Aurelia, Godo) goes when nothing kills it
+            for (final Card engine : forge.ai.simulation.ExtraCombatPlan.engines(ai, this.attackers)) {
+                if (!combat.isAttacking(engine) && defendingOpponent != null && canAttackWrapper(engine, defendingOpponent)
+                        && forge.ai.simulation.ExtraCombatPlan.safeToAttack(engine, this.blockers)) {
+                    combat.addAttacker(engine, defendingOpponent);
+                }
+            }
+
             return aiAggression;
         } finally {
             if (trackTimer) {
@@ -1617,7 +1716,7 @@ public class AiAttackController {
         }
 
         // Aggression 6 is also used by attack-limit and Reconnaissance paths; only the explicit Exalted path may bypass this.
-        if (shouldDeclineLandGift(ai, attacker, combat, exaltedStrategy)) {
+        if (shouldDeclineLandGift(ai, attacker, combat, defender, exaltedStrategy)) {
             return false;
         }
 
@@ -1894,16 +1993,34 @@ public class AiAttackController {
      * Some creature of theirs can block the attacker and kill it without dying, and the attacker has no effect that would
      * make that worth it: attacking just hands the blocker a free kill.
      */
-    static boolean shouldDeclineLandGift(final Player ai, final Card attacker, final Combat combat, final boolean exaltedStrategy) {
-        return attacker.isLand() && !exaltedStrategy && isGiftToABlocker(ai, attacker, combat);
+    static boolean shouldDeclineLandGift(final Player ai, final Card attacker, final Combat combat,
+                                         final GameEntity defender, final boolean exaltedStrategy) {
+        return attacker.isLand() && !exaltedStrategy && isGiftToABlocker(ai, attacker, combat, defender);
     }
 
     /** Shared blocker check used by the attack decision and report scenarios. */
-    static boolean isGiftToABlocker(final Player ai, final Card attacker, final Combat combat) {
+    static boolean isGiftToABlocker(final Player ai, final Card attacker, final Combat combat, final GameEntity defender) {
         if (attacker.hasSVar("SacMe") || attacker.hasSVar("HasAttackEffect") || attacker.hasSVar("HasCombatEffect")) {
             return false;
         }
+        final Player defendingPlayer;
+        if (defender instanceof Player) {
+            defendingPlayer = (Player) defender;
+        } else if (defender instanceof Card) {
+            final Card defendingCard = (Card) defender;
+            defendingPlayer = defendingCard.isBattle() ? defendingCard.getProtectingPlayer() : defendingCard.getController();
+        } else {
+            return false;
+        }
+        if (defendingPlayer == null) {
+            return false;
+        }
         for (final Player opp : ai.getOpponents()) {
+            // In free-for-all only the chosen defender can block. Under shared team turns, any member of
+            // the defending team can block an attack directed at one of its players or permanents.
+            if (!defendingPlayer.sharesTeamWith(opp)) {
+                continue;
+            }
             for (final Card blocker : opp.getCreaturesInPlay()) {
                 if (CombatUtil.canBlock(attacker, blocker) && ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)
                         && !ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, false)) {

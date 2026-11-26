@@ -1,4 +1,4 @@
-package forge.screens.home.rogue;
+package forge.gamemodes.rogue.flow;
 
 import forge.gamemodes.rogue.CodexHelper;
 import forge.gamemodes.rogue.RogueRun;
@@ -8,8 +8,10 @@ import forge.gamemodes.rogue.effect.ChoiceRerollContext;
 import forge.gamemodes.rogue.effect.EffectResultContext;
 import forge.gamemodes.rogue.effect.RogueEffect;
 import forge.gamemodes.rogue.effect.RogueEffectComposite;
+import forge.gamemodes.rogue.flow.RogueDecisions.Pick;
 import forge.gamemodes.rogue.path.NodeChest;
 import forge.localinstance.properties.ForgePreferences;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,11 +20,11 @@ import java.util.List;
 class NodeChestHelper {
     private static final int CHEST_LOOT_CHOICE_COUNT = 2;
 
-    private final CSubmenuRogueMap map;
+    private final RogueFlow flow;
     private NodeEffectResultHelper effectResultHelper;
 
-    NodeChestHelper(CSubmenuRogueMap map) {
-        this.map = map;
+    NodeChestHelper(RogueFlow flow) {
+        this.flow = flow;
     }
 
     void setEffectResultHelper(NodeEffectResultHelper effectResultHelper) {
@@ -36,7 +38,7 @@ class NodeChestHelper {
 
         NodeFlowOutcome chestOutcome = resolveChest(currentRun, chestNode);
         if (chestOutcome == NodeFlowOutcome.COMPLETE_NODE) {
-            map.completeSideNode(chestNode);
+            flow.completeSideNode(chestNode);
         }
     }
 
@@ -56,14 +58,14 @@ class NodeChestHelper {
         }
         chestNode.setChestEffects(chestEffects);
 
-        RogueTutorialHelper.showIfNotSeen(RogueTutorial.CHEST);
-        ChestDialog.DialogResult result;
+        flow.decisions().showTutorial(RogueTutorial.CHEST);
+        Pick<ChestEffect> result;
         boolean rerollRequested;
         do {
             ChoiceRerollContext rerollCtx = initialCtx;
             CodexHelper.recordTraitChoices(chestEffects);
-            result = new ChestDialog(chestEffects, currentRun, rerollCtx).show();
-            rerollRequested = result.rerollRequested();
+            result = flow.decisions().chooseChest(chestEffects, currentRun, rerollCtx);
+            rerollRequested = result.reroll();
 
             if (rerollRequested) {
                 RogueEffectComposite.INSTANCE.onChoiceReroll(rerollCtx, currentRun);
@@ -115,6 +117,7 @@ class NodeChestHelper {
         if (!ForgePreferences.DEV_MODE) {
             return chestEffects;
         }
-        return new ChestChoiceOverrideDialog(chestEffects).show();
+        return flow.decisions().devPick(Localizer.getInstance().getMessage("lblRogueDevChestLootOverride"),
+            List.of(ChestEffect.values()), chestEffects, CHEST_LOOT_CHOICE_COUNT);
     }
 }

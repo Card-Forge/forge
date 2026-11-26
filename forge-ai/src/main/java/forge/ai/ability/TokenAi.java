@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import com.google.common.collect.Iterables;
 
 import forge.ai.*;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -15,6 +17,8 @@ import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
+import forge.game.mana.ManaCostBeingPaid;
+import forge.card.mana.ManaCost;
 import forge.game.cost.CostDraw;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
@@ -495,6 +499,83 @@ public class TokenAi extends SpellAbilityAi {
         return false;
     }
 
+    /**
+     * A Treasure, a Clue or a Food for an opponent is worth about one mana or a card to them, and it costs the payer the mana of
+     * the price now: it is paid when the mana is not needed for anything the payer could cast this turn. Any other price (life,
+     * cards) is judged by the general rules.
+     */
+    private boolean paysToDenyNonCreatureToken(final Player payer, final Cost cost, final Card source, final SpellAbility sa) {
+        if (cost.getTotalMana() == null || cost.getCostParts().size() != 1) {
+            return ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)
+                    && ComputerUtilCost.checkDamageCost(payer, cost, source, 4, sa);
+        }
+        final ManaCost price = cost.getTotalMana();
+        if (price.getCMC() > ComputerUtilMana.getAvailableManaEstimate(payer)) {
+            return false;
+        }
+        // Real mana allocation, not converted mana cost: four Plains cannot cast Counterspell with or without the payment, but
+        // paying {2} out of Plains + Island + Island + Mountain would take the blue away from it. Pay unless it costs a spell
+        // that can be cast right now.
+        for (final Card inHand : payer.getCardsIn(ZoneType.Hand)) {
+            if (inHand.isLand()) {
+                continue;
+            }
+            // every way to cast it, at the cost it really has now: Affinity and cost reducers count
+            for (final SpellAbility spell : castOptions(inHand, payer)) {
+                if (!spell.isSpell() || spell.getPayCosts() == null || spell.getPayCosts().getTotalMana() == null
+                        || spell.getPayCosts().getTotalMana().countX() > 0) {
+                    continue;
+                }
+                if (spell.getActivatingPlayer() == null) {
+                    spell.setActivatingPlayer(payer);
+                }
+                // The cost it has now (cost reducers, Affinity), with and without the price added to it. Both go through the same
+                // mana allocation; the price is added to the cost itself rather than passed as the "extra mana" of
+                // canPayManaCost(sa, ...), which is meant for X costs and did not make the AI keep mana for Glorious Anthem.
+                if (!ComputerUtilMana.canPayManaCost(currentCost(spell, payer), spell, payer, false)) {
+                    continue; // not castable now anyway
+                }
+                final ManaCostBeingPaid withPrice = currentCost(spell, payer);
+                // plain count first: what is left after the price must still be as much as the spell costs
+                if (ComputerUtilMana.getAvailableManaEstimate(payer) - price.getCMC() < withPrice.getConvertedManaCost()) {
+                    return false; // paying would leave it uncastable
+                }
+                withPrice.addManaCost(price);
+                if (!ComputerUtilMana.canPayManaCost(withPrice, spell, payer, false)) {
+                    return false; // paying would leave it uncastable
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * The ways to cast a card: its spells and their alternative costs, whatever the phase. Card.getAllPossibleAbilities drops what
+     * cannot be played at this moment even when asked to keep it, and a sorcery-speed spell such as Glorious Anthem cannot be played
+     * while a trigger is on the stack, so the AI would have found nothing to keep its mana for. The mana it will take on its own
+     * turn is what matters here. Include abilities from alternate card states as well: a modal double-faced card may have a
+     * castable back face even when its front face cannot be cast with the available colors.
+     */
+    private static List<SpellAbility> castOptions(final Card card, final Player payer) {
+        final List<SpellAbility> options = new ArrayList<>();
+        for (final SpellAbility sa : card.getAllSpellAbilities()) {
+            if (sa.isAdventure() && card.isOnAdventure()) {
+                continue; // already cast as the adventure
+            }
+            if (sa.getActivatingPlayer() == null) {
+                sa.setActivatingPlayer(payer);
+            }
+            options.add(sa);
+            options.addAll(GameActionUtil.getAlternativeCosts(sa, payer, false));
+        }
+        return options;
+    }
+
+    /** The mana the spell costs the payer right now, after cost increases and reductions. A new object on every call. */
+    private static ManaCostBeingPaid currentCost(final SpellAbility spell, final Player payer) {
+        return ComputerUtilMana.calculateManaCost(spell.getPayCosts(), spell, payer, true, 0, false);
+    }
+
     @Override
     public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card source = sa.getHostCard();
@@ -584,8 +665,13 @@ public class TokenAi extends SpellAbilityAi {
             }
             final Card tokenCard = TokenAi.spawnToken(p, sa);
 
+            // Smothering Tithe: pay {2} or they get a Treasure. It is no creature, so the comparison of boards below says nothing
+            // about it, and the AI never paid
+            if (!tokenCard.isCreature()) {
+                return paysToDenyNonCreatureToken(payer, cost, source, sa);
+            }
             // Token would not survive
-            if (!tokenCard.isCreature() || tokenCard.getNetToughness() < 1) {
+            if (tokenCard.getNetToughness() < 1) {
                 return false;
             }
             int evalActivator = ComputerUtilCard.evaluateCreature(tokenCard) + ComputerUtilCard.evaluateCreatureList(p.getCreaturesInPlay());

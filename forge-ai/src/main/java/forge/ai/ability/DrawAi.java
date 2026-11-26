@@ -24,6 +24,7 @@ import forge.ai.*;
 import forge.ai.simulation.AiCardLists;
 import forge.ai.simulation.AlurenPlan;
 import forge.ai.simulation.DoomsdayPile;
+import forge.ai.simulation.LifeDrawGuard;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -128,6 +129,11 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         if (!ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)) {
+            return false;
+        }
+
+        // Griselbrand: life for cards, only while the life, the library and the hand can take them
+        if (payer.isAI() && LifeDrawGuard.reckless(payer, sa, null)) {
             return false;
         }
 

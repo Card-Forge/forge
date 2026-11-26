@@ -30,6 +30,11 @@ public record BazaarItem(PaperCard card, Type type, RogueEffect traitEffect,
         return new BazaarItem(card, Type.TRAIT, traitEffect, null, price, price);
     }
 
+    /** Traits and carry cards are offered apart from the cards. */
+    public boolean isSpecial() {
+        return type == Type.TRAIT || type == Type.CARRY_CARD;
+    }
+
     public static BazaarItem forCarryCard(PaperCard card, RogueRun.CarryCardType carryCardType) {
         return new BazaarItem(card, Type.CARRY_CARD, null, carryCardType, null, null);
     }

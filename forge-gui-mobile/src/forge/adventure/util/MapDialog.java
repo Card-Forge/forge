@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -68,6 +69,25 @@ public class MapDialog {
     private float volumeFade = 1.0f;
     private int volumeFadeStepCount = 0;
 
+    /**
+     * Finds the dialogue's TypingLabel, including labels nested inside
+     * scrolling containers and other Scene2D groups.
+     */
+    private static TypingLabel findTypingLabel(Actor actor) {
+        if (actor instanceof TypingLabel label)
+            return label;
+
+        if (actor instanceof Group group) {
+            for (Actor child : group.getChildren()) {
+                TypingLabel label = findTypingLabel(child);
+                if (label != null)
+                    return label;
+            }
+        }
+
+        return null;
+    }
+
     public MapDialog(String S, MapStage stage, int parentID) {
         this(S, stage, parentID, null);
     }
@@ -80,12 +100,9 @@ public class MapDialog {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (event.getListenerActor() instanceof Dialog d) {
-                    for (Actor child : d.getContentTable().getChildren()) {
-                        if (child instanceof TypingLabel) {
-                            ((TypingLabel) child).skipToTheEnd();
-                            break;
-                        }
-                    }
+                    TypingLabel label = findTypingLabel(d.getContentTable());
+                    if (label != null)
+                        label.skipToTheEnd();
                 }
                 super.clicked(event, x, y);
             }
@@ -110,12 +127,9 @@ public class MapDialog {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (event.getListenerActor() instanceof Dialog d) {
-                    for (Actor child : d.getContentTable().getChildren()) {
-                        if (child instanceof TypingLabel) {
-                            ((TypingLabel) child).skipToTheEnd();
-                            break;
-                        }
-                    }
+                    TypingLabel label = findTypingLabel(d.getContentTable());
+                    if (label != null)
+                        label.skipToTheEnd();
                 }
                 super.clicked(event, x, y);
             }
