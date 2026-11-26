@@ -105,9 +105,13 @@ public class RewardData implements Serializable {
 
     private static volatile Iterable<PaperCard> allCards;
     private static volatile Iterable<PaperCard> allEnemyCards;
+    // content whose author ignores excluded sets draws from its own pool
+    private static volatile Iterable<PaperCard> allCardsWithExcluded;
+    private static volatile Iterable<PaperCard> allEnemyCardsWithExcluded;
 
     static private synchronized void initializeAllCards() {
-        if (allCards != null && allEnemyCards != null)
+        boolean lifted = CardDb.areExclusionsLifted();
+        if ((lifted ? allCardsWithExcluded : allCards) != null)
             return; // another thread finished first
         ConfigData configData = Config.instance().getConfigData();
         RewardData legals = configData.legalCards;
@@ -151,21 +155,37 @@ public class RewardData implements Serializable {
             if (input != null && !forge.card.CardAiHints.isRemovedFromAiDecks(input.getRules()))
                 enemyPool.add(input);
         }
-        allEnemyCards = enemyPool;
-        allCards = pool; // assigned last: allCards != null implies the enemy pool is ready
+        // the full pool is assigned last: it being set implies the enemy pool is ready
+        if (lifted) {
+            allEnemyCardsWithExcluded = enemyPool;
+            allCardsWithExcluded = pool;
+        } else {
+            allEnemyCards = enemyPool;
+            allCards = pool;
+        }
     }
 
     static public Iterable<PaperCard> getAllCards() {
-        if (allCards == null)
+        return cardPool(false);
+    }
+
+    private static Iterable<PaperCard> cardPool(boolean forEnemy) {
+        boolean lifted = CardDb.areExclusionsLifted();
+        if ((lifted ? allCardsWithExcluded : allCards) == null)
             initializeAllCards();
-        return allCards;
+        if (lifted)
+            return forEnemy ? allEnemyCardsWithExcluded : allCardsWithExcluded;
+        return forEnemy ? allEnemyCards : allCards;
     }
 
     private static boolean rewardChangedByExclusions;
+    public static final String IGNORES_EXCLUDED_SETS_TAG = "ignoresExcludedSets";
 
     public static void invalidateCardPool() {
         allCards = null;
         allEnemyCards = null;
+        allCardsWithExcluded = null;
+        allEnemyCardsWithExcluded = null;
     }
 
     public boolean givesOnlyExcludedCards() {
@@ -212,12 +232,22 @@ public class RewardData implements Serializable {
     }
 
     public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoSell) {
+        Array<Reward> rewards = rollRewards(isForEnemy, cards, useSeedlessRandom, isNoSell);
+        // a pack is opened later, away from the dungeon or enemy that gave it, so it carries the lift with it
+        if (!isForEnemy && Config.instance().liftsExclusionsLocally()) {
+            for (Reward reward : rewards) {
+                if (reward.getDeck() != null)
+                    reward.getDeck().getTags().add(IGNORES_EXCLUDED_SETS_TAG);
+            }
+        }
+        return rewards;
+    }
+
+    private Array<Reward> rollRewards(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoSell) {
         boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
         Random rewardRandom = useSeedlessRandom ? new Random() : WorldSave.getCurrentSave().getWorld().getRandom();
         //Keep using same generation method for shop rewards, but fully randomize loot drops by not using the instance pre-seeded by the map
 
-        if (allCards==null)
-            initializeAllCards();
         Array<Reward> ret=new Array<>();
 
         if (probability == 0 || rewardRandom.nextFloat() <= probability) {
@@ -237,7 +267,7 @@ public class RewardData implements Serializable {
                         } else if (r.sourceDeck != null && !r.sourceDeck.isEmpty() ) {
                             pool.addAll(CardUtil.withAllowedPrints(CardUtil.getDeck(r.sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList()));
                         } else {
-                            pool.addAll(CardUtil.getPredicateResult(allCards, r));
+                            pool.addAll(CardUtil.getPredicateResult(cardPool(false), r));
                         }
                     }
                     ArrayList<PaperCard> finalPool = new ArrayList<>(pool);
@@ -266,7 +296,7 @@ public class RewardData implements Serializable {
                                 ret.add(new Reward(card, isNoSell));
                         }
                     } else {
-                        for (PaperCard card : CardUtil.generateCards(isForEnemy ? allEnemyCards:allCards,this, count + addedCount, rewardRandom)) {
+                        for (PaperCard card : CardUtil.generateCards(cardPool(isForEnemy),this, count + addedCount, rewardRandom)) {
                             if (card != null)
                                 ret.add(new Reward(card, isNoSell));
                         }

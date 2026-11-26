@@ -141,7 +141,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
 
         @Override
         protected void onActivate(NewConquestScreenModel model) {
-            lstCommanders.setListData(model.startingPlane.getCommanders());
+            lstCommanders.setListData(model.startingPlane.getAwardableCommanders());
             reset();
         }
 

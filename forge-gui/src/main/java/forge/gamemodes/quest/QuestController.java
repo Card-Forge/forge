@@ -295,8 +295,9 @@ public class QuestController {
      *      starting world
      * @param userPrefs
      *      user preferences
+     * @return whether the player's exclusions left cards out of the starting deck, for the caller to say so
      */
-    public void newGame(final String name, final int difficulty, final QuestMode mode,
+    public boolean newGame(final String name, final int difficulty, final QuestMode mode,
             final GameFormat formatPrizes, final boolean allowSetUnlocks,
             final Deck startingCards, final GameFormat formatStartingPool,
             final String startingWorld, final StartingPoolPreferences userPrefs,
@@ -304,8 +305,9 @@ public class QuestController {
 
         this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks, startingWorld, dcr)); // pass awards and unlocks here
 
+        boolean startingDeckChanged = false;
         if (startingCards != null) {
-            this.myCards.addDeck(startingCards);
+            startingDeckChanged = this.myCards.addDeck(startingCards) != startingCards;
         } else {
             this.myCards.setupNewGameCardPool(formatStartingPool, difficulty, userPrefs);
         }
@@ -314,6 +316,7 @@ public class QuestController {
 
         // Reset starting cards here.
         this.myCards.resetNewList();
+        return startingDeckChanged;
     }
 
     /**

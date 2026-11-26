@@ -70,7 +70,7 @@ public class StaticData {
     private IStorage<SealedTemplate> tournaments;
     private IStorage<FatPack.Template> fatPacks;
     private IStorage<BoosterBox.Template> boosterBoxes;
-    private IStorage<PrintSheet> printSheets;
+    private IStorage<PrintSheet> printSheets, printSheetsWithHidden;
     private final Map<String, List<String>> setLookup = new HashMap<>();
 
     private static StaticData lastInstance = null;
@@ -545,6 +545,12 @@ public class StaticData {
     }
 
     public IStorage<PrintSheet> getPrintSheets() {
+        // a sheet leaves out the cards hidden when it is built, so content that lifts exclusions keeps its own sheets
+        if (CardDb.areExclusionsLifted()) {
+            if (printSheetsWithHidden == null)
+                printSheetsWithHidden = PrintSheet.initializePrintSheets(new File(blockDataFolder, "printsheets.txt"), getEditions());
+            return printSheetsWithHidden;
+        }
         if (printSheets == null)
             printSheets = PrintSheet.initializePrintSheets(new File(blockDataFolder, "printsheets.txt"), getEditions());
         return printSheets;
@@ -1377,16 +1383,18 @@ public class StaticData {
         this.variantCards.setPrintExclusion(exclusion);
     }
 
-    /** Hides every card with a print the test matches from the card pools. A card is still found by name. */
+    /** Hides every card whose prints all match the test from the card pools. A card is still found by name. */
     public void setHiddenPrints(BiPredicate<CardEdition, String> hidden) {
         Set<String> cardNames = new HashSet<>();
         if (hidden != null) {
+            Set<String> keptNames = new HashSet<>();
             for (CardEdition edition : editions) {
                 for (CardEdition.EditionEntry entry : edition.getAllCardsInSet()) {
-                    if (hidden.test(edition, entry.collectorNumber()))
-                        cardNames.add(entry.name());
+                    (hidden.test(edition, entry.collectorNumber()) ? cardNames : keptNames).add(entry.name());
                 }
             }
+            // a card with a print outside the test stays, as sets tagged whole also hold ordinary cards
+            cardNames.removeAll(keptNames);
         }
         this.commonCards.setHiddenCards(cardNames);
         this.variantCards.setHiddenCards(cardNames);

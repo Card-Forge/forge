@@ -36,6 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -1337,12 +1338,56 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         hiddenCards = cardNames;
     }
 
+    private static volatile boolean exclusionsSuspended;
+    // a short lift for one piece of content stays on its own thread, and can also force the exclusions back on
+    private static final ThreadLocal<Boolean> exclusionsLiftedHere = new ThreadLocal<>();
+
+    /** Lifts the player's exclusions on every thread until cleared. */
+    public static void setExclusionsSuspended(boolean suspended) {
+        exclusionsSuspended = suspended;
+    }
+
+    /** Whether hidden cards are shown and cards given to the player skip print exclusions. Default art is unaffected. */
+    public static boolean areExclusionsLifted() {
+        Boolean here = exclusionsLiftedHere.get();
+        return here != null ? here : exclusionsSuspended;
+    }
+
+    /** Runs the body with the player's exclusions lifted on this thread. */
+    public static <T> T withExclusionsLifted(Supplier<T> body) {
+        return withLift(true, body);
+    }
+
+    /** Runs the body with the player's exclusions applied on this thread, even inside a lift. */
+    public static <T> T withExclusionsApplied(Supplier<T> body) {
+        return withLift(false, body);
+    }
+
+    private static <T> T withLift(boolean lifted, Supplier<T> body) {
+        Boolean previous = exclusionsLiftedHere.get();
+        exclusionsLiftedHere.set(lifted);
+        try {
+            return body.get();
+        } finally {
+            exclusionsLiftedHere.set(previous);
+        }
+    }
+
+    /** Whether the player's exclusions hide the card or skip its print, even where content lifts them. */
+    public boolean isExcludedByPlayer(PaperCard card) {
+        return card != null && (isHiddenByName(card.getRules()) || isPrintExcluded(card));
+    }
+
     public boolean isHidden(PaperCard card) {
         return card != null && isHidden(card.getRules());
     }
 
     private boolean isHidden(CardRules rules) {
-        return rules != null && hiddenCards.contains(rules.getName()) && !rules.getType().isBasicLand();
+        return rules != null && !areExclusionsLifted() && isHiddenByName(rules);
+    }
+
+    private boolean isHiddenByName(CardRules rules) {
+        return hiddenCards.contains(rules.getName()) && !rules.getType().isBasicLand();
     }
 
     @Override

@@ -91,6 +91,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public boolean ignoreGlobalEffect = false;
     public boolean ignoreBiomeEffect = false;
     public boolean ignoreDungeonEffect = false;
+    public boolean ignoreExcludedSets = false;
     public String questStageID;
     private ProgressableGraphPath<NavigationVertex> navPath;
     public Vector2 fleeTarget;
@@ -116,6 +117,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
         ignoreGlobalEffect = data.ignoreGlobalEffect;
         ignoreBiomeEffect = data.ignoreBiomeEffect;
         ignoreDungeonEffect = data.ignoreDungeonEffect;
+        ignoreExcludedSets = data.ignoreExcludedSets;
         float scale = data.scale;
         if (scale < 0)
             scale = 1f;
@@ -487,6 +489,10 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
         return data.getBossIntro();
     }
     public Array<Reward> getRewards() {
+        return ignoreExcludedSets ? Config.instance().withExclusionsLifted(this::collectRewards) : collectRewards();
+    }
+
+    private Array<Reward> collectRewards() {
         rewardCollectionPool.clear();
         // Collect custom rewards for chaos battles
 

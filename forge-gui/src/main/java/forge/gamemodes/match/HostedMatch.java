@@ -50,6 +50,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class HostedMatch {
     private Match match;
@@ -155,8 +156,8 @@ public class HostedMatch {
     private static final Set<String> warnedDecks = Collections.synchronizedSet(new HashSet<>());
 
     private void warnOfExcludedCards() {
-        List<IGuiGame> localGuis = guis.values().stream().filter(gui -> !(gui instanceof ProtocolGuiGame)).toList();
-        if (localGuis.isEmpty()) {
+        List<IGuiGame> localGuis = guis.values().stream().filter(gui -> !(gui instanceof ProtocolGuiGame)).collect(Collectors.toList());
+        if (localGuis.isEmpty() || CardDb.areExclusionsLifted()) {
             return;
         }
         for (RegisteredPlayer rp : match.getPlayers()) {

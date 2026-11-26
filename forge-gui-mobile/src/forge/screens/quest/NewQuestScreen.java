@@ -604,7 +604,7 @@ public class NewQuestScreen extends FScreen {
 
             DeckConstructionRules dcr = isCommander() ?  DeckConstructionRules.Commander: DeckConstructionRules.Default;
 
-            qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs, dcr);
+            boolean startingDeckChanged = qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs, dcr);
             qc.save();
 
             // Save in preferences.
@@ -612,6 +612,9 @@ public class NewQuestScreen extends FScreen {
             FModel.getQuestPreferences().save();
 
             QuestMenu.launchQuestMode(LaunchReason.NewQuest, isCommander()); //launch quest mode for new quest
+            if (startingDeckChanged)
+                FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblStarterDeckChangedByExclusions"),
+                        Forge.getLocalizer().getMessage("lblExcludedSets"));
         }));
     }
 }

@@ -31,6 +31,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.Supplier;
 
 /**
  * Main resource class to access files from the selected adventure
@@ -43,7 +44,7 @@ public class Config {
     private final HashMap<String, FileHandle> Cache = new HashMap<>();
     private ConfigData configData;
     private String[] planeRestrictedEditions, planeAllowedEditions;
-    private boolean planeIgnoresUserExclusions, resourcesLoaded;
+    private boolean excludedSetsNoticePending, placeIgnoresExcludedSets, resourcesLoaded;
     private Set<String> excludedEditionCodes = Collections.emptySet();
     private Set<String> partlyExcludedEditionCodes = Collections.emptySet();
     private final String[] adventures;
@@ -137,19 +138,51 @@ public class Config {
         return configData;
     }
 
-    /** False on a plane made only of editions the player excluded, which keeps its cards rather than being emptied. */
+    /** False where the content's author ignores excluded sets, which keeps every card. */
     public boolean appliesUserExclusions() {
-        return !planeIgnoresUserExclusions && FModel.getMagicDb().getCommonCards().hasPrintExclusion();
+        return !CardDb.areExclusionsLifted() && FModel.getMagicDb().getCommonCards().hasPrintExclusion();
     }
 
     /** The editions the player excludes as a whole, kept from the last change so card choices need not scan every edition. */
     public Set<String> getExcludedEditionCodes() {
-        return excludedEditionCodes;
+        return CardDb.areExclusionsLifted() ? Collections.emptySet() : excludedEditionCodes;
     }
 
     /** The editions with only some prints excluded, kept from the last change as the whole ones are. */
     public Set<String> getPartlyExcludedEditionCodes() {
-        return partlyExcludedEditionCodes;
+        return CardDb.areExclusionsLifted() ? Collections.emptySet() : partlyExcludedEditionCodes;
+    }
+
+    /** Whether a dungeon, town or enemy lifts the player's exclusions here, rather than the whole plane. */
+    public boolean liftsExclusionsLocally() {
+        return CardDb.areExclusionsLifted() && !configData.ignoreExcludedSets;
+    }
+
+    /** Lifts the player's exclusions while the player is in a dungeon or town whose author ignores them. */
+    public void setPlaceIgnoresExcludedSets(boolean ignores) {
+        if (placeIgnoresExcludedSets == ignores || !resourcesLoaded)
+            return;
+        placeIgnoresExcludedSets = ignores;
+        if (configData.ignoreExcludedSets)
+            return;  // the whole plane already lifts them
+        applyUserExclusions();
+        applyTokenEditionFilter();
+    }
+
+    /** Runs the body with the player's exclusions lifted, for an enemy whose author ignores them. */
+    public <T> T withExclusionsLifted(Supplier<T> body) {
+        if (CardDb.areExclusionsLifted())
+            return body.get();
+        // the edition lists hold the player's whole-set exclusions, so the plane's own lists stand in while the body runs
+        String[] restricted = configData.restrictedEditions, allowed = configData.allowedEditions;
+        configData.restrictedEditions = planeRestrictedEditions;
+        configData.allowedEditions = planeAllowedEditions;
+        try {
+            return CardDb.withExclusionsLifted(body);
+        } finally {
+            configData.restrictedEditions = restricted;
+            configData.allowedEditions = allowed;
+        }
     }
 
     /** Whether the plane's own edition lists allow the edition, leaving the player's exclusions aside. */
@@ -165,12 +198,19 @@ public class Config {
             planeRestrictedEditions = configData.restrictedEditions == null ? new String[0] : configData.restrictedEditions;
             planeAllowedEditions = configData.allowedEditions;
         }
-        Set<String> playerExcluded = FModel.getExcludedEditionCodes();
-        excludedEditionCodes = playerExcluded;
-        partlyExcludedEditionCodes = FModel.getPartlyExcludedEditionCodes();
         boolean hasWhitelist = planeAllowedEditions != null && planeAllowedEditions.length > 0;
-        planeIgnoresUserExclusions = hasWhitelist && Arrays.stream(planeAllowedEditions).allMatch(playerExcluded::contains);
-        Set<String> excluded = planeIgnoresUserExclusions ? Collections.emptySet() : playerExcluded;
+        Set<String> playerExcluded = FModel.getExcludedEditionCodes();
+        Set<String> playerPartlyExcluded = FModel.getPartlyExcludedEditionCodes();
+        boolean ignore = configData.ignoreExcludedSets || placeIgnoresExcludedSets;
+        CardDb.setExclusionsSuspended(ignore);
+        if (configData.ignoreExcludedSets) {
+            excludedSetsNoticePending = hasWhitelist
+                    ? Arrays.stream(planeAllowedEditions).anyMatch(code -> playerExcluded.contains(code) || playerPartlyExcluded.contains(code))
+                    : !playerExcluded.isEmpty() || !playerPartlyExcluded.isEmpty();
+        }
+        excludedEditionCodes = ignore ? Collections.emptySet() : playerExcluded;
+        partlyExcludedEditionCodes = ignore ? Collections.emptySet() : playerPartlyExcluded;
+        Set<String> excluded = excludedEditionCodes;
         Set<String> restricted = new LinkedHashSet<>(Arrays.asList(planeRestrictedEditions));
         restricted.addAll(excluded);
         configData.restrictedEditions = restricted.toArray(new String[0]);
@@ -178,9 +218,17 @@ public class Config {
             configData.allowedEditions = Arrays.stream(planeAllowedEditions).filter(code -> !excluded.contains(code)).toArray(String[]::new);
     }
 
+    /** True once after the player's exclusions would change a plane that ignores them, so the player can be told. */
+    public boolean takeExcludedSetsNotice() {
+        boolean pending = excludedSetsNoticePending;
+        excludedSetsNoticePending = false;
+        return pending;
+    }
+
     public static void onExclusionChanged() {
-        if (currentConfig == null || !currentConfig.resourcesLoaded)
-            return;  // Adventure has not loaded yet, and loadResources applies them
+        // outside Adventure the lift must stay off, and loadResources applies the change on return
+        if (currentConfig == null || !currentConfig.resourcesLoaded || !Forge.isMobileAdventureMode)
+            return;
         currentConfig.applyUserExclusions();
         currentConfig.applyTokenEditionFilter();
         RewardData.invalidateCardPool();
@@ -727,6 +775,7 @@ public class Config {
             saveSettings();
         }
         AdventureOverrides.instance().load(prefix, FModel.getMagicDb().getEditions(), configData);
+        placeIgnoresExcludedSets = false;
         applyUserExclusions();
         applyTokenEditionFilter();
         resourcesLoaded = true;

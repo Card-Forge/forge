@@ -151,10 +151,11 @@ public class PrintExclusionTest extends CardMockTestCase {
     @Test
     public void aHiddenCardLeavesThePoolsButIsStillFoundByName() {
         FModel.getMagicDb().setHiddenPrints((edition, collectorNumber) -> edition.hasTag(CardEdition.FUNNY_TAG, collectorNumber));
-        assertTrue(cardDb.streamUniqueCards().noneMatch(card -> card.getName().equals("Blacker Lotus")));
-        // the Secret Lair print is not tagged, but the card is hidden by name, as Un-cards always were
-        assertTrue(cardDb.getAllCards().stream().noneMatch(card -> card.getName().equals("Blacker Lotus")));
-        assertNotNull(cardDb.getCard("Blacker Lotus"));
+        assertTrue(cardDb.streamUniqueCards().noneMatch(card -> card.getName().equals("Jack-in-the-Mox")));
+        assertTrue(cardDb.getAllCards().stream().noneMatch(card -> card.getName().equals("Jack-in-the-Mox")));
+        assertNotNull(cardDb.getCard("Jack-in-the-Mox"));
+        // Drake Stone is tagged Funny as a whole, but Concentrate also has ordinary prints
+        assertTrue(cardDb.streamUniqueCards().anyMatch(card -> card.getName().equals("Concentrate")));
     }
 
     @Test

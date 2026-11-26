@@ -36,6 +36,7 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.assets.ImageCache;
+import forge.card.CardDb;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -473,11 +474,19 @@ public class RewardScene extends UIScene {
 
     public void loadRewards(Deck deck, Type type, ShopActor shopActor, boolean noSell) {
         Array<Reward> rewards = new Array<>();
-        // a pack is rolled without regard to the player's exclusions, and may predate them
         List<PaperCard> cards = deck.getAllCardsInASinglePool(true, true).toFlatList();
-        List<PaperCard> allowed = CardUtil.withAllowedPrints(cards);
-        if (CardUtil.droppedOrMoved(cards, allowed))
-            RewardData.noteRewardChanged();
+        List<PaperCard> allowed;
+        if (deck.getTags().contains(RewardData.IGNORES_EXCLUDED_SETS_TAG)) {
+            allowed = CardDb.withExclusionsLifted(() -> CardUtil.withAllowedPrints(cards));
+        } else {
+            // a pack is rolled without regard to the player's exclusions, and may predate them, so even inside a
+            // dungeon that lifts them it keeps the rules of wherever it came from
+            allowed = Config.instance().liftsExclusionsLocally()
+                    ? CardDb.withExclusionsApplied(() -> CardUtil.withAllowedPrints(cards))
+                    : CardUtil.withAllowedPrints(cards);
+            if (CardUtil.droppedOrMoved(cards, allowed))
+                RewardData.noteRewardChanged();
+        }
         for (PaperCard card : allowed) {
             rewards.add(new Reward(card, noSell));
         }

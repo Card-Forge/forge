@@ -175,6 +175,20 @@ public class ConquestUtil {
         }
     }
 
+    /** The print the player is given for the card: its own, the default print when its own is excluded, or null when no print is allowed. */
+    public static PaperCard allowedPrint(PaperCard pc) {
+        CardDb cardDb = FModel.getMagicDb().getCommonCards();
+        if (cardDb.isHidden(pc)) {
+            return null;
+        }
+        if (!cardDb.isPrintExcluded(pc)) {
+            return pc;
+        }
+        // the default print already skips excluded prints when the card has another
+        PaperCard other = cardDb.getCard(pc.getName());
+        return other == null || cardDb.isPrintExcluded(other) ? null : other;
+    }
+
     public static Iterable<PaperCard> getStartingPlaneswalkerOptions(final PaperCard startingCommander) {
         final byte colorIdentity = startingCommander.getRules().getColorIdentity().getColor();
         final Set<String> selected = Sets.newHashSet();
@@ -186,7 +200,8 @@ public class ConquestUtil {
             CardRules rules = card.getRules();
             boolean allowed = rules.getType().isPlaneswalker() &&
                     !card.getName().equals(startingCommander.getName()) && //don't allow picking a commander as a starting planeswalker
-                    rules.getColorIdentity().hasNoColorsExcept(colorIdentity);
+                    rules.getColorIdentity().hasNoColorsExcept(colorIdentity) &&
+                    !FModel.getMagicDb().getCommonCards().isPrintExcluded(card);
 
             if (allowed) {
                 selected.add(card.getName());

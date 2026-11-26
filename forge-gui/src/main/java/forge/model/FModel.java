@@ -115,6 +115,7 @@ public final class FModel {
         getMagicDb().setPrintExclusion(buildPrintExclusion());
         getMagicDb().setHiddenPrints(buildHiddenPrints());
         cardPools.forEach(CardPoolCache::reset);
+        getPlanes().forEach(ConquestPlane::resetAwardPool);
     }
 
     // must not reach getMagicDb(): it runs while the card database is still being built

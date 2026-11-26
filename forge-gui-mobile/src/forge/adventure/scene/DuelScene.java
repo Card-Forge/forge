@@ -25,6 +25,7 @@ import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.assets.FBufferedImage;
 import forge.assets.FSkin;
+import forge.card.CardDb;
 import forge.card.ColorSet;
 import forge.deck.*;
 import forge.game.card.CardView;
@@ -191,8 +192,11 @@ public class DuelScene extends ForgeScene {
                     //Could also add the cards to the opponent's pool, but their games aren't simulated and they never edit their decks.
                 }
                 else {
-                    anteWonCards = CardUtil.withAllowedPrints(anteResult.wonCards);
-                    anteChangedByExclusions = CardUtil.droppedOrMoved(anteResult.wonCards, anteWonCards);
+                    List<PaperCard> won = anteResult.wonCards;
+                    anteWonCards = enemy != null && enemy.ignoreExcludedSets
+                            ? CardDb.withExclusionsLifted(() -> CardUtil.withAllowedPrints(won))
+                            : CardUtil.withAllowedPrints(won);
+                    anteChangedByExclusions = CardUtil.droppedOrMoved(won, anteWonCards);
                     for (PaperCard card : anteWonCards) {
                         Current.player().addCard(card);
                     }
@@ -686,10 +690,19 @@ public class DuelScene extends ForgeScene {
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
+        // the dungeon or plane already said so when it lifts the exclusions itself
+        boolean enemyNotice = enemy.ignoreExcludedSets && !CardDb.areExclusionsLifted()
+                && FModel.getMagicDb().getCommonCards().hasPrintExclusion();
+        Runnable showEnemyNotice = () -> FOptionPane.showMessageDialog(localizer.getMessage("lblEnemyIgnoresExcludedSets"),
+                localizer.getMessage("lblExcludedSets"));
         LoadingOverlay matchOverlay;
         if (chaosBattle || showMessages || isDeckMissing) {
             final FBufferedImage fb = getFBEnemyAvatar();
-            final Runnable introDone = () -> MatchController.setIntroShowing(false);
+            final Runnable introDone = () -> {
+                MatchController.setIntroShowing(false);
+                if (enemyNotice)
+                    showEnemyNotice.run();
+            };
             String Intro = enemy.getBossIntro();
             if (Intro != null) {
                 bossDialogue = createFOption((Intro), enemy.getDisplayName(), fb, introDone);
@@ -702,6 +715,8 @@ public class DuelScene extends ForgeScene {
             }
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
                     bossDialogue.show())), false, true);
+        } else if (enemyNotice) {
+            matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, showEnemyNotice), false, true);
         } else {
             matchOverlay = new LoadingOverlay(null);
         }

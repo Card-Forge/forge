@@ -300,6 +300,11 @@ public final class QuestUtilCards {
         }
     }
 
+    /** A precon or starting deck names its cards, and a hidden card is still found by name. */
+    public static boolean hasHiddenCards(final Deck deck) {
+        return deck.getAllCardsInASinglePool().toFlatList().stream().anyMatch(FModel.getMagicDb()::isHidden);
+    }
+
     /**
      * Buy precon deck.
      *
@@ -308,11 +313,11 @@ public final class QuestUtilCards {
      * @param value
      *            the value
      */
-    public void buyPreconDeck(final PreconDeck precon, final int value) {
-        if (questAssets.getCredits() >= value) {
-            questAssets.subtractCredits(value);
-            addDeck(precon.getDeck());
-        }
+    public Deck buyPreconDeck(final PreconDeck precon, final int value) {
+        if (questAssets.getCredits() < value)
+            return null;
+        questAssets.subtractCredits(value);
+        return addDeck(precon.getDeck());
     }
 
     /**
@@ -320,13 +325,20 @@ public final class QuestUtilCards {
      *
      * @param fromDeck
      *            Deck, deck to import
+     * @return the deck added: fromDeck itself, or a copy without the cards the player hides
      */
-    void addDeck(final Deck fromDeck) {
+    Deck addDeck(final Deck fromDeck) {
         if (fromDeck == null) {
-            return;
+            return null;
         }
-        questController.getMyDecks().add(fromDeck);
-        addAllCards(fromDeck.getAllCardsInASinglePool().toFlatList());
+        Deck deck = fromDeck;
+        if (hasHiddenCards(fromDeck)) {
+            deck = new Deck(fromDeck);
+            deck.forEach(section -> section.getValue().removeIf(FModel.getMagicDb()::isHidden));
+        }
+        questController.getMyDecks().add(deck);
+        addAllCards(deck.getAllCardsInASinglePool().toFlatList());
+        return deck;
     }
 
     /**
@@ -728,6 +740,8 @@ public final class QuestUtilCards {
         if (questAssets.getShopList().isEmpty()) {
             generateCardsInShop();
         }
+        // the stock is saved with the quest, so it can predate the cards the player now hides
+        questAssets.getShopList().removeIf(item -> item instanceof PaperCard card && FModel.getMagicDb().isHidden(card));
         return questAssets.getShopList();
     }
 

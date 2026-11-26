@@ -4,6 +4,7 @@
     - [Accessing the setting](#accessing-the-setting)
     - [Effects](#effects)
     - [Warnings](#warnings)
+- [Keeping Excluded Cards in Authored Content](#keeping-excluded-cards-in-authored-content)
 - [How It Works](#how-it-works)
 - [Defining Categories](#defining-categories)
     - [Automated Scryfall tagging](#automated-scryfall-tagging)
@@ -13,7 +14,7 @@
 # Excluded Sets
 
 ## Overview
-The **Excluded Sets** feature allows you to removes chosen sets and printings from default card art and from Adventure Mode. A player can exclude single sets, or whole categories such as Universes Beyond.
+The **Excluded Sets** feature removes chosen sets and printings from default card art and from the cards Forge gives the player. A player can exclude single sets, or whole categories such as Universes Beyond.
 
 Each category includes both its sets and also individual cards printed in other sets, such as Universes Beyond cards included in Secret Lair.
 
@@ -35,14 +36,37 @@ Some sets hold only a few cards from a category, such as the Universes Beyond ca
 Changes take effect when the list closes.
 
 ### Effects
-A card's default art avoids excluded sets when another printing exists. Adventure shops, rewards, events, Spell Smith and loot leave out cards with no allowed printing.
 
-Excluding Un-cards and playtest cards goes further. These cards also leave deck editor catalogs, boosters, drafts and generated decks in every mode.
+| Mode | How exclusions apply |
+|---|---|
+| Constructed and Limited | • **Card art:** when a deck or list does not name a set, the card shows in a printing that is not excluded, if one exists.<br>• **Un-cards and playtest cards:** when excluded, they leave the deck editor catalogs, boosters, drafts, sealed pools and generated decks. |
+| Adventure | • **Card art:** as in Constructed.<br>• **Un-cards and playtest cards:** as in Constructed.<br>• **Cards the player receives:** shop stock, rewards, loot, events, Spell Smith, ante winnings, opened packs and the starting deck use a printing that is not excluded. A card with no allowed printing is left out. |
+| Planar Conquest | • **Card art:** as in Constructed.<br>• **Un-cards and playtest cards:** as in Constructed.<br>• **Cards the player receives:** boosters, the AEther, commander rewards, the starting commander, planeswalker and deck, and Chaos Battle rewards use a printing that is not excluded. A card with no allowed printing is left out. |
+| Quest | • **Card art:** as in Constructed.<br>• **Un-cards and playtest cards:** left out of the shop, boosters, precons, the starting deck and rewards.<br>• **Other categories:** do not change the cards the player receives. |
+| Rogue Commander | • **Card art:** as in Constructed.<br>• **Un-cards and playtest cards:** left out of rewards.<br>• **Other categories:** do not change the cards the player receives. |
 
-Owned cards and decks keep all their cards. In a deck line that names no set, the card switches to an allowed printing when one exists. Otherwise the deck keeps the excluded printing, and a deck with an excluded card still loads.
+Opponent decks are never changed. Owned cards and decks keep all their cards. In a deck line that names no set, the card switches to an allowed printing when one exists. Otherwise the deck keeps the excluded printing, and a deck with an excluded card still loads.
 
 ### Warnings
-Some content keeps excluded cards, and Forge shows a message once per session when it does. Opponent decks in Quest, Planar Conquest and Adventure still play cards on the list. A message at the start of a match names any opponent whose deck uses cards with no allowed printing, or Un-cards and playtest cards. In Adventure, a message also appears when a shop or a reward screen has cards that the list changed or left out. A specific card a reward names counts when it moves to another set or is left out. A random reward that picks another printing does not.
+Forge shows a message when the list changes what the player receives or faces:
+- In every mode, at the start of a match, once per session for each opponent whose deck uses cards with no allowed printing, or Un-cards and playtest cards.
+- In Adventure, when a reward screen, opened pack, ante or starting deck has cards that the list changed or left out, and once per session for each shop whose stock it changed. A specific card a reward names counts when it moves to another set or is left out. A random reward that picks another printing does not.
+- In Planar Conquest, once per session on arriving at a plane whose cards the list affects.
+- In Quest, before buying a precon with Un-cards or playtest cards, and when the starting deck or a reward loses them.
+
+## Keeping Excluded Cards in Authored Content
+Content built around excluded cards, such as a Universes Beyond or Un-card plane, can ignore the list. It then plays as authored, and the player sees a message saying their Excluded Sets list does not apply there.
+
+| Content | Setting | Covers | Message |
+|---|---|---|---|
+| Adventure plane | `"ignoreExcludedSets": true` in the plane's `config.json` | The whole plane | On the Adventure start menu |
+| Adventure point of interest | `"ignoreExcludedSets": true` on the point of interest | Everything inside it | On entering |
+| Adventure enemy | `"ignoreExcludedSets": true` on the enemy, or as a map property | That enemy's drops and ante | At the start of the battle |
+| Planar Conquest plane | `IgnoreExcludedSets:True` in `planes.txt` | The whole plane | On arriving |
+
+A pack from a point of interest or enemy that ignores the list keeps its cards when it is opened somewhere else.
+
+The Unstable Realm, Final Fantasy, Middle-earth and The Last Airbender planes in Planar Conquest ignore the list.
 
 ## How It Works
 Each category is a tag on sets and individual printings. The built-in tags update daily from Scryfall, and custom tags can be added by hand (see [Defining custom tags](#defining-custom-tags)).
@@ -51,9 +75,9 @@ An excluded category also covers sets and cards added to it later, so new releas
 
 Excluded printings are skipped whenever Forge picks a card's art or generates Adventure content, as long as another printing is allowed.
 
-Excluding Un-cards and playtest cards hides them rather than removing them from Forge, so decks that use them keep working.
+Excluding Un-cards and playtest cards hides them rather than removing them from Forge, so decks that use them keep working. A card is hidden only when every printing of it is an Un-card or playtest card. A card that also has an ordinary printing stays, and only its Un-card printings are excluded.
 
-Changes apply when the list closes, with no restart. Planar Conquest is the exception and picks up changes after a restart.
+Changes apply when the list closes, with no restart.
 
 ## Defining Categories
 `forge-gui/tools/printtags.py` generates `res/blockdata/printtags.txt`. The Update Print Tags workflow runs the script daily and commits the file when it changes. Do not edit the file by hand.
