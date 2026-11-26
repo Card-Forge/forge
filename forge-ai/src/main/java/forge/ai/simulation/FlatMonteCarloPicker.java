@@ -225,7 +225,7 @@ public final class FlatMonteCarloPicker {
          */
         public int lookaheadMaxCandidates = 0;
         /**
-         * Whether the other players' heuristic AIs, a teammate's too, may respond to what is on the stack in a rollout
+         * Whether the players' heuristic AIs may respond to what is on the stack in a rollout
          * (a counterspell, instant speed removal), using the hand dealt in that sample. Costs more heuristic decisions
          * per play.
          */
@@ -3054,18 +3054,23 @@ public final class FlatMonteCarloPicker {
     private static final int MAX_RESPONSES = 8;
 
     /**
-     * Resolves the stack down to {@code floor} objects: what was put on top of those. Before each spell, activated
-     * ability or triggered ability resolves, the other players get priority, so they can answer the AI's plays and
-     * each other's answers. Every response and every resolution starts a new round: having passed before does not
-     * keep a player from answering what is on top now.
+     * Resolves the stack down to {@code floor} objects: what {@code simAi} has just put on top of those. Before each
+     * spell, activated ability or triggered ability resolves, the players get priority, so they can answer the AI's
+     * plays and each other's answers. Every response and every resolution starts a new round: having passed before
+     * does not keep a player from answering what is on top now.
      */
     static void resolveWithResponses(final Game simGame, final Player simAi, final Config cfg, final int floor) {
         int responses = 0;
         GameSimulator.TopResolver resolver = null;
+        // who gets priority next, which the controller of the top object does not tell: whoever just acted keeps it
+        Player first = simAi;
         putTriggersOnStack(simGame);
         while (!simGame.isGameOver() && simGame.getStack().size() > floor) {
             AITimeoutTracker.check();
-            if (cfg.opponentResponses && responses < MAX_RESPONSES && offerPriority(simGame)) {
+            final Player responder = cfg.opponentResponses && responses < MAX_RESPONSES
+                    ? offerPriority(simGame, first) : null;
+            if (responder != null) {
+                first = responder;
                 responses++;
                 putTriggersOnStack(simGame);
                 continue; // the answer is on top now: a new round of priority
@@ -3074,6 +3079,7 @@ public final class FlatMonteCarloPicker {
                 resolver = new GameSimulator.TopResolver(simGame, simAi.getWeakestOpponent());
             }
             resolver.resolveTop();
+            first = simGame.getPhaseHandler().getPlayerTurn(); // after a resolution the active player gets priority
         }
     }
 
@@ -3084,18 +3090,16 @@ public final class FlatMonteCarloPicker {
     }
 
     /**
-     * Offers every other player, teammates of its controller included, in turn order after that controller, the chance
-     * to answer what is on top.
+     * Offers every player priority, in turn order starting with {@code first}, to respond to what is on the stack,
+     * whoever controls the top of it.
      * Hidden cards are the ones dealt in this sample, so the AI learns nothing about the real ones.
      *
-     * @return true as soon as one of them puts something on the stack; false when all of them pass
+     * @return the first of them who puts something on the stack; null when all of them pass
      */
-    private static boolean offerPriority(final Game simGame) {
-        final Player caster = simGame.getStack().peekAbility().getActivatingPlayer();
-        for (final Player p : simGame.getPlayersInTurnOrder(caster)) {
-            // teammates get priority too, and an empty hand is no reason to skip: abilities can be activated from the
-            // battlefield and other zones
-            if (p == caster || !p.isInGame() || !(p.getController() instanceof PlayerControllerAi)) {
+    private static Player offerPriority(final Game simGame, final Player first) {
+        for (final Player p : simGame.getPlayersInTurnOrder(first)) {
+            // an empty hand is no reason to skip: abilities can be activated from the battlefield and other zones
+            if (!p.isInGame() || !(p.getController() instanceof PlayerControllerAi)) {
                 continue;
             }
             AITimeoutTracker.check();
@@ -3106,11 +3110,11 @@ public final class FlatMonteCarloPicker {
                 final int before = simGame.getStack().size();
                 pc.playChosenSpellAbility(answer.get(0));
                 if (simGame.getStack().size() > before) {
-                    return true;
+                    return p;
                 }
             }
         }
-        return false;
+        return null;
     }
 
     /** As {@link #playOut(Game, Player, int)} for the AI's own plays, which the opponent may answer. */

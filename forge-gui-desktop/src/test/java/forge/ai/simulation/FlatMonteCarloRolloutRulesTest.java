@@ -1,5 +1,6 @@
 package forge.ai.simulation;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -280,6 +281,99 @@ public class FlatMonteCarloRolloutRulesTest extends FlatMcTestBase {
         castWithATeammate(axe);
         assertEquals(third.getCardsIn(ZoneType.Hand).size(), 1, "the Cancel was kept");
         assertEquals(opp.getLife(), 15);
+    }
+
+    /** Notes who is asked about what, in order, and passes, or plays as usual if told to. */
+    private static final class RecordsPriority extends PlayerControllerAi {
+        private final String who;
+        private final List<String> asked;
+        private boolean plays;
+
+        RecordsPriority(final Game game, final Player player, final String who, final List<String> asked) {
+            super(game, player, player.getLobbyPlayer());
+            this.who = who;
+            this.asked = asked;
+        }
+
+        @Override
+        public List<SpellAbility> chooseSpellAbilityToPlay() {
+            asked.add(who + ": " + getGame().getStack().peekAbility().getHostCard().getName());
+            return plays ? super.chooseSpellAbilityToPlay() : null;
+        }
+    }
+
+    /**
+     * Three players; the AI casts an Ambush Viper on the given player's turn, and the third player's Soul Warden
+     * triggers when it resolves.
+     *
+     * @return who was asked about what while the stack played out
+     */
+    private List<String> priorityAroundSoulWarden(final int turnOfSeat) {
+        game = initAndCreateThreePlayerGame();
+        // seated in this order
+        opp = game.getPlayers().get(0);
+        ai = game.getPlayers().get(1);
+        third = game.getPlayers().get(2);
+        put("Soul Warden", third, ZoneType.Battlefield);
+        put("Forest", 2, ai, ZoneType.Battlefield);
+        final SpellAbility viper = put("Ambush Viper", ai, ZoneType.Hand).getFirstSpellAbility();
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, game.getPlayers().get(turnOfSeat));
+        game.getAction().checkStateEffects(true);
+        viper.setActivatingPlayer(ai);
+        final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(
+                ((PlayerControllerAi) ai.getController()).getAi(), ai);
+        ((PlayerControllerAi) ai.getController()).playChosenSpellAbility(viper);
+
+        final List<String> asked = new ArrayList<>();
+        opp.runWithController(() -> ai.runWithController(() -> third.runWithController(
+                () -> FlatMonteCarloPicker.resolveWithResponses(game, ai, cfg, 0),
+                new RecordsPriority(game, third, "third", asked)),
+                new RecordsPriority(game, ai, "ai", asked)),
+                new RecordsPriority(game, opp, "opp", asked));
+        assertEquals(third.getLife(), 21, "the trigger resolved");
+        return asked;
+    }
+
+    @Test(timeOut = 120000)
+    public void theCasterGetsPriorityFirstAndTheActivePlayerAfterAResolution() {
+        assertEquals(priorityAroundSoulWarden(1), Arrays.asList(
+                "ai: Ambush Viper", "third: Ambush Viper", "opp: Ambush Viper",
+                "ai: Soul Warden", "third: Soul Warden", "opp: Soul Warden"));
+    }
+
+    @Test(timeOut = 120000)
+    public void onAnotherPlayersTurnThatPlayerGetsPriorityAfterAResolution() {
+        assertEquals(priorityAroundSoulWarden(0), Arrays.asList(
+                "ai: Ambush Viper", "third: Ambush Viper", "opp: Ambush Viper",
+                "opp: Soul Warden", "ai: Soul Warden", "third: Soul Warden"));
+    }
+
+    @Test(timeOut = 120000)
+    public void whoeverRespondsGetsPriorityNext() {
+        game = initAndCreateThreePlayerGame();
+        opp = game.getPlayers().get(0);
+        ai = game.getPlayers().get(1);
+        third = game.getPlayers().get(2);
+        put("Mountain", 5, ai, ZoneType.Battlefield);
+        put("Island", 3, third, ZoneType.Battlefield);
+        put("Cancel", third, ZoneType.Hand);
+        final SpellAbility axe = put("Lava Axe", ai, ZoneType.Hand).getFirstSpellAbility();
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+        axe.setActivatingPlayer(ai);
+        FlatMonteCarloPicker.applyTarget(axe, opp);
+        final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(
+                ((PlayerControllerAi) ai.getController()).getAi(), ai);
+        ((PlayerControllerAi) ai.getController()).playChosenSpellAbility(axe);
+
+        final List<String> asked = new ArrayList<>();
+        final RecordsPriority counters = new RecordsPriority(game, third, "third", asked);
+        counters.plays = true;
+        opp.runWithController(() -> ai.runWithController(() -> third.runWithController(
+                () -> FlatMonteCarloPicker.resolveWithResponses(game, ai, cfg, 0), counters),
+                new RecordsPriority(game, ai, "ai", asked)),
+                new RecordsPriority(game, opp, "opp", asked));
+        assertEquals(asked.subList(0, 3), Arrays.asList("ai: Lava Axe", "third: Lava Axe", "third: Cancel"));
     }
 
     /** Passes on everything until it is asked about the named spell for the second time; then plays as usual. */
