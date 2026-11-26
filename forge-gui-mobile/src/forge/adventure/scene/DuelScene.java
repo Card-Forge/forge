@@ -59,7 +59,6 @@ import forge.util.ScreenUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 /**
  * DuelScene
@@ -204,6 +203,8 @@ public class DuelScene extends ForgeScene {
             e.printStackTrace();
         }
         List<PaperCard> modifierLosses = winner || eventData != null ? Collections.emptyList() : loseModifierCards();
+        if (!winner && eventData == null)
+            Current.player().loseModifierMaxLife();
         String enemyName = enemy.getName();
         String insult = enemy.getBossInsult();
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
@@ -766,6 +767,8 @@ public class DuelScene extends ForgeScene {
             mainSize += commandExtras;
             maxDeckSize = applyCommanderSizeRule(playerDeck.getCommanders(), maxDeckSize);
         }
+        if (eventData == null && Current.player().hasModifierRule(modifier -> modifier.noMaxDeckSize))
+            maxDeckSize = Integer.MAX_VALUE;
 
         int excessCards = mainSize - maxDeckSize;
         if (excessCards > 0) {
@@ -791,14 +794,10 @@ public class DuelScene extends ForgeScene {
 
     /** The rules after this replace a removed commander and fill the deck up to its minimum size. */
     private void removeCardsModifiersDisallow() {
-        AdventurePlayer advPlayer = Current.player();
-        for (ModifierData modifier : advPlayer.getActiveModifiers()) {
-            Predicate<PaperCard> allowed = modifier.allowedCards(advPlayer.getModifiers().get(modifier.name));
-            for (DeckSection section : List.of(DeckSection.Main, DeckSection.Commander)) {
-                CardPool pool = playerDeck.get(section);
-                if (pool != null)
-                    pool.retainIf(allowed);
-            }
+        for (DeckSection section : List.of(DeckSection.Main, DeckSection.Commander)) {
+            CardPool pool = playerDeck.get(section);
+            if (pool != null)
+                pool.retainIf(Current.player()::modifiersAllowCard);
         }
     }
 
@@ -875,7 +874,7 @@ public class DuelScene extends ForgeScene {
                 if (removals.contains(mainCommander)) {
                     if (!format.isAllowedCommander(partnerCommander.getRules(), enforceLegality))
                         removals.add(partnerCommander); //Main is invalid but partner is valid.
-                } else if (!format.isAllowedPartnership(mainCommander.getRules(), partnerCommander.getRules(), enforceLegality))
+                } else if (!format.isAllowedPartnership(playerDeck, mainCommander.getRules(), partnerCommander.getRules(), enforceLegality))
                     removals.add(partnerCommander); //Invalid partnership.
             }
         }

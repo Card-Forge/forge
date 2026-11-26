@@ -1,0 +1,9 @@
+Name:Baron Vladimir Harkonnen
+ManaCost:3 U B R
+Types:Legendary Creature Human Noble
+PT:3/5
+T:Mode$ Sacrificed | ValidCard$ Creature.!token | ValidPlayer$ Opponent | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices a nontoken creature, you draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ Sacrifice | Cost$ T Sac<1/Creature.Other+Legendary/another legendary creature> | ValidTgts$ Opponent | SacValid$ Creature.!token | Amount$ 1 | SubAbility$ DBLoseLife | SpellDescription$ Target opponent sacrifices a nontoken creature of their choice and loses 3 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted
+Oracle:Whenever an opponent sacrifices a nontoken creature, you draw a card.\n{T}, Sacrifice another legendary creature: Target opponent sacrifices a nontoken creature of their choice and loses 3 life.

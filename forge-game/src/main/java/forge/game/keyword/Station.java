@@ -1,14 +1,9 @@
 package forge.game.keyword;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import forge.game.card.Card;
 import forge.game.staticability.StaticAbility;
 
 public class Station extends SimpleKeyword {
-
-    static Pattern pattern = Pattern.compile("counters_GE(\\d+)_CHARGE");
 
     @Override
     protected String formatReminderText(String reminderText) {
@@ -23,14 +18,10 @@ public class Station extends SimpleKeyword {
             reminderText = String.format(reminderText, "Planet");
         }
         for (StaticAbility st : card.getStaticAbilities()) {
-            if (!st.isIntrinsic() || !st.hasParam("Affected") || !"Creature".equals(st.getParam("AddType"))) {
+            if (!st.isIntrinsic() || !st.hasParam("Station") || !"Creature".equals(st.getParam("AddType"))) {
                 continue;
             }
-            Matcher m = pattern.matcher(st.getParam("Affected"));
-            if (!m.find()) {
-                continue;
-            }
-            extra = " It's an artifact creature at " + m.group(1) + "+.";
+            extra = " It's an artifact creature at " + st.getParam("Station") + "+.";
             break;
         }
         return reminderText + extra;

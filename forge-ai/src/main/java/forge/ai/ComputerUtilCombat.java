@@ -261,7 +261,7 @@ public class ComputerUtilCombat {
     public static int sumDamageIfUnblocked(final Iterable<Card> attackers, final Player attacked, boolean onlyPreventable) {
         int sum = 0;
         for (final Card attacker : attackers) {
-            if (onlyPreventable && !attacker.canDamagePrevented(true)) {
+            if (onlyPreventable && !attacker.canDamagePrevented(null, true)) {
                 continue;
             }
             // TODO always applies full prevention shields for each, so this might wrongly lower the result
@@ -2390,7 +2390,7 @@ public class ComputerUtilCombat {
     }
 
     public static boolean isCombatDamagePrevented(final Card attacker, final GameEntity target, final int damage) {
-        if (!attacker.canDamagePrevented(true)) {
+        if (!attacker.canDamagePrevented(target, true)) {
             return false;
         }
 
@@ -2635,15 +2635,18 @@ public class ComputerUtilCombat {
 
     public static boolean willOpposingCreatureDieInCombat(final Player ai, final Card combatant, final Combat combat) {
         if (combat != null) {
-            if (combat.isBlocking(combatant)) {
-                for (Card atk : combat.getAttackersBlockedBy(combatant)) {
-                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, atk, combat)) {
+            final List<Card> attackers = combat.getAttackersBlockedBy(combatant);
+            if (!attackers.isEmpty()) {
+                for (Card atk : attackers) {
+                    if (attackerWouldBeDestroyed(ai, atk, combat)) {
                         return true;
                     }
                 }
-            } else if (combat.isBlocked(combatant)) {
-                for (Card blk : combat.getBlockers(combatant)) {
-                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, blk, combat)) {
+            }
+            final List<Card> blockers = combat.getBlockers(combatant);
+            if (!blockers.isEmpty()) {
+                for (Card blk : blockers) {
+                    if (blockerWouldBeDestroyed(ai, blk, combat)) {
                         return true;
                     }
                 }
@@ -2654,19 +2657,19 @@ public class ComputerUtilCombat {
 
     public static boolean isDangerousToSacInCombat(final Player ai, final Card combatant, final Combat combat) {
         if (combat != null) {
-            if (combat.isBlocking(combatant)) {
+            final List<Card> attackers = combat.getAttackersBlockedBy(combatant);
+            if (!attackers.isEmpty()) {
                 if (combatant.hasKeyword(Keyword.BANDING)) {
                     return true;
                 }
-                for (Card atk : combat.getAttackersBlockedBy(combatant)) {
+                for (Card atk : attackers) {
                     if (atk.hasKeyword(Keyword.TRAMPLE)) {
                         return true;
                     }
                 }
-            } else if (combat.isBlocked(combatant)) {
-                if (combatant.hasKeyword(Keyword.BANDING)) {
-                    return true;
-                }
+            }
+            if (!combat.getBlockers(combatant).isEmpty() && combatant.hasKeyword(Keyword.BANDING)) {
+                return true;
             }
         }
         return false;

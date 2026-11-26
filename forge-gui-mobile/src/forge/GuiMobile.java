@@ -27,6 +27,8 @@ import forge.screens.LoadingOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.quest.QuestMenu;
+import forge.screens.rogue.RogueDialog;
+import forge.screens.rogue.RogueScreen;
 import forge.screens.settings.GuiDownloader;
 import forge.sound.*;
 import forge.toolbox.FOptionPane;
@@ -225,8 +227,12 @@ public class GuiMobile implements IGuiBase {
                     }
                 } else if (paperCard != null) {
                     Texture cardImage = ImageCache.getInstance().getImage(paperCard.getCardImageKey(), false);
-                    if (cardImage != null)
+                    if (cardImage != null) {
                         g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false, 0);
+                    } else if (ImageKeys.getImageFile(paperCard.getCardImageKey()) != null) {
+                        // The picture is on disk but loads over the next frame; draw again then rather than keep this one
+                        Gdx.app.postRunnable(this::clear);
+                    }
                 }
 
                 Gdx.graphics.requestRendering(); //ensure image appears right away
@@ -238,6 +244,10 @@ public class GuiMobile implements IGuiBase {
     public void showImageDialog(final ISkinImage image, final String message, final String title) {
         if (Forge.isMobileAdventureMode) {
             FThreads.invokeInEdtNowOrLater(() -> MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, (FBufferedImage)image, null));
+            return;
+        }
+        if (Forge.getCurrentScreen() instanceof RogueScreen) {
+            RogueDialog.notice((FImage) image, message, title);
             return;
         }
         new WaitCallback<Integer>() {

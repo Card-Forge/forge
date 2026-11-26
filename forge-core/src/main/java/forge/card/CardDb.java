@@ -158,6 +158,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     // Placeholder to setup default art Preference - to be moved from Static Data!
     private CardArtPreference defaultCardArtPreference;
     private BiPredicate<String, String> preferredLanguageAvailability;
+    // (edition, collector number) of prints to avoid when the card has another print
+    private BiPredicate<CardEdition, String> printExclusion;
+    private int printExclusionVersion;
     private boolean initialized;
 
     public static class CardRequest {
@@ -773,6 +776,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         List<PaperCard> traditional = getTraditionalFramePrints(pc);
         if (traditional.isEmpty())
             return pc;  // the card has no traditional print in this edition
+        if (hasPrintExclusion() && !isPrintExcluded(pc) && traditional.stream().allMatch(this::isPrintExcluded))
+            return pc;  // the frame never wins over the player's exclusion
         PaperCard result = traditional.get((Math.max(pc.getArtIndex(), 1) - 1) % traditional.size());
         return pc.isFoil() ? result.getFoiled() : result;
     }
@@ -794,6 +799,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     && Objects.equals(other.getFunctionalVariant(), pc.getFunctionalVariant()))
                 traditional.add(other);
         }
+        if (canExcludePrints(traditional))
+            traditional.removeIf(this::isPrintExcluded);
         if (!pc.getRules().getType().isBasicLand()) {
             /* Some products (Universes Beyond, Secret Lair, Commander decks...) list the special versions of a card
                in the main section too, with much higher collector numbers (e.g. 79 / 171 / 265). The standard
@@ -834,31 +841,62 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return false;
     }
 
-    private PaperCard getBestUniquePrint(final Collection<PaperCard> cards) {
-        return cards.stream()
-                .filter(pc -> !pc.getRarity().equals(CardRarity.Special))
-                // A Black Border preference is a hard requirement: a translated white-bordered print must not
-                // beat a black-bordered one. The preferred language only decides among equally acceptable borders.
-                .min(Comparator.comparing((PaperCard pc) -> isBorderMismatch(pc) ? 1 : 0)
-                        .thenComparing((PaperCard pc) -> isPreferredLanguagePrint(pc) ? 0 : 1)
-                        .thenComparing((PaperCard pc) -> editions.get(pc.getEdition()), defaultCardArtPreference)
-                        .thenComparing((PaperCard pc) -> isTraditionalFramePrint(pc) ? 0 : 1)
-                        .thenComparing(PaperCard::getCollectorNumber))
-                .orElseGet(() -> cards.iterator().next());
+    // A Black Border preference is a hard requirement: a translated white-bordered print must not
+    // beat a black-bordered one. The preferred language only decides among equally acceptable borders.
+    private PaperCard getBestUniquePrint(final Collection<PaperCard> prints) {
+        final Collection<PaperCard> cards = canExcludePrints(prints)
+                ? prints.stream().filter(pc -> !isPrintExcluded(pc)).collect(Collectors.toList())
+                : prints;
+        PaperCard best = null;
+        CardEdition bestEdition = null;
+        int bestBorder = 0;
+        int bestLanguage = 0;
+        int bestFrame = -1;
+        for (PaperCard pc : cards) {
+            if (pc.getRarity().equals(CardRarity.Special))
+                continue;
+            CardEdition edition = editions.get(pc.getEdition());
+            int border = isBorderMismatch(edition) ? 1 : 0;
+            int language = isPreferredLanguagePrint(pc, edition) ? 0 : 1;
+            int frame = -1;
+            if (best != null) {
+                // A full tie keeps the earlier print
+                int c = Integer.compare(bestBorder, border);
+                if (c == 0)
+                    c = Integer.compare(bestLanguage, language);
+                if (c == 0)
+                    c = defaultCardArtPreference.compare(bestEdition, edition);
+                if (c == 0) {
+                    // The frame check is costly, so it only runs when the editions tie
+                    if (bestFrame < 0)
+                        bestFrame = isTraditionalFramePrint(best) ? 0 : 1;
+                    frame = isTraditionalFramePrint(pc) ? 0 : 1;
+                    c = Integer.compare(bestFrame, frame);
+                }
+                if (c == 0)
+                    c = best.getCollectorNumber().compareTo(pc.getCollectorNumber());
+                if (c <= 0)
+                    continue;
+            }
+            best = pc;
+            bestEdition = edition;
+            bestBorder = border;
+            bestLanguage = language;
+            bestFrame = frame;
+        }
+        return best != null ? best : cards.iterator().next();
     }
 
-    private boolean isBorderMismatch(PaperCard pc) {
+    private boolean isBorderMismatch(CardEdition edition) {
         if (defaultCardArtPreference == null || !defaultCardArtPreference.blackBorderOnly)
             return false;
-        CardEdition edition = editions.get(pc.getEdition());
         return edition != null && edition.getBorderColor() != CardEdition.BorderColor.BLACK;
     }
 
-    private boolean isPreferredLanguagePrint(PaperCard pc) {
+    private boolean isPreferredLanguagePrint(PaperCard pc, CardEdition edition) {
         if (preferredLanguageAvailability == null) {
             return false;
         }
-        CardEdition edition = editions.get(pc.getEdition());
         if (edition == null) {
             return false;
         }
@@ -896,10 +934,44 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public void setPreferredLanguageAvailability(BiPredicate<String, String> availability) {
+        if (availability == this.preferredLanguageAvailability) {
+            return;
+        }
         this.preferredLanguageAvailability = availability;
         if (initialized) {
             reIndex();
         }
+    }
+
+    public void setPrintExclusion(BiPredicate<CardEdition, String> exclusion) {
+        if (exclusion == null && printExclusion == null)
+            return;  // keeps the version at 0, so decks loaded with nothing excluded never resolve again
+        this.printExclusion = exclusion;
+        printExclusionVersion++;
+        if (initialized) {
+            reIndex();
+        }
+    }
+
+    /** Changes whenever the print exclusion is replaced, so cached print choices can tell they are stale. */
+    public int getPrintExclusionVersion() {
+        return printExclusionVersion;
+    }
+
+    public boolean hasPrintExclusion() {
+        return printExclusion != null;
+    }
+
+    public boolean isPrintExcluded(PaperCard pc) {
+        if (printExclusion == null)
+            return false;
+        CardEdition edition = editions.get(pc.getEdition());
+        return edition != null && printExclusion.test(edition, pc.getCollectorNumber());
+    }
+
+    /** True when an exclusion is set and at least one of the prints passes it, so the excluded ones can be dropped. */
+    public boolean canExcludePrints(Collection<PaperCard> prints) {
+        return printExclusion != null && prints.stream().anyMatch(pc -> !isPrintExcluded(pc));
     }
 
     /**
@@ -1147,8 +1219,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         // Check no-alt cards first. Exact name matches are prioritized more highly than an alt face or half of a split
         // card. That way "Ancestral Recall" won't return Emeritus of Ideation but "Wild Idea" can return Sanar, Unfinished Genius.
+        // A filter that drops every exact match must not fall through to an alt face of another card.
         cards = getAllCardsNoAlt(cr.cardName, cardQueryFilter);
-        if(cards.isEmpty())
+        if (cards.isEmpty() && getRules(cr.cardName, false) == null)
             cards = getAllCards(cr.cardName, cardQueryFilter);
 
         if (cards.isEmpty())
@@ -1161,6 +1234,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if(!matchingNames.isEmpty())
                 cards.retainAll(matchingNames);
         }
+        if (canExcludePrints(cards))
+            cards.removeIf(this::isPrintExcluded);
 
         /* 2. Retrieve cards based of [Frame]Set Preference
            ================================================ */

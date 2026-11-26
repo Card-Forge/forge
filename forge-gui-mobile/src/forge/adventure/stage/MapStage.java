@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.utils.Timer;
@@ -76,7 +75,6 @@ public class MapStage extends GameStage {
     private String currentMap;
     private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
 
-    public InputEvent eventTouchDown, eventTouchUp;
     private boolean respawnEnemies;
     private boolean canFailDungeon = false;
     protected ArrayList<EnemySprite> enemies = new ArrayList<>();
@@ -137,12 +135,6 @@ public class MapStage extends GameStage {
     protected MapStage() {
         disposeWorld();
         createNewWorld();
-        eventTouchDown = new InputEvent();
-        eventTouchDown.setPointer(-1);
-        eventTouchDown.setType(InputEvent.Type.touchDown);
-        eventTouchUp = new InputEvent();
-        eventTouchUp.setPointer(-1);
-        eventTouchUp.setType(InputEvent.Type.touchUp);
     }
 
     public static MapStage getInstance() {
@@ -762,6 +754,15 @@ public class MapStage extends GameStage {
                         if (shops.size == 0) continue;
 
                         ShopData data = shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
+                        // picking again only on a miss keeps every other town's shops when the exclusions change
+                        if (data.sellsOnlyExcludedCards()) {
+                            Array<ShopData> allowed = new Array<>();
+                            for (ShopData candidate : new Array.ArrayIterator<>(shops))
+                                if (!candidate.sellsOnlyExcludedCards())
+                                    allowed.add(candidate);
+                            if (allowed.size == 0) continue;
+                            data = allowed.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(allowed.size));
+                        }
                         shopsAlreadyPresent.add(data.name);
                         //Make sure the seed exists now (it is created from the world random the first time), but don't
                         //generate the shop's cards until the player actually opens it. See ShopActor.getRewardData.
@@ -1128,12 +1129,17 @@ public class MapStage extends GameStage {
 
                     if (rewards.size == 1) {
                         Reward reward = rewards.get(0);
+                        int goldRoom = AdventurePlayer.current().getGoldRoom();
+                        if (reward.getType() == Reward.Type.Gold && reward.getCount() > goldRoom)
+                            reward = new Reward(goldRoom);
                         final String rewardTypeName = reward.getType().name();
 
                         switch (reward.getType()) {
                             case Life:
                             case Shards:
                             case Gold:
+                                if (reward.getCount() == 0)
+                                    break;
                                 String message = Forge.getLocalizer().getMessageorUseDefault(reward.getType().getLabelKey(), rewardTypeName);
                                 AdventurePlayer.current().addStatusMessage(rewardTypeName, message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
                                 AdventurePlayer.current().addReward(reward);
@@ -1288,68 +1294,6 @@ public class MapStage extends GameStage {
 
     public void resetQuestFlags() {
         changes.getMapFlags().clear();
-    }
-
-    public boolean dialogInput(int keycode) {
-        if (dialogOnlyInput) {
-            if (KeyBinding.Up.isPressed(keycode)) {
-                selectPreviousDialogButton();
-            }
-            if (KeyBinding.Down.isPressed(keycode)) {
-                selectNextDialogButton();
-            }
-            if (KeyBinding.Use.isPressed(keycode)) {
-                performTouch(dialogStage.getKeyboardFocus());
-            }
-        }
-        return true;
-    }
-
-    public void performTouch(Actor actor) {
-        if (actor == null)
-            return;
-        actor.fire(eventTouchDown);
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                actor.fire(eventTouchUp);
-            }
-        }, 0.10f);
-    }
-
-    private void selectNextDialogButton() {
-        if (dialogButtonMap.size < 2)
-            return;
-        if (!(dialogStage.getKeyboardFocus() instanceof Button)) {
-            dialogStage.setKeyboardFocus(dialogButtonMap.first());
-            return;
-        }
-        for (int i = 0; i < dialogButtonMap.size; i++) {
-            if (dialogStage.getKeyboardFocus() == dialogButtonMap.get(i)) {
-                i += 1;
-                i %= dialogButtonMap.size;
-                dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
-                return;
-            }
-        }
-    }
-
-    private void selectPreviousDialogButton() {
-        if (dialogButtonMap.size < 2)
-            return;
-        if (!(dialogStage.getKeyboardFocus() instanceof Button)) {
-            dialogStage.setKeyboardFocus(dialogButtonMap.first());
-            return;
-        }
-        for (int i = 0; i < dialogButtonMap.size; i++) {
-            if (dialogStage.getKeyboardFocus() == dialogButtonMap.get(i)) {
-                i -= 1;
-                if (i < 0)
-                    i = dialogButtonMap.size - 1;
-                dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
-                return;
-            }
-        }
     }
 
     public void clearOnExit() {

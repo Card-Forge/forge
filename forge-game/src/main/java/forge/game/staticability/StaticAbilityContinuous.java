@@ -554,7 +554,7 @@ public final class StaticAbilityContinuous {
                 }
 
                 if (params.containsKey("ControlOpponentsSearchingLibrary")) {
-                    Player cntl = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, params.get("ControlOpponentsSearchingLibrary"), stAb), null);
+                    Player cntl = AbilityUtils.getDefinedPlayers(hostCard, params.get("ControlOpponentsSearchingLibrary"), stAb).getFirst();
                     p.addControlledWhileSearching(se.getTimestamp(), cntl);
                 }
 

@@ -179,21 +179,70 @@ public final class NamedDiscard {
             return considerExile(ai, sa);
         }
         if (combosOf(ai).selfDiscardName(ai, sa.getHostCard()) != null) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            return aimAt(sa, ai) ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                    : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         final boolean flashback = sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class);
         for (final Player opp : ai.getOpponents()) {
             if (opp.getCardsIn(ZoneType.Hand).isEmpty() || !opp.canDiscardBy(sa, true)) {
                 continue;
             }
-            if (!knownInHand(ai, opp).isEmpty()) {
+            if (!knownInHand(ai, opp).isEmpty() && aimAt(sa, opp)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
-            if (!flashback && opp.getCardsIn(ZoneType.Hand).size() >= 2) {
+            if (!flashback && opp.getCardsIn(ZoneType.Hand).size() >= 2 && aimAt(sa, opp)) {
                 return new AiAbilityDecision(70, AiPlayDecision.WillPlay);
             }
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
+
+    /**
+     * Aims the effect behind the naming at the player. The naming asks for no target, so the sub ability's "target
+     * player" was left empty and the spell failed to go on the stack ("Couldn't add to stack, failed to target"): Cabal
+     * Therapy was picked and refunded thousands of times in a sweep.
+     */
+    private static boolean aimAt(final SpellAbility sa, final Player player) {
+        for (SpellAbility a = sa.getSubAbility(); a != null; a = a.getSubAbility()) {
+            if (a.usesTargeting() && a.getTargetRestrictions().canTgtPlayer()) {
+                if (!a.canTarget(player)) {
+                    return false;
+                }
+                a.resetTargets();
+                a.getTargets().add(player);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Aims the effect behind the naming when nothing has aimed it yet. The simulator copies the targets of the ability
+     * it was given, and a rollout candidate was never run through {@link #consider}, so its "target player" was empty:
+     * the cast failed ("Couldn't add to stack, failed to target", 2946 times in one sweep). The AI itself when its deck
+     * wants a card thrown away, else the opponent with the most cards in hand.
+     */
+    public static void aimIfUntargeted(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || !isNamingLogic(sa.getParamOrDefault("AILogic", "")) || discardTarget(sa) != null) {
+            return;
+        }
+        try {
+            if (!EXILE_LOGIC.equals(sa.getParam("AILogic")) && combosOf(ai).selfDiscardName(ai, sa.getHostCard()) != null
+                    && aimAt(sa, ai)) {
+                return;
+            }
+            Player best = null;
+            for (final Player opp : ai.getOpponents()) {
+                if (best == null || opp.getCardsIn(ZoneType.Hand).size() > best.getCardsIn(ZoneType.Hand).size()) {
+                    best = opp;
+                }
+            }
+            if (best != null) {
+                aimAt(sa, best);
+            }
+        } catch (final RuntimeException e) {
+            // a refinement only: the cast fails as it did before
+        }
     }
 
     /**
@@ -208,15 +257,8 @@ public final class NamedDiscard {
             if (!known && inHand < 2) {
                 continue;
             }
-            for (SpellAbility a = sa.getSubAbility(); a != null; a = a.getSubAbility()) {
-                if (a.usesTargeting() && a.getTargetRestrictions().canTgtPlayer()) {
-                    if (!a.canTarget(opp)) {
-                        break;
-                    }
-                    a.resetTargets();
-                    a.getTargets().add(opp);
-                    return new AiAbilityDecision(known ? 100 : 70, AiPlayDecision.WillPlay);
-                }
+            if (aimAt(sa, opp)) {
+                return new AiAbilityDecision(known ? 100 : 70, AiPlayDecision.WillPlay);
             }
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

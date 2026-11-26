@@ -90,7 +90,7 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
         if (damage <= 0) {
             return 0;
         }
-        if (!source.canDamagePrevented(isCombat)) {
+        if (!source.canDamagePrevented(this, isCombat)) {
             return damage;
         }
 

@@ -1,0 +1,6 @@
+Name:Wrathful - Kingdom
+ManaCost:no cost
+Types:Wrathful
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.OppCtrl | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ Landfall - Whenever a land your opponents control enters, that player puts a +1/+1 counter on target creature they control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.ControlledBy TriggeredCardController | TgtPrompt$ Select target creature you control | TargetingPlayer$ TriggeredCardController | Placer$ TriggeredCardController | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Landfall - Whenever a land your opponents control enters, that player puts a +1/+1 counter on target creature they control.

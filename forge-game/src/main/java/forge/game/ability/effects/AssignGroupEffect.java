@@ -19,6 +19,10 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
 public class AssignGroupEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Chooser", "Defined",
+    };
+    public static final String[][] REQUIRED_PARAMS = {{"Choices"}};
 
     /* (non-Javadoc)
      * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)

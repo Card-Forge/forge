@@ -23,12 +23,14 @@ import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.combat.CombatUtil;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
@@ -50,6 +52,11 @@ import java.util.Map;
  * @version $Id: AbilityFactoryGainControl.java 17764 2012-10-29 11:04:18Z Sloth $
  */
 public class ControlGainAi extends SpellAbilityAi {
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        return MayDecisions.gainControl(player, sa);
+    }
+
     @Override
     protected AiAbilityDecision canPlay(final Player ai, final SpellAbility sa) {
         final List<String> lose = Lists.newArrayList();
@@ -284,12 +291,41 @@ public class ControlGainAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
+    /**
+     * "When this enters, target opponent gains control of it" and it hurts its controller each turn (Sleeper Agent): the opponent gets a
+     * body, and takes the damage. That is a race the AI takes when it can survive the body: it has a creature that blocks it well, or
+     * it is not behind on life and has life to spare for a few hits. The trigger itself is mandatory, so this is asked when
+     * deciding to cast the creature (PermanentAi, SVar AICastLogic SleeperAgent on the card). The card's own NeedsToPlay asked for a big
+     * creature of the AI and kept it out of every deck without one, burn decks included (#13048).
+     */
+    public static AiAbilityDecision lendToOpponent(final Player ai, final Card host) {
+        final PlayerCollection opponents = ai.getOpponents();
+        if (opponents.isEmpty()) {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+        final int power = host.getNetPower();
+        final int toughness = host.getNetToughness();
+        // Only count creatures that can legally block in the opponent's upcoming combat.
+        // In particular, a tapped creature cannot block before the AI gets its next untap step.
+        final boolean answer = ai.getCreaturesInPlay().anyMatch(c -> CombatUtil.canBlock(host, c)
+                && (c.getNetToughness() > power || c.getNetPower() >= toughness));
+        final int opponentLife = opponents.stream().mapToInt(Player::getLife).min().orElse(0);
+        final boolean ahead = ai.getLife() > 3 * power && ai.getLife() >= opponentLife;
+        if (answer || ahead) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
+
     @Override
     public AiAbilityDecision chkDrawback(final Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
 
         // Special card logic that is processed elsewhere
         if (sa.hasParam("AILogic")) {
+            if ("DonateJunk".equals(sa.getParam("AILogic"))) {
+                return PlaceholderTargetAi.donate(ai, sa);
+            }
             if ("DonateTargetPerm".equals(sa.getParam("AILogic"))) {
                 // Donate step 2 - target a donatable permanent.
                 return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);

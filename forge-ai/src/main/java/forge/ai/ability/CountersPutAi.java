@@ -35,8 +35,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.Map;
 import java.util.function.Predicate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CountersPutAi extends CountersAi {
 
@@ -458,7 +456,7 @@ public class CountersPutAi extends CountersAi {
                 // don't put the counter on the dead creature
                 if (sacSelf && c.equals(source)) {
                     return false;
-                } else if (hasSacCost && !sacSelf && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) { // the threatened card is the one sacrificed: a self-sacrifice does not threaten the target (#12058)
+                } else if (hasSacCost && !sacSelf && !sa.isCurse() && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) { // the threatened card is the one sacrificed: a self-sacrifice does not threaten the target (#12058). A curse puts its counters on a creature of the opponent, which is never the sacrificed one (Ifnir Deadlands, #13046)
                     return false;
                 }
                 if ("NoCounterOfType".equals(sa.getParam("AILogic"))) {
@@ -878,8 +876,12 @@ public class CountersPutAi extends CountersAi {
                     choice = Aggregates.random(list);
                 }
                 if (choice != null && divided) {
-                    if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1) {
+                    if (left <= 0) {
+                        break; // no more counters to distribute
+                    }
+                    if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1 || left <= Math.max(amount / totalTargets, 1)) {
                         sa.addDividedAllocation(choice, left);
+                        left = 0;
                     } else {
                         int alloc = Math.max(amount / totalTargets, 1);
                         sa.addDividedAllocation(choice, alloc);
@@ -936,7 +938,16 @@ public class CountersPutAi extends CountersAi {
                 }
             }
         }
-        return MyRandom.getRandom().nextBoolean();
+        // "you may put a counter": a good counter on the host is taken, a bad one is not (it was a coin flip)
+        final String type = sa.getParam("CounterType");
+        if (type != null && !type.startsWith("Choose") && !type.contains(",")) {
+            try {
+                return !ComputerUtil.isNegativeCounter(CounterType.getType(type), source);
+            } catch (final RuntimeException e) {
+                return true;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -1212,8 +1223,6 @@ public class CountersPutAi extends CountersAi {
         Card source = sa.getHostCard();
         PhaseHandler ph = source.getGame().getPhaseHandler();
 
-        Pattern pattern = Pattern.compile("counters_GE(\\d+)_CHARGE");
-
         int numCharge = source.getCounters(CounterEnumType.CHARGE);
         CardCollection canTap = CardLists.filter(ai.getCreaturesInPlay(), c -> c.getNetPower() > 0 && c.isUntapped());
         if (canTap.isEmpty()) {
@@ -1231,14 +1240,10 @@ public class CountersPutAi extends CountersAi {
             if (source.getType().hasSubtype("Spacecraft") && !source.isCreature() && source.isUntapped()) {
                 Integer minStation = null;
                 for (StaticAbility st : source.getStaticAbilities()) {
-                    if (!st.isIntrinsic() || !st.hasParam("Affected") || !"Creature".equals(st.getParam("AddType"))) {
+                    if (!st.isIntrinsic() || !st.hasParam("Station") || !"Creature".equals(st.getParam("AddType"))) {
                         continue;
                     }
-                    Matcher m = pattern.matcher(st.getParam("Affected"));
-                    if (!m.find()) {
-                        continue;
-                    }
-                    minStation = Integer.valueOf(m.group(1));
+                    minStation = Integer.valueOf(st.getParam("Station"));
                     break;
                 }
                 if (minStation == null) {
@@ -1255,14 +1260,10 @@ public class CountersPutAi extends CountersAi {
         if (ph.is(PhaseType.MAIN2, ai)) {
             Integer maxStation = null;
             for (StaticAbility st : source.getStaticAbilities()) {
-                if (!st.isIntrinsic() || !st.hasParam("Affected")) {
+                if (!st.isIntrinsic() || !st.hasParam("Station")) {
                     continue;
                 }
-                Matcher m = pattern.matcher(st.getParam("Affected"));
-                if (!m.find()) {
-                    continue;
-                }
-                int value = Integer.valueOf(m.group(1));
+                int value = Integer.valueOf(st.getParam("Station"));
                 maxStation = maxStation == null ? value : Math.max(maxStation, value);
             }
             if (maxStation == null) {

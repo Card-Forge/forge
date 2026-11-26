@@ -639,6 +639,27 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
             Forge.getLocalizer().getMessage("cbImageFetcher"),
             Forge.getLocalizer().getMessage("nlImageFetcher")), 4);
+        if (GuiBase.isAndroid()) {
+            lstSettings.addItem(new BooleanSetting(FPref.UI_ANDROID_ORIGINAL_TEXTURE_QUALITY,
+                Forge.getLocalizer().getMessage("cbOriginalTextureQuality"),
+                Forge.getLocalizer().getMessage("nlOriginalTextureQuality")) {
+                    @Override
+                    public void select() {
+                        super.select();
+                        // Reload card textures using the newly selected decode settings.
+                        ImageCache.getInstance().disposeTextures();
+                    }
+                }, 4);
+        }
+        lstSettings.addItem(new BooleanSetting(FPref.UI_CACHE_CARD_FRAMES,
+            Forge.getLocalizer().getMessage("cbCacheCardFrames"),
+            Forge.getLocalizer().getMessage("nlCacheCardFrames")) {
+                @Override
+                public void select() {
+                    super.select();
+                    forge.card.CardImageRenderer.setFrameCacheEnabled(FModel.getPreferences().getPrefBoolean(FPref.UI_CACHE_CARD_FRAMES));
+                }
+            }, 4);
         final Map<String, String> cardLangMapping = ForgeConstants.getScryfallCardLanguageMapping();
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_DOWNLOAD_LANG, "Card art language",
                 "Preferred language for downloaded card images",
@@ -678,6 +699,21 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     super.select();
                     FModel.getMagicDb().setEnableSmartCardArtSelection(
                         FModel.getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART));
+                }
+            }, 4);
+        lstSettings.addItem(new Setting(FPref.UI_EXCLUDED_SETS,
+            Forge.getLocalizer().getMessage("lblExcludedSets"),
+            Forge.getLocalizer().getMessage("nlExcludedSets")) {
+                private String count = String.valueOf(FModel.getExcludedEditionCodes().size());
+
+                @Override
+                public void select() {
+                    Forge.openScreen(new ExcludedSetsScreen(() -> count = String.valueOf(FModel.getExcludedEditionCodes().size())));
+                }
+                @Override
+                public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color,
+                                          float x, float y, float w, float h) {
+                    g.drawText(count, font, color, x, y, w, h, false, Align.right, false);
                 }
             }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,

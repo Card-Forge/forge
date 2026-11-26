@@ -23,6 +23,11 @@ import forge.util.Lang;
 import forge.util.TextUtil;
 
 public class AlterAttributeEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Activate", "Defined", "OptionQuestion", "Optional", "RememberAltered",
+    };
+    public static final String[][] REQUIRED_PARAMS = {{"Attributes"}};
+
     @Override
     public void resolve(SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();

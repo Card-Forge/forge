@@ -1,0 +1,4 @@
+Name:Gonti Curio - Tarnished Relic
+ManaCost:no cost
+Types:Weird Item
+Oracle:A dull, scratched trinket that smells faintly of old leather. For how worthless it looks, the price just seems adsurd. It doesn't even do anything.

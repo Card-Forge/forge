@@ -1,0 +1,5 @@
+Name:Chest Trait - Relic Of Telepathy
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | AffectedZone$ Hand | Affected$ Card.OppOwn | MayLookAt$ Player | EffectZone$ Command | Description$ Your opponents play with their hands revealed.
+Oracle:Your opponents play with their hands revealed.

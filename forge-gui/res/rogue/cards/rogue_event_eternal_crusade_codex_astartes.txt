@@ -1,0 +1,5 @@
+Name:Event Trait - Codex Astartes
+ManaCost:no cost
+Types:Trait
+S:Mode$ Continuous | Affected$ Creature.YouOwn | AffectedZone$ Hand,Command,Stack,Battlefield | AddKeyword$ Squad:2 | EffectZone$ Command | Description$ Creatures you own have Squad {2}.
+Oracle:Creatures you own have Squad {2}.\n(As an additional cost to cast this spell, you may pay {2} any number of times. When this creature enters, create that many tokens that are copies of it.)

@@ -258,8 +258,13 @@ public interface IGuiGame {
 
     List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal);
 
-    // show a list of cards and allow some of them to be moved around and return new list
-    List<CardView> manipulateCardList(String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, boolean toTop, boolean toBottom, boolean toAnywhere);
+    /**
+     * Lets the player sort some cards of their library into two piles, the top of the library and a second one.
+     *
+     * @param secondPile the zone the second pile goes to, where the library means its bottom
+     * @return all the cards: the top pile, the cards that were not manipulable, and the second pile
+     */
+    List<CardView> manipulateCardList(String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, ZoneType secondPile);
 
     void setCard(CardView card);
 

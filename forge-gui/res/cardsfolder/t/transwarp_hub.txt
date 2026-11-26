@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMill:DB$ Mill | NumCards$ 5 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeNum$ 2 | ChangeType$ Artifact.IsRemembered | SelectPrompt$ You may select up to two artifact cards | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE3_CHARGE | AddAbility$ TranswarpUnblockability | Description$ STATION 3+ {T}: Target creature can't be blocked this turn.
+S:Mode$ Continuous | AffectedDefined$ Self | Station$ 3 | AddAbility$ TranswarpUnblockability | Description$ STATION 3+ {T}: Target creature can't be blocked this turn.
 SVar:TranswarpUnblockability:AB$ Effect | Cost$ T | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ MakeUnblockable | SpellDescription$ Target creature can't be blocked this turn.
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 DeckHints:Type$Artifact

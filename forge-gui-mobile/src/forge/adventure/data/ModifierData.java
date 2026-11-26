@@ -9,6 +9,7 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -30,6 +31,13 @@ public class ModifierData {
     public Type type;              //Optional rule implemented in code.
     public int lostCards;          //CardLoss: random nonbasic cards lost from the main deck.
     public boolean loseCommander;  //CardLoss: the deck's commanders are lost too.
+    public int maxGold = -1;       //The most gold the player can hold. -1 sets no limit.
+    public String[] blockedEnemyRewards; //Reward types enemies don't drop. A card reward without a cardName counts as "randomCard".
+    public int maxLifeBonus;       //Added to max life while the modifier is on.
+    public int maxLifeLostOnDefeat; //Max life lost for good each time the player loses a fight.
+    public boolean singleDeck;     //The player has one deck slot.
+    public boolean lockDeckCards;  //Cards can't leave the main deck or command zone after the deck editor closes.
+    public boolean noMaxDeckSize;  //Decks have no maximum size outside events.
     public EffectData effect;      //Added to every duel, written for the enemies like the plane's global effect.
 
     /** The rarities a player can pick as the highest, lowest first. Basic lands are always allowed. */
@@ -86,6 +94,18 @@ public class ModifierData {
             return card -> card.getRules().getColorIdentity().hasNoColorsExcept(colors);
         }
         return card -> true;
+    }
+
+    public boolean blocksEnemyReward(String type) {
+        return blockedEnemyRewards != null && Arrays.asList(blockedEnemyRewards).contains(type);
+    }
+
+    /** @return the reward's type as blockedEnemyRewards names it, where a card reward is "card" only when it sets a cardName */
+    public static String enemyRewardType(RewardData reward) {
+        String type = reward.type == null || reward.type.isEmpty() ? "randomCard" : reward.type;
+        if (type.equals("card") || type.equals("randomCard"))
+            return reward.cardName == null || reward.cardName.isEmpty() ? "randomCard" : "card";
+        return type;
     }
 
     /** @return the cards the player loses from the deck by losing a fight under this modifier, picked at random */

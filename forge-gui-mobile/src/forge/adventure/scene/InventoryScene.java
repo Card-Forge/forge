@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -568,6 +569,16 @@ public class InventoryScene extends UIScene {
                 public void changed(ChangeEvent event, Actor actor) {
                     if (((Button) actor).isChecked()) {
                         setSelected((Button) actor);
+                    }
+                }
+            });
+            newActor.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (getTapCount() == 2) {
+                        setSelected(newActor);
+                        if (!equipButton.isDisabled())
+                            equip();
                     }
                 }
             });
