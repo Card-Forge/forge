@@ -180,7 +180,7 @@ public class PlaySpellAbility {
             }
         }
 
-        final CostDecisionMakerBase hcd = controller.getCostDecisionMaker(p, sourceAbility, true, prompt);
+        final CostDecisionMakerBase hcd = controller.getCostDecisionMaker(p, sourceAbility, true, orString);
         boolean mandatory = cost.isMandatory();
 
         //the following costs do not need inputs
