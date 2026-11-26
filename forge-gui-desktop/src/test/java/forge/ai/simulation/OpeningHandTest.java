@@ -206,11 +206,19 @@ public class OpeningHandTest extends AITest {
         }
     }
 
-    /** One land and two Springleaf Drums, which tap an untapped creature besides themselves, around the given cards. */
-    private boolean oneLandAndTwoDrums(final String... others) {
+    /** One land and some Springleaf Drums, which tap an untapped creature besides themselves, around the given cards. */
+    private boolean oneLandAndDrums(final String land, final int drums, final String... others) {
         setUp(9, 8);
-        return OpeningHand.playable(
-                hand(mix(others, "Island", "Springleaf Drum", "Springleaf Drum")), 7);
+        final String[] fixed = new String[1 + drums];
+        fixed[0] = land;
+        for (int i = 1; i <= drums; i++) {
+            fixed[i] = "Springleaf Drum";
+        }
+        return OpeningHand.playable(hand(mix(others, fixed)), 7);
+    }
+
+    private boolean oneLandAndTwoDrums(final String... others) {
+        return oneLandAndDrums("Island", 2, others);
     }
 
     @Test
@@ -226,6 +234,24 @@ public class OpeningHandTest extends AITest {
     @Test
     public void oneCreatureCannotPayForTwoSpringleafDrums() {
         AssertJUnit.assertFalse(oneLandAndTwoDrums("Memnite", "Shock", "Shock", "Divination"));
+    }
+
+    @Test
+    public void springleafDrumsDoNotTapCreaturesThatTheLandsCannotCast() {
+        // two Hill Giants (four mana each) with a single Forest are no creatures to tap yet
+        AssertJUnit.assertFalse(oneLandAndDrums("Forest", 2, "Hill Giant", "Hill Giant", "Shock", "Shock"));
+    }
+
+    @Test
+    public void aManaCreatureIsNotCountedAsBothASourceAndADrumsCreature() {
+        // the Elves can make mana or be tapped for the Drums, not both: one source, not three
+        AssertJUnit.assertFalse(oneLandAndDrums("Forest", 2, "Llanowar Elves", "Shock", "Shock", "Divination"));
+    }
+
+    @Test
+    public void aManaCreatureAndAnotherCreatureAreTwoSourcesWithADrum() {
+        // the Elves make mana on their own, and the Drum taps the Memnite
+        AssertJUnit.assertTrue(oneLandAndDrums("Forest", 1, "Llanowar Elves", "Memnite", "Shock", "Divination"));
     }
 
     @Test

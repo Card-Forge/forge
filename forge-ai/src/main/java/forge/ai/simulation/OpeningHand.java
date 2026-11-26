@@ -644,71 +644,124 @@ public final class OpeningHand {
         return 0.5;
     }
 
-    /** How many cheap mana sources of the hand work together, each one with the other cards its cost needs. */
+    /**
+     * How many cheap mana sources of the hand work together. Sources that need nothing else count first; one that taps
+     * other permanents (Springleaf Drum) then counts only if the hand has permanents for it that can be put on the
+     * battlefield with its lands and that nothing else uses: not a source of mana itself (a Llanowar Elves tapped for
+     * the Drum makes no mana of its own) and not the tap cost of another source.
+     */
     static int cheapManaSources(final CardCollectionView hand) {
-        final Set<Card> paying = new HashSet<>(); // cards already promised to pay for another source
+        final Set<Card> unavailable = new HashSet<>(); // counted as a source, or already tapped for another one
+        final List<Card> needy = new ArrayList<>();
         int sources = 0;
         for (final Card c : hand) {
-            if (!c.isLand() && !isMdfcLand(c) && isCheapManaSource(c, hand, paying)) {
+            if (c.isLand() || isMdfcLand(c) || c.getCMC() > 2 || c.isInstant() || c.isSorcery()) {
+                continue;
+            }
+            final CostNeed need = costNeed(c);
+            if (need == CostNeed.NONE) {
+                sources++;
+                unavailable.add(c);
+            } else if (need == CostNeed.OTHER_PERMANENTS) {
+                needy.add(c);
+            }
+        }
+        int lands = 0;
+        for (final Card c : hand) {
+            if ((c.isLand() || isMdfcLand(c)) && isEarlyManaLand(c)) {
+                lands++;
+            }
+        }
+        final int colors = handColors(hand);
+        for (final Card c : needy) {
+            final Set<Card> tapped = tapResources(c, hand, unavailable, lands, colors);
+            if (tapped != null) {
+                unavailable.addAll(tapped);
                 sources++;
             }
         }
         return sources;
     }
 
-    /**
-     * Whether the card is a cheap source of mana that the hand can use. Besides tapping itself (and paying mana, as a
-     * Signet does) its cost may ask for other permanents: Springleaf Drum taps an untapped creature, so it is only a
-     * source if the hand has a creature for it, and one that no other source needs. Any other cost part is not
-     * judged here, so to the safe side the card is no source.
-     *
-     * @param paying the cards that other sources of the hand already count on; this one's are added when it works
-     */
-    private static boolean isCheapManaSource(final Card c, final CardCollectionView hand, final Set<Card> paying) {
-        if (c.getCMC() > 2 || c.isInstant() || c.isSorcery()) {
-            return false;
-        }
-        for (final SpellAbility sa : c.getSpellAbilities()) {
-            if (sa.getApi() == ApiType.Mana && sa.isAbility() && sa.getPayCosts() != null
-                    && sa.getPayCosts().hasTapCost() && worksAsItIs(c, sa)) {
-                final Set<Card> needed = new HashSet<>();
-                if (costIsPayable(c, sa, hand, paying, needed)) {
-                    paying.addAll(needed);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+    /** What the mana ability of a card asks for besides tapping the card itself. */
+    private enum CostNeed { NOT_A_SOURCE, NONE, OTHER_PERMANENTS }
 
-    /** Whether every part of the cost can be paid with what the hand holds; {@code needed} gets the other cards used. */
-    private static boolean costIsPayable(final Card c, final SpellAbility sa, final CardCollectionView hand,
-                                         final Set<Card> paying, final Set<Card> needed) {
-        for (final CostPart part : sa.getPayCosts().getCostParts()) {
-            if (part instanceof CostTap || part instanceof CostPartMana
-                    || part instanceof CostSacrifice && part.payCostFromSource()) {
+    private static CostNeed costNeed(final Card c) {
+        CostNeed best = CostNeed.NOT_A_SOURCE;
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.getApi() != ApiType.Mana || !sa.isAbility() || sa.getPayCosts() == null
+                    || !sa.getPayCosts().hasTapCost() || !worksAsItIs(c, sa)) {
                 continue;
             }
-            if (!(part instanceof CostTapType) || !part.getAmount().matches("\\d+")) {
-                return false;
-            }
-            // other permanents to tap: they have to be in the hand, since there is nothing on the battlefield yet
-            int missing = Integer.parseInt(part.getAmount());
-            for (final Card other : hand) {
-                if (missing == 0) {
+            boolean other = false;
+            boolean ok = true;
+            for (final CostPart part : sa.getPayCosts().getCostParts()) {
+                if (part instanceof CostTap || part instanceof CostPartMana
+                        || part instanceof CostSacrifice && part.payCostFromSource()) {
+                    continue;
+                }
+                if (part instanceof CostTapType && part.getAmount().matches("\\d+")) {
+                    other = true;
+                } else {
+                    ok = false; // another cost is not judged here: to the safe side the card is no source
                     break;
                 }
-                if ((other != c || ((CostTapType) part).canTapSource) && other.isPermanent() && !other.isLand()
-                        && !paying.contains(other) && !needed.contains(other) && matchesType(other, c, part.getType())) {
-                    needed.add(other);
-                    missing--;
-                }
             }
-            if (missing > 0) {
-                return false;
+            if (ok && !other) {
+                return CostNeed.NONE;
+            }
+            if (ok) {
+                best = CostNeed.OTHER_PERMANENTS;
             }
         }
-        return true;
+        return best;
+    }
+
+    /**
+     * The other cards of the hand that pay the tap costs of the card's mana ability: permanents of the type asked for
+     * that the hand can cast, and not in {@code unavailable}. Null if there are not enough of them.
+     */
+    private static Set<Card> tapResources(final Card c, final CardCollectionView hand, final Set<Card> unavailable,
+                                          final int lands, final int colors) {
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.getApi() != ApiType.Mana || !sa.isAbility() || sa.getPayCosts() == null
+                    || !sa.getPayCosts().hasTapCost() || !worksAsItIs(c, sa)) {
+                continue;
+            }
+            final Set<Card> needed = new HashSet<>();
+            boolean payable = true;
+            for (final CostPart part : sa.getPayCosts().getCostParts()) {
+                if (!(part instanceof CostTapType)) {
+                    continue; // judged by costNeed
+                }
+                int missing = Integer.parseInt(part.getAmount());
+                for (final Card other : hand) {
+                    if (missing == 0) {
+                        break;
+                    }
+                    if ((other != c || ((CostTapType) part).canTapSource) && other.isPermanent() && !other.isLand()
+                            && !unavailable.contains(other) && !needed.contains(other)
+                            && canBeCast(other, lands, colors) && matchesType(other, c, part.getType())) {
+                        needed.add(other);
+                        missing--;
+                    }
+                }
+                if (missing > 0) {
+                    payable = false;
+                    break;
+                }
+            }
+            if (payable) {
+                return needed;
+            }
+        }
+        return null;
+    }
+
+    /** Whether the lands of the hand can pay for the card: enough of them, and the colours it asks for. */
+    private static boolean canBeCast(final Card c, final int lands, final int colors) {
+        return !c.getManaCost().isNoCost() && c.getCMC() <= lands
+                && (c.getManaCost().getColorProfile() & ~colors) == 0;
     }
 
     private static boolean matchesType(final Card candidate, final Card source, final String type) {
