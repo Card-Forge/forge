@@ -787,6 +787,13 @@ public class AiReportScenarioTest extends AITest {
                     }
                     return walkers >= 2 ? "Fireball targeted both planeswalkers, 2 damage each: " + sa.getTargets() : null;
                 }));
+        // Griselbrand: pay 7 life, draw seven. Not into a hand that is already full (the cleanup step throws the cards away), not again and
+        // again until the life or the library is gone
+        l.add(play("griselbrand-empty-hand", "Griselbrand refills an empty hand when the life and the library can take it", Fid.APPROX, "MAIN2", true, "Griselbrand",
+                c -> { c.bf("Griselbrand", c.ai); c.ai.setLife(40, null); for (int i = 0; i < 30; i++) { c.lib("Plains", c.ai); } }));
+        l.add(noPlay("griselbrand-full-hand", "control: Griselbrand does not draw seven more into a hand of seven", Fid.EXACT, "MAIN2", true, "Griselbrand",
+                c -> { c.bf("Griselbrand", c.ai); c.ai.setLife(40, null); for (int i = 0; i < 30; i++) { c.lib("Plains", c.ai); }
+                       for (int i = 0; i < 7; i++) { c.hand("Island", c.ai); } }));
         // #13049: Pay {E}{E}, sacrifice Gonti's Machinations: the opponent loses 3 and the AI gains 3, with 10 life and 3 energy
         l.add(play("13049", "Gonti's Machinations is spent as soon as there is the energy for it, not only for lethal", Fid.EXACT, M1, true, "Gonti's Machinations",
                 c -> { c.bf("Gonti's Machinations", c.ai); c.ai.setCounters(CounterEnumType.ENERGY, 3); c.ai.setLife(10, null); }));

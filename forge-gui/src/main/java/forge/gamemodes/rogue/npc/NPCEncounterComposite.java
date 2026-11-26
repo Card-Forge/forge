@@ -166,15 +166,15 @@ public enum NPCEncounterComposite {
 
     /** For the developer's NPC level editor: keeping the current level first, then each chapter's required level. */
     public static List<LevelChoice> levelChoices(NPC npc, int currentLevel) {
-        NPCEncounter[] encounters = switch (npc) {
-            case TYVAR -> TyvarEncounter.values();
-            case GONTI -> GontiEncounter.values();
-            case NARSET -> NarsetEncounter.values();
-            case HENZIE -> HenzieEncounter.values();
-            case TEFERI -> TeferiEncounter.values();
-        };
+        // From the typed registry: a switch choosing between the enums' values() arrays verifies as Enum[], which Android rejects
+        List<NPCEncounter> encounters = new ArrayList<>();
+        for (NPCEncounter encounter : ALL_ENCOUNTERS) {
+            if (encounter.getNpc() == npc && !(encounter instanceof NPCOptionalEncounter)) {
+                encounters.add(encounter);
+            }
+        }
         List<LevelChoice> choices = new ArrayList<>();
-        if (encounters.length == 0) {
+        if (encounters.isEmpty()) {
             return choices;
         }
         choices.add(new LevelChoice(
@@ -197,7 +197,7 @@ public enum NPCEncounterComposite {
         return choices;
     }
 
-    private static String activeEncounterName(NPCEncounter[] encounters, int currentLevel) {
+    private static String activeEncounterName(List<NPCEncounter> encounters, int currentLevel) {
         NPCEncounter activeEncounter = null;
         for (NPCEncounter encounter : encounters) {
             int requiredLevel = encounter.getRequiredLevel();
