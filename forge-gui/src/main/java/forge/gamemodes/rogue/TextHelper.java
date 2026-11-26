@@ -73,8 +73,8 @@ public final class TextHelper {
 
     /**
      * The text of the parts together is what {@link #stripPreviewMarkers} gives, without the asterisks of a
-     * {@code **name**} mark. Such a mark is a card part when the name is a card or the display name of the effect card,
-     * and plain text otherwise. effectCardReference may be null.
+     * {@code **name**} mark. Such a mark is a card part when the name is the display name of the effect card, and
+     * plain text otherwise. effectCardReference may be null.
      */
     public static List<Part> parts(String raw, String effectCardReference) {
         String effectCardName = extractEffectCardDisplayNameFromReference(effectCardReference);
@@ -94,8 +94,8 @@ public final class TextHelper {
             String emphasis = matcher.group(PART_EMPHASIS_GROUP);
             if (emphasis != null) {
                 String name = emphasis.trim();
-                String reference = resolveCard(name) != null ? name
-                    : name.equals(effectCardName) && resolveCard(effectCardReference) != null ? effectCardReference : null;
+                String reference = name.equals(effectCardName) && resolveCard(effectCardReference) != null
+                    ? effectCardReference : null;
                 if (reference == null) {
                     text.append(emphasis);
                     continue;
