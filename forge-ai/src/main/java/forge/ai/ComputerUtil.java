@@ -1118,7 +1118,8 @@ public class ComputerUtil {
         if (preferredType == null) {
             return null;
         }
-        return ComputerUtilCard.getWorstPermanentAI(remaining,
+        final CardCollection preferred = CardLists.filter(remaining, card -> card.getType().hasType(preferredType));
+        return ComputerUtilCard.getWorstPermanentAI(preferred,
                 preferredType == CardType.CoreType.Enchantment,
                 false,
                 preferredType == CardType.CoreType.Artifact,
