@@ -19,6 +19,7 @@ import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.RogueRunHistoryEntry;
 import forge.gamemodes.rogue.RogueRunState;
 import forge.gamemodes.rogue.RogueWinLoseController;
+import forge.gamemodes.rogue.effect.AetherEffect;
 import forge.gamemodes.rogue.effect.ChestEffect;
 import forge.gamemodes.rogue.flow.RogueDecisions.Pick;
 import forge.gamemodes.rogue.flow.RogueDecisions.RogueMatch;
@@ -275,6 +276,24 @@ public class RogueFlowTest extends AITest {
         Assert.assertEquals(asked, List.of("startMatch", "runEnded"));
         Assert.assertNull(flow.run());
         Assert.assertTrue(flow.load().isEmpty());
+    }
+
+    @Test
+    public void aBuiltAetherworkIsSwitchedOnWhileEnergyLasts() {
+        RogueMetaProgress progress = RogueMetaProgress.getInstance();
+        List<AetherEffect> works = List.of(AetherEffect.ZHALFIRIN_SANCTUARY, AetherEffect.AETHER_EXCHANGE,
+            AetherEffect.RESTORATION_CHAMBER, AetherEffect.SPECTRAL_EXPANDER);
+        Assert.assertFalse(progress.upgradeAndActivateAetherEffect(works.get(0)));
+
+        progress.addEchoes(1000);
+        works.forEach(work -> Assert.assertTrue(progress.upgradeAndActivateAetherEffect(work)));
+        Assert.assertEquals(progress.getActiveAetherEffects(), Set.copyOf(works.subList(0, 3)));
+
+        int echoes = progress.getTotalEchoes();
+        Assert.assertTrue(progress.upgradeAndActivateAetherEffect(works.get(0)));
+        Assert.assertEquals(progress.getAetherEffectRank(works.get(0)), 2);
+        Assert.assertEquals(progress.getTotalEchoes(), echoes - works.get(0).getEchoCostForRank(2));
+        Assert.assertEquals(progress.getActiveAetherEffectCount(), 3);
     }
 
     @Test
