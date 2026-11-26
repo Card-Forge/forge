@@ -383,7 +383,11 @@ public abstract class PlayerController {
     public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect) {
         return this.getCostDecisionMaker(player, ability, effect, null);
     }
-    public abstract CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String prompt);
+    /**
+     * @param orString the " (or: ...)" suffix for payments made during resolution,
+     *                 already built by {@link PlaySpellAbility#getOrStringFromCost}; null for normal cost payment.
+     */
+    public abstract CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String orString);
 
     public abstract String chooseCardName(SpellAbility sa, Predicate<ICardFace> cpp, String valid, String message);
     public abstract String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message);

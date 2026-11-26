@@ -33,11 +33,21 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public final class CodexHelper {
+    /** In the order the Codex lists them. */
     public enum TraitCategory {
-        NPC,
         CHEST,
+        NPC,
         EVENT,
-        WOUND
+        WOUND;
+
+        public String label() {
+            return Localizer.getInstance().getMessage(switch (this) {
+                case CHEST -> "lblRogueChest";
+                case NPC -> "lblRogueNpc";
+                case EVENT -> "lblRogueEvent";
+                case WOUND -> "lblRogueWound";
+            });
+        }
     }
 
     public enum CodexState { UNKNOWN, SEEN, ACQUIRED }
@@ -423,17 +433,16 @@ public final class CodexHelper {
             }
         }
 
-        Set<String> displayedBasicLandNames = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        for (PaperCard card : deck.getAllCardsInASinglePool(false, false).toFlatList()) {
-            if (isValidCard(card)) {
-                boolean shouldAddCard = !card.getRules().getType().isBasicLand()
-                    || displayedBasicLandNames.add(card.getName());
-                if (shouldAddCard) {
-                    cards.add(card);
-                }
-            }
-        }
+        cards.addAll(eachBasicOnce(deck.getAllCardsInASinglePool(false, false).toFlatList()));
         return cards;
+    }
+
+    /** The cards a Codex list shows: each basic land once, and no card without rules. */
+    public static List<PaperCard> eachBasicOnce(List<PaperCard> cards) {
+        Set<String> basics = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        return cards.stream()
+            .filter(card -> isValidCard(card) && (!card.getRules().getType().isBasicLand() || basics.add(card.getName())))
+            .collect(Collectors.toList());
     }
 
     private static boolean isValidCard(PaperCard card) {
@@ -524,6 +533,10 @@ public final class CodexHelper {
             .sorted(Comparator.comparing(RoguePlanebound::planeboundName, String.CASE_INSENSITIVE_ORDER))
             .collect(Collectors.toList());
     }
+
+    /** Codex card lists group by card type, then sort by name. */
+    public static final Comparator<PaperCard> CODEX_CARD_ORDER = Comparator.comparingInt(CodexHelper::codexCardTypeOrder)
+        .thenComparing(PaperCard::getName, String.CASE_INSENSITIVE_ORDER);
 
     /** Codex card lists group by card type, then sort by name; a missing card goes last. */
     public static int codexCardTypeOrder(PaperCard card) {

@@ -2776,8 +2776,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String prompt) {
-        return new HumanCostDecision(this, player, ability, effect, prompt);
+    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String orString) {
+        return new HumanCostDecision(this, player, ability, effect, orString);
     }
 
     @Override

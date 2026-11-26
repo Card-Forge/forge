@@ -1,7 +1,6 @@
 package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.path.NodeSanctum;
-import forge.util.Localizer;
 import java.awt.*;
 
 /**
@@ -18,8 +17,6 @@ public class NodeSanctumPanel extends NodeCircularPanel {
    */
   public NodeSanctumPanel(NodeSanctum node) {
     super(node);
-    setToolTipText(
-        Localizer.getInstance().getMessage("lblRogueSanctumTooltip"));
   }
 
   @Override

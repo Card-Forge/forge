@@ -135,14 +135,8 @@ public class RogueHistoryScreen extends RogueScreen {
         Row(RogueRunHistoryEntry entry) {
             this.entry = entry;
             Localizer localizer = Localizer.getInstance();
-            outcome = entry.getEndlessLevel() > 0 && DEFEAT.equals(entry.getOutcome()) ? VICTORY : entry.getOutcome();
-            String opponent = entry.getBossOrDefeatedBy();
-            String key = switch (entry.getOutcome()) {
-                case VICTORY -> "lblRogueHistoryBossSlain";
-                case DEFEAT -> "lblRogueHistoryDefeatedBy";
-                default -> null;
-            };
-            detail = key == null || opponent == null || opponent.isEmpty() ? "" : localizer.getMessage(key, opponent);
+            outcome = entry.getShownOutcome();
+            detail = entry.getOutcomeDetail();
             List<String> lines = new ArrayList<>();
             DescensionLevel descension = DescensionLevel.forLevel(entry.getDescensionLevel());
             if (descension != null) {

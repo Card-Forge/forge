@@ -127,7 +127,6 @@ class NodePlaneboundHelper {
             ));
         } catch (Exception e) {
             Logger.error(e, "Could not start Rogue match for Planebound {}", node.getRoguePlanebound());
-            restoreHuman();
             // Charges and event effects are spent before a match exists, so the last save is the only state to return to
             currentRun.setHostedMatch(null);
             flow.setRun(RogueIO.loadRun(RogueIO.getRogueFile(currentRun)));
