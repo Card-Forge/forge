@@ -13,8 +13,11 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
 import forge.game.cost.CostSacrifice;
 import forge.game.cost.CostTap;
+import forge.game.cost.CostTapType;
 import forge.game.replacement.ReplacementType;
 import forge.card.CardStateName;
 import forge.game.keyword.Keyword;
@@ -194,16 +197,12 @@ public final class OpeningHand {
      */
     static boolean playable(final CardCollectionView kept, final int size) {
         int lands = 0;
-        int cheapSources = 0;
         for (final Card c : kept) {
-            if (c.isLand() || isMdfcLand(c)) {
-                if (isEarlyManaLand(c)) {
-                    lands++;
-                }
-            } else if (isCheapManaSource(c)) {
-                cheapSources++;
+            if ((c.isLand() || isMdfcLand(c)) && isEarlyManaLand(c)) {
+                lands++;
             }
         }
+        final int cheapSources = cheapManaSources(kept);
         if (lands == 0) {
             return false;
         }
@@ -536,7 +535,7 @@ public final class OpeningHand {
         final Want w = forCombo != null ? forCombo : want(arch);
         final int size = hand.size();
         int lands = 0;
-        int rocks = 0;
+        final int rocks = cheapManaSources(hand);
         int landKeys = 0;
         boolean access = false;
         boolean quickWiper = false;
@@ -564,9 +563,6 @@ public final class OpeningHand {
                 if (dredge) {
                     outlets += ComboPlan.isDredgeOutlet(c) ? 1 : 0;
                     pieces += ComboPlan.isDredgeHandPiece(c) ? 1 : 0;
-                }
-                if (isCheapManaSource(c)) {
-                    rocks++;
                 }
             }
         }
@@ -648,13 +644,76 @@ public final class OpeningHand {
         return 0.5;
     }
 
-    private static boolean isCheapManaSource(final Card c) {
+    /** How many cheap mana sources of the hand work together, each one with the other cards its cost needs. */
+    static int cheapManaSources(final CardCollectionView hand) {
+        final Set<Card> paying = new HashSet<>(); // cards already promised to pay for another source
+        int sources = 0;
+        for (final Card c : hand) {
+            if (!c.isLand() && !isMdfcLand(c) && isCheapManaSource(c, hand, paying)) {
+                sources++;
+            }
+        }
+        return sources;
+    }
+
+    /**
+     * Whether the card is a cheap source of mana that the hand can use. Besides tapping itself (and paying mana, as a
+     * Signet does) its cost may ask for other permanents: Springleaf Drum taps an untapped creature, so it is only a
+     * source if the hand has a creature for it, and one that no other source needs. Any other cost part is not
+     * judged here, so to the safe side the card is no source.
+     *
+     * @param paying the cards that other sources of the hand already count on; this one's are added when it works
+     */
+    private static boolean isCheapManaSource(final Card c, final CardCollectionView hand, final Set<Card> paying) {
         if (c.getCMC() > 2 || c.isInstant() || c.isSorcery()) {
             return false;
         }
         for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.getApi() == ApiType.Mana && sa.isAbility() && sa.getPayCosts() != null
                     && sa.getPayCosts().hasTapCost() && worksAsItIs(c, sa)) {
+                final Set<Card> needed = new HashSet<>();
+                if (costIsPayable(c, sa, hand, paying, needed)) {
+                    paying.addAll(needed);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** Whether every part of the cost can be paid with what the hand holds; {@code needed} gets the other cards used. */
+    private static boolean costIsPayable(final Card c, final SpellAbility sa, final CardCollectionView hand,
+                                         final Set<Card> paying, final Set<Card> needed) {
+        for (final CostPart part : sa.getPayCosts().getCostParts()) {
+            if (part instanceof CostTap || part instanceof CostPartMana
+                    || part instanceof CostSacrifice && part.payCostFromSource()) {
+                continue;
+            }
+            if (!(part instanceof CostTapType) || !part.getAmount().matches("\\d+")) {
+                return false;
+            }
+            // other permanents to tap: they have to be in the hand, since there is nothing on the battlefield yet
+            int missing = Integer.parseInt(part.getAmount());
+            for (final Card other : hand) {
+                if (missing == 0) {
+                    break;
+                }
+                if ((other != c || ((CostTapType) part).canTapSource) && other.isPermanent() && !other.isLand()
+                        && !paying.contains(other) && !needed.contains(other) && matchesType(other, c, part.getType())) {
+                    needed.add(other);
+                    missing--;
+                }
+            }
+            if (missing > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean matchesType(final Card candidate, final Card source, final String type) {
+        for (final String restriction : type.split(";")) {
+            if (candidate.isValid(restriction, source.getController(), source, null)) {
                 return true;
             }
         }

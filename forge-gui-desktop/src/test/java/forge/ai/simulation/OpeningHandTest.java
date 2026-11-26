@@ -206,6 +206,28 @@ public class OpeningHandTest extends AITest {
         }
     }
 
+    /** One land and two Springleaf Drums, which tap an untapped creature besides themselves, around the given cards. */
+    private boolean oneLandAndTwoDrums(final String... others) {
+        setUp(9, 8);
+        return OpeningHand.playable(
+                hand(mix(others, "Island", "Springleaf Drum", "Springleaf Drum")), 7);
+    }
+
+    @Test
+    public void springleafDrumsWithoutACreatureDoNotMakeUpForASingleLand() {
+        AssertJUnit.assertFalse(oneLandAndTwoDrums("Shock", "Shock", "Shock", "Divination"));
+    }
+
+    @Test
+    public void springleafDrumsWithACreatureEachMakeUpForASingleLand() {
+        AssertJUnit.assertTrue(oneLandAndTwoDrums("Memnite", "Ornithopter", "Shock", "Lava Axe"));
+    }
+
+    @Test
+    public void oneCreatureCannotPayForTwoSpringleafDrums() {
+        AssertJUnit.assertFalse(oneLandAndTwoDrums("Memnite", "Shock", "Shock", "Divination"));
+    }
+
     @Test
     public void aTempleOfTheFalseGodIsNoLandForTheFirstTurns() {
         setUp(9, 8);
