@@ -16,6 +16,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.cost.CostSacrifice;
 import forge.game.cost.PaymentDecision;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -247,6 +248,53 @@ public class CountersPutAiTest extends SimulationTest {
             assertEquals(1, outlet.getCounters(CounterEnumType.P1P1));
         }
         assertFalse("stop after the combat purpose is achieved", logic.canPlayWithSubs(ai, ability).willingToPlay());
+    }
+
+    @DataProvider
+    public Object[][] destroyEffects() {
+        return new Object[][] {{"Murder"}, {"Wrath of God"}};
+    }
+
+    @Test(dataProvider = "destroyEffects")
+    public void aristocratSurvivesDestroyEffectsWithNonHumanFodder(final String spellName) {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opponent = game.getPlayers().get(0);
+        ((LobbyPlayerAi) ai.getLobbyPlayer()).setAiProfile("Default");
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, opponent);
+        final Card outlet = addCard("Falkenrath Aristocrat", ai);
+        addToken("w_0_1_goat", ai);
+        addToken("w_0_1_goat", ai);
+        final SpellAbility protection = outlet.getSpellAbilities().stream()
+                .filter(sa -> sa.isActivatedAbility() && sa.hasParam("AILogic")).findFirst().get();
+        protection.setActivatingPlayer(ai);
+        final Card threat = addCardToZone(spellName, opponent, ZoneType.Hand);
+        final SpellAbility removal = threat.getFirstSpellAbility();
+        removal.setActivatingPlayer(opponent);
+        if (removal.usesTargeting()) {
+            assertTrue(removal.canTarget(outlet));
+            removal.getTargets().add(outlet);
+        }
+        game.getStack().addAndUnfreeze(removal);
+
+        final SpellAbilityAi logic = SpellApiToAi.Converter.get(protection);
+        assertTrue("indestructibility protects against destruction on the opponent's turn",
+                logic.canPlayWithSubs(ai, protection).willingToPlay());
+        game.copyLastState();
+        assertTrue("non-Human fodder can pay the actual protection ability",
+                ComputerUtil.playNoStack(ai, protection, game, false));
+        assertEquals("exactly one Goat was sacrificed", 2, ai.getCreaturesInPlay().size());
+        assertTrue(outlet.hasKeyword(Keyword.INDESTRUCTIBLE));
+        assertEquals("a Goat does not grant the Human counter bonus", 0, outlet.getCounters(CounterEnumType.P1P1));
+        assertFalse("do not sacrifice again once protection is active",
+                logic.canPlayWithSubs(ai, protection).willingToPlay());
+
+        game.getStack().resolveStack();
+        game.getAction().checkStateEffects(true);
+        assertTrue("the outlet survives the destroy spell", ai.getCreaturesInPlay().contains(outlet));
+        assertEquals("a sweeper still destroys the unprotected Goat",
+                removal.usesTargeting() ? 2 : 1, ai.getCreaturesInPlay().size());
+        assertTrue(game.getStack().isEmpty());
     }
 
     @DataProvider

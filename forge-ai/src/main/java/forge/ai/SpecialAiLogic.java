@@ -73,7 +73,8 @@ public class SpecialAiLogic {
                 && !source.hasKeyword(Keyword.INDESTRUCTIBLE)
                 && (inCombat && ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, combat)
                         || threatened.contains(source) && top != null
-                                && (top.getApi() == ApiType.DealDamage || top.getApi() == ApiType.DamageAll));
+                                && (top.getApi() == ApiType.DealDamage || top.getApi() == ApiType.DamageAll
+                                        || top.getApi() == ApiType.Destroy || top.getApi() == ApiType.DestroyAll));
         if (logic.contains(".") && !gainsProtection) {
             protectedOptions = CardLists.filter(protectedOptions, CardPredicates.isType(logic.substring(logic.indexOf('.') + 1)));
         }
@@ -185,12 +186,13 @@ public class SpecialAiLogic {
             return false;
         }
 
-        // Try to save the card from death by pumping it if it's threatened with a damage spell
+        // Try to protect the card from damage or destruction.
         if (isThreatened && (toughnessBonus > 0 || indestructible)) {
             SpellAbility saTop = game.getStack().peekAbility();
 
-            if (saTop.getApi() == ApiType.DealDamage || saTop.getApi() == ApiType.DamageAll) {
-                int dmg = AbilityUtils.calculateAmount(saTop.getHostCard(), saTop.getParam("NumDmg"), saTop) + source.getDamage();
+            final boolean destroy = saTop.getApi() == ApiType.Destroy || saTop.getApi() == ApiType.DestroyAll;
+            if (saTop.getApi() == ApiType.DealDamage || saTop.getApi() == ApiType.DamageAll || indestructible && destroy) {
+                int dmg = destroy ? 0 : AbilityUtils.calculateAmount(saTop.getHostCard(), saTop.getParam("NumDmg"), saTop) + source.getDamage();
                 final int numCreatsToSac = indestructible ? 1 : Math.max(1, (int)Math.ceil((dmg - source.getNetToughness() + 1) / toughnessBonus));
 
                 if (numCreatsToSac > 1) { // probably not worth sacrificing too much
