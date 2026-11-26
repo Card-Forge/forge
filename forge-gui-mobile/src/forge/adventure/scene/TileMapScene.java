@@ -122,17 +122,26 @@ public class TileMapScene extends HudScene {
                 Forge.getLocalizer().getMessage("lblMode") + " " +
                 Forge.getLocalizer().getMessage("lblChaos") + "{ENDBLINK}\n" +
                 Forge.getLocalizer().getMessage("lblChaosModeDescription"),
-                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
+                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::announceExcludedStarterCards);
         } else if (WorldSave.getCurrentSave().getPlayer().hasAnnounceCustom()) {
             WorldSave.getCurrentSave().getPlayer().clearAnnounceCustom();
             MapStage.getInstance().showDeckAwardDialog("{GRADIENT}" +
                 Forge.getLocalizer().getMessage("lblMode") + " " +
                 Forge.getLocalizer().getMessage("lblCustom") + "{ENDGRADIENT}\n" +
                 Forge.getLocalizer().getMessage("lblCustomModeDescription"),
-                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
+                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::announceExcludedStarterCards);
         } else {
-            initializeDialogs();
+            announceExcludedStarterCards();
         }
+    }
+
+    private void announceExcludedStarterCards() {
+        if (!Current.player().hasAnnounceExcludedStarterCards()) {
+            initializeDialogs();
+            return;
+        }
+        Current.player().clearAnnounceExcludedStarterCards();
+        MapStage.getInstance().showImageDialog(Forge.getLocalizer().getMessage("lblStarterDeckChangedByExclusions"), null, this::initializeDialogs);
     }
 
     private void initializeDialogs() {

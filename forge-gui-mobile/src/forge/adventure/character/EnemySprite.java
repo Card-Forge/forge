@@ -499,7 +499,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
 
             for (int i = 0; i < cardCount; i++) {
                 PaperCard paperCard = sourceFlatList.get(i);
-                if (paperCard != null && !paperCard.isVeryBasicLand()) {
+                if (paperCard != null && !paperCard.isVeryBasicLand() && CardUtil.isAllowedPrint(paperCard)) {
                     flatCardsFilterList.add(paperCard);
                 }
             }
@@ -518,7 +518,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
                 rewardCollectionPool.add(new Reward(Reward.Type.Shards, 9));
 
                 PaperCard cheese = StaticData.instance().fetchCard("The Cheese Stands Alone");
-                if (cheese != null) {
+                if (cheese != null && CardUtil.isAllowedPrint(cheese)) {
                     rewardCollectionPool.add(new Reward(cheese));
                 }
                 return rewardCollectionPool;
@@ -573,7 +573,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
             for (RewardData rdata : data.rewards) {
                 if (isBlockedByModifiers(ModifierData.enemyRewardType(rdata)))
                     continue;
-                rewardCollectionPool.addAll(rdata.generate(false, enemyDeck == null ? null : CardUtil.withAllowedPrints(deckNoBasicLands.toFlatList()), true));
+                rewardCollectionPool.addAll(rdata.generate(false, enemyDeck == null ? null : deckNoBasicLands.toFlatList(), true));
             }
         }
         if (this.rewards != null) { // Collect additional rewards.

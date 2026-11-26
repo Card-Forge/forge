@@ -95,7 +95,7 @@ public class ShopActor extends MapActor {
     // called right after the stock is generated, which records whether exclusions changed a named card in it
     public void setRewardData(Array<Reward> data) {
         rewardData = data;
-        namedCardsChanged = RewardData.takeAuthoredRewardChanged();
+        namedCardsChanged = RewardData.takeRewardChangedByExclusions();
     }
 
     /**

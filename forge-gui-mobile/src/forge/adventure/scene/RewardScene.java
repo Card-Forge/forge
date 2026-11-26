@@ -473,7 +473,12 @@ public class RewardScene extends UIScene {
 
     public void loadRewards(Deck deck, Type type, ShopActor shopActor, boolean noSell) {
         Array<Reward> rewards = new Array<>();
-        for (PaperCard card : deck.getAllCardsInASinglePool(true, true).toFlatList()) {
+        // a pack is rolled without regard to the player's exclusions, and may predate them
+        List<PaperCard> cards = deck.getAllCardsInASinglePool(true, true).toFlatList();
+        List<PaperCard> allowed = CardUtil.withAllowedPrints(cards);
+        if (CardUtil.droppedOrMoved(cards, allowed))
+            RewardData.noteRewardChanged();
+        for (PaperCard card : allowed) {
             rewards.add(new Reward(card, noSell));
         }
         loadRewards(rewards, type, shopActor);
@@ -499,7 +504,7 @@ public class RewardScene extends UIScene {
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
         // a shop's own warning covers its stock
-        exclusionNoticePending = type != Type.Shop && RewardData.takeAuthoredRewardChanged();
+        exclusionNoticePending = type != Type.Shop && RewardData.takeRewardChangedByExclusions();
         if (Forge.getCurrentScene() == this)
             showExclusionNotice();  // loaded while already open, so enter() does not run
         // Merge Gold and Shards rewards into single entries

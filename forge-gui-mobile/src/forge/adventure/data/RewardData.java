@@ -161,7 +161,7 @@ public class RewardData implements Serializable {
         return allCards;
     }
 
-    private static boolean authoredRewardChanged;
+    private static boolean rewardChangedByExclusions;
 
     public static void invalidateCardPool() {
         allCards = null;
@@ -244,41 +244,24 @@ public class RewardData implements Serializable {
 
                     if (finalPool.size() > 0){
                         for (int i = 0; i < count; i++) {
-                            if (allCardVariants) {
-                                PaperCard cardTemplate = finalPool.get(rewardRandom.nextInt(finalPool.size()));
-                                if (cardTemplate != null) {
-                                    PaperCard finalCard = CardUtil.getCardByNameAndEdition(
-                                            cardTemplate.getCardName(), cardTemplate.getEdition());
-                                    if (finalCard != null)
-                                        ret.add(new Reward(finalCard, isNoSell));
-                                }
-                            } else {
-                                PaperCard card = finalPool.get(rewardRandom.nextInt(finalPool.size()));
-                                if (card != null)
-                                    ret.add(new Reward(card, isNoSell));
-                            }
+                            PaperCard card = finalPool.get(rewardRandom.nextInt(finalPool.size()));
+                            if (card != null)
+                                ret.add(new Reward(CardUtil.randomVariant(card), isNoSell));
                         }
                     }
                     break;
                 case "card":
                 case "randomCard":
                     if (cardName != null && !cardName.isEmpty()) {
-                        CardDb.CardRequest request = CardDb.CardRequest.fromString(cardName);
                         PaperCard template = resolveNamedCard(cardName, editions, rewardRandom, allCardVariants);
                         if (template == null) {
                             System.err.println("Missing card: " + cardName);
                         } else {
-                            String editionToUse = template.getEdition();
-                            for (int i = 0; i < count + addedCount; i++) {
-                                PaperCard card = allCardVariants
-                                        ? CardUtil.getCardByNameAndEdition(request.cardName, editionToUse)
-                                        : template;
-                                if (card != null)
-                                    ret.add(new Reward(card, isNoSell));
-                            }
+                            for (int i = 0; i < count + addedCount; i++)
+                                ret.add(new Reward(CardUtil.randomVariant(template), isNoSell));
                         }
                     } else if (sourceDeck != null && !sourceDeck.isEmpty()) {
-                        for( PaperCard card : CardUtil.generateCards(CardUtil.withAllowedPrints(CardUtil.getDeck(sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList()) ,this, count+addedCount, rewardRandom)) {
+                        for( PaperCard card : CardUtil.generateCards(CardUtil.getDeck(sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList() ,this, count+addedCount, rewardRandom)) {
                             if (card != null)
                                 ret.add(new Reward(card, isNoSell));
                         }
@@ -374,6 +357,8 @@ public class RewardData implements Serializable {
                 case "deck": {
                     Deck deck = loadRewardDeck();
                     if (deck != null) {
+                        if (CardUtil.keepAllowedPrints(deck))
+                            rewardChangedByExclusions = true;
                         deck.getTags().add(Reward.DECK_TAG);
                         ret.add(new Reward(deck, isNoSell, cost));
                     }
@@ -469,14 +454,14 @@ public class RewardData implements Serializable {
         PaperCard card = resolveNamedPrint(request, cardName, edition, allCardVariants);
         if (card == null)
             return null;
-        PaperCard allowed = StaticData.instance().isHidden(card) ? null : allowedPrint(card);
+        PaperCard allowed = CardUtil.allowedPrint(card);
         // an edition excluded whole is already swapped by getCardByNameAndEdition, so compare with the one asked for,
         // leaving aside editions the plane itself rules out or that never held the card
         boolean editionKept = edition == null || !Config.instance().isPlaneEdition(edition)
                 || !holdsCard(edition, request.cardName)
                 || allowed != null && allowed.getEdition().equals(edition);
         if (allowed == null || !editionKept)
-            authoredRewardChanged = true;
+            rewardChangedByExclusions = true;
         return allowed;
     }
 
@@ -485,22 +470,15 @@ public class RewardData implements Serializable {
         return edition != null && !edition.getCardInSet(cardName).isEmpty();
     }
 
-    // another allowed print of the same edition keeps the reward as written, else any allowed print stands in
-    private static PaperCard allowedPrint(PaperCard card) {
-        CardDb cardDb = StaticData.instance().getCommonCards();
-        if (Config.instance().appliesUserExclusions() && cardDb.isPrintExcluded(card)) {
-            for (PaperCard print : cardDb.getAllCards(card.getName()))
-                if (print.getEdition().equals(card.getEdition()) && !cardDb.isPrintExcluded(print))
-                    return card.isFoil() ? print.getFoiled() : print;
-        }
-        List<PaperCard> allowed = CardUtil.withAllowedPrints(List.of(card));
-        return allowed.isEmpty() ? null : allowed.get(0);
+    /** Has the next reward screen say that the player's exclusions changed some of its cards. */
+    public static void noteRewardChanged() {
+        rewardChangedByExclusions = true;
     }
 
-    /** True once after an authored card reward was moved off its named edition or left out by the player's exclusions. */
-    public static boolean takeAuthoredRewardChanged() {
-        boolean changed = authoredRewardChanged;
-        authoredRewardChanged = false;
+    /** True once after the player's exclusions moved a card reward to another set or left it out. */
+    public static boolean takeRewardChangedByExclusions() {
+        boolean changed = rewardChangedByExclusions;
+        rewardChangedByExclusions = false;
         return changed;
     }
 
