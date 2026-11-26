@@ -2143,13 +2143,16 @@ public final class FlatMonteCarloPicker {
 
     /**
      * A decision with priority on the opponent's turn (a spell on the stack, or their attack): play the candidate on
-     * top of what is there, let the AI follow up if its own heuristics want to (a counterspell found by a cantrip),
-     * then let the rest resolve and play the turn on to its end step.
+     * top of what is there, or pass. With responses the stack then resolves in priority order, the AI's follow-ups (a
+     * counterspell found by a cantrip) among them; without, the AI may follow up before the rest resolves. Then the
+     * turn is played on to its end step.
      */
     private static Long rolloutRespond(final GameSimulator sim, final Game simGame, final Player simAi,
                                        final Candidate cand, final Config cfg, final int playoutPlays) {
         final Player simOpp = simAi.getWeakestOpponent();
-        if (!cand.isHold()) {
+        if (cand.isHold()) {
+            resolveAfterPass(simGame, simAi, cfg);
+        } else {
             final int below = simGame.getStack().size();
             if (!sim.applySpellAbility(cand.sa, false)) {
                 lastRolloutProblem = "apply";
@@ -3028,7 +3031,7 @@ public final class FlatMonteCarloPicker {
         return valueAtSecondMain(simGame, simAi, cand, cfg, true);
     }
 
-    /** Follow-up plays the AI may make after its response while the opponent's spell is still on the stack. */
+    /** Without responses: the AI's follow-up plays after its response, the opponent's spell still on the stack. */
     private static final int RESPONSE_FOLLOW_UPS = 3;
 
     private static void playOutResponding(final Game simGame, final Player simAi, final Config cfg, final int maxPlays) {
@@ -3054,22 +3057,40 @@ public final class FlatMonteCarloPicker {
     private static final int MAX_RESPONSES = 8;
 
     /**
-     * Resolves the stack down to {@code floor} objects: what {@code simAi} has just put on top of those. Before each
-     * spell, activated ability or triggered ability resolves, the players get priority, so they can answer the AI's
-     * plays and each other's answers. Every response and every resolution starts a new round: having passed before
-     * does not keep a player from answering what is on top now.
+     * Resolves what {@code simAi} has just put on the stack. Before each spell, activated ability or triggered ability
+     * resolves, the players get priority, so they can answer the AI's plays and each other's answers. Every response
+     * and every resolution starts a new round: having passed before does not keep a player from answering what is on
+     * top now. That goes for what was on the stack before the AI's play too, so with responses the whole stack resolves
+     * here. Without them it stops at {@code floor} objects, leaving those for the AI's follow-ups.
      */
     static void resolveWithResponses(final Game simGame, final Player simAi, final Config cfg, final int floor) {
+        resolveInPriorityOrder(simGame, simAi, null, cfg, cfg.opponentResponses ? 0 : floor);
+    }
+
+    /**
+     * As {@link #resolveWithResponses} when {@code simAi} passes instead of playing: the others are asked about what is
+     * on the stack, the AI not until one of them responds or something resolves. Does nothing without responses.
+     */
+    static void resolveAfterPass(final Game simGame, final Player simAi, final Config cfg) {
+        if (cfg.opponentResponses) {
+            resolveInPriorityOrder(simGame, simAi, simAi, cfg, 0);
+        }
+    }
+
+    /** The loop behind both: {@code simAi} gets priority first; {@code passed}, if not null, has already passed. */
+    private static void resolveInPriorityOrder(final Game simGame, final Player simAi, Player passed, final Config cfg,
+                                               final int floor) {
         int responses = 0;
         GameSimulator.TopResolver resolver = null;
-        // who gets priority next, which the controller of the top object does not tell: whoever just acted keeps it
         Player first = simAi;
         putTriggersOnStack(simGame);
         while (!simGame.isGameOver() && simGame.getStack().size() > floor) {
             AITimeoutTracker.check();
             final Player responder = cfg.opponentResponses && responses < MAX_RESPONSES
-                    ? offerPriority(simGame, first) : null;
+                    ? offerPriority(simGame, first, passed) : null;
+            passed = null; // a response or a resolution comes next: everybody gets to act again
             if (responder != null) {
+                // whoever just acted keeps priority, which the controller of the top object does not tell
                 first = responder;
                 responses++;
                 putTriggersOnStack(simGame);
@@ -3091,15 +3112,15 @@ public final class FlatMonteCarloPicker {
 
     /**
      * Offers every player priority, in turn order starting with {@code first}, to respond to what is on the stack,
-     * whoever controls the top of it.
+     * whoever controls the top of it. {@code passed}, if not null, has already passed and is skipped.
      * Hidden cards are the ones dealt in this sample, so the AI learns nothing about the real ones.
      *
      * @return the first of them who puts something on the stack; null when all of them pass
      */
-    private static Player offerPriority(final Game simGame, final Player first) {
+    private static Player offerPriority(final Game simGame, final Player first, final Player passed) {
         for (final Player p : simGame.getPlayersInTurnOrder(first)) {
             // an empty hand is no reason to skip: abilities can be activated from the battlefield and other zones
-            if (!p.isInGame() || !(p.getController() instanceof PlayerControllerAi)) {
+            if (p == passed || !p.isInGame() || !(p.getController() instanceof PlayerControllerAi)) {
                 continue;
             }
             AITimeoutTracker.check();

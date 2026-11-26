@@ -376,6 +376,94 @@ public class FlatMonteCarloRolloutRulesTest extends FlatMcTestBase {
         assertEquals(asked.subList(0, 3), Arrays.asList("ai: Lava Axe", "third: Lava Axe", "third: Cancel"));
     }
 
+    /**
+     * On the opponent's turn their Shock aims at the AI's Grizzly Bears; the AI answers with Mother of Runes.
+     *
+     * @return who was asked about what while the stack played out
+     */
+    private List<String> protectAgainstShock(final boolean responses) {
+        setUpGame();
+        final Card mother = put("Mother of Runes", ai, ZoneType.Battlefield);
+        mother.setSickness(false);
+        final Card bears = put("Grizzly Bears", ai, ZoneType.Battlefield);
+        put("Mountain", opp, ZoneType.Battlefield);
+        final SpellAbility shock = put("Shock", opp, ZoneType.Hand).getFirstSpellAbility();
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, opp);
+        game.getAction().checkStateEffects(true);
+        shock.setActivatingPlayer(opp);
+        shock.resetTargets();
+        shock.getTargets().add(bears);
+        ((PlayerControllerAi) opp.getController()).playChosenSpellAbility(shock);
+        SpellAbility protect = null;
+        for (final SpellAbility sa : mother.getSpellAbilities()) {
+            if (sa.isActivatedAbility() && !sa.isManaAbility()) {
+                protect = sa;
+            }
+        }
+        protect.setActivatingPlayer(ai);
+        protect.resetTargets();
+        protect.getTargets().add(bears);
+        ((PlayerControllerAi) ai.getController()).playChosenSpellAbility(protect);
+        assertEquals(game.getStack().size(), 2);
+        final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(
+                ((PlayerControllerAi) ai.getController()).getAi(), ai);
+        cfg.opponentResponses = responses;
+
+        final List<String> asked = new ArrayList<>();
+        opp.runWithController(() -> ai.runWithController(
+                () -> FlatMonteCarloPicker.resolveWithResponses(game, ai, cfg, 1),
+                new RecordsPriority(game, ai, "ai", asked)),
+                new RecordsPriority(game, opp, "opp", asked));
+        return asked;
+    }
+
+    @Test(timeOut = 120000)
+    public void theSpellUnderneathGetsItsOwnRoundOfPriority() {
+        assertEquals(protectAgainstShock(true), Arrays.asList(
+                "ai: Mother of Runes", "opp: Mother of Runes", "opp: Shock", "ai: Shock"));
+        assertTrue(game.getStack().isEmpty());
+    }
+
+    @Test(timeOut = 120000)
+    public void withoutResponsesTheSpellUnderneathIsLeftForTheFollowUps() {
+        assertEquals(protectAgainstShock(false), new ArrayList<String>());
+        assertEquals(game.getStack().size(), 1);
+    }
+
+    @Test(timeOut = 120000)
+    public void whenTheAiPassesTheOthersStillGetPriority() {
+        game = initAndCreateThreePlayerGame();
+        // seated in this order
+        opp = game.getPlayers().get(0);
+        ai = game.getPlayers().get(1);
+        third = game.getPlayers().get(2);
+        put("Mountain", 2, opp, ZoneType.Battlefield);
+        final List<Card> shocks = Arrays.asList(put("Shock", opp, ZoneType.Hand), put("Shock", opp, ZoneType.Hand));
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, opp);
+        game.getAction().checkStateEffects(true);
+        for (final Card shock : shocks) {
+            final SpellAbility sa = shock.getFirstSpellAbility();
+            sa.setActivatingPlayer(opp);
+            sa.resetTargets();
+            sa.getTargets().add(ai);
+            ((PlayerControllerAi) opp.getController()).playChosenSpellAbility(sa);
+        }
+        assertEquals(game.getStack().size(), 2);
+        final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(
+                ((PlayerControllerAi) ai.getController()).getAi(), ai);
+
+        final List<String> asked = new ArrayList<>();
+        opp.runWithController(() -> ai.runWithController(() -> third.runWithController(
+                () -> FlatMonteCarloPicker.resolveAfterPass(game, ai, cfg),
+                new RecordsPriority(game, third, "third", asked)),
+                new RecordsPriority(game, ai, "ai", asked)),
+                new RecordsPriority(game, opp, "opp", asked));
+        assertEquals(asked, Arrays.asList(
+                "third: Shock", "opp: Shock", // the AI has passed on the top one
+                "opp: Shock", "ai: Shock", "third: Shock"));
+        assertEquals(ai.getLife(), 16);
+    }
+
     /** Passes on everything until it is asked about the named spell for the second time; then plays as usual. */
     private static final class AnswersTheSecondTime extends PlayerControllerAi {
         private final String spell;
