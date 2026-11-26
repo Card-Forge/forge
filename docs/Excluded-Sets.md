@@ -30,6 +30,8 @@ All three open the same list. A change in one applies to all of them.
 
 Tick a category at the top of the list to exclude all of it. Tick a set to exclude that set. To keep one set from an excluded category, untick it. For example, a player can exclude Universes Beyond but keep The Lord of the Rings.
 
+Some sets hold only a few cards from a category, such as the Universes Beyond cards in Secret Lair. When the category is excluded, these sets show a dash and a note, and only the category's cards in them are excluded. Clicking the set again excludes the whole set, and a third click keeps it.
+
 Changes take effect when the list closes.
 
 ### Effects
@@ -40,7 +42,7 @@ Excluding Un-cards and playtest cards goes further. These cards also leave deck 
 Owned cards and decks keep all their cards. In a deck line that names no set, the card switches to an allowed printing when one exists. Otherwise the deck keeps the excluded printing, and a deck with an excluded card still loads.
 
 ### Warnings
-Some content keeps excluded cards, and Forge shows a message once per session when it does. Opponent decks in Quest, Planar Conquest and Adventure still play cards on the list. A message at the start of a match names any opponent whose deck uses cards with no allowed printing, or Un-cards and playtest cards. In Adventure, a message also appears when a shop's stock is missing cards because of the list.
+Some content keeps excluded cards, and Forge shows a message once per session when it does. Opponent decks in Quest, Planar Conquest and Adventure still play cards on the list. A message at the start of a match names any opponent whose deck uses cards with no allowed printing, or Un-cards and playtest cards. In Adventure, a message also appears when a shop or a reward screen has cards that the list changed or left out. A specific card a reward names counts when it moves to another set or is left out. A random reward that picks another printing does not.
 
 ## How It Works
 Each category is a tag on sets and individual printings. The built-in tags update daily from Scryfall, and custom tags can be added by hand (see [Defining custom tags](#defining-custom-tags)).

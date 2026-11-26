@@ -321,11 +321,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void chooseExcludedSets() {
-        DialogChooseSets.forExcludedSets(FModel.getExcludedEditionCodes(),
-                FModel.getExcludedTags(), (ticked, tags) -> {
-                    if (FModel.setExcludedEditions(ticked, tags))
-                        updateExcludedSetsButton();
-                });
+        DialogChooseSets.forExcludedSets(this::updateExcludedSetsButton);
     }
 
     private void resetDeckEditorLayout() {

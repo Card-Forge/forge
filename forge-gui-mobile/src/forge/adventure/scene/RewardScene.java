@@ -58,6 +58,7 @@ public class RewardScene extends UIScene {
     private TypingLabel headerLabel;
     private Vector2 headerLabelOrigPos;
     private boolean autoSell;
+    private boolean exclusionNoticePending;
 
     private ShopActor shopActor;
     private static RewardScene object;
@@ -383,6 +384,16 @@ public class RewardScene extends UIScene {
             setUIBackground(origDrawable);
         }
         super.enter();
+        showExclusionNotice();
+    }
+
+    private void showExclusionNotice() {
+        if (!exclusionNoticePending)
+            return;
+        exclusionNoticePending = false;
+        showDialog(createGenericDialog(Forge.getLocalizer().getMessage("lblExcludedSets"),
+                Forge.getLocalizer().getMessage("lblRewardsChangedByExclusions"), Forge.getLocalizer().getMessage("lblOK"),
+                null, this::removeDialog, null, false, "", true));
     }
 
     private void showLootOrDone() {
@@ -457,6 +468,7 @@ public class RewardScene extends UIScene {
         }
         shopActor.setRewardData(ret);
         loadRewards(ret, RewardScene.Type.Shop, shopActor);
+        shopActor.warnOfExcludedCards(this);
     }
 
     public void loadRewards(Deck deck, Type type, ShopActor shopActor, boolean noSell) {
@@ -486,6 +498,10 @@ public class RewardScene extends UIScene {
     }
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
+        // a shop's own warning covers its stock
+        exclusionNoticePending = type != Type.Shop && RewardData.takeAuthoredRewardChanged();
+        if (Forge.getCurrentScene() == this)
+            showExclusionNotice();  // loaded while already open, so enter() does not run
         // Merge Gold and Shards rewards into single entries
         int totalGold = 0;
         int totalShards = 0;

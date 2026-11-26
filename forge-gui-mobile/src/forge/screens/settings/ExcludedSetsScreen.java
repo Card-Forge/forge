@@ -2,6 +2,8 @@ package forge.screens.settings;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +41,9 @@ public class ExcludedSetsScreen extends MultiSetSelect {
     private final HelpToggle btnHelp = header.add(new HelpToggle());
     private final FTextArea lblHelp = header.add(new FTextArea(false, Forge.getLocalizer().getMessage("lblExcludedSetsHelp")));
     private final Map<String, FCheckBox> tagBoxes = new LinkedHashMap<>();
+    // sets with only their tagged prints excluded, and the note each set that ticked tags cover in part shows
+    private final Set<CardEdition> partlySelectedSets = new HashSet<>();
+    private final Map<CardEdition, String> partialNotes = new HashMap<>();
     private final FButton btnClear = header.add(new FButton(Forge.getLocalizer().getMessage("lblClearSelection")));
     private final FTextField txtSearch = header.add(new FTextField());
     private final ScrollBar scrollBar = add(new ScrollBar());
@@ -60,18 +65,39 @@ public class ExcludedSetsScreen extends MultiSetSelect {
                     excludedTags.contains(tag)));
             box.setFont(FSkinFont.get(12));
             List<CardEdition> tagged = editionsOf(FModel.getEditionCodesWithTag(tag));
+            List<CardEdition> partlyTagged = editionsOf(FModel.getEditionCodesWithTaggedPrints(tag));
             box.setCommand(e -> {
-                if (box.isSelected())
-                    selectedSets.addAll(tagged);
-                else
-                    tagged.forEach(selectedSets::remove);
+                Set<CardEdition> couldBePartial = new HashSet<>(partialNotes.keySet());
+                updatePartialNotes();
+                List<String> tickedTags = getTickedTags();
+                List<CardEdition> affected = new ArrayList<>(tagged);
+                affected.addAll(partlyTagged);
+                for (CardEdition edition : affected) {
+                    // ticked when a ticked tag covers it whole, partly ticked when one covers it in part unless the
+                    // player had ticked it whole, and unticked otherwise
+                    boolean tickedWhole = couldBePartial.contains(edition) && selectedSets.contains(edition);
+                    boolean partly = partialNotes.containsKey(edition);
+                    boolean ticked = tickedTags.stream().anyMatch(edition::hasTag) || partly && tickedWhole;
+                    if (ticked)
+                        selectedSets.add(edition);
+                    else
+                        selectedSets.remove(edition);
+                    if (partly && !ticked)
+                        partlySelectedSets.add(edition);
+                    else
+                        partlySelectedSets.remove(edition);
+                }
             });
             tagBoxes.put(tag, box);
         }
         btnClear.setCommand(e -> {
             tagBoxes.values().forEach(box -> box.setSelected(false));
             selectedSets.clear();
+            partlySelectedSets.clear();
+            partialNotes.clear();
         });
+        updatePartialNotes();
+        partlySelectedSets.addAll(editionsOf(FModel.getPartlyExcludedEditionCodes()));
         lstSets.setHeader(header);
         lstSets.setFont(FSkinFont.get(12));
         updateHelpLabel();
@@ -85,6 +111,46 @@ public class ExcludedSetsScreen extends MultiSetSelect {
 
     private void updateHelpLabel() {
         btnHelp.setText(Forge.getLocalizer().getMessage(helpShown ? "lblHideHelp" : "lblShowHelp"));
+    }
+
+    private List<String> getTickedTags() {
+        List<String> ticked = new ArrayList<>();
+        tagBoxes.forEach((tag, box) -> {
+            if (box.isSelected())
+                ticked.add(tag);
+        });
+        return ticked;
+    }
+
+    private void updatePartialNotes() {
+        partialNotes.clear();
+        List<String> tickedTags = getTickedTags();
+        for (CardEdition edition : FModel.getMagicDb().getEditions()) {
+            String note = FModel.getPartialExclusionNote(edition, tickedTags);
+            if (note != null)
+                partialNotes.put(edition, note);
+        }
+    }
+
+    // a set that ticked tags cover in part cycles from partly ticked to ticked to unticked
+    @Override
+    protected void toggleSet(CardEdition set) {
+        if (!partialNotes.containsKey(set))
+            super.toggleSet(set);
+        else if (partlySelectedSets.remove(set))
+            selectedSets.add(set);
+        else if (!selectedSets.remove(set))
+            partlySelectedSets.add(set);
+    }
+
+    @Override
+    protected boolean isPartlySelected(CardEdition set) {
+        return partlySelectedSets.contains(set) && !selectedSets.contains(set);
+    }
+
+    @Override
+    protected String getNoteText(CardEdition set) {
+        return isPartlySelected(set) ? partialNotes.get(set) : null;
     }
 
     private static List<CardEdition> editionsOf(Collection<String> codes) {
@@ -119,12 +185,13 @@ public class ExcludedSetsScreen extends MultiSetSelect {
         List<String> codes = new ArrayList<>();
         for (CardEdition edition : selectedSets)
             codes.add(edition.getCode());
+        List<String> partlyCodes = new ArrayList<>();
+        for (CardEdition edition : partlySelectedSets)
+            if (isPartlySelected(edition))
+                partlyCodes.add(edition.getCode());
         Set<String> tags = SetExclusions.newCodeSet();
-        tagBoxes.forEach((tag, box) -> {
-            if (box.isSelected())
-                tags.add(tag);
-        });
-        if (FModel.setExcludedEditions(codes, tags)) {
+        tags.addAll(getTickedTags());
+        if (FModel.setExcludedEditions(codes, partlyCodes, tags)) {
             Config.onExclusionChanged();
             if (onChanged != null)
                 onChanged.run();

@@ -46,7 +46,8 @@ public class PrintExclusionTest extends CardMockTestCase {
     @Test
     public void pickerTicksRoundTripThroughEntries() {
         Set<String> universesBeyond = Set.of("FIN", "LTR", "LTC");
-        Set<String> entries = SetExclusions.entriesFor(List.of("FIN", "ME1"), Set.of(UB), tag -> universesBeyond);
+        Set<String> entries = SetExclusions.entriesFor(List.of("FIN", "ME1"), List.of(), Set.of(UB), tag -> universesBeyond,
+                tag -> Set.of());
         // FIN is covered by the tag, so it is not stored, and the unticked UB sets are stored as kept
         assertEquals(entries, Set.of("#UniversesBeyond", "!LTR", "!LTC", "ME1"));
         SetExclusions exclusions = new SetExclusions(entries);
@@ -55,7 +56,21 @@ public class PrintExclusionTest extends CardMockTestCase {
         assertTrue(exclusions.excludes(edition("ME1"), null));
         assertFalse(exclusions.excludes(edition("LTR"), null));
         // with the UB tag not excluded, a ticked UB set is stored as a plain code
-        assertEquals(SetExclusions.entriesFor(List.of("FIN", "ME1"), Set.of(), tag -> universesBeyond), Set.of("FIN", "ME1"));
+        assertEquals(SetExclusions.entriesFor(List.of("FIN", "ME1"), List.of(), Set.of(), tag -> universesBeyond,
+                tag -> Set.of()), Set.of("FIN", "ME1"));
+    }
+
+    @Test
+    public void partlyTaggedSetsRoundTripThroughEntries() {
+        // SLD ticked, PLG20 partly ticked, PW23 unmarked, each with only some prints tagged Universes Beyond
+        Set<String> entries = SetExclusions.entriesFor(List.of("SLD"), List.of("PLG20"), Set.of(UB), tag -> Set.of(),
+                tag -> Set.of("SLD", "PLG20", "PW23"));
+        assertEquals(entries, Set.of("#UniversesBeyond", "SLD", "!PW23"));
+        SetExclusions exclusions = new SetExclusions(entries);
+        assertTrue(exclusions.excludes(edition("SLD"), null));
+        assertTrue(exclusions.excludesSomePrints(edition("PLG20")));
+        assertFalse(exclusions.excludesSomePrints(edition("PW23")));
+        assertFalse(exclusions.excludesSomePrints(edition("SLD")));
     }
 
     @Test

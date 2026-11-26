@@ -45,6 +45,7 @@ public class Config {
     private String[] planeRestrictedEditions, planeAllowedEditions;
     private boolean planeIgnoresUserExclusions, resourcesLoaded;
     private Set<String> excludedEditionCodes = Collections.emptySet();
+    private Set<String> partlyExcludedEditionCodes = Collections.emptySet();
     private final String[] adventures;
     private SettingData settingsData;
     private String Lang = "en-us";
@@ -146,6 +147,11 @@ public class Config {
         return excludedEditionCodes;
     }
 
+    /** The editions with only some prints excluded, kept from the last change as the whole ones are. */
+    public Set<String> getPartlyExcludedEditionCodes() {
+        return partlyExcludedEditionCodes;
+    }
+
     /** Whether the plane's own edition lists allow the edition, leaving the player's exclusions aside. */
     public boolean isPlaneEdition(String code) {
         if (planeAllowedEditions != null && planeAllowedEditions.length > 0)
@@ -161,6 +167,7 @@ public class Config {
         }
         Set<String> playerExcluded = FModel.getExcludedEditionCodes();
         excludedEditionCodes = playerExcluded;
+        partlyExcludedEditionCodes = FModel.getPartlyExcludedEditionCodes();
         boolean hasWhitelist = planeAllowedEditions != null && planeAllowedEditions.length > 0;
         planeIgnoresUserExclusions = hasWhitelist && Arrays.stream(planeAllowedEditions).allMatch(playerExcluded::contains);
         Set<String> excluded = planeIgnoresUserExclusions ? Collections.emptySet() : playerExcluded;

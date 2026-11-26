@@ -74,6 +74,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * The default Model implementation for Forge.
@@ -133,6 +134,18 @@ public final class FModel {
         return codes;
     }
 
+    /** The editions with only some prints excluded, through a tag on those prints. */
+    public static Set<String> getPartlyExcludedEditionCodes() {
+        SetExclusions exclusions = getSetExclusions();
+        Set<String> codes = SetExclusions.newCodeSet();
+        for (CardEdition edition : getMagicDb().getEditions()) {
+            if (exclusions.excludesSomePrints(edition)) {
+                codes.add(edition.getCode());
+            }
+        }
+        return codes;
+    }
+
     public static Set<String> getExcludedTags() {
         return getSetExclusions().getTags();
     }
@@ -162,17 +175,43 @@ public final class FModel {
         return codes;
     }
 
+    /** The editions carrying the tag on some prints but not as a whole. */
+    public static Set<String> getEditionCodesWithTaggedPrints(String tag) {
+        Set<String> codes = SetExclusions.newCodeSet();
+        for (CardEdition edition : getMagicDb().getEditions()) {
+            if (!edition.hasTag(tag) && edition.getPrintTags().contains(tag)) {
+                codes.add(edition.getCode());
+            }
+        }
+        return codes;
+    }
+
+    /**
+     * The note a set picker shows for an edition the ticked tags cover only in part, or null when no ticked tag tags
+     * any of its prints or one covers it whole.
+     */
+    public static String getPartialExclusionNote(CardEdition edition, Collection<String> tickedTags) {
+        if (tickedTags.stream().anyMatch(edition::hasTag)) {
+            return null;
+        }
+        List<String> names = tickedTags.stream().filter(edition.getPrintTags()::contains).map(FModel::getTagName)
+                .collect(Collectors.toList());
+        return names.isEmpty() ? null : Localizer.getInstance().getMessage("lblOnlyTagPrintsExcluded", String.join(", ", names));
+    }
+
     /** The name a tag is shown by, from {@code lblTag<Tag>} if the language file has it. */
     public static String getTagName(String tag) {
         return Localizer.getInstance().getMessageorUseDefault("lblTag" + tag, tag);
     }
 
     /**
-     * Stores the sets and tags ticked in a set picker and applies them to the card database. Returns false when that
+     * Stores the sets and tags marked in a set picker and applies them to the card database. Returns false when that
      * leaves the preference as it was.
      */
-    public static boolean setExcludedEditions(Collection<String> ticked, Collection<String> excludedTags) {
-        Set<String> entries = SetExclusions.entriesFor(ticked, excludedTags, FModel::getEditionCodesWithTag);
+    public static boolean setExcludedEditions(Collection<String> ticked, Collection<String> partlyTicked,
+                                              Collection<String> excludedTags) {
+        Set<String> entries = SetExclusions.entriesFor(ticked, partlyTicked, excludedTags,
+                FModel::getEditionCodesWithTag, FModel::getEditionCodesWithTaggedPrints);
         if (entries.equals(getPreferences().getPrefSet(FPref.UI_EXCLUDED_SETS))) {
             return false;
         }

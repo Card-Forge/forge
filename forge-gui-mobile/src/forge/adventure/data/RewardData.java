@@ -161,6 +161,8 @@ public class RewardData implements Serializable {
         return allCards;
     }
 
+    private static boolean authoredRewardChanged;
+
     public static void invalidateCardPool() {
         allCards = null;
         allEnemyCards = null;
@@ -181,8 +183,14 @@ public class RewardData implements Serializable {
     public boolean losesExcludedCards() {
         if (!Config.instance().appliesUserExclusions())
             return false;
+        // a named card's change is recorded as the stock is generated
+        if (cardName != null && !cardName.isEmpty())
+            return false;
+        if (cardUnion != null && Arrays.stream(cardUnion).anyMatch(RewardData::losesExcludedCards))
+            return true;
         if (editions != null && editions.length > 0) {
-            return Arrays.stream(editions).anyMatch(Config.instance().getExcludedEditionCodes()::contains);
+            return Arrays.stream(editions).anyMatch(code -> Config.instance().getExcludedEditionCodes().contains(code)
+                    || Config.instance().getPartlyExcludedEditionCodes().contains(code));
         }
         if (sourceDeck != null && !sourceDeck.isEmpty()) {
             List<PaperCard> cards = CardUtil.getDeck(sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList();
@@ -453,17 +461,51 @@ public class RewardData implements Serializable {
      */
     private static PaperCard resolveNamedCard(String cardName, String[] editions, Random rewardRandom,
                                               boolean allCardVariants) {
-        PaperCard card = resolveNamedPrint(cardName, editions, rewardRandom, allCardVariants);
-        return StaticData.instance().isHidden(card) ? null : card;
-    }
-
-    private static PaperCard resolveNamedPrint(String cardName, String[] editions, Random rewardRandom,
-                                               boolean allCardVariants) {
         CardDb.CardRequest request = CardDb.CardRequest.fromString(cardName);
         String edition = request.edition;
         if (edition == null && editions != null && editions.length > 0) {
             edition = editions[rewardRandom.nextInt(editions.length)];
         }
+        PaperCard card = resolveNamedPrint(request, cardName, edition, allCardVariants);
+        if (card == null)
+            return null;
+        PaperCard allowed = StaticData.instance().isHidden(card) ? null : allowedPrint(card);
+        // an edition excluded whole is already swapped by getCardByNameAndEdition, so compare with the one asked for,
+        // leaving aside editions the plane itself rules out or that never held the card
+        boolean editionKept = edition == null || !Config.instance().isPlaneEdition(edition)
+                || !holdsCard(edition, request.cardName)
+                || allowed != null && allowed.getEdition().equals(edition);
+        if (allowed == null || !editionKept)
+            authoredRewardChanged = true;
+        return allowed;
+    }
+
+    private static boolean holdsCard(String editionCode, String cardName) {
+        CardEdition edition = StaticData.instance().getEditions().get(editionCode);
+        return edition != null && !edition.getCardInSet(cardName).isEmpty();
+    }
+
+    // another allowed print of the same edition keeps the reward as written, else any allowed print stands in
+    private static PaperCard allowedPrint(PaperCard card) {
+        CardDb cardDb = StaticData.instance().getCommonCards();
+        if (Config.instance().appliesUserExclusions() && cardDb.isPrintExcluded(card)) {
+            for (PaperCard print : cardDb.getAllCards(card.getName()))
+                if (print.getEdition().equals(card.getEdition()) && !cardDb.isPrintExcluded(print))
+                    return card.isFoil() ? print.getFoiled() : print;
+        }
+        List<PaperCard> allowed = CardUtil.withAllowedPrints(List.of(card));
+        return allowed.isEmpty() ? null : allowed.get(0);
+    }
+
+    /** True once after an authored card reward was moved off its named edition or left out by the player's exclusions. */
+    public static boolean takeAuthoredRewardChanged() {
+        boolean changed = authoredRewardChanged;
+        authoredRewardChanged = false;
+        return changed;
+    }
+
+    private static PaperCard resolveNamedPrint(CardDb.CardRequest request, String cardName, String edition,
+                                               boolean allCardVariants) {
         if (edition != null) {
             return CardUtil.getCardByNameAndEdition(request.cardName, edition);
         }
