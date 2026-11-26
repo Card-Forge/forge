@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.testng.annotations.Test;
 
 import forge.ai.PlayerControllerAi;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.Game;
 import forge.game.phase.PhaseType;
@@ -546,6 +547,84 @@ public class FlatMonteCarloRolloutRulesTest extends FlatMcTestBase {
         mana.getHostCard().setTapped(true);
         assertEquals(resolveWithThirdPlaying(mana), Arrays.asList("ai: Lava Axe", "third: Lava Axe", "opp: Lava Axe"));
         assertTrue(game.getStack().isEmpty());
+    }
+
+    /** The AI has Sensei's Divining Top and has just activated its ability to reorder the library. */
+    private Card reorderWithTop() {
+        setUpGame();
+        final Card top = put("Sensei's Divining Top", ai, ZoneType.Battlefield);
+        put("Island", ai, ZoneType.Battlefield);
+        for (final String name : new String[] {"Grizzly Bears", "Shock", "Lava Axe", "Cancel"}) {
+            put(name, ai, ZoneType.Library);
+        }
+        // enough cards left that the AI's guard against drawing itself out does not apply
+        put("Forest", 6, ai, ZoneType.Library);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+        final SpellAbility reorder = abilityOf(top, ApiType.RearrangeTopOfLibrary);
+        reorder.setActivatingPlayer(ai);
+        ((PlayerControllerAi) ai.getController()).playChosenSpellAbility(reorder);
+        assertEquals(game.getStack().size(), 1);
+        return top;
+    }
+
+    private static SpellAbility abilityOf(final Card card, final ApiType api) {
+        for (final SpellAbility sa : card.getSpellAbilities()) {
+            if (sa.getApi() == api) {
+                return sa;
+            }
+        }
+        throw new AssertionError(card + " has no " + api + " ability");
+    }
+
+    @Test(timeOut = 120000)
+    public void theAiDrawsWithTopInResponseToItsOwnReorder() {
+        final Card top = reorderWithTop();
+        final List<SpellAbility> choice = ai.getController().chooseSpellAbilityToPlay();
+        assertTrue(choice != null && !choice.isEmpty(), "the AI responds to its own ability");
+        assertEquals(choice.get(0).getHostCard(), top);
+        assertEquals(choice.get(0).getApi(), ApiType.Draw);
+    }
+
+    @Test(timeOut = 120000)
+    public void bothTopAbilitiesResolveWhenTheAiRespondsToItself() {
+        final Card top = reorderWithTop();
+        final Card nextDraw = ai.getCardsIn(ZoneType.Library).get(0);
+        final int hand = ai.getCardsIn(ZoneType.Hand).size();
+        final int library = ai.getCardsIn(ZoneType.Library).size();
+        final List<String> seen = new ArrayList<>();
+        final PlayerControllerAi watching = new PlayerControllerAi(game, ai, ai.getLobbyPlayer()) {
+            @Override
+            public List<SpellAbility> chooseSpellAbilityToPlay() {
+                final List<SpellAbility> choice = super.chooseSpellAbilityToPlay();
+                seen.add(game.getStack().size() + " " + game.getStack().peekAbility().getApi()
+                        + ", Top in " + game.getCardState(top).getZone().getZoneType()
+                        + " -> " + (choice == null || choice.isEmpty() ? "pass" : choice.get(0).getApi()));
+                return choice;
+            }
+        };
+        final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(
+                ((PlayerControllerAi) ai.getController()).getAi(), ai);
+
+        ai.runWithController(() -> FlatMonteCarloPicker.resolveWithResponses(game, ai, cfg, 0), watching);
+
+        assertEquals(seen, Arrays.asList(
+                "1 RearrangeTopOfLibrary, Top in Battlefield -> Draw",
+                "2 Draw, Top in Battlefield -> pass",
+                // the draw has resolved, and the reorder is still waiting
+                "1 RearrangeTopOfLibrary, Top in Library -> pass"));
+        assertTrue(game.getStack().isEmpty(), "the reorder resolved too");
+        assertEquals(ai.getCardsIn(ZoneType.Hand).size(), hand + 1);
+        assertEquals(game.getCardState(nextDraw).getZone().getZoneType(), ZoneType.Hand,
+                "the card on top before the reorder was drawn");
+        // Top went on top of the library; the reorder then arranged the top three, Top among them
+        final List<Card> topThree = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            topThree.add(ai.getCardsIn(ZoneType.Library).get(i));
+        }
+        assertTrue(topThree.contains(game.getCardState(top)), "Top is among the top three cards: " + topThree);
+        // one card drawn and Top added
+        assertEquals(ai.getCardsIn(ZoneType.Library).size(), library);
     }
 
     /** Passes on everything until it is asked about the named spell for the second time; then plays as usual. */
