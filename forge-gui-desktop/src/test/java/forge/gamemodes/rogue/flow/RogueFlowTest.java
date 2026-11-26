@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue.flow;
 
+import forge.LobbyPlayer;
 import forge.ai.AITest;
 import forge.game.Game;
 import forge.game.GameEndReason;
@@ -222,6 +223,17 @@ public class RogueFlowTest extends AITest {
         Assert.assertEquals(match.human().getStartingLife(), 14);
         Assert.assertEquals(match.human().getDeck().getCommanders(), run.getCurrentDeck().getCommanders());
         Assert.assertEquals(match.human().getDeck().getMain(), run.getCurrentDeck().getMain());
+    }
+
+    @Test
+    public void replacingTheRunRestoresThePlayersNameAvatarAndSleeve() {
+        start(NodePlanebound.class);
+        LobbyPlayer human = GamePlayerUtil.getGuiPlayer();
+        human.setName("Human");
+        startedMatch();
+        Assert.assertEquals(human.getName(), run.getCurrentCommanderName());
+        flow.setRun(null);
+        Assert.assertEquals(human.getName(), "Human");
     }
 
     @Test
