@@ -3079,15 +3079,15 @@ public final class FlatMonteCarloPicker {
     /**
      * Offers the opponents of the controller of what is on top, in turn order after that player, the chance to answer
      * it.
-     * Each plays from the hand it was dealt in this sample, so the AI learns nothing about the real ones.
+     * Hidden cards are the ones dealt in this sample, so the AI learns nothing about the real ones.
      *
      * @return true as soon as one of them puts something on the stack; false when all of them pass
      */
     private static boolean offerPriority(final Game simGame) {
         final Player caster = simGame.getStack().peekAbility().getActivatingPlayer();
         for (final Player p : simGame.getPlayersInTurnOrder(caster)) {
-            if (!p.isInGame() || !p.isOpponentOf(caster)
-                    || p.getCardsIn(ZoneType.Hand).isEmpty() || !(p.getController() instanceof PlayerControllerAi)) {
+            // an empty hand is no reason to skip: abilities can be activated from the battlefield and other zones
+            if (!p.isInGame() || !p.isOpponentOf(caster) || !(p.getController() instanceof PlayerControllerAi)) {
                 continue;
             }
             AITimeoutTracker.check();

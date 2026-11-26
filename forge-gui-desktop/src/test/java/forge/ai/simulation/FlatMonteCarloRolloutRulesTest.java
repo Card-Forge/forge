@@ -210,6 +210,28 @@ public class FlatMonteCarloRolloutRulesTest extends FlatMcTestBase {
         assertEquals(opp.getLife(), 20);
     }
 
+    @Test(timeOut = 120000)
+    public void anOpponentWithAnEmptyHandCanAnswerFromTheBattlefield() {
+        setUpGame();
+        final Card mother = put("Mother of Runes", opp, ZoneType.Battlefield);
+        mother.setSickness(false);
+        final Card bears = put("Grizzly Bears", opp, ZoneType.Battlefield);
+        put("Mountain", ai, ZoneType.Battlefield);
+        final SpellAbility shock = put("Shock", ai, ZoneType.Hand).getFirstSpellAbility();
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+        shock.setActivatingPlayer(ai);
+        shock.resetTargets();
+        shock.getTargets().add(bears);
+        final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(
+                ((PlayerControllerAi) ai.getController()).getAi(), ai);
+        ((PlayerControllerAi) ai.getController()).playChosenSpellAbility(shock);
+        assertEquals(opp.getCardsIn(ZoneType.Hand).size(), 0);
+        FlatMonteCarloPicker.resolveWithResponses(game, ai, cfg, 0);
+        assertTrue(mother.isTapped(), "Mother of Runes was activated");
+        assertTrue(bears.isInPlay(), "the creature was protected");
+    }
+
     /** Passes on everything until it is asked about the named spell for the second time; then plays as usual. */
     private static final class AnswersTheSecondTime extends PlayerControllerAi {
         private final String spell;
