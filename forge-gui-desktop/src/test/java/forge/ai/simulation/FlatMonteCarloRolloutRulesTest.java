@@ -464,6 +464,90 @@ public class FlatMonteCarloRolloutRulesTest extends FlatMcTestBase {
         assertEquals(ai.getLife(), 16);
     }
 
+    /** Notes when it is asked, then makes its scripted plays one at a time, and passes when they run out. */
+    private static final class PlaysInOrder extends PlayerControllerAi {
+        private final String who;
+        private final List<String> asked;
+        private final List<SpellAbility> plays;
+
+        PlaysInOrder(final Game game, final Player player, final String who, final List<String> asked,
+                final SpellAbility... plays) {
+            super(game, player, player.getLobbyPlayer());
+            this.who = who;
+            this.asked = asked;
+            this.plays = new ArrayList<>(Arrays.asList(plays));
+        }
+
+        @Override
+        public List<SpellAbility> chooseSpellAbilityToPlay() {
+            asked.add(who + ": " + getGame().getStack().peekAbility().getHostCard().getName());
+            return plays.isEmpty() ? null : Arrays.asList(plays.remove(0));
+        }
+    }
+
+    /** Three players; the AI has a Lava Axe on the stack and the third player has an untapped Mountain. */
+    private SpellAbility axeWithAMountainOpposite() {
+        game = initAndCreateThreePlayerGame();
+        // seated in this order
+        opp = game.getPlayers().get(0);
+        ai = game.getPlayers().get(1);
+        third = game.getPlayers().get(2);
+        put("Mountain", 5, ai, ZoneType.Battlefield);
+        final Card mountain = put("Mountain", third, ZoneType.Battlefield);
+        final SpellAbility axe = put("Lava Axe", ai, ZoneType.Hand).getFirstSpellAbility();
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+        axe.setActivatingPlayer(ai);
+        FlatMonteCarloPicker.applyTarget(axe, opp);
+        ((PlayerControllerAi) ai.getController()).playChosenSpellAbility(axe);
+        final SpellAbility mana = mountain.getManaAbilities().get(0);
+        mana.setActivatingPlayer(third);
+        return mana;
+    }
+
+    private List<String> resolveWithThirdPlaying(final SpellAbility... plays) {
+        final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(
+                ((PlayerControllerAi) ai.getController()).getAi(), ai);
+        final List<String> asked = new ArrayList<>();
+        opp.runWithController(() -> ai.runWithController(() -> third.runWithController(
+                () -> FlatMonteCarloPicker.resolveWithResponses(game, ai, cfg, 0),
+                new PlaysInOrder(game, third, "third", asked, plays)),
+                new RecordsPriority(game, ai, "ai", asked)),
+                new RecordsPriority(game, opp, "opp", asked));
+        return asked;
+    }
+
+    @Test(timeOut = 120000)
+    public void aManaAbilityKeepsPriorityAndStartsANewRound() {
+        final SpellAbility mana = axeWithAMountainOpposite();
+        assertEquals(resolveWithThirdPlaying(mana), Arrays.asList(
+                "ai: Lava Axe",
+                "third: Lava Axe", // taps for mana
+                "third: Lava Axe", "opp: Lava Axe", "ai: Lava Axe"));
+        assertTrue(mana.getHostCard().isTapped());
+    }
+
+    @Test(timeOut = 120000)
+    public void theManaCanBeSpentBeforeAnybodyElseActs() {
+        final SpellAbility mana = axeWithAMountainOpposite();
+        final SpellAbility shock = put("Shock", third, ZoneType.Hand).getFirstSpellAbility();
+        shock.setActivatingPlayer(third);
+        shock.resetTargets();
+        shock.getTargets().add(ai);
+        final List<String> asked = resolveWithThirdPlaying(mana, shock);
+        assertEquals(asked.subList(0, 4), Arrays.asList(
+                "ai: Lava Axe", "third: Lava Axe", "third: Lava Axe", "third: Shock"));
+        assertEquals(ai.getLife(), 18);
+    }
+
+    @Test(timeOut = 120000)
+    public void aManaAbilityThatCannotBeActivatedCountsAsAPass() {
+        final SpellAbility mana = axeWithAMountainOpposite();
+        mana.getHostCard().setTapped(true);
+        assertEquals(resolveWithThirdPlaying(mana), Arrays.asList("ai: Lava Axe", "third: Lava Axe", "opp: Lava Axe"));
+        assertTrue(game.getStack().isEmpty());
+    }
+
     /** Passes on everything until it is asked about the named spell for the second time; then plays as usual. */
     private static final class AnswersTheSecondTime extends PlayerControllerAi {
         private final String spell;

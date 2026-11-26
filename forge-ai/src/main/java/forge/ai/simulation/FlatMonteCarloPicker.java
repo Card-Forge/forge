@@ -3055,6 +3055,8 @@ public final class FlatMonteCarloPicker {
 
     /** The most answers players may add while one play resolves, so an exchange cannot run on forever. */
     private static final int MAX_RESPONSES = 8;
+    /** The same for mana abilities, which add nothing to the stack: they have their own count. */
+    private static final int MAX_MANA_ACTIVATIONS = 8;
 
     /**
      * Resolves what {@code simAi} has just put on the stack. Before each spell, activated ability or triggered ability
@@ -3081,20 +3083,26 @@ public final class FlatMonteCarloPicker {
     private static void resolveInPriorityOrder(final Game simGame, final Player simAi, Player passed, final Config cfg,
                                                final int floor) {
         int responses = 0;
+        int manaActivations = 0;
         GameSimulator.TopResolver resolver = null;
         Player first = simAi;
         putTriggersOnStack(simGame);
         while (!simGame.isGameOver() && simGame.getStack().size() > floor) {
             AITimeoutTracker.check();
-            final Player responder = cfg.opponentResponses && responses < MAX_RESPONSES
-                    ? offerPriority(simGame, first, passed) : null;
-            passed = null; // a response or a resolution comes next: everybody gets to act again
-            if (responder != null) {
+            final int size = simGame.getStack().size();
+            final Player actor = cfg.opponentResponses && responses < MAX_RESPONSES
+                    ? offerPriority(simGame, first, passed, manaActivations < MAX_MANA_ACTIVATIONS) : null;
+            passed = null; // an action or a resolution comes next: everybody gets to act again
+            if (actor != null) {
                 // whoever just acted keeps priority, which the controller of the top object does not tell
-                first = responder;
-                responses++;
+                first = actor;
                 putTriggersOnStack(simGame);
-                continue; // the answer is on top now: a new round of priority
+                if (simGame.getStack().size() > size) {
+                    responses++;
+                } else {
+                    manaActivations++;
+                }
+                continue; // a new round of priority
             }
             if (resolver == null) {
                 resolver = new GameSimulator.TopResolver(simGame, simAi.getWeakestOpponent());
@@ -3112,12 +3120,14 @@ public final class FlatMonteCarloPicker {
 
     /**
      * Offers every player priority, in turn order starting with {@code first}, to respond to what is on the stack,
-     * whoever controls the top of it. {@code passed}, if not null, has already passed and is skipped.
+     * whoever controls the top of it. {@code passed}, if not null, has already passed and is skipped. A mana ability
+     * does not use the stack but is an action all the same; without {@code manaAllowed} it counts as a pass.
      * Hidden cards are the ones dealt in this sample, so the AI learns nothing about the real ones.
      *
-     * @return the first of them who puts something on the stack; null when all of them pass
+     * @return the first of them who acts; null when all of them pass
      */
-    private static Player offerPriority(final Game simGame, final Player first, final Player passed) {
+    private static Player offerPriority(final Game simGame, final Player first, final Player passed,
+                                        final boolean manaAllowed) {
         for (final Player p : simGame.getPlayersInTurnOrder(first)) {
             // an empty hand is no reason to skip: abilities can be activated from the battlefield and other zones
             if (p == passed || !p.isInGame() || !(p.getController() instanceof PlayerControllerAi)) {
@@ -3127,12 +3137,21 @@ public final class FlatMonteCarloPicker {
             checkRolloutDeadline();
             final PlayerControllerAi pc = (PlayerControllerAi) p.getController();
             final List<SpellAbility> answer = pc.chooseSpellAbilityToPlay();
-            if (answer != null && !answer.isEmpty() && !answer.get(0).isLandAbility()) {
-                final int before = simGame.getStack().size();
-                pc.playChosenSpellAbility(answer.get(0));
-                if (simGame.getStack().size() > before) {
+            if (answer == null || answer.isEmpty() || answer.get(0).isLandAbility()) {
+                continue;
+            }
+            final SpellAbility sa = answer.get(0);
+            if (sa.isManaAbility()) {
+                // it resolves at once, so only the play itself can tell whether it happened
+                if (manaAllowed && pc.playWithRollback(sa, null)) {
                     return p;
                 }
+                continue;
+            }
+            final int before = simGame.getStack().size();
+            pc.playChosenSpellAbility(sa);
+            if (simGame.getStack().size() > before) {
+                return p;
             }
         }
         return null;
