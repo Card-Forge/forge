@@ -3073,6 +3073,11 @@ public final class FlatMonteCarloPicker {
         // cast triggers go on the stack before anybody gets priority
         simGame.getAction().checkStateEffects(false);
         simGame.getStack().addAllTriggeredAbilitiesToStack();
+        // those resolve first (the opponent lets them), so that the spell beneath them can be answered
+        GameSimulator.resolveTriggersAboveSpell(simGame, simAi, simOpp);
+        if (simGame.isGameOver() || !simOpp.isInGame()) {
+            return false;
+        }
         final SpellAbility top = simGame.getStack().isEmpty() ? null : simGame.getStack().peekAbility();
         if (top == null || !top.isSpell() || !simAi.equals(top.getActivatingPlayer())) {
             return false;

@@ -43,7 +43,14 @@ public class FlatMonteCarloRolloutRulesTest extends FlatMcTestBase {
 
     /** A lethal Lava Axe into an untapped Counterspell: every card the opponent can be dealt is one. */
     private FlatMonteCarloPicker.Result axeIntoCounterspell(final boolean opponentResponses) {
+        return axeIntoCounterspell(opponentResponses, null);
+    }
+
+    private FlatMonteCarloPicker.Result axeIntoCounterspell(final boolean opponentResponses, final String aiCreature) {
         setUpGame();
+        if (aiCreature != null) {
+            put(aiCreature, ai, ZoneType.Battlefield);
+        }
         put("Mountain", 5, ai, ZoneType.Battlefield);
         put("Island", 2, opp, ZoneType.Battlefield);
         final SpellAbility axe = put("Lava Axe", ai, ZoneType.Hand).getFirstSpellAbility();
@@ -79,6 +86,13 @@ public class FlatMonteCarloRolloutRulesTest extends FlatMcTestBase {
     @Test(timeOut = 120000)
     public void theOpponentCountersItInTheRollouts() {
         final FlatMonteCarloPicker.Result r = axeIntoCounterspell(true);
+        assertNotEquals(r.reason, "wins", String.valueOf(r));
+    }
+
+    /** Prowess goes on the stack above the spell: the opponent must still get to counter the spell beneath it. */
+    @Test(timeOut = 120000)
+    public void aCastTriggerOnTopDoesNotHideTheSpellFromTheOpponent() {
+        final FlatMonteCarloPicker.Result r = axeIntoCounterspell(true, "Monastery Swiftspear");
         assertNotEquals(r.reason, "wins", String.valueOf(r));
     }
 }
