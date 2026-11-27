@@ -1,0 +1,6 @@
+Name:Narset Trait - Wrath of Chaos
+ManaCost:no cost
+Types:Trait
+R:Event$ ChaosEnsues | ActiveZones$ Command | ValidPlayer$ You | ValidCause$ PlanarDie | Optional$ True | OptionalDecider$ You | ReplaceWith$ REWrath | Description$ If chaos would ensue as a result of you rolling the planar die, instead you may destroy all creatures. They can't be regenerated. If you do, chaos doesn't ensue.
+SVar:REWrath:DB$ DestroyAll | ValidCards$ Creature | NoRegen$ True
+Oracle:If chaos would ensue as a result of you rolling the planar die, instead you may destroy all creatures. They can't be regenerated. If you do, chaos doesn't ensue.

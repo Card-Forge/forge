@@ -30,7 +30,8 @@ public class TriggerChaosEnsues extends Trigger {
      */
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))
+                || !matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
         }
         if (runParams.containsKey(AbilityKey.Affected)) {
@@ -53,7 +54,7 @@ public class TriggerChaosEnsues extends Trigger {
 
     @Override
     public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
-        AbilityKey.copyKeys(runParams, objects, AbilityKey.Player);
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.Player, AbilityKey.Cause);
     }
 
     @Override

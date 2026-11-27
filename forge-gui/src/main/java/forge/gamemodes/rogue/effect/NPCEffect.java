@@ -251,6 +251,21 @@ public enum NPCEffect implements RogueEffect {
             selectCardsForDeck(ctx, candidateCards, 0, 3);
         }
     },
+    NARSET_SINS("npc_narset_sins", "Narset's Sins",
+        "Gain the {{Item}}s [[Corrupted Powerstone]] and [[Chaos Capsule]]. ![[Narset Item - Corrupted Powerstone]] ![[Narset Item - Chaos Capsule]]", NPC.NARSET,
+        EffectType.ONESHOT, null) {
+        @Override
+        public void applyEffect(RogueRun run, EffectResultContext ctx) {
+            addCarryCards(run, ctx, List.of("Narset Item - Corrupted Powerstone", "Narset Item - Chaos Capsule"),
+                CarryCardType.ITEM);
+        }
+
+        @Override
+        public boolean isChoiceAvailable(RogueRun run) {
+            return canAddAllCarryCards(run,
+                List.of("Narset Item - Corrupted Powerstone", "Narset Item - Chaos Capsule"));
+        }
+    },
     NARSET_UTENSILS("npc_narset_utensils", "Narset's Utensils",
         "Gain the {{Item}}s [[Fractured Powerstone|MOC|1]] and [[Ichor Elixir|MOC|1]].", NPC.NARSET,
         EffectType.ONESHOT, null) {
@@ -434,6 +449,47 @@ public enum NPCEffect implements RogueEffect {
     NARSET_MINDWALKER("npc_narset_mindwalker", "Mindwalker",
         TRAIT_GAIN_DESCRIPTION, NPC.NARSET,
         EffectType.PERMANENT, "Narset Trait - Mindwalker") {
+        @Override
+        public void onMatchStart(RegisteredPlayer human, RegisteredPlayer opponent, RogueRun run) {
+            addEffectCardToCommandZone(human);
+        }
+    },
+
+    NARSET_CHAOSS_PROTECTION("npc_narset_chaoss_protection", "Chaos's Protection",
+        TRAIT_GAIN_DESCRIPTION, NPC.NARSET,
+        EffectType.PERMANENT, "Narset Trait - Chaos's Protection") {
+        @Override
+        public void onMatchStart(RegisteredPlayer human, RegisteredPlayer opponent, RogueRun run) {
+            addEffectCardToCommandZone(human);
+        }
+    },
+    NARSET_CHAOTIC_TITHE("npc_narset_chaotic_tithe", "Chaotic Tithe",
+        TRAIT_GAIN_DESCRIPTION, NPC.NARSET,
+        EffectType.PERMANENT, "Narset Trait - Chaotic Tithe") {
+        @Override
+        public void onMatchStart(RegisteredPlayer human, RegisteredPlayer opponent, RogueRun run) {
+            addEffectCardToCommandZone(human);
+        }
+    },
+    NARSET_CHAOTIC_TUTOR("npc_narset_chaotic_tutor", "Chaotic Tutor",
+        TRAIT_GAIN_DESCRIPTION, NPC.NARSET,
+        EffectType.PERMANENT, "Narset Trait - Chaotic Tutor") {
+        @Override
+        public void onMatchStart(RegisteredPlayer human, RegisteredPlayer opponent, RogueRun run) {
+            addEffectCardToCommandZone(human);
+        }
+    },
+    NARSET_NEGATION_OF_CHAOS("npc_narset_negation_of_chaos", "Negation of Chaos",
+        TRAIT_GAIN_DESCRIPTION, NPC.NARSET,
+        EffectType.PERMANENT, "Narset Trait - Negation of Chaos") {
+        @Override
+        public void onMatchStart(RegisteredPlayer human, RegisteredPlayer opponent, RogueRun run) {
+            addEffectCardToCommandZone(human);
+        }
+    },
+    NARSET_WRATH_OF_CHAOS("npc_narset_wrath_of_chaos", "Wrath of Chaos",
+        TRAIT_GAIN_DESCRIPTION, NPC.NARSET,
+        EffectType.PERMANENT, "Narset Trait - Wrath of Chaos") {
         @Override
         public void onMatchStart(RegisteredPlayer human, RegisteredPlayer opponent, RogueRun run) {
             addEffectCardToCommandZone(human);

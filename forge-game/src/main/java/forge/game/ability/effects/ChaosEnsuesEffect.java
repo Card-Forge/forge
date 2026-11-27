@@ -8,6 +8,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -34,7 +36,6 @@ public class ChaosEnsuesEffect extends SpellAbilityEffect {
             return;
         }
 
-        Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(activator);
         Map<Integer, EnumSet<ZoneType>> tweakedTrigs = new HashMap<>();
 
         List<Card> affected = Lists.newArrayList();
@@ -50,13 +51,13 @@ public class ChaosEnsuesEffect extends SpellAbilityEffect {
                     }
                 }
             }
-            runParams.put(AbilityKey.Affected, affected);
             if (affected.isEmpty()) { // if no Defined has chaos ability, don't trigger non Defined
                 return;
             }
         }
 
-        game.getTriggerHandler().runTrigger(TriggerType.ChaosEnsues, runParams, false);
+        Object cause = sa.hasParam("Cause") ? sa.getParam("Cause") : sa;
+        dispatchChaosEnsues(activator, cause, affected.isEmpty() ? null : affected);
 
         for (Map.Entry<Integer, EnumSet<ZoneType>> e : tweakedTrigs.entrySet()) {
             for (Card c : affected) {
@@ -68,5 +69,22 @@ public class ChaosEnsuesEffect extends SpellAbilityEffect {
                 }
             }
         }
+    }
+
+    public static void dispatchChaosEnsues(Player player, Object cause, List<Card> affected) {
+        final Game game = player.getGame();
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
+        repParams.put(AbilityKey.Cause, cause);
+        final ReplacementResult result = game.getReplacementHandler().run(ReplacementType.ChaosEnsues, repParams);
+        if (result == ReplacementResult.Replaced || result == ReplacementResult.Prevented) {
+            return;
+        }
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
+        runParams.put(AbilityKey.Cause, repParams.get(AbilityKey.Cause));
+        if (affected != null) {
+            runParams.put(AbilityKey.Affected, affected);
+        }
+        game.getTriggerHandler().runTrigger(TriggerType.ChaosEnsues, runParams, false);
     }
 }

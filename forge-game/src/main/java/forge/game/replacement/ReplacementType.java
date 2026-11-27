@@ -40,6 +40,7 @@ public enum ReplacementType {
     PayLife(ReplacePayLife.class),
     PlanarDiceResult(ReplacePlanarDiceResult.class),
     Planeswalk(ReplacePlaneswalk.class),
+    ChaosEnsues(ReplaceChaosEnsues.class),
     ProduceMana(ReplaceProduceMana.class),
     Proliferate(ReplaceProliferate.class),
     RemoveCounter(ReplaceRemoveCounter.class),

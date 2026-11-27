@@ -39,6 +39,10 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
             return;
         }
 
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(activator);
+        runParams.put(AbilityKey.Cause, cause);
+        game.getTriggerHandler().runTrigger(TriggerType.Planeswalk, runParams, false);
+
         if (game.getRules().getGameType() == GameType.RogueCommander) {
             if (!game.getActivePlanes().isEmpty()) {
                 final Map<AbilityKey, Object> planeParams = AbilityKey.newMap();

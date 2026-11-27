@@ -1,0 +1,5 @@
+Name:Narset Item - Chaos Capsule
+ManaCost:2
+Types:Artifact
+A:AB$ ChaosEnsues | Cost$ 5 T | SorcerySpeed$ True | SpellDescription$ {5}, {T}: Chaos ensues. Activate only as a sorcery.
+Oracle:{5}, {T}: Chaos ensues. Activate only as a sorcery.

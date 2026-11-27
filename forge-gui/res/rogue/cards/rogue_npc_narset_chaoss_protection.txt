@@ -1,0 +1,9 @@
+Name:Narset Trait - Chaos's Protection
+ManaCost:no cost
+Types:Trait
+R:Event$ ChaosEnsues | ActiveZones$ Command | ValidPlayer$ You | ValidCause$ PlanarDie | Optional$ True | OptionalDecider$ You | ReplaceWith$ REProtect | Description$ If chaos would ensue as a result of you rolling the planar die, instead you may gain protection from everything and have your life total not change until your next turn. All permanents you control phase out. If you do, chaos doesn't ensue.
+SVar:REProtect:DB$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ STCantChange | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ You | Duration$ UntilYourNextTurn | KW$ Protection from everything | SubAbility$ DBPhases
+SVar:STCantChange:Mode$ CantChangeLife | ValidPlayer$ You | Description$ Your life total can't change.
+SVar:DBPhases:DB$ Phases | Defined$ Valid Permanent.YouCtrl
+Oracle:If chaos would ensue as a result of you rolling the planar die, instead you may gain protection from everything and have your life total not change until your next turn. All permanents you control phase out. If you do, chaos doesn't ensue.\n(While they're phased out, they're treated as though they don't exist. They phase in before you untap during your untap step.)

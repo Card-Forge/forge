@@ -1,0 +1,6 @@
+Name:Narset Trait - Chaotic Tithe
+ManaCost:no cost
+Types:Trait
+R:Event$ ChaosEnsues | ActiveZones$ Command | ValidPlayer$ You | ValidCause$ PlanarDie | Optional$ True | OptionalDecider$ You | ReplaceWith$ REToken | Description$ If chaos would ensue as a result of you rolling the planar die, instead you may create three Treasure tokens. If you do, chaos doesn't ensue.
+SVar:REToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+Oracle:If chaos would ensue as a result of you rolling the planar die, instead you may create three Treasure tokens. If you do, chaos doesn't ensue.\n(They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.")
