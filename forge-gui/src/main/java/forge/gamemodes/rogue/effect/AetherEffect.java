@@ -4,6 +4,7 @@ import forge.card.CardType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.rogue.AetherUpgrade;
 import forge.gamemodes.rogue.RogueConfig;
+import forge.gamemodes.rogue.RoguePlaneboundType;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.RogueRun.CarryCardType;
 import forge.gamemodes.rogue.path.NodePlanebound;
@@ -300,8 +301,12 @@ public enum AetherEffect implements RogueEffect {
         public void onPathNodeReroll(PathUpdateContext ctx, RogueRun run) {
             if (run.getCurrentNode() instanceof NodePlanebound node) {
                 int descension = run.getDescensionLevel();
+                int cursedBonus = descension >= DescensionLevel.LEVEL_7.level
+                    && node.getPlaneboundType() == RoguePlaneboundType.BOSS ? 1 : 0;
+                node.setCursedCount(Math.max(0, node.getCursedCount() - cursedBonus));
                 node.rerollMarkers(descension >= DescensionLevel.LEVEL_1.level,
                     descension >= DescensionLevel.LEVEL_2.level);
+                node.setCursedCount(node.getCursedCount() + cursedBonus);
             }
             run.consumeEffect(getId());
         }
