@@ -245,9 +245,17 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
-    public void restrictedManaWithAnEligibleSpellInTheHandIsASource() {
-        AssertJUnit.assertTrue(oneLandAndSources("Island", new String[] {"Mox Sapphire", "Creeping Peeper"},
+    public void restrictedManaThatCannotPayTheEligibleSpellIsNoSource() {
+        // Pacifism is an enchantment, but it costs {1}{W} and nothing in the hand makes white mana
+        AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Mox Sapphire", "Creeping Peeper"},
                 "Pacifism", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void restrictedManaThatPaysAnEligibleSpellIsASource() {
+        // Curiosity is an enchantment that costs {U}, which the Peeper's {U} pays
+        AssertJUnit.assertTrue(oneLandAndSources("Island", new String[] {"Mox Sapphire", "Creeping Peeper"},
+                "Curiosity", "Shock", "Divination", "Lava Axe"));
     }
 
     @Test
