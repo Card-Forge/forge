@@ -1,9 +1,6 @@
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 
 import forge.ai.ability.TapAi;
@@ -70,15 +67,25 @@ public final class LandPlanner {
         final int from;
         /** The types of the mask that this source makes only by paying life or taking damage (Horizon Canopy). */
         final byte pain;
+        /** The activation that makes this mana (0: its own): Ancient Tomb's two {C} come from one, and hurt once. */
+        final int activation;
+        /** The life that the activation costs, whatever number of its mana is spent. */
+        final int life;
 
         Src(final byte mask, final int from) {
             this(mask, from, (byte) 0);
         }
 
         Src(final byte mask, final int from, final byte pain) {
+            this(mask, from, pain, 0, 1);
+        }
+
+        Src(final byte mask, final int from, final byte pain, final int activation, final int life) {
             this.mask = mask;
             this.from = from;
             this.pain = pain;
+            this.activation = activation;
+            this.life = life;
         }
     }
 
@@ -234,45 +241,95 @@ public final class LandPlanner {
         return total;
     }
 
+    /** Up to this many painful activations are tried in every combination; more are chosen cheapest first. */
+    private static final int EXACT_ACTIVATIONS = 8;
+
     /**
-     * What the spells of a turn cost in life: the fewest sources that make their mana with pain (Horizon Canopy) that
-     * the payment needs, times {@link #LIFE_COST}. A turn that a painless land pays for costs nothing, so the plan
-     * with the Forest first beats the plan with the Canopy first when only green is wanted.
+     * What the spells of a turn cost in life: the cheapest set of painful activations (Horizon Canopy, Ancient Tomb)
+     * that the payment needs, times {@link #LIFE_COST}. An activation costs its life once, however many of the mana it
+     * makes are spent (an Ancient Tomb hurts for 2 even for one {C}), and a turn that a painless land pays for costs
+     * nothing, so the plan with the Forest first beats the plan with the Canopy first when only green is wanted.
      */
     static double painCost(final List<Src> avail, final List<byte[]> coloured, final int generic) {
         if (coloured.isEmpty() && generic == 0) {
             return 0;
         }
-        final List<Integer> pains = new ArrayList<>();
+        // the painful sources by the activation they come from: key and the life it costs
+        final Map<Integer, Integer> life = new LinkedHashMap<>();
+        final int[] key = new int[avail.size()];
         for (int i = 0; i < avail.size(); i++) {
-            if (avail.get(i).pain != 0) {
-                pains.add(i);
+            final Src src = avail.get(i);
+            if (src.pain == 0) {
+                continue;
             }
+            key[i] = src.activation != 0 ? src.activation : -(i + 1); // a source of its own: its own activation
+            life.merge(key[i], src.life, Math::min);
         }
-        if (pains.isEmpty() || pains.size() > 6) {
+        if (life.isEmpty()) {
             return 0;
         }
-        for (int k = 0; k <= pains.size(); k++) {
-            for (int subset = 0; subset < 1 << pains.size(); subset++) {
-                if (Integer.bitCount(subset) != k) {
-                    continue;
-                }
-                final List<Src> trial = new ArrayList<>();
-                for (int i = 0; i < avail.size(); i++) {
-                    final Src src = avail.get(i);
-                    final int j = pains.indexOf(i);
-                    if (j < 0 || (subset & 1 << j) != 0) {
-                        trial.add(src); // a painless source, or a pain source that is allowed to hurt
-                    } else if ((src.mask & ~src.pain) != 0) {
-                        trial.add(new Src((byte) (src.mask & ~src.pain), src.from)); // only its painless types
+        final List<Integer> activations = new ArrayList<>(life.keySet());
+        if (activations.size() <= EXACT_ACTIVATIONS) {
+            double best = Double.POSITIVE_INFINITY;
+            for (int subset = 0; subset < 1 << activations.size(); subset++) {
+                int cost = 0;
+                final Set<Integer> allowed = new HashSet<>();
+                for (int j = 0; j < activations.size(); j++) {
+                    if ((subset & 1 << j) != 0) {
+                        allowed.add(activations.get(j));
+                        cost += life.get(activations.get(j));
                     }
                 }
-                if (canPay(coloured, generic, trial)) {
-                    return LIFE_COST * k;
+                if (cost < best && canPay(coloured, generic, withPain(avail, key, allowed))) {
+                    best = cost;
                 }
             }
+            return best == Double.POSITIVE_INFINITY ? LIFE_COST * sum(life) : LIFE_COST * best;
         }
-        return 0;
+        // many painful sources: allow the cheapest ones until the payment works, then give back what is not needed
+        activations.sort((x, y) -> Integer.compare(life.get(x), life.get(y)));
+        final Set<Integer> allowed = new HashSet<>();
+        for (final int activation : activations) {
+            allowed.add(activation);
+            if (canPay(coloured, generic, withPain(avail, key, allowed))) {
+                break;
+            }
+        }
+        final List<Integer> used = new ArrayList<>(allowed);
+        used.sort((x, y) -> Integer.compare(life.get(y), life.get(x)));
+        for (final int activation : used) {
+            allowed.remove(activation);
+            if (!canPay(coloured, generic, withPain(avail, key, allowed))) {
+                allowed.add(activation);
+            }
+        }
+        int cost = 0;
+        for (final int activation : allowed) {
+            cost += life.get(activation);
+        }
+        return LIFE_COST * cost;
+    }
+
+    private static int sum(final Map<Integer, Integer> life) {
+        int total = 0;
+        for (final int l : life.values()) {
+            total += l;
+        }
+        return total;
+    }
+
+    /** The sources, where the ones of an activation that may not hurt make only their painless types (or nothing). */
+    private static List<Src> withPain(final List<Src> avail, final int[] key, final Set<Integer> allowed) {
+        final List<Src> trial = new ArrayList<>();
+        for (int i = 0; i < avail.size(); i++) {
+            final Src src = avail.get(i);
+            if (src.pain == 0 || allowed.contains(key[i])) {
+                trial.add(src);
+            } else if ((src.mask & ~src.pain) != 0) {
+                trial.add(new Src((byte) (src.mask & ~src.pain), src.from));
+            }
+        }
+        return trial;
     }
 
     /**
@@ -471,11 +528,40 @@ public final class LandPlanner {
         addSourcesOf(out, c, ai, from);
         final byte pain = painMask(c, ai);
         if (pain != 0) {
+            final int life = painLife(c, ai);
             for (int i = before; i < out.size(); i++) {
                 final Src s = out.get(i);
-                out.set(i, new Src(s.mask, s.from, (byte) (pain & s.mask)));
+                out.set(i, new Src(s.mask, s.from, (byte) (pain & s.mask), c.getId(), life)); // one activation for the card
             }
         }
+    }
+
+    /** The life that the cheapest painful mana ability of the permanent costs: a paid life point or damage to you. */
+    private static int painLife(final Card c, final Player ai) {
+        int least = Integer.MAX_VALUE;
+        for (final SpellAbility ma : ComputerUtilMana.getAIPlayableMana(c)) {
+            if (!isPlannable(ma.getPayCosts()) || !isPainful(ma)) {
+                continue;
+            }
+            int life = 0;
+            for (final forge.game.cost.CostPart part : ma.getPayCosts().getCostParts()) {
+                if (part instanceof CostPayLife) {
+                    final Integer amount = ((CostPayLife) part).convertAmount();
+                    life += amount == null ? 1 : amount;
+                }
+            }
+            for (SpellAbility sub = ma.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+                if (sub.getApi() == ApiType.DealDamage || sub.getApi() == ApiType.LoseLife) {
+                    try {
+                        life += Integer.parseInt(sub.getParamOrDefault(sub.getApi() == ApiType.DealDamage ? "NumDmg" : "LifeAmount", "1"));
+                    } catch (final NumberFormatException e) {
+                        life += 1;
+                    }
+                }
+            }
+            least = Math.min(least, Math.max(1, life));
+        }
+        return least == Integer.MAX_VALUE ? 1 : least;
     }
 
     /** The types that a permanent can make only by paying life or taking damage: Horizon Canopy's {G} and {W}. */

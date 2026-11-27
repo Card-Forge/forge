@@ -284,6 +284,20 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void restrictedLandManaDoesNotPayForAnArtifact() {
+        // Ancient Ziggurat's mana is for creature spells: with the Mox it does not make the Fire Diamond's {2}
+        AssertJUnit.assertEquals(1, sourcesCounted("Ancient Ziggurat", new String[] {"Mox Emerald", "Fire Diamond"},
+                "Grizzly Bears", "Hill Giant", "Shock", "Air Elemental"));
+    }
+
+    @Test
+    public void restrictedLandManaPaysForACreatureThatIsASource() {
+        // the Ziggurat's mana pays for Llanowar Elves ({G}), a creature
+        AssertJUnit.assertEquals(1, sourcesCounted("Ancient Ziggurat", new String[] {"Llanowar Elves"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
     public void manaCreaturesTheLandCannotCastAreNoSources() {
         // an Island makes no green mana for the Elves
         AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Llanowar Elves", "Llanowar Elves"},

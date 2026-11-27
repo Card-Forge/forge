@@ -684,13 +684,18 @@ public final class OpeningHand {
         final List<ManaUnit> pool = new ArrayList<>(); // the mana the lands and the sources counted so far can make
         for (final Card c : hand) {
             if ((c.isLand() || isMdfcLand(c)) && isEarlyManaLand(c)) {
-                pool.add(new ManaUnit((byte) (producedColors(c) & MagicColor.ALL_COLORS), null, null));
+                final Flow land = c.isLand() ? restrictedLandFlow(c) : null;
+                if (land != null && land.restricted) {
+                    pool.addAll(outputOf(c, land)); // Ancient Ziggurat: for creature spells only, not for an artifact
+                } else {
+                    pool.add(new ManaUnit((byte) (producedColors(c) & MagicColor.ALL_COLORS), null, null));
+                }
             }
         }
         int sources = 0;
         for (final Card c : free) {
             final Flow flow = manaFlow(c);
-            if (flow != null && flow.net >= 1 && canDeploy(c, pool) && flow.paid <= pool.size()
+            if (flow != null && flow.net >= 1 && canDeploy(c, pool) && flow.paid <= unrestricted(pool)
                     && (!flow.restricted || canSpendRestricted(c, flow, hand, pool))) {
                 sources++;
                 unavailable.add(c);
@@ -699,7 +704,7 @@ public final class OpeningHand {
         }
         for (final Card c : needy) {
             final Flow flow = manaFlow(c);
-            if (flow == null || flow.net < 1 || !canDeploy(c, pool) || flow.paid > pool.size()
+            if (flow == null || flow.net < 1 || !canDeploy(c, pool) || flow.paid > unrestricted(pool)
                     || flow.restricted && !canSpendRestricted(c, flow, hand, pool)) {
                 continue;
             }
@@ -771,17 +776,57 @@ public final class OpeningHand {
     /** Takes what the activation costs out of the pool (the least flexible mana first) and adds what it makes. */
     private static void addOutput(final List<ManaUnit> pool, final Card c, final Flow flow) {
         final List<ManaUnit> made = outputOf(c, flow);
-        for (int i = 0; i < flow.paid && !pool.isEmpty(); i++) {
-            ManaUnit least = pool.get(0);
+        payActivation(pool, flow.paid);
+        if (!flow.restricted) { // restricted mana pays for what it is restricted to, not for other sources
+            pool.addAll(made);
+        }
+    }
+
+    /**
+     * The mana ability of a land whose mana is all restricted (Ancient Ziggurat), null for any other land. Not judged by
+     * {@link #manaFlow}: a land has no mana cost, which that asks for of a card that has to be cast.
+     */
+    private static Flow restrictedLandFlow(final Card c) {
+        Flow found = null;
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.getApi() != ApiType.Mana || !sa.isAbility()) {
+                continue;
+            }
+            final AbilityManaPart part = sa.getManaPart();
+            if (part == null || !sa.hasParam("RestrictValid") && part.getManaRestrictions().isEmpty()) {
+                return null; // some of its mana is free to spend
+            }
+            if (found == null) {
+                found = new Flow(0, 1, true, sa);
+            }
+        }
+        return found;
+    }
+
+    /** How much of the mana can pay for an ability: the restricted mana (Ancient Ziggurat's) cannot. */
+    private static int unrestricted(final List<ManaUnit> pool) {
+        int n = 0;
+        for (final ManaUnit u : pool) {
+            if (u.limit == null) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /** Takes what an activation costs out of the pool: unrestricted mana, the least flexible first. */
+    private static void payActivation(final List<ManaUnit> pool, final int amount) {
+        for (int i = 0; i < amount; i++) {
+            ManaUnit least = null;
             for (final ManaUnit u : pool) {
-                if (Integer.bitCount(u.colors) < Integer.bitCount(least.colors)) {
+                if (u.limit == null && (least == null || Integer.bitCount(u.colors) < Integer.bitCount(least.colors))) {
                     least = u;
                 }
             }
+            if (least == null) {
+                return;
+            }
             pool.remove(least);
-        }
-        if (!flow.restricted) { // restricted mana pays for what it is restricted to, not for other sources
-            pool.addAll(made);
         }
     }
 
@@ -846,7 +891,17 @@ public final class OpeningHand {
 
     /** Whether the mana at hand pays for the card, in full: its cost, and the colour of every part of it. */
     private static boolean canDeploy(final Card c, final List<ManaUnit> pool) {
-        return !c.getManaCost().isNoCost() && canPay(pool, c.getManaCost(), null, false);
+        if (c.getManaCost().isNoCost()) {
+            return false;
+        }
+        // restricted mana (Ancient Ziggurat's) counts when the spell that casts the card meets the restriction
+        for (final SpellAbility spell : c.getSpellAbilities()) {
+            if (spell.isSpell() && spell.getPayCosts() != null && spell.getPayCosts().getCostMana() != null
+                    && canPay(pool, c.getManaCost(), spell, false)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** What a mana ability costs in mana, what it adds to the mana there is, and whether it may be spent only in some ways. */
@@ -907,10 +962,7 @@ public final class OpeningHand {
     private static boolean canSpendRestricted(final Card c, final Flow flow, final CardCollectionView hand,
                                               final List<ManaUnit> pool) {
         final List<ManaUnit> with = new ArrayList<>(pool);
-        final int paid = Math.min(flow.paid, with.size());
-        for (int i = 0; i < paid; i++) { // what its own ability costs is not there for the spell
-            with.remove(with.size() - 1);
-        }
+        payActivation(with, flow.paid); // what its own ability costs is not there for the spell
         with.addAll(outputOf(c, flow));
         for (final Card other : hand) {
             if (other == c || other.isLand()) {

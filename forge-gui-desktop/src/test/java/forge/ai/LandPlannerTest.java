@@ -418,6 +418,29 @@ public class LandPlannerTest extends FlatMcTestBase {
     }
 
     @Test
+    public void anActivationCostsItsLifeOnceWhateverNumberOfItsManaIsSpent() {
+        // Ancient Tomb makes two {C} and deals 2 damage: {1}{G} with a Forest uses one of them and still pays the 2
+        final LandPlanner.Src tomb1 = new LandPlanner.Src((byte) C, 0, (byte) C, 7, 2);
+        final LandPlanner.Src tomb2 = new LandPlanner.Src((byte) C, 0, (byte) C, 7, 2);
+        assertEquals(LandPlanner.painCost(Arrays.asList(src(G, 0), tomb1, tomb2), costs(G), 1),
+                2 * LandPlanner.LIFE_COST, 1e-9);
+        assertEquals(LandPlanner.painCost(Arrays.asList(src(G, 0), tomb1, tomb2), costs(G), 2),
+                2 * LandPlanner.LIFE_COST, 1e-9, "both of its mana for one activation: still 2");
+        assertEquals(LandPlanner.painCost(Arrays.asList(src(G, 0), src(G, 0), tomb1, tomb2), costs(G), 1), 0.0, 1e-9,
+                "two Forests pay it without the Tomb");
+    }
+
+    @Test
+    public void manyPainfulSourcesAreNotFree() {
+        final List<LandPlanner.Src> canopies = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            canopies.add(new LandPlanner.Src((byte) (G | W), 0, (byte) (G | W)));
+        }
+        assertEquals(LandPlanner.painCost(canopies, costs(W, W, W, W, W, W, W, W, W), 0),
+                9 * LandPlanner.LIFE_COST, 1e-9, "nine of the ten hurt, and the tenth is not paid for");
+    }
+
+    @Test
     public void playsTheForestBeforeTheHorizonCanopyWhenOnlyGreenIsNeededNow() {
         // #13105: Slippery Bogle ({G/U}) now, Reprieve ({1}{W}) later: the Forest pays for the Bogle without a life
         setUpGame();
