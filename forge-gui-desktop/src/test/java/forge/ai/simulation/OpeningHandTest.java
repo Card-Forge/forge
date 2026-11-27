@@ -231,6 +231,13 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void manaFiltersAreNoAdditionalSources() {
+        // a Mana Cylix pays {1} for one mana: it changes the colour of the Island's mana and adds none
+        AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Mana Cylix", "Mana Cylix"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
     public void manaCreaturesTheLandCannotCastAreNoSources() {
         // an Island makes no green mana for the Elves
         AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Llanowar Elves", "Llanowar Elves"},

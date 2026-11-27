@@ -652,7 +652,8 @@ public final class OpeningHand {
      * that need nothing else come first; one that taps other permanents (Springleaf Drum) then counts only if the hand
      * has permanents for it that can be put on the battlefield the same way and that nothing else uses: not a source
      * of mana itself (a Llanowar Elves tapped for the Drum makes no mana of its own) and not the tap cost of another
-     * source. Mana spent on one card is not taken off for the next: this is a judgement over the first turns.
+     * source. A source also has to add mana: a Signet pays one for two, a Mana Cylix pays one for one and only filters.
+     * Mana spent on one card is not taken off for the next: this is a judgement over the first turns.
      */
     static int cheapManaSources(final CardCollectionView hand) {
         final List<Card> free = new ArrayList<>();
@@ -683,21 +684,23 @@ public final class OpeningHand {
         int colors = handColors(hand);
         int sources = 0;
         for (final Card c : free) {
-            if (canDeploy(c, mana, colors) && activationMana(c) <= mana) {
+            final int[] flow = manaFlow(c);
+            if (flow != null && flow[1] >= 1 && canDeploy(c, mana, colors) && flow[0] <= mana) {
                 sources++;
-                mana++;
+                mana += flow[1];
                 colors |= producedColors(c);
                 unavailable.add(c);
             }
         }
         for (final Card c : needy) {
-            if (!canDeploy(c, mana, colors) || activationMana(c) > mana) {
+            final int[] flow = manaFlow(c);
+            if (flow == null || flow[1] < 1 || !canDeploy(c, mana, colors) || flow[0] > mana) {
                 continue;
             }
             final Set<Card> tapped = tapResources(c, hand, unavailable, mana, colors);
             if (tapped != null) {
                 sources++;
-                mana++;
+                mana += flow[1];
                 colors |= producedColors(c);
                 unavailable.addAll(tapped);
                 unavailable.add(c);
@@ -712,23 +715,40 @@ public final class OpeningHand {
                 && (c.getManaCost().getColorProfile() & ~colors) == 0;
     }
 
-    /** The mana the card's mana ability asks for (a Signet's {1}), the least of its abilities that work. */
-    private static int activationMana(final Card c) {
-        int least = Integer.MAX_VALUE;
+    /**
+     * What the card's mana ability costs in mana and what it adds to the mana there is: a Signet pays one and makes
+     * two (+1), a Mana Cylix pays one and makes one (+0: it only filters), a Mox pays nothing and makes one (+1).
+     * Of the abilities that work, the one that adds the most (then costs the least).
+     *
+     * @return {mana paid, mana added}; null when no ability works as it is
+     */
+    private static int[] manaFlow(final Card c) {
+        int[] best = null;
         for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.getApi() != ApiType.Mana || !sa.isAbility() || sa.getPayCosts() == null
                     || !sa.getPayCosts().hasTapCost() || !worksAsItIs(c, sa)) {
                 continue;
             }
-            int cost = 0;
+            int paid = 0;
             for (final CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostPartMana) {
-                    cost += ((CostPartMana) part).getMana().getCMC();
+                    paid += ((CostPartMana) part).getMana().getCMC();
                 }
             }
-            least = Math.min(least, cost);
+            final int net = manaProduced(sa) - paid;
+            if (best == null || net > best[1] || net == best[1] && paid < best[0]) {
+                best = new int[] {paid, net};
+            }
         }
-        return least == Integer.MAX_VALUE ? 0 : least;
+        return best;
+    }
+
+    /** The mana one activation makes: the amount times what is produced ("W U" is two; "Any" and "Combo" one). */
+    private static int manaProduced(final SpellAbility sa) {
+        final String[] produced = sa.getParamOrDefault("Produced", "").trim().split("\\s+");
+        final int each = produced.length == 0 || produced[0].isEmpty() || "Any".equals(produced[0])
+                || "Combo".equals(produced[0]) ? 1 : produced.length;
+        return each * Integer.parseInt(sa.getParamOrDefault("Amount", "1")); // worksAsItIs: a fixed number
     }
 
     /** What the mana ability of a card asks for besides tapping the card itself. */
