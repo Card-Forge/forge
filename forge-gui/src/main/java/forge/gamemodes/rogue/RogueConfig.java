@@ -427,6 +427,11 @@ public class RogueConfig {
         // Parse metadata as key-value pairs
         FileSection metadata = FileSection.parse(metadataLines, FileSection.EQUALS_KV_SEPARATOR);
 
+        // Saved paths still load retired decks directly.
+        if (metadata.getBoolean("retired")) {
+            return null;
+        }
+
         // Extract required metadata
         String planeboundName = metadata.get("name", "Unknown Planebound");
         String planeName = metadata.get("planeName", "Unknown Plane");
