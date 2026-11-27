@@ -12,6 +12,7 @@ import forge.adventure.stage.PointOfInterestMapRenderer;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
+import forge.model.FModel;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
@@ -110,6 +111,8 @@ public class TileMapScene extends HudScene {
 
     @Override
     public void enter() {
+        // set on each entry, as the start menu clears it and a resumed map is not loaded again
+        Config.instance().setPlaceIgnoresExcludedSets(rootPoint != null && rootPoint.getData().ignoreExcludedSets);
         super.enter();
         if (isAutoHealLocation()) {
             // auto heal
@@ -122,17 +125,35 @@ public class TileMapScene extends HudScene {
                 Forge.getLocalizer().getMessage("lblMode") + " " +
                 Forge.getLocalizer().getMessage("lblChaos") + "{ENDBLINK}\n" +
                 Forge.getLocalizer().getMessage("lblChaosModeDescription"),
-                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
+                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::announceExcludedStarterCards);
         } else if (WorldSave.getCurrentSave().getPlayer().hasAnnounceCustom()) {
             WorldSave.getCurrentSave().getPlayer().clearAnnounceCustom();
             MapStage.getInstance().showDeckAwardDialog("{GRADIENT}" +
                 Forge.getLocalizer().getMessage("lblMode") + " " +
                 Forge.getLocalizer().getMessage("lblCustom") + "{ENDGRADIENT}\n" +
                 Forge.getLocalizer().getMessage("lblCustomModeDescription"),
-                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
+                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::announceExcludedStarterCards);
         } else {
-            initializeDialogs();
+            announceExcludedStarterCards();
         }
+    }
+
+    private void announceExcludedStarterCards() {
+        if (!Current.player().hasAnnounceExcludedStarterCards()) {
+            announcePlaceIgnoresExcludedSets();
+            return;
+        }
+        Current.player().clearAnnounceExcludedStarterCards();
+        MapStage.getInstance().showImageDialog(Forge.getLocalizer().getMessage("lblStarterDeckChangedByExclusions"), null, this::announcePlaceIgnoresExcludedSets);
+    }
+
+    private void announcePlaceIgnoresExcludedSets() {
+        if (!placeNoticePending) {
+            initializeDialogs();
+            return;
+        }
+        placeNoticePending = false;
+        MapStage.getInstance().showImageDialog(Forge.getLocalizer().getMessage("lblPlaceIgnoresExcludedSets"), null, this::initializeDialogs);
     }
 
     private void initializeDialogs() {
@@ -169,6 +190,9 @@ public class TileMapScene extends HudScene {
             SoundSystem.instance.clearShelvedPlaylist();
         }
         rootPoint = point;
+        Config.instance().setPlaceIgnoresExcludedSets(point.getData().ignoreExcludedSets);
+        placeNoticePending = point.getData().ignoreExcludedSets && !Config.instance().getConfigData().ignoreExcludedSets
+                && FModel.getMagicDb().getCommonCards().hasPrintExclusion();
         oldMap = point.getData().map;
         map = new TemplateTmxMapLoader().load(Config.instance().getCommonFilePath(point.getData().map));
         ((MapStage) stage).setPointOfInterest(getPointOfInterestChanges());
@@ -179,6 +203,7 @@ public class TileMapScene extends HudScene {
     }
 
     public PointOfInterest rootPoint;
+    private boolean placeNoticePending;
     String oldMap;
     private final static String[] AUTO_HEAL_LOCATIONS = { "capital", "town" };
     public boolean isAutoHealLocation() {

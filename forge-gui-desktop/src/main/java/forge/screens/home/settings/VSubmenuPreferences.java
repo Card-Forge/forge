@@ -53,6 +53,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     private final FLabel btnReset = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnReset")).build();
+    private final FLabel btnReplayWelcomeWizard = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnReplayWelcomeWizard")).build();
     private final FLabel btnDeleteMatchUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnDeleteMatchUI")).build();
     private final FLabel btnDeleteEditorUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnDeleteEditorUI")).build();
     private final FLabel btnDeleteWorkshopUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnDeleteWorkshopUI")).build();
@@ -125,11 +126,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbUseSentry = new OptionsCheckBox(localizer.getMessage("cbUseSentry"));
     private final JCheckBox cbCheckSnapshot = new OptionsCheckBox(localizer.getMessage("cbSnapshotUpdate"));
     private final JCheckBox cbEnableUnknownCards = new OptionsCheckBox(localizer.getMessage("lblEnableUnknownCards"));
-    private final JCheckBox cbEnableNonLegalCards = new OptionsCheckBox(localizer.getMessage("lblEnableNonLegalCards"));
     private final JCheckBox cbAllowCustomCardsDeckConformance = new OptionsCheckBox(localizer.getMessage("lblAllowCustomCardsInDecks"));
     private final JCheckBox cbAiPicker = new OptionsCheckBox(localizer.getMessage("lblAiPickerSettings"));
     private final JCheckBox cbCardArtCoreExpansionsOnlyOpt = new OptionsCheckBox(localizer.getMessage("lblPrefArtExpansionOnly"));
     private final JCheckBox cbSmartCardArtSelectionOpt = new OptionsCheckBox(localizer.getMessage("lblSmartCardArtOpt"));
+    private final FLabel btnExcludedSets = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
     private final JCheckBox cbShowDraftRanking = new OptionsCheckBox(localizer.getMessage("lblShowDraftRankingOverlay"));
     private final JCheckBox cbOrderHand = new OptionsCheckBox(localizer.getMessage("cbOrderHand"));
 
@@ -197,6 +198,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(btnContentDirectoryUI, twoButtonConstraints2);
         pnlPrefs.add(btnClearImageCache, twoButtonConstraints1);
         pnlPrefs.add(btnTokenPreviewer, twoButtonConstraints2);
+        pnlPrefs.add(btnReplayWelcomeWizard, twoButtonConstraints1);
+        pnlPrefs.add(new JLabel(""), twoButtonConstraints2);
 
         // Search bar
         pnlPrefs.add(getSearchPanel(), "w 80%!, h 28px!, gap 25px 0 30px 40px, span 2 1");
@@ -357,6 +360,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOpt")), "w 80%!, h pref!, gap 28px 0 0 0, span 2 1");
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOptNote")), descriptionConstraints);
 
+        pnlPrefs.add(btnExcludedSets, "w 38%!, h 30px!, gap 25px 0 0 0, span 2 1");
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlExcludedSets")), descriptionConstraints);
+
         //Draft Ranking Overlay
         pnlPrefs.add(cbShowDraftRanking, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlShowDraftRankingOverlay")), descriptionConstraints);
@@ -385,9 +391,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbEnableUnknownCards, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableUnknownCards")), descriptionConstraints);
-
-        pnlPrefs.add(cbEnableNonLegalCards, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableNonLegalCards")), descriptionConstraints);
 
         pnlPrefs.add(cbAllowCustomCardsDeckConformance, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAllowCustomCardsInDecks")), descriptionConstraints);
@@ -791,10 +794,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbEnableNonLegalCards() {
-        return cbEnableNonLegalCards;
-    }
-    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbAllowCustomCardsDeckConformance() {
         return cbAllowCustomCardsDeckConformance;
     }
@@ -1005,6 +1004,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbSmartCardArtSelectionOpt() { return cbSmartCardArtSelectionOpt; }
 
+    public FLabel getBtnExcludedSets() { return btnExcludedSets; }
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbShowDraftRanking() { return cbShowDraftRanking; }
 
@@ -1134,6 +1135,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getBtnReset() {
         return btnReset;
+    }
+
+    public FLabel getBtnReplayWelcomeWizard() {
+        return btnReplayWelcomeWizard;
     }
 
     public FLabel getBtnPlayerName() {

@@ -7,6 +7,7 @@ import forge.gamemodes.rogue.PreviewReference;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.effect.ChestEffect;
 import forge.gamemodes.rogue.effect.ChoiceRerollContext;
+import forge.gamemodes.rogue.flow.RogueDecisions.Pick;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
@@ -94,7 +95,7 @@ public class ChestDialog {
     panel.setMinimumSize(dialogSize);
   }
 
-  public DialogResult show() {
+  public Pick<ChestEffect> show() {
     selectedLoot = null;
     boolean hasRerolls = rerollCtx.remainingRerolls > 0;
     previewPopup = new RoguePreviewPopup();
@@ -123,7 +124,7 @@ public class ChestDialog {
       }
     } while (result == VIEW_DECK_OPTION || result == VIEW_MAP_OPTION);
 
-    return new DialogResult(hasRerolls && result == REROLL_OPTION, selectedLoot);
+    return new Pick<>(hasRerolls && result == REROLL_OPTION, selectedLoot);
   }
 
   private void hidePreview() {
@@ -149,8 +150,6 @@ public class ChestDialog {
   }
 
   private record PreviewTarget(JComponent component, List<PreviewReference> references) {}
-
-  public record DialogResult(boolean rerollRequested, ChestEffect choice) {}
 
   private static class MainPanel extends SkinnedPanel {
     private MainPanel() {

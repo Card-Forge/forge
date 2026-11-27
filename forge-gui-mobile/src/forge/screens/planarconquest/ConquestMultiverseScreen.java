@@ -1,6 +1,8 @@
 package forge.screens.planarconquest;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -60,6 +62,7 @@ public class ConquestMultiverseScreen extends FScreen {
     private static final FSkinFont PLANE_NAME_FONT = FSkinFont.get(16);
     private static final FSkinFont EVENT_NAME_FONT = FSkinFont.get(14);
     private static final FSkinFont AVATAR_NAME_FONT = FSkinFont.get(14);
+    private static final Set<String> excludedSetsNoticeShown = new HashSet<>();
     private static final float BATTLE_BAR_HEIGHT = Utils.AVG_FINGER_HEIGHT * 2;
     private static final float PADDING = FList.PADDING;
     private static final float LOCATION_BAR_HEIGHT = CardRenderer.getCardListItemHeight(false);
@@ -127,6 +130,12 @@ public class ConquestMultiverseScreen extends FScreen {
         planeGrid.scrollPlaneswalkerIntoView();
 
         battleBar.update();
+
+        ConquestPlane plane = model.getCurrentPlane();
+        if (!excludedSetsNoticeShown.contains(plane.getName()) && plane.hasExcludedCards() && excludedSetsNoticeShown.add(plane.getName())) {
+            String notice = plane.ignoresExcludedSets() ? "lblPlaneIgnoresExcludedSets" : "lblPlaneRewardsChangedByExclusions";
+            FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage(notice), Forge.getLocalizer().getMessage("lblExcludedSets"));
+        }
     }
 
     private void showRegionCommander() {

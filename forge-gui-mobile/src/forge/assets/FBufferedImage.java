@@ -91,7 +91,17 @@ public abstract class FBufferedImage extends FImageComplex {
                     g.setBounds(width, height);
                     g.setProjectionMatrix(fboMatrix);
                     batch.begin();
-                    draw(g, width, height);
+                    final boolean separateAlpha = separateAlphaBlend();
+                    final int srcColor = batch.getBlendSrcFunc(), dstColor = batch.getBlendDstFunc();
+                    final int srcAlpha = batch.getBlendSrcFuncAlpha(), dstAlpha = batch.getBlendDstFuncAlpha();
+                    if (separateAlpha)
+                        batch.setBlendFunctionSeparate(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
+                    try {
+                        draw(g, width, height);
+                    } finally {
+                        if (separateAlpha)
+                            batch.setBlendFunctionSeparate(srcColor, dstColor, srcAlpha, dstAlpha);
+                    }
                     batch.end();
                 } finally {
                     frameBuffer.end();
@@ -114,6 +124,14 @@ public abstract class FBufferedImage extends FImageComplex {
     public void dispose() {
         if (frameBuffer != null)
             frameBuffer.dispose();
+    }
+
+    /**
+     * Subclasses that draw translucent content return true, so the alpha channel of the buffer is blended correctly
+     * (ONE as source) and the result is not partly see-through. Off by default, so other buffers are unchanged.
+     */
+    protected boolean separateAlphaBlend() {
+        return false;
     }
 
     protected abstract void draw(Graphics g, float w, float h);

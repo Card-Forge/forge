@@ -234,8 +234,8 @@ public final class ConquestData {
         if (unlockedCards.add(card)) {
             newCards.add(card);
 
-            //add card to available commanders if eligible
-            if (card.getRules().canBeCommander()) {
+            //add card to available commanders if eligible, once per name as another print can be unlocked later
+            if (card.getRules().canBeCommander() && commanders.stream().noneMatch(c -> c.getCard().getName().equals(card.getName()))) {
                 ConquestCommander commander;
                 if (commanders.isEmpty()) { //generate deck for starting commander
                     commander = new ConquestCommander(card, getCurrentPlane());
@@ -439,17 +439,21 @@ public final class ConquestData {
             }
 
             for (ConquestCommander commander : commanders) {
-                if (plane.getCommanders().contains(commander.getCard())) {
+                if (plane.getCommanders().anyMatch(c -> c.getName().equals(commander.getCard().getName()))) {
                     commanderCount++;
                 }
             }
 
             totalEventCount = plane.getEventCount();
-            totalCardCount = plane.getCardPool().size();
-            totalCommanderCount = plane.getCommanders().size();
+            totalCommanderCount = plane.getAwardableCommanders().size();
 
             for (PaperCard card : plane.getCardPool().getAllCards()) {
-                boolean unlocked = hasUnlockedCard(card);
+                PaperCard awardable = plane.awardablePrint(card);
+                if (awardable == null) {
+                    continue;
+                }
+                totalCardCount++;
+                boolean unlocked = hasUnlockedCard(awardable) || hasUnlockedCard(card);
                 if (unlocked) {
                     unlockedCardCount++;
                 }
@@ -474,11 +478,15 @@ public final class ConquestData {
                 }
 
                 totalEventCount += p.getEventCount();
-                totalCardCount += p.getCardPool().size();
-                totalCommanderCount += p.getCommanders().size();
+                totalCommanderCount += p.getAwardableCommanders().size();
 
                 for (PaperCard card : p.getCardPool().getAllCards()) {
-                    boolean unlocked = hasUnlockedCard(card);
+                    PaperCard awardable = p.awardablePrint(card);
+                    if (awardable == null) {
+                        continue;
+                    }
+                    totalCardCount++;
+                    boolean unlocked = hasUnlockedCard(awardable) || hasUnlockedCard(card);
                     if (unlocked) {
                         unlockedCardCount++;
                     }

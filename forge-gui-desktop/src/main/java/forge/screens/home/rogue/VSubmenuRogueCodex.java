@@ -4,6 +4,8 @@ import forge.util.Localizer;
 
 import forge.deck.Deck;
 import forge.gamemodes.rogue.CodexHelper;
+import forge.gamemodes.rogue.CodexHelper.CodexState;
+import forge.gamemodes.rogue.CodexHelper.JournalEntry;
 import forge.gamemodes.rogue.RogueConfig;
 import forge.gamemodes.rogue.RogueDeck;
 import forge.gamemodes.rogue.RogueMetaProgress;
@@ -16,7 +18,6 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
-import forge.itemmanager.GroupDef;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.home.EMenuGroup;
@@ -54,10 +55,8 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import javax.swing.BorderFactory;
@@ -87,13 +86,6 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
 
     CodexTab(String labelKey) {
       this.labelKey = labelKey;
-    }
-  }
-
-  record JournalEntry(String id, String title, String text) {
-    @Override
-    public String toString() {
-      return title;
     }
   }
 
@@ -359,25 +351,12 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     JPanel sections = new CodexSectionsPanel(new MigLayout("insets 12, gap 0, wrap 1", GROW_AXIS));
     sections.setOpaque(false);
 
-    List<CodexCardGrid.Entry> chestEntries = createTraitEntries(
-        traitsByCategory.get(CodexHelper.TraitCategory.CHEST), progress);
-    List<CodexCardGrid.Entry> npcEntries = createTraitEntries(
-        traitsByCategory.get(CodexHelper.TraitCategory.NPC), progress);
-    List<CodexCardGrid.Entry> eventEntries = createTraitEntries(
-        traitsByCategory.get(CodexHelper.TraitCategory.EVENT), progress);
-    List<CodexCardGrid.Entry> woundEntries = createTraitEntries(
-        traitsByCategory.get(CodexHelper.TraitCategory.WOUND), progress);
-
     List<CodexCardGrid.Entry> traitEntries = new ArrayList<>();
-    traitEntries.addAll(chestEntries);
-    traitEntries.addAll(npcEntries);
-    traitEntries.addAll(eventEntries);
-    traitEntries.addAll(woundEntries);
-
-    addTraitSection(sections, localizer.getMessage("lblRogueChest"), chestEntries);
-    addTraitSection(sections, localizer.getMessage("lblRogueNpc"), npcEntries);
-    addTraitSection(sections, localizer.getMessage("lblRogueEvent"), eventEntries);
-    addTraitSection(sections, localizer.getMessage("lblRogueWound"), woundEntries);
+    for (CodexHelper.TraitCategory category : CodexHelper.TraitCategory.values()) {
+      List<CodexCardGrid.Entry> entries = createTraitEntries(traitsByCategory.get(category), progress);
+      traitEntries.addAll(entries);
+      addTraitSection(sections, category.label(), entries);
+    }
 
     pnlContent.add(createTraitStatsHeader(traitEntries), STATS_HEADER_CONSTRAINTS);
     pnlContent.add(createPanelScrollPane(sections), FILL_CONTENT);
@@ -582,19 +561,18 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
       return panel;
     }
 
-    String commanderName = selectedCommander.getCommanderCardName();
     List<CodexCardGrid.Entry> nonMythicEntries = new ArrayList<>();
     List<CodexCardGrid.Entry> mythicEntries = new ArrayList<>();
     for (PaperCard card : selectedCommander.getRewardPoolCards()) {
       List<CodexCardGrid.Entry> entries = PaperCardPredicates.IS_MYTHIC_RARE.test(card)
           ? mythicEntries : nonMythicEntries;
-      entries.add(createCommanderRewardEntry(commanderName, card, progress));
+      entries.add(createCommanderRewardEntry(selectedCommander, card, progress));
     }
     Deck startDeck = selectedCommander.getStartDeck();
     List<CodexCardGrid.Entry> startDeckEntries = startDeck == null ? new ArrayList<>()
         : createDeckEntries(startDeck.getMain().toFlatList(),
             card -> new CodexCardGrid.Entry(card, card.getName(), card.getName(),
-                CodexCardGrid.CardState.NORMAL));
+                CodexState.ACQUIRED));
     sortCodexCardEntries(nonMythicEntries);
     sortCodexCardEntries(mythicEntries);
     sortCodexCardEntries(startDeckEntries);
@@ -611,13 +589,11 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     return panel;
   }
 
-  private CodexCardGrid.Entry createCommanderRewardEntry(String commanderName, PaperCard card,
+  private CodexCardGrid.Entry createCommanderRewardEntry(RogueDeck commander, PaperCard card,
                                                          RogueMetaProgress progress) {
-    boolean acquired = progress.hasAcquiredCommanderRewardCard(commanderName, card);
-    boolean seen = progress.hasSeenCommanderRewardCard(commanderName, card);
-    CodexCardGrid.CardState state = getDiscoveryState(acquired, seen);
+    CodexState state = CodexHelper.state(progress, commander, card);
     return new CodexCardGrid.Entry(card, card.getName(),
-        state == CodexCardGrid.CardState.HIDDEN ? localizer.getMessage("lblRogueUnknownCard") : card.getName(), state);
+        state == CodexState.UNKNOWN ? localizer.getMessage("lblRogueUnknownCard") : card.getName(), state);
   }
 
   private JPanel createCommanderStatsHeader(RogueDeck selectedCommander, RogueMetaProgress progress,
@@ -629,7 +605,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     List<CodexCardGrid.Entry> rewardEntries = new ArrayList<>(nonMythicEntries);
     rewardEntries.addAll(mythicEntries);
     panel.add(new FLabel.Builder().text(selectedCommander.getName()).fontSize(16).fontStyle(Font.BOLD).build());
-    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueCommanderRuns", progress.getRunsStartedWithCommander(commanderName))).fontSize(13).build());
+    panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueCommanderRunCount", progress.getRunsStartedWithCommander(commanderName))).fontSize(13).build());
     panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueCommanderWins", progress.getRunsWonWithCommander(commanderName))).fontSize(13).build());
     panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueMaxDescension", progress.getMaxDescensionWon(commanderName))).fontSize(13).build());
     panel.add(new FLabel.Builder().text(localizer.getMessage("lblRogueMaxEndless", progress.getMaxEndlessCompleted(commanderName))).fontSize(13).build());
@@ -691,7 +667,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   private JPanel createPlaneboundTopSections(RoguePlanebound selectedPlanebound,
                                              List<CodexCardGrid.Entry> commanderEntries) {
     JPanel commanderSection = createCardGridSection(localizer.getMessage("lblCommander"), commanderEntries);
-    PaperCard planeCard = getPlaneCard(selectedPlanebound);
+    PaperCard planeCard = CodexHelper.getPlaneCard(selectedPlanebound);
     if (planeCard == null) {
       return commanderSection;
     }
@@ -716,18 +692,6 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     return panel;
   }
 
-  private PaperCard getPlaneCard(RoguePlanebound planebound) {
-    if (planebound == null || planebound.planeName() == null) {
-      return null;
-    }
-    for (PaperCard card : RogueConfig.getAllPlanes().toFlatList()) {
-      if (planebound.planeName().equalsIgnoreCase(card.getName())) {
-        return card;
-      }
-    }
-    return null;
-  }
-
   private List<CodexCardGrid.Entry> createCommanderCardEntries(RogueDeck selectedCommander) {
     Deck startDeck = selectedCommander.getStartDeck();
     if (startDeck == null) {
@@ -736,7 +700,7 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
     List<CodexCardGrid.Entry> entries = new ArrayList<>();
     for (PaperCard commander : startDeck.getCommanders()) {
       entries.add(new CodexCardGrid.Entry(commander, commander.getName(), commander.getName(),
-          CodexCardGrid.CardState.NORMAL));
+          CodexState.ACQUIRED));
     }
     return entries;
   }
@@ -744,24 +708,17 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   private static List<CodexCardGrid.Entry> createDeckEntries(List<PaperCard> cards,
       Function<PaperCard, CodexCardGrid.Entry> createEntry) {
     List<CodexCardGrid.Entry> entries = new ArrayList<>();
-    Set<String> displayedBasicLandNames = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-    for (PaperCard card : cards) {
-      if (card == null || card.getRules() == null) {
-        continue;
-      }
-      if (!card.getRules().getType().isBasicLand() || displayedBasicLandNames.add(card.getName())) {
-        entries.add(createEntry.apply(card));
-      }
+    for (PaperCard card : CodexHelper.eachBasicOnce(cards)) {
+      entries.add(createEntry.apply(card));
     }
     return entries;
   }
 
   private CodexCardGrid.Entry createPlaneboundDeckEntry(RoguePlanebound selectedPlanebound, PaperCard card,
                                                         RogueMetaProgress progress) {
-    CodexCardGrid.CardState state = progress.hasSeenPlaneboundCard(selectedPlanebound, card)
-        ? CodexCardGrid.CardState.NORMAL : CodexCardGrid.CardState.HIDDEN;
+    CodexState state = CodexHelper.state(progress, selectedPlanebound, card);
     return new CodexCardGrid.Entry(card, card.getName(),
-        state == CodexCardGrid.CardState.HIDDEN ? localizer.getMessage("lblRogueUnknownCard") : card.getName(), state);
+        state == CodexState.UNKNOWN ? localizer.getMessage("lblRogueUnknownCard") : card.getName(), state);
   }
 
   private JPanel createTraitStatsHeader(List<CodexCardGrid.Entry> traitEntries) {
@@ -782,21 +739,12 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
       if (card == null) {
         continue;
       }
-      boolean acquired = progress.hasAcquiredTrait(effect);
-      boolean seen = progress.hasSeenTrait(effect);
-      CodexCardGrid.CardState state = getDiscoveryState(acquired, seen);
+      CodexState state = CodexHelper.state(progress, effect);
       String label = getTraitLabel(effect, card);
       entries.add(new CodexCardGrid.Entry(card, label,
-          state == CodexCardGrid.CardState.HIDDEN ? localizer.getMessage("lblRogueUnknownTrait") : label, state));
+          state == CodexState.UNKNOWN ? localizer.getMessage("lblRogueUnknownTrait") : label, state));
     }
     return entries;
-  }
-
-  private static CodexCardGrid.CardState getDiscoveryState(boolean acquired, boolean seen) {
-    if (acquired) {
-      return CodexCardGrid.CardState.NORMAL;
-    }
-    return seen ? CodexCardGrid.CardState.GREYED : CodexCardGrid.CardState.HIDDEN;
   }
 
   private void addTraitSection(JPanel sections, String title, List<CodexCardGrid.Entry> entries) {
@@ -816,37 +764,17 @@ public enum VSubmenuRogueCodex implements IVSubmenu<CSubmenuRogueCodex> {
   }
 
   private int countSeenCards(List<CodexCardGrid.Entry> entries) {
-    return countCards(entries, entry -> entry.state() != CodexCardGrid.CardState.HIDDEN);
+    return CodexHelper.countSeen(entries.stream().map(CodexCardGrid.Entry::state).toList());
   }
 
   private int countAcquiredCards(List<CodexCardGrid.Entry> entries) {
-    return countCards(entries, entry -> entry.state() == CodexCardGrid.CardState.NORMAL);
-  }
-
-  private int countCards(List<CodexCardGrid.Entry> entries, Predicate<CodexCardGrid.Entry> filter) {
-    int count = 0;
-    for (CodexCardGrid.Entry entry : entries) {
-      if (filter.test(entry)) {
-        count++;
-      }
-    }
-    return count;
+    return CodexHelper.countAcquired(entries.stream().map(CodexCardGrid.Entry::state).toList());
   }
 
   private void sortCodexCardEntries(List<CodexCardGrid.Entry> entries) {
-    entries.sort(Comparator
-        .comparingInt((CodexCardGrid.Entry entry) -> getCodexCardTypeOrder(entry.card()))
-        .thenComparing(entry -> entry.card() == null ? entry.label() : entry.card().getName(),
-            String.CASE_INSENSITIVE_ORDER));
+    entries.sort(Comparator.comparing(CodexCardGrid.Entry::card, CodexHelper.CODEX_CARD_ORDER));
   }
 
-  private int getCodexCardTypeOrder(PaperCard card) {
-    if (card == null) {
-      return 8;
-    }
-    int groupIndex = GroupDef.CARD_TYPE.getItemGroupIndex(card);
-    return groupIndex < 0 ? 8 : groupIndex;
-  }
 
   private FScrollPane createPanelScrollPane(JPanel panel) {
     return new FScrollPane(panel, false,

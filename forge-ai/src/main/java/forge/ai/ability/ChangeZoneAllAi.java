@@ -344,11 +344,12 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 }
                 Player oppTarget = oppList.max(
                         AiPlayerPredicates.compareByZoneValue(sa.getParam("ChangeType"), origin, sa));
-                if (!oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty() && (mandatory || worthHatingTheYard(ai, sa, oppTarget))
-                        || mandatory) {
-                    sa.resetTargets();
+                final boolean worthwhile = worthHatingTheYard(ai, sa, oppTarget);
+                sa.resetTargets();
+                // A mandatory trigger must resolve, but that does not make its optional target mandatory (e.g. Endurance).
+                if (worthwhile || (mandatory && !sa.isTargetNumberValid())) {
                     sa.getTargets().add(oppTarget);
-                } else {
+                } else if (!mandatory) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
                 }
             }

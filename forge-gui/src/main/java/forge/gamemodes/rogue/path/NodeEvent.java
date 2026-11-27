@@ -33,6 +33,11 @@ public class NodeEvent extends RoguePathNode {
     }
 
     @Override
+    public NodeType getType() {
+        return NodeType.EVENT;
+    }
+
+    @Override
     public String toString() {
         return event != null ? "Event (" + event.getDisplayName() + ")" : "Event (???)";
     }

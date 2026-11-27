@@ -134,6 +134,9 @@ public enum AetherEffect implements RogueEffect {
         public int getChargesForRank(int rank) { return rank > 0 ? 1 : 0; }
 
         @Override
+        public boolean revivesOnDefeat() { return true; }
+
+        @Override
         public void onDefeat(DefeatContext ctx, RogueRun run) {
             ctx.revived = true;
             ctx.reviveLife = getEffectValueAtRank(run.getRunEffectRank(getId()));
@@ -447,38 +450,24 @@ public enum AetherEffect implements RogueEffect {
         return rankContext.effectValues()[rank - 1];
     }
 
-    /**
-     * Get the description showing all rank values with the current rank highlighted.
-     * Uses HTML formatting. Shows values up to the effective max rank for the given upgrade level.
-     * @param currentRank The current rank (0 = not unlocked)
-     * @param upgradeLevel The current Aether Upgrade level
-     * @return HTML-formatted description string
-     */
+    /** The description with the value of every rank reachable at this upgrade level, such as "3 / 6 / 9". */
     @Override
     public String getDescriptionWithAllRanks(int currentRank, int upgradeLevel) {
-        String allValues = buildAllValuesString(currentRank, upgradeLevel);
-        return "<html>" + String.format(description, allValues) + "</html>";
+        List<String> values = new ArrayList<>();
+        for (int value : getRankValues(upgradeLevel)) {
+            values.add(Integer.toString(value));
+        }
+        return String.format(description, String.join(" / ", values));
     }
 
-    /**
-     * Build the all-values string showing values up to effectiveMaxRank(upgradeLevel).
-     * The current rank value is highlighted with bold+underline.
-     */
-    private String buildAllValuesString(int currentRank, int upgradeLevel) {
+    /** The value at each rank up to the effective maximum; rank r is at index r - 1. */
+    public List<Integer> getRankValues(int upgradeLevel) {
         int effectiveMax = getEffectiveMaxRank(upgradeLevel);
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < rankContext.effectValues().length && (i + 1) <= effectiveMax; i++) {
-            if (i > 0) {
-                sb.append(" / ");
-            }
-            int rankForThisValue = i + 1;
-            if (rankForThisValue == currentRank) {
-                sb.append("<b><u>").append(rankContext.effectValues()[i]).append("</u></b>");
-            } else {
-                sb.append(rankContext.effectValues()[i]);
-            }
+        List<Integer> values = new ArrayList<>();
+        for (int i = 0; i < rankContext.effectValues().length && i < effectiveMax; i++) {
+            values.add(rankContext.effectValues()[i]);
         }
-        return sb.toString();
+        return values;
     }
 
     private record EffectRankContext(int[] echoCosts, int[] effectValues, int maxRank,

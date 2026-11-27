@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Forge;
 import forge.util.ImageUtil;
 
@@ -18,8 +20,8 @@ import forge.util.ImageUtil;
  * TextureLoader honours a preset textureData and ignores the resolved FileHandle, so the AssetManager
  * owns the whole lifecycle (load/get/unload/dispose/context-loss reload) while the actual decode stays
  * a plain java.io byte read — iOS can't reliably load a libGDX FileHandle from Documents, but reading
- * bytes directly is proven. WebP images are decoded by the platform, straight into the pixmap. iOS card
- * images are downscaled to at most {@link #MAX_CARD_TEX_DIM}px on the longest side since the battlefield draws thumbnails. Re-preparable (mirrors FileTextureData) so GL context-loss
+ * bytes directly is proven. WebP images are decoded by the platform, straight into the pixmap. iOS downloaded
+ * images and Android card art are downscaled to at most {@link #MAX_CARD_TEX_DIM}px on the longest side since the battlefield draws thumbnails. Re-preparable (mirrors FileTextureData) so GL context-loss
  * reload re-decodes from disk. The border colour is sampled while decoding, so ImageCache doesn't decode again.
  */
 final class CardTextureData implements TextureData {
@@ -29,16 +31,18 @@ final class CardTextureData implements TextureData {
     // a mipmap min filter samples black from a texture uploaded without mipmaps
     private final boolean useMipMaps;
     private final boolean downscale;
+    private final boolean rgb565IfOpaque;
     private volatile String borderColor;
     private int width, height;
     private Format format = Format.RGBA8888; // real format set in prepare(); safe default pre-prepare
     private Pixmap pixmap;
     private boolean prepared;
 
-    CardTextureData(String path, boolean useMipMaps, boolean downscale) {
+    CardTextureData(String path, boolean useMipMaps, boolean downscale, boolean rgb565IfOpaque) {
         this.path = path;
         this.useMipMaps = useMipMaps;
         this.downscale = downscale;
+        this.rgb565IfOpaque = rgb565IfOpaque;
     }
 
     String getPath() {
@@ -65,7 +69,7 @@ final class CardTextureData implements TextureData {
             throw new GdxRuntimeException("Already prepared");
         Pixmap p = GreyscaleTextureLoader.toRgb(decodeFromDisk(path), path);
         if (downscale)
-            p = downscale(p);
+            p = downscale(p, rgb565IfOpaque && isOpaque(path));
         borderColor = ImageCache.sampleBorderColor(p, path);
         pixmap = p;
         width = p.getWidth();
@@ -156,19 +160,27 @@ final class CardTextureData implements TextureData {
         return pixmap[0];
     }
 
-    // Cap the longest side at MAX_CARD_TEX_DIM; returns src unchanged when already small enough,
-    // otherwise a new RGBA8888 pixmap (and disposes src). Any failure falls back to the original.
-    private static Pixmap downscale(Pixmap src) {
+    // JPEG and simple lossy WebP have no alpha channel, so RGB565 loses nothing they hold
+    private static boolean isOpaque(String path) {
+        return StringUtils.endsWithIgnoreCase(path, ".jpg") || StringUtils.endsWithIgnoreCase(path, ".jpeg")
+                || ImageUtil.isOpaqueWebp(new File(path));
+    }
+
+    // Cap the longest side at MAX_CARD_TEX_DIM. Opaque Android card art is also converted to RGB565
+    // when it is already within the size limit; PNG/alpha-capable art keeps its original alpha.
+    // Any failure falls back to the decoded source so a format conversion cannot prevent card display.
+    private static Pixmap downscale(Pixmap src, boolean useRgb565) {
         try {
             int w = src.getWidth();
             int h = src.getHeight();
             int maxSide = Math.max(w, h);
-            if (maxSide <= MAX_CARD_TEX_DIM)
+            if (maxSide <= MAX_CARD_TEX_DIM && !useRgb565)
                 return src;
-            float s = (float) MAX_CARD_TEX_DIM / (float) maxSide;
+            float s = maxSide <= MAX_CARD_TEX_DIM ? 1f : (float) MAX_CARD_TEX_DIM / (float) maxSide;
             int nw = Math.max(1, Math.round(w * s));
             int nh = Math.max(1, Math.round(h * s));
-            Pixmap dst = new Pixmap(nw, nh, Pixmap.Format.RGBA8888);
+            Pixmap.Format targetFormat = useRgb565 ? Pixmap.Format.RGB565 : Pixmap.Format.RGBA8888;
+            Pixmap dst = new Pixmap(nw, nh, targetFormat);
             dst.setFilter(Pixmap.Filter.BiLinear);
             dst.drawPixmap(src, 0, 0, w, h, 0, 0, nw, nh);
             src.dispose();

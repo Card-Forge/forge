@@ -3,7 +3,9 @@ package forge.card;
 import static forge.assets.FSkin.getDefaultSkinFile;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -21,6 +23,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.google.common.collect.ImmutableList;
@@ -48,6 +53,7 @@ public class CardImageRenderer {
     private static final float BASE_IMAGE_WIDTH = 360;
     private static final float BASE_IMAGE_HEIGHT = 504;
     private static float MANA_SYMBOL_SIZE, PT_BOX_WIDTH, HEADER_PADDING, BORDER_THICKNESS;
+    private static FSkinFont ADV_NAME_FONT, ADV_TYPE_FONT; //smaller fonts for the bars of an adventure or prepared spell
     private static FSkinFont NAME_FONT, TYPE_FONT, TEXT_FONT, PT_FONT, LEVEL_FONT; //LEVEL_FONT: the small "LEVEL" label of a Leveler level
     private static float prevImageWidth, prevImageHeight;
     private static final float BLACK_BORDER_THICKNESS_RATIO = 0.021f;
@@ -58,8 +64,102 @@ public class CardImageRenderer {
     private static final String[] landTypesStrings = new String[0];
     private static float textBoxInset; //how far the text box is inset from the inner edge of the card
     private static final Color LOYALTY_BOX_COLOR = Color.BLACK;
+    private static final float FRAME_ART_RATIO = 1.37f; //art box of the desktop frame, used when the card has no scanned art
     private static final List<TextRenderer> rowTextRenderers = new ArrayList<>();
     private static final TextRenderer classHeaderTextRenderer = new TextRenderer(true);
+
+    // ---- modern frame ------------------------------------------------------------------------------------------------
+    // The shapes of the desktop renderer (FCardImageRenderer), drawn over the card texture: the title, type and P/T bars
+    // have tall, narrow elliptical ends (Java2D fillRoundRect(x, y, w, h, h / 3, h), so rx = h / 6 and ry = h / 2), the
+    // art and text boxes are plain rectangles, all lines are black, and a Spacecraft or Vehicle P/T box is solid black or
+    // brown. The rounded shapes are drawn from antialiased corner masks (see FrameMask), the card texture is cut to the
+    // rounded inside of the black border with the same masks. Set MODERN_FRAME to false to get the old frame back.
+    private static final boolean MODERN_FRAME = true;
+    private static final float CARD_CORNER_RATIO = 0.045f; //outer card corner, relative to the card width
+    private static final float TYPE_BOX_RATIO = 0.85f; //height of the type line relative to the title bar, measured on the desktop render
+    private static final Color[] FRAME_SPACECRAFT_COLOR = MODERN_FRAME ? new Color[] { Color.BLACK } : SPACECRAFT_PTBOX_COLOR;
+    private static final Color[] FRAME_VEHICLE_COLOR = MODERN_FRAME ? new Color[] { new Color(128 / 255f, 96 / 255f, 64 / 255f, 1f) } : VEHICLE_PTBOX_COLOR;
+
+    private static float barRx(float h) {
+        return MODERN_FRAME ? h / 6 : 0;
+    }
+
+    private static float barRy(float h) {
+        return MODERN_FRAME ? h / 2 : 0;
+    }
+
+    /** True if the box has rounded ends that frameBox draws, false for a plain rectangle. */
+    private static boolean isRounded(float w, float h, float rx, float ry) {
+        return Math.min(rx, w / 2) >= 0.5f && Math.min(ry, h / 2) >= 0.5f;
+    }
+
+    /** The height of the title bar, which the type line and the adventure bars are derived from. */
+    private static float getHeaderHeight() {
+        return Math.max(MANA_SYMBOL_SIZE + 2 * HEADER_PADDING, 2 * getCapHeight(NAME_FONT)) + 2;
+    }
+
+    private static float getTypeBoxHeight() {
+        final float old = 2 * getCapHeight(TYPE_FONT);
+        return MODERN_FRAME ? Math.max(old, getHeaderHeight() * TYPE_BOX_RATIO) : old;
+    }
+
+    /**
+     * Fills a box with antialiased elliptical corners. Gradients of two and three colors run from the left to the right,
+     * like the plain fill, and are drawn as two halves so each half has one round side.
+     */
+    private static void fillBox(Graphics g, Color[] colors, float x, float y, float w, float h, float rx, float ry) {
+        if (!isRounded(w, h, rx, ry) || colors.length == 0 || colors.length > 3) {
+            fillColorBackground(g, colors, x, y, w, h);
+            return;
+        }
+        switch (colors.length) {
+            case 1:
+                g.fillMaskedRoundRect(colors[0], colors[0], x, y, w, h, rx, ry, true, true);
+                break;
+            case 2:
+                g.fillMaskedRoundRect(colors[0], colors[1], x, y, w, h, rx, ry, true, true);
+                break;
+            default:
+                final float half = w / 2;
+                g.fillMaskedRoundRect(colors[0], colors[1], x, y, half, h, rx, ry, true, false);
+                g.fillMaskedRoundRect(colors[1], colors[2], x + half, y, half, h, rx, ry, false, true);
+                break;
+        }
+    }
+
+    /**
+     * Draws the black line of a box as a filled antialiased shape and returns how far the fill of the box has to be
+     * inset so it sits inside of the line. Returns 0 and draws nothing for a plain rectangle: finishBox draws that one
+     * after the fill.
+     */
+    private static float frameBox(Graphics g, Color border, float x, float y, float w, float h, float rx, float ry) {
+        if (!isRounded(w, h, rx, ry))
+            return 0;
+        g.fillMaskedRoundRect(border, border, x, y, w, h, rx, ry, true, true);
+        return BORDER_THICKNESS;
+    }
+
+    /** The frame of a plain rectangle, drawn on top of the fill. Does nothing when frameBox drew the frame. */
+    private static void finishBox(Graphics g, ColorSet cardColors, Color border, float x, float y, float w, float h, float rx, float ry) {
+        if (isRounded(w, h, rx, ry))
+            return;
+        if (cardColors != null)
+            drawOutlineColor(g, cardColors, x, y, w, h); //only draws with the old frame
+        g.drawRect(BORDER_THICKNESS, border, x, y, w, h);
+    }
+
+    /** Fills the inside of a frame that frameBox drew. */
+    private static void fillInsideBox(Graphics g, Color[] colors, float x, float y, float w, float h, float rx, float ry, float inset) {
+        fillBox(g, colors, x + inset, y + inset, w - 2 * inset, h - 2 * inset, inset > 0 ? Math.max(rx - inset, 1f) : rx, inset > 0 ? Math.max(ry - inset, 1f) : ry);
+    }
+
+    private static Color[] toColors(List<DetailColors> detailColors) {
+        final Color[] colors = new Color[detailColors.size()];
+        for (int i = 0; i < colors.length; i++) {
+            colors[i] = fromDetailColor(detailColors.get(i));
+        }
+        return colors;
+    }
 
     private static Color fromDetailColor(DetailColors detailColor) {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
@@ -91,13 +191,30 @@ public class CardImageRenderer {
         stretchedArt.clear();
     }
 
+    /** Set while one half of a split card is drawn: the half is drawn like a card of its own, with the sizes of the whole card. */
+    private static final class SplitHalf {
+        final CardStateView state;
+        final float ratio, border, artRatio;
+        final boolean first, aftermath;
+
+        SplitHalf(CardStateView state, float ratio, float border, float artRatio, boolean first, boolean aftermath) {
+            this.state = state;
+            this.ratio = ratio;
+            this.border = border;
+            this.artRatio = artRatio;
+            this.first = first;
+            this.aftermath = aftermath;
+        }
+    }
+    private static SplitHalf splitHalf;
+
     private static void updateStaticFields(float w, float h) {
-        if (w == prevImageWidth && h == prevImageHeight) {
+        if (splitHalf == null && w == prevImageWidth && h == prevImageHeight) {
             //for performance sake, only update static fields if card image size is different than previous rendered card
             return;
         }
 
-        float ratio = Math.min(w / BASE_IMAGE_WIDTH, h / BASE_IMAGE_HEIGHT);
+        float ratio = splitHalf != null ? splitHalf.ratio : Math.min(w / BASE_IMAGE_WIDTH, h / BASE_IMAGE_HEIGHT);
 
         MANA_SYMBOL_SIZE = 20 * ratio;
         PT_BOX_WIDTH = 56 * ratio;
@@ -106,11 +223,13 @@ public class CardImageRenderer {
         TYPE_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.9f);
         TEXT_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.95f);
         PT_FONT = NAME_FONT;
+        ADV_NAME_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.8f); //the desktop shrinks the fonts of the adventure bars
+        ADV_TYPE_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.72f);
         LEVEL_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.5f);
         BORDER_THICKNESS = Math.max(1.5f * ratio, 1f); //don't let border go below 1
 
-        prevImageWidth = w;
-        prevImageHeight = h;
+        prevImageWidth = splitHalf != null ? -1 : w; //the sizes of a split half are not the sizes of the next card
+        prevImageHeight = splitHalf != null ? -1 : h;
     }
 
     public static void drawFaceDownCard(CardView card, Graphics g, float x, float y, float w, float h) {
@@ -134,17 +253,291 @@ public class CardImageRenderer {
         drawCardImage(g, card, altState, x, y, w, h, pos, useCardBGTexture, noText, isChoiceList, showArtist, showArtBox, false);
     }
 
+    /**
+     * Draws the texture of a half (upright) turned by rotation degrees (90 to the left, -90 to the right) into the rectangle
+     * x, y, w, h, which is the size of the turned half. What is further right than visibleRight is not drawn.
+     */
+    private static void drawHalf(Graphics g, Texture texture, float x, float y, float w, float h, float rotation, float visibleRight) {
+        if (texture == null) {
+            return;
+        }
+        if (rotation == 0) {
+            g.drawFlippedImage(texture, x, y, w, h);
+            return;
+        }
+        //the upright half is h wide and w high. Turned to the left its bottom is on the right, so that is what is cut.
+        final float visible = Math.min(w, visibleRight - x);
+        final int texW = texture.getWidth(), texH = texture.getHeight();
+        final int keep = Math.max(1, Math.round(texH * (visible / w)));
+        final float cx = x + visible / 2, cy = y + h / 2;
+        g.drawRotatedFlippedImage(texture, cx, cy, h, visible, 0, rotation > 0 ? texH - keep : 0, texW, keep, rotation);
+    }
+
+    /** One half of a split card, drawn once, upright, into a texture (see drawSplitFrames). */
+    private static final class SplitHalfImage extends FBufferedImage {
+        private final CardView card;
+        private final CardStateView state;
+        private final float ratio, border, artRatio;
+        private final boolean useCardBGTexture, noText, useEditionLabel, first, aftermath;
+
+        SplitHalfImage(CardView card, CardStateView state, float localW, float localH, float ratio, float border, float artRatio,
+                       boolean first, boolean aftermath, boolean useCardBGTexture, boolean noText, boolean useEditionLabel) {
+            super(localW, localH);
+            this.card = card;
+            this.state = state;
+            this.ratio = ratio;
+            this.border = border;
+            this.artRatio = artRatio;
+            this.first = first;
+            this.aftermath = aftermath;
+            this.useCardBGTexture = useCardBGTexture;
+            this.noText = noText;
+            this.useEditionLabel = useEditionLabel;
+        }
+
+        @Override
+        protected boolean separateAlphaBlend() {
+            return true;
+        }
+
+        @Override
+        protected void draw(Graphics g, float w, float h) {
+            splitHalf = new SplitHalf(state, ratio, border, artRatio, first, aftermath);
+            try {
+                drawCardImageLive(g, card, false, 0, 0, w, h, CardStackPosition.Top, useCardBGTexture, noText, false, false, true, useEditionLabel);
+            } finally {
+                splitHalf = null;
+            }
+        }
+    }
+
+    /**
+     * The texture of a buffered image. The first call draws the image, and FBufferedImage hands the bounds of the graphics back as
+     * the very objects it changed, so they are copied before and put back after, or the rest of the frame is clipped away.
+     */
+    private static Texture textureOf(Graphics g, FBufferedImage image) {
+        final Rectangle bounds = new Rectangle(g.getBounds()), visibleBounds = new Rectangle(g.getVisibleBounds());
+        final float regionHeight = g.getRegionHeight();
+        //a card that is shown turned (the zoom view) has a transform on the batch, the image must not be drawn with it
+        final SpriteBatch batch = g.getBatch();
+        final Matrix4 transform = new Matrix4(batch.getTransformMatrix());
+        batch.setTransformMatrix(new Matrix4());
+        final Texture texture;
+        try {
+            texture = image.getTexture();
+        } finally {
+            batch.setTransformMatrix(transform);
+        }
+        g.getBounds().set(bounds);
+        g.getVisibleBounds().set(visibleBounds);
+        g.setRegionHeight(regionHeight);
+        return texture;
+    }
+
+    private static String stateKey(CardStateView state) {
+        return state.getName() + "|" + state.getManaCost() + "|" + state.getType() + "|" + state.getColors() + "|" + state.getOracleText() + "|" + state.getImageKey();
+    }
+
+    private static FBufferedImage splitHalfImage(CardView card, CardStateView state, int which, float localW, float localH, float ratio, float border, float artRatio,
+                                                 boolean aftermath, boolean useCardBGTexture, boolean noText, boolean useEditionLabel) {
+        //the art arrives later than the card, then the picture has to be drawn again
+        final Object art = CardRenderer.getCardArt(card);
+        final Object secondArt = aftermath && which == 1 ? CardRenderer.getAftermathSecondCardArt(card.getCurrentState().getImageKey()) : null;
+        final String key = "split|" + card.getId() + "|" + which + "|" + Math.round(localW) + "x" + Math.round(localH) + "|" + useCardBGTexture + Forge.allowCardBG + noText + useEditionLabel
+                + "|" + stateKey(state) + "|" + System.identityHashCode(art) + "|" + System.identityHashCode(secondArt);
+        FBufferedImage image = frameCache.get(key);
+        if (image == null) {
+            image = new SplitHalfImage(card, state, localW, localH, ratio, border, artRatio, which == 0, aftermath, useCardBGTexture, noText, useEditionLabel);
+            frameCache.put(key, image);
+        }
+        return image;
+    }
+
+    /**
+     * Draws a split card like the desktop: the black border of the card, and two frames of their own. Both halves are
+     * turned a quarter to the left (an Aftermath card has its first half upright and the second one turned to the right).
+     * A half is drawn once, upright, into a texture, then that texture is drawn turned on every frame.
+     */
+    private static void drawSplitFrames(Graphics g, CardView card, float x, float y, float w, float h, boolean useCardBGTexture, boolean noText, boolean showArtist, boolean useEditionLabel) {
+        updateStaticFields(w, h);
+        final float ratio = Math.min(w / BASE_IMAGE_WIDTH, h / BASE_IMAGE_HEIGHT);
+        final float border = w * BLACK_BORDER_THICKNESS_RATIO;
+        final float cardCorner = w * CARD_CORNER_RATIO;
+        g.fillMaskedRoundRect(Color.BLACK, Color.BLACK, x, y, w, h, cardCorner, cardCorner, true, true);
+        final float ix = x + border, iy = y + border, iw = w - 2 * border, ih = h - 2 * border;
+        final float outer = 0.6f * border;
+        final CardStateView left = card.getLeftSplitState(), right = card.getRightSplitState();
+        final float alpha = g.getfloatAlphaComposite();
+        final FBufferedImage leftImage, rightImage;
+        final float lx, ly, lw, lh, rx, ry, rw, rh; //where the halves are, turned
+        final float leftTurn, rightTurn;
+        final float below; //the black space under the halves, for the name of the artist
+        if (right.hasAftermath() || (right.getOracleText() != null && right.getOracleText().startsWith("Aftermath"))) {
+            final float r = Math.min(w / 488f, h / 680f); //the sizes of the desktop frame
+            final float halfHeight = Math.round(370 * r);
+            final float widthAdjust = outer, heightAdjust = outer + MANA_SYMBOL_SIZE / 2;
+            //the first half upright on top, the second one turned to the right below it. The desktop lets them overlap by a
+            //few pixels, here the second one starts where the first one ends so nothing is covered.
+            lw = iw;
+            lh = halfHeight;
+            lx = ix;
+            ly = iy;
+            leftTurn = 0;
+            leftImage = splitHalfImage(card, left, 0, lw, lh, ratio, border, 2.719f, true, useCardBGTexture, noText, useEditionLabel);
+            final float localW = ih - halfHeight - heightAdjust, localH = iw;
+            rw = localH;
+            rh = localW;
+            rx = ix - widthAdjust;
+            ry = iy + halfHeight;
+            rightTurn = -90;
+            rightImage = splitHalfImage(card, right, 1, localW, localH, ratio, border, 1.714f, true, useCardBGTexture, noText, useEditionLabel);
+            below = heightAdjust;
+        } else {
+            final float widthAdjust = outer + MANA_SYMBOL_SIZE / 2;
+            final float heightAdjust = ih - widthAdjust - border;
+            final float localW = heightAdjust / 2, localH = iw + widthAdjust;
+            //the first half below, the second one above it, both turned to the left
+            lw = rw = localH;
+            lh = rh = localW;
+            lx = rx = ix;
+            ly = iy + ih - widthAdjust - localW;
+            ry = iy;
+            leftTurn = rightTurn = 90;
+            leftImage = splitHalfImage(card, left, 0, localW, localH, ratio, border, 1.443f, false, useCardBGTexture, noText, useEditionLabel);
+            rightImage = splitHalfImage(card, right, 1, localW, localH, ratio, border, 1.443f, false, useCardBGTexture, noText, useEditionLabel);
+            below = widthAdjust;
+        }
+        g.resetAlphaComposite(); //the alpha is applied once, when the halves are drawn
+        final Texture leftTexture = textureOf(g, leftImage), rightTexture = textureOf(g, rightImage);
+        if (alpha < 1) {
+            g.setAlphaComposite(alpha);
+        }
+        //a half is a bit wider than the card (like on the desktop), what is outside of the black border is not drawn
+        final float visibleRight = x + w;
+        drawHalf(g, rightTexture, rx, ry, rw, rh, rightTurn, visibleRight);
+        drawHalf(g, leftTexture, lx, ly, lw, lh, leftTurn, visibleRight);
+        if (showArtist) {
+            //the artist goes into the black space below the halves
+            final float space = below + border;
+            final FSkinFont font = FSkinFont.forHeight(Math.max(8f, space * 0.7f));
+            g.drawOutlinedText(getArtist(card.getCurrentState().getImageKey()), font, Color.WHITE, Color.DARK_GRAY, ix + border, iy + ih - below, iw - 2 * border, space, false, Align.left, true);
+        }
+    }
+
+    // ---- cache of the fallback frame ------------------------------------------------------------------------------------
+    // The frame is drawn in code (boxes, rows of text, mana symbols), which is a lot of work to repeat on every frame. It is
+    // drawn once into a texture, and that texture is drawn again until something on the card changes. Entries are
+    // keyed on everything that changes the picture, and the size is rounded up to a multiple of 8 so a zoom animation
+    // does not make a new texture for every frame.
+    /** Set from the setting "Cache generated card frames" (on by default); -Dforge.frameCache=false also turns it off. */
+    private static boolean frameCacheEnabled = !"false".equals(System.getProperty("forge.frameCache"));
+
+    public static void setFrameCacheEnabled(boolean enabled) {
+        frameCacheEnabled = enabled;
+        if (!enabled) {
+            clearFrameCache();
+        }
+    }
+    // Kept in a class of its own so Forge.resume() can clear it without initializing CardImageRenderer: the static
+    // initializer of CardImageRenderer needs the skin and the assets (textures), so it must not run before GL is ready.
+    public static final class FrameCache {
+        private static final int SIZE = 48;
+        static final Map<String, FBufferedImage> MAP = new LinkedHashMap<>(64, 0.75f, true) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<String, FBufferedImage> eldest) {
+                if (size() > SIZE) {
+                    eldest.getValue().clear();
+                    return true;
+                }
+                return false;
+            }
+        };
+
+        public static void clear() {
+            for (FBufferedImage image : MAP.values()) {
+                image.clear();
+            }
+            MAP.clear();
+        }
+    }
+    private static final Map<String, FBufferedImage> frameCache = FrameCache.MAP;
+
+    /** Drops all cached frames, for example after the GL context was lost. */
+    public static void clearFrameCache() {
+        FrameCache.clear();
+    }
+
     public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText, boolean isChoiceList, boolean showArtist, boolean showArtBox, boolean useEditionLabel) {
+        if (MODERN_FRAME && splitHalf == null && pos == CardStackPosition.Top && !altState && !isChoiceList && card.isSplitCard() && !card.isFaceDown()
+                && card.getAlternateState() != null && card.getZone() != ZoneType.Stack && card.getZone() != ZoneType.Battlefield //on the stack and the battlefield it is the one half that was cast
+                && MatchController.instance.mayView(card) && g.getBatch().isDrawing() && w >= 16 && h >= 16
+                && card.getLeftSplitState() != null && card.getRightSplitState() != null) {
+            drawSplitFrames(g, card, x, y, w, h, useCardBGTexture, noText, showArtist, useEditionLabel);
+            return;
+        }
+        if (!MODERN_FRAME || !frameCacheEnabled || pos != CardStackPosition.Top || !g.getBatch().isDrawing() || w < 16 || h < 16) {
+            drawCardImageLive(g, card, altState, x, y, w, h, pos, useCardBGTexture, noText, isChoiceList, showArtist, showArtBox, useEditionLabel);
+            return;
+        }
+        final CardStateView state = altState ? card.getAlternateState() : isChoiceList && card.isSplitCard() ? card.getLeftSplitState() : card.getCurrentState();
+        if (state == null) {
+            drawCardImageLive(g, card, altState, x, y, w, h, pos, useCardBGTexture, noText, isChoiceList, showArtist, showArtBox, useEditionLabel);
+            return;
+        }
+        final int cw = (int) Math.ceil(w / 8f) * 8, ch = (int) Math.ceil(h / 8f) * 8;
+        final Object art = CardRenderer.getCardArt(card); //the art can arrive later, then the picture changes
+        final String key = card.getId() + "|" + altState + "|" + isChoiceList + "|" + card.isFaceDown() + "|" + MatchController.instance.mayView(card)
+                + "|" + useCardBGTexture + Forge.allowCardBG + noText + showArtist + showArtBox + useEditionLabel + "|" + cw + "x" + ch
+                + "|" + state.getName() + "|" + state.getManaCost() + "|" + state.getType() + "|" + state.getColors() + "|" + state.getOracleText()
+                + "|" + state.getPower() + "/" + state.getToughness() + "/" + state.getLoyalty() + "/" + state.getDefense() + "|" + state.getImageKey()
+                + "|" + System.identityHashCode(art);
+        FBufferedImage image = frameCache.get(key);
+        if (image == null) {
+            image = new FBufferedImage(cw, ch) {
+                @Override
+                protected boolean separateAlphaBlend() {
+                    return true;
+                }
+
+                @Override
+                protected void draw(Graphics fg, float fw, float fh) {
+                    drawCardImageLive(fg, card, altState, 0, 0, fw, fh, CardStackPosition.Top, useCardBGTexture, noText, isChoiceList, showArtist, showArtBox, useEditionLabel);
+                }
+            };
+            frameCache.put(key, image);
+        }
+        final float alpha = g.getfloatAlphaComposite();
+        g.resetAlphaComposite(); //the alpha is applied once, when the texture is drawn
+        final Texture texture = textureOf(g, image); //draws the frame the first time
+        if (alpha < 1) {
+            g.setAlphaComposite(alpha);
+        }
+        if (texture == null) {
+            frameCache.remove(key);
+            drawCardImageLive(g, card, altState, x, y, w, h, pos, useCardBGTexture, noText, isChoiceList, showArtist, showArtBox, useEditionLabel);
+            return;
+        }
+        g.drawFlippedImage(texture, x, y, w, h);
+    }
+
+    private static void drawCardImageLive(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText, boolean isChoiceList, boolean showArtist, boolean showArtBox, boolean useEditionLabel) {
         updateStaticFields(w, h);
 
-        float blackBorderThickness = w * BLACK_BORDER_THICKNESS_RATIO;
-        g.fillRect(Color.BLACK, x, y, w, h);
-        x += blackBorderThickness;
-        y += blackBorderThickness;
-        w -= 2 * blackBorderThickness;
-        h -= 2 * blackBorderThickness;
+        final SplitHalf half = splitHalf; //a half of a split card is a frame of its own, without the black border of the card
+        float blackBorderThickness = half != null ? half.border : w * BLACK_BORDER_THICKNESS_RATIO;
+        final float cardCorner = w * CARD_CORNER_RATIO;
+        if (half == null) {
+            if (MODERN_FRAME)
+                g.fillMaskedRoundRect(Color.BLACK, Color.BLACK, x, y, w, h, cardCorner, cardCorner, true, true);
+            else
+                g.fillRect(Color.BLACK, x, y, w, h);
+            x += blackBorderThickness;
+            y += blackBorderThickness;
+            w -= 2 * blackBorderThickness;
+            h -= 2 * blackBorderThickness;
+        }
 
-        CardStateView state = altState
+        CardStateView state = half != null ? half.state : altState
             ? card.getAlternateState()
             : isChoiceList && card.isSplitCard() 
                 ? card.getLeftSplitState()
@@ -175,15 +568,23 @@ public class CardImageRenderer {
         } else {
             borderColors = CardDetailUtil.getBorderColors(state, canShow);
         }
+        final float cardX = x, cardY = y, cardW = w, cardH = h;
         Color[] colors = useCardBGTexture && Forge.allowCardBG ? drawCardBackgroundTexture(state, g, borderColors, x, y, w, h) : fillColorBackground(g, borderColors, x, y, w, h);
+        if (MODERN_FRAME) {
+            //cut the texture to the rounded inside of the black border: the corners of the texture are covered by black
+            final float innerCorner = Math.max(cardCorner - blackBorderThickness, 1f);
+            //the top of the frame is nearly square like on the desktop, the bottom is cut by the black band drawn below the text box
+            g.fillMaskedCorners(Color.BLACK, x, y, w, h, innerCorner * 0.35f, innerCorner * 0.35f, 0, 0);
+        }
 
-        float artInset = blackBorderThickness * 0.5f;
+        //the desktop frame: a thin colored ring, the art and text boxes inset by 0.6 of the black border
+        float artInset = blackBorderThickness * (MODERN_FRAME ? 0.6f : 0.5f);
         textBoxInset = artInset;
-        float outerBorderThickness = 2 * blackBorderThickness - artInset;
+        float outerBorderThickness = MODERN_FRAME ? 0.6f * blackBorderThickness : 2 * blackBorderThickness - artInset;
         x += outerBorderThickness;
         y += outerBorderThickness;
         w -= 2 * outerBorderThickness;
-        float headerHeight = Math.max(MANA_SYMBOL_SIZE + 2 * HEADER_PADDING, 2 * getCapHeight(NAME_FONT)) + 2;
+        float headerHeight = getHeaderHeight();
 
         //draw header containing name and mana cost
         Color[] headerColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.NAME_BOX_TINT);
@@ -197,16 +598,16 @@ public class CardImageRenderer {
         y += headerHeight;
 
         float artWidth = w - 2 * artInset;
-        float artHeight = !showArtBox ? 0f : artWidth / CardRenderer.CARD_ART_RATIO;
-        float typeBoxHeight = 2 * getCapHeight(TYPE_FONT);
+        float artHeight = !showArtBox ? 0f : artWidth / (MODERN_FRAME ? (half != null ? half.artRatio : FRAME_ART_RATIO) : CardRenderer.CARD_ART_RATIO);
+        float typeBoxHeight = getTypeBoxHeight();
         float ptBoxHeight = 0;
         float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset;
 
         if (state.isCreature() || state.isPlaneswalker() || state.hasPrintedPT() || state.isBattle()) {
-            ptBoxHeight = 2 * getCapHeight(PT_FONT);
+            ptBoxHeight = MODERN_FRAME ? headerHeight : 2 * getCapHeight(PT_FONT);
         }
-        //space for artist
-        textBoxHeight -= 2 * getCapHeight(PT_FONT);
+        //space for artist (the desktop only keeps half a P/T box free)
+        textBoxHeight -= MODERN_FRAME ? MANA_SYMBOL_SIZE / 2f : 2 * getCapHeight(PT_FONT);
         // the artist is only needed (and only looked up in the card database) when it is actually shown
         String artist = showArtist ? getArtist(state.getImageKey()) : "WOTC";
         float minTextBoxHeight = 2 * headerHeight;
@@ -217,6 +618,18 @@ public class CardImageRenderer {
                 textBoxHeight += artHeight;
                 artHeight = 0;
             }
+        }
+
+        if (MODERN_FRAME && (isSaga || isClass || isDungeon)) {
+            textBoxHeight -= 0.2f * typeBoxHeight; //the desktop ends the type line 0.2 of its height above the bottom of these cards
+        }
+
+        if (MODERN_FRAME) {
+            //like the desktop: the colored frame is a rounded box that ends 2 border widths above the bottom (6 x 5 border widths of
+            //corner), below it is black. The corners are cut by the mask, the strip below by a rect.
+            final float frameBottom = cardY + cardH - 2 * blackBorderThickness;
+            g.fillMaskedCorners(Color.BLACK, cardX, cardY, cardW, frameBottom - cardY, 0, 0, 6 * blackBorderThickness, 5 * blackBorderThickness);
+            g.fillRect(Color.BLACK, cardX, frameBottom, cardW, cardY + cardH - frameBottom);
         }
 
         //draw art box with Forge icon
@@ -288,7 +701,10 @@ public class CardImageRenderer {
         if (onTop && ptBoxHeight > 0) {
             //only needed if on top since otherwise P/T will be hidden
             Color[] ptColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.PT_BOX_TINT);
-            drawPtBox(g, state, ptColors, x, y - 2 * artInset, w, ptBoxHeight, noText);
+            if (MODERN_FRAME) //like the desktop: centered on the bottom edge of the text box, ending where the text box ends
+                drawPtBox(g, state, ptColors, x, y - ptBoxHeight / 2, w - artInset, ptBoxHeight, noText);
+            else
+                drawPtBox(g, state, ptColors, x, y - 2 * artInset, w, ptBoxHeight, noText);
         }
         //draw artist
         if (showArtist)
@@ -346,36 +762,46 @@ public class CardImageRenderer {
     }
 
     private static void drawOutlineColor(Graphics g, ColorSet colors, float x, float y, float w, float h) {
+        if (MODERN_FRAME)
+            return; //the desktop frame only has black lines
         final Color outline = getOutlineColor(colors);
         if (outline != null)
             g.drawRect(BORDER_THICKNESS*2, outline, x, y, w, h);
     }
     private static void drawHeader(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText, boolean isAdventure) {
-        float oldAlpha = g.getfloatAlphaComposite();
-        if (isAdventure)
-            g.setAlphaComposite(0.8f);
-        fillColorBackground(g, colors, x, y, w, h);
-        g.setAlphaComposite(oldAlpha);
-        //draw outline color here
-        if (state != null)
-            drawOutlineColor(g, state.getColors(), x, y, w, h);
-        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+        //like on the desktop the bars of an adventure are plain gray bands with white text inside of the frame of the box
+        final boolean band = MODERN_FRAME && isAdventure;
+        final FSkinFont nameFont = band ? ADV_NAME_FONT : NAME_FONT;
+        final Color textColor = band ? Color.WHITE : Color.BLACK;
+        if (band) {
+            fillColorBackground(g, colors, x, y, w, h);
+        } else {
+            final float rx = barRx(h), ry = barRy(h);
+            final ColorSet cardColors = state != null ? state.getColors() : null;
+            final float inset = frameBox(g, Color.BLACK, x, y, w, h, rx, ry);
+            float oldAlpha = g.getfloatAlphaComposite();
+            if (isAdventure)
+                g.setAlphaComposite(0.8f);
+            fillInsideBox(g, colors, x, y, w, h, rx, ry, inset);
+            g.setAlphaComposite(oldAlpha);
+            finishBox(g, cardColors, Color.BLACK, x, y, w, h, rx, ry);
+        }
 
-        float padding = h / 8;
+        float padding = MODERN_FRAME ? h / 3 : h / 8; //the desktop starts the text a third of the bar height in
         float manaCostWidth = 0;
         float manaSymbolSize = isAdventure ? MANA_SYMBOL_SIZE * 0.75f : MANA_SYMBOL_SIZE;
         if (!noText && state != null) {
             //draw mana cost for card
             ManaCost mainManaCost = state.getOriginalManaCost();
-            if (card.isSplitCard() && card.getAlternateState() != null && !card.isFaceDown() && card.getZone() != ZoneType.Stack && card.getZone() != ZoneType.Battlefield) {
+            if (splitHalf == null && card.isSplitCard() && card.getAlternateState() != null && !card.isFaceDown() && card.getZone() != ZoneType.Stack && card.getZone() != ZoneType.Battlefield) {
                 //handle rendering both parts of split card
                 mainManaCost = card.getLeftSplitState().getManaCost();
                 ManaCost otherManaCost = card.getRightSplitState().getManaCost();
                 manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, manaSymbolSize) + HEADER_PADDING;
                 CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - manaSymbolSize) / 2, manaSymbolSize);
                 //draw "//" between two parts of mana cost
-                manaCostWidth += getBoundsWidth("//", NAME_FONT) + HEADER_PADDING;
-                g.drawText("//", NAME_FONT, Color.BLACK, x + w - manaCostWidth, y, w, h, false, Align.left, true);
+                manaCostWidth += getBoundsWidth("//", nameFont) + HEADER_PADDING;
+                g.drawText("//", nameFont, textColor, x + w - manaCostWidth, y, w, h, false, Align.left, true);
             }
             manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, manaSymbolSize) + HEADER_PADDING;
             CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y + (h - manaSymbolSize) / 2, manaSymbolSize);
@@ -385,7 +811,7 @@ public class CardImageRenderer {
         x += padding;
         w -= 2 * padding;
         if (!noText && state != null)
-            g.drawText(CardTranslation.getTranslatedName(state.getName()), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, Align.left, true);
+            g.drawText(CardTranslation.getTranslatedName(state.getName()), nameFont, textColor, x, y, w - manaCostWidth - padding, h, false, Align.left, true);
     }
 
     public static final FBufferedImage forgeArt;
@@ -428,6 +854,12 @@ public class CardImageRenderer {
     }
 
     private static void drawArt(CardView cv, Graphics g, float x, float y, float w, float h, boolean altState, boolean isFaceDown) {
+        if (splitHalf != null && cv != null) {
+            drawSplitHalfArt(cv, g, x, y, w, h);
+            drawOutlineColor(g, splitHalf.state.getColors(), x, y, w, h);
+            g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+            return;
+        }
         boolean isDungeon = cv.getCurrentState().getType().isDungeon();
         boolean useStretchedArt = cv.getCurrentState().getType().hasSubtype("Saga")
                 || cv.getCurrentState().getType().hasSubtype("Class")
@@ -516,6 +948,90 @@ public class CardImageRenderer {
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
     }
 
+    /**
+     * Draws the art of one half of a split card into the art box of that half. The half is drawn upright and turned later,
+     * so the art is upright here too. The scan has the arts sideways: the two arts of a split card are in one tall crop, the
+     * first half below the second, with their tops to the left. An Aftermath card has the first art upright on top of the
+     * art crop, and a crop of the second art with its top to the right. Every crop is cut to the shape of the box.
+     */
+    private static void drawSplitHalfArt(CardView cv, Graphics g, float x, float y, float w, float h) {
+        final SplitHalf half = splitHalf;
+        final FImageComplex art = CardRenderer.getCardArt(cv);
+        FImageComplex source = art;
+        if (art != null && half.aftermath && !half.first) {
+            source = CardRenderer.getAftermathSecondCardArt(cv.getCurrentState().getImageKey());
+        }
+        if (source == null || source.getTexture() == null || source.getTexture() == forgeArt.getTexture()) {
+            drawArtPlaceholder(g, x, y, w, h);
+            return;
+        }
+        final Texture texture = source.getTexture();
+        int sx = source.getRegionX(), sy = source.getRegionY(), sw = (int) source.getWidth(), sh = (int) source.getHeight();
+        float turn; //the turn that makes the crop upright
+        if (!half.aftermath) {
+            //both arts are in the crop (the second half above, the first below). Cut each one out with the
+            //measured position of the art box of the scan (in pixels of a 488x680 scan; the crop starts at x=64.4 and is 206.9 wide)
+            final CardEdition ed = FModel.getMagicDb().getEditions().get(cv.getCurrentState().getSetCode());
+            final boolean isOldFrame = ed != null && !ed.isModern();
+            final float kx = sw / 206.9f, ky = sh / 680f;
+            final float x0 = isOldFrame ? 2f : 15f, x1 = isOldFrame ? 161f : 193f;
+            final float y0, y1;
+            if (isOldFrame) {
+                y0 = half.first ? 384f : 60f;
+                y1 = half.first ? 622f : 298f;
+            } else {
+                y0 = half.first ? 353f : 41f;
+                y1 = half.first ? 610f : 298f;
+            }
+            sx += Math.round(x0 * kx);
+            sw = Math.round((x1 - x0) * kx);
+            sy += Math.round(y0 * ky);
+            sh = Math.round((y1 - y0) * ky);
+            turn = -90;
+        } else if (half.first) {
+            sh /= 2; //the upper half of the crop is the first art
+            turn = 0;
+        } else {
+            turn = 90;
+        }
+        if (half.aftermath) {
+            //a little off every edge: some scans have a bit of the frame at the edge of the art
+            final int marginX = sw / 40, marginY = sh / 40;
+            sx += marginX;
+            sw -= 2 * marginX;
+            sy += marginY;
+            sh -= 2 * marginY;
+        }
+        //cut the crop to the shape of the box (which is drawn turned, so its sides swap)
+        final float boxRatio = turn == 0 ? w / h : h / w;
+        final float cropRatio = (float) sw / sh;
+        if (cropRatio > boxRatio) {
+            final int cut = Math.round(sw - sh * boxRatio);
+            sx += cut / 2;
+            sw -= cut;
+        } else {
+            final int cut = Math.round(sh - sw / boxRatio);
+            sy += cut / 2;
+            sh -= cut;
+        }
+        if (turn == 0) {
+            g.drawRotatedImage(texture, x, y, w, h, x + w / 2, y + h / 2, sx, sy, sw, sh, 0);
+        } else {
+            final float cx = x + w / 2, cy = y + h / 2;
+            g.drawRotatedImage(texture, cx - h / 2, cy - w / 2, h, w, cx, cy, sx, sy, sw, sh, turn);
+        }
+    }
+
+    /** The logo on the background of the cards, in its own shape, whatever the shape of the box is. */
+    private static void drawArtPlaceholder(Graphics g, float x, float y, float w, float h) {
+        g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, x, y, w, h);
+        g.fillRect(FScreen.getTextureOverlayColor(), x, y, w, h);
+        final float logoWidth = FSkinImage.CARDART.getWidth(), logoHeight = FSkinImage.CARDART.getHeight();
+        final float scale = Math.min(h / (logoHeight * 1.1f), w * 0.9f / logoWidth);
+        final float lw = logoWidth * scale, lh = logoHeight * scale;
+        g.drawImage(FSkinImage.CARDART, x + (w - lw) / 2, y + (h - lh) / 2, lw, lh);
+    }
+
     private static void drawSplitCard(CardView card, FImageComplex cardArt, Graphics g, float x, float y, float w, float h, boolean altState, boolean isFaceDown) {
         if (cardArt.getTexture() == forgeArt.getTexture()) {
             g.drawImage(cardArt, x, y, w, h);
@@ -556,17 +1072,24 @@ public class CardImageRenderer {
     }
 
     private static void drawTypeLine(Graphics g, CardStateView state, boolean canShow, Color[] colors, float x, float y, float w, float h, boolean noText, boolean noRarity, boolean isAdventure, boolean useEditionLabel) {
-        float oldAlpha = g.getfloatAlphaComposite();
-        if (isAdventure)
-            g.setAlphaComposite(0.6f);
-        fillColorBackground(g, colors, x, y, w, h);
-        g.setAlphaComposite(oldAlpha);
-        //draw outline color here
-        if (state != null)
-            drawOutlineColor(g, state.getColors(), x, y, w, h);
-        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+        final boolean band = MODERN_FRAME && isAdventure;
+        final FSkinFont typeFont = band ? ADV_TYPE_FONT : TYPE_FONT;
+        final Color textColor = band ? Color.WHITE : Color.BLACK;
+        if (band) {
+            fillColorBackground(g, colors, x, y, w, h);
+        } else {
+            final float rx = barRx(h), ry = barRy(h);
+            final ColorSet cardColors = state != null ? state.getColors() : null;
+            final float inset = frameBox(g, Color.BLACK, x, y, w, h, rx, ry);
+            float oldAlpha = g.getfloatAlphaComposite();
+            if (isAdventure)
+                g.setAlphaComposite(0.6f);
+            fillInsideBox(g, colors, x, y, w, h, rx, ry, inset);
+            g.setAlphaComposite(oldAlpha);
+            finishBox(g, cardColors, Color.BLACK, x, y, w, h, rx, ry);
+        }
 
-        float padding = h / 8;
+        float padding = MODERN_FRAME ? h / 3 : h / 8;
 
         //draw rarity: edition text box (deck-editor style) or classic anvil set icons
         if (!noRarity && state != null) {
@@ -603,8 +1126,12 @@ public class CardImageRenderer {
         if (noText)
             return;
         x += padding;
-        if (state != null)
-            g.drawText(CardDetailUtil.formatCardType(state, canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, Align.left, true);
+        if (state != null) {
+            String typeLine = CardDetailUtil.formatCardType(state, canShow);
+            if (MODERN_FRAME)
+                typeLine = typeLine.replace(" - ", " \u2014 "); //an em dash, like on the desktop
+            g.drawText(typeLine, typeFont, textColor, x, y, w - padding, h, false, Align.left, true);
+        }
     }
 
     //use text renderer to handle mana symbols and reminder text
@@ -612,10 +1139,30 @@ public class CardImageRenderer {
 
     private static void drawTextBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean onTop, boolean useCardBGTexture, boolean noText, boolean altstate, boolean isFacedown, boolean canShow, boolean isChoiceList, boolean isArtVisible) {
         if (card.hasSecondaryState() || card.hasPreparedSpell()) {
-            Color[] altcolors = FSkinColor.tintColors(Color.WHITE, fillColorBackground(g, CardDetailUtil.getBorderColors(card.getState(true), canShow) , x, y, w, h), CardRenderer.NAME_BOX_TINT);
             if ((isFacedown && !altstate) || card.getZone() == ZoneType.Stack && !card.hasPreparedSpell() || isChoiceList || altstate) {
                 setTextBox(g, card, state, colors, x, y, w, h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown, isArtVisible);
+            } else if (MODERN_FRAME) {
+                //like the desktop: one box around the adventure with a gray header and a dark gray type band on top of it
+                final Color[] baseColors = toColors(CardDetailUtil.getBorderColors(card.getState(true), canShow));
+                final Color[] headerColors = FSkinColor.tintColors(Color.GRAY, baseColors, 0.6f);
+                final Color[] typeColors = FSkinColor.tintColors(Color.DARK_GRAY, baseColors, 0.6f);
+                final Color[] boxColors = FSkinColor.tintColors(Color.WHITE, baseColors, CardRenderer.TEXT_BOX_TINT);
+                float leftX = x, rightX = x + w / 2, width = w - (w / 2);
+                CardStateView rightState = state, leftState = card.getState(true);
+                if (card.hasPreparedSpell()) {
+                    leftX = x + w / 2;
+                    rightX = x;
+                }
+                final float headerHeight = getTypeBoxHeight() - 2; //the same sizes as on the desktop
+                final float typeHeight = headerHeight - 1;
+                //the bands first, the frame of the box is drawn over their edges
+                drawHeader(g, card, leftState, headerColors, leftX, y, width, headerHeight, noText, true);
+                drawTypeLine(g, leftState, canShow, typeColors, leftX, y + headerHeight, width, typeHeight, noText, true, true, false);
+                setTextBox(g, card, leftState, boxColors, leftX, y + headerHeight + typeHeight, width, h - headerHeight - typeHeight, onTop, useCardBGTexture, noText, headerHeight, typeHeight, true, altstate, isFacedown, isArtVisible);
+                //right
+                setTextBox(g, card, rightState, colors, rightX, y, width, h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown, isArtVisible);
             } else {
+                Color[] altcolors = FSkinColor.tintColors(Color.WHITE, fillColorBackground(g, CardDetailUtil.getBorderColors(card.getState(true), canShow) , x, y, w, h), CardRenderer.NAME_BOX_TINT);
                 float leftX = x, rightX = x + w / 2, width = w - (w / 2);
                 CardStateView rightState = state, leftState = card.getState(true);
                 if (card.hasPreparedSpell()) {
@@ -638,6 +1185,9 @@ public class CardImageRenderer {
     }
 
     private static void setTextBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean onTop, boolean useCardBGTexture, boolean noText, float adventureHeaderHeight, float adventureTypeHeight, boolean drawAdventure, boolean altstate, boolean isFaceDown, boolean isArtVisible) {
+        //the frame goes first, the fills below are inset to sit inside of it
+        final ColorSet frameColors = state != null ? state.getColors() : null;
+        final float fillX = x, fillY = y, fillW = w, fillH = h; //a plain rectangle like on the desktop, its line goes on top
         boolean fakeDuals = false;
         //update land bg colors
         FSkinProp imageProp = null;
@@ -674,10 +1224,10 @@ public class CardImageRenderer {
                 colorPairs = FSkinColor.tintColors(Color.WHITE, colorPairs, 0.3f);
                 float oldAlpha = g.getfloatAlphaComposite();
                 if (!useCardBGTexture)
-                    fillColorBackground(g, colorPairs, x, y, w, h);
+                    fillBox(g, colorPairs, fillX, fillY, fillW, fillH, 0, 0);
                 else {
                     g.setAlphaComposite(0.95f);
-                    fillColorBackground(g, colorPairs, x, y, w, h);
+                    fillBox(g, colorPairs, fillX, fillY, fillW, fillH, 0, 0);
                     if (fakeDuals && landTypeCount == 2 && isArtVisible) {
                         g.setAlphaComposite(0.1f);
                         drawAlphaLines(g, x, y, w, h);
@@ -695,27 +1245,26 @@ public class CardImageRenderer {
                 bgColor = FSkinColor.tintColor(Color.WHITE, bgColor, CardRenderer.NAME_BOX_TINT);
                 float oldAlpha = g.getfloatAlphaComposite();
                 if (!useCardBGTexture)
-                    g.fillRect(bgColor, x, y, w, h);
+                    fillBox(g, new Color[] { bgColor }, fillX, fillY, fillW, fillH, 0, 0);
                 else {
                     g.setAlphaComposite(0.95f);
-                    g.fillRect(bgColor, x, y, w, h);
+                    fillBox(g, new Color[] { bgColor }, fillX, fillY, fillW, fillH, 0, 0);
                     g.setAlphaComposite(oldAlpha);
                 }
             }
         } else {
             float oldAlpha = g.getfloatAlphaComposite();
             if (!useCardBGTexture)
-                fillColorBackground(g, colors, x, y, w, h);
+                fillBox(g, colors, fillX, fillY, fillW, fillH, 0, 0);
             else {
                 g.setAlphaComposite(0.95f);
-                fillColorBackground(g, colors, x, y, w, h);
+                fillBox(g, colors, fillX, fillY, fillW, fillH, 0, 0);
                 g.setAlphaComposite(oldAlpha);
             }
         }
-        //draw outline color here
-        if (state != null)
-            drawOutlineColor(g, state.getColors(), x, y, w, h);
-        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+        //the frame of an adventure also goes around the bands above the text box
+        final float bands = MODERN_FRAME && drawAdventure ? adventureHeaderHeight + adventureTypeHeight : 0;
+        finishBox(g, frameColors, Color.BLACK, x, y - bands, w, h + bands, 0, 0);
 
         if (!onTop) {
             return;
@@ -781,6 +1330,17 @@ public class CardImageRenderer {
                             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState(), card.getRightSplitState()) : null);
                 }
             }
+            if (state != null && card.isSplitCard() && !card.hasSecondaryState() && (state == card.getLeftSplitState() || state == card.getRightSplitState())) {
+                //a half of a split card (drawn on its own, on the stack or on the battlefield) has the text of that half only
+                String halfText = needTranslation ? CardTranslation.getTranslatedOracle(state) : null;
+                if (StringUtils.isEmpty(halfText)) {
+                    halfText = state.getOracleText();
+                }
+                if (StringUtils.isEmpty(halfText)) { //a card in a game has no oracle text to show, only its rules
+                    halfText = (state.getRulesText() + "\r\n\r\n" + state.getAbilityText()).trim();
+                }
+                text = halfText;
+            }
             if (StringUtils.isEmpty(text)) {
                 return;
             }
@@ -821,10 +1381,19 @@ public class CardImageRenderer {
     }
 
     /** Width of the badge of a row: a circle (Station) and a square (Saga chapter) are as wide as they are high. */
-    private static float getBadgeWidth(CardTextRows.Row row, float boxHeight, float boxPadding) {
+    private static float getBadgeWidth(CardTextRows.Row row, float boxHeight, float boxPadding, boolean desktopSize) {
         float textWidth = 0;
         for (String part : row.badgeParts()) {
             textWidth = Math.max(textWidth, getBoundsWidth(part, PT_FONT));
+        }
+        if (desktopSize) { //loyalty abilities, like the desktop: as wide as the text needs, not wider
+            if (row.kind == CardTextRows.Kind.SAGA) {
+                return Math.round(boxHeight * 0.7f);
+            }
+            if (row.isRoundBadge()) {
+                return Math.round(boxHeight * 1.15f);
+            }
+            return Math.max(Math.round(boxHeight * 1.15f), textWidth + getCapHeight(PT_FONT) * 2);
         }
         textWidth += 2 * boxPadding;
         if (row.isRoundBadge() || row.kind == CardTextRows.Kind.SAGA) {
@@ -839,7 +1408,7 @@ public class CardImageRenderer {
             final int parts = row.badgeParts().size();
             return parts * badgeWidth + (parts - 1) * gap;
         }
-        return row.isRoundBadge() ? badgeWidth : boxHeight;
+        return row.isRoundBadge() && !MODERN_FRAME ? badgeWidth : boxHeight; //the circle of the desktop is as high as a box
     }
 
     /**
@@ -855,7 +1424,9 @@ public class CardImageRenderer {
                 drawRowBox(g, state, chapters.get(i), false, colors, Color.BLACK, false, x, top + i * (width + gap) + width / 2, width, width);
             }
         } else if (row.kind == CardTextRows.Kind.STATION) {
-            drawRowBox(g, state, row.badge, true, SPACECRAFT_PTBOX_COLOR, Color.WHITE, true, x, centerY, width, width);
+            drawRowBox(g, state, row.badge, true, FRAME_SPACECRAFT_COLOR, Color.WHITE, true, x, centerY, width, MODERN_FRAME ? boxHeight : width);
+        } else if (MODERN_FRAME) { //loyalty abilities: black with a white outline and white text, like the loyalty box
+            drawRowBox(g, state, row.badge, false, new Color[] { LOYALTY_BOX_COLOR }, Color.WHITE, false, Color.WHITE, x, centerY, width, boxHeight);
         } else {
             drawRowBox(g, state, row.badge, false, colors, Color.BLACK, false, x, centerY, width, boxHeight);
         }
@@ -1052,7 +1623,7 @@ public class CardImageRenderer {
         final int count = rows.size();
         final float padding = getCapHeight(TEXT_FONT) * 0.75f;
         final float boxPadding = Math.round(getCapHeight(PT_FONT) / 4);
-        final float boxHeight = getCapHeight(PT_FONT) + getAscent(PT_FONT) + 3 * boxPadding;
+        final float boxHeight = MODERN_FRAME ? Math.round(getHeaderHeight() * 0.9f) : getCapHeight(PT_FONT) + getAscent(PT_FONT) + 3 * boxPadding;
         final float headerHeight = 2 * getCapHeight(TYPE_FONT); // header of a Class level, as high as a type line
 
         // a small gap above and below the rows, so the mana symbols of the first and the last row stay inside of the text box
@@ -1064,7 +1635,7 @@ public class CardImageRenderer {
         float badgeWidth = 0;
         for (CardTextRows.Row row : rows) {
             if (hasBadgeBox(row)) {
-                badgeWidth = Math.max(badgeWidth, getBadgeWidth(row, boxHeight, boxPadding));
+                badgeWidth = Math.max(badgeWidth, getBadgeWidth(row, boxHeight, boxPadding, MODERN_FRAME));
             }
         }
         final float badgeOverhang = badgeWidth * 0.4f;
@@ -1150,7 +1721,7 @@ public class CardImageRenderer {
                 float ptWidth = Math.max(PT_BOX_WIDTH, getBoundsWidth(row.pt, PT_FONT) + 2 * boxPadding);
                 // like the P/T box of the card: gray for a Spacecraft, the color of the card otherwise
                 if (row.isStation) {
-                    drawRowBox(g, state, row.pt, false, SPACECRAFT_PTBOX_COLOR, Color.WHITE, true, ptRight - ptWidth, centerY, ptWidth, boxHeight);
+                    drawRowBox(g, state, row.pt, false, FRAME_SPACECRAFT_COLOR, Color.WHITE, true, ptRight - ptWidth, centerY, ptWidth, boxHeight);
                 } else {
                     drawRowBox(g, state, row.pt, false, badgeColors, Color.BLACK, false, ptRight - ptWidth, centerY, ptWidth, boxHeight);
                 }
@@ -1167,24 +1738,38 @@ public class CardImageRenderer {
      */
     private static void drawRowBox(Graphics g, CardStateView state, String text, boolean circle, Color[] fill, Color textColor,
                                    boolean outlineWithCardColor, float x, float centerY, float w, float h) {
+        drawRowBox(g, state, text, circle, fill, textColor, outlineWithCardColor, Color.BLACK, x, centerY, w, h);
+    }
+
+    private static void drawRowBox(Graphics g, CardStateView state, String text, boolean circle, Color[] fill, Color textColor,
+                                   boolean outlineWithCardColor, Color outlineColor, float x, float centerY, float w, float h) {
         float y = centerY - h / 2;
         if (circle) {
             final float cx = x + w / 2;
             final float radius = Math.min(w, h) / 2;
             g.fillCircle(fill[0], cx, centerY, radius);
-            if (outlineWithCardColor) {
+            if (MODERN_FRAME && outlineWithCardColor) { //like the desktop: a single outline in the color of the card
+                final Color outline = getOutlineColor(state.getColors());
+                g.drawCircle(BORDER_THICKNESS, outline != null ? outline : Color.LIGHT_GRAY, cx, centerY, radius);
+            } else if (outlineWithCardColor) {
                 final Color outline = getOutlineColor(state.getColors());
                 if (outline != null) {
                     g.drawCircle(BORDER_THICKNESS * 2, outline, cx, centerY, radius);
                 }
             }
-            g.drawCircle(BORDER_THICKNESS, Color.BLACK, cx, centerY, radius);
+            if (!(MODERN_FRAME && outlineWithCardColor))
+                g.drawCircle(BORDER_THICKNESS, Color.BLACK, cx, centerY, radius);
         } else {
-            fillColorBackground(g, fill, x, y, w, h);
-            if (outlineWithCardColor) {
-                drawOutlineColor(g, state.getColors(), x, y, w, h);
-            }
-            g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+            //like the desktop: wide boxes (P/T, level) have tall elliptical ends, square ones (Saga chapters) small round corners
+            final boolean square = w <= h * 1.15f;
+            final float rx = !MODERN_FRAME ? 0 : h / 6, ry = !MODERN_FRAME ? 0 : square ? h / 6 : h / 2;
+            final boolean cardOutline = MODERN_FRAME && outlineWithCardColor; //Station P/T: a single outline in the color of the card
+            final Color cardOutlineColor = cardOutline ? getOutlineColor(state.getColors()) : null;
+            final Color boxOutline = cardOutline ? (cardOutlineColor != null ? cardOutlineColor : Color.LIGHT_GRAY) : outlineColor;
+            final ColorSet rowColors = outlineWithCardColor && !cardOutline ? state.getColors() : null;
+            final float inset = frameBox(g, boxOutline, x, y, w, h, rx, ry);
+            fillInsideBox(g, fill, x, y, w, h, rx, ry, inset);
+            finishBox(g, rowColors, boxOutline, x, y, w, h, rx, ry);
         }
         g.drawText(text, PT_FONT, textColor, x, y, w, h, false, Align.center, true);
     }
@@ -1219,7 +1804,7 @@ public class CardImageRenderer {
             ptWidths[i] = pieceWidth;
             totalPieceWidth += pieceWidth;
         }
-        float boxHeight = getCapHeight(PT_FONT) + getAscent(PT_FONT) + 3 * padding;
+        float boxHeight = MODERN_FRAME ? getHeaderHeight() : getCapHeight(PT_FONT) + getAscent(PT_FONT) + 3 * padding;
 
         float boxWidth = Math.max(PT_BOX_WIDTH, totalPieceWidth + 2 * padding);
         x += w - boxWidth;
@@ -1229,14 +1814,12 @@ public class CardImageRenderer {
 
         //loyalty and defense boxes are black with white text and outline, like on the desktop
         final boolean isDarkBox = !state.isCreature() && (state.isPlaneswalker() || state.isBattle());
-        fillColorBackground(g, state.isVehicle() ? VEHICLE_PTBOX_COLOR : state.isSpaceCraft() ? SPACECRAFT_PTBOX_COLOR : isDarkBox ? new Color[] { LOYALTY_BOX_COLOR } : colors, x, y, w, h);
-        if (isDarkBox) {
-            g.drawRect(BORDER_THICKNESS, Color.WHITE, x, y, w, h);
-        } else {
-            //draw outline color here
-            drawOutlineColor(g, state.getColors(), x, y, w, h);
-            g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
-        }
+        final float ptRx = barRx(h), ptRy = barRy(h); //the same ends as the other bars, like on the desktop
+        final Color ptBorder = isDarkBox ? Color.WHITE : Color.BLACK;
+        final ColorSet ptCardColors = isDarkBox ? null : state.getColors();
+        final float ptInset = frameBox(g, ptBorder, x, y, w, h, ptRx, ptRy);
+        fillInsideBox(g, state.isVehicle() ? FRAME_VEHICLE_COLOR : state.isSpaceCraft() ? FRAME_SPACECRAFT_COLOR : isDarkBox ? new Color[] { LOYALTY_BOX_COLOR } : colors, x, y, w, h, ptRx, ptRy, ptInset);
+        finishBox(g, ptCardColors, ptBorder, x, y, w, h, ptRx, ptRy);
 
         if (noText)
             return;

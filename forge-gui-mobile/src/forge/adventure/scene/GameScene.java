@@ -8,6 +8,7 @@ import forge.adventure.data.BiomeData;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
+import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.world.World;
 import forge.util.TextUtil;
@@ -72,6 +73,7 @@ public class GameScene extends HudScene {
     @Override
     public void enter() {
         MapStage.getInstance().clearIsInMap();
+        Config.instance().setPlaceIgnoresExcludedSets(false);
         Forge.clearTransitionScreen();
         Forge.clearCurrentScreen();
         super.enter();

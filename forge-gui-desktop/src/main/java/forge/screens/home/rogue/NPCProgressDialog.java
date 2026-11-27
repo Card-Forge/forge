@@ -4,12 +4,8 @@ import forge.util.Localizer;
 
 import forge.gamemodes.rogue.RogueMetaProgress;
 import forge.gamemodes.rogue.npc.NPC;
-import forge.gamemodes.rogue.npc.NPCEncounter;
-import forge.gamemodes.rogue.npc.GontiEncounter;
-import forge.gamemodes.rogue.npc.HenzieEncounter;
-import forge.gamemodes.rogue.npc.NarsetEncounter;
-import forge.gamemodes.rogue.npc.TeferiEncounter;
-import forge.gamemodes.rogue.npc.TyvarEncounter;
+import forge.gamemodes.rogue.npc.NPCEncounterComposite;
+import forge.gamemodes.rogue.npc.NPCEncounterComposite.LevelChoice;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
@@ -30,7 +26,7 @@ public class NPCProgressDialog {
   private static final int SAVE_OPTION = 0;
 
   private final MainPanel panel;
-  private final Map<NPC, FComboBox<LevelOption>> levelInputs = new EnumMap<>(NPC.class);
+  private final Map<NPC, FComboBox<LevelChoice>> levelInputs = new EnumMap<>(NPC.class);
 
   public NPCProgressDialog(RogueMetaProgress progress) {
     panel = new MainPanel();
@@ -53,11 +49,11 @@ public class NPCProgressDialog {
 
     for (NPC npc : NPC.values()) {
       int currentLevel = progress.getNPCLevel(npc.id);
-      List<LevelOption> options = getOptionsForNpc(npc, currentLevel);
+      List<LevelChoice> options = NPCEncounterComposite.levelChoices(npc, currentLevel);
       if (options.isEmpty()) {
         continue;
       }
-      FComboBox<LevelOption> comboBox = new FComboBox<>(options);
+      FComboBox<LevelChoice> comboBox = new FComboBox<>(options);
       comboBox.setSelectedIndex(0);
       levelInputs.put(npc, comboBox);
 
@@ -93,66 +89,10 @@ public class NPCProgressDialog {
     }
 
     Map<NPC, Integer> updatedLevels = new EnumMap<>(NPC.class);
-    for (Map.Entry<NPC, FComboBox<LevelOption>> entry : levelInputs.entrySet()) {
+    for (Map.Entry<NPC, FComboBox<LevelChoice>> entry : levelInputs.entrySet()) {
       updatedLevels.put(entry.getKey(), Objects.requireNonNull(entry.getValue().getSelectedItem()).level());
     }
     return updatedLevels;
-  }
-
-  private static List<LevelOption> getOptionsForNpc(NPC npc, int currentLevel) {
-    NPCEncounter[] encounters = switch (npc) {
-      case TYVAR -> TyvarEncounter.values();
-      case GONTI -> GontiEncounter.values();
-      case NARSET -> NarsetEncounter.values();
-      case HENZIE -> HenzieEncounter.values();
-      case TEFERI -> TeferiEncounter.values();
-    };
-    if (encounters.length == 0) {
-      return List.of();
-    }
-
-    List<LevelOption> options = new ArrayList<>();
-    options.add(new LevelOption(
-        Localizer.getInstance().getMessage("lblRogueKeepNpcLevel", currentLevel, getActiveEncounterName(encounters, currentLevel)),
-        currentLevel));
-    boolean hasLevelZero = false;
-    for (NPCEncounter encounter : encounters) {
-      if (encounter.getRequiredLevel() < 0) {
-        continue;
-      }
-      if (encounter.getRequiredLevel() == 0) {
-        hasLevelZero = true;
-      }
-      options.add(new LevelOption(
-          encounter.getRequiredLevel() + " - " + getEnumName(encounter), encounter.getRequiredLevel()));
-    }
-    if (!hasLevelZero) {
-      options.add(1, new LevelOption("0 - NONE", 0));
-    }
-    return options;
-  }
-
-  private static String getEnumName(NPCEncounter encounter) {
-    return ((Enum<?>) encounter).name();
-  }
-
-  private static String getActiveEncounterName(NPCEncounter[] encounters, int currentLevel) {
-    NPCEncounter activeEncounter = null;
-    for (NPCEncounter encounter : encounters) {
-      int requiredLevel = encounter.getRequiredLevel();
-      if (requiredLevel >= 0 && requiredLevel <= currentLevel
-          && (activeEncounter == null || requiredLevel > activeEncounter.getRequiredLevel())) {
-        activeEncounter = encounter;
-      }
-    }
-    return activeEncounter == null ? "NONE" : getEnumName(activeEncounter);
-  }
-
-  private record LevelOption(String label, int level) {
-    @Override
-    public String toString() {
-      return label;
-    }
   }
 
   private static class MainPanel extends SkinnedPanel {

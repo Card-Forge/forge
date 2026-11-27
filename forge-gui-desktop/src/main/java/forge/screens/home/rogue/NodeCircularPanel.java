@@ -20,6 +20,7 @@ public abstract class NodeCircularPanel extends NodePanel {
     setPreferredSize(new Dimension(CIRCULAR_SIZE, CIRCULAR_SIZE));
     setMinimumSize(new Dimension(CIRCULAR_SIZE, CIRCULAR_SIZE));
     setMaximumSize(new Dimension(CIRCULAR_SIZE, CIRCULAR_SIZE));
+    setToolTipText(node.getType().sideTooltip());
   }
 
   @Override

@@ -141,7 +141,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
 
         @Override
         protected void onActivate(NewConquestScreenModel model) {
-            lstCommanders.setListData(model.startingPlane.getCommanders());
+            lstCommanders.setListData(model.startingPlane.getAwardableCommanders());
             reset();
         }
 
@@ -200,7 +200,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
 
         @Override
         protected void onActivate(NewConquestScreenModel model) {
-            lstPlaneswalkers.setListData(ConquestUtil.getStartingPlaneswalkerOptions(model.startingCommander));
+            lstPlaneswalkers.setListData(ConquestUtil.getStartingPlaneswalkerOptions(model.startingCommander, model.startingPlane));
             reset();
         }
 

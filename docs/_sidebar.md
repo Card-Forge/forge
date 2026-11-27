@@ -7,6 +7,7 @@
   - [Network Play](network-play.md)
   - [Advanced search](Advanced-Search.md)
   - [Advanced Yield Options](Advanced-Yield-Options.md)
+  - [Excluded Sets](Excluded-Sets.md)
 
 - Adventure Mode
 

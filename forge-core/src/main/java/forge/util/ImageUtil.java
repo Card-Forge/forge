@@ -309,6 +309,17 @@ public class ImageUtil {
         }
     }
 
+    /** Whether the file holds simple lossy WebP, which has no alpha channel. */
+    public static boolean isOpaqueWebp(File file) {
+        byte[] head = new byte[16];
+        try (FileInputStream in = new FileInputStream(file)) {
+            return in.read(head) == head.length && isWebp(head)
+                    && head[12] == 'V' && head[13] == 'P' && head[14] == '8' && head[15] == ' ';
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
     public static String toMWSFilename(String in) {
         in = StringUtils.stripAccents(in);
         final StringBuilder out = new StringBuilder();

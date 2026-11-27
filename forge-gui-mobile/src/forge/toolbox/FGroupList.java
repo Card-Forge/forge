@@ -162,10 +162,25 @@ public class FGroupList<E> extends FScrollPane {
         g.fillRect(FScreen.getTextureOverlayColor(), 0, 0, getWidth(), getHeight());
     }
 
+    /** Content above the groups that scrolls with them. */
+    public abstract static class Header extends FContainer {
+        public abstract float getPreferredHeight(float width);
+    }
+
+    private Header header;
+
+    public void setHeader(Header header0) {
+        header = add(header0);
+    }
+
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
         float y = 0;
         float groupHeight;
+        if (header != null) {
+            y = header.getPreferredHeight(visibleWidth);
+            header.setBounds(0, 0, visibleWidth, y);
+        }
 
         for (ListGroup group : groups) {
             if (group.isVisible()) {

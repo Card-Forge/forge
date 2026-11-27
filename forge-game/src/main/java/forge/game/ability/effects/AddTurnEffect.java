@@ -16,6 +16,11 @@ import forge.util.Lang;
 import forge.util.Localizer;
 
 public class AddTurnEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined", "ExtraTurnDelayedTrigger", "ExtraTurnDelayedTriggerExecute", "NoSchemes",
+        "ShowMessage", "SkipUntap",
+    };
+    public static final String[][] REQUIRED_PARAMS = {{"NumTurns"}};
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

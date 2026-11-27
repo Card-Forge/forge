@@ -24,6 +24,9 @@ import forge.util.collect.FCollectionView;
  *
  */
 public class BalanceEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Zone",
+    };
 
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityEffect#resolve(forge.card.spellability.SpellAbility)

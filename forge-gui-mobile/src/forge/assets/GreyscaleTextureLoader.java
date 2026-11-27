@@ -30,7 +30,7 @@ class GreyscaleTextureLoader extends TextureLoader {
             Format format = parameter == null ? null : parameter.format;
             boolean genMipMaps = parameter != null && parameter.genMipMaps;
             TextureData data = "webp".equalsIgnoreCase(file.extension())
-                    ? new CardTextureData(file.path(), genMipMaps, false)
+                    ? new CardTextureData(file.path(), genMipMaps, false, false)
                     : TextureData.Factory.loadFromFile(file, format, genMipMaps);
             if (data instanceof FileTextureData && data.getFormat() == Format.Alpha) {
                 data.prepare();

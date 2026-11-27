@@ -5,5 +5,5 @@ S:Mode$ Continuous | Affected$ Creature | EffectZone$ Command | AddAbility$ Llan
 SVar:LlanowarAb:AB$ Mana | Cost$ T | Amount$ 2 | Produced$ G | SpellDescription$ Add {G}{G}.
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, untap all creatures you control.
 SVar:RolledChaos:DB$ UntapAll | ValidCards$ Creature.YouCtrl
-SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True
+SVar:AIRollPlanarDieParams:Mode$ Always | HasValidCardInZone$ Battlefield:Creature.YouCtrl+tapped | MinTurn$ 1
 Oracle:All creatures have "{T}: Add {G}{G}."\nWhenever chaos ensues, untap all creatures you control.

@@ -106,7 +106,12 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = calculateDamageAmount(sa, source, damage);
 
-        if (damage.equals("X") || (dmg == 0 && source.getSVar("X").equals("Count$xPaid"))) {
+        // Crater's Claws deals X plus 2 with ferocious; the 2 is not paid for, so it is kept apart from X and added to dmg below
+        final int ferociousBonus = sourceName.equals("Crater's Claws") && ai.hasFerocious() ? 2 : 0;
+
+        // Crater's Claws deals Y, which is already X plus 2 with ferocious, so it is not 0 before X is chosen and needs asking for here
+        if (damage.equals("X") || sourceName.equals("Crater's Claws")
+                || (dmg == 0 && source.getSVar("X").equals("Count$xPaid"))) {
             if (sa.getSVar("X").equals("Count$xPaid") || sa.getSVar(damage).equals("Count$xPaid")) {
                 dmg = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
 
@@ -115,8 +120,9 @@ public class DamageDealAi extends DamageAiBase {
                 if (MyRandom.percentTrue(holdChance)) {
                     int threshold = AiProfileUtil.getIntProperty(ai, AiProps.HOLD_X_DAMAGE_SPELLS_THRESHOLD);
                     boolean inDanger = ComputerUtil.aiLifeInDanger(ai, false, 0);
-                    boolean isLethal = sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer() && dmg >= ai.getWeakestOpponent().getLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife();
-                    if (dmg < threshold && ai.getGame().getPhaseHandler().getTurn() / 2 < threshold && !inDanger && !isLethal) {
+                    final int totalDmg = dmg + ferociousBonus; // what the spell will deal, not only what X pays for
+                    boolean isLethal = sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer() && totalDmg >= ai.getWeakestOpponent().getLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife();
+                    if (totalDmg < threshold && ai.getGame().getPhaseHandler().getTurn() / 2 < threshold && !inDanger && !isLethal) {
                         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                 }
@@ -148,9 +154,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
-        if (sourceName.equals("Crater's Claws") && ai.hasFerocious()) {
-            dmg += 2;
-        }
+        dmg += ferociousBonus;
 
         String logic = sa.getParamOrDefault("AILogic", "");
         if ("DiscardLands".equals(logic)) {
@@ -284,7 +288,11 @@ public class DamageDealAi extends DamageAiBase {
         if ((damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) ||
                 sourceName.equals("Crater's Claws")) {
             // If I can kill my target by paying less mana, do it
-            if (sa.usesTargeting() && !sa.getTargets().isTargetingAnyPlayer() && !sa.isDividedAsYouChoose()) {
+            // minimalX adds the ferocious bonus itself, so it is given the most X that can be paid, not the damage that makes
+            final Integer lethalX = sa.usesTargeting() ? minimalX(sa, dmg - ferociousBonus, source, sa.hasParam("NoPrevention")) : null;
+            if (lethalX != null) {
+                sa.setXManaCostPaid(lethalX);
+            } else if (sa.usesTargeting() && !sa.getTargets().isTargetingAnyPlayer() && !sa.isDividedAsYouChoose()) {
                 int actualPay = dmg;
                 final boolean noPrevention = sa.hasParam("NoPrevention");
                 for (final Card c : sa.getTargets().getTargetCards()) {
@@ -293,8 +301,8 @@ public class DamageDealAi extends DamageAiBase {
                         actualPay = adjDamage;
                     }
                 }
-                if (sourceName.equals("Crater's Claws") && ai.hasFerocious()) {
-                    actualPay = actualPay > 2 ? actualPay - 2 : 0;
+                if (ferociousBonus > 0) {
+                    actualPay = Math.max(0, actualPay - ferociousBonus);
                 }
                 sa.setXManaCostPaid(actualPay);
             }
@@ -344,6 +352,7 @@ public class DamageDealAi extends DamageAiBase {
 
         // Filter MustTarget requirements
         StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
+        hPlay = CardLists.filter(hPlay, c -> canActuallyDamage(c, d, source, noPrevention));
 
         CardCollection killables = CardLists.filter(hPlay, c -> c.getSVar("Targeting").equals("Dies")
                 || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
@@ -366,11 +375,23 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (!mandatory) {
+            // Nothing that the damage kills (protected creatures were left out above): the spell is held. A creature that
+            // merely survives it is no target, not even the only one left unprotected (a Lightning Bolt at the 0/4 Crystal
+            // Barricade while it keeps everything else safe, #3994). A mandatory trigger still has to pick one below.
             return null;
         }
 
-        // try unfiltered now
+        // Retry against the full legal target set. Prefer a target that can take damage, but a mandatory trigger
+        // still has to choose a legal target when prevention makes every option deal zero.
         hPlay = getTargetableCards(pl, sa, pl, tgt, activator, source, game);
+        StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
+        final List<Card> legalTargets = Lists.newArrayList(hPlay);
+        final List<Card> damageableTargets = CardLists.filter(hPlay, c -> canActuallyDamage(c, d, source, noPrevention));
+        if (!damageableTargets.isEmpty()) {
+            hPlay = damageableTargets;
+        } else {
+            hPlay = legalTargets;
+        }
         List<Card> controlledByOpps = CardLists.filterControlledBy(hPlay, ai.getOpponents());
 
         if (!hPlay.isEmpty()) {
@@ -609,6 +630,8 @@ public class DamageDealAi extends DamageAiBase {
 
         immediately = immediately || ComputerUtil.playImmediately(ai, sa);
 
+        final int fullDmg = dmg; // what one target would take: every target beyond the first costs {1} and splits the damage
+        final boolean dividedEvenly = sa.hasParam("DivideEvenly");
         int totalTargetedSoFar = -1;
         while (sa.canAddMoreTarget()) {
             if (totalTargetedSoFar == tcs.size()) {
@@ -617,6 +640,12 @@ public class DamageDealAi extends DamageAiBase {
                 break;
             }
             totalTargetedSoFar = tcs.size();
+            if (dividedEvenly) {
+                // what the next target would really take, whatever kind it is (a creature, a planeswalker, the player): one more
+                // target costs {1} of X and the rest is split between one more. Always from the full amount, not from what the
+                // last pass left, or every pass cuts it again
+                dmg = Math.max(0, (fullDmg - tcs.size()) / (tcs.size() + 1));
+            }
             if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
                 // canPlayAI (sa activated by ai)
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
@@ -630,6 +659,12 @@ public class DamageDealAi extends DamageAiBase {
             if (tgt.canTgtPlaneswalker()) {
                 // We can damage planeswalkers with this, consider targeting.
                 Card c = dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, enemy, false);
+                // the chooser also offers a walker it can only hurt; an extra target of an evenly divided spell that does not die
+                // to its share only takes {1} and damage away from the others
+                if (c != null && dividedEvenly && !tcs.isEmpty()
+                        && ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention) > dmg) {
+                    c = null;
+                }
                 if (c != null && !shouldTgtP(ai, sa, dmg, noPrevention)) {
                     tcs.add(c);
                     if (divided) {
@@ -652,10 +687,10 @@ public class DamageDealAi extends DamageAiBase {
                         sa.addDividedAllocation(enemy, dmg);
                         break;
                     }
+                    if (dividedEvenly && killsAlone(enemy, fullDmg, source, noPrevention)) {
+                        break; // Fireball for exactly what it takes: a second target only costs {1} and halves the damage
+                    }
                     continue;
-                }
-                if ("RoundedDown".equals(sa.getParam("DivideEvenly"))) {
-                    dmg = dmg * sa.getTargets().size() / (sa.getTargets().size() +1);
                 }
 
                 // look for creature targets; currently also catches planeswalkers that can be killed immediately
@@ -721,7 +756,9 @@ public class DamageDealAi extends DamageAiBase {
                 }
                 return false;
             }
-            if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
+            // the player as one more target of an evenly divided spell is not a free ping: only when its share is lethal
+            final boolean diluting = dividedEvenly && !tcs.isEmpty() && !killsAlone(enemy, dmg, source, noPrevention);
+            if (sa.canTarget(enemy) && sa.canAddMoreTarget() && !diluting) {
                 boolean freePing = immediately || sa.getTargets().size() > 0;
                 if (sa.isActivatedAbility()) {
                     if (phase.is(PhaseType.END_OF_TURN) && phase.isPlayerNextTurn(ai) && sa.getPayCosts().isReusuableResource()) {
@@ -994,6 +1031,11 @@ public class DamageDealAi extends DamageAiBase {
             if (!sa.getTargets().isTargetingAnyCard()) {
                 actualPay = dmg;
             }
+            final Integer lethalX = minimalX(sa, dmg, source, noPrevention);
+            if (lethalX != null) {
+                sa.setXManaCostPaid(lethalX);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
             for (final Card c : sa.getTargets().getTargetCards()) {
                 final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
                 if (adjDamage > actualPay) {
@@ -1005,6 +1047,83 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    /**
+     * The X that kills what is targeted for as little mana as possible, for X spells that hit a player alone or split their damage
+     * evenly (Fireball): null when this does not apply and the caller decides. {@code maxX} is the most X that can be paid, before any
+     * damage that X does not pay for (Crater's Claws' ferocious bonus, which is added here, once); each target beyond the first costs
+     * {1}, and the split is rounded down, so n targets that need N each take N*n.
+     */
+    private static Integer minimalX(final SpellAbility sa, final int maxX, final Card source, final boolean noPrevention) {
+        final boolean evenly = sa.hasParam("DivideEvenly");
+        final TargetChoices tcs = sa.getTargets();
+        final int targets = tcs.size();
+        final boolean lonePlayer = targets == 1 && tcs.isTargetingAnyPlayer();
+        if (targets == 0 || !(evenly || lonePlayer) || sa.isDividedAsYouChoose()) {
+            return null;
+        }
+        final int cap = evenly ? maxX - (targets - 1) : maxX;
+        if (cap <= 0) {
+            return null;
+        }
+        // damage that is not X: Crater's Claws deals X plus 2 with a creature of power 4 or more
+        final Player activator = sa.getActivatingPlayer();
+        final int bonus = "Crater's Claws".equals(ComputerUtilAbility.getAbilitySourceName(sa)) && activator != null
+                && activator.hasFerocious() ? 2 : 0;
+        final int most = cap + bonus; // the most damage that the mana can make
+        int need = 0; // the damage, before the bonus, that each target must be dealt
+        for (final Card c : tcs.getTargetCards()) {
+            need = Math.max(need, ComputerUtilCombat.getEnoughDamageToKill(c, most, source, false, noPrevention));
+        }
+        for (final Player p : tcs.getTargetPlayers()) {
+            final int raw = leastLethalDamage(p, most, source, noPrevention);
+            if (raw < 0) {
+                return null; // it does not die to any damage that the mana can make (prevention, cannot lose life): nothing cheaper to find
+            }
+            need = Math.max(need, raw);
+        }
+        if (evenly) {
+            return Math.min(cap, need * targets);
+        }
+        return Math.min(cap, Math.max(0, need - bonus));
+    }
+
+    private static int predictedDamage(final Player p, final int damage, final Card source, final boolean noPrevention) {
+        return noPrevention ? p.staticReplaceDamage(damage, source, false)
+                : ComputerUtilCombat.predictDamageTo(p, damage, source, false);
+    }
+
+    /**
+     * The least damage that kills this player once replacement and prevention are applied (Furnace of Rath doubles it: 5 life takes
+     * 3), found by a search up to {@code most}; -1 when even that is not enough.
+     */
+    private static int leastLethalDamage(final Player p, final int most, final Card source, final boolean noPrevention) {
+        if (p == null || !p.canLoseLife() || p.cantLoseForZeroOrLessLife() || most <= 0 || p.getLife() <= 0
+                || predictedDamage(p, most, source, noPrevention) < p.getLife()) {
+            return -1;
+        }
+        int lo = 1;
+        int hi = most;
+        while (lo < hi) {
+            final int mid = (lo + hi) >>> 1;
+            if (predictedDamage(p, mid, source, noPrevention) >= p.getLife()) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+        return lo;
+    }
+
+    /** Whether this much damage, all of it to one player, is lethal for that player. */
+    private static boolean killsAlone(final Player p, final int damage, final Card source, final boolean noPrevention) {
+        if (p == null || !p.canLoseLife() || p.cantLoseForZeroOrLessLife()) {
+            return false;
+        }
+        final int dealt = noPrevention ? p.staticReplaceDamage(damage, source, false)
+                : ComputerUtilCombat.predictDamageTo(p, damage, source, false);
+        return dealt >= p.getLife();
     }
 
     private static int calculateDamageAmount(SpellAbility sa, Card source, String damage) {
@@ -1199,8 +1318,10 @@ public class DamageDealAi extends DamageAiBase {
         int dmg = calculateDamageAmount(sa, source, sa.getParam("NumDmg"));
 
         // Separate options into creatures and players
-        List<Card> oppCreatures = CardLists.filterControlledBy(
+        final List<Card> legalOppCreatures = CardLists.filterControlledBy(
                 IterableUtil.filter(options, Card.class), ai.getOpponents());
+        List<Card> oppCreatures = CardLists.filter(legalOppCreatures,
+                c -> canActuallyDamage(c, dmg, source, noPrevention));
         Iterable<Player> optionPlayers = IterableUtil.filter(options, Player.class);
         List<Player> oppPlayers = ai.getOpponents().filter(p -> IterableUtil.any(optionPlayers, p::equals));
 
@@ -1228,6 +1349,11 @@ public class DamageDealAi extends DamageAiBase {
         // Fourth priority: target opponent player
         if (!oppPlayers.isEmpty()) {
             return (T) oppPlayers.get(0);
+        }
+
+        // A mandatory damage ability must still select a legal target even when every opposing creature prevents it.
+        if (!isOptional && !legalOppCreatures.isEmpty()) {
+            return (T) ComputerUtilCard.getBestCreatureAI(legalOppCreatures);
         }
 
         // If optional and only own stuff remains, don't choose

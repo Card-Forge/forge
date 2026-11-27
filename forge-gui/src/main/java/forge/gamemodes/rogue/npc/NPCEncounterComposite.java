@@ -7,6 +7,7 @@ import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.effect.BazaarContext;
 import forge.gamemodes.rogue.effect.EventEffect;
 import forge.gamemodes.rogue.effect.SanctumContext;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -154,5 +155,57 @@ public enum NPCEncounterComposite {
             if (npcCtx != null) results.add(npcCtx);
         }
         return results;
+    }
+
+    public record LevelChoice(String label, int level) {
+        @Override
+        public String toString() {
+            return label;
+        }
+    }
+
+    /** For the developer's NPC level editor: keeping the current level first, then each chapter's required level. */
+    public static List<LevelChoice> levelChoices(NPC npc, int currentLevel) {
+        // From the typed registry: a switch choosing between the enums' values() arrays verifies as Enum[], which Android rejects
+        List<NPCEncounter> encounters = new ArrayList<>();
+        for (NPCEncounter encounter : ALL_ENCOUNTERS) {
+            if (encounter.getNpc() == npc && !(encounter instanceof NPCOptionalEncounter)) {
+                encounters.add(encounter);
+            }
+        }
+        List<LevelChoice> choices = new ArrayList<>();
+        if (encounters.isEmpty()) {
+            return choices;
+        }
+        choices.add(new LevelChoice(
+            Localizer.getInstance().getMessage("lblRogueKeepNpcLevel", currentLevel, activeEncounterName(encounters, currentLevel)),
+            currentLevel));
+        boolean hasLevelZero = false;
+        for (NPCEncounter encounter : encounters) {
+            if (encounter.getRequiredLevel() < 0) {
+                continue;
+            }
+            if (encounter.getRequiredLevel() == 0) {
+                hasLevelZero = true;
+            }
+            choices.add(new LevelChoice(encounter.getRequiredLevel() + " - " + ((Enum<?>) encounter).name(),
+                encounter.getRequiredLevel()));
+        }
+        if (!hasLevelZero) {
+            choices.add(1, new LevelChoice("0 - NONE", 0));
+        }
+        return choices;
+    }
+
+    private static String activeEncounterName(List<NPCEncounter> encounters, int currentLevel) {
+        NPCEncounter activeEncounter = null;
+        for (NPCEncounter encounter : encounters) {
+            int requiredLevel = encounter.getRequiredLevel();
+            if (requiredLevel >= 0 && requiredLevel <= currentLevel
+                && (activeEncounter == null || requiredLevel > activeEncounter.getRequiredLevel())) {
+                activeEncounter = encounter;
+            }
+        }
+        return activeEncounter == null ? "NONE" : ((Enum<?>) activeEncounter).name();
     }
 }

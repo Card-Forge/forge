@@ -21,6 +21,7 @@ import forge.adventure.data.EnemyData;
 import forge.adventure.data.ModifierData;
 import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.util.CardUtil;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
@@ -90,6 +91,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public boolean ignoreGlobalEffect = false;
     public boolean ignoreBiomeEffect = false;
     public boolean ignoreDungeonEffect = false;
+    public boolean ignoreExcludedSets = false;
     public String questStageID;
     private ProgressableGraphPath<NavigationVertex> navPath;
     public Vector2 fleeTarget;
@@ -115,6 +117,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
         ignoreGlobalEffect = data.ignoreGlobalEffect;
         ignoreBiomeEffect = data.ignoreBiomeEffect;
         ignoreDungeonEffect = data.ignoreDungeonEffect;
+        ignoreExcludedSets = data.ignoreExcludedSets;
         float scale = data.scale;
         if (scale < 0)
             scale = 1f;
@@ -486,6 +489,10 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
         return data.getBossIntro();
     }
     public Array<Reward> getRewards() {
+        return ignoreExcludedSets ? Config.instance().withExclusionsLifted(this::collectRewards) : collectRewards();
+    }
+
+    private Array<Reward> collectRewards() {
         rewardCollectionPool.clear();
         // Collect custom rewards for chaos battles
 
@@ -498,7 +505,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
 
             for (int i = 0; i < cardCount; i++) {
                 PaperCard paperCard = sourceFlatList.get(i);
-                if (paperCard != null && !paperCard.isVeryBasicLand()) {
+                if (paperCard != null && !paperCard.isVeryBasicLand() && CardUtil.isAllowedPrint(paperCard)) {
                     flatCardsFilterList.add(paperCard);
                 }
             }
@@ -517,7 +524,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
                 rewardCollectionPool.add(new Reward(Reward.Type.Shards, 9));
 
                 PaperCard cheese = StaticData.instance().fetchCard("The Cheese Stands Alone");
-                if (cheese != null) {
+                if (cheese != null && CardUtil.isAllowedPrint(cheese)) {
                     rewardCollectionPool.add(new Reward(cheese));
                 }
                 return rewardCollectionPool;

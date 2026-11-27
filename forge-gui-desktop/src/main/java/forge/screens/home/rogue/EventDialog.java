@@ -6,6 +6,7 @@ import forge.gamemodes.rogue.RogueEvent;
 import forge.gamemodes.rogue.RogueEvent.EventChoice;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.effect.ChoiceRerollContext;
+import forge.gamemodes.rogue.flow.RogueDecisions.Pick;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.toolbox.FButton;
@@ -100,7 +101,7 @@ public class EventDialog {
   }
 
   /** Show dialog and return the selected action. */
-  public DialogResult show() {
+  public Pick<EventChoice> show() {
     selectedChoice = null;
     SoundSystem.instance.play(SoundEffectType.Sorcery,
         SoundEffectType.Sorcery.isSynced());
@@ -132,7 +133,7 @@ public class EventDialog {
       }
     } while (result == VIEW_DECK_OPTION || result == VIEW_MAP_OPTION);
 
-    return new DialogResult(hasRerolls && result == REROLL_OPTION, selectedChoice);
+    return new Pick<>(hasRerolls && result == REROLL_OPTION, selectedChoice);
   }
 
   private void hidePreview() {
@@ -158,8 +159,6 @@ public class EventDialog {
   }
 
   private record PreviewTarget(JComponent component, List<PreviewReference> references) {}
-
-  public record DialogResult(boolean rerollRequested, EventChoice choice) {}
 
   private static class MainPanel extends SkinnedPanel {
     private MainPanel() {

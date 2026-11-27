@@ -1196,9 +1196,6 @@ public enum EventEffect implements RogueEffect {
         @Override
         public void onMatchStart(RegisteredPlayer human, RegisteredPlayer opponent, RogueRun run) {
             addEffectCardToCommandZone(human);
-            RogueEffect.moveCardsFromDeckToBattlefield(c ->
-                c.getRules().getType().isCreature() && c.getRules().getManaCost().getCMC() <= 3,
-                1, opponent);
         }
     },
     SHRINE_KNEEL("shrine_kneel", "Kneel", "You discover a hidden {{Sanctum}}.",

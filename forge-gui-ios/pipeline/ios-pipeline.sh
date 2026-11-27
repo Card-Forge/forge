@@ -142,16 +142,30 @@ ROBOVM_CT="$M2/com/mobidevelop/robovm/robovm-cocoatouch/2.3.24/robovm-cocoatouch
 GDXB="$M2/com/badlogicgames/gdx/gdx-backend-robovm/1.14.2/gdx-backend-robovm-1.14.2.jar"
 
 # ---------------------------------------------------------------- bootstrap
+fetch_jar() { # <dest> <url>  (an error page or cut-off download is retried, never kept)
+    [ -f "$1" ] && return
+    for attempt in 1 2 3; do
+        if curl -fsSL -o "$1.part" "$2" && unzip -tq "$1.part" > /dev/null 2>&1; then
+            mv "$1.part" "$1"
+            return
+        fi
+        rm -f "$1.part"
+        [ "$attempt" = 3 ] || sleep 5
+    done
+    echo "ERROR: no valid jar after 3 attempts: $2" >&2
+    exit 1
+}
+
 bootstrap() {
     mkdir -p "$JV/tools"
 
-    [ -f "$JVMDG_JAR" ] || curl -sL -o "$JVMDG_JAR" \
+    fetch_jar "$JVMDG_JAR" \
         "https://github.com/unimined/JvmDowngrader/releases/download/$JVMDG_VER/jvmdowngrader-$JVMDG_VER-all.jar"
-    [ -f "$SS_JAR" ] || curl -sL -o "$SS_JAR" \
+    fetch_jar "$SS_JAR" \
         "https://repo1.maven.org/maven2/net/sourceforge/streamsupport/streamsupport/$SS_VER/streamsupport-$SS_VER.jar"
-    [ -f "$SSCF_JAR" ] || curl -sL -o "$SSCF_JAR" \
+    fetch_jar "$SSCF_JAR" \
         "https://repo1.maven.org/maven2/net/sourceforge/streamsupport/streamsupport-cfuture/$SS_VER/streamsupport-cfuture-$SS_VER.jar"
-    [ -f "$THREETEN_JAR" ] || curl -sL -o "$THREETEN_JAR" \
+    fetch_jar "$THREETEN_JAR" \
         "https://repo1.maven.org/maven2/org/threeten/threetenbp/$THREETEN_VER/threetenbp-$THREETEN_VER.jar"
     if [ ! -f "$ASM" ]; then
         mvn -q --settings "$SETTINGS" dependency:get -Dartifact=org.ow2.asm:asm:$ASM_VER

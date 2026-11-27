@@ -52,6 +52,7 @@ public class EnemyData implements Serializable {
     public boolean ignoreGlobalEffect = false;
     public boolean ignoreBiomeEffect = false;
     public boolean ignoreDungeonEffect = false;
+    public boolean ignoreExcludedSets = false;
 
     public EnemyData() {
     }
@@ -85,6 +86,7 @@ public class EnemyData implements Serializable {
         ignoreGlobalEffect  = enemyData.ignoreGlobalEffect;
         ignoreBiomeEffect   = enemyData.ignoreBiomeEffect;
         ignoreDungeonEffect = enemyData.ignoreDungeonEffect;
+        ignoreExcludedSets = enemyData.ignoreExcludedSets;
         if (enemyData.scale == 0.0f) {
             scale = 1.0f;
         }

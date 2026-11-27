@@ -50,6 +50,27 @@ public class WebpImagesTest {
         }
     }
 
+    // Fails if WebP that can hold alpha would be stored as RGB565 and lose its transparent corners
+    @Test
+    public void onlySimpleLossyWebpIsOpaque() throws Exception {
+        final Path dir = Files.createTempDirectory("webp-alpha");
+        try {
+            final File lossy = dir.resolve("Shock.fullborder.webp").toFile();
+            Files.write(lossy.toPath(), WEBP);
+            Assert.assertTrue(ImageUtil.isOpaqueWebp(lossy));
+
+            final File lossless = dir.resolve("Opt.fullborder.webp").toFile();
+            Files.write(lossless.toPath(), "RIFF\0\0\0\0WEBPVP8L\0\0\0\0".getBytes(StandardCharsets.US_ASCII));
+            Assert.assertFalse(ImageUtil.isOpaqueWebp(lossless));
+
+            final File extended = dir.resolve("Ponder.fullborder.webp").toFile();
+            Files.write(extended.toPath(), "RIFF\0\0\0\0WEBPVP8X\0\0\0\0".getBytes(StandardCharsets.US_ASCII));
+            Assert.assertFalse(ImageUtil.isOpaqueWebp(extended));
+        } finally {
+            FileUtil.deleteDirectory(dir.toFile());
+        }
+    }
+
     // Fails if a WebP download keeps the .jpg name its path was chosen with
     @Test
     public void webpDownloadsAreNamedWebp() {

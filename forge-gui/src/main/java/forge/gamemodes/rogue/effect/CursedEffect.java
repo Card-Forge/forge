@@ -108,24 +108,22 @@ public enum CursedEffect implements PlaneboundEffect {
         }
     },
     RAMP("cursed_ramp", "Ramp",
-        "Planebound starts the match with a random land from their deck on the battlefield.",
-        null) {
+        "At the beginning of Planebound's first upkeep, they reveal cards from the top of their library until they reveal a land card. "
+            + "They put that card onto the battlefield, then shuffle the rest into their library.",
+        "Cursed - Ramp") {
         @Override
         public void onMatchStart(RegisteredPlayer human, RegisteredPlayer opponent, RogueRun run) {
-            RogueEffect.moveCardsFromDeckToBattlefield(c -> c.getRules().getType().isLand(),
-                1, opponent);
+            addEffectCardToCommandZone(human);
             run.consumeEffect(getId());
         }
     },
     SUMMON("cursed_summon", "Summon",
-            "Planebound starts the match with a random nonland permanent card with mana value 3 or less from their deck on the battlefield.",
-        null) {
+        "At the beginning of Planebound's first upkeep, they reveal cards from the top of their library until they reveal a nonland permanent card with mana value 3 or less. "
+            + "They put that card onto the battlefield, then shuffle the rest into their library.",
+        "Cursed - Summon") {
         @Override
         public void onMatchStart(RegisteredPlayer human, RegisteredPlayer opponent, RogueRun run) {
-            RogueEffect.moveCardsFromDeckToBattlefield(c ->
-                c.getRules().getType().isPermanent() && !c.getRules().getType().isLand()
-                    && c.getRules().getManaCost().getCMC() <= 3,
-                1, opponent);
+            addEffectCardToCommandZone(human);
             run.consumeEffect(getId());
         }
     };

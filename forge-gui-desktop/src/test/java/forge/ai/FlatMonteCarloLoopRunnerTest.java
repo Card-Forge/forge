@@ -1393,4 +1393,755 @@ public class FlatMonteCarloLoopRunnerTest extends AITest {
         AssertJUnit.assertTrue("{1}{W}, {T}: the Equipment from the hand comes in without its five mana\n" + trace
                 + gameStateToString(game), inPlay);
     }
+
+    private void upheavalBoard(final int islands, final int swamps, final int opponentLands) {
+        elfDeckWith(0, "Upheaval", "Psychatog");
+        addCards("Island", islands, ai);
+        addCards("Swamp", swamps, ai);
+        addCards("Plains", opponentLands, opp);
+        addCardToZone("Grizzly Bears", opp, ZoneType.Battlefield);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+    }
+
+    @Test(timeOut = 120000)
+    public void upheavalWaitsForTheManaOfPsychatogToo() {
+        upheavalBoard(5, 1, 5); // six lands: the spell, and nothing to float
+        final SpellAbility upheaval = spellOf("Upheaval");
+        AssertJUnit.assertFalse(forge.ai.simulation.UpheavalPlan.ready(ai));
+        AssertJUnit.assertTrue("the generic code does not take the lands away", LoopRunner.held(ai, upheaval));
+    }
+
+    @Test(timeOut = 120000)
+    public void upheavalIsReadyWithNineLandsAndAnOpponentToReset() {
+        upheavalBoard(7, 2, 5);
+        AssertJUnit.assertTrue(forge.ai.simulation.UpheavalPlan.ready(ai));
+        AssertJUnit.assertFalse(LoopRunner.held(ai, spellOf("Upheaval")));
+    }
+
+    @Test(timeOut = 120000)
+    public void upheavalIsNotCastOnAnEmptyBoard() {
+        upheavalBoard(7, 2, 1); // the opponent has a land and a creature: nothing worth the lands
+        AssertJUnit.assertFalse(forge.ai.simulation.UpheavalPlan.ready(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithUpheavalPutsPsychatogOnAClearBoard() {
+        upheavalBoard(7, 2, 5);
+        runTurn();
+        boolean atog = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            atog |= c.getName().equals("Psychatog");
+        }
+        AssertJUnit.assertTrue("Upheaval from the pool, then Psychatog\n" + trace + gameStateToString(game), atog);
+        AssertJUnit.assertEquals("the opponent starts again", 0, opp.getCardsIn(ZoneType.Battlefield).size());
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithMeliraRedcapAndSeerKillsTheOpponent() {
+        elfDeckWith(0);
+        addCards("Forest", 2, ai);
+        for (final String name : new String[] {"Melira, Sylvok Outcast", "Murderous Redcap", "Viscera Seer"}) {
+            addCardToZone(name, ai, ZoneType.Battlefield).setSickness(false);
+        }
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("Seer sacrifices the Redcap, Melira lets it persist back with no counter, and it hits for two\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    private SpellAbility abilityOf(final Card host, final forge.game.ability.ApiType api) {
+        for (final SpellAbility sa : host.getSpellAbilities()) {
+            if (sa.isActivatedAbility() && sa.getApi() == api) {
+                return sa;
+            }
+        }
+        throw new IllegalStateException(host + " has no " + api);
+    }
+
+    @Test(timeOut = 120000)
+    public void theUntapOfAMonolithIsPricedWithWhatCutsIt() {
+        elfDeckWith(0);
+        final Card grim = addCardToZone("Grim Monolith", ai, ZoneType.Battlefield);
+        final SpellAbility untap = abilityOf(grim, ApiType.Untap);
+        final SpellAbility tap = abilityOf(grim, ApiType.Mana);
+        AssertJUnit.assertEquals("three for four: no net mana", 4, forge.ai.simulation.ManaLoopPlan.untapCost(ai, untap));
+        AssertJUnit.assertEquals(3, forge.ai.simulation.ManaLoopPlan.produced(ai, grim, tap));
+        addCardToZone("Zirda, the Dawnwaker", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("Zirda: two less", 2, forge.ai.simulation.ManaLoopPlan.untapCost(ai, untap));
+    }
+
+    @Test(timeOut = 120000)
+    public void kinnanAddsOneToTheTapOfABasalt() {
+        elfDeckWith(0);
+        final Card basalt = addCardToZone("Basalt Monolith", ai, ZoneType.Battlefield);
+        final SpellAbility tap = abilityOf(basalt, ApiType.Mana);
+        AssertJUnit.assertEquals(3, forge.ai.simulation.ManaLoopPlan.produced(ai, basalt, tap));
+        addCardToZone("Kinnan, Bonder Prodigy", ai, ZoneType.Battlefield);
+        AssertJUnit.assertEquals("a nonland permanent: one more", 4, forge.ai.simulation.ManaLoopPlan.produced(ai, basalt, tap));
+    }
+
+    @Test(timeOut = 120000)
+    public void aMonolithAloneIsNotLoopedForMana() {
+        elfDeckWith(0, "Blaze");
+        addCards("Mountain", 1, ai);
+        addCardToZone("Grim Monolith", ai, ZoneType.Battlefield);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("three for four makes nothing: the Blaze for what the Monolith gives once is not lethal\n" + trace,
+                opp.getLife() > 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithGrimMonolithAndZirdaPaysForABlaze() {
+        elfDeckWith(0, "Blaze");
+        addCards("Mountain", 1, ai);
+        addCardToZone("Grim Monolith", ai, ZoneType.Battlefield);
+        addCardToZone("Zirda, the Dawnwaker", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("tap for three, untap for two, round again: the pool pays the X of the Blaze\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aDruidUntapsForNothingWithMeliraOrAVizier() {
+        elfDeckWith(0);
+        final Card druid = addCardToZone("Devoted Druid", ai, ZoneType.Battlefield);
+        AssertJUnit.assertFalse("a counter that stays is no free untap", forge.ai.simulation.ManaLoopPlan.counterIsFree(ai, druid, 1));
+        addCardToZone("Vizier of Remedies", ai, ZoneType.Battlefield);
+        AssertJUnit.assertTrue("Vizier: one counter fewer", forge.ai.simulation.ManaLoopPlan.counterIsFree(ai, druid, 1));
+        AssertJUnit.assertFalse("two counters leave one", forge.ai.simulation.ManaLoopPlan.counterIsFree(ai, druid, 2));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithDevotedDruidAndVizierPaysForABlaze() {
+        elfDeckWith(0, "Fireball");
+        addCards("Mountain", 1, ai);
+        addCardToZone("Devoted Druid", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Vizier of Remedies", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("tap for G, untap for no counter, round again\n" + trace + gameStateToString(game),
+                game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithSliverQueenAndManaEchoesPaysForABlaze() {
+        elfDeckWith(0, "Fireball");
+        addCards("Mountain", 4, ai);
+        addCardToZone("Mana Echoes", ai, ZoneType.Battlefield);
+        addCardToZone("Sliver Queen", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("a Sliver for two, two mana back, then three, then four\n" + trace + gameStateToString(game),
+                game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithFoodChainAndSqueeCastsABigCreature() {
+        elfDeckWith(0, "Craterhoof Behemoth");
+        addCards("Mountain", 3, ai);
+        addCardToZone("Food Chain", ai, ZoneType.Battlefield);
+        addCardToZone("Squee, the Immortal", ai, ZoneType.Battlefield).setSickness(false);
+        runTurn();
+        AssertJUnit.assertTrue("Squee, exile it, four mana for creatures, round again, until the Hoof is paid for\n" + trace
+                + gameStateToString(game), countCardsWithName(game, "Craterhoof Behemoth", ZoneType.Battlefield) > 0
+                || game.isGameOver());
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithPaintersServantAndGrindstoneMillsTheLibraryOut() {
+        elfDeckWith(0);
+        addCards("Forest", 3, ai);
+        addCardToZone("Painter's Servant", ai, ZoneType.Battlefield).setChosenColors(com.google.common.collect.Lists.newArrayList("blue"));
+        addCardToZone("Grindstone", ai, ZoneType.Battlefield);
+        runTurn();
+        AssertJUnit.assertEquals("every milled card is blue with the Servant: the Grindstone goes round until the library is gone\n"
+                + trace + gameStateToString(game), 0, opp.getCardsIn(ZoneType.Library).size());
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithYawgmothTwoUndyingAndABloodArtistKillsTheOpponent() {
+        elfDeckWith(0);
+        for (final String name : new String[] {"Yawgmoth, Thran Physician", "Young Wolf", "Strangleroot Geist", "Blood Artist"}) {
+            addCardToZone(name, ai, ZoneType.Battlefield).setSickness(false);
+        }
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("one undying creature dies, the other takes the -1/-1 counter, and the Blood Artist drains for each\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void yawgmothDoesNotGoRoundWithNothingToPayForIt() {
+        elfDeckWith(0);
+        for (final String name : new String[] {"Yawgmoth, Thran Physician", "Young Wolf", "Strangleroot Geist"}) {
+            addCardToZone(name, ai, ZoneType.Battlefield).setSickness(false);
+        }
+        runTurn();
+        AssertJUnit.assertTrue("no drain, no loop: the AI keeps its life and its library\n" + trace, ai.getLife() >= 19);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithDeadeyeNavigatorAndPeregrineDrakePaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Island", 4, ai);
+        addCards("Mountain", 1, ai);
+        final Card navigator = addCardToZone("Deadeye Navigator", ai, ZoneType.Battlefield);
+        final Card drake = addCardToZone("Peregrine Drake", ai, ZoneType.Battlefield);
+        navigator.setPairedWith(drake);
+        drake.setPairedWith(navigator);
+        game.getAction().checkStateEffects(true);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("float the lands, {1}{U} to flicker the Drake, five lands back, round again\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithGhostlyFlickerArchaeomancerAndDrakePaysForAFireball() {
+        elfDeckWith(0, "Fireball", "Ghostly Flicker");
+        addCards("Island", 5, ai);
+        addCards("Mountain", 1, ai);
+        addCardToZone("Peregrine Drake", ai, ZoneType.Battlefield);
+        addCardToZone("Archaeomancer", ai, ZoneType.Battlefield);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("Ghostly Flicker on the Drake and the Archaeomancer: five lands back, the Flicker back in hand\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aFlickerLoopDoesNotStartWithoutAnythingToSpendTheManaOn() {
+        elfDeckWith(0);
+        addCards("Island", 5, ai);
+        final Card navigator = addCardToZone("Deadeye Navigator", ai, ZoneType.Battlefield);
+        final Card drake = addCardToZone("Peregrine Drake", ai, ZoneType.Battlefield);
+        navigator.setPairedWith(drake);
+        drake.setPairedWith(navigator);
+        game.getAction().checkStateEffects(true);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        AssertJUnit.assertEquals("no hand, no loop", 0, forge.ai.simulation.ManaLoopPlan.goal(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithBreachLionsEyeDiamondAndBrainFreezeMillsMostOfTheLibrary() {
+        elfDeckWith(0, "Underworld Breach", "Brain Freeze", "Ponder", "Brainstorm", "Opt");
+        addCards("Mountain", 3, ai);
+        addCards("Island", 3, ai);
+        addCardToZone("Lion's Eye Diamond", ai, ZoneType.Battlefield);
+        runTurn();
+        AssertJUnit.assertTrue("Breach, the Freeze, the Diamond turns the hand into fuel, the Freeze escapes: well over half of "
+                + "the library is gone, " + opp.getCardsIn(ZoneType.Library).size() + " left\n" + trace + gameStateToString(game),
+                opp.getCardsIn(ZoneType.Library).size() <= 5);
+    }
+
+    @Test(timeOut = 120000)
+    public void anExtraCombatEngineIsRecognised() {
+        elfDeckWith(0);
+        AssertJUnit.assertTrue(forge.ai.simulation.ExtraCombatPlan.isEngine(addCardToZone("Aurelia, the Warleader", ai, ZoneType.Battlefield)));
+        AssertJUnit.assertTrue(forge.ai.simulation.ExtraCombatPlan.isEngine(addCardToZone("Godo, Bandit Warlord", ai, ZoneType.Battlefield)));
+        AssertJUnit.assertFalse(forge.ai.simulation.ExtraCombatPlan.isEngine(addCardToZone("Grizzly Bears", ai, ZoneType.Battlefield)));
+    }
+
+    @Test(timeOut = 120000)
+    public void theDamageEnginesAreRecognisedOnlyWhenTheyCanWork() {
+        elfDeckWith(0);
+        final Card bumi = addCardToZone("Bumi, Unleashed", ai, ZoneType.Battlefield);
+        AssertJUnit.assertFalse("Only land creatures attack in the extra combat, so Bumi is no engine alone"
+                + gameStateToString(game), forge.ai.simulation.ExtraCombatPlan.isEngine(bumi));
+        addCardToZone("Ashaya, Soul of the Wild", ai, ZoneType.Battlefield);
+        game.getAction().checkStateEffects(true); // applies Ashaya's static ability
+        AssertJUnit.assertTrue("With Ashaya Bumi is a land creature" + gameStateToString(game),
+                forge.ai.simulation.ExtraCombatPlan.isEngine(bumi));
+        AssertJUnit.assertTrue("Trample past a small blocker still connects",
+                forge.ai.simulation.ExtraCombatPlan.safeToAttack(bumi, new forge.game.card.CardCollection()));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithAureliaAndTheHelmOfTheHostKillsTheOpponent() {
+        elfDeckWith(0);
+        addCards("Forest", 5, ai);
+        final Card aurelia = addCardToZone("Aurelia, the Warleader", ai, ZoneType.Battlefield);
+        aurelia.setSickness(false);
+        final Card helm = addCardToZone("Helm of the Host", ai, ZoneType.Battlefield);
+        helm.attachToEntity(aurelia, null, true);
+        runTurn();
+        AssertJUnit.assertTrue("Aurelia attacks, untaps, and the Helm makes one more at the start of each combat\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void theHelmOfTheHostIsEquippedToAurelia() {
+        elfDeckWith(0);
+        addCards("Forest", 5, ai);
+        final Card aurelia = addCardToZone("Aurelia, the Warleader", ai, ZoneType.Battlefield);
+        aurelia.setSickness(false);
+        final Card helm = addCardToZone("Helm of the Host", ai, ZoneType.Battlefield);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        runTurn();
+        AssertJUnit.assertTrue("equip {5} in the first main phase\n" + trace + gameStateToString(game), helm.getEquipping() == aurelia
+                || aurelia.isEquipped());
+    }
+
+    @Test(timeOut = 120000)
+    public void anEngineDoesNotAttackIntoABlockerThatKillsIt() {
+        elfDeckWith(0);
+        final Card aurelia = addCardToZone("Aurelia, the Warleader", ai, ZoneType.Battlefield);
+        aurelia.setSickness(false);
+        addCardToZone("Serra Angel", opp, ZoneType.Battlefield).setSickness(false);
+        AssertJUnit.assertFalse(forge.ai.simulation.ExtraCombatPlan.safeToAttack(aurelia, opp.getCardsIn(ZoneType.Battlefield)));
+        AssertJUnit.assertTrue(forge.ai.simulation.ExtraCombatPlan.safeToAttack(aurelia, new java.util.ArrayList<>()));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithNivMizzetAndCuriosityKillsTheOpponent() {
+        elfDeckWith(0, "Curiosity", "Opt");
+        addCards("Island", 3, ai);
+        addCards("Mountain", 3, ai);
+        addCardToZone("Niv-Mizzet, Parun", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("Curiosity on Niv-Mizzet, an instant draws, the ping draws, round and round\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithExquisiteBloodSanguineBondAndADrainKillsTheOpponent() {
+        elfDeckWith(0, "Vampire's Kiss");
+        addCards("Swamp", 3, ai);
+        addCardToZone("Exquisite Blood", ai, ZoneType.Battlefield);
+        addCardToZone("Sanguine Bond", ai, ZoneType.Battlefield);
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("the drain is lost by the opponent, gained by the AI, lost by the opponent again\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void theColourThatTheHandLacksIsTheOneTheAnyColourManaAdds() {
+        elfDeckWith(0, "Burning Wish", "Dark Ritual", "Dark Ritual");
+        final java.util.List<Card> hand = new java.util.ArrayList<>(ai.getCardsIn(ZoneType.Hand));
+        // black needs two, red one: black first; with the Rituals gone it is the red
+        AssertJUnit.assertEquals(forge.card.MagicColor.BLACK, ComputerUtilMana.colorShortfall(ai, hand, (byte) 31));
+        hand.removeIf(c -> c.getName().equals("Dark Ritual"));
+        AssertJUnit.assertEquals(forge.card.MagicColor.RED, ComputerUtilMana.colorShortfall(ai, hand, (byte) 31));
+        AssertJUnit.assertEquals("a colour the mana cannot be: none", 0, ComputerUtilMana.colorShortfall(ai, hand, (byte) forge.card.MagicColor.GREEN));
+    }
+
+    @Test(timeOut = 120000)
+    public void theDiamondAddsTheColourOfTheCardsItDiscarded() {
+        elfDeckWith(0);
+        final Card diamond = addCardToZone("Lion's Eye Diamond", ai, ZoneType.Battlefield);
+        addCardToZone("Burning Wish", ai, ZoneType.Graveyard); // what the Diamond has just discarded
+        final SpellAbility mana = abilityOf(diamond, ApiType.Mana);
+        final byte chosen = ((PlayerControllerAi) ai.getController()).chooseColor("", mana, forge.card.ColorSet.fromMask(31));
+        AssertJUnit.assertEquals("an empty hand is not white: the Wish in the graveyard needs red", forge.card.MagicColor.RED, chosen);
+    }
+
+    @Test(timeOut = 120000)
+    public void theIronworksLoopNeedsAFoundryInspectorToGainMana() {
+        AssertJUnit.assertEquals("two for each sacrifice, three and two to cast them again", -1,
+                forge.ai.simulation.SacrificeLoopPlan.ironworksNet(0));
+        AssertJUnit.assertEquals(1, forge.ai.simulation.SacrificeLoopPlan.ironworksNet(1));
+        AssertJUnit.assertEquals(3, forge.ai.simulation.SacrificeLoopPlan.ironworksNet(2));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithIronworksTrawlerRetrieverAndInspectorPaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Mountain", 1, ai);
+        addCardToZone("Krark-Clan Ironworks", ai, ZoneType.Battlefield);
+        addCardToZone("Foundry Inspector", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Myr Retriever", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Scrap Trawler", ai, ZoneType.Graveyard);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("sacrifice the Retriever, cast the Trawler, sacrifice it, cast the Retriever: one more each round\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void theIronworksLoopDoesNotStartWithoutTheInspector() {
+        elfDeckWith(0, "Fireball");
+        addCards("Mountain", 1, ai);
+        addCardToZone("Krark-Clan Ironworks", ai, ZoneType.Battlefield);
+        addCardToZone("Myr Retriever", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Scrap Trawler", ai, ZoneType.Graveyard);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("a round costs one more than it gives: no loop\n" + trace, opp.getLife() > 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void theDeathmantleLoopMakesManaOnlyWithTokens() {
+        AssertJUnit.assertEquals("two for the creature, less the four", -2, forge.ai.simulation.SacrificeLoopPlan.deathmantleNet(0));
+        AssertJUnit.assertEquals("a Wurmcoil Engine: two tokens", 2, forge.ai.simulation.SacrificeLoopPlan.deathmantleNet(2));
+        AssertJUnit.assertEquals("a Myr Battlesphere: four", 6, forge.ai.simulation.SacrificeLoopPlan.deathmantleNet(4));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithDeathmantleAltarAndWurmcoilEnginePaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Plains", 4, ai);
+        addCards("Mountain", 1, ai);
+        addCardToZone("Nim Deathmantle", ai, ZoneType.Battlefield);
+        addCardToZone("Ashnod's Altar", ai, ZoneType.Battlefield);
+        addCardToZone("Wurmcoil Engine", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Altar takes the Engine, the Deathmantle brings it back, its tokens go to the Altar: two more a round\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithBasaltMonolithAndRingsOfBrighthearthPaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Plains", 3, ai);
+        addCards("Mountain", 3, ai);
+        addCardToZone("Basalt Monolith", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Rings of Brighthearth", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("tap, untap with the copy, tap again with the untap on the stack: one mana over a round\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithWarrenSoultraderGravecrawlerAndBloodArtistKillsTheOpponent() {
+        elfDeckWith(0);
+        addCards("Swamp", 2, ai);
+        addCardToZone("Warren Soultrader", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Blood Artist", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Gravecrawler", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(6, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Gravecrawler for a Treasure, the Artist drains, the Treasure pays for the Gravecrawler\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithKrenkoThornbiteStaffAndGoblinBombardmentKillsTheOpponent() {
+        elfDeckWith(0);
+        addCards("Mountain", 5, ai);
+        addCardToZone("Krenko, Mob Boss", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Thornbite Staff", ai, ZoneType.Battlefield);
+        addCardToZone("Goblin Bombardment", ai, ZoneType.Battlefield);
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("Krenko taps for Goblins, a Goblin goes to the Bombardment, the Staff untaps Krenko\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithDuskmantleGuildmageAndMindcrankKillsTheOpponent() {
+        elfDeckWith(0);
+        addCards("Island", 2, ai);
+        addCards("Swamp", 2, ai);
+        addCards("Mountain", 3, ai);
+        addCardToZone("Duskmantle Guildmage", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Mindcrank", ai, ZoneType.Battlefield);
+        opp.setLife(5, null);
+        runTurn();
+        AssertJUnit.assertTrue("the first ability, then the mill: a card is a life and a life is a card\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithNaruMehaAndGhostlyFlickerPaysForAWalkingBallista() {
+        elfDeckWith(0, "Ghostly Flicker", "Naru Meha, Master Wizard", "Walking Ballista");
+        addCards("Island", 8, ai);
+        opp.setLife(4, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Flicker, Naru Meha in response, her copy flickers her and a land: a mana a round\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithSenseisDiviningTopBolassCitadelAndAetherfluxReservoirKillsTheOpponent() {
+        elfDeckWith(0);
+        addCardToZone("Bolas's Citadel", ai, ZoneType.Battlefield);
+        addCardToZone("Aetherflux Reservoir", ai, ZoneType.Battlefield);
+        addCardToZone("Sensei's Divining Top", ai, ZoneType.Battlefield);
+        opp.setLife(40, null);
+        runTurn();
+        AssertJUnit.assertTrue("Top draws, is cast from the library for a life, the Reservoir gains a life per spell: then fifty\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithIsochronScepterDramaticReversalAndRocksPaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Mountain", 1, ai);
+        final Card scepter = addCardToZone("Isochron Scepter", ai, ZoneType.Battlefield);
+        final Card reversal = addCardToZone("Dramatic Reversal", ai, ZoneType.Exile);
+        scepter.addImprintedCard(reversal);
+        reversal.setExiledWith(scepter);
+        scepter.addExiledCard(reversal);
+        addCardToZone("Sol Ring", ai, ZoneType.Battlefield);
+        addCardToZone("Mana Crypt", ai, ZoneType.Battlefield);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("tap the rocks, the Scepter pays two, the copy untaps all: two mana over a round\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithMetalworkerAndStaffOfDominationPaysForAFireball() {
+        elfDeckWith(0, "Fireball", "Juggernaut", "Juggernaut", "Juggernaut");
+        addCards("Mountain", 1, ai);
+        final Card metal = addCardToZone("Metalworker", ai, ZoneType.Battlefield);
+        metal.setSickness(false);
+        addCardToZone("Staff of Domination", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(5, null);
+        runTurn();
+        AssertJUnit.assertTrue("reveal three artifacts for six, untap with the Staff for three and one: two over a round\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithPiliPalaAndGrandArchitectPaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Mountain", 1, ai);
+        addCards("Island", 1, ai);
+        addCardToZone("Pili-Pala", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Grand Architect", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(5, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Architect paints Pili-Pala, taps it for two, Pili-Pala pays them to untap for one mana\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithDualcasterMageAndTwinflameKillsTheOpponent() {
+        elfDeckWith(0, "Twinflame", "Dualcaster Mage");
+        addCards("Mountain", 5, ai);
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("Twinflame for nothing, the Mage in answer copies it, each hasty token copies it again\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithWitherbloomApprenticeAndChainOfSmogDrainsTheOpponent() {
+        elfDeckWith(0, "Chain of Smog");
+        addCards("Swamp", 2, ai);
+        addCardToZone("Witherbloom Apprentice", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(6, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Chain at the AI itself with an empty hand, copied again and again, one drained for each\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    private static boolean drains(final SpellAbility sa) {
+        for (SpellAbility part = sa; part != null; part = part.getSubAbility()) {
+            if (forge.ai.simulation.TriggerLoopPlan.makesTheAiGainOrAnOpponentLose(part)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Test(timeOut = 120000)
+    public void lifeThatTheOpponentGainsIsNoStartForBloodAndBond() {
+        elfDeckWith(0, "Devour Flesh", "Soul Feast", "Vampire's Kiss");
+        AssertJUnit.assertFalse("Devour Flesh gives the targeted player the life", drains(spellOf("Devour Flesh")));
+        AssertJUnit.assertTrue("Soul Feast: the opponent loses it, the AI gains it", drains(spellOf("Soul Feast")));
+        AssertJUnit.assertTrue("Vampire's Kiss too", drains(spellOf("Vampire's Kiss")));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithBloodAndBondIgnoresDevourFleshForTheDrain() {
+        elfDeckWith(0, "Devour Flesh", "Soul Feast");
+        addCards("Swamp", 5, ai); // Devour Flesh would leave too little for the Soul Feast
+        addCardToZone("Exquisite Blood", ai, ZoneType.Battlefield);
+        addCardToZone("Sanguine Bond", ai, ZoneType.Battlefield);
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Soul Feast starts it, not the Devour Flesh\n" + trace + gameStateToString(game),
+                game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void severalBlockersTogetherDecideWhetherAnEngineAttacks() {
+        elfDeckWith(0);
+        final Card aurelia = addCardToZone("Aurelia, the Warleader", ai, ZoneType.Battlefield); // 3/4 flier
+        aurelia.setSickness(false);
+        addCardToZone("Wind Drake", opp, ZoneType.Battlefield).setSickness(false);
+        AssertJUnit.assertTrue("one 2/2 does not kill it", forge.ai.simulation.ExtraCombatPlan.safeToAttack(aurelia,
+                opp.getCardsIn(ZoneType.Battlefield)));
+        addCardToZone("Wind Drake", opp, ZoneType.Battlefield).setSickness(false);
+        AssertJUnit.assertFalse("two 2/2s that block together do" + gameStateToString(game),
+                forge.ai.simulation.ExtraCombatPlan.safeToAttack(aurelia, opp.getCardsIn(ZoneType.Battlefield)));
+    }
+
+    @Test(timeOut = 120000)
+    public void aStepThatIsTurnedDownLeavesNoSacrificeMarkBehind() {
+        elfDeckWith(0);
+        addCards("Swamp", 2, ai);
+        final Card trader = addCardToZone("Warren Soultrader", ai, ZoneType.Battlefield);
+        addCardToZone("Blood Artist", ai, ZoneType.Battlefield);
+        final Card crawler = addCardToZone("Gravecrawler", ai, ZoneType.Battlefield);
+        trader.setSickness(false);
+        crawler.setSickness(false);
+        final SpellAbility accepted = LoopRunner.next(ai, abilitiesOf(trader), s -> true);
+        AssertJUnit.assertNotNull("the plan has a step" + gameStateToString(game), accepted);
+        AssertJUnit.assertEquals("the accepted step keeps the mark for the payment", "6", crawler.getSVar("SacMe"));
+        AssertJUnit.assertNull("turned down", LoopRunner.next(ai, abilitiesOf(trader), s -> false));
+        // the Gravecrawler's own script says SacMe:3, and that is what it has again: the plan's 6 is gone
+        AssertJUnit.assertEquals("the plan's mark is not left behind", "3", crawler.getSVar("SacMe"));
+        AssertJUnit.assertFalse(crawler.hasSVar("SacMeWas"));
+    }
+
+    @Test(timeOut = 120000)
+    public void aCardThatAlreadyHadASacrificeMarkGetsItBack() {
+        elfDeckWith(0);
+        final Card token = addCardToZone("Gravecrawler", ai, ZoneType.Battlefield);
+        token.setSVar("SacMe", "3");
+        forge.ai.simulation.SacMarks.mark(token);
+        AssertJUnit.assertEquals("6", token.getSVar("SacMe"));
+        forge.ai.simulation.SacMarks.restore(ai);
+        AssertJUnit.assertEquals("3", token.getSVar("SacMe"));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithNivMizzetStartsTheLoopAfterAnEarlierLifeLoss() {
+        elfDeckWith(0, "Curiosity", "Opt");
+        addCards("Island", 3, ai);
+        addCards("Mountain", 3, ai);
+        addCardToZone("Niv-Mizzet, Parun", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(10, null);
+        opp.loseLife(1, false, false, null); // combat damage, say: not the Niv-Mizzet chain
+        runTurn();
+        AssertJUnit.assertTrue("Niv-Mizzet has not hit anyone yet, so an instant still starts it\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void upheavalNeedsTheColoursFromDifferentLands() {
+        elfDeckWith(0, "Upheaval", "Psychatog");
+        addCards("Island", 2, ai);
+        addCards("Underground Sea", 1, ai); // blue or black, not both: three blue and a black need four such lands
+        addCards("Plains", 6, ai);
+        addCards("Plains", 5, opp);
+        addCardToZone("Grizzly Bears", opp, ZoneType.Battlefield);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        AssertJUnit.assertFalse("nine lands, but one dual land cannot be the third blue and the black",
+                forge.ai.simulation.UpheavalPlan.ready(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void upheavalIsReadyWhenTwoDualLandsCoverTheMissingColours() {
+        elfDeckWith(0, "Upheaval", "Psychatog");
+        addCards("Island", 2, ai);
+        addCards("Underground Sea", 2, ai);
+        addCards("Plains", 5, ai);
+        addCards("Plains", 5, opp);
+        addCardToZone("Grizzly Bears", opp, ZoneType.Battlefield);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        AssertJUnit.assertTrue("the Islands and the dual lands: one more blue and the black", forge.ai.simulation.UpheavalPlan.ready(ai));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithUpheavalKeepsABlackSourceWhenTheDualLandsComeFirst() {
+        elfDeckWith(0, "Upheaval", "Psychatog");
+        addCards("Underground Sea", 2, ai); // first in the list: the first blue ability must not take both of them
+        addCards("Island", 2, ai);
+        addCards("Plains", 5, ai);
+        addCards("Plains", 5, opp);
+        addCardToZone("Grizzly Bears", opp, ZoneType.Battlefield);
+        AssertJUnit.assertTrue("nine lands: three blue and a black", forge.ai.simulation.UpheavalPlan.ready(ai));
+        runTurn();
+        boolean atog = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            atog |= c.getName().equals("Psychatog");
+        }
+        AssertJUnit.assertTrue("a dual land is tapped for the black, the Psychatog comes out of the pool\n" + trace + gameStateToString(game), atog);
+        AssertJUnit.assertEquals("the opponent starts again", 0, opp.getCardsIn(ZoneType.Battlefield).size());
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithNivMizzetStartsTheLoopAfterItDamagedBeforeTheAuraCame() {
+        elfDeckWith(0, "Curiosity", "Opt");
+        addCards("Island", 3, ai);
+        addCards("Mountain", 3, ai);
+        final Card niv = addCardToZone("Niv-Mizzet, Parun", ai, ZoneType.Battlefield);
+        niv.setSickness(false);
+        opp.setLife(10, null);
+        // Niv-Mizzet itself hit the opponent (an instant that pinged, say) before the Curiosity: not the chain
+        final forge.game.card.CardDamageTable damage = new forge.game.card.CardDamageTable();
+        damage.put(niv, opp, 2);
+        game.getAction().dealDamage(false, damage, new forge.game.card.CardDamageTable(), new forge.game.GameEntityCounterTable(), null);
+        AssertJUnit.assertTrue("setup: Niv-Mizzet has hit the opponent", niv.hasDealtDamageToOpponentThisTurn());
+        runTurn();
+        AssertJUnit.assertTrue("the Curiosity is on, the earlier ping is not the chain: an instant starts it\n" + trace
+                + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithBloodAndBondStartsTheLoopAfterLifeLostBeforeTheSecondPiece() {
+        elfDeckWith(0, "Soul Feast");
+        addCards("Swamp", 5, ai);
+        opp.setLife(10, null);
+        opp.loseLife(1, false, false, null); // combat damage, before the combo is complete
+        addCardToZone("Exquisite Blood", ai, ZoneType.Battlefield);
+        addCardToZone("Sanguine Bond", ai, ZoneType.Battlefield); // the piece that completes it
+        runTurn();
+        AssertJUnit.assertTrue("the earlier life loss is not the loop: the Soul Feast starts it\n" + trace + gameStateToString(game),
+                game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithThopterFoundrySwordOfTheMeekAndTimeSieveTakesAnExtraTurn() {
+        elfDeckWith(0);
+        addCards("Island", 3, ai);
+        final Card sieve = addCardToZone("Time Sieve", ai, ZoneType.Battlefield);
+        sieve.setSickness(false);
+        addCardToZone("Thopter Foundry", ai, ZoneType.Battlefield);
+        addCardToZone("Sword of the Meek", ai, ZoneType.Battlefield);
+        runTurn();
+        AssertJUnit.assertTrue("a Thopter for the Sword, the Sword back on it, twice: five artifacts for the Sieve\n"
+                + trace + gameStateToString(game), sieve.isTapped() || !sieve.isInZone(ZoneType.Battlefield));
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithBaskingBroodscaleAndSadisticGleePaysForAFireball() {
+        elfDeckWith(0, "Sadistic Glee", "Fireball");
+        addCards("Forest", 3, ai);
+        addCards("Swamp", 1, ai);
+        addCards("Mountain", 2, ai);
+        addCardToZone("Basking Broodscale", ai, ZoneType.Battlefield).setSickness(false);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Glee, adapt for a Spawn, the Spawn for a mana and a counter, the counter for a Spawn\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithChatterfangAndPitilessPlundererPaysForAFireball() {
+        elfDeckWith(0, "Fireball");
+        addCards("Swamp", 1, ai);
+        addCards("Mountain", 1, ai);
+        addCardToZone("Chatterfang, Squirrel General", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Pitiless Plunderer", ai, ZoneType.Battlefield).setSickness(false);
+        addTokens("g_1_1_squirrel", 3, ai);
+        opp.setLife(8, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Squirrels to Chatterfang, each death a Treasure and a Squirrel: mana for a {B}\n"
+                + trace + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    @Test(timeOut = 120000)
+    public void aWholeTurnWithConspicuousSnoopBoggartHarbingerKikiJikiAndSlingGangKillsTheOpponent() {
+        elfDeckWith(0, "Boggart Harbinger");
+        addCards("Swamp", 3, ai);
+        addCardToZone("Conspicuous Snoop", ai, ZoneType.Battlefield).setSickness(false);
+        addCardToZone("Kiki-Jiki, Mirror Breaker", ai, ZoneType.Library);
+        addCardToZone("Sling-Gang Lieutenant", ai, ZoneType.Library);
+        opp.setLife(10, null);
+        runTurn();
+        AssertJUnit.assertTrue("the Harbinger puts Kiki-Jiki on top, the Snoops copy themselves, a last one copies the Harbinger"
+                + " for Sling-Gang Lieutenant, the Goblins go\n" + trace + gameStateToString(game),
+                game.isGameOver() || opp.getLife() <= 0);
+    }
 }

@@ -28,7 +28,10 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbilityDisableTriggers;
 import forge.game.staticability.StaticAbilityMustTarget;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -171,11 +174,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else if (aiLogic.equals("ReturnCastable")) {
-                if (!sa.getHostCard().getExiledCards().isEmpty()
-                        && ComputerUtilMana.canPayManaCost(sa.getHostCard().getExiledCards().getFirst().getFirstSpellAbility(), aiPlayer, 0, false)) {
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                return !sa.getHostCard().getExiledCards().isEmpty()
+                        && !ComputerUtilAbility.shouldWaitForUginLabyrinthReturn(aiPlayer, sa)
+                        ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                        : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
         if (sa.isHidden()) {
@@ -245,6 +247,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
+        if (sa.isHidden() && "Library".equals(sa.getParam("Destination")) && sa.hasParam("ChangeType")
+                && forge.ai.simulation.GoblinPlan.fetch(aiPlayer, sa, aiPlayer.getCardsIn(ZoneType.Library)) != null) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // Boggart Harbinger for Conspicuous Snoop
+        }
         if (sa.isHidden()) {
             return hiddenTriggerAI(aiPlayer, sa, mandatory);
         }
@@ -490,6 +496,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // this works for hidden because the mana is paid first.
         final String type = sa.getParam("ChangeType");
+        final boolean uginLabyrinthImprint = "UginLabyrinthImprint".equals(sa.getParam("AILogic"));
         if (!mandatory && type != null && type.contains("X")) {
             ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         }
@@ -534,6 +541,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // Computer should "know" his deck
             if (p == ai) {
                 list = AbilityUtils.filterListByType(list, sa.getParam("ChangeType"), sa);
+                if (uginLabyrinthImprint) {
+                    list = CardLists.filter(list, card -> !ComputerUtilAbility.canCastCardNow(ai, card));
+                }
             }
 
             if (list.isEmpty()) {
@@ -742,6 +752,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (!isPreferredTarget(ai, sa, false, false)) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            if (ComputerUtilAbility.hasUnpromisedGiftReturn(sa)) {
+                for (final Card target : sa.getTargets().getTargetCards()) {
+                    if (target.getOwner() != null && target.getOwner().isOpponentOf(ai)) {
+                        // Do not spend mana on the mode that gives the opponent's creature back larger.
+                        sa.resetTargets();
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    }
+                }
+            }
             if (destination == ZoneType.Battlefield && diesToItsOwnMinusCounters(sa)) {
                 // Persist on a 1/1: it comes back with a -1/-1 counter and is gone again (#4122)
                 sa.resetTargets();
@@ -909,6 +928,24 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
         // if we are here, we have a target
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    private static boolean hasEnabledEtbTrigger(final Player ai, final Card card) {
+        if (!card.hasETBTrigger(false)) {
+            return false;
+        }
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
+        runParams.put(AbilityKey.Destination, ZoneType.Battlefield.name());
+        for (final Trigger trigger : card.getTriggers()) {
+            if (trigger.getMode() != TriggerType.ChangesZone
+                    || !ZoneType.Battlefield.toString().equals(trigger.getParam("Destination"))) {
+                continue;
+            }
+            if (!StaticAbilityDisableTriggers.disabled(ai.getGame(), trigger, runParams)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -1081,7 +1118,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
                 // blink logic: get my own permanents back or blink permanents with ETB effects
                 if (blink) {
-                    CardCollection blinkTargets = CardLists.filter(list, c -> !c.isToken() && c.getOwner().equals(ai) && (c.getController().isOpponentOf(ai) || c.hasETBTrigger(false)));
+                    CardCollection blinkTargets = CardLists.filter(list, c -> !c.isToken() && c.getOwner().equals(ai) && (c.getController().isOpponentOf(ai) || hasEnabledEtbTrigger(ai, c)));
                     if (!blinkTargets.isEmpty()) {
                         CardCollection opponentBlinkTargets = CardLists.filterControlledBy(blinkTargets, ai.getOpponents());
                         // prefer post-combat unless targeting opponent's stuff or part of another ability
@@ -1569,12 +1606,45 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
+    /**
+     * The card to take out of the hand of another player (Thought-Knot Seer): the first key card of THEIR deck list that is
+     * in the revealed cards, following the order of the list and skipping those already in play. The {@code player} that the
+     * chooser methods get is always the AI that decides, so its own list says nothing about the hand it looks at.
+     *
+     * @return null when the cards are the AI's own, the deck has no key card or none of them is among the cards
+     */
+    private static Card firstKeyCardOfHandOwner(final CardCollection fetchList, final Player decider) {
+        if (fetchList.isEmpty()) {
+            return null;
+        }
+        final Player owner = fetchList.getFirst().getOwner();
+        if (owner == null || owner.equals(decider) || owner.getRegisteredPlayer() == null
+                || owner.getRegisteredPlayer().getDeck() == null) {
+            return null;
+        }
+        final CardCollectionView inPlay = owner.getCardsIn(ZoneType.Battlefield);
+        for (final String keyName : owner.getRegisteredPlayer().getDeck().getKeyCards()) {
+            if (inPlay.anyMatch(CardPredicates.nameEquals(keyName))) {
+                continue; // already in play: the next one on the list
+            }
+            final CardCollection inHand = CardLists.filter(fetchList, CardPredicates.nameEquals(keyName));
+            if (!inHand.isEmpty()) {
+                return inHand.getFirst();
+            }
+        }
+        return null;
+    }
+
     public static Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, Player player, final Player decider) {
         if (fetchList.isEmpty()) {
             return null;
         }
         if (destination == null) {
             return fetchList.isEmpty() ? null : ComputerUtilCard.getBestAI(fetchList);
+        }
+        final Card goblin = forge.ai.simulation.GoblinPlan.fetch(decider, sa, fetchList);
+        if (goblin != null) {
+            return goblin; // Boggart Harbinger for Conspicuous Snoop: Kiki-Jiki, then Sling-Gang Lieutenant
         }
         // an opponent choosing between cards revealed from outside the game (Extrapolate the Impossible, Wish-like
         // effects with a chooser) hands over the worse one
@@ -1642,6 +1712,18 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     multipleCardsToChoose.remove(0);
                     return choice;
                 }
+            } else if ("UginLabyrinthImprint".equals(logic)) {
+                // Keep cards the AI can already cast; imprint the least useful remaining option.
+                final CardCollection uncastable = CardLists.filter(fetchList, card -> !ComputerUtilAbility.canCastCardNow(decider, card));
+                return uncastable.isEmpty() ? null : ComputerUtilCard.getWorstAI(uncastable);
+            } else if ("ThoughtKnotSeer".equals(logic)) {
+                // The key cards of the deck whose hand it is, in the order of its list (#13037); without one of them in the
+                // hand, the highest-mana-value nonland card. The key cards of the AI's own deck say nothing about their hand.
+                final Card theirKeyCard = firstKeyCardOfHandOwner(fetchList, decider);
+                if (theirKeyCard != null) {
+                    return theirKeyCard;
+                }
+                return ComputerUtilCard.getMostExpensivePermanentAI(fetchList);
             } else if (logic.startsWith("ExilePreference")) {
                 return doExilePreferenceLogic(decider, sa, fetchList);
             } else if (logic.equals("BounceOwnTrigger")) {

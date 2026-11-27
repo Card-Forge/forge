@@ -456,7 +456,7 @@ public class CountersPutAi extends CountersAi {
                 // don't put the counter on the dead creature
                 if (sacSelf && c.equals(source)) {
                     return false;
-                } else if (hasSacCost && !sacSelf && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) { // the threatened card is the one sacrificed: a self-sacrifice does not threaten the target (#12058)
+                } else if (hasSacCost && !sacSelf && !sa.isCurse() && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) { // the threatened card is the one sacrificed: a self-sacrifice does not threaten the target (#12058). A curse puts its counters on a creature of the opponent, which is never the sacrificed one (Ifnir Deadlands, #13046)
                     return false;
                 }
                 if ("NoCounterOfType".equals(sa.getParam("AILogic"))) {
@@ -876,8 +876,12 @@ public class CountersPutAi extends CountersAi {
                     choice = Aggregates.random(list);
                 }
                 if (choice != null && divided) {
-                    if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1) {
+                    if (left <= 0) {
+                        break; // no more counters to distribute
+                    }
+                    if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1 || left <= Math.max(amount / totalTargets, 1)) {
                         sa.addDividedAllocation(choice, left);
+                        left = 0;
                     } else {
                         int alloc = Math.max(amount / totalTargets, 1);
                         sa.addDividedAllocation(choice, alloc);

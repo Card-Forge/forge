@@ -10,6 +10,7 @@ import forge.StaticData;
 import forge.card.CardMockTestCase;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.gamemodes.rogue.effect.NPCEffect;
 import forge.gamemodes.rogue.path.NodeBazaar;
 import forge.gamemodes.rogue.path.NodePlanebound;
 import forge.gamemodes.rogue.path.RoguePath;
@@ -142,5 +143,14 @@ public class RogueConfigTest extends CardMockTestCase {
         PaperCard mythic = FModel.getMagicDb().getCommonCards().getCard("Atraxa, Grand Unifier");
         assertNotNull(mythic);
         assertNull(RogueConfig.getNonMythicRandomPrint(mythic, card -> true, "ONE"));
+    }
+
+    @Test
+    public void aTraitNameLinksItsRogueCardOverARealCard() {
+        NPCEffect trait = NPCEffect.HENZIE_DRAMATIC_ENTRANCE;
+        assertNotNull(testData.getCommonCards().getCard("Dramatic Entrance"));
+        TextHelper.Part part = TextHelper.parts(trait.getRawDescription(), trait.getEffectCardReference()).stream()
+                .filter(p -> p.text().equals("Dramatic Entrance")).findFirst().orElseThrow();
+        assertEquals(TextHelper.resolveCard(part.token()).getName(), "Henzie Trait - Dramatic Entrance");
     }
 }

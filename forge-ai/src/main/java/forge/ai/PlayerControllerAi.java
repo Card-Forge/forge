@@ -912,7 +912,16 @@ public class PlayerControllerAi extends PlayerController {
                 // fall back to the standard rule below
             }
         }
-        return !ComputerUtil.wantMulligan(player, cardsToReturn);
+        return classicMulliganKeepsHand(player.getCardsIn(ZoneType.Hand), cardsToReturn);
+    }
+
+    /** Applies the classic keep heuristic to the hand that remains after its own bottoming choice. */
+    boolean classicMulliganKeepsHand(final CardCollectionView hand, final int cardsToReturn) {
+        final CardCollection bottom = classicMulliganBottomCards(hand, cardsToReturn);
+        final CardCollection kept = new CardCollection(hand);
+        kept.removeAll(bottom);
+        return !OpeningHand.hasOnlyLandsAndCreatureAuras(kept)
+                && !ComputerUtil.wantMulligan(player, cardsToReturn);
     }
 
     @Override
@@ -926,30 +935,35 @@ public class PlayerControllerAi extends PlayerController {
                 // fall back to the standard rule below
             }
         }
+        return CardCollection.getView(classicMulliganBottomCards(hand, cardsToReturn));
+    }
+
+    /** Selects the cards the classic mulligan path will bottom, without mutating the supplied hand view. */
+    CardCollection classicMulliganBottomCards(final CardCollectionView hand, final int cardsToReturn) {
         // TODO This is better than it was before, but still suboptimal (but fast).
         // Maybe score a bunch of hands based on projected hand size and return the "duds"
-        int numLandsDesired = (player.getStartingHandSize() - cardsToReturn) / 2;
-
-        CardCollection toReturn = new CardCollection();
+        final int numLandsDesired = (player.getStartingHandSize() - cardsToReturn) / 2;
+        final CardCollection remaining = new CardCollection(hand);
+        final CardCollection toReturn = new CardCollection();
         for (int i = 0; i < cardsToReturn; i++) {
-            hand.removeAll(toReturn);
+            remaining.removeAll(toReturn);
 
-            CardCollection landsInHand = CardLists.filter(hand, CardPredicates.LANDS);
-            int numLandsInHand = landsInHand.size() - CardLists.count(toReturn, CardPredicates.LANDS);
+            final CardCollection landsInHand = CardLists.filter(remaining, CardPredicates.LANDS);
+            final int numLandsInHand = landsInHand.size();
 
             // If we're flooding with lands, get rid of the worst land we have
             if (numLandsInHand > 0 && numLandsInHand > numLandsDesired) {
-                CardCollection producingLands = CardLists.filter(landsInHand, CardPredicates.LANDS_PRODUCING_MANA);
-                CardCollection nonProducingLands = CardLists.filter(landsInHand, CardPredicates.LANDS_PRODUCING_MANA.negate());
-                Card worstLand = nonProducingLands.isEmpty() ? ComputerUtilCard.getWorstLand(producingLands)
+                final CardCollection producingLands = CardLists.filter(landsInHand, CardPredicates.LANDS_PRODUCING_MANA);
+                final CardCollection nonProducingLands = CardLists.filter(landsInHand, CardPredicates.LANDS_PRODUCING_MANA.negate());
+                final Card worstLand = nonProducingLands.isEmpty() ? ComputerUtilCard.getWorstLand(producingLands)
                         : ComputerUtilCard.getWorstLand(nonProducingLands);
                 toReturn.add(worstLand);
                 continue;
             }
 
-            // See if we'd scry something to the bottom in this situation. If we want to, probably get rid of it.
-            CardCollection scryBottom = new CardCollection();
-            for (Card c : hand) {
+            // See if we'd scry something to the bottom. If we want to, probably get rid of it.
+            final CardCollection scryBottom = new CardCollection();
+            for (final Card c : remaining) {
                 // Lands are evaluated separately above, factoring in the number of cards to be returned to the library
                 if (!c.isLand() && !toReturn.contains(c) && !willPutCardOnTop(c)) {
                     scryBottom.add(c);
@@ -962,10 +976,9 @@ public class PlayerControllerAi extends PlayerController {
             }
 
             // If we don't want to scry anything to the bottom, remove the worst card that we have in order to satisfy the requirement
-            toReturn.add(ComputerUtilCard.getWorstAI(hand));
+            toReturn.add(ComputerUtilCard.getWorstAI(remaining));
         }
-
-        return CardCollection.getView(toReturn);
+        return toReturn;
     }
 
     @Override
@@ -1283,6 +1296,19 @@ public class PlayerControllerAi extends PlayerController {
                 return ComputerUtilMana.chooseColorForShard(shardBeingPaid, colors.getColor());
             }
             hand = CardCollection.combine(hand, player.getCardsIn(ZoneType.Stack));
+            // what the cards that the mana is for still lack: the cards that a Lion's Eye Diamond has just discarded
+            // are those (a Past in Flames casts them from the graveyard), so they are counted as well
+            final CardCollection wanted = new CardCollection(hand);
+            for (final Card g : player.getCardsIn(ZoneType.Graveyard)) {
+                if (g.getTurnInZone() == player.getGame().getPhaseHandler().getTurn() && !g.isLand() && !g.isCreature()
+                        && (g.isInstant() || g.isSorcery())) {
+                    wanted.add(g);
+                }
+            }
+            final byte lacking = ComputerUtilMana.colorShortfall(player, wanted, colors.getColor());
+            if (lacking != 0) {
+                return lacking;
+            }
         }
         final String c = ComputerUtilCard.getMostProminentColor(hand);
         byte chosenColorMask = MagicColor.fromName(c);
@@ -1558,6 +1584,9 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     void chooseNewTargetsForCopy(final SpellAbility copy) {
+        if (forge.ai.simulation.StackLoops.naruCopy(player, copy)) {
+            return; // Naru Meha with Ghostly Flicker: the copy goes for Naru Meha and the land of the loop, or ends it
+        }
         List<TargetChoices> oldTargets = new ArrayList<>();
         boolean targetingPlayer = false;
         for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
@@ -1608,6 +1637,7 @@ public class PlayerControllerAi extends PlayerController {
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
+            sa.clearTargets();
             return targetingPlayer.getController().chooseTargetsFor(sa);
         }
         return brains.doTrigger(sa, isMandatory);

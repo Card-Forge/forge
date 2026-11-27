@@ -252,6 +252,9 @@ public interface RogueEffect {
     /** Fired when the player would lose the run. */
     default void onDefeat(DefeatContext ctx, RogueRun run) {}
 
+    /** Whether onDefeat revives the player, so a lost match does not end the run. */
+    default boolean revivesOnDefeat() { return false; }
+
     /** Fired before match rewards are given after a win. Use to modify or skip them. */
     default void onBeforeRewards(MatchRewardContext ctx, RogueRun run) {}
 

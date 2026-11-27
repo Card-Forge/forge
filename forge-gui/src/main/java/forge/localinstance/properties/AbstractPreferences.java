@@ -42,7 +42,7 @@ public abstract class AbstractPreferences<T extends Enum<T> & IPreferences.IPref
         final List<String> lines = FileUtil.readFile(filename);
         for (String line : lines) {
             line = line.trim();
-            if (line.startsWith("#") || (line.isEmpty())) {
+            if (line.startsWith("#") || line.isEmpty()) {
                 continue;
             }
 

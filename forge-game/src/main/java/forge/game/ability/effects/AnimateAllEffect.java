@@ -18,6 +18,12 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class AnimateAllEffect extends AnimateEffectBase {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Abilities", "Colors", "Defined", "Duration", "HiddenKeywords", "Keywords", "Power",
+        "RemoveTypes", "Replacements", "Toughness", "Triggers", "Types", "Zone", "sVars",
+        "staticAbilities",
+    };
+    public static final String[][] REQUIRED_PARAMS = {{"ValidCards"}};
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

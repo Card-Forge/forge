@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Predicate;
@@ -51,7 +52,8 @@ public class RogueConfig {
     private static final String FALLBACK_LAND_SET = "MH3";
     private static final String WASTES_FALLBACK_LAND_SET = "M3C";
 
-    private static final StaticData db = StaticData.instance();
+    /** The card database the Rogue cards were last added to; a test that builds its own database replaces it. */
+    private static WeakReference<StaticData> rogueCardsAddedTo = new WeakReference<>(null);
 
     // Cache all plane cards to avoid reloading them repeatedly
     private static CardPool cachedPlanarPool = null;
@@ -64,9 +66,50 @@ public class RogueConfig {
             Suppliers.memoize(RogueConfig::loadGamechangerCardNames);
     private static final Supplier<Set<String>> excludedRogueCardNames =
             Suppliers.memoize(RogueConfig::loadExcludedRogueCardNames);
+    private static final Supplier<List<CommanderUnlock>> commanderUnlocks =
+            Suppliers.memoize(RogueConfig::loadCommanderUnlocks);
+
+    /** What an unlock check needs from a commander deck. Unlike the deck, it never changes while the game runs. */
+    public record CommanderUnlock(String commanderName, boolean experimental, RogueUnlockCondition condition) {
+        public boolean isUnlocked() {
+            return RogueUnlockCondition.isUnlocked(condition);
+        }
+    }
+
+    /** Read once: loading the decks parses every start deck and reward pool. */
+    public static List<CommanderUnlock> getCommanderUnlocks() {
+        return commanderUnlocks.get();
+    }
+
+    private static List<CommanderUnlock> loadCommanderUnlocks() {
+        List<CommanderUnlock> unlocks = new ArrayList<>();
+        for (RogueDeck deck : loadRogueDecks()) {
+            unlocks.add(new CommanderUnlock(deck.getCommanderCardName(), deck.isExperimental(), deck.getUnlockCondition()));
+        }
+        return ImmutableList.copyOf(unlocks);
+    }
 
     public static PaperCard getRogueCard(String name) {
-        return name == null ? null : rogueCards.get().get(name);
+        return name == null ? null : rogueCards().get(name);
+    }
+
+    /** The current card database: read each time, as the singleton is replaced when a new database is built. */
+    private static StaticData db() {
+        return StaticData.instance();
+    }
+
+    /** The Rogue cards, added to the current database's variant cards if they are not there yet. */
+    private static synchronized Map<String, PaperCard> rogueCards() {
+        Map<String, PaperCard> cards = rogueCards.get();
+        StaticData data = db();
+        if (rogueCardsAddedTo.get() != data) {
+            // Forge's image lookup searches variant cards without adding them to the normal deck catalog.
+            for (PaperCard card : cards.values()) {
+                data.getVariantCards().addCard(card);
+            }
+            rogueCardsAddedTo = new WeakReference<>(data);
+        }
+        return cards;
     }
 
     private static Map<String, PaperCard> loadRogueCards() {
@@ -88,8 +131,6 @@ public class RogueConfig {
                 CardRules rules = rulesReader.readCard(lines, baseName);
                 rules.setCustom();
                 PaperCard card = new PaperCard(rules, CardEdition.UNKNOWN_CODE, CardRarity.Special);
-                // Forge's image lookup searches variant cards without adding them to the normal deck catalog.
-                db.getVariantCards().addCard(card);
                 cards.put(card.getName(), card);
             } catch (Exception e) {
                 Logger.error(e, "Error loading Rogue card {}", cardFile.getName());
@@ -215,7 +256,7 @@ public class RogueConfig {
             cachedPlanarPool = new CardPool();
 
             // Search variant cards for planes
-            for (PaperCard card : db.getVariantCards().getAllCards()) {
+            for (PaperCard card : db().getVariantCards().getAllCards()) {
                 if (card.getRules().getType().isPlane()) {
                     cachedPlanarPool.add(card);
                 }
@@ -284,15 +325,15 @@ public class RogueConfig {
             if (excludedRogueCardNames.get().contains(name)) {
                 continue;
             }
-            PaperCard card = db.getCommonCards().getCardFromEditions(name,
+            PaperCard card = db().getCommonCards().getCardFromEditions(name,
                 candidate -> preferredSetCodes.contains(candidate.getEdition()) && isEligibleSpecialPoolCard(candidate));
             if (card == null) {
-                card = db.getCommonCards().getCardFromEditions(name,
+                card = db().getCommonCards().getCardFromEditions(name,
                     candidate -> !DEPRIORITIZED_PRINT_SET_CODES.contains(candidate.getEdition())
                         && isEligibleSpecialPoolCard(candidate));
             }
             if (card == null) {
-                card = db.getCommonCards().getCardFromEditions(name, RogueConfig::isEligibleSpecialPoolCard);
+                card = db().getCommonCards().getCardFromEditions(name, RogueConfig::isEligibleSpecialPoolCard);
             }
             if (card != null) {
                 cards.add(card);
@@ -325,7 +366,7 @@ public class RogueConfig {
         if (card.isRebalanced()) {
             return false;
         }
-        CardEdition edition = db.getCardEdition(card.getEdition());
+        CardEdition edition = db().getCardEdition(card.getEdition());
         return edition != null && edition.getType() != CardEdition.Type.FUNNY
             && edition.getType() != CardEdition.Type.ONLINE;
     }
@@ -501,7 +542,7 @@ public class RogueConfig {
     /** Returns an eligible print of the same rarity on or after the cutoff, or null. */
     public static PaperCard getPreferredRecentPrint(PaperCard card, Date cutoff) {
         Predicate<PaperCard> recent = print -> isEligibleRoguePrinting(print)
-                && !db.getCardEdition(print.getEdition()).getDate().before(cutoff);
+                && !db().getCardEdition(print.getEdition()).getDate().before(cutoff);
         if (recent.test(card)) {
             return card;
         }
@@ -523,7 +564,7 @@ public class RogueConfig {
                         .thenComparing(candidate -> !candidate.getEdition().equals("CMM"))
                         .thenComparing(candidate -> !candidate.getEdition().equals("FDC"))
                         .thenComparing(candidate -> !candidate.getEdition().equals("FDN"))
-                        .thenComparing(candidate -> db.getCardEdition(candidate.getEdition()).getDate(),
+                        .thenComparing(candidate -> db().getCardEdition(candidate.getEdition()).getDate(),
                                 Comparator.reverseOrder())
                         .thenComparingInt(PaperCard::getArtIndex)
                         .thenComparing(PaperCard::getCollectorNumberSortingKey)
@@ -557,7 +598,7 @@ public class RogueConfig {
     /** Lowest-index basic-land art from the preferred edition, or its standard fallback. */
     public static PaperCard getBasicLandPrint(String name, String preferredEdition) {
         String fallbackEdition = "Wastes".equals(name) ? WASTES_FALLBACK_LAND_SET : FALLBACK_LAND_SET;
-        return db.getCommonCards().getAllCards(name).stream()
+        return db().getCommonCards().getAllCards(name).stream()
                 .filter(card -> card.getRules().getType().isBasicLand()
                         && (preferredEdition.equals(card.getEdition())
                             || fallbackEdition.equals(card.getEdition())))
@@ -590,16 +631,16 @@ public class RogueConfig {
         }
         PaperCard card;
         if (setCode == null || setCode.isEmpty()) {
-            card = db.getCommonCards().getCard(cardName);
+            card = db().getCommonCards().getCard(cardName);
         } else if (artIndex == null) {
-            card = db.getCommonCards().getCard(cardName, setCode);
+            card = db().getCommonCards().getCard(cardName, setCode);
         } else {
-            card = db.getCommonCards().getCard(cardName, setCode, artIndex);
+            card = db().getCommonCards().getCard(cardName, setCode, artIndex);
         }
         if (card == null) {
             Logger.warn("Card not found: {}", cardName);
             // Return a basic land as fallback
-            return db.getCommonCards().getCard("Plain");
+            return db().getCommonCards().getCard("Plain");
         }
         return card;
     }
