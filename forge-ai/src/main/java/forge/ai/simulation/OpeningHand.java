@@ -23,6 +23,7 @@ import forge.game.replacement.ReplacementType;
 import forge.card.CardStateName;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -684,7 +685,7 @@ public final class OpeningHand {
         int colors = handColors(hand);
         int sources = 0;
         for (final Card c : free) {
-            final int[] flow = manaFlow(c);
+            final int[] flow = manaFlow(c, hand);
             if (flow != null && flow[1] >= 1 && canDeploy(c, mana, colors) && flow[0] <= mana) {
                 sources++;
                 mana += flow[1];
@@ -693,7 +694,7 @@ public final class OpeningHand {
             }
         }
         for (final Card c : needy) {
-            final int[] flow = manaFlow(c);
+            final int[] flow = manaFlow(c, hand);
             if (flow == null || flow[1] < 1 || !canDeploy(c, mana, colors) || flow[0] > mana) {
                 continue;
             }
@@ -718,15 +719,16 @@ public final class OpeningHand {
     /**
      * What the card's mana ability costs in mana and what it adds to the mana there is: a Signet pays one and makes
      * two (+1), a Mana Cylix pays one and makes one (+0: it only filters), a Mox pays nothing and makes one (+1).
-     * Of the abilities that work, the one that adds the most (then costs the least).
+     * Of the abilities that work, the one that adds the most (then costs the least). Mana that may only be spent in
+     * some ways counts only if a card of the hand can use it.
      *
      * @return {mana paid, mana added}; null when no ability works as it is
      */
-    private static int[] manaFlow(final Card c) {
+    private static int[] manaFlow(final Card c, final CardCollectionView hand) {
         int[] best = null;
         for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.getApi() != ApiType.Mana || !sa.isAbility() || sa.getPayCosts() == null
-                    || !sa.getPayCosts().hasTapCost() || !worksAsItIs(c, sa)) {
+                    || !sa.getPayCosts().hasTapCost() || !worksAsItIs(c, sa) || !restrictionIsUsable(c, sa, hand)) {
                 continue;
             }
             int paid = 0;
@@ -741,6 +743,29 @@ public final class OpeningHand {
             }
         }
         return best;
+    }
+
+    /**
+     * Whether the mana of the ability can be spent on something in the hand: always for mana without a restriction
+     * (Creeping Peeper's only pays for enchantments, unlocking doors and turning permanents face up), otherwise when a
+     * spell of another card of the hand meets it. What only the deck might hold later is not looked at.
+     */
+    private static boolean restrictionIsUsable(final Card c, final SpellAbility sa, final CardCollectionView hand) {
+        final AbilityManaPart part = sa.getManaPart();
+        if (part == null || !sa.hasParam("RestrictValid") && part.getManaRestrictions().isEmpty()) {
+            return true;
+        }
+        for (final Card other : hand) {
+            if (other == c || other.isLand()) {
+                continue;
+            }
+            for (final SpellAbility spell : other.getSpellAbilities()) {
+                if (spell.isSpell() && part.meetsManaRestrictions(spell)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /** The mana one activation makes: the amount times what is produced ("W U" is two; "Any" and "Combo" one). */

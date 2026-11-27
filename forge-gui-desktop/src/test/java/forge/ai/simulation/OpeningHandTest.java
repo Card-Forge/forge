@@ -238,6 +238,19 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void restrictedManaWithNothingToSpendItOnIsNoSource() {
+        // Creeping Peeper's mana pays for enchantments only, and the hand has none
+        AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Mox Sapphire", "Creeping Peeper"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void restrictedManaWithAnEligibleSpellInTheHandIsASource() {
+        AssertJUnit.assertTrue(oneLandAndSources("Island", new String[] {"Mox Sapphire", "Creeping Peeper"},
+                "Pacifism", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
     public void manaCreaturesTheLandCannotCastAreNoSources() {
         // an Island makes no green mana for the Elves
         AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Llanowar Elves", "Llanowar Elves"},
