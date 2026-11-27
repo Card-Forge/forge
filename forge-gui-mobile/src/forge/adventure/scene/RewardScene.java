@@ -36,6 +36,7 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.assets.ImageCache;
+import forge.card.CardDb;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -58,6 +59,7 @@ public class RewardScene extends UIScene {
     private TypingLabel headerLabel;
     private Vector2 headerLabelOrigPos;
     private boolean autoSell;
+    private boolean exclusionNoticePending;
 
     private ShopActor shopActor;
     private static RewardScene object;
@@ -383,6 +385,16 @@ public class RewardScene extends UIScene {
             setUIBackground(origDrawable);
         }
         super.enter();
+        showExclusionNotice();
+    }
+
+    private void showExclusionNotice() {
+        if (!exclusionNoticePending)
+            return;
+        exclusionNoticePending = false;
+        showDialog(createGenericDialog(Forge.getLocalizer().getMessage("lblExcludedSets"),
+                Forge.getLocalizer().getMessage("lblRewardsChangedByExclusions"), Forge.getLocalizer().getMessage("lblOK"),
+                null, this::removeDialog, null, false, "", true));
     }
 
     private void showLootOrDone() {
@@ -457,11 +469,25 @@ public class RewardScene extends UIScene {
         }
         shopActor.setRewardData(ret);
         loadRewards(ret, RewardScene.Type.Shop, shopActor);
+        shopActor.warnOfExcludedCards(this);
     }
 
     public void loadRewards(Deck deck, Type type, ShopActor shopActor, boolean noSell) {
         Array<Reward> rewards = new Array<>();
-        for (PaperCard card : deck.getAllCardsInASinglePool(true, true).toFlatList()) {
+        List<PaperCard> cards = deck.getAllCardsInASinglePool(true, true).toFlatList();
+        List<PaperCard> allowed;
+        if (deck.getTags().contains(RewardData.IGNORES_EXCLUDED_SETS_TAG)) {
+            allowed = CardDb.withExclusionsLifted(() -> CardUtil.withAllowedPrints(cards));
+        } else {
+            // a pack is rolled without regard to the player's exclusions, and may predate them, so even inside a
+            // dungeon that lifts them it keeps the rules of wherever it came from
+            allowed = Config.instance().liftsExclusionsLocally()
+                    ? CardDb.withExclusionsApplied(() -> CardUtil.withAllowedPrints(cards))
+                    : CardUtil.withAllowedPrints(cards);
+            if (CardUtil.droppedOrMoved(cards, allowed))
+                RewardData.noteRewardChanged();
+        }
+        for (PaperCard card : allowed) {
             rewards.add(new Reward(card, noSell));
         }
         loadRewards(rewards, type, shopActor);
@@ -486,6 +512,10 @@ public class RewardScene extends UIScene {
     }
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
+        // a shop's own warning covers its stock
+        exclusionNoticePending = type != Type.Shop && RewardData.takeRewardChangedByExclusions();
+        if (Forge.getCurrentScene() == this)
+            showExclusionNotice();  // loaded while already open, so enter() does not run
         // Merge Gold and Shards rewards into single entries
         int totalGold = 0;
         int totalShards = 0;

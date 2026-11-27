@@ -36,21 +36,34 @@ public final class SetExclusions {
     }
 
     /**
-     * The entries for a set picker's ticks. An excluded tag is stored as the tag, so sets tagged later are excluded
-     * too. A set the tag covers is stored as kept when unticked, and not stored at all when ticked.
+     * The entries for a set picker's marks. An excluded tag is stored as the tag, so sets tagged later are excluded
+     * too. A set the tag covers as a whole is stored as kept when unticked, and not stored at all when ticked. A set
+     * the tag covers only in part is not stored when marked partly, stored as a code when ticked, and stored as kept
+     * when unmarked.
      */
-    public static Set<String> entriesFor(Iterable<String> tickedSets, Iterable<String> excludedTags,
-                                         Function<String, Set<String>> setsWithTag) {
+    public static Set<String> entriesFor(Iterable<String> tickedSets, Iterable<String> partlyTickedSets,
+                                         Iterable<String> excludedTags, Function<String, Set<String>> setsWithTag,
+                                         Function<String, Set<String>> setsWithTaggedPrints) {
         Set<String> ticked = newCodeSet();
         tickedSets.forEach(ticked::add);
+        Set<String> partlyTicked = newCodeSet();
+        partlyTickedSets.forEach(partlyTicked::add);
         Set<String> covered = newCodeSet();
+        Set<String> partlyCovered = newCodeSet();
         Set<String> entries = newCodeSet();
         for (String tag : excludedTags) {
-            entries.add(TAG_ENTRY + tag);
+            entries.add(tagEntry(tag));
             covered.addAll(setsWithTag.apply(tag));
+            partlyCovered.addAll(setsWithTaggedPrints.apply(tag));
         }
+        partlyCovered.removeAll(covered);
         for (String code : covered) {
             if (!ticked.contains(code)) {
+                entries.add(KEPT_ENTRY + code);
+            }
+        }
+        for (String code : partlyCovered) {
+            if (!ticked.contains(code) && !partlyTicked.contains(code)) {
                 entries.add(KEPT_ENTRY + code);
             }
         }
@@ -60,6 +73,10 @@ public final class SetExclusions {
             }
         }
         return entries;
+    }
+
+    public static String tagEntry(String tag) {
+        return TAG_ENTRY + tag;
     }
 
     public static Set<String> newCodeSet() {
@@ -72,6 +89,19 @@ public final class SetExclusions {
 
     public Set<String> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /** True for a Funny print outside a kept set, whose card is left out of the card pools once Funny is excluded. */
+    public boolean hides(CardEdition edition, String collectorNumber) {
+        return !kept.contains(edition.getCode()) && edition.hasTag(CardEdition.FUNNY_TAG, collectorNumber);
+    }
+
+    /** True when only some prints of the edition are excluded, through a tag on those prints. */
+    public boolean excludesSomePrints(CardEdition edition) {
+        if (excludes(edition, null) || kept.contains(edition.getCode())) {
+            return false;
+        }
+        return edition.getPrintTags().stream().anyMatch(tags::contains);
     }
 
     /** A null collector number asks about the edition as a whole. */

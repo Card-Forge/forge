@@ -224,6 +224,12 @@ public final class FlatMonteCarloPicker {
          * of the AI's own turn. 0 = always. This is what keeps the extra turn affordable on a phone.
          */
         public int lookaheadMaxCandidates = 0;
+        /**
+         * Whether the players' heuristic AIs may respond to what is on the stack in a rollout
+         * (a counterspell, instant speed removal), using the hand dealt in that sample. Costs more heuristic decisions
+         * per play.
+         */
+        public boolean opponentResponses = true;
 
         /** This configuration for a decision with this many candidates: the lookahead is dropped when it is too many. */
         Config forDecision(final int candidates) {
@@ -268,6 +274,7 @@ public final class FlatMonteCarloPicker {
             cfg.extraCandidates = intProp(ai, AiProps.FLAT_MC_EXTRA_CANDIDATES, 0, 8);
             cfg.broadDiscovery = ai.getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY);
             cfg.opponentLookaheadPercent = intProp(ai, AiProps.FLAT_MC_OPPONENT_LOOKAHEAD, 0, 100);
+            cfg.opponentResponses = ai.getBoolProperty(AiProps.FLAT_MC_OPPONENT_RESPONSES);
             cfg.plan = ai.deckPlan(player);
             cfg.riskWeightPercent = cfg.riskWeightPercent * cfg.plan.riskPercent / 100;
             cfg.landChoice = ai.getBoolProperty(AiProps.FLAT_MC_LAND_CHOICE);
@@ -325,6 +332,7 @@ public final class FlatMonteCarloPicker {
             adaptivePlayout = true;
             opponentLookaheadPercent = Math.max(opponentLookaheadPercent, LOOKAHEAD_PERCENT_MOBILE);
             lookaheadMaxCandidates = MOBILE_LOOKAHEAD_MAX_CANDIDATES;
+            opponentResponses = false; // an extra heuristic decision for every spell: more than a phone can spend
             return this;
         }
 
@@ -568,6 +576,7 @@ public final class FlatMonteCarloPicker {
         final int[] count = new int[n];
         final boolean[] invalid = new boolean[n];
         final boolean[] pruned = new boolean[n];
+        final boolean[] luckyWin = new boolean[n]; // won a sample, then failed to win with other hidden cards
         final long[][] vals = new long[n][maxRounds];
         int limitN = n; // how many lines this device can afford to compare, found out by timing the first rollout
         int evaluated = 0;
@@ -630,10 +639,33 @@ public final class FlatMonteCarloPicker {
                     sum[c] += value;
                     vals[c][count[c]] = value;
                     count[c]++;
-                    if (value == WIN_VALUE && !cand.isHold()) {
-                        // This line wins the game outright: nothing needs comparing, and waiting only wastes time.
-                        return new Result(cand.sa, false, true, Math.max(evaluated, c + 1), rollouts,
-                                System.nanoTime() - start, "wins", prunedCount, cand.target);
+                    if (value == WIN_VALUE && !cand.isHold() && r == 0) {
+                        // One win can be luck: the top card of the library, or an opposing hand without an answer in
+                        // this sample. Only a line that also wins with other hidden cards ends the search at once;
+                        // otherwise it is compared like any other.
+                        int confirmed = 1;
+                        while (confirmed < WIN_CONFIRM_SAMPLES && System.nanoTime() + maxRolloutNanos <= hardDeadline) {
+                            AITimeoutTracker.check();
+                            final boolean wanted = cand.extra || revalidate == null || revalidate.test(cand.sa);
+                            if (!wanted || cand.target != null && !applyTarget(cand.sa, cand.target)) {
+                                break;
+                            }
+                            final long t1 = System.nanoTime();
+                            // seeds beyond the ones of the rounds, so that these are samples of their own
+                            final Long again = rollout(player, cand, baseSeed + (maxRounds + confirmed) * SEED_STEP,
+                                    rcfg, playoutPlays, mode);
+                            maxRolloutNanos = Math.max(maxRolloutNanos, System.nanoTime() - t1);
+                            rollouts++;
+                            if (again == null || again != WIN_VALUE) {
+                                luckyWin[c] = again != null;
+                                break;
+                            }
+                            confirmed++;
+                        }
+                        if (confirmed >= WIN_CONFIRM_SAMPLES) {
+                            return new Result(cand.sa, false, true, Math.max(evaluated, c + 1), rollouts,
+                                    System.nanoTime() - start, "wins", prunedCount, cand.target);
+                        }
                     }
                 }
                 if (r == 0) {
@@ -668,13 +700,16 @@ public final class FlatMonteCarloPicker {
         }
         // Only lines still in the race can win: a pruned line was behind when it stopped, and its few samples must not
         // be compared with the many samples of the survivors.
+        // When time ran out in the middle of a round, some lines have one sample more than others: only the samples
+        // that all of them have (the same hidden cards) are compared.
+        final int shared = sharedSamples(count, invalid, pruned, evaluated);
         int best = 0;
         double bestValue = Double.NEGATIVE_INFINITY;
         for (int c = 0; c < evaluated; c++) {
             if (invalid[c] || pruned[c] || count[c] == 0) {
                 continue;
             }
-            final double value = (double) sum[c] / count[c] + (c == 0 ? bonus0 : 0);
+            final double value = meanOfFirst(vals[c], shared) + (c == 0 ? bonus0 : 0);
             if (value > bestValue) {
                 bestValue = value;
                 best = c;
@@ -696,12 +731,14 @@ public final class FlatMonteCarloPicker {
             }
             // A line that is never worse in any paired round and clearly better on average (a cantrip: often only a
             // small gain, when it draws a land, but it costs nothing) does not have to win a majority outright.
-            final boolean neverWorse = pairs >= 3 && losses == 0 && wins >= 1
-                    && (double) sum[best] / count[best] > (double) sum[0] / count[0] + bonus0;
+            final double bestMean = meanOfFirst(vals[best], pairs);
+            final double heuristicMean = meanOfFirst(vals[0], pairs);
+            final boolean neverWorse = pairs >= 3 && losses == 0 && wins >= 1 && bestMean > heuristicMean + bonus0;
             if (pairs >= 2 && !neverWorse && wins * 100 <= pairs * cfg.overrideMajorityPercent) {
                 best = 0;
-            } else if (pairs < 2 && (double) sum[best] / count[best] < (double) sum[0] / count[0] + 2.0 * bonus0) {
-                // One sample per line is only noise: leave the heuristic choice unless the gap is large.
+            } else if (pairs < 2 && (luckyWin[best] || bestMean < heuristicMean + 2.0 * bonus0)) {
+                // One sample per line is only noise: leave the heuristic choice unless the gap is large, and never
+                // follow a single win that another sample has already contradicted.
                 best = 0;
             }
         }
@@ -760,8 +797,34 @@ public final class FlatMonteCarloPicker {
         return (int) Math.max(2, Math.min(n, lines));
     }
 
-    /** Fewest paired samples before a line may be dropped; one sample has no spread to judge it by. */
-    private static final int PRUNE_MIN_SAMPLES = 2;
+    /** How many samples every line still in the race has. */
+    static int sharedSamples(final int[] count, final boolean[] invalid, final boolean[] pruned, final int candidates) {
+        int shared = Integer.MAX_VALUE;
+        for (int c = 0; c < candidates; c++) {
+            if (!invalid[c] && !pruned[c] && count[c] > 0) {
+                shared = Math.min(shared, count[c]);
+            }
+        }
+        return shared == Integer.MAX_VALUE ? 0 : shared;
+    }
+
+    /** The mean of the first {@code n} values, 0 when there are none. */
+    static double meanOfFirst(final long[] values, final int n) {
+        long total = 0;
+        for (int i = 0; i < n; i++) {
+            total += values[i];
+        }
+        return n == 0 ? 0 : (double) total / n;
+    }
+
+    /** Samples, each with other hidden cards, that a line has to win before it ends the search at once. */
+    static final int WIN_CONFIRM_SAMPLES = 3;
+
+    /**
+     * Fewest paired samples before a line may be dropped. Two are not enough: when both differences happen to be the
+     * same, the estimated standard error is zero, and a line is gone for good on very little evidence.
+     */
+    private static final int PRUNE_MIN_SAMPLES = 3;
     /** How many standard errors a line must be behind the leader (on paired samples) to be dropped for good. */
     private static final double PRUNE_Z = 1.5;
     /** Smallest lead, in evaluator points, that is worth dropping a line for. */
@@ -1817,11 +1880,12 @@ public final class FlatMonteCarloPicker {
     private static Long rolloutMain(final GameSimulator sim, final Game simGame, final Player simAi, final Candidate cand,
                                     final Config cfg, final int playoutPlays) {
         if (!cand.isHold()) {
-            if (!sim.applySpellAbility(cand.sa)) {
+            if (!sim.applySpellAbility(cand.sa, false)) {
                 lastRolloutProblem = "apply";
                 return null;
             }
-            playOut(simGame, simAi, playoutPlays);
+            resolveWithResponses(simGame, simAi, cfg, 0);
+            playOut(simGame, simAi, playoutPlays, cfg);
         }
 
         final PhaseHandler ph = simGame.getPhaseHandler();
@@ -1830,7 +1894,7 @@ public final class FlatMonteCarloPicker {
             ph.devAdvanceToPhase(PhaseType.MAIN2,
                     () -> GameSimulator.resolveStack(simGame, simAi.getWeakestOpponent()));
             if (!cand.isHold()) {
-                playOut(simGame, simAi, playoutPlays);
+                playOut(simGame, simAi, playoutPlays, cfg);
             }
         }
         final Long own = valueAtSecondMain(simGame, simAi, cand, cfg, true);
@@ -1981,14 +2045,21 @@ public final class FlatMonteCarloPicker {
         if (!simGame.isGameOver()) {
             ph.devAdvanceToPhase(PhaseType.MAIN2, () -> GameSimulator.resolveStack(simGame, simAi.getWeakestOpponent()));
             if (!simGame.isGameOver()) {
-                playOut(simGame, simAi, playoutPlays);
+                playOut(simGame, simAi, playoutPlays, cfg);
             }
         }
         return valueAtSecondMain(simGame, simAi, cand, cfg, true);
     }
 
-    /** What a line that loses the game during the opponent's turn is worth, relative to how it looked before. */
-    private static final int LOOKAHEAD_LOSS_PENALTY = 1500;
+    /** What winning during the opponent's turn adds, relative to how the line looked before. */
+    private static final int LOOKAHEAD_WIN_BONUS = 1500;
+    /**
+     * What losing during the opponent's turn costs. Unlike the rest of the lookahead it is not scaled down by
+     * {@link Config#opponentLookaheadPercent}: a dead AI has no board to blend with. It stays short of
+     * {@link #LOSS_VALUE} because it depends on the cards the opponent was dealt in this sample, so that one bad sample
+     * in several does not rule a line out on its own.
+     */
+    static final int LOOKAHEAD_DEATH_PENALTY = 4000;
 
     /**
      * Plays the opponent's next turn in the copy (their heuristic AI casts and attacks, the AI blocks) and blends the
@@ -2008,7 +2079,10 @@ public final class FlatMonteCarloPicker {
         }
         long later;
         if (simGame.isGameOver() || !simAi.isInGame()) {
-            later = simAi.hasWon() ? own + LOOKAHEAD_LOSS_PENALTY : own - LOOKAHEAD_LOSS_PENALTY;
+            if (!simAi.hasWon()) {
+                return deathOnOpponentTurn(own);
+            }
+            later = own + LOOKAHEAD_WIN_BONUS;
         } else {
             if (ph.isPlayerTurn(simOpp)) {
                 playOut(simGame, simOpp, playoutPlays);
@@ -2018,7 +2092,10 @@ public final class FlatMonteCarloPicker {
                 }
             }
             if (simGame.isGameOver() || !simAi.isInGame()) {
-                later = simAi.hasWon() ? own + LOOKAHEAD_LOSS_PENALTY : own - LOOKAHEAD_LOSS_PENALTY;
+                if (!simAi.hasWon()) {
+                    return deathOnOpponentTurn(own);
+                }
+                later = own + LOOKAHEAD_WIN_BONUS;
             } else {
                 final Long v = valueAtSecondMain(simGame, simAi, cand, cfg, false);
                 later = v == null ? own : v;
@@ -2026,6 +2103,11 @@ public final class FlatMonteCarloPicker {
         }
         final long blended = own + (later - own) * cfg.opponentLookaheadPercent / 100;
         return Math.max(LOSS_VALUE + 1, Math.min(WIN_VALUE - 1, blended));
+    }
+
+    /** The value of a sample in which the AI is dead by the end of the opponent's turn. */
+    static long deathOnOpponentTurn(final long own) {
+        return Math.max(LOSS_VALUE + 1, own - LOOKAHEAD_DEATH_PENALTY);
     }
 
     /**
@@ -2061,19 +2143,23 @@ public final class FlatMonteCarloPicker {
 
     /**
      * A decision with priority on the opponent's turn (a spell on the stack, or their attack): play the candidate on
-     * top of what is there, let the AI follow up if its own heuristics want to (a counterspell found by a cantrip),
-     * then let the rest resolve and play the turn on to its end step.
+     * top of what is there, or pass. With responses the stack then resolves in priority order, the AI's follow-ups (a
+     * counterspell found by a cantrip) among them; without, the AI may follow up before the rest resolves. Then the
+     * turn is played on to its end step.
      */
     private static Long rolloutRespond(final GameSimulator sim, final Game simGame, final Player simAi,
                                        final Candidate cand, final Config cfg, final int playoutPlays) {
         final Player simOpp = simAi.getWeakestOpponent();
-        if (!cand.isHold()) {
+        if (cand.isHold()) {
+            resolveAfterPass(simGame, simAi, cfg);
+        } else {
+            final int below = simGame.getStack().size();
             if (!sim.applySpellAbility(cand.sa, false)) {
                 lastRolloutProblem = "apply";
                 return null;
             }
-            GameSimulator.resolveOwnTop(simGame, simAi, simOpp);
-            playOutResponding(simGame, simAi, simOpp, Math.min(RESPONSE_FOLLOW_UPS, playoutPlays));
+            resolveWithResponses(simGame, simAi, cfg, below);
+            playOutResponding(simGame, simAi, cfg, Math.min(RESPONSE_FOLLOW_UPS, playoutPlays));
         }
         // Mana and instants still open for the rest of the turn are worth something, but the turn is nearly over.
         final long held = simGame.isGameOver() ? 0 : holdUpBonus(simAi, cfg) / 2;
@@ -2098,11 +2184,12 @@ public final class FlatMonteCarloPicker {
                                        final Candidate cand, final Config cfg, final int playoutPlays) {
         final Player simOpp = simAi.getWeakestOpponent();
         if (!cand.isHold()) {
+            final int below = simGame.getStack().size();
             if (!sim.applySpellAbility(cand.sa, false)) {
                 lastRolloutProblem = "apply";
                 return null;
             }
-            GameSimulator.resolveOwnTop(simGame, simAi, simOpp);
+            resolveWithResponses(simGame, simAi, cfg, below);
         }
         final PhaseHandler ph = simGame.getPhaseHandler();
         if (!simGame.isGameOver()) {
@@ -2110,7 +2197,7 @@ public final class FlatMonteCarloPicker {
         }
         if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.MAIN2)) {
             ph.devAdvanceToPhase(PhaseType.MAIN2, () -> GameSimulator.resolveStack(simGame, simOpp));
-            playOut(simGame, simAi, playoutPlays);
+            playOut(simGame, simAi, playoutPlays, cfg);
         }
         return valueAtSecondMain(simGame, simAi, cand, cfg, true);
     }
@@ -2920,9 +3007,12 @@ public final class FlatMonteCarloPicker {
     private static Long rolloutEndStep(final GameSimulator sim, final Game simGame, final Player simAi,
                                        final Candidate cand, final Config cfg, final int playoutPlays) {
         final Player simOpp = simAi.getWeakestOpponent();
-        if (!cand.isHold() && !sim.applySpellAbility(cand.sa)) {
-            lastRolloutProblem = "apply";
-            return null;
+        if (!cand.isHold()) {
+            if (!sim.applySpellAbility(cand.sa, false)) {
+                lastRolloutProblem = "apply";
+                return null;
+            }
+            resolveWithResponses(simGame, simAi, cfg, 0);
         }
         final PhaseHandler ph = simGame.getPhaseHandler();
         if (!simGame.isGameOver()
@@ -2932,19 +3022,19 @@ public final class FlatMonteCarloPicker {
             return null;
         }
         if (!simGame.isGameOver() && ph.isPlayerTurn(simAi)) {
-            playOut(simGame, simAi, playoutPlays);
+            playOut(simGame, simAi, playoutPlays, cfg);
             if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.MAIN2)) {
                 ph.devAdvanceToPhase(PhaseType.MAIN2, () -> GameSimulator.resolveStack(simGame, simOpp));
-                playOut(simGame, simAi, playoutPlays);
+                playOut(simGame, simAi, playoutPlays, cfg);
             }
         }
         return valueAtSecondMain(simGame, simAi, cand, cfg, true);
     }
 
-    /** Follow-up plays the AI may make after its response while the opponent's spell is still on the stack. */
+    /** Without responses: the AI's follow-up plays after its response, the opponent's spell still on the stack. */
     private static final int RESPONSE_FOLLOW_UPS = 3;
 
-    private static void playOutResponding(final Game simGame, final Player simAi, final Player simOpp, final int maxPlays) {
+    private static void playOutResponding(final Game simGame, final Player simAi, final Config cfg, final int maxPlays) {
         if (!(simAi.getController() instanceof PlayerControllerAi)) {
             return;
         }
@@ -2956,8 +3046,133 @@ public final class FlatMonteCarloPicker {
             if (next == null || next.isEmpty()) {
                 return;
             }
+            final int below = simGame.getStack().size();
             pc.playChosenSpellAbility(next.get(0));
-            GameSimulator.resolveOwnTop(simGame, simAi, simOpp);
+            // the follow-up and any answers to it resolve; what was there before stays
+            resolveWithResponses(simGame, simAi, cfg, below);
+        }
+    }
+
+    /** The most answers players may add while one play resolves, so an exchange cannot run on forever. */
+    private static final int MAX_RESPONSES = 8;
+    /** The same for mana abilities, which add nothing to the stack: they have their own count. */
+    private static final int MAX_MANA_ACTIVATIONS = 8;
+
+    /**
+     * Resolves what {@code simAi} has just put on the stack. Before each spell, activated ability or triggered ability
+     * resolves, the players get priority, so they can answer the AI's plays and each other's answers. Every response
+     * and every resolution starts a new round: having passed before does not keep a player from answering what is on
+     * top now. That goes for what was on the stack before the AI's play too, so with responses the whole stack resolves
+     * here. Without them it stops at {@code floor} objects, leaving those for the AI's follow-ups.
+     */
+    static void resolveWithResponses(final Game simGame, final Player simAi, final Config cfg, final int floor) {
+        resolveInPriorityOrder(simGame, simAi, null, cfg, cfg.opponentResponses ? 0 : floor);
+    }
+
+    /**
+     * As {@link #resolveWithResponses} when {@code simAi} passes instead of playing: the others are asked about what is
+     * on the stack, the AI not until one of them responds or something resolves. Does nothing without responses.
+     */
+    static void resolveAfterPass(final Game simGame, final Player simAi, final Config cfg) {
+        if (cfg.opponentResponses) {
+            resolveInPriorityOrder(simGame, simAi, simAi, cfg, 0);
+        }
+    }
+
+    /** The loop behind both: {@code simAi} gets priority first; {@code passed}, if not null, has already passed. */
+    private static void resolveInPriorityOrder(final Game simGame, final Player simAi, Player passed, final Config cfg,
+                                               final int floor) {
+        int responses = 0;
+        int manaActivations = 0;
+        GameSimulator.TopResolver resolver = null;
+        Player first = simAi;
+        putTriggersOnStack(simGame);
+        while (!simGame.isGameOver() && simGame.getStack().size() > floor) {
+            AITimeoutTracker.check();
+            final int size = simGame.getStack().size();
+            final Player actor = cfg.opponentResponses && responses < MAX_RESPONSES
+                    ? offerPriority(simGame, first, passed, manaActivations < MAX_MANA_ACTIVATIONS) : null;
+            passed = null; // an action or a resolution comes next: everybody gets to act again
+            if (actor != null) {
+                // whoever just acted keeps priority, which the controller of the top object does not tell
+                first = actor;
+                putTriggersOnStack(simGame);
+                if (simGame.getStack().size() > size) {
+                    responses++;
+                } else {
+                    manaActivations++;
+                }
+                continue; // a new round of priority
+            }
+            if (resolver == null) {
+                resolver = new GameSimulator.TopResolver(simGame, simAi.getWeakestOpponent());
+            }
+            resolver.resolveTop();
+            first = simGame.getPhaseHandler().getPlayerTurn(); // after a resolution the active player gets priority
+        }
+    }
+
+    /** Cast triggers go on the stack before anybody gets priority. */
+    private static void putTriggersOnStack(final Game simGame) {
+        simGame.getAction().checkStateEffects(false);
+        simGame.getStack().addAllTriggeredAbilitiesToStack();
+    }
+
+    /**
+     * Offers every player priority, in turn order starting with {@code first}, to respond to what is on the stack,
+     * whoever controls the top of it. {@code passed}, if not null, has already passed and is skipped. A mana ability
+     * does not use the stack but is an action all the same; without {@code manaAllowed} it counts as a pass.
+     * Hidden cards are the ones dealt in this sample, so the AI learns nothing about the real ones.
+     *
+     * @return the first of them who acts; null when all of them pass
+     */
+    private static Player offerPriority(final Game simGame, final Player first, final Player passed,
+                                        final boolean manaAllowed) {
+        for (final Player p : simGame.getPlayersInTurnOrder(first)) {
+            // an empty hand is no reason to skip: abilities can be activated from the battlefield and other zones
+            if (p == passed || !p.isInGame() || !(p.getController() instanceof PlayerControllerAi)) {
+                continue;
+            }
+            AITimeoutTracker.check();
+            checkRolloutDeadline();
+            final PlayerControllerAi pc = (PlayerControllerAi) p.getController();
+            final List<SpellAbility> answer = pc.chooseSpellAbilityToPlay();
+            if (answer == null || answer.isEmpty() || answer.get(0).isLandAbility()) {
+                continue;
+            }
+            final SpellAbility sa = answer.get(0);
+            if (sa.isManaAbility()) {
+                // it resolves at once, so only the play itself can tell whether it happened
+                if (manaAllowed && pc.playWithRollback(sa, null)) {
+                    return p;
+                }
+                continue;
+            }
+            final int before = simGame.getStack().size();
+            pc.playChosenSpellAbility(sa);
+            if (simGame.getStack().size() > before) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /** As {@link #playOut(Game, Player, int)} for the AI's own plays, which the opponent may answer. */
+    private static void playOut(final Game simGame, final Player simAi, final int maxPlays, final Config cfg) {
+        if (!(simAi.getController() instanceof PlayerControllerAi)) {
+            return;
+        }
+        final PlayerControllerAi pc = (PlayerControllerAi) simAi.getController();
+        for (int i = 0; i < maxPlays && !simGame.isGameOver(); i++) {
+            AITimeoutTracker.check();
+            checkRolloutDeadline();
+            final List<SpellAbility> next = pc.chooseSpellAbilityToPlay();
+            if (next == null || next.isEmpty()) {
+                return;
+            }
+            final int below = simGame.getStack().size();
+            pc.playChosenSpellAbility(next.get(0));
+            resolveWithResponses(simGame, simAi, cfg, below);
         }
     }
 

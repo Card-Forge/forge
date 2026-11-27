@@ -23,12 +23,28 @@ EDITIONS_DIR = os.path.join(RES_DIR, "editions")
 TAGS_FILE = os.path.join(RES_DIR, "blockdata", "printtags.txt")
 USER_AGENT = "Forge-printtags/1.0"
 
+
+def is_funny(card):
+    """Un-cards and playtest cards. The Commander check keeps legal cards out, such as an acorn Counterspell or the
+    eternal-legal Attractions and sticker sheets."""
+    marked = (card.get("set_type") == "funny" or card.get("border_color") == "silver"
+              or card.get("security_stamp") == "acorn" or "playtest" in card.get("promo_types", []))
+    return marked and card.get("legalities", {}).get("commander") == "not_legal"
+
+
 # To add a tag, add its name and a test on a Scryfall card object, such as
 #     "Playtest": lambda card: "playtest" in card.get("promo_types", []),
 # Forge then offers it in the Excluded Sets settings, named by an lblTag<Name> key in en-US.properties.
 # Sets not yet released can be tagged by hand with Tags=<Name> in their edition file.
 RULES = {
     "UniversesBeyond": lambda card: bool({"universesbeyond", "godzillaseries"} & set(card.get("promo_types", []))),
+    "Digital": lambda card: card.get("digital", False),
+    "Funny": is_funny,
+}
+
+# Tags Scryfall cannot give, taken from a section of the edition files
+SECTION_RULES = {
+    "Rebalanced": "rebalanced",  # Scryfall no longer lists Alchemy rebalances
 }
 
 # Sections holding card entries, as in CardEdition.EditionSectionWithCollectorNumbers
@@ -46,7 +62,7 @@ def read_editions():
     for file_name in sorted(os.listdir(EDITIONS_DIR)):
         if not file_name.endswith(".txt"):
             continue
-        metadata, numbers, section = {}, [], None
+        metadata, numbers, section_numbers, section = {}, [], {}, None
         with open(os.path.join(EDITIONS_DIR, file_name), encoding="utf-8") as f:
             for raw in f:
                 line = raw.strip()
@@ -60,10 +76,12 @@ def read_editions():
                     metadata[key.strip()] = value.strip()
                 elif section in CARD_SECTIONS:
                     entry = CARD_PATTERN.match(line)
-                    if entry and entry.group(2) and entry.group(2) not in numbers:
-                        numbers.append(entry.group(2))
+                    if entry and entry.group(2):
+                        if entry.group(2) not in numbers:
+                            numbers.append(entry.group(2))
+                        section_numbers.setdefault(section, []).append(entry.group(2))
         if "Code" in metadata:
-            editions.append((metadata, numbers))
+            editions.append((metadata, numbers, section_numbers))
     return sorted(editions, key=lambda edition: edition[0]["Code"].lower())
 
 
@@ -110,15 +128,17 @@ def download_bulk():
 
 
 def read_scryfall(path, wanted):
-    """Maps each wanted (set, number) found on Scryfall to the tags RULES give its card."""
-    tags = {}
+    """Maps each wanted (set, number) found on Scryfall to the tags RULES give its card, and lists the basic lands."""
+    tags, basics = {}, set()
     with gzip.open(path, "rt", encoding="utf-8") as f:
         for line in f:
             card = json.loads(line)
             key = (card["set"], card["collector_number"])
             if key in wanted:
                 tags[key] = {tag for tag, rule in RULES.items() if rule(card)}
-    return tags
+                if "Basic Land" in card.get("type_line", ""):
+                    basics.add(key)
+    return tags, basics
 
 
 def main():
@@ -126,13 +146,13 @@ def main():
     parser.add_argument("--bulk", help="a Scryfall Default Cards .jsonl.gz file to use instead of downloading one")
     args = parser.parse_args()
     editions = read_editions()
-    wanted = {scryfall_key(metadata, number) for metadata, numbers in editions for number in numbers}
-    card_tags = read_scryfall(args.bulk or download_bulk(), wanted)
+    wanted = {scryfall_key(metadata, number) for metadata, numbers, _ in editions for number in numbers}
+    card_tags, basics = read_scryfall(args.bulk or download_bulk(), wanted)
 
-    lines = {tag: [] for tag in RULES}
+    lines = {tag: [] for tag in [*RULES, *SECTION_RULES]}
     total = found = 0
     unmatched = []
-    for metadata, numbers in editions:
+    for metadata, numbers, section_numbers in editions:
         code = metadata["Code"]
         prints = {}
         for number in numbers:
@@ -146,16 +166,22 @@ def main():
         total += len(numbers)
         found += len(prints)
         unmatched += [f"{code} {n}" for n in numbers if n not in prints]
+        basic_numbers = {n for n in prints if scryfall_key(metadata, n) in basics}
         for tag in RULES:
             tagged = [n for n in numbers if n in prints and tag in prints[n]]
+            # untagged basic lands, such as an Un-set's legal basics, still let the set be tagged as a whole
+            whole = all(tag in tags or n in basic_numbers for n, tags in prints.items())
             if tagged:
-                lines[tag].append(code if len(tagged) == len(prints) else code + " " + " ".join(with_ranges(tagged)))
+                lines[tag].append(code if whole else code + " " + " ".join(with_ranges(tagged)))
+        for tag, section in SECTION_RULES.items():
+            if section in section_numbers:
+                lines[tag].append(code + " " + " ".join(with_ranges(section_numbers[section])))
 
     print(f"{found} of {total} edition entries found on Scryfall")
     if total == 0 or found / total < MIN_MATCHED:
         sys.exit("Too few entries found, leaving the tag file unchanged")
     with open(TAGS_FILE, "w", encoding="utf-8", newline="\n") as f:
-        f.write("# Generated by forge-gui/tools/printtags.py from Scryfall. Do not edit by hand.\n")
+        f.write("# Generated by forge-gui/tools/printtags.py from Scryfall and the edition files. Do not edit by hand.\n")
         for tag, tag_lines in lines.items():
             f.write(f"[{tag}]\n" + "".join(line + "\n" for line in tag_lines))
             print(f"{tag}: {len(tag_lines)} editions")

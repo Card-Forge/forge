@@ -72,6 +72,12 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             cards = tgtPlayers.getCardsIn(origin);
         }
 
+        cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
+
+        if (sa.hasParam("TypeLimit")) {
+            cards = new CardCollection(Iterables.limit(cards, AbilityUtils.calculateAmount(source, sa.getParam("TypeLimit"), sa)));
+        }
+
         if (sa.hasParam("Optional")) {
             final String targets = Lang.joinHomogenous(cards);
             final String message;
@@ -85,12 +91,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message, cardToShow, null)) {
                 return;
             }
-        }
-
-        cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
-
-        if (sa.hasParam("TypeLimit")) {
-            cards = new CardCollection(Iterables.limit(cards, AbilityUtils.calculateAmount(source, sa.getParam("TypeLimit"), sa)));
         }
 
         if (sa.hasParam("ForgetOtherRemembered")) {

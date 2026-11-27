@@ -36,6 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,7 +67,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final Map<String, Integer> artIds = Maps.newHashMap();
 
     private final CardEdition.Collection editions;
-    private final Set<String> filtered;
+    // left out of the card pools but still found by name, so decks holding them keep working
+    private volatile Set<String> hiddenCards = Collections.emptySet();
 
     private final Map<String, Boolean> nonLegendaryCreatureNames = Maps.newHashMap();
 
@@ -366,8 +368,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
-    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, Set<String> filteredCards) {
-        this.filtered = filteredCards;
+    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0) {
         this.rulesByPrimaryName = rules;
         this.editions = editions0;
 
@@ -375,13 +376,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         // create faces list from rules
         for (final CardRules rule : rules.values()) {
-            // Collect placeholder-face rules unconditionally so they get supplied
-            // even when filtered out and remain reachable via rulesByName.
             if (rule.hasPlaceholderFaces()) {
                 needsPlaceholderFaces.add(rule);
             }
-            if (filteredCards.contains(rule.getPreInitName()))
-                continue;
             for (ICardFace face : rule.getAllFaces()) {
                 addFaceToDbNames(face, rule);
             }
@@ -538,8 +535,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 return;
             }
         }
-        if (rulesByPrimaryName.putIfAbsent(cr.getName(), cr) == null
-                && !filtered.contains(cr.getPreInitName())) {
+        if (rulesByPrimaryName.putIfAbsent(cr.getName(), cr) == null) {
             for (ICardFace face : cr.getAllFaces()) {
                 addFaceToDbNames(face, cr);
             }
@@ -694,7 +690,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     if (upcomingSet != null && cr.getPath() != null && cr.getPath().contains("upcoming/")) {
                         addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
                         reIndex(cr);
-                    } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
+                    } else if (enableUnknownCards) {
                         System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
                         addCard(new PaperCard(cr, CardEdition.UNKNOWN_CODE, CardRarity.Special));
                         reIndex(cr);
@@ -709,10 +705,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public void addCard(PaperCard paperCard) {
-        if (filtered.contains(paperCard.getName())) {
-            return;
-        }
-
         String mainName = paperCard.getName();
         allCardsByName.put(mainName, paperCard);
 
@@ -1341,32 +1333,98 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return bool;
     }
 
+    /** Leaves the named cards out of the card pools and face lists. Basic lands are never hidden. */
+    public void setHiddenCards(Set<String> cardNames) {
+        hiddenCards = cardNames;
+    }
+
+    private static volatile boolean exclusionsSuspended;
+    // a short lift for one piece of content stays on its own thread, and can also force the exclusions back on
+    private static final ThreadLocal<Boolean> exclusionsLiftedHere = new ThreadLocal<>();
+
+    /** Lifts the player's exclusions on every thread until cleared. */
+    public static void setExclusionsSuspended(boolean suspended) {
+        exclusionsSuspended = suspended;
+    }
+
+    /** Whether hidden cards are shown and cards given to the player skip print exclusions. Default art is unaffected. */
+    public static boolean areExclusionsLifted() {
+        Boolean here = exclusionsLiftedHere.get();
+        return here != null ? here : exclusionsSuspended;
+    }
+
+    /** Runs the body with the player's exclusions lifted on this thread. */
+    public static <T> T withExclusionsLifted(Supplier<T> body) {
+        return withLift(true, body);
+    }
+
+    /** Runs the body with the player's exclusions applied on this thread, even inside a lift. */
+    public static <T> T withExclusionsApplied(Supplier<T> body) {
+        return withLift(false, body);
+    }
+
+    private static <T> T withLift(boolean lifted, Supplier<T> body) {
+        Boolean previous = exclusionsLiftedHere.get();
+        exclusionsLiftedHere.set(lifted);
+        try {
+            return body.get();
+        } finally {
+            exclusionsLiftedHere.set(previous);
+        }
+    }
+
+    /** Whether the player's exclusions hide the card or skip its print, even where content lifts them. */
+    public boolean isExcludedByPlayer(PaperCard card) {
+        return card != null && (isHiddenByName(card.getRules()) || isPrintExcluded(card));
+    }
+
+    public boolean isHidden(PaperCard card) {
+        return card != null && isHidden(card.getRules());
+    }
+
+    private boolean isHidden(CardRules rules) {
+        return rules != null && !areExclusionsLifted() && isHiddenByName(rules);
+    }
+
+    private boolean isHiddenByName(CardRules rules) {
+        return hiddenCards.contains(rules.getName()) && !rules.getType().isBasicLand();
+    }
+
     @Override
     public Collection<PaperCard> getAllCards() {
-        return Collections.unmodifiableCollection(allCardsByRules.values());
+        if (hiddenCards.isEmpty())
+            return Collections.unmodifiableCollection(allCardsByRules.values());
+        return Collections.unmodifiableList(streamAllCards().collect(Collectors.toList()));
     }
 
     // returns a list of all cards from their respective latest (or preferred) editions
     @Override
     public Collection<PaperCard> getUniqueCards() {
-        return uniqueCardsByRules.values();
+        if (hiddenCards.isEmpty())
+            return uniqueCardsByRules.values();
+        return Collections.unmodifiableList(streamUniqueCards().collect(Collectors.toList()));
     }
     @Override
     public Collection<ICardFace> getAllFaces() {
-        return facesByName.values();
+        if (hiddenCards.isEmpty())
+            return facesByName.values();
+        return Collections.unmodifiableList(streamAllFaces().collect(Collectors.toList()));
     }
 
     @Override
     public Stream<PaperCard> streamAllCards() {
-        return allCardsByRules.values().stream();
+        Stream<PaperCard> cards = allCardsByRules.values().stream();
+        return hiddenCards.isEmpty() ? cards : cards.filter(card -> !isHidden(card));
     }
     @Override
     public Stream<PaperCard> streamUniqueCards() {
-        return uniqueCardsByRules.values().stream();
+        Stream<PaperCard> cards = uniqueCardsByRules.values().stream();
+        return hiddenCards.isEmpty() ? cards : cards.filter(card -> !isHidden(card));
     }
     @Override
     public Stream<ICardFace> streamAllFaces() {
-        return facesByName.values().stream();
+        Stream<ICardFace> faces = facesByName.values().stream();
+        return hiddenCards.isEmpty() ? faces : faces.filter(face -> !isHidden(getLoadedRules(face.getName(), true)));
     }
 
     public static final Predicate<PaperCard> EDITION_NON_PROMO = paperCard -> {
@@ -1478,6 +1536,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             PaperCard card = this.getCard(cis.name(), edition.getCode());
             if (card == null) {
                 // Just in case the card is listed in the edition file but Forge doesn't support it
+                continue;
+            }
+            if (isHidden(card)) {
                 continue;
             }
 

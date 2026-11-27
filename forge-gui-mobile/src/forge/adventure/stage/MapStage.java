@@ -543,6 +543,10 @@ public class MapStage extends GameStage {
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.ignoreGlobalEffect = Boolean.parseBoolean(dialogObject.toString());
                             }
+                            dialogObject = prop.get("ignoreExcludedSets");
+                            if (dialogObject != null && !dialogObject.toString().isEmpty()) {
+                                mob.ignoreExcludedSets = Boolean.parseBoolean(dialogObject.toString());
+                            }
                             dialogObject = prop.get("ignoreBiomeEffect");
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.ignoreBiomeEffect = Boolean.parseBoolean(dialogObject.toString());
