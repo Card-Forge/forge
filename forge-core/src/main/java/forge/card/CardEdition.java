@@ -295,6 +295,10 @@ public final class CardEdition implements Comparable<CardEdition> {
     private BorderColor borderColor = BorderColor.BLACK;
     private final Set<String> tags = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
+    public static final String REBALANCED_TAG = "Rebalanced";
+    // hides cards from the card pools when excluded, rather than only steering default art
+    public static final String FUNNY_TAG = "Funny";
+
     // SealedProduct
     private String prerelease = null;
     private int boosterBoxCount;
@@ -419,7 +423,6 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public List<EditionEntry> getCards() { return cardMap.get(EditionSectionWithCollectorNumbers.CARDS.getName()); }
     public List<EditionEntry> getRebalancedCards() { return cardMap.get(EditionSectionWithCollectorNumbers.REBALANCED.getName()); }
-    public List<EditionEntry> getFunnyEternalCards() { return cardMap.get(EditionSectionWithCollectorNumbers.ETERNAL.getName()); }
     public List<EditionEntry> getObtainableCards() { 
         List<EditionEntry> allCards = new ArrayList<>(getAllCardsInSet());
         List<EditionEntry> conjuredCards = cardMap.get(EditionSectionWithCollectorNumbers.CONJURED.getName());

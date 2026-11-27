@@ -24,8 +24,11 @@ import java.util.StringJoiner;
 import java.util.TreeSet;
 
 import forge.MulliganDefs;
+import forge.card.CardEdition;
+import forge.card.SetExclusions;
 import forge.game.GameLogEntryType;
 import forge.game.GameLogVerbosity;
+import forge.util.FileUtil;
 
 public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref> {
 
@@ -162,7 +165,6 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_REMIND_ON_PRIORITY ("false"),
         UI_CARD_COUNTER_DISPLAY_TYPE(ForgeConstants.CounterDisplayType.TEXT.getName()),
         UI_CARD_COUNTER_DISPLAY_LOCATION(ForgeConstants.CounterDisplayLocation.TOP.getName()),
-        UI_LOAD_NONLEGAL_CARDS("true"),
         ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE("false"),
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
         UI_UNDO_MODE (ForgeConstants.UNDO_MODE_FREE),
@@ -440,6 +442,12 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
     /** Instantiates a ForgePreferences object. */
     public ForgePreferences() {
         super(ForgeConstants.MAIN_PREFS_FILE, FPref.class);
+        // the removed Un-card setting became an exclusion of the Funny tag; saving drops the old line
+        if (FileUtil.readFile(ForgeConstants.MAIN_PREFS_FILE).contains("UI_LOAD_NONLEGAL_CARDS=false")) {
+            Set<String> excluded = getPrefSet(FPref.UI_EXCLUDED_SETS);
+            excluded.add(SetExclusions.tagEntry(CardEdition.FUNNY_TAG));
+            setPrefSet(FPref.UI_EXCLUDED_SETS, excluded);
+        }
     }
 
     /** Parse the custom log types preference into a Set. */

@@ -20,6 +20,7 @@ package forge.item.generation;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.StaticData;
+import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardEdition.FoilType;
 import forge.card.CardRarity;
@@ -52,10 +53,15 @@ public class BoosterGenerator {
     private final static Map<String, PrintSheet> cachedSheets = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     private static final ThreadLocal<Collection<String>> EXCLUDED_NAMES = new ThreadLocal<>();
 
+    public static synchronized void clearCachedSheets() {
+        cachedSheets.clear();
+    }
+
     private static synchronized PrintSheet getPrintSheet(String key) {
-        if (!cachedSheets.containsKey(key))
-            cachedSheets.put(key, makeSheet(key, StaticData.instance().getCommonCards().getAllCards()));
-        return applyExclusions(cachedSheets.get(key));
+        String cacheKey = CardDb.areExclusionsLifted() ? key + "|withHidden" : key;
+        if (!cachedSheets.containsKey(cacheKey))
+            cachedSheets.put(cacheKey, makeSheet(key, StaticData.instance().getCommonCards().getAllCards()));
+        return applyExclusions(cachedSheets.get(cacheKey));
     }
 
     private static PrintSheet applyExclusions(PrintSheet sheet) {

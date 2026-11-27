@@ -3,7 +3,6 @@ package forge.screens.home.quest;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import javax.swing.*;
@@ -36,12 +35,14 @@ public class DialogChooseSets {
 	private TreeMap<FTreeNodeData, List<FTreeNodeData>> editionTreeData;
 	private boolean forExclusions;
 
-	/** Opens the dialog for the sets the player excludes. onOk receives the ticked set codes and tags. */
-	public static void forExcludedSets(Collection<String> excludedSets, Set<String> excludedTags,
-									   BiConsumer<List<String>, Set<String>> onOk) {
-		DialogChooseSets dialog = new DialogChooseSets(new ArrayList<>(excludedSets), null, null, false, false,
-				excludedTags);
-		dialog.setOkCallback(() -> onOk.accept(dialog.getSelectedSets(), dialog.getTickedTags()));
+	/** Opens the dialog for the sets the player excludes, and runs onChanged when OK changes them. */
+	public static void forExcludedSets(Runnable onChanged) {
+		DialogChooseSets dialog = new DialogChooseSets(new ArrayList<>(FModel.getExcludedEditionCodes()), null, null,
+				false, false, FModel.getExcludedTags());
+		dialog.setOkCallback(() -> {
+			if (FModel.setExcludedEditions(dialog.getSelectedSets(), dialog.getPartlySelectedSets(), dialog.getTickedTags()))
+				onChanged.run();
+		});
 	}
 
 	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets,
@@ -134,6 +135,7 @@ public class DialogChooseSets {
 		TreeMap<FTreeNodeData, List<FTreeNodeData>> editionTypeTreeData = new TreeMap<>();
 		TreeMap<CardEdition.Type, Integer> allEditionTypes = new TreeMap<>();
 		List<CardEdition> allCardEditions = new ArrayList<>();
+		Set<String> partlyExcluded = forExclusions ? FModel.getPartlyExcludedEditionCodes() : Set.of();
 		for (CardEdition.Type editionType : editionsTypeMap.keySet()) {
 			List<CardEdition> editionsOfType = editionsTypeMap.get(editionType);
 			if (editionsOfType.size() == 0)  // skip empty set types
@@ -150,8 +152,12 @@ public class DialogChooseSets {
 				boolean isSelected = null != preselectedSets && preselectedSets.contains(code);
 				boolean isEnabled = null == unselectableSets || !unselectableSets.contains(code);
 				FTreeNodeData editionNode = new FTreeNodeData(ce, ce.getName(), ce.getCode());
-				if (forExclusions)
+				if (forExclusions) {
 					editionNode.detail = ce.getTags().stream().map(FModel::getTagName).collect(Collectors.joining(", "));
+					editionNode.partialNote = FModel.getPartialExclusionNote(ce, excludedTags);
+					editionNode.canBePartial = editionNode.partialNote != null;
+					editionNode.isPartial = partlyExcluded.contains(code);
+				}
 				editionNode.isEnabled = isEnabled;
 				editionNode.isSelected = isSelected;
 				if (isEnabled)
@@ -456,7 +462,6 @@ public class DialogChooseSets {
 					showMatchingEditions();
 				}
 			});
-			editionSelectionPanel.add(txtSearch, "w 100%, h 25!");
 			checkBoxTree.setVisibleRowCount(15);
 		} else {
 			editionSelectionPanel.add(new FLabel.Builder().text(
@@ -583,38 +588,62 @@ public class DialogChooseSets {
 
 	private JPanel buildExclusionPanel(Set<String> excludedTags) {
 		Localizer localizer = Localizer.getInstance();
-		JPanel panel = new JPanel(new MigLayout("insets 10 10 0 10, gap 15 5, fillx"));
+		// two columns, so each added category lengthens the dialog rather than widening it past the window
+		JPanel panel = new JPanel(new MigLayout("insets 10 10 0 10, gap 15 5, fillx, wrap 2", "[grow, sg][grow, sg]"));
 		panel.setOpaque(false);
-		panel.add(new FTextArea(localizer.getMessage("lblExcludedSetsHelp")), "span, growx, wrap, gapbottom 5");
+		panel.add(new FTextArea(localizer.getMessage("lblExcludedSetsHelp")), "span 2, growx, gapbottom 5");
 
 		for (String tag : FModel.getEditionTags()) {
 			FCheckBox box = new FCheckBox(localizer.getMessage("lblExcludeTag", FModel.getTagName(tag)), excludedTags.contains(tag));
 			Set<String> tagged = FModel.getEditionCodesWithTag(tag);
+			Set<String> partlyTagged = FModel.getEditionCodesWithTaggedPrints(tag);
 			box.addItemListener(e -> {
-				for (FTreeNodeData edition : getEditionNodes()) {
-					if (!tagged.contains((String) edition.key))
-						continue;
-					FTreeNode node = checkBoxTree.getNodeByKey(edition.key);
-					if (node != null)
-						checkBoxTree.setNodeCheckStatus(node, box.isSelected());
-					else
-						edition.isSelected = box.isSelected();
-				}
+				storeTicks();
+				Set<String> tickedTags = getTickedTags();
+				for (FTreeNodeData edition : getEditionNodes())
+					if (tagged.contains((String) edition.key) || partlyTagged.contains((String) edition.key))
+						updateCategoryMark(edition, tickedTags);
 				checkBoxTree.repaint();
 			});
 			tagBoxes.put(tag, box);
 			panel.add(box, "h 30!");
 		}
+		if (tagBoxes.size() % 2 == 1)
+			panel.add(new JLabel());
 
 		FButton clearButton = new FButton(localizer.getMessage("lblClearSelection"));
 		clearButton.addActionListener(e -> {
+			boolean anySelected = tagBoxes.values().stream().anyMatch(JCheckBox::isSelected)
+					|| getEditionNodes().stream().anyMatch(edition -> edition.isSelected || edition.isPartial);
+			if (anySelected && !FOptionPane.showConfirmDialog(localizer.getMessage("lblConfirmClearExcludedSets"),
+					localizer.getMessage("lblClearSelection"), localizer.getMessage("lblYes"), localizer.getMessage("lblNo"), false))
+				return;
 			tagBoxes.values().forEach(box -> box.setSelected(false));
-			getEditionNodes().forEach(edition -> edition.isSelected = false);
+			getEditionNodes().forEach(edition -> {
+				edition.isSelected = false;
+				edition.isPartial = false;
+			});
 			checkBoxTree.resetCheckingState();
 			checkBoxTree.repaint();
 		});
-		panel.add(clearButton, "gapleft push, w 200!, h 26!");
+		panel.add(txtSearch, "growx, h 26!");
+		panel.add(clearButton, "growx, h 26!");
 		return panel;
+	}
+
+	// ticked when a ticked tag covers the edition whole, partly ticked when one covers it in part unless the player
+	// had ticked it whole, and unticked otherwise
+	private void updateCategoryMark(FTreeNodeData edition, Set<String> tickedTags) {
+		CardEdition ce = (CardEdition) edition.item;
+		boolean tickedWhole = edition.canBePartial && edition.isSelected;
+		edition.partialNote = FModel.getPartialExclusionNote(ce, tickedTags);
+		edition.canBePartial = edition.partialNote != null;
+		boolean ticked = tickedTags.stream().anyMatch(ce::hasTag) || edition.canBePartial && tickedWhole;
+		FTreeNode node = checkBoxTree.getNodeByKey(edition.key);
+		if (node != null)
+			checkBoxTree.setNodeCheckStatus(node, ticked);
+		edition.isSelected = ticked;
+		edition.isPartial = edition.canBePartial && !ticked;
 	}
 
 	private List<FTreeNodeData> getEditionNodes() {
@@ -660,6 +689,14 @@ public class DialogChooseSets {
 
 	public List<String> getSelectedSets() {
 		return selectedSets;
+	}
+
+	private List<String> getPartlySelectedSets() {
+		List<String> partly = new ArrayList<>();
+		for (FTreeNodeData edition : getEditionNodes())
+			if (edition.isPartial && !edition.isSelected)
+				partly.add((String) edition.key);
+		return partly;
 	}
 
 	public boolean getWantReprints() {

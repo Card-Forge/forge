@@ -1,5 +1,6 @@
 package forge.card;
 
+import forge.StaticData;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
@@ -55,6 +56,9 @@ public class PrintSheet {
     public void add(PaperCard card, int weight) {
         // Skip missing/unsupported scripts so boosters never deal placeholder cards.
         if (card == null || card.getRules() == null || card.getRules().isUnsupported()) {
+            return;
+        }
+        if (StaticData.instance().isHidden(card)) {
             return;
         }
         cardsWithWeights.add(card, weight);

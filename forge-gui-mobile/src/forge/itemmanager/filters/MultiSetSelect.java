@@ -114,6 +114,21 @@ public class MultiSetSelect extends FScreen {
         return null;
     }
 
+    // drawn under the set name when not null
+    protected String getNoteText(CardEdition set) {
+        return null;
+    }
+
+    // drawn as a dash in the box
+    protected boolean isPartlySelected(CardEdition set) {
+        return false;
+    }
+
+    protected void toggleSet(CardEdition set) {
+        if (!selectedSets.remove(set))
+            selectedSets.add(set);
+    }
+
     @Override
     public void onClose(Consumer<Boolean> canCloseCallback) {
         List<CardEdition> sortedSets = new ArrayList<>(selectedSets);
@@ -128,6 +143,8 @@ public class MultiSetSelect extends FScreen {
         lstSets.setBounds(0, startY, width, height - startY);
     }
 
+    private static final FSkinColor NOTE_COLOR = FSkinColor.getStandardColor(252, 226, 137);
+
     private class SetRenderer extends FList.ListItemRenderer<CardEdition> {
         @Override
         public float getItemHeight() {
@@ -136,17 +153,11 @@ public class MultiSetSelect extends FScreen {
 
         @Override
         public boolean tap(Integer index, CardEdition value, float x, float y, int count) {
-            if (selectedSets.contains(value)) {
-                if (count == 2) {
-                    Forge.back(); //support double tap to confirm selection without unselecting double tapped item
-                } else {
-                    selectedSets.remove(value);
-                }
+            if (count == 2) {
+                selectedSets.add(value); //support double tap to confirm selection, leaving the double tapped item selected
+                Forge.back();
             } else {
-                selectedSets.add(value);
-                if (count == 2) {
-                    Forge.back(); //support double tap to confirm selection after selecting double tapped item
-                }
+                toggleSet(value);
             }
             return true;
         }
@@ -169,11 +180,20 @@ public class MultiSetSelect extends FScreen {
                 textWidth -= tagWidth;
                 g.drawText(tagText, font, SettingsScreen.DESC_COLOR, x + textWidth, y, tagWidth, textHeight, false, Align.left, true);
             }
-            g.drawText(value.toString(), font, foreColor, x, y, textWidth - FList.PADDING, textHeight, false, Align.left, true);
+            String noteText = getNoteText(value);
+            if (noteText == null) {
+                g.drawText(value.toString(), font, foreColor, x, y, textWidth - FList.PADDING, textHeight, false, Align.left, true);
+            } else {
+                float half = textHeight / 2;
+                g.drawText(value.toString(), font, foreColor, x, y, textWidth - FList.PADDING, half, false, Align.left, true);
+                g.drawText(noteText, FSkinFont.get(10), NOTE_COLOR, x, y + half, textWidth - FList.PADDING, half, false, Align.left, true);
+            }
 
             x += w - h;
             y += (textHeight - h) / 2;
             FCheckBox.drawCheckBox(g, SettingsScreen.DESC_COLOR, foreColor, selectedSets.contains(value), x, y, h, h);
+            if (isPartlySelected(value))
+                g.drawLine(Utils.scale(2), foreColor, x + h / 4, y + h / 2, x + h * 3 / 4, y + h / 2);
         }
     }
 }

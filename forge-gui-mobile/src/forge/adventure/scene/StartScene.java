@@ -345,6 +345,8 @@ public class StartScene extends UIScene {
 
     @Override
     public void enter() {
+        // a new game or load starts from the overworld, so a dungeon's lift ends here
+        Config.instance().setPlaceIgnoresExcludedSets(false);
         boolean hasSaveButton = WorldSave.getCurrentSave().getWorld().getData() != null;
         if (hasSaveButton) {
             TileMapScene scene = TileMapScene.instance();
@@ -365,6 +367,10 @@ public class StartScene extends UIScene {
         }
 
         super.enter();
+        if (Config.instance().takeExcludedSetsNotice())
+            showDialog(createGenericDialog(Forge.getLocalizer().getMessage("lblExcludedSets"),
+                    Forge.getLocalizer().getMessage("lblPlaneIgnoresExcludedSets"), Forge.getLocalizer().getMessage("lblOK"),
+                    null, this::removeDialog, null, false, "", true));
     }
 
     private void NewGamePlus() {
