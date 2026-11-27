@@ -185,6 +185,11 @@ public class PlayAi extends SpellAbilityAi {
                     return c;
             }
         }
+        for (final Card c : options) {
+            if (forge.ai.simulation.StackLoops.scepterCopiesTheReversal(ai, sa, c)) {
+                return c; // Isochron Scepter with Dramatic Reversal: the untap is the loop, whatever it looks like on its own
+            }
+        }
         List<Card> tgtCards = CardLists.filter(options, c -> {
             // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
             // of which spell was the reason for the choice can be used there
@@ -225,8 +230,13 @@ public class PlayAi extends SpellAbilityAi {
                 }
                 // A suspended burn or removal spell is free and stays in exile for good if it is not cast now (Rift Bolt
                 // with only Shalai or Crystal Barricade to aim at): any legal target is better than none, so it is cast
-                // as if it were mandatory
-                final boolean lostIfNotCast = c.isInZone(ZoneType.Exile) && c.hasSuspend()
+                // as if it were mandatory. After the final TIME counter is removed, hasSuspend() is false;
+                // the printed Suspend keyword remains, so detect the ready-to-cast card from its state instead
+                // of depending on which wrapper/root ability retained the CounterRemoved trigger.
+                final boolean lastSuspendCounterRemoved = c == sa.getHostCard() && c.isInZone(ZoneType.Exile)
+                        && c.hasKeyword(Keyword.SUSPEND)
+                        && c.getCounters(forge.game.card.CounterEnumType.TIME) == 0;
+                final boolean lostIfNotCast = c.isInZone(ZoneType.Exile) && (c.hasSuspend() || lastSuspendCounterRemoved)
                         && (spell.getApi() == ApiType.DealDamage || spell.getApi() == ApiType.Destroy);
                 if (AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, lostIfNotCast || !(isOptional || sa.hasParam("Optional")), true)) {
                     // Before accepting, see if the spell has a valid number of targets (it should at this point).

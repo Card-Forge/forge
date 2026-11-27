@@ -4,6 +4,7 @@ Date=2010-07-14
 Name=Drake Stone
 Code2=DS0
 Type=Funny
+Tags=Funny
 
 [cards]
 1 U Illusory Thoughts @Kevin Smith

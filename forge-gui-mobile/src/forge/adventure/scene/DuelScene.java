@@ -19,11 +19,13 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
 import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.CardUtil;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.assets.FBufferedImage;
 import forge.assets.FSkin;
+import forge.card.CardDb;
 import forge.card.ColorSet;
 import forge.deck.*;
 import forge.game.card.CardView;
@@ -158,6 +160,7 @@ public class DuelScene extends ForgeScene {
             eventData.nextOpponent = null;
         boolean winner = false;
         List<PaperCard> anteWonCards = Collections.emptyList();
+        boolean anteChangedByExclusions = false;
         List<PaperCard> anteLostCards = Collections.emptyList();
         try {
             winner = humanPlayer == hostedMatch.getGame().getMatch().getWinner();
@@ -176,6 +179,7 @@ public class DuelScene extends ForgeScene {
             GameOutcome.AnteResult anteResult = hostedMatch.getAnteResult(humanPlayer);
             if (anteResult != null) {
                 if (eventData != null) {
+                    anteWonCards = new ArrayList<>(anteResult.wonCards);
                     //In an event. Apply the ante result to the current event deck.
                     eventData.registeredDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
                     if(eventData.rewardDeck != null)
@@ -188,7 +192,12 @@ public class DuelScene extends ForgeScene {
                     //Could also add the cards to the opponent's pool, but their games aren't simulated and they never edit their decks.
                 }
                 else {
-                    for (PaperCard card : anteResult.wonCards) {
+                    List<PaperCard> won = anteResult.wonCards;
+                    anteWonCards = enemy != null && enemy.ignoreExcludedSets
+                            ? CardDb.withExclusionsLifted(() -> CardUtil.withAllowedPrints(won))
+                            : CardUtil.withAllowedPrints(won);
+                    anteChangedByExclusions = CardUtil.droppedOrMoved(won, anteWonCards);
+                    for (PaperCard card : anteWonCards) {
                         Current.player().addCard(card);
                     }
                     for (PaperCard card : anteResult.lostCards) {
@@ -196,7 +205,6 @@ public class DuelScene extends ForgeScene {
                         Current.player().removeLostCardFromPools(card);
                     }
                 }
-                anteWonCards = new ArrayList<>(anteResult.wonCards);
                 anteLostCards = new ArrayList<>(anteResult.lostCards);
             }
         } catch (Exception e) {
@@ -212,7 +220,7 @@ public class DuelScene extends ForgeScene {
 
         boolean finalWinner = winner;
         boolean isBossLoss = (chaosBattle || showMessages) && !finalWinner;
-        boolean hasAnteResults = !anteWonCards.isEmpty() || !anteLostCards.isEmpty();
+        boolean hasAnteResults = !anteWonCards.isEmpty() || !anteLostCards.isEmpty() || anteChangedByExclusions;
 
         // No popups needed, preserve original behavior
         if (!hasAnteResults && !isBossLoss) {
@@ -244,6 +252,12 @@ public class DuelScene extends ForgeScene {
             afterAnte = exitChain;
         }
 
+        if (anteChangedByExclusions) {
+            Runnable next = afterAnte;
+            afterAnte = () -> FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(
+                    Forge.getLocalizer().getMessage("lblRewardsChangedByExclusions"),
+                    Forge.getLocalizer().getMessage("lblExcludedSets"), null, result -> next.run()));
+        }
         if (hasAnteResults) {
             showAnteResults(anteWonCards, anteLostCards, afterAnte);
         } else {
@@ -676,10 +690,19 @@ public class DuelScene extends ForgeScene {
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
+        // the dungeon or plane already said so when it lifts the exclusions itself
+        boolean enemyNotice = enemy.ignoreExcludedSets && !CardDb.areExclusionsLifted()
+                && FModel.getMagicDb().getCommonCards().hasPrintExclusion();
+        Runnable showEnemyNotice = () -> FOptionPane.showMessageDialog(localizer.getMessage("lblEnemyIgnoresExcludedSets"),
+                localizer.getMessage("lblExcludedSets"));
         LoadingOverlay matchOverlay;
         if (chaosBattle || showMessages || isDeckMissing) {
             final FBufferedImage fb = getFBEnemyAvatar();
-            final Runnable introDone = () -> MatchController.setIntroShowing(false);
+            final Runnable introDone = () -> {
+                MatchController.setIntroShowing(false);
+                if (enemyNotice)
+                    showEnemyNotice.run();
+            };
             String Intro = enemy.getBossIntro();
             if (Intro != null) {
                 bossDialogue = createFOption((Intro), enemy.getDisplayName(), fb, introDone);
@@ -692,6 +715,8 @@ public class DuelScene extends ForgeScene {
             }
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
                     bossDialogue.show())), false, true);
+        } else if (enemyNotice) {
+            matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, showEnemyNotice), false, true);
         } else {
             matchOverlay = new LoadingOverlay(null);
         }

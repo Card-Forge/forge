@@ -1053,13 +1053,13 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/COM - Counterpunch.dck", "cost": 10000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/COM - Devour for Power.dck", "cost": 10000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/COM - Heavenly Inferno.dck", "cost": 10000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/COM - Mirror Mastery.dck", "cost": 10000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/COM - Political Puppets.dck", "cost": 10000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TD0 - Deathdancer Xira.dck", "cost": 7500 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TD0 - Enchantress Rubinia.dck", "cost": 7500 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/COM - Counterpunch.dck", "cost": 12000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/COM - Devour for Power.dck", "cost": 12000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/COM - Heavenly Inferno.dck", "cost": 12000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/COM - Mirror Mastery.dck", "cost": 12000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/COM - Political Puppets.dck", "cost": 12000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TD0 - Deathdancer Xira.dck", "cost": 9000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TD0 - Enchantress Rubinia.dck", "cost": 9000 }
     ]
   },
   {
@@ -1068,11 +1068,11 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C13 - Eternal Bargain.dck", "cost": 12000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C13 - Evasive Maneuvers.dck", "cost": 12000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C13 - Mind Seize.dck", "cost": 12000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C13 - Nature of the Beast.dck", "cost": 12000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C13 - Power Hungry.dck", "cost": 12000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C13 - Eternal Bargain.dck", "cost": 15000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C13 - Evasive Maneuvers.dck", "cost": 15000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C13 - Mind Seize.dck", "cost": 15000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C13 - Nature of the Beast.dck", "cost": 15000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C13 - Power Hungry.dck", "cost": 15000 }
     ]
   },
   {
@@ -1081,11 +1081,11 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C14 - Built from Scratch.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C14 - Forged in Stone.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C14 - Guided by Nature.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C14 - Peer Through Time.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C14 - Sworn to Darkness.dck", "cost": 13000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C14 - Built from Scratch.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C14 - Forged in Stone.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C14 - Guided by Nature.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C14 - Peer Through Time.dck", "cost": 26000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C14 - Sworn to Darkness.dck", "cost": 16000 }
     ]
   },
   {
@@ -1094,11 +1094,11 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C15 - Call the Spirits.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C15 - Plunder the Graves.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C15 - Seize Control.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C15 - Swell the Host.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C15 - Wade into Battle.dck", "cost": 13000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C15 - Call the Spirits.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C15 - Plunder the Graves.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C15 - Seize Control.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C15 - Swell the Host.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C15 - Wade into Battle.dck", "cost": 16000 }
     ]
   },
   {
@@ -1107,11 +1107,11 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C16 - Breed Lethality.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C16 - Entropic Uprising.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C16 - Invent Superiority.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C16 - Open Hostility.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C16 - Stalwart Unity.dck", "cost": 15000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C16 - Breed Lethality.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C16 - Entropic Uprising.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C16 - Invent Superiority.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C16 - Open Hostility.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C16 - Stalwart Unity.dck", "cost": 18000 }
     ]
   },
   {
@@ -1120,14 +1120,14 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C17 - Arcane Wizardry.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C17 - Draconic Domination.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C17 - Feline Ferocity.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C17 - Vampiric Bloodlust.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C18 - Adaptive Enchantment.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C18 - Exquisite Invention.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C18 - Nature's Vengeance.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C18 - Subjective Reality.dck", "cost": 13000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C17 - Arcane Wizardry.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C17 - Draconic Domination.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C17 - Feline Ferocity.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C17 - Vampiric Bloodlust.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C18 - Adaptive Enchantment.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C18 - Exquisite Invention.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C18 - Nature's Vengeance.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C18 - Subjective Reality.dck", "cost": 16000 }
     ]
   },
   {
@@ -1136,14 +1136,14 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C19 - Faceless Menace.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C19 - Merciless Rage.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C19 - Mystic Intellect.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C19 - Primal Genesis.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/ZNC - Land's Wrath.dck", "cost": 11000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/ZNC - Sneak Attack.dck", "cost": 11000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/KHC - Elven Empire.dck", "cost": 11000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/KHC - Phantom Premonition.dck", "cost": 11000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C19 - Faceless Menace.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C19 - Merciless Rage.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C19 - Mystic Intellect.dck", "cost": 23000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C19 - Primal Genesis.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/ZNC - Land's Wrath.dck", "cost": 13000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/ZNC - Sneak Attack.dck", "cost": 13000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/KHC - Elven Empire.dck", "cost": 13000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/KHC - Phantom Premonition.dck", "cost": 13000 }
     ]
   },
   {
@@ -1152,13 +1152,13 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C20 - Arcane Maelstrom.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C20 - Enhanced Evolution.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C20 - Ruthless Regiment.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C20 - Symbiotic Swarm.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C20 - Timeless Wisdom.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CMR - Arm for Battle.dck", "cost": 11000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CMR - Reap the Tides.dck", "cost": 11000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C20 - Arcane Maelstrom.dck", "cost": 28000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C20 - Enhanced Evolution.dck", "cost": 28000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C20 - Ruthless Regiment.dck", "cost": 28000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C20 - Symbiotic Swarm.dck", "cost": 23000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C20 - Timeless Wisdom.dck", "cost": 28000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CMR - Arm for Battle.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CMR - Reap the Tides.dck", "cost": 13000 }
     ]
   },
   {
@@ -1167,11 +1167,11 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C21 - Lorehold Legacies.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C21 - Prismari Performance.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C21 - Quantum Quandrix.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C21 - Silverquill Statement.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C21 - Witherbloom Witchcraft.dck", "cost": 15000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C21 - Lorehold Legacies.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C21 - Prismari Performance.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C21 - Quantum Quandrix.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C21 - Silverquill Statement.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/C21 - Witherbloom Witchcraft.dck", "cost": 18000 }
     ]
   },
   {
@@ -1180,12 +1180,12 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MIC - Coven Counters.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MIC - Undead Unleashed.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/VOC - Spirit Squadron.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/VOC - Vampiric Bloodline.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NEC - Buckle Up.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NEC - Upgrades Unleashed.dck", "cost": 15000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MIC - Coven Counters.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MIC - Undead Unleashed.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/VOC - Spirit Squadron.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/VOC - Vampiric Bloodline.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NEC - Buckle Up.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NEC - Upgrades Unleashed.dck", "cost": 18000 }
     ]
   },
   {
@@ -1194,13 +1194,13 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NCC - Bedecked Brokers.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NCC - Cabaretti Cacophony.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NCC - Maestros Massacre.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NCC - Obscura Operation.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NCC - Riveteer Rampage.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/BRC - Mishra's Burnished Banner.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/BRC - Urza's Iron Alliance.dck", "cost": 17000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NCC - Bedecked Brokers.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NCC - Cabaretti Cacophony.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NCC - Maestros Massacre.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NCC - Obscura Operation.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/NCC - Riveteer Rampage.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/BRC - Mishra's Burnished Banner.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/BRC - Urza's Iron Alliance.dck", "cost": 20000 }
     ]
   },
   {
@@ -1209,13 +1209,13 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SCD - Chaos Incarnate.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SCD - Draconic Destruction.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SCD - First Flight.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SCD - Grave Danger.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SCD - Token Triumph.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DMC - Legends' Legacy.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DMC - Painbow.dck", "cost": 17000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SCD - Chaos Incarnate.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SCD - Draconic Destruction.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SCD - First Flight.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SCD - Grave Danger.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SCD - Token Triumph.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DMC - Legends' Legacy.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DMC - Painbow.dck", "cost": 20000 }
     ]
   },
   {
@@ -1224,13 +1224,13 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/ONC - Corrupting Influence.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/ONC - Rebellion Rising.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MOC - Cavalry Charge.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MOC - Divine Convocation.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MOC - Growing Threat.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MOC - Tinker Time.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MOC - Call for Backup.dck", "cost": 16000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/ONC - Corrupting Influence.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/ONC - Rebellion Rising.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MOC - Cavalry Charge.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MOC - Divine Convocation.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MOC - Growing Threat.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MOC - Tinker Time.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MOC - Call for Backup.dck", "cost": 19000 }
     ]
   },
   {
@@ -1239,14 +1239,14 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CMM - Eldrazi Unbound.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CMM - Enduring Enchantments.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CMM - Planeswalker Party.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CMM - Sliver Swarm.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LCC - Ahoy Mateys.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LCC - Blood Rites.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LCC - Explorers of the Deep.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LCC - Veloci-Ramp-Tor.dck", "cost": 16000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CMM - Eldrazi Unbound.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CMM - Enduring Enchantments.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CMM - Planeswalker Party.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CMM - Sliver Swarm.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LCC - Ahoy Mateys.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LCC - Blood Rites.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LCC - Explorers of the Deep.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LCC - Veloci-Ramp-Tor.dck", "cost": 19000 }
     ]
   },
   {
@@ -1255,14 +1255,14 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MKC - Blame Game.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MKC - Deadly Disguise.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MKC - Deep Clue Sea.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MKC - Revenant Recon.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/OTC - Desert Bloom.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/OTC - Grand Larceny.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/OTC - Most Wanted.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/OTC - Quick Draw.dck", "cost": 16000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MKC - Blame Game.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MKC - Deadly Disguise.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MKC - Deep Clue Sea.dck", "cost": 32000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MKC - Revenant Recon.dck", "cost": 29000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/OTC - Desert Bloom.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/OTC - Grand Larceny.dck", "cost":22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/OTC - Most Wanted.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/OTC - Quick Draw.dck", "cost": 19000 }
     ]
   },
   {
@@ -1271,14 +1271,14 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/BLC - Animated Army.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/BLC - Family Matters.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/BLC - Peace Offering.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/BLC - Squirreled Away.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/M3C - Creative Energy.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/M3C - Eldrazi Incursion.dck", "cost": 20000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/M3C - Graveyard Overdrive.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/M3C - Tricky Terrain.dck", "cost": 18000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/BLC - Animated Army.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/BLC - Family Matters.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/BLC - Peace Offering.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/BLC - Squirreled Away.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/M3C - Creative Energy.dck", "cost": 32000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/M3C - Eldrazi Incursion.dck", "cost": 24000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/M3C - Graveyard Overdrive.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/M3C - Tricky Terrain.dck", "cost": 22000 }
     ]
   },
   {
@@ -1287,14 +1287,14 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/WOC - Fae Dominion.dck", "cost": 14000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/WOC - Virtue and Valor.dck", "cost": 14000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DSC - Death Toll.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DSC - Endless Punishment.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DSC - Jump Scare!.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DSC - Miracle Worker.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DRC - Eternal Might.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DRC - Living Energy.dck", "cost": 17000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/WOC - Fae Dominion.dck", "cost": 17000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/WOC - Virtue and Valor.dck", "cost": 17000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DSC - Death Toll.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DSC - Endless Punishment.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DSC - Jump Scare!.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DSC - Miracle Worker.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DRC - Eternal Might.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/DRC - Living Energy.dck", "cost": 20000 }
     ]
   },
   {
@@ -1303,13 +1303,13 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TDC - Abzan Armor.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TDC - Jeskai Striker.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TDC - Mardu Surge.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TDC - Sultai Arisen.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TDC - Temur Roar.dck", "cost": 19000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/EOC - Counter Intelligence.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/EOC - World Shaper.dck", "cost": 17000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TDC - Abzan Armor.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TDC - Jeskai Striker.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TDC - Mardu Surge.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TDC - Sultai Arisen.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TDC - Temur Roar.dck", "cost": 23000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/EOC - Counter Intelligence.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/EOC - World Shaper.dck", "cost": 20000 }
     ]
   },
   {
@@ -1318,13 +1318,13 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/ECC - Blight Curse.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/ECC - Dance of the Elements.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SOC - Lorehold Spirit.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SOC - Prismari Artistry.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SOC - Quandrix Unlimited.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SOC - Silverquill Influence.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SOC - Witherbloom Pestilence.dck", "cost": 17000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/ECC - Blight Curse.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/ECC - Dance of the Elements.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SOC - Lorehold Spirit.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SOC - Prismari Artistry.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SOC - Quandrix Unlimited.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SOC - Silverquill Influence.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SOC - Witherbloom Pestilence.dck", "cost": 20000 }
     ]
   },
   {
@@ -1333,12 +1333,12 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FRC - Multiverse Reforged.dck", "cost": 20000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FDC - Calling All Angels.dck", "cost": 14000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FDC - Keen Engineering.dck", "cost": 12000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FDC - Reign of Dragons.dck", "cost": 14000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FDC - Tramplesaurus Rex.dck", "cost": 14000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FDC - Wretched Ranks.dck", "cost": 12000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FRC - Multiverse Reforged.dck", "cost": 24000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FDC - Calling All Angels.dck", "cost": 17000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FDC - Keen Engineering.dck", "cost": 15000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FDC - Reign of Dragons.dck", "cost": 17000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FDC - Tramplesaurus Rex.dck", "cost": 17000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FDC - Wretched Ranks.dck", "cost": 15000 }
     ]
   },
   {
@@ -1347,14 +1347,14 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - 20 Ways to Win.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Angels They're Just Like Us.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Everyone's Invited.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - From Cute to Brute.dck", "cost": 21000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Goblin Storm.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Heads I Win, Tails You Lose.dck", "cost": 23000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Odds and Ends.dck", "cost": 23000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Raining Cats and Dogs.dck", "cost": 21000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - 20 Ways to Win.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Angels They're Just Like Us.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Everyone's Invited.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - From Cute to Brute.dck", "cost": 25000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Goblin Storm.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Heads I Win, Tails You Lose.dck", "cost": 28000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Odds and Ends.dck", "cost": 28000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Raining Cats and Dogs.dck", "cost": 25000 }
     ]
   },
   {
@@ -1363,14 +1363,14 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/AFC - Aura of Courage.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/AFC - Draconic Rage.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/AFC - Dungeons of Death.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/AFC - Planar Portal.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CLB - Draconic Dissent.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CLB - Exit from Exile.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CLB - Mind Flayarrrs.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CLB - Party Time.dck", "cost": 16000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/AFC - Aura of Courage.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/AFC - Draconic Rage.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/AFC - Dungeons of Death.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/AFC - Planar Portal.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CLB - Draconic Dissent.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CLB - Exit from Exile.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CLB - Mind Flayarrrs.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/CLB - Party Time.dck", "cost": 19000 }
     ]
   },
   {
@@ -1379,10 +1379,10 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/40K - Forces of the Imperium.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/40K - Necron Dynasties.dck", "cost": 14000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/40K - The Ruinous Powers.dck", "cost": 14000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/40K - Tyranid Swarm.dck", "cost": 14000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/40K - Forces of the Imperium.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/40K - Necron Dynasties.dck", "cost": 17000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/40K - The Ruinous Powers.dck", "cost": 17000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/40K - Tyranid Swarm.dck", "cost": 17000 }
     ]
   },
   {
@@ -1391,10 +1391,10 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/WHO - Blast from the Past.dck", "cost": 19000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/WHO - Masters of Evil.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/WHO - Paradox Power.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/WHO - Timey-Wimey.dck", "cost": 18000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/WHO - Blast from the Past.dck", "cost": 23000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/WHO - Masters of Evil.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/WHO - Paradox Power.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/WHO - Timey-Wimey.dck", "cost": 32000 }
     ]
   },
   {
@@ -1403,10 +1403,10 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LTC - Elven Council.dck", "cost": 13000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LTC - Food and Fellowship.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LTC - Riders of Rohan.dck", "cost": 15000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LTC - The Host of Mordor.dck", "cost": 15000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LTC - Elven Council.dck", "cost": 16000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LTC - Food and Fellowship.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LTC - Riders of Rohan.dck", "cost": 18000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/LTC - The Host of Mordor.dck", "cost": 18000 }
     ]
   },
   {
@@ -1415,10 +1415,10 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/PIP - Hail, Caesar.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/PIP - Mutant Menace.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/PIP - Science!.dck", "cost": 16000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/PIP - Scrappy Survivors.dck", "cost": 16000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/PIP - Hail, Caesar.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/PIP - Mutant Menace.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/PIP - Science!.dck", "cost": 19000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/PIP - Scrappy Survivors.dck", "cost": 19000 }
     ]
   },
   {
@@ -1427,10 +1427,10 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FIC - Counter Blitz.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FIC - Limit Break.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FIC - Revival Trance.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FIC - Scions & Spellcraft.dck", "cost": 18000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FIC - Counter Blitz.dck", "cost": 32000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FIC - Limit Break.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FIC - Revival Trance.dck", "cost": 32000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/FIC - Scions & Spellcraft.dck", "cost": 22000 }
     ]
   },
   {
@@ -1439,10 +1439,10 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MSC - Avengers Assemble.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MSC - Doom Prevails.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MSC - The Fantastic Four.dck", "cost": 17000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MSC - Wakanda Forever.dck", "cost": 17000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MSC - Avengers Assemble.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MSC - Doom Prevails.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MSC - The Fantastic Four.dck", "cost": 20000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/MSC - Wakanda Forever.dck", "cost": 20000 }
     ]
   },
   {
@@ -1451,10 +1451,10 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TRC - Federation Fleet.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TRC - Klingon Fury.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TRC - Landing Party.dck", "cost": 18000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TRC - We Are the Borg.dck", "cost": 18000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TRC - Federation Fleet.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TRC - Klingon Fury.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TRC - Landing Party.dck", "cost": 22000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TRC - We Are the Borg.dck", "cost": 22000 }
     ]
   },
   {
@@ -1463,8 +1463,8 @@
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite":"BoosterShop",
     "rewards": [
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Hatsune Miku.dck", "cost": 24000 },
-      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TMC - Turtle Power!.dck", "cost": 19000 }
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/SLD - Hatsune Miku.dck", "cost": 29000 },
+      {"type": "deck", "sourceDeck": "decks/starter/commanderprecon/TMC - Turtle Power!.dck", "cost": 23000 }
     ]
   },
   {

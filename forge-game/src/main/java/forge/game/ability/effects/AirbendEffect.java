@@ -19,6 +19,9 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 
 public class AirbendEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined", "DefinedDesc",
+    };
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

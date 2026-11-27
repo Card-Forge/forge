@@ -65,6 +65,7 @@ public class PlayerControllerAi extends PlayerController {
     private final AiController brains;
 
     private boolean pilotsNonAggroDeck = false;
+    private ManaCostShard shardBeingPaid;
 
     /** Snapshot the whole game before a targeted AI cast so it can be taken back. Heavy on memory, so off. */
     public static final boolean AI_ROLLBACK = false;
@@ -77,6 +78,17 @@ public class PlayerControllerAi extends PlayerController {
 
     public boolean pilotsNonAggroDeck() {
         return pilotsNonAggroDeck;
+    }
+
+    // lets mana triggered while paying, like Fertile Ground's, take this shard's color
+    public void runPayingShard(ManaCostShard shard, Runnable proc) {
+        ManaCostShard previous = shardBeingPaid;
+        shardBeingPaid = shard;
+        try {
+            proc.run();
+        } finally {
+            shardBeingPaid = previous;
+        }
     }
 
     public void setupAutoProfile(Deck deck) {
@@ -756,9 +768,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser) {
+    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max, DelayedReveal delayedReveal) {
         if (p == player) {
             return brains.getCardsToDiscard(min, max, validCards, sa);
+        }
+
+        if (delayedReveal != null) {
+            reveal(delayedReveal);
         }
 
         boolean isTargetFriendly = !p.isOpponentOf(player);
@@ -896,7 +912,16 @@ public class PlayerControllerAi extends PlayerController {
                 // fall back to the standard rule below
             }
         }
-        return !ComputerUtil.wantMulligan(player, cardsToReturn);
+        return classicMulliganKeepsHand(player.getCardsIn(ZoneType.Hand), cardsToReturn);
+    }
+
+    /** Applies the classic keep heuristic to the hand that remains after its own bottoming choice. */
+    boolean classicMulliganKeepsHand(final CardCollectionView hand, final int cardsToReturn) {
+        final CardCollection bottom = classicMulliganBottomCards(hand, cardsToReturn);
+        final CardCollection kept = new CardCollection(hand);
+        kept.removeAll(bottom);
+        return !OpeningHand.hasOnlyLandsAndCreatureAuras(kept)
+                && !ComputerUtil.wantMulligan(player, cardsToReturn);
     }
 
     @Override
@@ -910,30 +935,35 @@ public class PlayerControllerAi extends PlayerController {
                 // fall back to the standard rule below
             }
         }
+        return CardCollection.getView(classicMulliganBottomCards(hand, cardsToReturn));
+    }
+
+    /** Selects the cards the classic mulligan path will bottom, without mutating the supplied hand view. */
+    CardCollection classicMulliganBottomCards(final CardCollectionView hand, final int cardsToReturn) {
         // TODO This is better than it was before, but still suboptimal (but fast).
         // Maybe score a bunch of hands based on projected hand size and return the "duds"
-        int numLandsDesired = (player.getStartingHandSize() - cardsToReturn) / 2;
-
-        CardCollection toReturn = new CardCollection();
+        final int numLandsDesired = (player.getStartingHandSize() - cardsToReturn) / 2;
+        final CardCollection remaining = new CardCollection(hand);
+        final CardCollection toReturn = new CardCollection();
         for (int i = 0; i < cardsToReturn; i++) {
-            hand.removeAll(toReturn);
+            remaining.removeAll(toReturn);
 
-            CardCollection landsInHand = CardLists.filter(hand, CardPredicates.LANDS);
-            int numLandsInHand = landsInHand.size() - CardLists.count(toReturn, CardPredicates.LANDS);
+            final CardCollection landsInHand = CardLists.filter(remaining, CardPredicates.LANDS);
+            final int numLandsInHand = landsInHand.size();
 
             // If we're flooding with lands, get rid of the worst land we have
             if (numLandsInHand > 0 && numLandsInHand > numLandsDesired) {
-                CardCollection producingLands = CardLists.filter(landsInHand, CardPredicates.LANDS_PRODUCING_MANA);
-                CardCollection nonProducingLands = CardLists.filter(landsInHand, CardPredicates.LANDS_PRODUCING_MANA.negate());
-                Card worstLand = nonProducingLands.isEmpty() ? ComputerUtilCard.getWorstLand(producingLands)
+                final CardCollection producingLands = CardLists.filter(landsInHand, CardPredicates.LANDS_PRODUCING_MANA);
+                final CardCollection nonProducingLands = CardLists.filter(landsInHand, CardPredicates.LANDS_PRODUCING_MANA.negate());
+                final Card worstLand = nonProducingLands.isEmpty() ? ComputerUtilCard.getWorstLand(producingLands)
                         : ComputerUtilCard.getWorstLand(nonProducingLands);
                 toReturn.add(worstLand);
                 continue;
             }
 
-            // See if we'd scry something to the bottom in this situation. If we want to, probably get rid of it.
-            CardCollection scryBottom = new CardCollection();
-            for (Card c : hand) {
+            // See if we'd scry something to the bottom. If we want to, probably get rid of it.
+            final CardCollection scryBottom = new CardCollection();
+            for (final Card c : remaining) {
                 // Lands are evaluated separately above, factoring in the number of cards to be returned to the library
                 if (!c.isLand() && !toReturn.contains(c) && !willPutCardOnTop(c)) {
                     scryBottom.add(c);
@@ -946,10 +976,9 @@ public class PlayerControllerAi extends PlayerController {
             }
 
             // If we don't want to scry anything to the bottom, remove the worst card that we have in order to satisfy the requirement
-            toReturn.add(ComputerUtilCard.getWorstAI(hand));
+            toReturn.add(ComputerUtilCard.getWorstAI(remaining));
         }
-
-        return CardCollection.getView(toReturn);
+        return toReturn;
     }
 
     @Override
@@ -1263,7 +1292,23 @@ public class PlayerControllerAi extends PlayerController {
         // You may switch on sa.getApi() here and use sa.getParam("AILogic")
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         if (sa.getApi() == ApiType.Mana) {
+            if (shardBeingPaid != null) {
+                return ComputerUtilMana.chooseColorForShard(shardBeingPaid, colors.getColor());
+            }
             hand = CardCollection.combine(hand, player.getCardsIn(ZoneType.Stack));
+            // what the cards that the mana is for still lack: the cards that a Lion's Eye Diamond has just discarded
+            // are those (a Past in Flames casts them from the graveyard), so they are counted as well
+            final CardCollection wanted = new CardCollection(hand);
+            for (final Card g : player.getCardsIn(ZoneType.Graveyard)) {
+                if (g.getTurnInZone() == player.getGame().getPhaseHandler().getTurn() && !g.isLand() && !g.isCreature()
+                        && (g.isInstant() || g.isSorcery())) {
+                    wanted.add(g);
+                }
+            }
+            final byte lacking = ComputerUtilMana.colorShortfall(player, wanted, colors.getColor());
+            if (lacking != 0) {
+                return lacking;
+            }
         }
         final String c = ComputerUtilCard.getMostProminentColor(hand);
         byte chosenColorMask = MagicColor.fromName(c);
@@ -1491,6 +1536,20 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
+        final AiController brains = getAi();
+        final int previousValakutTriggers = brains.getSimultaneousValakutDamageTriggers();
+        int valakutTriggers = 0;
+        for (final SpellAbility pending : activePlayerSAs) {
+            final Card host = pending.getHostCard();
+            if (pending.isTrigger() && pending.getApi() == forge.game.ability.ApiType.DealDamage
+                    && host != null && "Valakut, the Molten Pinnacle".equals(host.getName())) {
+                valakutTriggers++;
+            }
+        }
+        if (valakutTriggers > 0) {
+            brains.setSimultaneousValakutDamageTriggers(valakutTriggers);
+        }
+        try {
         for (final SpellAbility sa : orderSimultaneousSa(activePlayerSAs)) {
             if (playedByTeammate(sa)) {
                 continue;
@@ -1519,9 +1578,15 @@ public class PlayerControllerAi extends PlayerController {
                 getGame().getStack().add(sa);
             }
         }
+        } finally {
+            brains.setSimultaneousValakutDamageTriggers(previousValakutTriggers);
+        }
     }
 
     void chooseNewTargetsForCopy(final SpellAbility copy) {
+        if (forge.ai.simulation.StackLoops.naruCopy(player, copy)) {
+            return; // Naru Meha with Ghostly Flicker: the copy goes for Naru Meha and the land of the loop, or ends it
+        }
         List<TargetChoices> oldTargets = new ArrayList<>();
         boolean targetingPlayer = false;
         for (SpellAbility s = copy; s != null; s = s.getSubAbility()) {
@@ -1572,6 +1637,7 @@ public class PlayerControllerAi extends PlayerController {
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
+            sa.clearTargets();
             return targetingPlayer.getController().chooseTargetsFor(sa);
         }
         return brains.doTrigger(sa, isMandatory);
@@ -1605,7 +1671,12 @@ public class PlayerControllerAi extends PlayerController {
                 return ComputerUtil.playStack(tgtSA, player, getGame());
             }
             // TODO if mandatory AI is only forced to use mana when it's already in the pool
-            if (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional) {
+            // Suspend is optional in the rules, but declining after the last TIME counter leaves the card exiled.
+            final Card host = tgtSA.getHostCard();
+            final boolean lastSuspendCast = tgtSA.isCastFromPlayEffect() && host != null
+                    && host.isInZone(ZoneType.Exile) && host.hasKeyword(Keyword.SUSPEND)
+                    && host.getCounters(CounterEnumType.TIME) == 0;
+            if (brains.canPlayFromEffectAI(spell, !optional || lastSuspendCast, noManaCost) == AiPlayDecision.WillPlay || !optional) {
                 return ComputerUtil.playStack(tgtSA, player, getGame());
             }
             return false; // didn't play spell

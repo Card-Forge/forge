@@ -1527,9 +1527,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     /** Draws a 7x4 pixel down arrow centred on x that rises and falls over time. */
     public static void drawMoreArrow(Batch batch, float x, float y, float px, float elapsed, float alpha) {
+        drawMoreArrow(batch, x, y, px, elapsed, alpha, Color.WHITE);
+    }
+
+    public static void drawMoreArrow(Batch batch, float x, float y, float px, float elapsed, float alpha, Color tint) {
         float bob = px * (1 - MathUtils.cos(elapsed * MathUtils.PI2 / 1.2f));
         float color = batch.getPackedColor();
-        batch.setColor(1f, 1f, 1f, 0.9f * alpha);
+        batch.setColor(tint.r, tint.g, tint.b, 0.9f * alpha);
         for (int row = 0; row < 4; row++)
             batch.draw(Forge.getAssets().getWhiteTexture(), x - 3.5f * px + row * px, y + bob + (3 - row) * px, (7 - row * 2) * px, px);
         batch.setPackedColor(color);

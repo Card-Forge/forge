@@ -105,23 +105,7 @@ public class RogueWinLoseController {
 
         // Check if this was the last node (run completed)
         boolean isLastNode = currentRun.getCurrentNodeIndex() >= currentRun.getPath().getNodeCount() - 1;
-
-        // Apply match win effects (healing, etc.) — not for Boss/last node
-        if (!isLastNode) {
-            int lifeBefore = currentRun.getCurrentLife();
-            RogueEffectComposite.INSTANCE.onMatchWin(currentRun);
-            int gainedLife = currentRun.getCurrentLife() - lifeBefore;
-            if (gainedLife > 0) {
-                view.showMessage(localizer.getMessage("lblRogueGainedLife", gainedLife), localizer.getMessage("lblRogueEffect"), FSkinProp.ICO_QUEST_CHARM);
-            }
-
-            // Won the match but life is still <= 0 (e.g. "can't lose the game" effect) — run is lost
-            if (currentRun.getCurrentLife() <= 0) {
-                recordMatchStats(RogueMetaProgress.getInstance(), true);
-                handleRunDefeat("being unable to continue the run at 0 or less life");
-                return;
-            }
-        }
+        applyVictoryLifeChanges(isLastNode);
 
         // Get current node for rewards (applies to ALL nodes including Boss)
         RoguePathNode currentNode = currentRun.getCurrentNode();
@@ -157,14 +141,14 @@ public class RogueWinLoseController {
             return;
         }
 
+        // Lost carry cards come before the card choice, so a view can show them with it
+        showLostCarryCards();
+
         // Award card rewards (only for non-final nodes, skip if distortion)
         if (planeboundNode != null && !rewardCtx.skipRewards) {
             boolean isElite = planeboundNode.getPlaneboundType() == RoguePlaneboundType.ELITE;
             awardCardRewards(isElite, goldReward, echoReward, rewardCtx);
         }
-
-        // Show lost carry card message
-        showLostCarryCards();
 
         // Track meta progress for match
         recordMatchStats(progress, true);
@@ -179,6 +163,25 @@ public class RogueWinLoseController {
         RogueIO.saveRun(currentRun);
     }
 
+    private void applyVictoryLifeChanges(boolean isLastNode) {
+        List<String> summary = new ArrayList<>();
+        // Effects like Platinum Angel can let the player win at 0 or less life.
+        if (currentRun.getCurrentLife() <= 0) {
+            summary.add(localizer.getMessage("lblRogueWonAtLowLife", currentRun.getLastMatchRawLife()));
+            currentRun.setCurrentLife(1);
+        }
+        if (!isLastNode) {
+            RogueEffectComposite.INSTANCE.onMatchWin(currentRun, (effect, gainedLife) -> {
+                String name = effect.getDisplayName();
+                summary.add(name.isEmpty() ? localizer.getMessage("lblRogueGainedLife", gainedLife)
+                    : localizer.getMessage("lblRogueLifeRestoredByEffect", name, gainedLife));
+            });
+        }
+        if (!summary.isEmpty()) {
+            view.showMessage(String.join("\n", summary), localizer.getMessage("lblRogueEffect"), FSkinProp.ICO_QUEST_CHARM);
+        }
+    }
+
     private void handleTrailVictory(int echoReward) {
         if (echoReward > 0) {
             view.showMessage(localizer.getMessage("lblRogueEchoesWon", echoReward), localizer.getMessage("lblRogueEchoReward"), FSkinProp.ICO_QUEST_GOLD);
@@ -186,10 +189,6 @@ public class RogueWinLoseController {
 
         RogueMetaProgress progress = RogueMetaProgress.getInstance();
         recordMatchStats(progress, true);
-        if (currentRun.getCurrentLife() <= 0) {
-            handleRunDefeat("being unable to continue the run at 0 or less life");
-            return;
-        }
         progress.recordEndlessLevelCompleted(currentRun);
         RogueCommanderAchievements.getInstance().recordEndlessLevelWon(currentRun.getEndlessLevel());
         if (currentRun.isCustomRun() && currentRun.getEndlessLevel() == 0) {
@@ -231,8 +230,17 @@ public class RogueWinLoseController {
     }
 
     private void awardCardRewards(boolean isElite, int goldReward, int echoReward, MatchRewardContext rewardCtx) {
-        List<PaperCard> chosenCards = CardRewardHelper.runReward(currentRun,
-                rewardDialog, false, rewardCtx, null);
+        // The gold and Echoes come before the card choice, so a view can show them with it
+        if (goldReward > 0) {
+            view.showMessage(localizer.getMessage("lblRogueGoldWon", goldReward), localizer.getMessage("lblRogueGoldReward"), FSkinProp.ICO_QUEST_COIN);
+        }
+
+        if (echoReward > 0) {
+            view.showMessage(localizer.getMessage("lblRogueEchoesWon", echoReward), localizer.getMessage("lblRogueEchoReward"), FSkinProp.ICO_QUEST_GOLD);
+        }
+
+        List<PaperCard> chosenCards = new ArrayList<>(CardRewardHelper.runReward(currentRun,
+                rewardDialog, false, rewardCtx, null));
 
         // If Elite opponent, show second reward screen with mythic cards
         if (isElite) {
@@ -243,14 +251,6 @@ public class RogueWinLoseController {
 
         if (!chosenCards.isEmpty()) {
             view.showCards(localizer.getMessage("lblRogueCardsAdded"), chosenCards);
-        }
-
-        if (goldReward > 0) {
-            view.showMessage(localizer.getMessage("lblRogueGoldWon", goldReward), localizer.getMessage("lblRogueGoldReward"), FSkinProp.ICO_QUEST_COIN);
-        }
-
-        if (echoReward > 0) {
-            view.showMessage(localizer.getMessage("lblRogueEchoesWon", echoReward), localizer.getMessage("lblRogueEchoReward"), FSkinProp.ICO_QUEST_GOLD);
         }
     }
 
@@ -404,10 +404,5 @@ public class RogueWinLoseController {
                 .anyMatch(c -> c.getName().equals(card.cardName()))
             || human.getCardsIn(ZoneType.Stack).stream()
                 .anyMatch(c -> c.getName().equals(card.cardName()));
-    }
-
-    public void actionOnQuit() {
-        // Any cleanup needed before quitting
-        // Currently handled by RogueWinLose.actionOnQuit()
     }
 }

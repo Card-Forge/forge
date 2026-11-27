@@ -5,7 +5,6 @@ import forge.deckchooser.FDeckViewer;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gamemodes.rogue.RogueTutorial;
 import forge.item.PaperCard;
-import forge.itemmanager.GroupDef;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
@@ -16,7 +15,6 @@ import forge.view.arcane.CardPanel;
 import forge.util.Localizer;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -76,12 +74,6 @@ public class CardSelectionDialog {
         .fontSize(14)
         .fontAlign(SwingConstants.CENTER)
         .build();
-
-    // Sort by type (Deck Editor order), then by CMC
-    cards = new ArrayList<>(cards);
-    cards.sort(Comparator
-        .comparingInt(CardSelectionDialog::typeOrder)
-        .thenComparingInt(c -> c.getRules().getManaCost().getCMC()));
 
     // Grid panel holds all cards with custom layout
     gridPanel = new GridPanel();
@@ -173,12 +165,6 @@ public class CardSelectionDialog {
       return Localizer.getInstance().getMessage("lblRogueFixedCardSelectionCount", subtitle, selectedCards.size(), maxSelections);
     }
     return Localizer.getInstance().getMessage("lblRogueVariableCardSelectionCount", subtitle, selectedCards.size(), minSelections, maxSelections);
-  }
-
-  /** Returns type sort index matching Deck Editor order (GroupDef.CARD_TYPE). */
-  private static int typeOrder(PaperCard c) {
-    int groupIndex = GroupDef.CARD_TYPE.getItemGroupIndex(c);
-    return groupIndex < 0 ? 8 : groupIndex;
   }
 
   /** Grid panel that lays out cards in a fixed-width grid. */

@@ -50,6 +50,10 @@ public class FCheckBoxTree extends JTree {
         public Comparable item;
         public boolean isEnabled = true;
         public boolean isSelected = false;
+        public String detail;  // shown in a second column beside the label when set
+        public boolean canBePartial;  // a click then cycles partly ticked, ticked and unticked
+        public boolean isPartial;  // drawn as a dash while unticked
+        public String partialNote;  // shown in place of the detail while partly ticked
 
         public FTreeNodeData(Comparable value) {
             this(value, value.toString(), value.hashCode());
@@ -184,6 +188,13 @@ public class FCheckBoxTree extends JTree {
                 if (!enabledStatus)
                     return;
                 boolean checkStatus = !treeNodesStates.get(tp).isSelected;
+                FTreeNodeData data = ((FTreeNode) tp.getLastPathComponent()).getUserObject();
+                if (checkStatus && data.canBePartial && !data.isPartial) {
+                    data.isPartial = true;
+                    fireCheckChangeEvent(new TreeCheckChangeEvent(new Object()));
+                    selfPointer.repaint();
+                    return;
+                }
                 setPathCheckStatus(tp, checkStatus);
             }
             @Override public void mousePressed(MouseEvent e) {}
@@ -434,6 +445,7 @@ public class FCheckBoxTree extends JTree {
         TreeNodeState cn = treeNodesStates.get(tp);
         cn.isSelected = cn.isEnabled && isChecked;
         FTreeNode node = (FTreeNode) tp.getLastPathComponent();
+        node.getUserObject().isPartial = false;
         for (int i = 0; i < node.getChildCount(); i++)
             percolateCheckedStatusOnSubTree(tp.pathByAddingChild(node.getChildAt(i)), isChecked);
         cn.selectedChildrenCount = isChecked ? cn.enabledChildrenCount : 0;
@@ -464,6 +476,9 @@ public class FCheckBoxTree extends JTree {
     // of a single (FCheckBox) node based on the "checked" property.
     private class FCheckBoxTreeCellRenderer extends JPanel implements TreeCellRenderer {
         FCheckBox checkBox;
+        private boolean partial;
+        private final FSkin.SkinnedLabel detailLabel = new FSkin.SkinnedLabel();
+        private final FSkin.SkinColor DETAIL_COLOUR = FSkin.getColor(FSkin.Colors.CLR_TEXT).alphaColor(150);
         private final FSkin.SkinFont CHECKBOX_LABEL_FONT = FSkin.getFont(14);
         private final FSkin.SkinColor CHECKBOX_LABEL_COLOUR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
         private final Color CHECKBOX_SELECTED_LABEL_COLOUR = new Color(252, 226, 137);
@@ -474,9 +489,31 @@ public class FCheckBoxTree extends JTree {
             this.setLayout(new MigLayout("insets 0, gap 0"));
             this.setBorder(null);
             this.setOpaque(false);
-            this.checkBox = new FCheckBox();
+            this.checkBox = new FCheckBox() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    Icon icon = UIManager.getIcon("CheckBox.icon");
+                    if (!partial || icon == null)
+                        return;
+                    Rectangle iconBounds = new Rectangle();
+                    SwingUtilities.layoutCompoundLabel(this, getFontMetrics(getFont()), getText(), icon,
+                            getVerticalAlignment(), getHorizontalAlignment(), getVerticalTextPosition(),
+                            getHorizontalTextPosition(), SwingUtilities.calculateInnerArea(this, null), iconBounds,
+                            new Rectangle(), getIconTextGap());
+                    // odd sizes on an odd box, so the dash sits on its centre pixel
+                    int width = iconBounds.width / 2 | 1;
+                    int height = 3;
+                    g.setColor(Color.DARK_GRAY);
+                    g.fillRect(iconBounds.x + (iconBounds.width - width) / 2, iconBounds.y + (iconBounds.height - height) / 2,
+                            width, height);
+                }
+            };
             this.displayNodesCount = displayNodesCount;
             add(this.checkBox, "left, gaptop 2, w 250::450, h 20!");
+            this.detailLabel.setFont(CHECKBOX_LABEL_FONT);
+            this.detailLabel.setForeground(DETAIL_COLOUR);
+            add(this.detailLabel, "gaptop 2, h 20!");
 
         }
 
@@ -495,6 +532,9 @@ public class FCheckBoxTree extends JTree {
                 return this;
             this.checkBox.setEnabled(cn.isEnabled);
             this.checkBox.setSelected(cn.isSelected);
+            partial = nodeInfo.isPartial && !cn.isSelected;
+            boolean showNote = partial && nodeInfo.partialNote != null;
+            String detail = showNote ? nodeInfo.partialNote : nodeInfo.detail;
             String chkBoxTxt = nodeInfo.label;
             int disabledNodes = cn.numberOfChildren - cn.enabledChildrenCount;
             int totalActiveNodes = cn.numberOfChildren - disabledNodes;
@@ -502,6 +542,14 @@ public class FCheckBoxTree extends JTree {
                 chkBoxTxt += String.format(" (%d/%d)", cn.selectedChildrenCount, totalActiveNodes);
             }
             this.checkBox.setText(chkBoxTxt);
+            // a fixed label width lines the details up in a column
+            ((MigLayout) getLayout()).setComponentConstraints(this.checkBox, detail == null
+                    ? "left, gaptop 2, w 250::450, h 20!" : "left, gaptop 2, w 450!, h 20!");
+            this.detailLabel.setText(detail == null ? "" : detail);
+            if (showNote)
+                this.detailLabel.setForeground(CHECKBOX_SELECTED_LABEL_COLOUR);
+            else
+                this.detailLabel.setForeground(DETAIL_COLOUR);
             this.checkBox.setName(nodeInfo.item.toString());
             if (cn.isSelected) {
                 this.checkBox.setForeground(CHECKBOX_SELECTED_LABEL_COLOUR);

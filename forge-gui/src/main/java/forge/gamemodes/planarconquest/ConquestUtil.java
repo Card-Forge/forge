@@ -175,18 +175,41 @@ public class ConquestUtil {
         }
     }
 
-    public static Iterable<PaperCard> getStartingPlaneswalkerOptions(final PaperCard startingCommander) {
+    /** The print the player is given for the card: its own, the default print when its own is excluded, or null when no print is allowed. */
+    public static PaperCard allowedPrint(PaperCard pc) {
+        CardDb cardDb = FModel.getMagicDb().getCommonCards();
+        if (cardDb.isHidden(pc)) {
+            return null;
+        }
+        if (!cardDb.isPrintExcluded(pc)) {
+            return pc;
+        }
+        // the default print already skips excluded prints when the card has another
+        PaperCard other = cardDb.getCard(pc.getName());
+        return other == null || cardDb.isPrintExcluded(other) ? null : other;
+    }
+
+    public static List<PaperCard> getStartingPlaneswalkerOptions(final PaperCard startingCommander, final ConquestPlane plane) {
+        // a plane that ignores excluded sets offers every planeswalker, hidden ones included
+        if (plane.ignoresExcludedSets()) {
+            return CardDb.withExclusionsLifted(() -> findStartingPlaneswalkers(startingCommander, false));
+        }
+        return findStartingPlaneswalkers(startingCommander, true);
+    }
+
+    private static List<PaperCard> findStartingPlaneswalkers(final PaperCard startingCommander, final boolean skipExcluded) {
         final byte colorIdentity = startingCommander.getRules().getColorIdentity().getColor();
         final Set<String> selected = Sets.newHashSet();
         // TODO: Could make this more efficient by streaming unique cards and then mapping them to an acceptable print if they aren't already...
-        return IterableUtil.filter(FModel.getMagicDb().getCommonCards().getAllNonPromosNonReprintsNoAlt(), card -> {
+        return FModel.getMagicDb().getCommonCards().getAllNonPromosNonReprintsNoAlt().stream().filter(card -> {
             if (selected.contains(card.getName())) {
                 return false;
             }
             CardRules rules = card.getRules();
             boolean allowed = rules.getType().isPlaneswalker() &&
                     !card.getName().equals(startingCommander.getName()) && //don't allow picking a commander as a starting planeswalker
-                    rules.getColorIdentity().hasNoColorsExcept(colorIdentity);
+                    rules.getColorIdentity().hasNoColorsExcept(colorIdentity) &&
+                    !(skipExcluded && FModel.getMagicDb().getCommonCards().isPrintExcluded(card));
 
             if (allowed) {
                 selected.add(card.getName());
@@ -194,7 +217,7 @@ public class ConquestUtil {
             }
 
             return false;
-        });
+        }).collect(Collectors.toList());
     }
 
     public static int getShardValue(PaperCard card, CQPref baseValuePref) {

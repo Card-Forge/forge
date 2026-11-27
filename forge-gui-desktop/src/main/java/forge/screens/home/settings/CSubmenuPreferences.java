@@ -23,6 +23,8 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorTokenViewer;
+import forge.screens.home.quest.DialogChooseSets;
+import forge.screens.home.welcome.WelcomeWizardDialog;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FComboBox;
@@ -129,7 +131,6 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbEnableAICheats(), FPref.UI_ENABLE_AI_CHEATS));
         lstControls.add(Pair.of(view.getCbAiFlatMonteCarlo(), FPref.MATCH_AI_FLAT_MONTE_CARLO));
         lstControls.add(Pair.of(view.getCbEnableUnknownCards(), FPref.UI_LOAD_UNKNOWN_CARDS));
-        lstControls.add(Pair.of(view.getCbEnableNonLegalCards(), FPref.UI_LOAD_NONLEGAL_CARDS));
         lstControls.add(Pair.of(view.getCbAllowCustomCardsDeckConformance(), FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE));
         lstControls.add(Pair.of(view.getCbImageFetcher(), FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER));
         lstControls.add(Pair.of(view.getCbDisableCardImages(), FPref.UI_DISABLE_CARD_IMAGES));
@@ -182,7 +183,12 @@ public enum CSubmenuPreferences implements ICDoc {
             FModel.getMagicDb().setEnableSmartCardArtSelection(isEnabled);
         });
 
+        updateExcludedSetsButton();
+        view.getBtnExcludedSets().setCommand((UiCommand) CSubmenuPreferences.this::chooseExcludedSets);
+
         view.getBtnReset().setCommand((UiCommand) CSubmenuPreferences.this::resetForgeSettingsToDefault);
+
+        view.getBtnReplayWelcomeWizard().setCommand((UiCommand) WelcomeWizardDialog::replay);
 
         view.getBtnDeleteEditorUI().setCommand((UiCommand) CSubmenuPreferences.this::resetDeckEditorLayout);
 
@@ -285,6 +291,11 @@ public enum CSubmenuPreferences implements ICDoc {
             kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));
         }
         view.getTxtActionableHighlightColor().setText(prefs.getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR));
+        // The welcome wizard can change these after the screen was built
+        initializeStackGroupPermanentsComboBox();
+        initializeUndoModeComboBox();
+        initializeDefaultLanguageComboBox();
+        view.getCbpCardDownloadLangComboBoxPanel().setSelectedItem(savedCardDownloadLanguageLabel());
         view.reloadShortcuts();
 
         SwingUtilities.invokeLater(() -> view.getCbRemoveSmall().requestFocusInWindow());
@@ -303,6 +314,14 @@ public enum CSubmenuPreferences implements ICDoc {
             update();
             Singletons.getControl().restartForge();
         }
+    }
+
+    private void updateExcludedSetsButton() {
+        view.getBtnExcludedSets().setText(localizer.getMessage("lblExcludedSetsCount", FModel.getExcludedEditionCodes().size()));
+    }
+
+    private void chooseExcludedSets() {
+        DialogChooseSets.forExcludedSets(this::updateExcludedSetsButton);
     }
 
     private void resetDeckEditorLayout() {
@@ -390,21 +409,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeDefaultLanguageComboBox() {
-    	final File lang_root = new File(ForgeConstants.LANG_DIR);
-    	final File[] files = lang_root.listFiles();
-    	final List<String> allLanguages = new ArrayList<>();
-    	for ( File file : files ) {
-    		if ( !file.isFile() ) {
-    			continue;
-    		}
-    		String languageName = file.getName();
-    		if (!languageName.endsWith(".properties")) {
-    			continue;
-    		}
-    		allLanguages.add(languageName.replace(".properties", ""));
-    	}
-        final String [] choices = new String[ allLanguages.size() ];
-        allLanguages.toArray( choices );
+        final String[] choices = ForgeConstants.getAvailableLanguages().toArray(new String[0]);
         final FPref userSetting = FPref.UI_LANGUAGE;
         final FComboBoxPanel<String> panel = this.view.getCbpDefaultLanguageComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(choices, userSetting);
@@ -432,14 +437,7 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createLocalizedComboBox(localizedOptions, cardLangPreference, cardLangMapping);
         comboBox.addItemListener(e -> applyPreferredLanguageAvailability());
 
-        final String savedCode = this.prefs.getPref(cardLangPreference);
-        final String selectedDisplayName = cardLangMapping.entrySet().stream()
-                .filter(entry -> entry.getValue().equals(savedCode))
-                .map(Map.Entry::getKey)
-                .findFirst()
-                .orElse("English");
-
-        panel.setComboBox(comboBox, selectedDisplayName);
+        panel.setComboBox(comboBox, savedCardDownloadLanguageLabel());
 
         final JCheckBox cbPreferLang = this.view.getCbPreferLangForUniqueCards();
         cbPreferLang.setSelected(this.prefs.getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS));
@@ -450,6 +448,15 @@ public enum CSubmenuPreferences implements ICDoc {
         });
 
         applyPreferredLanguageAvailability();
+    }
+
+    private String savedCardDownloadLanguageLabel() {
+        final String savedCode = this.prefs.getPref(FPref.UI_CARD_DOWNLOAD_LANG);
+        return ForgeConstants.getScryfallCardLanguageMapping().entrySet().stream()
+                .filter(entry -> entry.getValue().equals(savedCode))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse("English");
     }
 
     private void applyPreferredLanguageAvailability() {

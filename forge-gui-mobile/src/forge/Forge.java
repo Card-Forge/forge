@@ -31,6 +31,8 @@ import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.assets.ImageCache;
+import forge.card.CardDb;
+import forge.card.CardImageRenderer;
 import forge.error.ExceptionHandler;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gui.FThreads;
@@ -246,6 +248,7 @@ public class Forge implements ApplicationListener {
         altPlayerLayout = getForgePreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         animatedCardTapUntap = getForgePreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
         enableUIMask = getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING);
+        forge.card.CardImageRenderer.setFrameCacheEnabled(getForgePreferences().getPrefBoolean(FPref.UI_CACHE_CARD_FRAMES));
         if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
             enableUIMask = "Full";
         else if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("false"))
@@ -412,6 +415,7 @@ public class Forge implements ApplicationListener {
         FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(null);
         GuiBase.setAdventureCacheDirectory(null);
+        CardDb.setExclusionsSuspended(false);
         clearScreenStack();
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
@@ -1094,6 +1098,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void resume() {
         lifecycleClosing = false;
+        CardImageRenderer.FrameCache.clear(); //the contents of frame buffers are lost with the GL context; does not initialize CardImageRenderer
         setWindowFocus(true);
         try {
             Texture.setAssetManager(getAssets().manager());

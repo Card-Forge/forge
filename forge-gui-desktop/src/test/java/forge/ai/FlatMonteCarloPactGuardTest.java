@@ -137,4 +137,24 @@ public class FlatMonteCarloPactGuardTest extends AITest {
         sa.setActivatingPlayer(ai);
         AssertJUnit.assertEquals("pact-unpayable", ComboGuard.problem(ai, sa, null, ComboPlan.EMPTY));
     }
+
+    @Test
+    public void aPactThatProtectsALethalTendrilsOnTheStackIsAllowedWithoutTheMana() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        for (int i = 0; i < 3; i++) {
+            addCard("Island", ai);
+        }
+        final SpellAbility pact = pact(game, ai, "Pact of Negation");
+        AssertJUnit.assertEquals("nothing on the stack: no lands for the upkeep, no Pact", "pact-unpayable",
+                ComboGuard.problem(ai, pact, null, ComboPlan.EMPTY));
+        opp.setLife(2, null);
+        final SpellAbility tendrils = addCardToZone("Tendrils of Agony", ai, ZoneType.Hand).getFirstSpellAbility();
+        tendrils.setActivatingPlayer(ai);
+        tendrils.getTargets().add(opp);
+        game.getStack().add(tendrils);
+        AssertJUnit.assertNull("the Tendrils takes the last two life: the upkeep never comes",
+                ComboGuard.problem(ai, pact, null, ComboPlan.EMPTY));
+    }
 }

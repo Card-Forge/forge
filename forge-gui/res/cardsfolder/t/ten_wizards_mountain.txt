@@ -6,4 +6,5 @@ SVar:RolledDie:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creatur
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, creatures you control gain flying until end of turn.
 SVar:RolledChaos:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Flying
 DeckHas:Ability$Counters
+SVar:AIRollPlanarDieParams:Mode$ Always | HasValidCardInZone$ Battlefield:Creature.YouCtrl | RollInMain1$ True | MinTurn$ 1
 Oracle:Whenever you roll the planar die, put a +1/+1 counter on up to one target creature.\nWhenever chaos ensues, creatures you control gain flying until end of turn.

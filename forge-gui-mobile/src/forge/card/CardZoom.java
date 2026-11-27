@@ -115,6 +115,7 @@ public class CardZoom extends FOverlay {
     private static final float OPEN_SECONDS = 0.22f, CLOSE_SECONDS = 0.16f;
     private static float openT = 1f, closeT;
     private static boolean closing, hidePosted;
+    private static int closeGeneration;
     private static final float FLIP_SECONDS = 0.34f;
     private static boolean flipping, flipToggled;
     private static float flipT;
@@ -211,6 +212,31 @@ public class CardZoom extends FOverlay {
 
     public static boolean isCurrent(CardView cv) {
         return cv != null && cv == viewAt(currentIndex);
+    }
+
+    /**
+     * Reset the singleton zoom when its owning match is being discarded.
+     * A zoom left visible by a match transition still belongs to the old screen,
+     * so a subsequent show() can otherwise be ignored by FOverlay.setVisible().
+     */
+    public static void resetForMatchEnd() {
+        closeGeneration++;
+        closing = false;
+        hidePosted = false;
+        fanActive = false;
+        cardZoom.finishHide(true);
+
+        // Do not retain references to cards or callbacks belonging to the finished game.
+        items = null;
+        currentCard = prevCard = nextCard = null;
+        activateHandler = null;
+        currentActivateAction = null;
+        currentIndex = initialIndex = 0;
+        isAdvBack = false;
+        nestedShow = false;
+        spreadNext = false;
+        cardZoom.totalZoomAmount = 0f;
+        specializedCardsList.clear();
     }
 
     public static void hideZoom() {
@@ -660,7 +686,11 @@ public class CardZoom extends FOverlay {
             moving = true;
             if (closeT >= 1f && !hidePosted) {
                 hidePosted = true;
+                final int generation = closeGeneration;
                 Gdx.app.postRunnable(() -> {
+                    if (generation != closeGeneration) {
+                        return;
+                    }
                     hidePosted = false;
                     if (closing) cardZoom.completeClose();
                 });
@@ -1105,6 +1135,10 @@ public class CardZoom extends FOverlay {
     }
 
     private void finishHide() {
+        finishHide(false);
+    }
+
+    private void finishHide(boolean immediately) {
         if (cardViewsToClearObject != null) {
             for (CardView cardView : cardViewsToClearObject.values()) {
                 if (cardView != null)
@@ -1128,7 +1162,11 @@ public class CardZoom extends FOverlay {
         Arrays.fill(btnAlpha, 0f);
         backAfterClose = false;
         backStack.clear();
-        super.hide();
+        if (immediately) {
+            hideImmediately();
+        } else {
+            super.hide();
+        }
     }
 
     @Override

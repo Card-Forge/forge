@@ -3,6 +3,7 @@ name=Lathliss, Dragon Queen
 planeName=Shiv
 avatarIndex=85
 type=0
+retired=true
 [Commander]
 1 Lathliss, Dragon Queen|J25|1
 [Main]

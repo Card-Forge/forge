@@ -18,8 +18,9 @@ public final class ProwessTiming {
 
     public static boolean worthBeforeCombat(final Player ai, final SpellAbility sa) {
         try {
-            final Card host = sa == null ? null : sa.getHostCard();
-            if (host == null || !sa.isSpell() || host.isPermanent() || !(ai.getController() instanceof PlayerControllerAi)) {
+            final SpellAbility root = sa == null ? null : sa.getRootAbility();
+            final Card host = root == null ? null : root.getHostCard();
+            if (host == null || !root.isSpell() || host.isPermanent() || !(ai.getController() instanceof PlayerControllerAi)) {
                 return false;
             }
             final PhaseHandler ph = ai.getGame().getPhaseHandler();

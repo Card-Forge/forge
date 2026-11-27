@@ -10,6 +10,7 @@ import forge.model.FModel;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
 import forge.util.XmlWriter.IXmlWritable;
+import java.util.stream.Collectors;
 
 public class ConquestCommander implements InventoryItem, IXmlWritable {
     private final PaperCard card;
@@ -23,10 +24,10 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
         this(card0, null, null);
     }
     public ConquestCommander(PaperCard card0, ConquestPlane startingPlane) {
-        this(card0, ConquestUtil.generateDeck(card0, new DeckGenPool(startingPlane.getCardPool().getAllCards(pc -> {
+        this(card0, ConquestUtil.generateDeck(card0, new DeckGenPool(startingPlane.getAwardableCards().stream().filter(pc -> {
             CardRules rules = pc.getRules();
             return !rules.canBeCommander() && !rules.getType().isPlaneswalker(); //prevent including additional commanders or planeswalkers in starting deck
-        })), false), null);
+        }).collect(Collectors.toList())), false), null);
     }
     private ConquestCommander(PaperCard card0, Deck deck0, ConquestRecord record0) {
         card = card0;
@@ -40,7 +41,7 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
         ConquestPlane originPlane0 = null;
         String originRegionName0 = null;
         for (ConquestPlane plane : FModel.getPlanes()) {
-            if (plane.getCommanders().contains(card)) {
+            if (plane.getCommanders().anyMatch(c -> c.getName().equals(card.getName()))) {
                 originPlane0 = plane;
                 for (ConquestRegion region : plane.getRegions()) {
                     if (region.getCardPool().contains(card)) {

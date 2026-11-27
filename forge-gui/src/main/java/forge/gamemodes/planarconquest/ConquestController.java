@@ -43,7 +43,6 @@ import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.util.Aggregates;
 import forge.util.FileUtil;
-import forge.util.collect.FCollectionView;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
 
@@ -51,6 +50,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -202,7 +202,7 @@ public class ConquestController {
         // The plane keeps one printing of each commander, but boosters can unlock any printing
         Set<String> owned = new HashSet<>();
         model.getUnlockedCards().forEach(c -> owned.add(c.getName()));
-        FCollectionView<PaperCard> pool = loc.getRegion().getCommanders();
+        List<PaperCard> pool = loc.getRegion().getCommanders().stream().map(loc.getPlane()::awardablePrint).filter(Objects::nonNull).collect(Collectors.toList());
         List<PaperCard> locked = pool.stream().filter(c -> !owned.contains(c.getName())).collect(Collectors.toList());
         PaperCard commander = Aggregates.random(locked.isEmpty() ? pool : locked);
         if (commander == null) { return null; }
@@ -246,7 +246,7 @@ public class ConquestController {
         for (int i = rewards.size() - 1; i >= 0; i--) {
             int replacementShards = 0;
             PaperCard card = rewards.get(i);
-            if (model.hasUnlockedCard(card)) {
+            if (pool.isOwned(card, model)) {
                 rewards.remove(i);
                 replacementShards = ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_DUPLICATE_VALUE);
                 shards += replacementShards;

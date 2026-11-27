@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import com.google.common.collect.ArrayListMultimap;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -70,7 +71,7 @@ public class PossibleTargetSelector {
 
         SimilarTargetSkipper skipper = new SimilarTargetSkipper();
         for (GameObject o : tgt.getAllCandidates(targetingSa)) {
-            if (pointlessCounterTarget(player, o)) {
+            if (pointlessCounterTarget(player, o) || pointlessUnpromisedGiftTarget(player, o)) {
                 continue;
             }
             if (maxTargets == 1 && skipper.shouldSkipTarget(o)) {
@@ -95,6 +96,18 @@ public class PossibleTargetSelector {
         }
         final Card c = (Card) o;
         return !c.isCreature() || c.getController().isOpponentOf(player);
+    }
+
+    /**
+     * An unpromised Gift spell returns its opposing target later, so that target is not useful removal.
+     * The separate Promise Gift spell ability remains available and can still target opposing creatures.
+     */
+    private boolean pointlessUnpromisedGiftTarget(final Player player, final GameObject o) {
+        if (!(o instanceof Card) || ((Card) o).getOwner() == null
+                || !((Card) o).getOwner().isOpponentOf(player)) {
+            return false;
+        }
+        return ComputerUtilAbility.hasUnpromisedGiftReturn(targetingSa);
     }
 
     private static class SimilarTargetSkipper {

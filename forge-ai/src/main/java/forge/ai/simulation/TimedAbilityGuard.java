@@ -1,8 +1,5 @@
 package forge.ai.simulation;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import forge.ai.ability.AnimateAi;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -45,9 +42,6 @@ public final class TimedAbilityGuard {
 
     /** The kinds of ability with one good moment. */
     enum Kind { MANLAND, CREW, SADDLE, STATION }
-
-    /** Charge counters a station card needs, as written in its static abilities ("counters_GE12_CHARGE"). */
-    private static final Pattern CHARGE_THRESHOLD = Pattern.compile("counters_GE(\\d+)_CHARGE");
 
     /** Which kind of timed ability this is, or null for any other play. */
     static Kind kindOf(final SpellAbility sa) {
@@ -262,15 +256,8 @@ public final class TimedAbilityGuard {
     static int[] thresholds(final Card host) {
         final java.util.TreeSet<Integer> found = new java.util.TreeSet<>();
         for (final StaticAbility st : host.getStaticAbilities()) {
-            for (final String key : new String[] { "Affected", "Condition", "IsPresent" }) {
-                final String value = st.getParam(key);
-                if (value == null) {
-                    continue;
-                }
-                final Matcher m = CHARGE_THRESHOLD.matcher(value);
-                while (m.find()) {
-                    found.add(Integer.parseInt(m.group(1)));
-                }
+            if (st.hasParam("Station")) {
+                found.add(Integer.parseInt(st.getParam("Station")));
             }
         }
         final int[] result = new int[found.size()];

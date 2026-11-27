@@ -21,7 +21,9 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import forge.card.CardDb;
 import forge.card.CardEdition;
@@ -32,6 +34,8 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.FileUtil;
+import forge.util.IterableUtil;
+import forge.util.StreamUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.storage.StorageReaderFile;
@@ -41,6 +45,7 @@ public class ConquestPlane {
     private final String directory;
     private final String description;
     private boolean unreachable;
+    private final boolean ignoreExcludedSets;
     private final int rowsPerRegion;
     private final int cols;
 
@@ -52,11 +57,12 @@ public class ConquestPlane {
     private ConquestEvent[] events;
     private final Set<CardEdition> editions = new HashSet<>();
 
-    private ConquestPlane(String name0, String description0, int regionSize0, boolean unreachable0) {
+    private ConquestPlane(String name0, String description0, int regionSize0, boolean unreachable0, boolean ignoreExcludedSets0) {
         name = name0;
         directory = ForgeConstants.CONQUEST_PLANES_DIR + name + ForgeConstants.PATH_SEPARATOR;
         description = description0;
         unreachable = unreachable0;
+        ignoreExcludedSets = ignoreExcludedSets0;
 
         switch (regionSize0) {
         case 9:
@@ -158,6 +164,35 @@ public class ConquestPlane {
         return editions;
     }
 
+    public boolean ignoresExcludedSets() {
+        return ignoreExcludedSets;
+    }
+
+    /**
+     * The print the player is given for the card. The pools stay unfiltered for opponents and the rule applies only here,
+     * so unlike Adventure the plane needs no lift of the card database.
+     */
+    public PaperCard awardablePrint(PaperCard pc) {
+        return ignoreExcludedSets ? pc : ConquestUtil.allowedPrint(pc);
+    }
+
+    public List<PaperCard> getAwardableCards() {
+        return StreamUtil.stream(getCardPool().getAllCards()).map(this::awardablePrint).filter(Objects::nonNull).distinct().collect(Collectors.toList());
+    }
+
+    public List<PaperCard> getAwardableCommanders() {
+        return getCommanders().stream().map(this::awardablePrint).filter(Objects::nonNull).distinct().collect(Collectors.toList());
+    }
+
+    /** Whether the player's exclusions would change any of the plane's cards. */
+    public boolean hasExcludedCards() {
+        return IterableUtil.any(getCardPool().getAllCards(), FModel.getMagicDb().getCommonCards()::isExcludedByPlayer);
+    }
+
+    public void resetAwardPool() {
+        awardPool = null;
+    }
+
     private void ensureRegionsLoaded() {
         if (regions != null) { return; }
 
@@ -241,7 +276,7 @@ public class ConquestPlane {
 
     public ConquestAwardPool getAwardPool() {
         if (awardPool == null) { // Delay initializing until needed
-            awardPool = new ConquestAwardPool(cardPool.getAllCards());
+            awardPool = ConquestAwardPool.of(getCardPool().getAllCards(), this::awardablePrint);
         }
         return awardPool;
     }
@@ -257,6 +292,7 @@ public class ConquestPlane {
             int regionSize = 0;
             String description = null;
             boolean unreachable = false;
+            boolean ignoreExcludedSets = false;
 
             String key, value;
             String[] pieces = line.split("\\|");
@@ -286,6 +322,9 @@ public class ConquestPlane {
                 case "unreachable":
                     unreachable = true;
                     break;
+                case "ignoreexcludedsets":
+                    ignoreExcludedSets = Boolean.parseBoolean(value);
+                    break;
                 case "desc":
                     description = value;
                     break;
@@ -294,7 +333,7 @@ public class ConquestPlane {
                     break;
                 }
             }
-            return new ConquestPlane(name, description, regionSize, unreachable);
+            return new ConquestPlane(name, description, regionSize, unreachable, ignoreExcludedSets);
         }
     }
 

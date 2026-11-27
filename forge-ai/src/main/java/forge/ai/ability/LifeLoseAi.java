@@ -10,6 +10,7 @@ import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.card.CardCollectionView;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostPayEnergy;
 import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -182,7 +183,21 @@ public class LifeLoseAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
+        if (spendsEnergyAndItself(sa) && tgtPlayers.anyMatch(p -> p.isOpponentOf(ai) && p.canLoseLife())) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
+
+    /**
+     * "Pay {E}{E}, Sacrifice this: each opponent loses 3 life" (Gonti's Machinations): the permanent only collects the energy
+     * that this ability spends and does nothing else, so there is no better moment to wait for than having enough of it. The
+     * AI used to cast it only for the last points of the opponent's life (#13049).
+     */
+    private static boolean spendsEnergyAndItself(final SpellAbility sa) {
+        final Cost cost = sa.getPayCosts();
+        return cost != null && cost.hasSpecificCostType(CostPayEnergy.class) && ComputerUtilCost.isSacrificeSelfCost(cost);
     }
 
     /*

@@ -24,7 +24,7 @@ public class CardRewardHelperTest extends CardMockTestCase {
         AtomicBoolean reroll = new AtomicBoolean(true);
 
         List<PaperCard> chosenCards = CardRewardHelper.runReward(run, (title, cards, maxSelections,
-                rerollLabel, rerollEnabled, gold) -> {
+                rerollLabel, rerollCost, rerollEnabled, gold) -> {
             if (reroll.getAndSet(false)) {
                 assertTrue(rerollEnabled);
                 return null;
@@ -49,7 +49,7 @@ public class CardRewardHelperTest extends CardMockTestCase {
         RogueRun run = createRun(rewardCards, 0);
 
         List<PaperCard> skippedCards = CardRewardHelper.runReward(run, (title, cards, maxSelections,
-                rerollLabel, rerollEnabled, gold) -> {
+                rerollLabel, rerollCost, rerollEnabled, gold) -> {
             assertEquals(Set.copyOf(cards), Set.copyOf(rewardCards));
             return List.of();
         }, false, null, null);

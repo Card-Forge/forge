@@ -122,6 +122,14 @@ public class UIScene extends Scene {
 
     }
 
+    /** Show an error message using the Adventure scene's own dialog layer. */
+    public void showImageLoadFailureDialog(String title, String message) {
+        Dialog errorDialog = createGenericDialog(title, message.replace("[", "[["),
+                Forge.getLocalizer().getMessage("lblOK"), null,
+                this::removeDialog, null, false, "", true);
+        showDialog(errorDialog);
+    }
+
     private void requestTextInput(String text, KeyBoardDialog.ScreenKeyboardFinished e) {
         KeyBoardDialog keyboardDialog=new KeyBoardDialog()
         {
@@ -255,8 +263,11 @@ public class UIScene extends Scene {
         Dialog dialog = new Dialog(title == null ? "" : title, Controls.getSkin());
         textboxOpen = true;
 
-        if (label != null)
-            dialog.getContentTable().add(Controls.newTextraLabel(label).setWrap(wrap)).center().fill();
+        if (label != null) {
+            Cell<?> cell = dialog.getContentTable().add(Controls.newTextraLabel(label).setWrap(wrap)).center().fill();
+            if (wrap)
+                cell.width(stage.getWidth() * 0.6f);  // a wrapping label has no width of its own and collapses
+        }
 
         dialog.button(Controls.newTextButton(stringYes, runnableYes));
 

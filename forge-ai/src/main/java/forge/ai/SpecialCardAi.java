@@ -231,6 +231,12 @@ public class SpecialCardAi {
     // Chain of Smog
     public static class ChainOfSmog {
         public static AiAbilityDecision consider(final Player ai, final SpellAbility sa) {
+            if (forge.ai.simulation.StackLoops.chainLoop(ai)) {
+                // Witherbloom Apprentice: aimed at itself, with nothing to discard, every copy of the Chain is a drain
+                sa.getParent().resetTargets();
+                sa.getParent().getTargets().add(ai);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
             if (ai.getCardsIn(ZoneType.Hand).isEmpty()) {
                 // to avoid failure to add to stack, provide a legal target opponent first (choosing random at this point)
                 // TODO: this makes the AI target opponents with 0 cards in hand, but bailing from here causes a

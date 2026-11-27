@@ -28,6 +28,7 @@ public class ConfigData {
     public String[] restrictedBlocks;
     public String[] restrictedTokens;
     public String[] allowedEditions;
+    public boolean ignoreExcludedSets = false;
     public boolean vintageOnlyEditions = false;
     public String[] restrictedEvents;
     public String[] allowedEvents;

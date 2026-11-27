@@ -27,6 +27,11 @@ import forge.util.collect.FCollection;
 import com.google.common.collect.Maps;
 
 public class AttachEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "ChoiceTitle", "ChoiceZone", "Chooser", "Defined", "Move", "Object", "Optional",
+        "PlayerChoices", "RememberAttached",
+    };
+
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();

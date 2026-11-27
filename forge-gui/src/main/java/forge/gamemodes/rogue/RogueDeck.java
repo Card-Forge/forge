@@ -1,5 +1,6 @@
 package forge.gamemodes.rogue;
 
+import forge.StaticData;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
@@ -70,6 +71,8 @@ public class RogueDeck {
         }
 
         List<PaperCard> allCards = poolToUse.toFlatList();
+        // the pool is read from a deck file by name, and a hidden card is still found by name
+        allCards.removeIf(StaticData.instance()::isHidden);
         if (allCards.isEmpty()) {
             return new ArrayList<>();
         }
@@ -227,9 +230,7 @@ public class RogueDeck {
      * @return true if the commander can be selected
      */
     public boolean isUnlocked() {
-        if (RogueMetaProgress.getInstance().isDevUnlockAll()) return true;
-        if (rogueUnlockCondition == null) return true;
-        return rogueUnlockCondition.evaluate();
+        return RogueUnlockCondition.isUnlocked(rogueUnlockCondition);
     }
 
     /**

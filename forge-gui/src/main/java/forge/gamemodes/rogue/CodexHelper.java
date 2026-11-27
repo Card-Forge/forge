@@ -14,8 +14,14 @@ import forge.gamemodes.rogue.effect.EventEffect;
 import forge.gamemodes.rogue.effect.NPCEffect;
 import forge.gamemodes.rogue.effect.RogueEffect;
 import forge.gamemodes.rogue.effect.WoundEffect;
+import forge.gamemodes.rogue.npc.NPC;
+import forge.gamemodes.rogue.npc.TeferiEncounter;
+import forge.gamemodes.rogue.npc.TeferiOptionalEncounter;
 import forge.item.PaperCard;
+import forge.itemmanager.GroupDef;
+import forge.util.Localizer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.EnumMap;
@@ -27,11 +33,31 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public final class CodexHelper {
+    /** In the order the Codex lists them. */
     public enum TraitCategory {
-        NPC,
         CHEST,
+        NPC,
         EVENT,
-        WOUND
+        WOUND;
+
+        public String label() {
+            return Localizer.getInstance().getMessage(switch (this) {
+                case CHEST -> "lblRogueChest";
+                case NPC -> "lblRogueNpc";
+                case EVENT -> "lblRogueEvent";
+                case WOUND -> "lblRogueWound";
+            });
+        }
+    }
+
+    public enum CodexState { UNKNOWN, SEEN, ACQUIRED }
+
+    /** A tutorial, or a chapter of the story. */
+    public record JournalEntry(String id, String title, String text, boolean story) {
+        @Override
+        public String toString() {
+            return title;
+        }
     }
 
     private static final ZoneType[] PLANEBOUND_PUBLIC_ZONES = {
@@ -204,6 +230,89 @@ public final class CodexHelper {
         return result;
     }
 
+    public static List<JournalEntry> journal(RogueMetaProgress progress) {
+        List<JournalEntry> journal = Arrays.stream(RogueTutorial.values())
+            .filter(progress::hasSeenTutorial)
+            .map(tutorial -> new JournalEntry(tutorial.getId(), tutorial.getTitle(),
+                String.join("\n\n", tutorial.getMessageChunks()), false))
+            .collect(Collectors.toCollection(ArrayList::new));
+
+        int storyLevel = progress.getNPCLevel(NPC.TEFERI.id);
+        for (TeferiEncounter chapter : TeferiEncounter.values()) {
+            if (chapter.getRequiredLevel() >= storyLevel) {
+                continue;
+            }
+            List<String> text = chapter.getJournalText();
+            if (!text.isEmpty()) {
+                journal.add(new JournalEntry("teferi:" + chapter.name(), chapter.getTitle(),
+                    String.join("\n\n", text), true));
+            }
+        }
+        TeferiOptionalEncounter anchor = TeferiOptionalEncounter.TEMPORAL_ANCHOR;
+        if (progress.hasSeenNPCEncounter(anchor.getId())) {
+            journal.add(new JournalEntry(anchor.getId(),
+                Localizer.getInstance().getMessage("lblRogueJournalTemporalAnchor"),
+                String.join("\n\n", anchor.getStoryTextChunks()), true));
+        }
+        return journal;
+    }
+
+    /** The state of a card of the Commander's reward pool. */
+    public static CodexState state(RogueMetaProgress progress, RogueDeck commander, PaperCard card) {
+        String commanderName = commander.getCommanderCardName();
+        return state(progress.hasAcquiredCommanderRewardCard(commanderName, card),
+            progress.hasSeenCommanderRewardCard(commanderName, card));
+    }
+
+    /** A Planebound's cards cannot be acquired, so a seen one is fully known. */
+    public static CodexState state(RogueMetaProgress progress, RoguePlanebound planebound, PaperCard card) {
+        return state(progress.hasSeenPlaneboundCard(planebound, card), false);
+    }
+
+    public static CodexState state(RogueMetaProgress progress, RogueEffect trait) {
+        return state(progress.hasAcquiredTrait(trait), progress.hasSeenTrait(trait));
+    }
+
+    /** Seen includes acquired. */
+    public static int countSeen(Collection<CodexState> states) {
+        int count = 0;
+        for (CodexState state : states) {
+            if (state != CodexState.UNKNOWN) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static int countAcquired(Collection<CodexState> states) {
+        int count = 0;
+        for (CodexState state : states) {
+            if (state == CodexState.ACQUIRED) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static CodexState state(boolean acquired, boolean seen) {
+        if (acquired) {
+            return CodexState.ACQUIRED;
+        }
+        return seen ? CodexState.SEEN : CodexState.UNKNOWN;
+    }
+
+    public static PaperCard getPlaneCard(RoguePlanebound planebound) {
+        if (planebound == null || planebound.planeName() == null) {
+            return null;
+        }
+        for (PaperCard card : RogueConfig.getAllPlanes().toFlatList()) {
+            if (planebound.planeName().equalsIgnoreCase(card.getName())) {
+                return card;
+            }
+        }
+        return null;
+    }
+
     public static TraitCategory getTraitCategory(RogueEffect effect) {
         if (effect == null || StringUtils.isBlank(effect.getId())) {
             return null;
@@ -324,17 +433,16 @@ public final class CodexHelper {
             }
         }
 
-        Set<String> displayedBasicLandNames = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        for (PaperCard card : deck.getAllCardsInASinglePool(false, false).toFlatList()) {
-            if (isValidCard(card)) {
-                boolean shouldAddCard = !card.getRules().getType().isBasicLand()
-                    || displayedBasicLandNames.add(card.getName());
-                if (shouldAddCard) {
-                    cards.add(card);
-                }
-            }
-        }
+        cards.addAll(eachBasicOnce(deck.getAllCardsInASinglePool(false, false).toFlatList()));
         return cards;
+    }
+
+    /** The cards a Codex list shows: each basic land once, and no card without rules. */
+    public static List<PaperCard> eachBasicOnce(List<PaperCard> cards) {
+        Set<String> basics = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        return cards.stream()
+            .filter(card -> isValidCard(card) && (!card.getRules().getType().isBasicLand() || basics.add(card.getName())))
+            .collect(Collectors.toList());
     }
 
     private static boolean isValidCard(PaperCard card) {
@@ -410,5 +518,32 @@ public final class CodexHelper {
 
     private static String normalize(PaperCard card) {
         return card == null || card.getRules() == null ? null : card.getRules().getNormalizedName();
+    }
+
+    /** The official commanders by name; locked ones keep their place. */
+    public static List<RogueDeck> codexCommanders() {
+        return RogueConfig.loadRogueDecks().stream()
+            .filter(deck -> !deck.isExperimental())
+            .sorted(Comparator.comparing(RogueDeck::getName, String.CASE_INSENSITIVE_ORDER))
+            .collect(Collectors.toList());
+    }
+
+    public static List<RoguePlanebound> codexPlanebounds() {
+        return RogueConfig.loadPlanebounds().stream()
+            .sorted(Comparator.comparing(RoguePlanebound::planeboundName, String.CASE_INSENSITIVE_ORDER))
+            .collect(Collectors.toList());
+    }
+
+    /** Codex card lists group by card type, then sort by name. */
+    public static final Comparator<PaperCard> CODEX_CARD_ORDER = Comparator.comparingInt(CodexHelper::codexCardTypeOrder)
+        .thenComparing(PaperCard::getName, String.CASE_INSENSITIVE_ORDER);
+
+    /** Codex card lists group by card type, then sort by name; a missing card goes last. */
+    public static int codexCardTypeOrder(PaperCard card) {
+        if (card == null) {
+            return 8;
+        }
+        int groupIndex = GroupDef.CARD_TYPE.getItemGroupIndex(card);
+        return groupIndex < 0 ? 8 : groupIndex;
     }
 }

@@ -16,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.trackable.TrackableCollection;
@@ -1087,6 +1088,7 @@ public class CardView extends GameEntityView {
 
         currentStateView.updateAttractionLights(currentState);
         currentStateView.updateHasPrintedPT((currentStateView.isVehicle() || currentStateView.isSpaceCraft()) && currentState.hasPrintedPT());
+        currentStateView.updateStationLevels(currentState);
 
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
@@ -1518,6 +1520,66 @@ public class CardView extends GameEntityView {
         }
         void updateHasPrintedPT(boolean v) {
             set(TrackableProperty.HasPrintedPT, v);
+        }
+
+        /**
+         * The Station levels of a Spacecraft or Planet as "threshold:power:toughness" entries separated by ';',
+         * sorted by threshold. Power and toughness are empty for a level without a P/T box,
+         * e.g. "3::;8:3:3". Empty if the card has no Station levels.
+         */
+        public String getStationLevels() {
+            return get(TrackableProperty.StationLevels);
+        }
+        void updateStationLevels(CardState c) {
+            final TreeMap<Integer, String> levels = new TreeMap<>();
+            for (final StaticAbility st : c.getStaticAbilities()) {
+                if (!st.isIntrinsic() || !st.hasParam("Station")) {
+                    continue;
+                }
+                putStationLevel(levels, st.getParam("Station"), st.getParamOrDefault("SetPower", ""), st.getParamOrDefault("SetToughness", ""));
+            }
+            if (levels.isEmpty()) {
+                // UI cards (deck editor, id -1) get no StaticAbility objects from CardFactory: read the script lines instead
+                final forge.card.CardRules rules = c.getCard() == null ? null : c.getCard().getRules();
+                final forge.card.ICardFace face = rules == null ? null
+                        : c.getStateName() == CardStateName.Original ? rules.getMainPart() : rules.getOtherPart();
+                if (face != null && face.getStaticAbilities() != null) {
+                    for (final String script : face.getStaticAbilities()) {
+                        final Map<String, String> params = parseScriptParams(script);
+                        if (params.containsKey("Station")) {
+                            putStationLevel(levels, params.get("Station"), params.getOrDefault("SetPower", ""), params.getOrDefault("SetToughness", ""));
+                        }
+                    }
+                }
+            }
+            final StringBuilder sb = new StringBuilder();
+            for (final Map.Entry<Integer, String> e : levels.entrySet()) {
+                if (sb.length() > 0) {
+                    sb.append(';');
+                }
+                sb.append(e.getKey()).append(':').append(e.getValue());
+            }
+            set(TrackableProperty.StationLevels, sb.toString());
+        }
+
+        private void putStationLevel(TreeMap<Integer, String> levels, String station, String power, String toughness) {
+            try {
+                levels.put(Integer.parseInt(station.trim()), power + ":" + toughness);
+            } catch (NumberFormatException e) {
+                // not a numeric threshold, nothing to show
+            }
+        }
+
+        /** The "Key$ Value" parameters of a script line such as "Mode$ Continuous | Station$ 12 | SetPower$ 7". */
+        private Map<String, String> parseScriptParams(String script) {
+            final Map<String, String> params = new java.util.HashMap<>();
+            for (final String part : script.split("\\|")) {
+                final int i = part.indexOf('$');
+                if (i > 0) {
+                    params.put(part.substring(0, i).trim(), part.substring(i + 1).trim());
+                }
+            }
+            return params;
         }
 
         public String getSetCode() {

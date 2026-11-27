@@ -8,7 +8,11 @@ import com.google.common.collect.MultimapBuilder;
 import com.google.common.eventbus.Subscribe;
 import forge.LobbyPlayer;
 import forge.StaticData;
+import forge.card.CardDb;
+import forge.deck.Deck;
+import forge.item.PaperCard;
 import forge.ai.AiProfileUtil;
+import forge.ai.LobbyPlayerAi;
 import forge.game.*;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSubgameEnd;
@@ -19,6 +23,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.net.NetworkGameEventListener;
+import forge.gamemodes.net.ProtocolGuiGame;
 import forge.gamemodes.net.server.HostingServer;
 import forge.gamemodes.replay.ReplaySession;
 import forge.gamemodes.quest.QuestController;
@@ -38,12 +43,14 @@ import forge.haptic.HapticEngine;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class HostedMatch {
     private Match match;
@@ -71,7 +78,7 @@ public class HostedMatch {
     public void setEndGameHook(Runnable hook) { endGameHook = hook; }
     public void setOnMatchOver(Runnable callback) { onMatchOver = callback; }
 
-    private static GameRules getDefaultRules(final GameType gameType) {
+    public static GameRules getDefaultRules(final GameType gameType) {
         final GameRules gameRules = new GameRules(gameType);
         gameRules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
         gameRules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
@@ -143,6 +150,36 @@ public class HostedMatch {
         this.match.subscribeToEvents(visitor);
         this.matchPlaylist = playlist;
         startGame();
+    }
+
+    // authored opponent decks keep cards the player excluded, so this says so once per deck each session
+    private static final Set<String> warnedDecks = Collections.synchronizedSet(new HashSet<>());
+
+    private void warnOfExcludedCards() {
+        List<IGuiGame> localGuis = guis.values().stream().filter(gui -> !(gui instanceof ProtocolGuiGame)).collect(Collectors.toList());
+        if (localGuis.isEmpty() || CardDb.areExclusionsLifted()) {
+            return;
+        }
+        for (RegisteredPlayer rp : match.getPlayers()) {
+            Deck deck = rp.getDeck();
+            if (!(rp.getPlayer() instanceof LobbyPlayerAi) || deck == null || StringUtils.isBlank(deck.getName())
+                    || warnedDecks.contains(deck.getName())) {
+                continue;
+            }
+            boolean excluded = deck.getAllCardsInASinglePool().toFlatList().stream().anyMatch(HostedMatch::isExcludedCard);
+            if (excluded && warnedDecks.add(deck.getName())) {
+                String message = Localizer.getInstance().getMessage("lblDeckHasExcludedCards", rp.getPlayer().getName());
+                String title = Localizer.getInstance().getMessage("lblExcludedSets");
+                localGuis.forEach(gui -> gui.message(message, title));
+            }
+        }
+    }
+
+    // hidden, or with every print excluded so no allowed art can stand in
+    private static boolean isExcludedCard(PaperCard card) {
+        StaticData db = FModel.getMagicDb();
+        CardDb cards = card.getRules().isVariant() ? db.getVariantCards() : db.getCommonCards();
+        return cards.isHidden(card) || cards.hasPrintExclusion() && !cards.canExcludePrints(cards.getAllCards(card.getRules()));
     }
 
     public void continueMatch() {
@@ -296,6 +333,7 @@ public class HostedMatch {
                 playbackControl.setGame(currentGame);
                 currentGame.subscribeToEvents(playbackControl);
             }
+            warnOfExcludedCards();
             // Actually start the game!
             try {
                 match.startGame(currentGame, startGameHook);
@@ -378,6 +416,33 @@ public class HostedMatch {
     }
     public GameView getGameView() {
         return game == null ? null : game.getView();
+    }
+
+    // Recomputes the "X vs Y" match title from the players' current in-game names
+    // and re-pushes it to any open guis. Needed after a puzzle renames a player
+    // (e.g. via AIName) since the title is normally captured once at match start,
+    // before the puzzle's GameState has been applied.
+    public void refreshTitle() {
+        if (game == null || match == null) {
+            return;
+        }
+        final FCollectionView<Player> players = game.getPlayers();
+        if (players.size() != 2) {
+            return;
+        }
+        match.setTitle(TextUtil.concatNoSpace(players.get(0).getName(), " vs ", players.get(1).getName()));
+
+        final GameView gameView = getGameView();
+        if (gameView == null) {
+            return;
+        }
+        gameView.updateTitle();
+
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final IGuiGame gui : guis.values()) {
+                gui.setGameView(gameView);
+            }
+        });
     }
 
     public void endCurrentGame() {

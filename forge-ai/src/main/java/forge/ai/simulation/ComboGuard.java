@@ -403,6 +403,10 @@ public final class ComboGuard {
                 && ai.getCardsIn(ZoneType.Library).size() <= PACT_LIBRARY_OUT_LEFT) {
             return true;
         }
+        final Player oppOnStack = ai.getWeakestOpponent();
+        if (oppOnStack != null && ai.getOpponents().size() == 1 && lethalStormOnTheStack(ai, oppOnStack)) {
+            return true; // the Pact protects the kill: the opponent never gets to the upkeep it is paid in
+        }
         final Player opp = ai.getWeakestOpponent();
         if (opp == null || ai.getOpponents().size() != 1 || !ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             return false;
@@ -420,6 +424,29 @@ public final class ComboGuard {
             }
         }
         return opp.getLife() > 0 && unblockedDamage(attackers, blockers) >= opp.getLife();
+    }
+
+    /**
+     * Whether a storm spell of the AI's that takes life for every copy (Tendrils of Agony, Grapeshot) is on the stack with
+     * enough copies to take the opponent's last life: a Pact cast in answer to the counterspell on top of it wins the game
+     * with the Tendrils, so the upkeep that the Pact is paid in never comes.
+     */
+    static boolean lethalStormOnTheStack(final Player ai, final Player opp) {
+        if (opp.getLife() <= 0) {
+            return false;
+        }
+        for (final forge.game.spellability.SpellAbilityStackInstance si : ai.getGame().getStack()) {
+            final SpellAbility on = si.getSpellAbility();
+            final Card host = on == null ? null : on.getHostCard();
+            if (host == null || !ai.equals(on.getActivatingPlayer()) || !on.isSpell() || !ComboPlan.takesLifePerCopy(host)) {
+                continue;
+            }
+            // the spell itself and one copy for every spell cast before it: as many as spells were cast this turn
+            if ((long) ComboPlan.perCopyDamage(host) * ComboPlan.stormCount(ai) >= opp.getLife()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** With this few cards left in the library the library-out deck is taken to win the turn it is cast in. */

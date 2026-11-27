@@ -7,6 +7,7 @@
   - [Network Play](network-play.md)
   - [Advanced search](Advanced-Search.md)
   - [Advanced Yield Options](Advanced-Yield-Options.md)
+  - [Excluded Sets](Excluded-Sets.md)
 
 - Adventure Mode
 
@@ -54,6 +55,7 @@
   - [Docker Container](docker-setup.md)
   - [Network Testing](Development/Network-Testing.md)
   - [UI Guidelines](Development/UI-Guidelines.md)
+  - [Card-script Linting](Development/Card-Script-Linting.md)
 
 - Customization & Themes
   - [Skins](Skins.md)

@@ -330,6 +330,12 @@ public class SpellAbilityPicker {
         if (!sa.checkRestrictions(sa.getHostCard(), player)) {
             return AiPlayDecision.CantPlaySa;
         }
+        if (ComputerUtilAbility.shouldWaitForUginLabyrinthReturn(player, sa)) {
+            return AiPlayDecision.AnotherTime;
+        }
+        if (ComputerUtilAbility.shouldWaitForSpectacleEnabler(player, sa)) {
+            return AiPlayDecision.AnotherTime;
+        }
 
         if (sa.isLandAbility()) {
             return AiPlayDecision.WillPlay;
@@ -469,6 +475,9 @@ public class SpellAbilityPicker {
             Card source = ability.getHostCard();
             CardCollection cardList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, ability);
             cardList = CardLists.filter(cardList, CardPredicates.canBeSacrificedBy(ability, effect));
+            if (exclude != null) {
+                cardList.removeAll(exclude); // already chosen for another part of the same cost
+            }
             if (cardList.size() >= 2) {
                 if (interceptor != null) {
                     return new CardCollection(interceptor.chooseCard(cardList));

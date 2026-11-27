@@ -10,6 +10,9 @@ import forge.adventure.stage.MapStage;
 import forge.adventure.util.Reward;
 import forge.adventure.world.WorldSave;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 /**
  * Map actor that will open the Shop on collision
@@ -22,6 +25,9 @@ public class ShopActor extends MapActor {
     //Generated lazily the first time the shop is opened (or restocked), so that loading a town doesn't have to
     //generate the cards of every shop in it.
     private Array<Reward> rewardData;
+    // exclusions quietly thin a themed shop, so the player is told once per shop each session
+    private static final Set<String> warnedShops = new HashSet<>();
+    private boolean namedCardsChanged;
 
     public ShopActor(MapStage stage, int id, ShopData data, PointOfInterestChanges loadChanges) {
         super(id);
@@ -44,8 +50,20 @@ public class ShopActor extends MapActor {
     @Override
     public void onPlayerCollide() {
         stage.getPlayerSprite().stop();
-        RewardScene.instance().loadRewards(getRewardData(), RewardScene.Type.Shop, this);
-        Forge.switchScene(RewardScene.instance());
+        RewardScene scene = RewardScene.instance();
+        scene.loadRewards(getRewardData(), RewardScene.Type.Shop, this);
+        if (Forge.switchScene(scene))
+            warnOfExcludedCards(scene);
+    }
+
+    /** Tells the player once a session per shop when their exclusions changed or left out some of its stock. */
+    public void warnOfExcludedCards(RewardScene scene) {
+        if (warnedShops.contains(shopData.name) || !namedCardsChanged && !shopData.losesExcludedCards())
+            return;
+        warnedShops.add(shopData.name);
+        scene.showDialog(scene.createGenericDialog(Forge.getLocalizer().getMessage("lblExcludedSets"),
+                Forge.getLocalizer().getMessage("lblShopHasExcludedCards"), Forge.getLocalizer().getMessage("lblOK"),
+                null, scene::removeDialog, null, false, "", true));
     }
 
 
@@ -74,8 +92,10 @@ public class ShopActor extends MapActor {
         return shopData;
     }
 
+    // called right after the stock is generated, which records whether exclusions changed a named card in it
     public void setRewardData(Array<Reward> data) {
         rewardData = data;
+        namedCardsChanged = RewardData.takeRewardChangedByExclusions();
     }
 
     /**
@@ -89,7 +109,7 @@ public class ShopActor extends MapActor {
             for (RewardData rdata : new Array.ArrayIterator<>(shopData.rewards)) {
                 generated.addAll(rdata.generate(false, false));
             }
-            rewardData = generated;
+            setRewardData(generated);
         }
         return rewardData;
     }

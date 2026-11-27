@@ -16,6 +16,11 @@ public class NodeBazaar extends RoguePathNode {
     }
 
     @Override
+    public NodeType getType() {
+        return NodeType.BAZAAR;
+    }
+
+    @Override
     public String toString() {
         return "Bazaar (Shop)";
     }

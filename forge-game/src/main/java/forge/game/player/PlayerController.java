@@ -253,12 +253,11 @@ public abstract class PlayerController {
 
     /** p = target player, validCards - possible discards, min cards to discard. */
     public CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max) {
-        return chooseCardsToDiscardFrom(playerDiscard, sa, validCards, min, max, validCards);
+        return chooseCardsToDiscardFrom(playerDiscard, sa, validCards, min, max, null);
     }
 
-    /** visibleToChooser - all cards the chooser is allowed to see during the choice (a superset of validCards
-     *  when an effect has revealed extra cards, e.g. Reveal/Look modes). */
-    public abstract CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser);
+    /** delayedReveal - cards revealed to the chooser by this effect, e.g. Reveal/Look modes; the controller shows them during the choice or reveals them first. */
+    public abstract CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max, DelayedReveal delayedReveal);
     public abstract CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String[] unlessTypes, SpellAbility sa);
     public abstract CardCollectionView chooseCardsToDiscardToMaximumHandSize(int numDiscard);
 
@@ -384,7 +383,11 @@ public abstract class PlayerController {
     public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect) {
         return this.getCostDecisionMaker(player, ability, effect, null);
     }
-    public abstract CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String prompt);
+    /**
+     * @param orString the " (or: ...)" suffix for payments made during resolution,
+     *                 already built by {@link PlaySpellAbility#getOrStringFromCost}; null for normal cost payment.
+     */
+    public abstract CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String orString);
 
     public abstract String chooseCardName(SpellAbility sa, Predicate<ICardFace> cpp, String valid, String message);
     public abstract String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message);
