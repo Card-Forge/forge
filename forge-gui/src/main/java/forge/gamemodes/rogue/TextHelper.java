@@ -23,8 +23,8 @@ public final class TextHelper {
     private static final int PREVIEW_CARD_TOKEN_GROUP = 2;
     private static final int PREVIEW_KEYWORD_TOKEN_GROUP = 4;
     private static final Pattern CARD_MARKER_PATTERN = Pattern.compile("(!)?\\[\\[(.+?)]]");
-    private static final Pattern KEYWORD_MARKER_PATTERN = Pattern.compile("(!)?\\{\\{(.+?)}}");
-    private static final Pattern PREVIEW_MARKER_PATTERN = Pattern.compile("(!)?\\[\\[(.+?)]]|(!)?\\{\\{(.+?)}}");
+    private static final Pattern KEYWORD_MARKER_PATTERN = Pattern.compile("(!)?\\{\\{(.+?)\\}\\}");
+    private static final Pattern PREVIEW_MARKER_PATTERN = Pattern.compile("(!)?\\[\\[(.+?)]]|(!)?\\{\\{(.+?)\\}\\}");
     private static final int PART_EMPHASIS_GROUP = 5;
     private static final Pattern PART_PATTERN = Pattern.compile(PREVIEW_MARKER_PATTERN.pattern() + "|\\*\\*(.+?)\\*\\*");
 
