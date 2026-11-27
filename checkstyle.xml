@@ -29,9 +29,16 @@
         <!-- Android's regex engine rejects an unescaped } that desktop Java accepts. -->
         <module name="RegexpSinglelineJava">
             <property name="id" value="androidRegexBrace"/>
-            <property name="format" value="(\bcompile|\.(matches|replaceAll|replaceFirst|split))\(\s*(&quot;([^&quot;\\]|\\.)*&quot;\s*\+\s*)*&quot;([^&quot;\\]|\\.)*?(?&lt;!\\)(?&lt;!\{\d{1,9}(,\d{0,9})?)(?&lt;![pPxN]\{[\w=. -]{1,40})(?&lt;![^\\]\[[^\]&quot;]{0,40})(?&lt;!\\Q[^&quot;]{0,40})\}"/>
+            <property name="format" value="(\bcompile|\.(matches|replaceAll|replaceFirst|split))\(\s*(&quot;[^&quot;\\]*+(?:\\.[^&quot;\\]*+)*+&quot;\s*\+\s*)*&quot;(?:[^&quot;\\}]++|\\.|\})*?(?&lt;!\\)(?&lt;!\{\d{1,9}(,\d{0,9})?)(?&lt;![pPxN]\{[\w=. -]{1,40})(?&lt;![^\\]\[[^\]&quot;]{0,40})(?&lt;!\\Q[^&quot;]{0,40})\}"/>
             <property name="ignoreComments" value="true"/>
             <property name="message" value="Android rejects an unescaped } in a regex. Write \\}."/>
+        </module>
+        <!-- Android's regex engine rejects a lookbehind with no maximum length, which desktop Java accepts. -->
+        <module name="RegexpSinglelineJava">
+            <property name="id" value="androidRegexLookbehind"/>
+            <property name="format" value="\(\?&lt;[=!](?:\\\\.|\\[^\\]|[^()\[\\&quot;]|\[(?:\\\\.|\\[^\\]|[^\]\\&quot;])*\])*?(?:[*+]|\{\d+,\})"/>
+            <property name="ignoreComments" value="true"/>
+            <property name="message" value="Android rejects a lookbehind without a maximum length. Use a bounded quantifier."/>
         </module>
 
     </module>
