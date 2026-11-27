@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 
 import forge.ai.ManaSourceAllocation;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaCost;
 import forge.game.ability.ApiType;
@@ -656,17 +657,14 @@ public final class OpeningHand {
      * has permanents for it that can be put on the battlefield the same way and that nothing else uses: not a source
      * of mana itself (a Llanowar Elves tapped for the Drum makes no mana of its own) and not the tap cost of another
      * source. A source also has to add mana: a Signet pays one for two, a Mana Cylix pays one for one and only filters.
+     * The mana is tracked unit by unit, with its colours, so a cost is paid in full ({2}{U}{U}{U}{U} needs four blue).
      * Mana spent on one card is not taken off for the next: this is a judgement over the first turns.
      */
     static int cheapManaSources(final CardCollectionView hand) {
         final List<Card> free = new ArrayList<>();
         final List<Card> needy = new ArrayList<>();
-        int lands = 0;
         for (final Card c : hand) {
             if (c.isLand() || isMdfcLand(c)) {
-                if (isEarlyManaLand(c)) {
-                    lands++;
-                }
                 continue;
             }
             if (c.getCMC() > 2 || c.isInstant() || c.isSorcery()) {
@@ -683,34 +681,32 @@ public final class OpeningHand {
         needy.sort(Comparator.comparingInt(Card::getCMC));
 
         final Set<Card> unavailable = new HashSet<>(); // counted as a source, or already tapped for another one
-        int mana = lands; // what the lands and the sources counted so far can pay with
-        int colors = handColors(hand);
+        final List<ManaUnit> pool = new ArrayList<>(); // the mana the lands and the sources counted so far can make
+        for (final Card c : hand) {
+            if ((c.isLand() || isMdfcLand(c)) && isEarlyManaLand(c)) {
+                pool.add(new ManaUnit((byte) (producedColors(c) & MagicColor.ALL_COLORS), null, null));
+            }
+        }
         int sources = 0;
         for (final Card c : free) {
             final Flow flow = manaFlow(c);
-            if (flow != null && flow.net >= 1 && canDeploy(c, mana, colors) && flow.paid <= mana
-                    && (!flow.restricted || canSpendRestricted(c, flow, hand, mana, colors))) {
+            if (flow != null && flow.net >= 1 && canDeploy(c, pool) && flow.paid <= pool.size()
+                    && (!flow.restricted || canSpendRestricted(c, flow, hand, pool))) {
                 sources++;
                 unavailable.add(c);
-                if (!flow.restricted) { // restricted mana pays for what it is restricted to, not for other sources
-                    mana += flow.net;
-                    colors |= producedColors(c);
-                }
+                addOutput(pool, c, flow);
             }
         }
         for (final Card c : needy) {
             final Flow flow = manaFlow(c);
-            if (flow == null || flow.net < 1 || !canDeploy(c, mana, colors) || flow.paid > mana
-                    || flow.restricted && !canSpendRestricted(c, flow, hand, mana, colors)) {
+            if (flow == null || flow.net < 1 || !canDeploy(c, pool) || flow.paid > pool.size()
+                    || flow.restricted && !canSpendRestricted(c, flow, hand, pool)) {
                 continue;
             }
-            final Set<Card> tapped = tapResources(c, hand, unavailable, mana, colors);
+            final Set<Card> tapped = tapResources(c, hand, unavailable, pool);
             if (tapped != null) {
                 sources++;
-                if (!flow.restricted) {
-                    mana += flow.net;
-                    colors |= producedColors(c);
-                }
+                addOutput(pool, c, flow);
                 unavailable.addAll(tapped);
                 unavailable.add(c);
             }
@@ -718,10 +714,124 @@ public final class OpeningHand {
         return sources;
     }
 
-    /** Whether the mana (as many as that) and the colours at hand pay for the card. */
-    private static boolean canDeploy(final Card c, final int mana, final int colors) {
-        return !c.getManaCost().isNoCost() && c.getCMC() <= mana
-                && (c.getManaCost().getColorProfile() & ~colors) == 0;
+    /**
+     * One mana of the hand: the colours it can be (none: colourless), and, for mana that may only be spent in some
+     * ways, the mana ability and the card that make it.
+     */
+    private static final class ManaUnit {
+        final byte colors;
+        final AbilityManaPart limit;
+        final Card source;
+
+        ManaUnit(final byte colors, final AbilityManaPart limit, final Card source) {
+            this.colors = colors;
+            this.limit = limit;
+            this.source = source;
+        }
+    }
+
+    /** The mana of an activation, one unit for each mana it makes: a Signet makes a {W} and a {U}, not either twice. */
+    private static List<ManaUnit> outputOf(final Card c, final Flow flow) {
+        final List<ManaUnit> units = new ArrayList<>();
+        final AbilityManaPart limit = flow.restricted ? flow.sa.getManaPart() : null;
+        final int amount = Integer.parseInt(flow.sa.getParamOrDefault("Amount", "1"));
+        for (int i = 0; i < amount; i++) {
+            for (final String token : flow.sa.getParamOrDefault("Produced", "").trim().split("\\s+")) {
+                byte colors = 0;
+                switch (token) {
+                    case "W": colors = MagicColor.WHITE; break;
+                    case "U": colors = MagicColor.BLUE; break;
+                    case "B": colors = MagicColor.BLACK; break;
+                    case "R": colors = MagicColor.RED; break;
+                    case "G": colors = MagicColor.GREEN; break;
+                    case "C": break;
+                    default: colors = MagicColor.ALL_COLORS; // Any, Combo, a chosen colour: the best case
+                }
+                units.add(new ManaUnit(colors, limit, c));
+            }
+        }
+        return units;
+    }
+
+    /** Takes what the activation costs out of the pool (the least flexible mana first) and adds what it makes. */
+    private static void addOutput(final List<ManaUnit> pool, final Card c, final Flow flow) {
+        final List<ManaUnit> made = outputOf(c, flow);
+        for (int i = 0; i < flow.paid && !pool.isEmpty(); i++) {
+            ManaUnit least = pool.get(0);
+            for (final ManaUnit u : pool) {
+                if (Integer.bitCount(u.colors) < Integer.bitCount(least.colors)) {
+                    least = u;
+                }
+            }
+            pool.remove(least);
+        }
+        if (!flow.restricted) { // restricted mana pays for what it is restricted to, not for other sources
+            pool.addAll(made);
+        }
+    }
+
+    /**
+     * Whether the mana can pay the whole cost: each coloured part with a mana that fits it and the generic part with
+     * what is left. With {@code spell}, restricted mana counts when the spell meets its restriction, and then only
+     * for the parts it may pay; {@code mustUseLimited} asks for a payment in which some restricted mana is used.
+     */
+    private static boolean canPay(final List<ManaUnit> pool, final ManaCost cost, final SpellAbility spell,
+                                  final boolean mustUseLimited) {
+        final List<ManaCostShard> shards = new ArrayList<>();
+        for (final ManaCostShard shard : cost) {
+            shards.add(shard);
+        }
+        return payShards(pool, shards, 0, new boolean[pool.size()], cost.getGenericCost(), spell, mustUseLimited, false);
+    }
+
+    private static boolean payShards(final List<ManaUnit> pool, final List<ManaCostShard> shards, final int i,
+                                     final boolean[] used, final int generic, final SpellAbility spell,
+                                     final boolean mustUseLimited, final boolean usedLimited) {
+        if (i == shards.size()) {
+            int spare = 0;
+            boolean spareLimited = false;
+            for (int u = 0; u < used.length; u++) {
+                if (!used[u] && unitPays(pool.get(u), ManaCostShard.GENERIC, spell)) {
+                    spare++;
+                    spareLimited |= pool.get(u).limit != null;
+                }
+            }
+            return spare >= generic && (!mustUseLimited || usedLimited || generic > 0 && spareLimited);
+        }
+        for (int u = 0; u < used.length; u++) {
+            if (!used[u] && unitPays(pool.get(u), shards.get(i), spell)) {
+                used[u] = true;
+                final boolean ok = payShards(pool, shards, i + 1, used, generic, spell, mustUseLimited,
+                        usedLimited || pool.get(u).limit != null);
+                used[u] = false;
+                if (ok) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** Whether one mana can pay one part of the cost of the spell, with the restrictions of the mana and the spell. */
+    private static boolean unitPays(final ManaUnit unit, final ManaCostShard shard, final SpellAbility spell) {
+        if (unit.limit != null && (spell == null || !unit.limit.meetsManaRestrictions(spell))) {
+            return false;
+        }
+        for (final byte color : unit.colors == 0 ? new byte[] {(byte) ManaAtom.COLORLESS} : MagicColor.WUBRG) {
+            if (unit.colors != 0 && (unit.colors & color) == 0 || !shard.canBePaidWithManaOfColor(color)) {
+                continue;
+            }
+            if (unit.limit == null || unit.limit.meetsManaShardRestrictions(shard, color)
+                    && spell.allowsPayingWithShard(unit.source, color)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether the mana at hand pays for the card, in full: its cost, and the colour of every part of it. */
+    private static boolean canDeploy(final Card c, final List<ManaUnit> pool) {
+        return !c.getManaCost().isNoCost() && canPay(pool, c.getManaCost(), null, false);
     }
 
     /** What a mana ability costs in mana, what it adds to the mana there is, and whether it may be spent only in some ways. */
@@ -774,47 +884,26 @@ public final class OpeningHand {
 
     /**
      * Whether the restricted mana of the card can pay for a spell of the hand, as the game would let it: the spell
-     * meets the restriction, the mana (with the lands and the sources counted so far for the rest) pays its cost and
-     * colours, and a colour the card makes pays at least one part of that cost. Creeping Peeper's {U} pays an
-     * enchantment, not Pacifism without white mana. What only the deck might hold later is not looked at.
+     * meets the restriction, and the whole cost is paid by the lands and the sources counted so far together with this
+     * mana, which pays a part of it that its restrictions allow. Creeping Peeper's {U} pays an enchantment such as
+     * Curiosity, not Pacifism without white mana, and not a {2}{U}{U}{U}{U} with one more blue mana only. What only
+     * the deck might hold later is not looked at.
      */
     private static boolean canSpendRestricted(final Card c, final Flow flow, final CardCollectionView hand,
-                                              final int mana, final int colors) {
-        final AbilityManaPart part = flow.sa.getManaPart();
-        final byte produced = producedColors(c);
+                                              final List<ManaUnit> pool) {
+        final List<ManaUnit> with = new ArrayList<>(pool);
+        final int paid = Math.min(flow.paid, with.size());
+        for (int i = 0; i < paid; i++) { // what its own ability costs is not there for the spell
+            with.remove(with.size() - 1);
+        }
+        with.addAll(outputOf(c, flow));
         for (final Card other : hand) {
             if (other == c || other.isLand()) {
                 continue;
             }
             for (final SpellAbility spell : other.getSpellAbilities()) {
-                if (!spell.isSpell() || spell.getPayCosts() == null || spell.getPayCosts().getCostMana() == null
-                        || !part.meetsManaRestrictions(spell)) {
-                    continue;
-                }
-                final ManaCost cost = spell.getPayCosts().getCostMana().getMana();
-                if (cost.getCMC() > mana + flow.net || (cost.getColorProfile() & ~(colors | produced)) != 0) {
-                    continue;
-                }
-                if (restrictedManaPays(c, part, spell, cost, produced)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /** Whether a colour made by the source pays a part of the cost, with the restrictions of the mana and the spell. */
-    private static boolean restrictedManaPays(final Card c, final AbilityManaPart part, final SpellAbility spell,
-                                              final ManaCost cost, final byte produced) {
-        for (final byte color : MagicColor.WUBRG) {
-            if ((produced & color) == 0 || !spell.allowsPayingWithShard(c, color)) {
-                continue;
-            }
-            if (cost.getGenericCost() > 0 && part.meetsManaShardRestrictions(ManaCostShard.GENERIC, color)) {
-                return true;
-            }
-            for (final ManaCostShard shard : cost) {
-                if (shard.canBePaidWithManaOfColor(color) && part.meetsManaShardRestrictions(shard, color)) {
+                if (spell.isSpell() && spell.getPayCosts() != null && spell.getPayCosts().getCostMana() != null
+                        && canPay(with, spell.getPayCosts().getCostMana().getMana(), spell, true)) {
                     return true;
                 }
             }
@@ -869,7 +958,7 @@ public final class OpeningHand {
      * that the hand can cast, and not in {@code unavailable}. Null if there are not enough of them.
      */
     private static Set<Card> tapResources(final Card c, final CardCollectionView hand, final Set<Card> unavailable,
-                                          final int mana, final int colors) {
+                                          final List<ManaUnit> pool) {
         for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.getApi() != ApiType.Mana || !sa.isAbility() || sa.getPayCosts() == null
                     || !sa.getPayCosts().hasTapCost() || !worksAsItIs(c, sa)) {
@@ -888,7 +977,7 @@ public final class OpeningHand {
                     }
                     if ((other != c || ((CostTapType) part).canTapSource) && other.isPermanent() && !other.isLand()
                             && !unavailable.contains(other) && !needed.contains(other)
-                            && canDeploy(other, mana, colors) && matchesType(other, c, part.getType())) {
+                            && canDeploy(other, pool) && matchesType(other, c, part.getType())) {
                         needed.add(other);
                         missing--;
                     }

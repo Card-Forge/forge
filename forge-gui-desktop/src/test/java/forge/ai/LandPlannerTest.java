@@ -404,6 +404,51 @@ public class LandPlannerTest extends FlatMcTestBase {
         }), "a refinement only: an exception means no opinion");
     }
 
+    // ===================================================================================== pain, sickness, shocklands
+
+    @Test
+    public void aPainSourceCostsLifeOnlyWhenAPainlessOneCannotPayAlone() {
+        final LandPlanner.Src canopy = new LandPlanner.Src((byte) (G | W), 0, (byte) (G | W));
+        final LandPlanner.Src forest = src(G, 0);
+        assertEquals(LandPlanner.painCost(Arrays.asList(canopy, forest), costs(G), 0), 0.0, 1e-9, "the Forest pays");
+        assertEquals(LandPlanner.painCost(Arrays.asList(canopy, forest), costs(W), 1), LandPlanner.LIFE_COST, 1e-9,
+                "white and one more: the Canopy pays one of them, with a life");
+        assertEquals(LandPlanner.painCost(Arrays.asList(canopy, canopy), costs(W), 1), 2 * LandPlanner.LIFE_COST, 1e-9);
+        assertEquals(LandPlanner.painCost(Arrays.asList(canopy, forest), costs(), 0), 0.0, 1e-9, "nothing is cast");
+    }
+
+    @Test
+    public void playsTheForestBeforeTheHorizonCanopyWhenOnlyGreenIsNeededNow() {
+        // #13105: Slippery Bogle ({G/U}) now, Reprieve ({1}{W}) later: the Forest pays for the Bogle without a life
+        setUpGame();
+        final Card canopy = put("Horizon Canopy", ai, ZoneType.Hand);
+        put("Horizon Canopy", ai, ZoneType.Hand);
+        final Card forest = put("Forest", ai, ZoneType.Hand);
+        put("Slippery Bogle", ai, ZoneType.Hand);
+        put("Reprieve", ai, ZoneType.Hand);
+        assertSame(LandPlanner.choose(ai, collection(canopy, forest), c -> false), forest);
+    }
+
+    @Test
+    public void playsTheHorizonCanopyFirstWhenWhiteIsNeededNow() {
+        setUpGame();
+        final Card canopy = put("Horizon Canopy", ai, ZoneType.Hand);
+        final Card forest = put("Forest", ai, ZoneType.Hand);
+        put("Savannah Lions", ai, ZoneType.Hand); // {W}
+        assertSame(LandPlanner.choose(ai, collection(canopy, forest), c -> false), canopy);
+    }
+
+    @Test
+    public void playsTheCreatureLandFirstWhenTheHandHasOnlyTwoDrops() {
+        // #13104: Dryad Arbor is summoning sick the turn it comes in, so it goes first and the Temple Garden
+        // comes in untapped for 2 life on the turn that the Ledgewalkers are cast
+        setUpGame();
+        final Card arbor = put("Dryad Arbor", ai, ZoneType.Hand);
+        final Card garden = put("Temple Garden", ai, ZoneType.Hand);
+        put("Silhana Ledgewalker", 2, ai, ZoneType.Hand); // {1}{G}
+        assertSame(LandPlanner.choose(ai, collection(arbor, garden), c -> c == garden), arbor);
+    }
+
     @Test
     public void landPlannerIsOnByDefault() {
         setUpGame();

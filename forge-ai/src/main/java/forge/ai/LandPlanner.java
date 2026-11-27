@@ -15,7 +15,10 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPayLife;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -50,6 +53,10 @@ public final class LandPlanner {
     /** Value of the first/second source of a colour that the library still asks for, at most (times the demand 0..1). */
     private static final double LIBRARY_COLOR_BONUS = 30;
     private static final int MAX_SPELLS = 12;
+    /** What a life point is worth in the score: a tenth of a cheap spell, so that it breaks a tie between equal plans. */
+    static final double LIFE_COST = 12;
+    /** A life point is only paid for a land that comes in untapped while the AI has this much more than that. */
+    private static final int LIFE_SPARE = 6;
 
     private static final String[] TYPE_LETTERS = { "W", "U", "B", "R", "G", "C" };
     private static final byte[] TYPE_BITS = { ManaAtom.WHITE, ManaAtom.BLUE, ManaAtom.BLACK, ManaAtom.RED,
@@ -62,10 +69,28 @@ public final class LandPlanner {
     static final class Src {
         final byte mask;
         final int from;
+        /** The types of the mask that this source makes only by paying life or taking damage (Horizon Canopy). */
+        final byte pain;
 
         Src(final byte mask, final int from) {
+            this(mask, from, (byte) 0);
+        }
+
+        Src(final byte mask, final int from, final byte pain) {
             this.mask = mask;
             this.from = from;
+            this.pain = pain;
+        }
+    }
+
+    /** One way to play a land: when its mana is there, and what it costs in score (life paid to have it untapped). */
+    private static final class Variant {
+        final int delay;
+        final double cost;
+
+        Variant(final int delay, final double cost) {
+            this.delay = delay;
+            this.cost = cost;
         }
     }
 
@@ -111,9 +136,12 @@ public final class LandPlanner {
                 }
                 final List<Card> rest = new ArrayList<>(handLands);
                 rest.remove(land);
-                final List<Src> srcs = new ArrayList<>(base);
-                addLand(srcs, land, ai, 0, entersTapped);
-                final double score = bestFuture(ai, srcs, rest, 1, spells, demand, entersTapped);
+                double score = Double.NEGATIVE_INFINITY;
+                for (final Variant v : variants(land, ai, entersTapped)) {
+                    final List<Src> srcs = new ArrayList<>(base);
+                    addSources(srcs, land, ai, v.delay);
+                    score = Math.max(score, bestFuture(ai, srcs, rest, 1, spells, demand, entersTapped) - v.cost);
+                }
                 if (DEBUG) {
                     System.err.println("[landplanner] " + land + (entersTapped.test(land) ? " (tapped)" : "") + " = " + score);
                 }
@@ -151,9 +179,11 @@ public final class LandPlanner {
             }
             final List<Card> remaining = new ArrayList<>(rest);
             remaining.remove(land);
-            final List<Src> next = new ArrayList<>(srcs);
-            addLand(next, land, ai, turn, entersTapped);
-            best = Math.max(best, bestFuture(ai, next, remaining, turn + 1, spells, demand, entersTapped));
+            for (final Variant v : variants(land, ai, entersTapped)) {
+                final List<Src> next = new ArrayList<>(srcs);
+                addSources(next, land, ai, turn + v.delay);
+                best = Math.max(best, bestFuture(ai, next, remaining, turn + 1, spells, demand, entersTapped) - v.cost);
+            }
         }
         return best;
     }
@@ -187,6 +217,7 @@ public final class LandPlanner {
                     total += sp.weight * DECAY[t];
                 }
             }
+            total -= painCost(avail, colouredSoFar, genericSoFar);
         }
         // the colours the library will ask for: a first source of a colour is worth more than a second
         final int[] sources = new int[5];
@@ -202,6 +233,47 @@ public final class LandPlanner {
             total += LIBRARY_COLOR_BONUS * demand[c] * share;
         }
         return total;
+    }
+
+    /**
+     * What the spells of a turn cost in life: the fewest sources that make their mana with pain (Horizon Canopy) that
+     * the payment needs, times {@link #LIFE_COST}. A turn that a painless land pays for costs nothing, so the plan
+     * with the Forest first beats the plan with the Canopy first when only green is wanted.
+     */
+    static double painCost(final List<Src> avail, final List<byte[]> coloured, final int generic) {
+        if (coloured.isEmpty() && generic == 0) {
+            return 0;
+        }
+        final List<Integer> pains = new ArrayList<>();
+        for (int i = 0; i < avail.size(); i++) {
+            if (avail.get(i).pain != 0) {
+                pains.add(i);
+            }
+        }
+        if (pains.isEmpty() || pains.size() > 6) {
+            return 0;
+        }
+        for (int k = 0; k <= pains.size(); k++) {
+            for (int subset = 0; subset < 1 << pains.size(); subset++) {
+                if (Integer.bitCount(subset) != k) {
+                    continue;
+                }
+                final List<Src> trial = new ArrayList<>();
+                for (int i = 0; i < avail.size(); i++) {
+                    final Src src = avail.get(i);
+                    final int j = pains.indexOf(i);
+                    if (j < 0 || (subset & 1 << j) != 0) {
+                        trial.add(src); // a painless source, or a pain source that is allowed to hurt
+                    } else if ((src.mask & ~src.pain) != 0) {
+                        trial.add(new Src((byte) (src.mask & ~src.pain), src.from)); // only its painless types
+                    }
+                }
+                if (canPay(coloured, generic, trial)) {
+                    return LIFE_COST * k;
+                }
+            }
+        }
+        return 0;
     }
 
     /**
@@ -347,9 +419,45 @@ public final class LandPlanner {
         return out;
     }
 
-    private static void addLand(final List<Src> srcs, final Card land, final Player ai, final int turn,
-                                final Predicate<Card> entersTapped) {
-        addSources(srcs, land, ai, turn + (entersTapped.test(land) ? 1 : 0));
+    /**
+     * The ways to play a land. A land that enters tapped makes mana from the next turn, a land that is a creature
+     * (Dryad Arbor) is summoning sick and cannot be tapped for mana until the next turn too. A shockland may instead
+     * come in untapped for 2 life, which is worth it when a spell waits for the mana: both ways are planned, the second
+     * with the price of the life.
+     */
+    private static List<Variant> variants(final Card land, final Player ai, final Predicate<Card> entersTapped) {
+        final int sick = land.isCreature() && !land.hasKeyword(Keyword.HASTE) ? 1 : 0;
+        final boolean tapped = entersTapped.test(land);
+        final List<Variant> out = new ArrayList<>();
+        out.add(new Variant(sick + (tapped ? 1 : 0), 0));
+        if (tapped) {
+            final int life = lifeToEnterUntapped(land);
+            if (life > 0 && ai.getLife() > life + LIFE_SPARE) {
+                out.add(new Variant(sick, LIFE_COST * life));
+            }
+        }
+        return out;
+    }
+
+    /** The life a land asks to enter untapped ("you may pay 2 life"), 0 when it has no such choice. */
+    private static int lifeToEnterUntapped(final Card land) {
+        for (final ReplacementEffect re : land.getReplacementEffects()) {
+            final SpellAbility sa = re.ensureAbility();
+            if (sa == null || sa.getApi() != ApiType.Tap || !sa.hasParam("UnlessCost")) {
+                continue;
+            }
+            final String unless = sa.getParam("UnlessCost");
+            if (!unless.startsWith("PayLife<")) {
+                continue;
+            }
+            final String amount = unless.substring("PayLife<".length()).split("[>/]")[0];
+            try {
+                return Integer.parseInt(amount.trim());
+            } catch (final NumberFormatException e) {
+                return 0;
+            }
+        }
+        return 0;
     }
 
     /**
@@ -359,10 +467,68 @@ public final class LandPlanner {
      * may be any of them. A land that only fetches (Evolving Wilds) makes the types of the lands it can find.
      */
     private static void addSources(final List<Src> out, final Card c, final Player ai, final int from) {
+        final int before = out.size();
+        addSourcesOf(out, c, ai, from);
+        final byte pain = painMask(c, ai);
+        if (pain != 0) {
+            for (int i = before; i < out.size(); i++) {
+                final Src s = out.get(i);
+                out.set(i, new Src(s.mask, s.from, (byte) (pain & s.mask)));
+            }
+        }
+    }
+
+    /** The types that a permanent can make only by paying life or taking damage: Horizon Canopy's {G} and {W}. */
+    private static byte painMask(final Card c, final Player ai) {
+        byte pain = 0;
+        byte free = 0;
+        for (final SpellAbility ma : ComputerUtilMana.getAIPlayableMana(c)) {
+            final Cost cost = ma.getPayCosts();
+            if (!isPlannable(cost)) {
+                continue;
+            }
+            ma.setActivatingPlayer(ai);
+            if (isPainful(ma)) {
+                pain |= maskOf(ma);
+            } else {
+                free |= maskOf(ma);
+            }
+        }
+        return (byte) (pain & ~free);
+    }
+
+    /** A cost that is paid every turn without mana: tapping, and paying life (Horizon Canopy), which is the pain. */
+    private static boolean isPlannable(final Cost cost) {
+        if (cost == null || cost.hasManaCost()) {
+            return false;
+        }
+        for (final forge.game.cost.CostPart part : cost.getCostParts()) {
+            if (!part.isReusable() && !(part instanceof CostPayLife)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isPainful(final SpellAbility ma) {
+        for (final forge.game.cost.CostPart part : ma.getPayCosts().getCostParts()) {
+            if (part instanceof CostPayLife) {
+                return true;
+            }
+        }
+        for (SpellAbility sub = ma.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+            if (sub.getApi() == ApiType.DealDamage || sub.getApi() == ApiType.LoseLife) {
+                return true; // the damage dealt to you by an Adarkar Wastes or a Karplusan Forest
+            }
+        }
+        return false;
+    }
+
+    private static void addSourcesOf(final List<Src> out, final Card c, final Player ai, final int from) {
         final List<SpellAbility> usable = new ArrayList<>();
         for (final SpellAbility ma : ComputerUtilMana.getAIPlayableMana(c)) {
             final Cost cost = ma.getPayCosts();
-            if (cost == null || cost.hasManaCost() || !cost.isReusuableResource()) {
+            if (!isPlannable(cost)) {
                 continue;
             }
             usable.add(ma);

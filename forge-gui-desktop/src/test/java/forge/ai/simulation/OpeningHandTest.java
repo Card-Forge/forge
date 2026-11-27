@@ -259,6 +259,23 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void restrictedManaThatPaysOnlyOneColouredPartOfTheSpellIsNoSource() {
+        // Mind Over Matter costs {2}{U}{U}{U}{U}: six mana, but only the Island's and the Peeper's are blue.
+        // The Moxen and the Sol Ring are four sources, the Peeper is not a fifth.
+        AssertJUnit.assertEquals(4, sourcesCounted("Island",
+                new String[] {"Mox Ruby", "Mox Emerald", "Mox Jet", "Sol Ring", "Creeping Peeper"},
+                "Mind Over Matter"));
+    }
+
+    @Test
+    public void restrictedManaThatPaysTheWholeSpellIsASource() {
+        // Island, two Mox Sapphires and the Peeper make four blue, and the Sol Ring the generic part
+        AssertJUnit.assertEquals(4, sourcesCounted("Island",
+                new String[] {"Mox Sapphire", "Mox Sapphire", "Sol Ring", "Creeping Peeper"},
+                "Mind Over Matter"));
+    }
+
+    @Test
     public void manaCreaturesTheLandCannotCastAreNoSources() {
         // an Island makes no green mana for the Elves
         AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Llanowar Elves", "Llanowar Elves"},
@@ -274,11 +291,21 @@ public class OpeningHandTest extends AITest {
     /** One land and the given sources of mana, around the other cards. */
     private boolean oneLandAndSources(final String land, final String[] sources, final String... others) {
         setUp(9, 8);
+        final CardCollection cards = hand(mix(others, withLand(land, sources)));
+        return OpeningHand.playable(cards, cards.size());
+    }
+
+    /** How many of the sources the hand of one land, the sources and the other cards counts. */
+    private int sourcesCounted(final String land, final String[] sources, final String... others) {
+        setUp(9, 8);
+        return OpeningHand.cheapManaSources(hand(mix(others, withLand(land, sources))));
+    }
+
+    private static String[] withLand(final String land, final String[] sources) {
         final String[] fixed = new String[1 + sources.length];
         fixed[0] = land;
         System.arraycopy(sources, 0, fixed, 1, sources.length);
-        final CardCollection cards = hand(mix(others, fixed));
-        return OpeningHand.playable(cards, cards.size());
+        return fixed;
     }
 
     /** One land and some Springleaf Drums, which tap an untapped creature besides themselves, around the given cards. */

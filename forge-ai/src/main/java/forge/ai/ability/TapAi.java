@@ -150,6 +150,30 @@ public class TapAi extends TapAiBase {
         return payer.getLife() - amount >= lifeReserve(payer);
     }
 
+    /**
+     * Whether an Aura has something on the battlefield that it may enchant. A creature of the opponent does not count
+     * for an Aura that enchants "creature you control", the usual one for the AI's own creatures.
+     *
+     * @param creatureInPlay whether any creature is in play, for an Aura whose script says nothing about its target
+     */
+    private static boolean auraHasATarget(final Player payer, final Card aura, final boolean creatureInPlay) {
+        boolean restricted = false;
+        for (final SpellAbility spell : aura.getSpellAbilities()) {
+            if (!spell.isSpell()) {
+                continue;
+            }
+            final String valid = spell.getParam("ValidTgts");
+            if (valid == null) {
+                continue;
+            }
+            restricted = true;
+            if (!CardLists.getValidCards(payer.getGame().getCardsIn(ZoneType.Battlefield), valid, payer, aura, spell).isEmpty()) {
+                return true;
+            }
+        }
+        return restricted ? false : creatureInPlay;
+    }
+
     /** A spell that only aims at the AI's own permanents (Ephemerate, Cloudshift) is no play while it has none. */
     private static boolean needsAnOwnTargetThatIsNotThere(final Player payer, final Card c) {
         boolean any = false;
@@ -280,8 +304,8 @@ public class TapAi extends TapAiBase {
                             if (c.isLand() || c.isInstant() || c.hasKeyword(Keyword.FLASH)) {
                                 continue; // burn and counterspells are held for the opponent's turn: the land can come in tapped
                             }
-                            if (c.isAura() && !creatureInPlay) {
-                                continue; // an Aura with nothing to enchant is not a reason to pay 2 life
+                            if (c.isAura() && !auraHasATarget(payer, c, creatureInPlay)) {
+                                continue; // an Aura with nothing it may enchant is not a reason to pay 2 life (#12929)
                             }
                             if (c.getCMC() < 2 && payer.getLife() < LOW_LIFE_FOR_ONE_DROP) {
                                 continue; // a one-drop is not worth the life while it is not plentiful
