@@ -86,6 +86,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private boolean announceFantasy = false;
     private boolean usingCustomDeck = false;
     private boolean announceCustom = false;
+    private boolean announceExcludedStarterCards = false;
 
     // Signals
     final SignalList onLifeTotalChangeList = new SignalList();
@@ -121,6 +122,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         //Reset all properties HERE.
         fantasyMode = false;
         announceFantasy = false;
+        announceExcludedStarterCards = false;
         usingCustomDeck = false;
         adventureMode = null;
         modifiers.clear();
@@ -172,6 +174,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.maxDeckCount = Math.max(Math.min(this.maxDeckCount, 99), 20);
 
         clearDecks(); // Reset the empty decks to now already have the commander in the command zone.
+        announceExcludedStarterCards = CardUtil.keepAllowedPrints(startingDeck);
         deck = startingDeck;
         decks.set(0, deck);
 
@@ -889,6 +892,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         announceFantasy = data.containsKey("announceFantasy") && data.readBool("announceFantasy");
         usingCustomDeck = data.containsKey("usingCustomDeck") && data.readBool("usingCustomDeck");
         announceCustom = data.containsKey("announceCustom") && data.readBool("announceCustom");
+        announceExcludedStarterCards = data.containsKey("announceExcludedStarterCards") && data.readBool("announceExcludedStarterCards");
         if (migration) {
             getCurrentGameStage().setExtraAnnouncement(Forge.getLocalizer().getMessage("lblDataMigrationMsg"));
         }
@@ -929,6 +933,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("announceFantasy", announceFantasy);
         data.store("usingCustomDeck", usingCustomDeck);
         data.store("announceCustom", announceCustom);
+        data.store("announceExcludedStarterCards", announceExcludedStarterCards);
 
         data.store("worldPosX", worldPosX);
         data.store("worldPosY", worldPosY);
@@ -1282,6 +1287,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public void clearAnnounceCustom() {
         announceCustom = false;
+    }
+
+    public boolean hasAnnounceExcludedStarterCards() {
+        return announceExcludedStarterCards;
+    }
+
+    public void clearAnnounceExcludedStarterCards() {
+        announceExcludedStarterCards = false;
     }
 
     public boolean hasColorView() {

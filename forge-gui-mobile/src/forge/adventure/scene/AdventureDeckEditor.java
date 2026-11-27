@@ -10,6 +10,7 @@ import forge.adventure.data.AdventureEventData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.CardUtil;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FImage;
@@ -1003,7 +1004,11 @@ public class AdventureDeckEditor extends FDeckEditor {
                 needed -= moveableSellable;
                 if (needed <= 0)
                     continue;
-                PaperCard unsellable = card.getNoSellVersion();
+                // the copies made here are new cards for the player, so they follow the exclusions
+                PaperCard allowed = CardUtil.allowedPrint(card);
+                if (allowed == null)
+                    continue;
+                PaperCard unsellable = allowed.getNoSellVersion();
                 //It'd probably be better to do some kind of fuzzy search that matches prints but ignores flags.
                 //But for now, unsellable is the only one that should matter here.
                 int moveableUnsellable = Math.min(availablePool.count(unsellable), needed);
@@ -1021,6 +1026,8 @@ public class AdventureDeckEditor extends FDeckEditor {
     @Override
     protected PaperCard supplyPrintForImporter(PaperCard missingCard) {
         PaperCard out = super.supplyPrintForImporter(missingCard);
+        if (out != null)
+            out = CardUtil.allowedPrint(out);
         return out == null ? null : out.getNoSellVersion();
     }
 

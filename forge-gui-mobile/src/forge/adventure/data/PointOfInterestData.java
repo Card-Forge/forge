@@ -30,6 +30,7 @@ public class PointOfInterestData implements Serializable {
     public String[] questTags = new String[0];
     public DialogData.ActionData.QuestFlag[] questFlagsToActivate = new DialogData.ActionData.QuestFlag[0];
     public String displayName;
+    public boolean ignoreExcludedSets = false;
 
 
 
@@ -71,6 +72,7 @@ public class PointOfInterestData implements Serializable {
         active=other.active;
         questTags = other.questTags.clone();
         displayName= other.displayName;
+        ignoreExcludedSets = other.ignoreExcludedSets;
         questFlagsToActivate = other.questFlagsToActivate;
     }
 

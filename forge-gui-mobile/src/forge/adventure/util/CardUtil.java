@@ -12,6 +12,7 @@ import forge.card.*;
 import forge.card.DeckHints.Type;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
@@ -20,7 +21,6 @@ import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
-import forge.item.PaperCardPredicates;
 import forge.item.SealedTemplate;
 import forge.item.generation.BoosterGenerator;
 import forge.item.generation.IUnOpenedProduct;
@@ -232,14 +232,15 @@ public class CardUtil {
             return this.shouldBeEqual;
         }
 
-        /** The printing that meets the rarity and edition filters, preferring the given one, or null if none does. */
+        /** The allowed printing that meets the rarity and edition filters, preferring the given one, or null if none does. */
         private PaperCard getPrinting(final PaperCard card) {
-            if (matchesPrinting(card))
-                return card;
+            PaperCard allowed = allowedPrint(card);
+            if (allowed != null && matchesPrinting(allowed))
+                return allowed;
             if (this.editions.isEmpty())
                 return null;
             for (PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards(card)) {
-                if (matchesPrinting(c))
+                if (matchesPrinting(c) && isAllowedPrint(c))
                     return c;
             }
             return null;
@@ -339,30 +340,26 @@ public class CardUtil {
 
     public static List<PaperCard> generateCards(Iterable<PaperCard> cards, final RewardData data, final int count,
             Random r) {
-        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
-
         final List<PaperCard> result = new ArrayList<>();
         List<PaperCard> pool = getPredicateResult(cards, data);
         if (!pool.isEmpty()) {
             for (int i = 0; i < count; i++) {
                 PaperCard candidate = pool.get(r.nextInt(pool.size()));
-                if (candidate != null) {
-                    if (allCardVariants) {
-                        // Get a random variant, preserving edition when specified
-                        PaperCard finalCandidate = CardUtil.getCardByNameAndEdition(candidate.getCardName(), candidate.getEdition());
-                        if (finalCandidate.getRules().equals(candidate.getRules())) {
-                            result.add(finalCandidate);
-                        } else { // something went wrong use previous candidate instead
-                            result.add(candidate);
-                        }
-                    } else {
-                        result.add(candidate);
-                    }
-                }
+                if (candidate != null)
+                    result.add(randomVariant(candidate));
             }
         }
         return result;
     }
+
+    /** With all card variants in use, a random print of the card's edition, or the card itself if that print is not allowed. */
+    public static PaperCard randomVariant(PaperCard card) {
+        if (!Config.instance().getSettingData().useAllCardVariants)
+            return card;
+        PaperCard variant = getCardByNameAndEdition(card.getCardName(), card.getEdition());
+        return variant.getRules().equals(card.getRules()) && isAllowedPrint(variant) ? variant : card;
+    }
+
     private static AdventureReadPriceList.PriceData priceData;
 
     /**
@@ -768,25 +765,62 @@ public class CardUtil {
         return ret;
     }
 
-    /** Swaps each excluded print for an allowed print in the plane's editions, and drops the cards without one. */
-    public static List<PaperCard> withAllowedPrints(List<PaperCard> cards) {
-        if (!Config.instance().appliesUserExclusions())
-            return cards;
+    /** Whether the player may be given this print: its card is not hidden and the player's exclusions leave the print in. */
+    public static boolean isAllowedPrint(PaperCard print) {
         CardDb cardDb = FModel.getMagicDb().getCommonCards();
-        Predicate<PaperCard> usable = print -> !cardDb.isPrintExcluded(print) && Config.instance().isPlaneEdition(print.getEdition());
-        List<PaperCard> allowed = new ArrayList<>();
-        for (PaperCard card : cards) {
-            if (!cardDb.isPrintExcluded(card)) {
-                allowed.add(card);
-                continue;
-            }
-            PaperCard print = cardDb.getCard(card.getName());
-            if (print == null || !usable.test(print))
-                print = cardDb.getAllCards(card.getName()).stream().filter(usable).findFirst().orElse(null);
-            if (print != null)
-                allowed.add(card.isFoil() ? print.getFoiled() : print);
+        return !cardDb.isHidden(print) && !(Config.instance().appliesUserExclusions() && cardDb.isPrintExcluded(print));
+    }
+
+    /**
+     * The print itself when allowed. Otherwise an allowed print of the card from the same edition, then the preferred
+     * print or another in the plane's editions, or null without one.
+     */
+    public static PaperCard allowedPrint(PaperCard card) {
+        if (isAllowedPrint(card))
+            return card;
+        CardDb cardDb = FModel.getMagicDb().getCommonCards();
+        List<PaperCard> prints = cardDb.getAllCards(card, CardUtil::isAllowedPrint);
+        PaperCard print = prints.stream().filter(p -> p.getEdition().equals(card.getEdition())).findFirst().orElse(null);
+        if (print == null) {
+            prints.removeIf(p -> !Config.instance().isPlaneEdition(p.getEdition()));
+            PaperCard preferred = cardDb.getCard(card.getName());
+            print = prints.contains(preferred) ? preferred : prints.isEmpty() ? null : prints.get(0);
         }
-        return allowed;
+        if (print == null)
+            return null;
+        return card.isFoil() ? print.getFoiled() : print;
+    }
+
+    /** Swaps each print the player may not be given for an allowed one, and drops the cards without one. */
+    public static List<PaperCard> withAllowedPrints(List<PaperCard> cards) {
+        return cards.stream().map(CardUtil::allowedPrint).filter(Objects::nonNull).collect(Collectors.toList());
+    }
+
+    /**
+     * Whether {@link #withAllowedPrints(List)} dropped a card or moved one to another set, which the player is told
+     * about. Another print of the same set goes unmentioned.
+     */
+    public static boolean droppedOrMoved(List<PaperCard> cards, List<PaperCard> allowed) {
+        if (allowed.size() < cards.size())
+            return true;
+        // with nothing dropped, the allowed list lines up with the original
+        for (int i = 0; i < cards.size(); i++)
+            if (!allowed.get(i).getEdition().equals(cards.get(i).getEdition()))
+                return true;
+        return false;
+    }
+
+    /** Applies {@link #withAllowedPrints(List)} to every section of a deck the player is about to receive. */
+    public static boolean keepAllowedPrints(Deck deck) {
+        boolean changed = false;
+        for (Map.Entry<DeckSection, CardPool> section : deck) {
+            List<PaperCard> cards = section.getValue().toFlatList();
+            List<PaperCard> allowed = withAllowedPrints(cards);
+            changed |= droppedOrMoved(cards, allowed);
+            section.getValue().clear();
+            section.getValue().addAllFlat(allowed);
+        }
+        return changed;
     }
 
     public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme,
@@ -962,9 +996,6 @@ public class CardUtil {
                 editionFilter = card -> (!Arrays.asList(configData.restrictedEditions).contains(card.getEdition()));
             }
             Predicate<PaperCard> combined_predicate = editionFilter;
-            if (Config.instance().getSettingData().excludeAlchemyVariants) {
-                combined_predicate = editionFilter.and(PaperCardPredicates.IS_REBALANCED.negate());
-            }
             if (Config.instance().appliesUserExclusions()) {
                 CardDb cardDb = FModel.getMagicDb().getCommonCards();
                 combined_predicate = combined_predicate.and(card -> !cardDb.isPrintExcluded(card));
@@ -1003,8 +1034,6 @@ public class CardUtil {
         if (validCards.isEmpty() && Config.instance().appliesUserExclusions()) {
             // a card named by the plane is still given when only the player's exclusions rule it out
             Predicate<PaperCard> planeFilter = card -> Config.instance().isPlaneEdition(card.getEdition());
-            if (Config.instance().getSettingData().excludeAlchemyVariants)
-                planeFilter = planeFilter.and(PaperCardPredicates.IS_REBALANCED.negate());
             validCards = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(cardName, planeFilter);
         }
         if (validCards.isEmpty()) {
@@ -1034,6 +1063,10 @@ public class CardUtil {
                     + ", but didn't find it in the DB. A random existing instance will be returned if found.");
             return getCardByName(cardName);
         }
+        // an edition can hold allowed and excluded prints of the same card
+        validCards.removeIf(card -> !isAllowedPrint(card));
+        if (validCards.isEmpty())
+            return getCardByName(cardName);
 
         return validCards.get(Current.world().getRandom().nextInt(validCards.size()));
     }
@@ -1120,7 +1153,7 @@ public class CardUtil {
         if (allowed.contains(card.getEdition()))
             return card;
         for (PaperCard p : FModel.getMagicDb().getCommonCards().getAllCards(card)) {
-            if (allowed.contains(p.getEdition()))
+            if (allowed.contains(p.getEdition()) && isAllowedPrint(p))
                 return p;
         }
         return card;

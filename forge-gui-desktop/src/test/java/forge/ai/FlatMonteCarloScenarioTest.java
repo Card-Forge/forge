@@ -324,7 +324,7 @@ public class FlatMonteCarloScenarioTest extends AITest {
         AssertJUnit.assertFalse("must not hold back when the game can be won now: " + result, result.hold);
         AssertJUnit.assertEquals(String.valueOf(result), "wins", result.reason);
         AssertJUnit.assertSame(approved.get(0), result.choice);
-        AssertJUnit.assertEquals("a win needs no further samples: " + result, 1, result.rollouts);
+        AssertJUnit.assertEquals("a confirmed win needs no further samples: " + result, 3, result.rollouts);
     }
 
     @Test(timeOut = LONG_TIMEOUT_MS)

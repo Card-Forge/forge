@@ -31,6 +31,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.assets.ImageCache;
+import forge.card.CardDb;
 import forge.card.CardImageRenderer;
 import forge.error.ExceptionHandler;
 import forge.gamemodes.limited.BoosterDraft;
@@ -413,6 +414,7 @@ public class Forge implements ApplicationListener {
         FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(null);
         GuiBase.setAdventureCacheDirectory(null);
+        CardDb.setExclusionsSuspended(false);
         clearScreenStack();
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;

@@ -6,6 +6,7 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.PrintSheet;
 import forge.item.*;
+import forge.item.generation.BoosterGenerator;
 import forge.token.TokenDb;
 import forge.util.FileUtil;
 import forge.util.ImageUtil;
@@ -38,8 +39,6 @@ public class StaticData {
     private final CardDb variantCards;
     private final TokenDb allTokens;
     private final CardEdition.Collection editions;
-    private final Set<String> funnyCards = new HashSet<>();
-    private final Set<String> filtered = new HashSet<>();
     private final Map<String, CardRules> regularRules = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> variantRules = new ConcurrentSkipListMap<>(String.CASE_INSENSITIVE_ORDER);
     private final Set<String> placeholderFacesInProgress = new HashSet<>();
@@ -61,7 +60,6 @@ public class StaticData {
 
     private boolean allowCustomCardsInDecksConformance;
     private boolean enableSmartCardArtSelection;
-    private boolean loadNonLegalCards;
     private final boolean enableUnknownCards;
 
     private boolean sourceImageForClone;
@@ -72,18 +70,18 @@ public class StaticData {
     private IStorage<SealedTemplate> tournaments;
     private IStorage<FatPack.Template> fatPacks;
     private IStorage<BoosterBox.Template> boosterBoxes;
-    private IStorage<PrintSheet> printSheets;
+    private IStorage<PrintSheet> printSheets, printSheetsWithHidden;
     private final Map<String, List<String>> setLookup = new HashMap<>();
 
     private static StaticData lastInstance = null;
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards) {
-        this(cardReader, null, customCardReader, null, editionFolder, customEditionsFolder, blockDataFolder, "", cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false, null, null);
+    public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards) {
+        this(cardReader, null, customCardReader, null, editionFolder, customEditionsFolder, blockDataFolder, "", cardArtPreference, enableUnknownCards, false, false, null, null);
     }
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
-        this(cardReader, tokenReader, customCardReader, customTokenReader, editionFolder, customEditionsFolder, blockDataFolder, setLookupFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, allowCustomCardsInDecksConformance, enableSmartCardArtSelection, null, null);
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
+        this(cardReader, tokenReader, customCardReader, customTokenReader, editionFolder, customEditionsFolder, blockDataFolder, setLookupFolder, cardArtPreference, enableUnknownCards, allowCustomCardsInDecksConformance, enableSmartCardArtSelection, null, null);
     }
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection, BiPredicate<String, String> preferredLanguageAvailability, BiPredicate<CardEdition, String> printExclusion) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection, BiPredicate<String, String> preferredLanguageAvailability, BiPredicate<CardEdition, String> printExclusion) {
         this.cardReader = cardReader;
         this.customCardReader = customCardReader;
         this.tokenReader = tokenReader;
@@ -92,34 +90,18 @@ public class StaticData {
         this.blockDataFolder = blockDataFolder;
         this.allowCustomCardsInDecksConformance = allowCustomCardsInDecksConformance;
         this.enableSmartCardArtSelection = enableSmartCardArtSelection;
-        this.loadNonLegalCards = loadNonLegalCards;
         this.enableUnknownCards = enableUnknownCards;
         lastInstance = this;
 
         editions.append(new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder), true)));
+        // a player's own tags sit beside their custom editions, so they survive updates and can tag those editions
+        editions.loadPrintTags(new File(new File(customEditionsFolder).getParentFile(), "printtags.txt"));
 
         {
-            if (!loadNonLegalCards) {
-                for (CardEdition e : editions) {
-                    if (e.getType() == CardEdition.Type.FUNNY || e.getBorderColor() == CardEdition.BorderColor.SILVER) {
-                        List<CardEdition.EditionEntry> eternalCards = e.getFunnyEternalCards();
-
-                        for (CardEdition.EditionEntry cis : e.getAllCardsInSet()) {
-                            if (eternalCards.contains(cis))
-                                continue;
-                            funnyCards.add(cis.name());
-                        }
-                    }
-                }
-            }
-
             for (CardRules card : cardReader.loadCards()) {
                 if (null == card) continue;
 
                 final String cardName = card.getPreInitName();
-
-                if (!loadNonLegalCards && funnyCards.contains(cardName) && !card.getType().isBasicLand())
-                    filtered.add(cardName);
 
                 if (card.isVariant()) {
                     variantRules.put(cardName, card);
@@ -129,8 +111,8 @@ public class StaticData {
             }
             loadCustomCards();
 
-            commonCards = new CardDb(regularRules, editions, filtered);
-            variantCards = new CardDb(variantRules, editions, filtered);
+            commonCards = new CardDb(regularRules, editions);
+            variantCards = new CardDb(variantRules, editions);
 
             commonCards.setCardArtPreference(cardArtPreference);
             variantCards.setCardArtPreference(cardArtPreference);
@@ -306,9 +288,6 @@ public class StaticData {
         if (commonCards.getRules(cardName, false) != null || variantCards.getRules(cardName, false) != null) {
             return;
         }
-        if (!loadNonLegalCards && funnyCards.contains(cardName) && !rules.getType().isBasicLand()) {
-            filtered.add(cardName);
-        }
         if (rules.isVariant()) {
             variantCards.loadCard(cardName, null, rules);
         } else {
@@ -342,7 +321,6 @@ public class StaticData {
             commonCards.clearLoadedCards();
             variantCards.clearLoadedCards();
             missingLazyCards.clear();
-            filtered.clear();
             allCardsLoaded = false;
             if (customCardReader != null) {
                 lazyLoadDepth++;
@@ -412,9 +390,6 @@ public class StaticData {
                     placeholderFacesInProgress.remove(faceName);
                 }
             }
-        }
-        if (!loadNonLegalCards && funnyCards.contains(rules.getPreInitName()) && !rules.getType().isBasicLand()) {
-            filtered.add(rules.getPreInitName());
         }
         if (rules.isVariant()) {
             variantCards.loadCard(cardName, setCode, rules);
@@ -570,6 +545,12 @@ public class StaticData {
     }
 
     public IStorage<PrintSheet> getPrintSheets() {
+        // a sheet leaves out the cards hidden when it is built, so content that lifts exclusions keeps its own sheets
+        if (CardDb.areExclusionsLifted()) {
+            if (printSheetsWithHidden == null)
+                printSheetsWithHidden = PrintSheet.initializePrintSheets(new File(blockDataFolder, "printsheets.txt"), getEditions());
+            return printSheetsWithHidden;
+        }
         if (printSheets == null)
             printSheets = PrintSheet.initializePrintSheets(new File(blockDataFolder, "printsheets.txt"), getEditions());
         return printSheets;
@@ -1227,7 +1208,6 @@ public class StaticData {
                             }
                             if (cp == null) {
                                 if (isFunny) return;
-                                if (!loadNonLegalCards && CardEdition.Type.FUNNY.equals(e.getType())) return;
                                 EDITION_Q.add(e.getCode() + "_" + e.getName());
                                 CNI_Q.add(e.getCode() + "_" + c + "\n");
                                 return;
@@ -1401,6 +1381,30 @@ public class StaticData {
     public void setPrintExclusion(BiPredicate<CardEdition, String> exclusion) {
         this.commonCards.setPrintExclusion(exclusion);
         this.variantCards.setPrintExclusion(exclusion);
+    }
+
+    /** Hides every card whose prints all match the test from the card pools. A card is still found by name. */
+    public void setHiddenPrints(BiPredicate<CardEdition, String> hidden) {
+        Set<String> cardNames = new HashSet<>();
+        if (hidden != null) {
+            Set<String> keptNames = new HashSet<>();
+            for (CardEdition edition : editions) {
+                for (CardEdition.EditionEntry entry : edition.getAllCardsInSet()) {
+                    (hidden.test(edition, entry.collectorNumber()) ? cardNames : keptNames).add(entry.name());
+                }
+            }
+            // a card with a print outside the test stays, as sets tagged whole also hold ordinary cards
+            cardNames.removeAll(keptNames);
+        }
+        this.commonCards.setHiddenCards(cardNames);
+        this.variantCards.setHiddenCards(cardNames);
+        // print sheets are built once, so they are rebuilt without the hidden cards
+        printSheets = null;
+        BoosterGenerator.clearCachedSheets();
+    }
+
+    public boolean isHidden(PaperCard card) {
+        return commonCards.isHidden(card);
     }
 
     public boolean isEnabledCardArtSmartSelection() {

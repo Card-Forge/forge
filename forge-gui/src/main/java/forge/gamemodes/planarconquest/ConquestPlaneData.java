@@ -114,8 +114,9 @@ public class ConquestPlaneData implements IXmlWritable {
     public int getUnlockedCardCount() {
         int count = 0;
         ConquestData model = FModel.getConquest().getModel();
-        for (PaperCard pc : location.getPlane().getCardPool().getAllCards()) {
-            if (model.hasUnlockedCard(pc)) {
+        ConquestPlane plane = location.getPlane();
+        for (PaperCard pc : plane.getCardPool().getAllCards()) {
+            if (model.hasUnlockedCard(pc) || model.hasUnlockedCard(plane.awardablePrint(pc))) {
                 count++;
             }
         }
