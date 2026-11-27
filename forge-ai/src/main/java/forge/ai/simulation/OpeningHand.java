@@ -730,24 +730,39 @@ public final class OpeningHand {
         }
     }
 
+    /** The colour of a "Produced" token: none for {C}, every colour for what is not one (a chosen colour, "Any"). */
+    private static byte colorOf(final String token) {
+        switch (token) {
+            case "W": return MagicColor.WHITE;
+            case "U": return MagicColor.BLUE;
+            case "B": return MagicColor.BLACK;
+            case "R": return MagicColor.RED;
+            case "G": return MagicColor.GREEN;
+            case "C": return 0;
+            default: return MagicColor.ALL_COLORS; // a chosen colour, "Any": the best case
+        }
+    }
+
     /** The mana of an activation, one unit for each mana it makes: a Signet makes a {W} and a {U}, not either twice. */
     private static List<ManaUnit> outputOf(final Card c, final Flow flow) {
         final List<ManaUnit> units = new ArrayList<>();
         final AbilityManaPart limit = flow.restricted ? flow.sa.getManaPart() : null;
         final int amount = Integer.parseInt(flow.sa.getParamOrDefault("Amount", "1"));
+        final String[] tokens = flow.sa.getParamOrDefault("Produced", "").trim().split("\\s+");
+        final boolean combo = "Combo".equals(tokens[0]);
         for (int i = 0; i < amount; i++) {
-            for (final String token : flow.sa.getParamOrDefault("Produced", "").trim().split("\\s+")) {
+            if (combo || "Any".equals(tokens[0])) {
+                // one mana of one of the colours that follow ("Combo B G U"), or of any: a single unit, not one for each token
                 byte colors = 0;
-                switch (token) {
-                    case "W": colors = MagicColor.WHITE; break;
-                    case "U": colors = MagicColor.BLUE; break;
-                    case "B": colors = MagicColor.BLACK; break;
-                    case "R": colors = MagicColor.RED; break;
-                    case "G": colors = MagicColor.GREEN; break;
-                    case "C": break;
-                    default: colors = MagicColor.ALL_COLORS; // Any, Combo, a chosen colour: the best case
+                for (int t = 1; t < tokens.length; t++) {
+                    colors |= colorOf(tokens[t]);
                 }
-                units.add(new ManaUnit(colors, limit, c));
+                units.add(new ManaUnit(combo && tokens.length > 1 && !"Any".equals(tokens[1]) ? colors : MagicColor.ALL_COLORS,
+                        limit, c));
+                continue;
+            }
+            for (final String token : tokens) {
+                units.add(new ManaUnit(colorOf(token), limit, c)); // "W U" makes both
             }
         }
         return units;

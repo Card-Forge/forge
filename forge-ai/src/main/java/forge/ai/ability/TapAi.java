@@ -146,7 +146,7 @@ public class TapAi extends TapAiBase {
         return Math.max(10, ActivationGuard.nextTurnThreat(payer) + 5);
     }
 
-    static boolean lifeCanBeSpared(final Player payer, final int amount) {
+    public static boolean lifeCanBeSpared(final Player payer, final int amount) {
         return payer.getLife() - amount >= lifeReserve(payer);
     }
 

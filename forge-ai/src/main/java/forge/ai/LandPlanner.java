@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import forge.ai.ability.TapAi;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -55,8 +56,6 @@ public final class LandPlanner {
     private static final int MAX_SPELLS = 12;
     /** What a life point is worth in the score: a tenth of a cheap spell, so that it breaks a tie between equal plans. */
     static final double LIFE_COST = 12;
-    /** A life point is only paid for a land that comes in untapped while the AI has this much more than that. */
-    private static final int LIFE_SPARE = 6;
 
     private static final String[] TYPE_LETTERS = { "W", "U", "B", "R", "G", "C" };
     private static final byte[] TYPE_BITS = { ManaAtom.WHITE, ManaAtom.BLUE, ManaAtom.BLACK, ManaAtom.RED,
@@ -432,7 +431,8 @@ public final class LandPlanner {
         out.add(new Variant(sick + (tapped ? 1 : 0), 0));
         if (tapped) {
             final int life = lifeToEnterUntapped(land);
-            if (life > 0 && ai.getLife() > life + LIFE_SPARE) {
+            // the payment is decided by TapAi with this reserve (10 life, or what the opponent hits for next turn plus 5)
+            if (life > 0 && ai.getLife() > life + 1 && TapAi.lifeCanBeSpared(ai, life)) {
                 out.add(new Variant(sick, LIFE_COST * life));
             }
         }

@@ -450,6 +450,29 @@ public class LandPlannerTest extends FlatMcTestBase {
     }
 
     @Test
+    public void doesNotPlanToPayForAShocklandBelowTheLifeReserve() {
+        // 11 - 2 is below the 10 life that TapAi keeps, so the Temple Garden would come in tapped: no plan around it
+        setUpGame();
+        ai.setLife(11, null);
+        final Card arbor = put("Dryad Arbor", ai, ZoneType.Hand);
+        final Card garden = put("Temple Garden", ai, ZoneType.Hand);
+        put("Silhana Ledgewalker", 2, ai, ZoneType.Hand);
+        assertNull(LandPlanner.choose(ai, collection(arbor, garden), c -> c == garden),
+                "tapped either way, the order makes no difference");
+    }
+
+    @Test
+    public void doesNotPlanToPayForAShocklandWhenTheOpponentThreatensTheLife() {
+        // 20 life, but four Craw Wurms hit for 24 next turn: the reserve is higher than the life left after paying
+        setUpGame();
+        put("Craw Wurm", 4, opp, ZoneType.Battlefield);
+        final Card arbor = put("Dryad Arbor", ai, ZoneType.Hand);
+        final Card garden = put("Temple Garden", ai, ZoneType.Hand);
+        put("Silhana Ledgewalker", 2, ai, ZoneType.Hand);
+        assertNull(LandPlanner.choose(ai, collection(arbor, garden), c -> c == garden));
+    }
+
+    @Test
     public void landPlannerIsOnByDefault() {
         setUpGame();
         assertTrue(brain().getBoolProperty(AiProps.LAND_PLANNER));

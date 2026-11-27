@@ -276,6 +276,14 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void comboManaIsOneManaOfOneOfTheColours() {
+        // Urborg Elf makes one {B}, {G} or {U}: with the Forest and the Mox it cannot make the {R} of a Hill Giant
+        // ({3}{R}), so the Springleaf Drum has no creature to tap. The Mox and the Elf are the two sources.
+        AssertJUnit.assertEquals(2, sourcesCounted("Forest",
+                new String[] {"Mox Emerald", "Urborg Elf", "Springleaf Drum"}, "Hill Giant"));
+    }
+
+    @Test
     public void manaCreaturesTheLandCannotCastAreNoSources() {
         // an Island makes no green mana for the Elves
         AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Llanowar Elves", "Llanowar Elves"},
