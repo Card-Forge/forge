@@ -684,12 +684,7 @@ public final class OpeningHand {
         final List<ManaUnit> pool = new ArrayList<>(); // the mana the lands and the sources counted so far can make
         for (final Card c : hand) {
             if ((c.isLand() || isMdfcLand(c)) && isEarlyManaLand(c)) {
-                final Flow land = c.isLand() ? restrictedLandFlow(c) : null;
-                if (land != null && land.restricted) {
-                    pool.addAll(outputOf(c, land)); // Ancient Ziggurat: for creature spells only, not for an artifact
-                } else {
-                    pool.add(new ManaUnit((byte) (producedColors(c) & MagicColor.ALL_COLORS), null, null));
-                }
+                addLandMana(pool, c);
             }
         }
         int sources = 0;
@@ -721,17 +716,30 @@ public final class OpeningHand {
 
     /**
      * One mana of the hand: the colours it can be (none: colourless), and, for mana that may only be spent in some
-     * ways, the mana ability and the card that make it.
+     * ways, the mana ability and the card that make it. A land with a restricted mana ability also names the ability
+     * that makes each of its mana ({@code choice}): its abilities are alternatives, as tapping it for one rules out
+     * the others.
      */
     private static final class ManaUnit {
         final byte colors;
         final AbilityManaPart limit;
         final Card source;
+        final SpellAbility choice;
 
         ManaUnit(final byte colors, final AbilityManaPart limit, final Card source) {
+            this(colors, limit, source, null);
+        }
+
+        ManaUnit(final byte colors, final AbilityManaPart limit, final Card source, final SpellAbility choice) {
             this.colors = colors;
             this.limit = limit;
             this.source = source;
+            this.choice = choice;
+        }
+
+        /** Whether the two cannot both be had: they come from different abilities of the same land. */
+        boolean excludes(final ManaUnit other) {
+            return choice != null && other.choice != null && source == other.source && choice != other.choice;
         }
     }
 
@@ -783,38 +791,85 @@ public final class OpeningHand {
     }
 
     /**
-     * The mana ability of a land whose mana is all restricted (Ancient Ziggurat), null for any other land. Not judged by
-     * {@link #manaFlow}: a land has no mana cost, which that asks for of a card that has to be cast.
+     * Adds the mana of a land of the hand. Without a spending restriction it is one mana of any colour the land makes.
+     * With one (Ancient Ziggurat, Sliver Hive) each ability keeps its own output and restriction: Sliver Hive makes
+     * {C} for anything or a colour for a Sliver spell, never a colour for anything.
      */
-    private static Flow restrictedLandFlow(final Card c) {
-        Flow found = null;
-        for (final SpellAbility sa : c.getSpellAbilities()) {
-            if (sa.getApi() != ApiType.Mana || !sa.isAbility()) {
-                continue;
+    private static void addLandMana(final List<ManaUnit> pool, final Card c) {
+        if (!c.isLand() || !hasRestrictedMana(c)) {
+            pool.add(new ManaUnit((byte) (producedColors(c) & MagicColor.ALL_COLORS), null, null));
+            return;
+        }
+        for (final SpellAbility sa : c.getManaAbilities()) {
+            if (sa.getPayCosts() != null && sa.getPayCosts().getCostMana() != null
+                    && sa.getPayCosts().getCostMana().getMana().getCMC() > 0) {
+                continue; // an ability that has to be fed mana is not judged here: to the safe side it adds nothing
             }
-            final AbilityManaPart part = sa.getManaPart();
-            if (part == null || !sa.hasParam("RestrictValid") && part.getManaRestrictions().isEmpty()) {
-                return null; // some of its mana is free to spend
-            }
-            if (found == null) {
-                found = new Flow(0, 1, true, sa);
+            final AbilityManaPart limit = isRestricted(sa) ? sa.getManaPart() : null;
+            if (sa.getApi() == ApiType.Mana && sa.getParamOrDefault("Amount", "1").matches("\\d+")) {
+                // not judged by manaFlow: a land has no mana cost, which that asks for of a card that has to be cast
+                for (final ManaUnit u : outputOf(c, new Flow(0, manaProduced(sa), limit != null, sa))) {
+                    pool.add(new ManaUnit(u.colors, u.limit, c, sa));
+                }
+            } else { // reflected mana or a variable amount: one mana of what it can make
+                pool.add(new ManaUnit(ManaConversion.producedColors(sa), limit, c, sa));
             }
         }
-        return found;
+    }
+
+    private static boolean hasRestrictedMana(final Card c) {
+        for (final SpellAbility sa : c.getManaAbilities()) {
+            if (isRestricted(sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether the mana of the ability may be spent only in some ways. */
+    private static boolean isRestricted(final SpellAbility sa) {
+        final AbilityManaPart part = sa.getManaPart();
+        return part != null && (sa.hasParam("RestrictValid") || !part.getManaRestrictions().isEmpty());
     }
 
     /** How much of the mana can pay for an ability: the restricted mana (Ancient Ziggurat's) cannot. */
     private static int unrestricted(final List<ManaUnit> pool) {
+        return mostTogether(pool, u -> u.limit == null);
+    }
+
+    /** How many of the matching mana can be had at once: of each land with a choice, only its best ability counts. */
+    private static int mostTogether(final List<ManaUnit> units, final Predicate<ManaUnit> matching) {
         int n = 0;
-        for (final ManaUnit u : pool) {
-            if (u.limit == null) {
+        final Set<Card> counted = new HashSet<>();
+        for (final ManaUnit u : units) {
+            if (!matching.test(u)) {
+                continue;
+            }
+            if (u.choice == null) {
                 n++;
+            } else if (counted.add(u.source)) {
+                int best = 0;
+                for (final ManaUnit first : units) {
+                    if (first.source == u.source && first.choice != null) {
+                        int same = 0;
+                        for (final ManaUnit v : units) {
+                            if (v.source == u.source && v.choice == first.choice && matching.test(v)) {
+                                same++;
+                            }
+                        }
+                        best = Math.max(best, same);
+                    }
+                }
+                n += best;
             }
         }
         return n;
     }
 
-    /** Takes what an activation costs out of the pool: unrestricted mana, the least flexible first. */
+    /**
+     * Takes what an activation costs out of the pool: unrestricted mana, the least flexible first. Tapping a land for
+     * one of its abilities takes the mana of its other abilities with it.
+     */
     private static void payActivation(final List<ManaUnit> pool, final int amount) {
         for (int i = 0; i < amount; i++) {
             ManaUnit least = null;
@@ -827,42 +882,43 @@ public final class OpeningHand {
                 return;
             }
             pool.remove(least);
+            pool.removeIf(least::excludes);
         }
     }
 
     /**
      * Whether the mana can pay the whole cost: each coloured part with a mana that fits it and the generic part with
      * what is left. With {@code spell}, restricted mana counts when the spell meets its restriction, and then only
-     * for the parts it may pay; {@code mustUseLimited} asks for a payment in which some restricted mana is used.
+     * for the parts it may pay; {@code mustUse} asks for a payment in which restricted mana of that card is used.
      */
     private static boolean canPay(final List<ManaUnit> pool, final ManaCost cost, final SpellAbility spell,
-                                  final boolean mustUseLimited) {
+                                  final Card mustUse) {
         final List<ManaCostShard> shards = new ArrayList<>();
         for (final ManaCostShard shard : cost) {
             shards.add(shard);
         }
-        return payShards(pool, shards, 0, new boolean[pool.size()], cost.getGenericCost(), spell, mustUseLimited, false);
+        return payShards(pool, shards, 0, new boolean[pool.size()], cost.getGenericCost(), spell, mustUse, false);
     }
 
     private static boolean payShards(final List<ManaUnit> pool, final List<ManaCostShard> shards, final int i,
                                      final boolean[] used, final int generic, final SpellAbility spell,
-                                     final boolean mustUseLimited, final boolean usedLimited) {
+                                     final Card mustUse, final boolean usedIt) {
         if (i == shards.size()) {
-            int spare = 0;
-            boolean spareLimited = false;
+            final List<ManaUnit> spare = new ArrayList<>();
+            boolean spareIt = false;
             for (int u = 0; u < used.length; u++) {
-                if (!used[u] && unitPays(pool.get(u), ManaCostShard.GENERIC, spell)) {
-                    spare++;
-                    spareLimited |= pool.get(u).limit != null;
+                if (isAvailable(pool, used, u) && unitPays(pool.get(u), ManaCostShard.GENERIC, spell)) {
+                    spare.add(pool.get(u));
+                    spareIt |= isLimitedManaOf(pool.get(u), mustUse);
                 }
             }
-            return spare >= generic && (!mustUseLimited || usedLimited || generic > 0 && spareLimited);
+            return mostTogether(spare, u -> true) >= generic && (mustUse == null || usedIt || generic > 0 && spareIt);
         }
         for (int u = 0; u < used.length; u++) {
-            if (!used[u] && unitPays(pool.get(u), shards.get(i), spell)) {
+            if (isAvailable(pool, used, u) && unitPays(pool.get(u), shards.get(i), spell)) {
                 used[u] = true;
-                final boolean ok = payShards(pool, shards, i + 1, used, generic, spell, mustUseLimited,
-                        usedLimited || pool.get(u).limit != null);
+                final boolean ok = payShards(pool, shards, i + 1, used, generic, spell, mustUse,
+                        usedIt || isLimitedManaOf(pool.get(u), mustUse));
                 used[u] = false;
                 if (ok) {
                     return true;
@@ -870,6 +926,23 @@ public final class OpeningHand {
             }
         }
         return false;
+    }
+
+    /** Whether the mana is not used yet, and its land is not tapped for another of its abilities. */
+    private static boolean isAvailable(final List<ManaUnit> pool, final boolean[] used, final int index) {
+        if (used[index]) {
+            return false;
+        }
+        for (int u = 0; u < used.length; u++) {
+            if (used[u] && pool.get(u).excludes(pool.get(index))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isLimitedManaOf(final ManaUnit unit, final Card card) {
+        return unit.limit != null && unit.source == card;
     }
 
     /** Whether one mana can pay one part of the cost of the spell, with the restrictions of the mana and the spell. */
@@ -897,7 +970,7 @@ public final class OpeningHand {
         // restricted mana (Ancient Ziggurat's) counts when the spell that casts the card meets the restriction
         for (final SpellAbility spell : c.getSpellAbilities()) {
             if (spell.isSpell() && spell.getPayCosts() != null && spell.getPayCosts().getCostMana() != null
-                    && canPay(pool, c.getManaCost(), spell, false)) {
+                    && canPay(pool, c.getManaCost(), spell, null)) {
                 return true;
             }
         }
@@ -940,9 +1013,7 @@ public final class OpeningHand {
                     paid += ((CostPartMana) part).getMana().getCMC();
                 }
             }
-            final AbilityManaPart part = sa.getManaPart();
-            final boolean restricted = part != null
-                    && (sa.hasParam("RestrictValid") || !part.getManaRestrictions().isEmpty());
+            final boolean restricted = isRestricted(sa);
             final int net = manaProduced(sa) - paid;
             if (best == null || best.restricted && !restricted
                     || best.restricted == restricted && (net > best.net || net == best.net && paid < best.paid)) {
@@ -970,7 +1041,7 @@ public final class OpeningHand {
             }
             for (final SpellAbility spell : other.getSpellAbilities()) {
                 if (spell.isSpell() && spell.getPayCosts() != null && spell.getPayCosts().getCostMana() != null
-                        && canPay(with, spell.getPayCosts().getCostMana().getMana(), spell, true)) {
+                        && canPay(with, spell.getPayCosts().getCostMana().getMana(), spell, c)) {
                     return true;
                 }
             }

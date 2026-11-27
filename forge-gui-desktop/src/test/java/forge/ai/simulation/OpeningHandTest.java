@@ -298,6 +298,48 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void sliverHivesColouredManaDoesNotPayForANonSliver() {
+        // {C} is free to spend, but the Hive's {G} is for Sliver spells: only the Mox is a source, not the Mystic
+        AssertJUnit.assertEquals(1, sourcesCounted("Sliver Hive", new String[] {"Mox Sapphire", "Elvish Mystic"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void sliverHiveAndAnElfItCannotCastDoNotMakeUpForASingleLand() {
+        AssertJUnit.assertFalse(oneLandAndSources("Sliver Hive", new String[] {"Mox Sapphire", "Elvish Mystic"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void sliverHivesColorlessManaIsStillFreeToSpend() {
+        // the Hive's {C} and the Mox pay the Fire Diamond's {2}
+        AssertJUnit.assertEquals(2, sourcesCounted("Sliver Hive", new String[] {"Mox Sapphire", "Fire Diamond"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void sliverHiveIsTappedForOnlyOneOfItsAbilities() {
+        // {C} and the Sliver-only {G} are alternatives: alone, the Hive cannot pay the {1}{G} of the Muscle Sliver,
+        // so the Springleaf Drum it can cast has no creature to tap
+        AssertJUnit.assertEquals(0, sourcesCounted("Sliver Hive",
+                new String[] {"Muscle Sliver", "Springleaf Drum"}, "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void sliverHivesColouredManaPaysForASliver() {
+        // the Hive's {G} and the Mox cast the Muscle Sliver, which the Springleaf Drum can then tap
+        AssertJUnit.assertEquals(2, sourcesCounted("Sliver Hive",
+                new String[] {"Mox Sapphire", "Muscle Sliver", "Springleaf Drum"}, "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void anotherCardsRestrictedManaDoesNotMakeARestrictedSourceUseful() {
+        // the Ziggurat's mana can cast the Bears, but Creeping Peeper's own mana has no enchantment to pay for
+        AssertJUnit.assertEquals(1, sourcesCounted("Ancient Ziggurat",
+                new String[] {"Mox Sapphire", "Creeping Peeper"}, "Grizzly Bears", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
     public void manaCreaturesTheLandCannotCastAreNoSources() {
         // an Island makes no green mana for the Elves
         AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Llanowar Elves", "Llanowar Elves"},
