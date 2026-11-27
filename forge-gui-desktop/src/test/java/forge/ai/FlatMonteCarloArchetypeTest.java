@@ -205,7 +205,7 @@ public class FlatMonteCarloArchetypeTest extends AITest {
         AssertJUnit.assertFalse("never hold or pass with lethal on the table: " + result, result.hold);
         AssertJUnit.assertEquals(String.valueOf(result), "wins", result.reason);
         AssertJUnit.assertSame(bolt, result.choice);
-        AssertJUnit.assertEquals("a win ends the search at once: " + result, 1, result.rollouts);
+        AssertJUnit.assertEquals("a win ends the search once other samples confirm it: " + result, 3, result.rollouts);
     }
 
     @Test(timeOut = LONG_TIMEOUT_MS)

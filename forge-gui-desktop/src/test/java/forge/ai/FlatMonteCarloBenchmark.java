@@ -39,7 +39,8 @@ import forge.util.MyRandom;
  * Arms: {@code H} the plain heuristic AI, {@code MCorig} Monte Carlo as first proposed (no pruning, mana-cost-only
  * hold values, fixed playout length, no target variants), {@code MCnew} Monte Carlo with the refinements, and
  * {@code MCnoTV} the refinements without trying other targets, {@code MCmax} the refinements at the maximum
- * (desktop) strength.
+ * (desktop) strength, {@code MCnoResp} and {@code MCmaxNoResp} are MCnew and MCmax with the opponent never answering
+ * inside a rollout.
  * <p>
  * Every pair of decks is played in blocks of four games in which both the deck each arm plays and the seat (who goes
  * first) alternate, so that neither a lopsided matchup nor the first player advantage can favour an arm. A few hundred
@@ -87,8 +88,13 @@ public class FlatMonteCarloBenchmark extends AITest {
                 return new Arm("MCnew", "FlatMcNew", true);
             case "MCmax":
                 return new Arm("MCmax", "FlatMcNew", true, true);
+            case "MCnoResp":
+                return new Arm("MCnoResp", "FlatMcNoResponses", true);
+            case "MCmaxNoResp":
+                return new Arm("MCmaxNoResp", "FlatMcNoResponses", true, true);
             default:
-                throw new IllegalArgumentException("unknown arm " + name + " (use H, MCorig, MCnoTV, MCnew or MCmax)");
+                throw new IllegalArgumentException("unknown arm " + name
+                        + " (use H, MCorig, MCnoTV, MCnew, MCmax, MCnoResp or MCmaxNoResp)");
         }
     }
 
@@ -112,6 +118,9 @@ public class FlatMonteCarloBenchmark extends AITest {
         Files.write(new File(dir, "FlatMcOrig.ai").toPath(), (base + orig + extra).getBytes(StandardCharsets.UTF_8));
         Files.write(new File(dir, "FlatMcNoTargets.ai").toPath(),
                 (base + "\nFLAT_MC_TARGET_VARIANTS=0\n" + extra).getBytes(StandardCharsets.UTF_8));
+        Files.write(new File(dir, "FlatMcNoResponses.ai").toPath(),
+                (base.replace("FLAT_MC_OPPONENT_RESPONSES=true", "FLAT_MC_OPPONENT_RESPONSES=false")
+                        + "\nFLAT_MC_OPPONENT_RESPONSES=false\n" + extra).getBytes(StandardCharsets.UTF_8));
         Files.write(new File(dir, "FlatMcNew.ai").toPath(), (base + extra).getBytes(StandardCharsets.UTF_8));
         return dir;
     }
