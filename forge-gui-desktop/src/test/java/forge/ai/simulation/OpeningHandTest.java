@@ -200,21 +200,64 @@ public class OpeningHandTest extends AITest {
 
     @Test
     public void manaArtifactsThatWorkStillMakeUpForASingleLand() {
-        // free ones, and one that enters tapped: that is a delay, not a condition
-        for (final String name : new String[] {"Mox Emerald", "Lotus Petal", "Fire Diamond", "Azorius Signet"}) {
+        // the free ones: the single land has nothing to pay for
+        for (final String name : new String[] {"Mox Emerald", "Lotus Petal"}) {
             AssertJUnit.assertTrue(name, oneLandAndTwoPass(name));
         }
     }
 
+    @Test
+    public void manaArtifactsThatCostTwoCannotBeCastWithASingleLand() {
+        // a Fire Diamond or a Signet costs two: the one land casts neither, so they are no sources on their own
+        for (final String name : new String[] {"Fire Diamond", "Azorius Signet"}) {
+            AssertJUnit.assertFalse(name, oneLandAndTwoPass(name));
+        }
+    }
+
+    @Test
+    public void aFreeSourceHelpsToCastAnArtifactThatCostsTwo() {
+        AssertJUnit.assertTrue(oneLandAndSources("Island", new String[] {"Mox Emerald", "Fire Diamond"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void aSignetNeedsManaOtherThanItsOwnToBeActivated() {
+        // the Mox and the Island pay for casting the Signet and for its {1}: two sources; two Signets and the Island
+        // alone cannot even cast the first one
+        AssertJUnit.assertTrue(oneLandAndSources("Island", new String[] {"Mox Emerald", "Azorius Signet"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+        AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Azorius Signet", "Azorius Signet"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void manaCreaturesTheLandCannotCastAreNoSources() {
+        // an Island makes no green mana for the Elves
+        AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Llanowar Elves", "Llanowar Elves"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void manaCreaturesTheLandCanCastAreSources() {
+        AssertJUnit.assertTrue(oneLandAndSources("Forest", new String[] {"Llanowar Elves", "Llanowar Elves"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    /** One land and the given sources of mana, around the other cards. */
+    private boolean oneLandAndSources(final String land, final String[] sources, final String... others) {
+        setUp(9, 8);
+        final String[] fixed = new String[1 + sources.length];
+        fixed[0] = land;
+        System.arraycopy(sources, 0, fixed, 1, sources.length);
+        final CardCollection cards = hand(mix(others, fixed));
+        return OpeningHand.playable(cards, cards.size());
+    }
+
     /** One land and some Springleaf Drums, which tap an untapped creature besides themselves, around the given cards. */
     private boolean oneLandAndDrums(final String land, final int drums, final String... others) {
-        setUp(9, 8);
-        final String[] fixed = new String[1 + drums];
-        fixed[0] = land;
-        for (int i = 1; i <= drums; i++) {
-            fixed[i] = "Springleaf Drum";
-        }
-        return OpeningHand.playable(hand(mix(others, fixed)), 7);
+        final String[] sources = new String[drums];
+        java.util.Arrays.fill(sources, "Springleaf Drum");
+        return oneLandAndSources(land, sources, others);
     }
 
     private boolean oneLandAndTwoDrums(final String... others) {

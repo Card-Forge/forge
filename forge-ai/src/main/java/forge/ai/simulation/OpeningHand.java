@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -645,42 +646,89 @@ public final class OpeningHand {
     }
 
     /**
-     * How many cheap mana sources of the hand work together. Sources that need nothing else count first; one that taps
-     * other permanents (Springleaf Drum) then counts only if the hand has permanents for it that can be put on the
-     * battlefield with its lands and that nothing else uses: not a source of mana itself (a Llanowar Elves tapped for
-     * the Drum makes no mana of its own) and not the tap cost of another source.
+     * How many cheap mana sources of the hand work together. A source counts only if the hand can put it on the
+     * battlefield: its mana cost and colours are paid by the lands, plus the sources that came before it (cheapest
+     * first, so a Mox pays for the Signet after it), and so is the mana its own ability costs (a Signet's {1}). Sources
+     * that need nothing else come first; one that taps other permanents (Springleaf Drum) then counts only if the hand
+     * has permanents for it that can be put on the battlefield the same way and that nothing else uses: not a source
+     * of mana itself (a Llanowar Elves tapped for the Drum makes no mana of its own) and not the tap cost of another
+     * source. Mana spent on one card is not taken off for the next: this is a judgement over the first turns.
      */
     static int cheapManaSources(final CardCollectionView hand) {
-        final Set<Card> unavailable = new HashSet<>(); // counted as a source, or already tapped for another one
+        final List<Card> free = new ArrayList<>();
         final List<Card> needy = new ArrayList<>();
-        int sources = 0;
+        int lands = 0;
         for (final Card c : hand) {
-            if (c.isLand() || isMdfcLand(c) || c.getCMC() > 2 || c.isInstant() || c.isSorcery()) {
+            if (c.isLand() || isMdfcLand(c)) {
+                if (isEarlyManaLand(c)) {
+                    lands++;
+                }
+                continue;
+            }
+            if (c.getCMC() > 2 || c.isInstant() || c.isSorcery()) {
                 continue;
             }
             final CostNeed need = costNeed(c);
             if (need == CostNeed.NONE) {
-                sources++;
-                unavailable.add(c);
+                free.add(c);
             } else if (need == CostNeed.OTHER_PERMANENTS) {
                 needy.add(c);
             }
         }
-        int lands = 0;
-        for (final Card c : hand) {
-            if ((c.isLand() || isMdfcLand(c)) && isEarlyManaLand(c)) {
-                lands++;
+        free.sort(Comparator.comparingInt(Card::getCMC));
+        needy.sort(Comparator.comparingInt(Card::getCMC));
+
+        final Set<Card> unavailable = new HashSet<>(); // counted as a source, or already tapped for another one
+        int mana = lands; // what the lands and the sources counted so far can pay with
+        int colors = handColors(hand);
+        int sources = 0;
+        for (final Card c : free) {
+            if (canDeploy(c, mana, colors) && activationMana(c) <= mana) {
+                sources++;
+                mana++;
+                colors |= producedColors(c);
+                unavailable.add(c);
             }
         }
-        final int colors = handColors(hand);
         for (final Card c : needy) {
-            final Set<Card> tapped = tapResources(c, hand, unavailable, lands, colors);
+            if (!canDeploy(c, mana, colors) || activationMana(c) > mana) {
+                continue;
+            }
+            final Set<Card> tapped = tapResources(c, hand, unavailable, mana, colors);
             if (tapped != null) {
-                unavailable.addAll(tapped);
                 sources++;
+                mana++;
+                colors |= producedColors(c);
+                unavailable.addAll(tapped);
+                unavailable.add(c);
             }
         }
         return sources;
+    }
+
+    /** Whether the mana (as many as that) and the colours at hand pay for the card. */
+    private static boolean canDeploy(final Card c, final int mana, final int colors) {
+        return !c.getManaCost().isNoCost() && c.getCMC() <= mana
+                && (c.getManaCost().getColorProfile() & ~colors) == 0;
+    }
+
+    /** The mana the card's mana ability asks for (a Signet's {1}), the least of its abilities that work. */
+    private static int activationMana(final Card c) {
+        int least = Integer.MAX_VALUE;
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.getApi() != ApiType.Mana || !sa.isAbility() || sa.getPayCosts() == null
+                    || !sa.getPayCosts().hasTapCost() || !worksAsItIs(c, sa)) {
+                continue;
+            }
+            int cost = 0;
+            for (final CostPart part : sa.getPayCosts().getCostParts()) {
+                if (part instanceof CostPartMana) {
+                    cost += ((CostPartMana) part).getMana().getCMC();
+                }
+            }
+            least = Math.min(least, cost);
+        }
+        return least == Integer.MAX_VALUE ? 0 : least;
     }
 
     /** What the mana ability of a card asks for besides tapping the card itself. */
@@ -722,7 +770,7 @@ public final class OpeningHand {
      * that the hand can cast, and not in {@code unavailable}. Null if there are not enough of them.
      */
     private static Set<Card> tapResources(final Card c, final CardCollectionView hand, final Set<Card> unavailable,
-                                          final int lands, final int colors) {
+                                          final int mana, final int colors) {
         for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.getApi() != ApiType.Mana || !sa.isAbility() || sa.getPayCosts() == null
                     || !sa.getPayCosts().hasTapCost() || !worksAsItIs(c, sa)) {
@@ -741,7 +789,7 @@ public final class OpeningHand {
                     }
                     if ((other != c || ((CostTapType) part).canTapSource) && other.isPermanent() && !other.isLand()
                             && !unavailable.contains(other) && !needed.contains(other)
-                            && canBeCast(other, lands, colors) && matchesType(other, c, part.getType())) {
+                            && canDeploy(other, mana, colors) && matchesType(other, c, part.getType())) {
                         needed.add(other);
                         missing--;
                     }
@@ -756,12 +804,6 @@ public final class OpeningHand {
             }
         }
         return null;
-    }
-
-    /** Whether the lands of the hand can pay for the card: enough of them, and the colours it asks for. */
-    private static boolean canBeCast(final Card c, final int lands, final int colors) {
-        return !c.getManaCost().isNoCost() && c.getCMC() <= lands
-                && (c.getManaCost().getColorProfile() & ~colors) == 0;
     }
 
     private static boolean matchesType(final Card candidate, final Card source, final String type) {
