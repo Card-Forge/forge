@@ -5,6 +5,7 @@ import forge.gamemodes.rogue.RogueRun;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.ObjIntConsumer;
 
 /**
  * Composite dispatcher implementing RogueEffect.
@@ -64,7 +65,19 @@ public enum RogueEffectComposite implements RogueEffect {
 
     @Override
     public void onMatchWin(RogueRun run) {
-        forEachEffect(run, e -> e.onMatchWin(run));
+        onMatchWin(run, (effect, gainedLife) -> {});
+    }
+
+    /** Reports the actual life gained from each effect after applying it. */
+    public void onMatchWin(RogueRun run, ObjIntConsumer<RogueEffect> onLifeGained) {
+        forEachEffect(run, effect -> {
+            int lifeBefore = run.getCurrentLife();
+            effect.onMatchWin(run);
+            int gainedLife = run.getCurrentLife() - lifeBefore;
+            if (gainedLife > 0) {
+                onLifeGained.accept(effect, gainedLife);
+            }
+        });
     }
 
     /** Whether losing now would revive the player rather than end the run; changes nothing. */

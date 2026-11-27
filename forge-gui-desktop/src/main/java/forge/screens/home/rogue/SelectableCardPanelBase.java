@@ -12,6 +12,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.util.ImageFetcher;
 import java.awt.*;
+import java.awt.dnd.DragSource;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
@@ -77,24 +78,44 @@ public abstract class SelectableCardPanelBase extends SkinnedPanel implements
 
   private void installMouseListeners(Supplier<CardUtil> zoomUtilSupplier,
       ZoomActivation zoomActivation) {
-    addMouseListener(new MouseAdapter() {
+    final int dragThreshold = DragSource.getDragThreshold();
+    MouseAdapter listener = new MouseAdapter() {
+      private Point leftPress;
+
       @Override
       public void mouseClicked(MouseEvent e) {
-        if (!isMiddleButtonZoom(e, zoomActivation)) {
+        if (e.getButton() != MouseEvent.BUTTON1 && !isMiddleButtonZoom(e, zoomActivation)) {
           handleCardClick(e);
         }
       }
 
       @Override
       public void mousePressed(MouseEvent e) {
-        if (isMiddleButtonZoom(e, zoomActivation)) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+          leftPress = contains(e.getX(), e.getY()) ? e.getPoint() : null;
+        } else if (isMiddleButtonZoom(e, zoomActivation)) {
           showZoom(zoomUtilSupplier);
         }
       }
 
       @Override
+      public void mouseDragged(MouseEvent e) {
+        if (leftPress != null && leftPress.distance(e.getX(), e.getY()) > dragThreshold) {
+          leftPress = null;
+        }
+      }
+
+      @Override
       public void mouseReleased(MouseEvent e) {
-        if (isMiddleButtonZoom(e, zoomActivation)) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+          Point press = leftPress;
+          leftPress = null;
+          // AWT can omit mouseClicked after even a small movement.
+          if (press != null && contains(e.getX(), e.getY())
+              && press.distance(e.getX(), e.getY()) <= dragThreshold) {
+            handleCardClick(e);
+          }
+        } else if (isMiddleButtonZoom(e, zoomActivation)) {
           CardUtil zoomUtil = zoomUtilSupplier != null ? zoomUtilSupplier.get() : null;
           if (zoomUtil != null) {
             zoomUtil.closeZoom();
@@ -115,7 +136,9 @@ public abstract class SelectableCardPanelBase extends SkinnedPanel implements
         setCursor(Cursor.getDefaultCursor());
         repaint();
       }
-    });
+    };
+    addMouseListener(listener);
+    addMouseMotionListener(listener);
 
     if (zoomActivation == ZoomActivation.MOUSE_WHEEL) {
       addMouseWheelListener(e -> {

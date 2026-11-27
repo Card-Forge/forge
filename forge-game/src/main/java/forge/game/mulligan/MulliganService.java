@@ -34,7 +34,9 @@ public class MulliganService {
             whoCanMulligan.add(whoCanMulligan.remove(0));
         }
 
-        boolean firstMullFree = game.getPlayers().size() > 2 || game.getRules().hasAppliedVariant(GameType.Brawl);
+        boolean firstMullFree = game.getPlayers().size() > 2
+                || game.getRules().hasAppliedVariant(GameType.Brawl)
+                || game.getRules().getGameType() == GameType.RogueCommander;
 
         for (Player player : whoCanMulligan) {
             MulliganDefs.MulliganRule rule = StaticData.instance().getMulliganRule();
