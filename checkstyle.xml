@@ -11,7 +11,7 @@
 <module name="Checker">
     <!-- Android-shipped main sources only; desktop and tests run on Java 17. -->
     <module name="SuppressionSingleFilter">
-        <property name="id" value="androidStreamToList"/>
+        <property name="checks" value="RegexpSinglelineJava"/>
         <property name="files" value="^(?!.*[\\/](forge-(core|game|ai|gui)[\\/]src[\\/]main|forge-gui-mobile[\\/]src)[\\/]).*$"/>
     </module>
     <module name="TreeWalker">
@@ -25,6 +25,13 @@
             <property name="format" value="(?&lt;!Collectors)\.toList\(\)"/>
             <property name="ignoreComments" value="true"/>
             <property name="message" value="Stream.toList() is missing on Android 13 and older. Use collect(Collectors.toList())."/>
+        </module>
+        <!-- Android's regex engine rejects an unescaped } that desktop Java accepts. -->
+        <module name="RegexpSinglelineJava">
+            <property name="id" value="androidRegexBrace"/>
+            <property name="format" value="(\bcompile|\.(matches|replaceAll|replaceFirst|split))\(\s*(&quot;([^&quot;\\]|\\.)*&quot;\s*\+\s*)*&quot;([^&quot;\\]|\\.)*?(?&lt;!\\)(?&lt;!\{\d{1,9}(,\d{0,9})?)(?&lt;![pPxN]\{[\w=. -]{1,40})(?&lt;![^\\]\[[^\]&quot;]{0,40})(?&lt;!\\Q[^&quot;]{0,40})\}"/>
+            <property name="ignoreComments" value="true"/>
+            <property name="message" value="Android rejects an unescaped } in a regex. Write \\}."/>
         </module>
 
     </module>
