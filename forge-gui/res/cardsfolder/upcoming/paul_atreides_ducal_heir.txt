@@ -1,0 +1,9 @@
+Name:Paul Atreides, Ducal Heir
+ManaCost:1 W
+Types:Legendary Creature Human Noble
+PT:1/2
+K:Vigilance
+K:Training
+A:AB$ PutCounterAll | Cost$ T | ValidCards$ Creature.Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtEOTOrBlock | IsPresent$ Card.powerGE4+Self | SpellDescription$ Put a +1/+1 counter on each other creature you control. Activate only if NICKNAME's power is 4 or greater.
+DeckHas:Ability$Counters
+Oracle:Vigilance\nTraining (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)\n{T}: Put a +1/+1 counter on each other creature you control. Activate only if Paul Atreides's power is 4 or greater.

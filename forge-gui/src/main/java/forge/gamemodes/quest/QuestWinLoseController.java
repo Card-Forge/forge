@@ -98,13 +98,19 @@ public class QuestWinLoseController {
                 // Won/lost cards should already be calculated (even in a draw)
                 final GameOutcome.AnteResult anteResult = lastGame.getAnteResult(questPlayer);
                 if (anteResult != null) {
+                    List<PaperCard> wonCards = null;
                     if (anteResult.wonCards != null) {
-                        qc.getCards().addAllCards(anteResult.wonCards);
+                        // an opponent's deck keeps the cards the player hides, so one can be won by ante
+                        wonCards = anteResult.wonCards.stream()
+                                .filter(card -> !FModel.getMagicDb().isHidden(card)).collect(Collectors.toList());
+                        qc.getCards().addAllCards(wonCards);
+                        if (wonCards.size() < anteResult.wonCards.size())
+                            showRewardsChangedByExclusions();
                     }
                     if (anteResult.lostCards != null) {
                         qc.getCards().loseCards(anteResult.lostCards);
                     }
-                    anteReport(anteResult.wonCards, anteResult.lostCards);
+                    anteReport(wonCards, anteResult.lostCards);
                 }
             }
 
@@ -160,6 +166,11 @@ public class QuestWinLoseController {
                 }
             }
         });
+    }
+
+    private void showRewardsChangedByExclusions() {
+        view.showMessage(Localizer.getInstance().getMessage("lblRewardsChangedByExclusions"),
+                Localizer.getInstance().getMessage("lblExcludedSets"), FSkinProp.ICO_QUEST_NOTES);
     }
 
     private void anteReport(final List<PaperCard> cardsWon, final List<PaperCard> cardsLost) {
@@ -643,10 +654,15 @@ public class QuestWinLoseController {
         }
 
         final List<PaperCard> cardsWon = new ArrayList<>();
+        boolean cardsLeftOut = false;
 
         for (final InventoryItem ii : itemsWon) {
-            if (ii instanceof PaperCard) {
-                cardsWon.add((PaperCard) ii);
+            if (ii instanceof PaperCard pc) {
+                // a fixed reward names its card, and a hidden card is still found by name
+                if (FModel.getMagicDb().isHidden(pc))
+                    cardsLeftOut = true;
+                else
+                    cardsWon.add(pc);
             }
             else if (ii instanceof TournamentPack || ii instanceof BoosterPack) {
                 final List<PaperCard> boosterCards = new ArrayList<>();
@@ -670,6 +686,9 @@ public class QuestWinLoseController {
                     cardsWon.add(chosenCard);
                 }
             }
+        }
+        if (cardsLeftOut) {
+            showRewardsChangedByExclusions();
         }
         if (!cardsWon.isEmpty()) {
             if (message == null) {

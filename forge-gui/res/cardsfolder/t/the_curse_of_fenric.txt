@@ -6,7 +6,7 @@ SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ One
 SVar:DBToken:DB$ Token | TokenScript$ g_3_3_mutant_deathtouch | TokenOwner$ RememberedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature.!token | TgtPrompt$ Select target nontoken creature | Power$ 6 | Toughness$ 6 | RemoveAllAbilities$ True | Types$ Legendary,Creature,Horror | RemoveCreatureTypes$ True | Name$ Fenric | Duration$ Permanent | SpellDescription$ Target nontoken creature becomes a 6/6 legendary Horror creature named Fenric and loses all abilities.
-SVar:DBFight:DB$ Pump | ValidTgts$ Creature.Mutant | AILogic$ Fight | TgtPrompt$ Select target Mutant | SubAbility$ DBFightBis | SpellDescription$ Target Mutant fights another target creature named Fenric.
+SVar:DBFight:DB$ TargetOnly | ValidTgts$ Creature.Mutant | AILogic$ Fight | TgtPrompt$ Select target Mutant | SubAbility$ DBFightBis | SpellDescription$ Target Mutant fights another target creature named Fenric.
 SVar:DBFightBis:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.namedFenric | TgtPrompt$ Select target creature named Fenric
 SVar:OneEach:PlayerCountPlayers$Amount
 DeckHas:Ability$Token & Type$Mutant|Horror

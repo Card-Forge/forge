@@ -39,6 +39,10 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public class AttachAi extends SpellAbilityAi {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AITgts", "AITgtsStrict",
+    };
+    public static final String[] INTERNAL_PARAMS = {"AIValid"};
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
@@ -1007,6 +1011,16 @@ public class AttachAi extends SpellAbilityAi {
             && sa.getParent().getApi() == ApiType.Token && sa.getParent().hasParam("RememberTokens")) {
             // Living Weapon or similar
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else if ("Remembered".equals(sa.getParam("Defined")) && sa.getParent() != null
+            && sa.getParent().getApi() == ApiType.ChangeZone && sa.getParent().hasParam("RememberChanged")
+            && !sa.usesTargeting()) {
+            // Nim Deathmantle and the like: returns the card, then attaches itself to what came back
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else if ("TriggeredCardLKICopy".equals(sa.getParam("Defined")) && sa.getParent() != null
+            && sa.getParent().getApi() == ApiType.ChangeZone && "Self".equals(sa.getParent().getParam("Defined"))
+            && !sa.usesTargeting()) {
+            // Sword of the Meek: comes back from the graveyard, then attaches itself to the 1/1 that entered
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
@@ -1090,7 +1104,44 @@ public class AttachAi extends SpellAbilityAi {
         return affected != null && (affected.contains(stCheck) || affected.contains("AttachedBy"));
     }
 
+    /**
+     * Splinter Twin and the other auras that let a creature copy itself: only a creature that gains from a hasty
+     * copy is worth it. One with an enters-the-battlefield trigger is the deck's reason for the aura (Pestermite,
+     * Deceiver Exarch, Zealous Conscripts); without one, a creature that can attack for at least two, doubled. A blocker
+     * or a utility creature (Spellskite) gains nothing, and the aura is not cast on it.
+     */
+    private static Card attachAICopyEnabler(final Player ai, final List<Card> list) {
+        Card best = null;
+        int bestScore = 0;
+        for (final Card c : list) {
+            if (!c.isCreature() || !c.getController().equals(ai) || c.isEnchanted()) {
+                continue;
+            }
+            int score = 0;
+            for (final Trigger t : c.getTriggers()) {
+                if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Destination"))
+                        && t.getParam("ValidCard") != null && t.getParam("ValidCard").startsWith("Card.Self")) {
+                    score += 100;
+                }
+            }
+            if (score == 0 && c.getNetPower() >= 2 && !c.hasKeyword(Keyword.DEFENDER)) {
+                score = 10 * c.getNetPower();
+            }
+            if (score > 0) {
+                score += ComputerUtilCard.evaluateCreature(c) / 100;
+            }
+            if (score > bestScore) {
+                bestScore = score;
+                best = c;
+            }
+        }
+        return best;
+    }
+
     private static Card attachAIPumpPreference(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory, final Card attachSource) {
+        if ("SplinterTwin".equals(attachSource.getSVar("AttachAIPick"))) {
+            return attachAICopyEnabler(ai, list);
+        }
         // AI For choosing a Card to Pump
         Card card = null;
         List<Card> magnetList = null;

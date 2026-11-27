@@ -23,6 +23,7 @@ import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.CommanderDraftUtil;
 import forge.gamemodes.limited.IBoosterDraft;
 import forge.gamemodes.limited.IDraftLog;
 import forge.gamemodes.limited.LimitedPlayer;
@@ -257,7 +258,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
 
         humanDeck.setDraftNotes(player.getSerializedDraftNotes());
         if (((BoosterDraft) boosterDraft).isCommanderDraft()) {
-            humanDeck.getTags().add("CommanderDraft");
+            CommanderDraftUtil.markCommanderDraftDeck(humanDeck);
         }
         finishedDraft.setHumanDeck(humanDeck);
         finishedDraft.addAiDecks(computer);
@@ -274,8 +275,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
             CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
                     new CEditorCommanderDraftLimited(FModel.getDecks().getDraft(),
-                            FScreen.DECK_EDITOR_DRAFT, getCDetailPicture(),
-                            ((BoosterDraft) boosterDraft).getFreeCommanderName()));
+                            FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
         } else {
             Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
             CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited<>(FModel.getDecks().getDraft(), DeckGroup::new, FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));

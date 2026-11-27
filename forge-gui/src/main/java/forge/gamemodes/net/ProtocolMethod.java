@@ -9,6 +9,7 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
+import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.Selection;
@@ -62,7 +63,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     sideboard           (Mode.SERVER, List.class, CardPool.class, CardPool.class, String.class),
     chooseSingleEntityForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, DelayedReveal.class, Boolean.TYPE),
     chooseEntitiesForEffect(Mode.SERVER, List.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
-    manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
+    manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, ZoneType.class),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     setSelection        (Mode.SERVER, Void.TYPE, Selection.class),
     showRevealedCards   (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),

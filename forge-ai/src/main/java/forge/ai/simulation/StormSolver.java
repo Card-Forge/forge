@@ -281,6 +281,13 @@ public final class StormSolver {
         }
     }
 
+    /** The line is given up: its next play cannot be paid for, so it is searched again from where the game is. */
+    public void drop() {
+        line = null;
+        index = 0;
+        lastNote = "step not payable, line dropped";
+    }
+
     /** Whether the next step of the line answers the spell on the stack (and the spell is the AI's own). */
     public boolean expectsResponse(final Player ai) {
         if (line == null || index >= line.steps.size() || !line.steps.get(index).response) {

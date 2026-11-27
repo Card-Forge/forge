@@ -9,8 +9,10 @@ import forge.adventure.world.WorldSave;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.deck.Deck;
+import forge.gamemodes.quest.QuestController;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
+import forge.item.PreconDeck;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.IterableUtil;
@@ -58,6 +60,9 @@ public class RewardData implements Serializable {
     public RewardData[] rotation;
     public Deck cardPack;
     public String sourceDeck;
+    public String precon;
+    public String commanderPrecon;
+    public int cost;
     public String minDate;
 
     public RewardData() { }
@@ -92,14 +97,21 @@ public class RewardData implements Serializable {
         deckNeeds        = rewardData.deckNeeds == null ? null : rewardData.deckNeeds.clone();
         cardPack         = rewardData.cardPack;
         sourceDeck       = rewardData.sourceDeck;
+        precon           = rewardData.precon;
+        commanderPrecon  = rewardData.commanderPrecon;
+        cost             = rewardData.cost;
         minDate          = rewardData.minDate;
     }
 
     private static volatile Iterable<PaperCard> allCards;
     private static volatile Iterable<PaperCard> allEnemyCards;
+    // content whose author ignores excluded sets draws from its own pool
+    private static volatile Iterable<PaperCard> allCardsWithExcluded;
+    private static volatile Iterable<PaperCard> allEnemyCardsWithExcluded;
 
     static private synchronized void initializeAllCards() {
-        if (allCards != null && allEnemyCards != null)
+        boolean lifted = CardDb.areExclusionsLifted();
+        if ((lifted ? allCardsWithExcluded : allCards) != null)
             return; // another thread finished first
         ConfigData configData = Config.instance().getConfigData();
         RewardData legals = configData.legalCards;
@@ -117,9 +129,6 @@ public class RewardData implements Serializable {
         else
             filters.add(PaperCardPredicates.isObtainableAnyEdition());
 
-        if (Config.instance().getSettingData().excludeAlchemyVariants)
-            filters.add(PaperCardPredicates.IS_REBALANCED.negate());
-
         if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE))
             filters.add(pc -> !pc.getRules().hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante."));
 
@@ -131,8 +140,12 @@ public class RewardData implements Serializable {
         Set<String> restrictedCards = new HashSet<>(Arrays.asList(configData.restrictedCards));
         filters.add(pc -> !restrictedCards.contains(pc.getName()));
 
+        Collection<PaperCard> source = CardUtil.getFullCardPool(false);
+        if (Config.instance().appliesUserExclusions())
+            source = CardUtil.withAllowedPrints(new ArrayList<>(source));
+
         // Filter out specific cards.
-        List<PaperCard> pool = CardUtil.getFullCardPool(false).stream()
+        List<PaperCard> pool = source.stream()
                 .filter(IterableUtil.and(filters))
                 .collect(Collectors.toList());
 
@@ -142,19 +155,68 @@ public class RewardData implements Serializable {
             if (input != null && !forge.card.CardAiHints.isRemovedFromAiDecks(input.getRules()))
                 enemyPool.add(input);
         }
-        allEnemyCards = enemyPool;
-        allCards = pool; // assigned last: allCards != null implies the enemy pool is ready
+        // the full pool is assigned last: it being set implies the enemy pool is ready
+        if (lifted) {
+            allEnemyCardsWithExcluded = enemyPool;
+            allCardsWithExcluded = pool;
+        } else {
+            allEnemyCards = enemyPool;
+            allCards = pool;
+        }
     }
 
     static public Iterable<PaperCard> getAllCards() {
-        if (allCards == null)
-            initializeAllCards();
-        return allCards;
+        return cardPool(false);
     }
+
+    private static Iterable<PaperCard> cardPool(boolean forEnemy) {
+        boolean lifted = CardDb.areExclusionsLifted();
+        if ((lifted ? allCardsWithExcluded : allCards) == null)
+            initializeAllCards();
+        if (lifted)
+            return forEnemy ? allEnemyCardsWithExcluded : allCardsWithExcluded;
+        return forEnemy ? allEnemyCards : allCards;
+    }
+
+    private static boolean rewardChangedByExclusions;
+    public static final String IGNORES_EXCLUDED_SETS_TAG = "ignoresExcludedSets";
 
     public static void invalidateCardPool() {
         allCards = null;
         allEnemyCards = null;
+        allCardsWithExcluded = null;
+        allEnemyCardsWithExcluded = null;
+    }
+
+    public boolean givesOnlyExcludedCards() {
+        if (!Config.instance().appliesUserExclusions())
+            return false;
+        if (editions != null && editions.length > 0) {
+            return Arrays.stream(editions).allMatch(Config.instance().getExcludedEditionCodes()::contains);
+        }
+        if (sourceDeck != null && !sourceDeck.isEmpty())
+            return CardUtil.withAllowedPrints(CardUtil.getDeck(sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList()).isEmpty();
+        return false;
+    }
+
+    /** True when the player's exclusions leave out some of the cards this reward would give. */
+    public boolean losesExcludedCards() {
+        if (!Config.instance().appliesUserExclusions())
+            return false;
+        // a named card's change is recorded as the stock is generated
+        if (cardName != null && !cardName.isEmpty())
+            return false;
+        if (cardUnion != null && Arrays.stream(cardUnion).anyMatch(RewardData::losesExcludedCards))
+            return true;
+        if (editions != null && editions.length > 0) {
+            return Arrays.stream(editions).anyMatch(code -> Config.instance().getExcludedEditionCodes().contains(code)
+                    || Config.instance().getPartlyExcludedEditionCodes().contains(code));
+        }
+        if (sourceDeck != null && !sourceDeck.isEmpty()) {
+            List<PaperCard> cards = CardUtil.getDeck(sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList();
+            return CardUtil.withAllowedPrints(cards).size() < cards.size();
+        }
+        return false;
     }
 
     public Array<Reward> generate(boolean isForEnemy, boolean useSeedlessRandom) {
@@ -170,12 +232,22 @@ public class RewardData implements Serializable {
     }
 
     public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoSell) {
+        Array<Reward> rewards = rollRewards(isForEnemy, cards, useSeedlessRandom, isNoSell);
+        // a pack is opened later, away from the dungeon or enemy that gave it, so it carries the lift with it
+        if (!isForEnemy && Config.instance().liftsExclusionsLocally()) {
+            for (Reward reward : rewards) {
+                if (reward.getDeck() != null)
+                    reward.getDeck().getTags().add(IGNORES_EXCLUDED_SETS_TAG);
+            }
+        }
+        return rewards;
+    }
+
+    private Array<Reward> rollRewards(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoSell) {
         boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
         Random rewardRandom = useSeedlessRandom ? new Random() : WorldSave.getCurrentSave().getWorld().getRandom();
         //Keep using same generation method for shop rewards, but fully randomize loot drops by not using the instance pre-seeded by the map
 
-        if (allCards==null)
-            initializeAllCards();
         Array<Reward> ret=new Array<>();
 
         if (probability == 0 || rewardRandom.nextFloat() <= probability) {
@@ -193,47 +265,30 @@ public class RewardData implements Serializable {
                             if (pc != null)
                                 pool.add(pc);
                         } else if (r.sourceDeck != null && !r.sourceDeck.isEmpty() ) {
-                            pool.addAll(CardUtil.getDeck(r.sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList());
+                            pool.addAll(CardUtil.withAllowedPrints(CardUtil.getDeck(r.sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList()));
                         } else {
-                            pool.addAll(CardUtil.getPredicateResult(allCards, r));
+                            pool.addAll(CardUtil.getPredicateResult(cardPool(false), r));
                         }
                     }
                     ArrayList<PaperCard> finalPool = new ArrayList<>(pool);
 
                     if (finalPool.size() > 0){
                         for (int i = 0; i < count; i++) {
-                            if (allCardVariants) {
-                                PaperCard cardTemplate = finalPool.get(rewardRandom.nextInt(finalPool.size()));
-                                if (cardTemplate != null) {
-                                    PaperCard finalCard = CardUtil.getCardByNameAndEdition(
-                                            cardTemplate.getCardName(), cardTemplate.getEdition());
-                                    if (finalCard != null)
-                                        ret.add(new Reward(finalCard, isNoSell));
-                                }
-                            } else {
-                                PaperCard card = finalPool.get(rewardRandom.nextInt(finalPool.size()));
-                                if (card != null)
-                                    ret.add(new Reward(card, isNoSell));
-                            }
+                            PaperCard card = finalPool.get(rewardRandom.nextInt(finalPool.size()));
+                            if (card != null)
+                                ret.add(new Reward(CardUtil.randomVariant(card), isNoSell));
                         }
                     }
                     break;
                 case "card":
                 case "randomCard":
                     if (cardName != null && !cardName.isEmpty()) {
-                        CardDb.CardRequest request = CardDb.CardRequest.fromString(cardName);
                         PaperCard template = resolveNamedCard(cardName, editions, rewardRandom, allCardVariants);
                         if (template == null) {
                             System.err.println("Missing card: " + cardName);
                         } else {
-                            String editionToUse = template.getEdition();
-                            for (int i = 0; i < count + addedCount; i++) {
-                                PaperCard card = allCardVariants
-                                        ? CardUtil.getCardByNameAndEdition(request.cardName, editionToUse)
-                                        : template;
-                                if (card != null)
-                                    ret.add(new Reward(card, isNoSell));
-                            }
+                            for (int i = 0; i < count + addedCount; i++)
+                                ret.add(new Reward(CardUtil.randomVariant(template), isNoSell));
                         }
                     } else if (sourceDeck != null && !sourceDeck.isEmpty()) {
                         for( PaperCard card : CardUtil.generateCards(CardUtil.getDeck(sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList() ,this, count+addedCount, rewardRandom)) {
@@ -241,7 +296,7 @@ public class RewardData implements Serializable {
                                 ret.add(new Reward(card, isNoSell));
                         }
                     } else {
-                        for (PaperCard card : CardUtil.generateCards(isForEnemy ? allEnemyCards:allCards,this, count + addedCount, rewardRandom)) {
+                        for (PaperCard card : CardUtil.generateCards(cardPool(isForEnemy),this, count + addedCount, rewardRandom)) {
                             if (card != null)
                                 ret.add(new Reward(card, isNoSell));
                         }
@@ -281,6 +336,11 @@ public class RewardData implements Serializable {
                         if (this.editions != null && this.editions.length > 0) {
                             Set<String> allowed = new HashSet<>(Arrays.asList(this.editions));
                             allEditions.removeIf(q -> !allowed.contains(q.getCode()));
+                            // a shop's own list skips the plane's restrictions, but not the player's
+                            if (Config.instance().appliesUserExclusions()) {
+                                Set<String> excluded = Config.instance().getExcludedEditionCodes();
+                                allEditions.removeIf(q -> excluded.contains(q.getCode()));
+                            }
                         } else {
                             for (String restricted : configData.restrictedEditions) {
                                 allEditions.removeIf(q -> q.getCode().equals(restricted));
@@ -288,7 +348,7 @@ public class RewardData implements Serializable {
                             endDate = endDate == 0 ? 9999 : endDate;
                             allEditions.removeIf(q -> q.getDate().getYear()+1900 < startDate || q.getDate().getYear()+1900 > endDate);
                         }
-                        for (int i = 0; i < count + addedCount; i++) {
+                        for (int i = 0; i < count + addedCount && !allEditions.isEmpty(); i++) {
                             ret.add(new Reward(AdventureEventController.instance().generateBooster(
                                 allEditions.get(rewardRandom.nextInt(allEditions.size())).getCode())));
                         }
@@ -324,6 +384,16 @@ public class RewardData implements Serializable {
                         ret.add(new Reward(cardPack, isNoSell));
                     }
                     break;
+                case "deck": {
+                    Deck deck = loadRewardDeck();
+                    if (deck != null) {
+                        if (CardUtil.keepAllowedPrints(deck))
+                            rewardChangedByExclusions = true;
+                        deck.getTags().add(Reward.DECK_TAG);
+                        ret.add(new Reward(deck, isNoSell, cost));
+                    }
+                    break;
+                }
                 case "deckCard":
                     if (cards == null)
                         return ret;
@@ -345,6 +415,23 @@ public class RewardData implements Serializable {
             }
         }
         return ret;
+    }
+
+    private Deck loadRewardDeck() {
+        if (precon != null && !precon.isEmpty()) {
+            PreconDeck found = QuestController.getPrecons().get(precon);
+            if (found != null)
+                return (Deck) found.getDeck().copyTo(found.getDeck().getName());
+            System.err.println("Missing precon: " + precon);
+        } else if (commanderPrecon != null && !commanderPrecon.isEmpty()) {
+            Deck found = FModel.getDecks().getCommanderPrecons().get(commanderPrecon);
+            if (found != null)
+                return (Deck) found.copyTo(found.getName());
+            System.err.println("Missing commander precon: " + commanderPrecon);
+        } else if (sourceDeck != null && !sourceDeck.isEmpty()) {
+            return CardUtil.getDeck(sourceDeck, false, false, "", false, false);
+        }
+        return null;
     }
 
     static public List<PaperCard> generateAllCards(Iterable<RewardData> dataList, boolean isForEnemy) {
@@ -394,6 +481,39 @@ public class RewardData implements Serializable {
         if (edition == null && editions != null && editions.length > 0) {
             edition = editions[rewardRandom.nextInt(editions.length)];
         }
+        PaperCard card = resolveNamedPrint(request, cardName, edition, allCardVariants);
+        if (card == null)
+            return null;
+        PaperCard allowed = CardUtil.allowedPrint(card);
+        // an edition excluded whole is already swapped by getCardByNameAndEdition, so compare with the one asked for,
+        // leaving aside editions the plane itself rules out or that never held the card
+        boolean editionKept = edition == null || !Config.instance().isPlaneEdition(edition)
+                || !holdsCard(edition, request.cardName)
+                || allowed != null && allowed.getEdition().equals(edition);
+        if (allowed == null || !editionKept)
+            rewardChangedByExclusions = true;
+        return allowed;
+    }
+
+    private static boolean holdsCard(String editionCode, String cardName) {
+        CardEdition edition = StaticData.instance().getEditions().get(editionCode);
+        return edition != null && !edition.getCardInSet(cardName).isEmpty();
+    }
+
+    /** Has the next reward screen say that the player's exclusions changed some of its cards. */
+    public static void noteRewardChanged() {
+        rewardChangedByExclusions = true;
+    }
+
+    /** True once after the player's exclusions moved a card reward to another set or left it out. */
+    public static boolean takeRewardChangedByExclusions() {
+        boolean changed = rewardChangedByExclusions;
+        rewardChangedByExclusions = false;
+        return changed;
+    }
+
+    private static PaperCard resolveNamedPrint(CardDb.CardRequest request, String cardName, String edition,
+                                               boolean allCardVariants) {
         if (edition != null) {
             return CardUtil.getCardByNameAndEdition(request.cardName, edition);
         }

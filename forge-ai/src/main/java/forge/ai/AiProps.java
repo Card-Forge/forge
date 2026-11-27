@@ -181,6 +181,8 @@ public enum AiProps {
     /** Compare attack sets with rollouts (the opponent blocks in the copy) instead of taking the heuristic attack. */
     FLAT_MC_ATTACK("false"),
     FLAT_MC_OPPONENT_LOOKAHEAD("0"),
+    // The opponent may answer the AI's spells inside a rollout (off on phones and tablets).
+    FLAT_MC_OPPONENT_RESPONSES("true"),
     /** off, auto (read the deck) or one of aggro, burn, control, combo, ramp, midrange. */
     FLAT_MC_DECK_PLAN("auto"),
     /** Mulligan and bottom cards by the deck plan (see OpeningHand); also part of maximum strength. */

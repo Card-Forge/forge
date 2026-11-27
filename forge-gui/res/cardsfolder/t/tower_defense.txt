@@ -2,5 +2,4 @@ Name:Tower Defense
 ManaCost:1 G
 Types:Instant
 A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +5 | KW$ Reach | SpellDescription$ Creatures you control get +0/+5 and gain reach until end of turn.
-AI:RemoveDeck:All
 Oracle:Creatures you control get +0/+5 and gain reach until end of turn.

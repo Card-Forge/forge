@@ -31,6 +31,8 @@ import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.assets.ImageCache;
+import forge.card.CardDb;
+import forge.card.CardImageRenderer;
 import forge.error.ExceptionHandler;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gui.FThreads;
@@ -245,6 +247,7 @@ public class Forge implements ApplicationListener {
         altPlayerLayout = getForgePreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         animatedCardTapUntap = getForgePreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
         enableUIMask = getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING);
+        forge.card.CardImageRenderer.setFrameCacheEnabled(getForgePreferences().getPrefBoolean(FPref.UI_CACHE_CARD_FRAMES));
         if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
             enableUIMask = "Full";
         else if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("false"))
@@ -411,6 +414,7 @@ public class Forge implements ApplicationListener {
         FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(null);
         GuiBase.setAdventureCacheDirectory(null);
+        CardDb.setExclusionsSuspended(false);
         clearScreenStack();
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
@@ -651,6 +655,33 @@ public class Forge implements ApplicationListener {
 
     public static Clipboard getClipboard() {
         return clipboard;
+    }
+
+    /**
+     * Reads the clipboard and hands the text (never null) to {@code onText} on the UI thread.
+     * <p>
+     * On iOS the read happens on a background thread: reading text copied in another app
+     * makes iOS show its "Allow Paste" prompt, and the read blocks until the user answers.
+     * libGDX renders on the iOS main thread, and a blocking read there leaves the app frozen
+     * after the prompt is answered. Other platforms read synchronously as before
+     * (LWJGL's clipboard must be accessed from the main thread).
+     */
+    public static void readClipboard(final java.util.function.Consumer<String> onText) {
+        if (Gdx.app.getType() == Application.ApplicationType.iOS) {
+            FThreads.invokeInBackgroundThread(() -> {
+                String contents = null;
+                try {
+                    contents = clipboard.getContents();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                final String text = contents == null ? "" : contents;
+                FThreads.invokeInEdtLater(() -> onText.accept(text));
+            });
+        } else {
+            final String contents = clipboard.getContents();
+            onText.accept(contents == null ? "" : contents);
+        }
     }
 
     public static IDeviceAdapter getDeviceAdapter() {
@@ -1066,6 +1097,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void resume() {
         lifecycleClosing = false;
+        CardImageRenderer.FrameCache.clear(); //the contents of frame buffers are lost with the GL context; does not initialize CardImageRenderer
         setWindowFocus(true);
         try {
             Texture.setAssetManager(getAssets().manager());

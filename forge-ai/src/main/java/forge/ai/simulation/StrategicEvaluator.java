@@ -261,7 +261,7 @@ final class StrategicEvaluator {
             boolean outclassed = false;
             if (opp != null) {
                 for (final Card o : opp.getCreaturesInPlay()) {
-                    if (o.getNetPower() >= c.getNetToughness() && o.getNetToughness() > c.getNetPower()) {
+                    if (o.getNetCombatDamage() >= c.getNetToughness() && o.getNetToughness() > c.getNetCombatDamage()) {
                         outclassed = true;
                         break;
                     }

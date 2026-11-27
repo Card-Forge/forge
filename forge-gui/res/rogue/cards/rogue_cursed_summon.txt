@@ -1,0 +1,6 @@
+Name:Cursed - Summon
+ManaCost:no cost
+Types:Cursed
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Command | GameActivationLimit$ 1 | Execute$ TrigDig | TriggerDescription$ At the beginning of each opponent's first upkeep, that player reveals cards from the top of their library until they reveal a nonland permanent card with mana value 3 or less. They put that card onto the battlefield, then shuffle the rest into their library.
+SVar:TrigDig:DB$ DigUntil | Defined$ TriggeredPlayer | Valid$ Permanent.nonLand+cmcLE3 | ValidDescription$ nonland permanent with mana value 3 or less | FoundDestination$ Battlefield | RevealedDestination$ Library | Shuffle$ True
+Oracle:At the beginning of each opponent's first upkeep, that player reveals cards from the top of their library until they reveal a nonland permanent card with mana value 3 or less. They put that card onto the battlefield, then shuffle the rest into their library.

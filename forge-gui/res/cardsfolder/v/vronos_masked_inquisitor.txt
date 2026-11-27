@@ -2,7 +2,7 @@ Name:Vronos, Masked Inquisitor
 ManaCost:3 U U
 Types:Legendary Planeswalker Vronos
 Loyalty:5
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Planeswalker.YouCtrl+Other | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target other planeswalkers you control | SubAbility$ DelayedTrig | Planeswalker$ True | SpellDescription$ Up to two other target planeswalkers you control phase out at the beginning of the next end step. (Treat them and anything attached to them as though they don't exist until your next turn.)
+A:AB$ TargetOnly | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Planeswalker.YouCtrl+Other | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target other planeswalkers you control | SubAbility$ DelayedTrig | Planeswalker$ True | SpellDescription$ Up to two other target planeswalkers you control phase out at the beginning of the next end step. (Treat them and anything attached to them as though they don't exist until your next turn.)
 SVar:DelayedTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | ValidPlayer$ Player | Execute$ TrigPhase | RememberObjects$ Targeted | TriggerDescription$ Up to two other target planeswalkers you control phase out at the beginning of the next end step.
 SVar:TrigPhase:DB$ Phases | Defined$ DelayTriggerRememberedLKI
 A:AB$ ChangeZone | Origin$ Battlefield | Cost$ SubCounter<2/LOYALTY> | Destination$ Hand | Planeswalker$ True | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | TgtPrompt$ Select up to one target nonland permanent each opponent controls | SpellDescription$ For each opponent, return up to one target nonland permanent that player controls to its owner's hand.

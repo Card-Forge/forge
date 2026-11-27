@@ -248,7 +248,7 @@ public class ComputerUtilCost {
                 int amount = payLife.getAbilityAmount(sourceAbility);
 
                 // check if there's override for the remainingLife threshold
-                if (sourceAbility != null && sourceAbility.hasParam("AILifeThreshold")) {
+                if (sourceAbility != null && ai.isAI() && sourceAbility.hasParam("AILifeThreshold")) {
                     remainingLife = Integer.parseInt(sourceAbility.getParam("AILifeThreshold"));
                 }
 
@@ -258,6 +258,21 @@ public class ComputerUtilCost {
             }
         }
         return true;
+    }
+
+    /**
+     * The life the AI keeps when an activated ability costs it life: the script's AILifeThreshold, else the default
+     * (what {@link #checkLifeCost} is given for a PayLife cost; Phyrexian mana paid with life has to respect it too).
+     */
+    public static int lifeToKeep(final SpellAbility sa, final int defaultLife) {
+        if (sa != null && sa.hasParam("AILifeThreshold")) {
+            try {
+                return Integer.parseInt(sa.getParam("AILifeThreshold"));
+            } catch (final NumberFormatException e) {
+                return defaultLife;
+            }
+        }
+        return defaultLife;
     }
 
     public static boolean checkForManaSacrificeCost(final Player ai, final Cost cost, final SpellAbility sourceAbility, final boolean effect) {
@@ -365,11 +380,18 @@ public class ComputerUtilCost {
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice sac) {
                 if (sac.payCostFromSource()) {
+                    if (ComputerUtil.sacrificePunished(ai, source)) {
+                        return false; // the sacrifice is punished (Bloodroot Apothecary's poison)
+                    }
                     if (!important) {
                         return false;
                     }
                     if (!CardLists.filterControlledBy(source.getEnchantedBy(), source.getController()).isEmpty()) {
                         return false;
+                    }
+                    // Vampire Hexmage: giving up the source is the point when it frees an impending permanent or the like
+                    if (sourceAbility != null && forge.ai.ability.CountersRemoveAi.worthwhileOwnTarget(ai, sourceAbility) != null) {
+                        continue;
                     }
                     if (source.isCreature()) {
                         // e.g. Sakura-Tribe Elder
@@ -379,7 +401,8 @@ public class ComputerUtilCost {
                                 && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, combat);
                         final int lifeThreshold = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_THRESHOLD);
                         final boolean aiInDanger = ai.getLife() <= lifeThreshold && ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife();
-                        if (creatureInDanger && !ComputerUtilCombat.isDangerousToSacInCombat(ai, source, combat)) {
+                        if (creatureInDanger && (!ComputerUtilCombat.isDangerousToSacInCombat(ai, source, combat)
+                                || preventsCombatDamage(sourceAbility))) {
                             return true;
                         } else if (aiInDanger || !beforeNextTurn) {
                             return false;
@@ -453,6 +476,16 @@ public class ComputerUtilCost {
         return false;
     }
 
+    /** A Fog prevents all combat damage; a bounded PreventDamage shield may not stop trample. */
+    public static boolean preventsCombatDamage(final SpellAbility sa) {
+        for (SpellAbility ability = sa; ability != null; ability = ability.getSubAbility()) {
+            if (ability.getApi() == ApiType.Fog && ability.metConditions()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Check TapType cost.
      *
@@ -492,6 +525,9 @@ public class ComputerUtilCost {
                     if (alreadyTapped != null) {
                         exclude.addAll(alreadyTapped);
                     }
+                    if (sa != null) {
+                        exclude.addAll(sa.getTappedForConvoke());
+                    }
                     CardCollection tapChoices = ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, sa.isCrew() || !((CostTapType) part).canTapSource, Integer.parseInt(totalP), exclude);
                     if (tapChoices != null) {
                         if (alreadyTapped != null) {
@@ -510,6 +546,9 @@ public class ComputerUtilCost {
                 CardCollection exclude = new CardCollection();
                 if (alreadyTapped != null) {
                     exclude.addAll(alreadyTapped);
+                }
+                if (sa != null) {
+                    exclude.addAll(sa.getTappedForConvoke());
                 }
                 // trying to produce mana that includes tapping source that will already be tapped
                 if (exclude.contains(source) && cost.hasTapCost()) {

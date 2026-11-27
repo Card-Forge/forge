@@ -249,7 +249,7 @@ public class EffectAi extends SpellAbilityAi {
                 final SpellAbility saTop = game.getStack().peekAbility();
                 final Card host = saTop.getHostCard();
                 if (saTop.getActivatingPlayer() != ai // from opponent
-                        && host.canDamagePrevented(false) // no prevent damage
+                        && host.canDamagePrevented(null, false) // no prevent damage
                         && (host.isInstant() || host.isSorcery())
                         && !host.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")) { // valid target
                     final ApiType type = saTop.getApi();
@@ -854,6 +854,9 @@ public class EffectAi extends SpellAbilityAi {
     @Override
     public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final String aiLogic = sa.getParam("UnlessAI");
+        if ("AttackTaxDraw".equals(aiLogic) && !AttackRestrictionDeal.worthTaking(payer, sa.getHostCard().getController())) {
+            return false; // Willie Lumpkin: the card is not worth an attack it wants to make
+        }
         if ("WillAttack".equals(aiLogic)) {
             // TODO use AiController::getPredictedCombat
             AiAttackController aiAtk = new AiAttackController(payer);

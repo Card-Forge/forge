@@ -52,7 +52,14 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AbilityUtils {
+public class AbilityUtils implements IHasForgeParams {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AbilityCount", "AnnounceMax", "ETB", "ForgetOtherTargets", "GiftAbility",
+        "IncludeAllComponentCards", "LockInText", "RememberCostMana", "RememberTargets",
+        "UnlessColor", "UnlessCost", "UnlessPayer", "UnlessResolveSubs", "UnlessSwitched",
+        "UnlessUpTo", "XMax", "XMin",
+    };
+
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
 
     // should the three getDefined functions be merged into one? Or better to
@@ -653,7 +660,7 @@ public class AbilityUtils {
                 val = handlePaid(tgtList, calcX[1], card, ability);
             }
             else if (calcX[0].equals("TriggeredSpellAbility") || calcX[0].equals("SpellTargeted")) {
-                final SpellAbility sat = Iterables.getFirst(getDefinedSpellAbilities(card, calcX[0], sa), null);
+                final SpellAbility sat = getDefinedSpellAbilities(card, calcX[0], sa).getFirst();
                 val = sat == null ? 0 : xCount(sat.getHostCard(), calcX[1], sat);
             }
             else if (calcX[0].startsWith("ReplaceCount")) {

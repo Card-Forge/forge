@@ -40,11 +40,15 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         final String[] desc = sa.getDescription().split(":");
 
-        if (desc.length > 1) {
-            return desc[1];
-        } else {
-            return desc[0];
+        String text = desc.length > 1 ? desc[1] : desc[0];
+        if (sa.getSubAbility() != null) {
+            // the card's whole text is the description of its first part: the parts after it describe themselves
+            final int end = text.indexOf(". ");
+            if (end > 0) {
+                text = text.substring(0, end + 1);
+            }
         }
+        return text;
     }
 
     @Override
@@ -68,6 +72,12 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             cards = tgtPlayers.getCardsIn(origin);
         }
 
+        cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
+
+        if (sa.hasParam("TypeLimit")) {
+            cards = new CardCollection(Iterables.limit(cards, AbilityUtils.calculateAmount(source, sa.getParam("TypeLimit"), sa)));
+        }
+
         if (sa.hasParam("Optional")) {
             final String targets = Lang.joinHomogenous(cards);
             final String message;
@@ -81,12 +91,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message, cardToShow, null)) {
                 return;
             }
-        }
-
-        cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
-
-        if (sa.hasParam("TypeLimit")) {
-            cards = new CardCollection(Iterables.limit(cards, AbilityUtils.calculateAmount(source, sa.getParam("TypeLimit"), sa)));
         }
 
         if (sa.hasParam("ForgetOtherRemembered")) {
@@ -125,9 +129,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 game.getStack().remove(c);
             }
 
-            if (remLKI) {
-                source.addRemembered(CardCopyService.getLKICopy(c));
-            }
+            final Card lkiCopy = remLKI ? CardCopyService.getLKICopy(c) : null;
 
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             AbilityKey.addCardZoneTableParams(moveParams, triggerList);
@@ -164,6 +166,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.turnFaceDown(true);
                 }
+            }
+
+            if (lkiCopy != null && movedCard.getZone().is(destination)) {
+                source.addRemembered(lkiCopy);
             }
 
             if (!movedCard.getZone().equals(originZone)) {

@@ -4,6 +4,7 @@ import forge.GuiDesktop;
 import forge.gamemodes.match.HostedMatch;
 import forge.util.IHasForgeLog;
 import forge.gui.interfaces.IGuiGame;
+import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
 
@@ -83,6 +84,11 @@ public class HeadlessGuiDesktop extends GuiDesktop implements IHasForgeLog {
     @Override
     public void showImageDialog(final ISkinImage image, final String message, final String title) {
         System.err.println("[HeadlessGuiDesktop] " + title + ": " + message);
+    }
+
+    @Override
+    public ISkinImage createLayeredImage(final PaperCard paperCard, final FSkinProp background, final String overlayFilename, final float opacity) {
+        return null;
     }
 
     @Override

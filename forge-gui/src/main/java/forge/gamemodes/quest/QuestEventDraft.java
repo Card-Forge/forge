@@ -440,7 +440,7 @@ public class QuestEventDraft implements IQuestEvent {
 
                 if (card.rarity() == CardRarity.Rare || card.rarity() == CardRarity.MythicRare) {
                     final PaperCard cardToAdd = StaticData.instance().fetchCard(card.name(), edition.getCode(), card.collectorNumber());
-                    if (cardToAdd != null) {
+                    if (cardToAdd != null && !StaticData.instance().isHidden(cardToAdd)) {
                         possibleCards.add(cardToAdd);
                         cardNames.add(card.name());
                     }
@@ -459,7 +459,7 @@ public class QuestEventDraft implements IQuestEvent {
 
     private PaperCard getPromoCard() {
         final CardEdition randomEdition = getRandomEdition();
-        final List<EditionEntry> cardsInEdition = new ArrayList<>();
+        final List<PaperCard> cardsInEdition = new ArrayList<>();
         final HashSet<String> cardNames = new HashSet<>();
 
         for (final EditionEntry card : randomEdition.getObtainableCards()) {
@@ -468,8 +468,11 @@ public class QuestEventDraft implements IQuestEvent {
             }
 
             if (card.rarity() == CardRarity.Rare || card.rarity() == CardRarity.MythicRare) {
-                cardsInEdition.add(card);
-                cardNames.add(card.name());
+                final PaperCard cardToAdd = StaticData.instance().fetchCard(card.name(), randomEdition.getCode(), card.collectorNumber());
+                if (cardToAdd != null && !StaticData.instance().isHidden(cardToAdd)) {
+                    cardsInEdition.add(cardToAdd);
+                    cardNames.add(card.name());
+                }
             }
         }
 
@@ -478,21 +481,7 @@ public class QuestEventDraft implements IQuestEvent {
             return FModel.getQuest().getCards().addRandomRare();
         }
 
-        EditionEntry randomCard;
-        PaperCard promo = null;
-
-        int attempts = 25;
-
-        while (promo == null && attempts-- > 0) {
-            randomCard = cardsInEdition.get((int) (MyRandom.getRandom().nextDouble() * cardsInEdition.size()));
-            promo = StaticData.instance().fetchCard(randomCard.name(), randomEdition.getCode(), randomCard.collectorNumber());
-        }
-
-        if (promo == null) {
-            return FModel.getQuest().getCards().addRandomRare();
-        }
-
-        return promo;
+        return cardsInEdition.get((int) (MyRandom.getRandom().nextDouble() * cardsInEdition.size()));
     }
 
     private CardEdition getRandomEdition() {

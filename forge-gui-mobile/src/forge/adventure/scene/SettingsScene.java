@@ -1,8 +1,10 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
@@ -37,6 +39,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  */
 public class SettingsScene extends UIScene {
     private final Table settingGroup;
+    private boolean rebuildOnEnter;
     TextraButton backButton;
     TextraButton newPlane;
     ScrollPane scrollPane;
@@ -104,12 +107,41 @@ public class SettingsScene extends UIScene {
 
     private SettingsScene() {
         super(Forge.isLandscapeMode() ? "ui/settings.json" : "ui/settings_portrait.json");
-        Localizer localizer = Forge.getLocalizer();
 
         settingGroup = new Table();
         selectSourcePlane = Controls.newComboBox();
         newPlaneName = Controls.newTextField("");
         selectSourcePlane.setItems(Config.instance().getAllAdventures());
+        fillSettings();
+
+        backButton = ui.findActor("return");
+        ui.onButtonPress("return", SettingsScene.this::back);
+        ui.onButtonPress("general", () -> {
+            rebuildOnEnter = true;
+            Forge.switchScene(GeneralSettingsScene.instance());
+        });
+        TextraButton general = ui.findActor("general");
+        general.getTextraLabel().setWrap(true);
+        general.getTextraLabel().setAlignment(Align.center);
+
+        scrollPane = ui.findActor("settings");
+        scrollPane.setActor(settingGroup);
+        addToSelectable(settingGroup);
+    }
+
+    @Override
+    public void enter() {
+        // General Settings can change preferences that rows here also show
+        if (rebuildOnEnter) {
+            rebuildOnEnter = false;
+            fillSettings();
+        }
+        super.enter();
+    }
+
+    private void fillSettings() {
+        Localizer localizer = Forge.getLocalizer();
+        settingGroup.clear();
         SelectBox plane = Controls.newComboBox(Config.instance().getAllAdventures(), Config.instance().getSettingData().plane, o -> {
             Config.instance().getSettingData().plane = (String) o;
             Config.instance().saveSettings();
@@ -269,18 +301,18 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
-        addSettingField(localizer.getMessage("lblExcludeAlchemyVariants"), Config.instance().getSettingData().excludeAlchemyVariants, new ChangeListener() {
+        TextraButton excludedSets = Controls.newTextButton(String.valueOf(FModel.getExcludedEditionCodes().size()));
+        excludedSets.addListener(new ClickListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Config.instance().getSettingData().excludeAlchemyVariants = ((CheckBox) actor).isChecked();
-                Config.instance().saveSettings();
-                RewardData.invalidateCardPool();
+            public void clicked(InputEvent event, float x, float y) {
+                Forge.switchScene(ExcludedSetsScene.getInstance(
+                    () -> excludedSets.setText(String.valueOf(FModel.getExcludedEditionCodes().size()))));
             }
         });
+        addLabel(localizer.getMessage("lblExcludedSets"));
+        settingGroup.add(excludedSets).align(Align.right).pad(2);
         addCheckBox(localizer.getMessage("lblEnableUnknownCards") + " (" +
             localizer.getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_UNKNOWN_CARDS, this::restartForge);
-        addCheckBox(localizer.getMessage("lblEnableNonLegalCards") + " (" +
-            localizer.getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_NONLEGAL_CARDS, this::restartForge);
         addSettingField(localizer.getMessage("lblGenerateLDADecks"), Config.instance().getSettingData().generateLDADecks, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -422,12 +454,6 @@ public class SettingsScene extends UIScene {
         addCheckBox(localizer.getMessage("lblVibrateOnShopAction"), ForgePreferences.FPref.UI_VIBRATE_ON_SHOP_ACTION);
 
         settingGroup.row();
-        backButton = ui.findActor("return");
-        ui.onButtonPress("return", SettingsScene.this::back);
-
-        scrollPane = ui.findActor("settings");
-        scrollPane.setActor(settingGroup);
-        addToSelectable(settingGroup);
     }
 
 

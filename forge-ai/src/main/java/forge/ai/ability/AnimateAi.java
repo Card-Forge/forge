@@ -5,7 +5,9 @@ import com.google.common.collect.Maps;
 
 import forge.ai.*;
 import forge.card.CardType;
+import forge.card.CardTypeView;
 import forge.card.ColorSet;
+import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -16,6 +18,7 @@ import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPutCounter;
 import forge.game.keyword.Keyword;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -29,7 +32,9 @@ import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import forge.util.collect.FCollectionView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +48,9 @@ import java.util.Map;
  */
 
 public class AnimateAi extends SpellAbilityAi {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AITgts", "AITgtsStrict",
+    };
 
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
@@ -143,6 +151,51 @@ public class AnimateAi extends SpellAbilityAi {
     }
 
     /**
+     * An "until end of turn" animate of a land by itself (Celestial Colonnade, Mutavault, Mishra's Factory) whose mana the
+     * other lands cannot make: it would tap itself to pay and be a tapped creature that cannot block or attack. Not
+     * counted: a cost that has an X, and lands that have no mana ability.
+     */
+    public static boolean needsItsOwnMana(final Player ai, final SpellAbility ability) {
+        final SpellAbility sa = ability.getRootAbility();
+        final Card host = sa.getHostCard();
+        if (sa.getApi() != ApiType.Animate || host == null || !host.isLand() || !host.isInZone(ZoneType.Battlefield)
+                || host.isTapped() || host.getManaAbilities().isEmpty() || sa.getPayCosts() == null
+                || sa.getPayCosts().getCostMana() == null || sa.costHasManaX() || sa.usesTargeting()
+                || "Permanent".equals(sa.getParam("Duration"))
+                || !"Self".equals(sa.getParamOrDefault("Defined", "Self"))) {
+            return false;
+        }
+        final ManaCostBeingPaid cost = new ManaCostBeingPaid(sa.getPayCosts().getCostMana().getMana());
+        final List<Card> others = new ArrayList<>();
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c != host && !c.isTapped() && !c.getManaAbilities().isEmpty()) {
+                others.add(c);
+            }
+        }
+        if (others.size() < cost.getConvertedManaCost()) {
+            return true;
+        }
+        for (final ManaCostShard shard : cost.getDistinctShards()) {
+            if (shard.isGeneric() || shard.isColorless() || !shard.isMonoColor()) {
+                continue;
+            }
+            int needed = cost.getUnpaidShards(shard);
+            for (final Card c : others) {
+                for (final SpellAbility ma : c.getManaAbilities()) {
+                    if (ma.canProduce(shard.toString().replaceAll("[{}]", ""))) {
+                        needed--;
+                        break;
+                    }
+                }
+            }
+            if (needed > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * A permanent "{X}: CARDNAME has base power and toughness X/X" (Gigantoplasm, or a copy of it) that, with all the mana
      * that can be spared as X, would not make the creature any bigger: it changes nothing and, being permanent, is allowed
      * at any time, so the AI would otherwise repeat it at every priority pass.
@@ -151,7 +204,7 @@ public class AnimateAi extends SpellAbilityAi {
         sa = sa.getRootAbility();
         if (sa.getApi() != ApiType.Animate || sa.usesTargeting() || !"Permanent".equals(sa.getParam("Duration"))
                 || !sa.hasParam("Power") || !sa.hasParam("Toughness")
-                || !("Self".equals(sa.getParam("ValidCards")) || "Self".equals(sa.getParam("Defined")))) {
+                || !"Self".equals(sa.getParamOrDefault("Defined", "Self"))) {
             return false;
         }
         if (sa.hasParam("Keywords") || sa.hasParam("HiddenKeywords") || sa.hasParam("Types") || sa.hasParam("RemoveTypes")
@@ -291,6 +344,9 @@ public class AnimateAi extends SpellAbilityAi {
                 return new AiAbilityDecision(100, AiPlayDecision.ResponseToStackResolve);
             }
         }
+        if (needsItsOwnMana(aiPlayer, sa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
+        }
         if (isPointlessSelfAnimate(aiPlayer, sa)) {
             return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactCombat);
         }
@@ -317,6 +373,13 @@ public class AnimateAi extends SpellAbilityAi {
             bFlag |= !c.isCreature() && !c.isTapped()
                     && (!c.hasSickness() || givesHaste || !ph.isPlayerTurn(aiPlayer))
                     && !c.isEquipping();
+
+            // A permanent Animate can be useful even when it leaves P/T unchanged: Figure-of-Destiny-style
+            // transformations and Nog's Scout-to-Officer promotion change the creature types instead.
+            if (!bFlag && (sa.hasParam("Types") || sa.hasParam("RemoveTypes") || sa.hasParam("RemoveCreatureTypes"))) {
+                final Card animatedCopy = becomeAnimated(c, sa);
+                bFlag = hasDifferentCardType(c, animatedCopy);
+            }
 
             // for creatures that could be improved (like Figure of Destiny)
             if (!bFlag && c.isCreature() && ("Permanent".equals(sa.getParam("Duration")) || (!c.isTapped() && !c.isSick()))) {
@@ -374,6 +437,14 @@ public class AnimateAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
+
+    private static boolean hasDifferentCardType(final Card current, final Card projected) {
+        final CardTypeView oldType = current.getType();
+        final CardTypeView newType = projected.getType();
+        return !new HashSet<>(oldType.getCoreTypes()).equals(new HashSet<>(newType.getCoreTypes()))
+                || !new HashSet<>(oldType.getSupertypes()).equals(new HashSet<>(newType.getSupertypes()))
+                || !new HashSet<>(oldType.getSubtypes()).equals(new HashSet<>(newType.getSubtypes()));
     }
 
     @Override

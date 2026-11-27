@@ -193,4 +193,17 @@ public class FlatMonteCarloNamedDiscardTest extends AITest {
         aimDiscardAt(sa, opp);
         AssertJUnit.assertNull(forge.ai.simulation.ComboGuard.problem(ai, sa, null, plan));
     }
+
+    @Test
+    public void aRolloutCandidateWithoutATargetIsAimedAtTheOpponent() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        final SpellAbility sa = setUp(game, ai);
+        addCardToZone("Plains", opp, ZoneType.Hand);
+        addCardToZone("Plains", opp, ZoneType.Hand);
+        AssertJUnit.assertNull("nothing aimed it yet", NamedDiscard.discardTarget(sa));
+        NamedDiscard.aimIfUntargeted(ai, sa);
+        AssertJUnit.assertEquals(opp, NamedDiscard.discardTarget(sa));
+    }
 }

@@ -5,5 +5,4 @@ A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBExile | SpellDescription$ Tap ta
 SVar:DBExile:DB$ ChangeZone | Condition$ Metalcraft | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | ConditionDescription$ If you control three or more artifacts,
 SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$Valid Artifact.YouCtrl
-AI:RemoveDeck:All
 Oracle:Tap target creature.\nMetalcraft — If you control three or more artifacts, exile that creature.

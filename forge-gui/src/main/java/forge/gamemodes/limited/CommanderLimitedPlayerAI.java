@@ -19,6 +19,7 @@ package forge.gamemodes.limited;
 
 import forge.card.ColorSet;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
@@ -43,33 +44,22 @@ import java.util.stream.Collectors;
  *
  * <p>Deck construction uses {@link CardThemedCommanderDeckBuilder} with
  *  (60-card-minimum, non-singleton, color identity enforced).
- * If no commander was drafted the AI falls back to the
- * edition's free-commander name from CR 903.13e.
+ * If no commander was drafted the AI falls back to a free commander
+ * of the drafted sets from CR 903.13e.
  */
 public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
 
     private PaperCard commander = null;
     private PaperCard partner = null;
-    private boolean partnerEligible = false;
-    private final String freeCommanderName;
-    private final String impliedPartner;
 
     /**
      * Construct a commander-draft AI player.
      *
-     * @param seatingOrder      seat index in the draft pod (1-based for AI)
+     * @param seatingOrder      seat index in the draft pod
      * @param draft             the owning {@link BoosterDraft}
-     * @param freeCommanderName name of the edition's free commander card, or
-     *                          {@code null} / empty if none
-     * @param impliedPartner    name of the edition's implied partner card, or
      */
-    public CommanderLimitedPlayerAI(final int seatingOrder, final BoosterDraft draft,
-                                    final String freeCommanderName, String impliedPartner) {
+    public CommanderLimitedPlayerAI(final int seatingOrder, final BoosterDraft draft) {
         super(seatingOrder, draft);
-        this.freeCommanderName = freeCommanderName != null && !freeCommanderName.isEmpty()
-                ? freeCommanderName : null;
-        this.impliedPartner = (impliedPartner != null && !impliedPartner.isEmpty())
-                ? impliedPartner : null;
         // Replace the base DeckColors with a commander-identity-aware variant
         this.deckCols = new CommanderDeckColors();
     }
@@ -94,8 +84,8 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
             return pickCommander(chooseFrom);
         }
 
-        // Phase 2 — partner selection (if eligible)
-        if (partnerEligible && partner == null) {
+        // Phase 2 — partner selection
+        if (partner == null) {
             final PaperCard partnerPick = tryPickPartner(chooseFrom);
             if (partnerPick != null) {
                 return partnerPick;
@@ -143,16 +133,9 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
         final ColorSet identity = commander.getRules().getColorIdentity();
         ((CommanderDeckColors) deckCols).lockToColorIdentity(identity);
 
-        // Partner-eligible: ≤1-color Commander Draft rule, explicit Partner keyword,
-        // "Choose a Background" (pairs with Background enchantments), or Background
-        // itself (pairs with a "Choose a Background" legend).
-        partnerEligible = (identity.countColors() <= 1 && this.impliedPartner != null)
-                || commander.getRules().canBePartnerCommander();
-
         if (ForgePreferences.DEV_MODE) {
             System.out.println("Player[" + order + "] selected commander: " + commander
-                    + " identity=" + identity
-                    + " partnerEligible=" + partnerEligible);
+                    + " identity=" + identity);
         }
         return commander;
     }
@@ -239,24 +222,18 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
     }
 
     /**
-     * Resolve the free commander available for this draft, trying the
-     * edition-specific name first, then the universal fallbacks.
+     * Resolve a free commander of the sets this player drafted from.
      *
      * @return a {@link PaperCard} for the free commander, or {@code null} if
      *         none could be found in the card database
      */
     private PaperCard resolveFallbackCommander() {
-        if (freeCommanderName != null) {
-            final PaperCard free = FModel.getMagicDb().getCommonCards().getCard(freeCommanderName);
+        for (final String name : DeckFormat.getFreeCommanders(deck.getOrCreate(DeckSection.Sideboard).toFlatList())) {
+            final PaperCard free = FModel.getMagicDb().getCommonCards().getCard(name);
             if (free != null) {
                 return free;
             }
         }
-
-        if (impliedPartner != null) {
-            // For MBC, we can use fake color mana identities. FIgure out how that works
-        }
-
         return null;
     }
 

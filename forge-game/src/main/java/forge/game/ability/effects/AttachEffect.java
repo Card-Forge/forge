@@ -27,6 +27,11 @@ import forge.util.collect.FCollection;
 import com.google.common.collect.Maps;
 
 public class AttachEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "ChoiceTitle", "ChoiceZone", "Chooser", "Defined", "Move", "Object", "Optional",
+        "PlayerChoices", "RememberAttached",
+    };
+
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
@@ -177,12 +182,34 @@ public class AttachEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(" ").append(Localizer.getInstance().getMessage("lblAttachTo")).append(" ");
+        final String attachTo = Localizer.getInstance().getMessage("lblAttachTo").trim();
+        // what is attached: the card itself unless the script says otherwise (the word order is English only)
+        final boolean sayObject = attachTo.matches("(?i).*\\sto$");
+        if (sayObject) {
+            sb.append(attachTo, 0, attachTo.length() - 2).append(" ");
+            final String object = sa.getParamOrDefault("Object", "Self");
+            if (object.equals("Self")) {
+                sb.append(sa.getHostCard());
+            } else {
+                final List<Card> objects = AbilityUtils.getDefinedCards(sa.getHostCard(), object, sa);
+                sb.append(objects.isEmpty() ? "it" : Lang.joinHomogenous(objects));
+            }
+            sb.append(" to ");
+        } else {
+            sb.append(attachTo).append(" ");
+        }
 
         final List<GameObject> targets = getTargets(sa);
         // Should never allow more than one Attachment per card
-
-        sb.append(Lang.joinHomogenous(targets));
+        final String[] validTgts = sa.usesTargeting() ? sa.getTargetRestrictions().getValidTgts() : null;
+        if (!targets.isEmpty()) {
+            sb.append(Lang.joinHomogenous(targets));
+        } else if (validTgts != null && validTgts.length > 0) {
+            sb.append("target ").append(Lang.getInstance().describeValidList(String.join(",", validTgts)));
+        } else {
+            sb.append("a permanent");
+        }
+        sb.append(".");
         return sb.toString();
     }
 }

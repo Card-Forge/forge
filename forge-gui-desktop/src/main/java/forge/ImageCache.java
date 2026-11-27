@@ -449,7 +449,8 @@ public class ImageCache {
 
         boolean noBorder = !useArtCrop && !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS);
         boolean fetcherEnabled = isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
-        boolean isPlaceholder = (original == null) && fetcherEnabled;
+        // Custom cards are not fetched, so their rendered images can be cached.
+        boolean isPlaceholder = (original == null) && fetcherEnabled && (ipc == null || !ipc.getRules().isCustom());
         String setCode = imageKey.split("/")[0].trim().toUpperCase();
 
         // If the user has indicated that they prefer Forge NOT render a black border, round the image corners
@@ -584,6 +585,10 @@ public class ImageCache {
         } else {
             int destWidth  = (int)(original.getWidth()  * bestFitScale);
             int destHeight = (int)(original.getHeight() * bestFitScale);
+            if (!isSupportedImageSize(destWidth, destHeight)) {
+                // keeping the aspect ratio can shrink one side below what the resampler accepts
+                return null;
+            }
 
             ResampleOp resampler = new ResampleOp(destWidth, destHeight);
             result = resampler.filter(original, null);

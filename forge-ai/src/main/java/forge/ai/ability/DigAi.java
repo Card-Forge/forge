@@ -130,6 +130,19 @@ public class DigAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     
+    /** A legendary card whose namesake the player already controls (other than {@code leaving}, which is about to go). */
+    public static boolean legendIsAlreadyHere(final Player ai, final Card c, final Card leaving) {
+        if (c == null || !c.getType().isLegendary()) {
+            return false;
+        }
+        for (final Card p : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (p != leaving && p.getType().isLegendary() && p.getName().equals(c.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> valid, boolean isOptional, Player relatedPlayer, Map<String, Object> params) {
         String logic = sa.getParamOrDefault("AILogic", "");
@@ -153,6 +166,21 @@ public class DigAi extends SpellAbilityAi {
                 }
             }
             return null;
+        }
+
+        if ("Battlefield".equalsIgnoreCase(sa.getParamOrDefault("DestinationZone", "")) && relatedPlayer == ai
+                && sa.getActivatingPlayer() == ai) {
+            // a second copy of a legend it already controls only goes to the legend rule (Birthing Ritual, Phelia)
+            final CardCollection fresh = new CardCollection();
+            for (final Card c : valid) {
+                if (!legendIsAlreadyHere(ai, c, null)) {
+                    fresh.add(c);
+                }
+            }
+            if (fresh.isEmpty()) {
+                return isOptional ? null : ComputerUtilCard.getWorstAI(valid);
+            }
+            return ComputerUtilCard.getBestAI(fresh);
         }
 
         // For an ordinary self-dig that puts a card from the AI's library into its hand, prefer a missing

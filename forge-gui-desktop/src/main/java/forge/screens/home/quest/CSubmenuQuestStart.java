@@ -248,7 +248,7 @@ public enum CSubmenuQuestStart implements ICDoc {
 
         final QuestController qc = FModel.getQuest();
 
-        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName(), userPrefs, dcr);
+        boolean startingDeckChanged = qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName(), userPrefs, dcr);
         FModel.getQuest().save();
 
         // Save in preferences.
@@ -257,6 +257,9 @@ public enum CSubmenuQuestStart implements ICDoc {
 
         // Change to QuestDecks screen
         CHomeUI.SINGLETON_INSTANCE.itemClick(VSubmenuQuestDecks.SINGLETON_INSTANCE.getDocumentID());
+        if (startingDeckChanged)
+            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblStarterDeckChangedByExclusions"),
+                    Localizer.getInstance().getMessage("lblExcludedSets"));
     }
 
     private Map<String, QuestData> getAllQuests() {
