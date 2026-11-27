@@ -165,14 +165,18 @@ public class RogueFlowTest extends AITest {
     }
 
     /** Enters the current plane and ends its match by a concession before it starts. */
-    private RogueWinLoseController fight(boolean win) {
+    private RogueWinLoseController fight(boolean win, int endingLife) {
         RogueMatch match = startedMatch();
         run.setHostedMatch(new HostedMatch());
         GameRules rules = new GameRules(GameType.RogueCommander);
         rules.setAppliedVariants(match.variants());
         Game game = new Match(rules, match.players(), "Rogue").createGame();
         for (Player player : game.getRegisteredPlayers()) {
-            if ((player.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer()) != win) {
+            boolean human = player.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer();
+            if (human) {
+                player.setLife(endingLife, null);
+            }
+            if (human != win) {
                 player.concede();
             }
         }
@@ -251,12 +255,13 @@ public class RogueFlowTest extends AITest {
                 return List.of(offered.get(0));
             });
         }
-        RogueWinLoseController result = fight(true);
+        RogueWinLoseController result = fight(true, 14);
         Assert.assertEquals(asked, List.of("startMatch", "show", "show"));
         Assert.assertEquals(RogueMetaProgress.getInstance().getTotalEchoes(), 4);
 
         RogueRun saved = saved();
         Assert.assertEquals(saved.getCurrentGold(), 12);
+        Assert.assertEquals(saved.getCurrentLife(), 14);
         chosen.forEach(card -> Assert.assertEquals(saved.getCurrentDeck().getMain().count(card), 1, card.getName()));
         Assert.assertTrue(saved.getPath().getNode(10).isCompleted());
         Assert.assertEquals(saved.getCurrentNodeIndex(), 15);
@@ -266,10 +271,38 @@ public class RogueFlowTest extends AITest {
     }
 
     @Test
+    public void winningAtZeroLifeSavesAContinuableRunAtOneLife() {
+        RoguePathNode plane = start(NodePlanebound.class);
+        then("show", args -> List.of());
+
+        RogueWinLoseController result = fight(true, 0);
+
+        Assert.assertFalse(result.hasFailedRun());
+        Assert.assertTrue(plane.isCompleted());
+        Assert.assertEquals(saved().getCurrentLife(), 1);
+    }
+
+    @Test
+    public void restorationChamberHealsFromOneLifeAfterWinningAtNegativeLife() {
+        start(NodePlanebound.class);
+        RogueMetaProgress progress = RogueMetaProgress.getInstance();
+        progress.addEchoes(2);
+        Assert.assertTrue(progress.upgradeAetherEffect(AetherEffect.RESTORATION_CHAMBER));
+        run.snapshotAetherEffects(progress);
+        then("show", args -> List.of());
+
+        fight(true, -4);
+
+        Assert.assertEquals(run.getLastMatchRawLife(), -4);
+        Assert.assertEquals(saved().getCurrentLife(), 3);
+    }
+
+    @Test
     public void aLostBattleEndsTheRun() {
         NodePlanebound plane = (NodePlanebound) start(NodePlanebound.class);
-        RogueWinLoseController result = fight(false);
+        RogueWinLoseController result = fight(false, 0);
         Assert.assertEquals(run.getRunState(), RogueRunState.LOST);
+        Assert.assertEquals(run.getCurrentLife(), 0);
         Assert.assertEquals(onlyHistoryEntry().getOutcome(), "DEFEAT");
         Assert.assertEquals(onlyHistoryEntry().getBossOrDefeatedBy(), plane.getRoguePlanebound().planeboundName());
         flow.resultLeft(result, false);
@@ -291,11 +324,12 @@ public class RogueFlowTest extends AITest {
     }
 
     @Test
-    public void beatingTheBossWinsTheRun() {
+    public void beatingTheBossAtNegativeLifeWinsTheRun() {
         start(NodePlanebound.class);
         run.setCurrentNodeIndex(15);
-        RogueWinLoseController result = fight(true);
+        RogueWinLoseController result = fight(true, -4);
         Assert.assertTrue(flow.offersEnding(result));
+        Assert.assertEquals(run.getCurrentLife(), 1);
         flow.resultLeft(result, false);
         Assert.assertEquals(asked, List.of("startMatch", "runEnded"));
         Assert.assertEquals(run.getRunState(), RogueRunState.WON);
