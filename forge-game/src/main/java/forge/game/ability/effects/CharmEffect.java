@@ -64,7 +64,8 @@ public class CharmEffect extends SpellAbilityEffect {
     public static String makeFormatedDescription(SpellAbility sa, boolean includeChosen) {
         Card source = sa.getHostCard();
 
-        List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
+        // list every printed mode, makeChoices filters the ones that can be chosen
+        List<AbilitySub> list = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
         String numParam = sa.getParamOrDefault("CharmNum", "1");
         boolean isX = numParam.equals("X");
         boolean repeat = sa.hasParam("CanRepeatModes");
