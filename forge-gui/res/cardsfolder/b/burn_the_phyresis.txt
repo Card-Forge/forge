@@ -1,0 +1,7 @@
+Name:Burn the Phyresis
+ManaCost:2 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ You | AddPoisonTolerance$ 2 | Description$ Poison Tolerance +2 (It takes two additional poison counters for you to lose the game to poison.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
+Oracle:Poison Tolerance +2 (It takes two additional poison counters for you to lose the game to poison.)\nWhen Burn the Phyresis enters the battlefield, it deals 3 damage to any target.

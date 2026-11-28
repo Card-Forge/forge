@@ -553,6 +553,12 @@ public final class StaticAbilityContinuous {
                     }
                 }
 
+                if (params.containsKey("AddPoisonTolerance")) {
+                    String apt = params.get("AddPoisonTolerance");
+                    int add = AbilityUtils.calculateAmount(hostCard, apt, stAb);
+                    p.setPoisonCountersToLose(p.getPoisonCountersToLose() + add);
+                }
+
                 if (params.containsKey("ControlOpponentsSearchingLibrary")) {
                     Player cntl = AbilityUtils.getDefinedPlayers(hostCard, params.get("ControlOpponentsSearchingLibrary"), stAb).getFirst();
                     p.addControlledWhileSearching(se.getTimestamp(), cntl);

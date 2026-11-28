@@ -1,0 +1,7 @@
+Name:Drake with Set's Mechanic
+ManaCost:2 U
+Types:Creature Drake
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ You | AddPoisonTolerance$ 2 | Description$ Poison Tolerance +2 (It takes two additional poison counters for you to lose the game to poison.)
+Oracle:Flying\nPoison Tolerance +2 (It takes two additional poison counters for you to lose the game to poison.)

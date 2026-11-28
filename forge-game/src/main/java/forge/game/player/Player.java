@@ -91,6 +91,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int maxHandSize = 7;
     private int startingHandSize = 7;
     private boolean unlimitedHandSize = false;
+    private int poisonCountersToLose;
     private Card lastDrawnCard;
     private int numDrawnThisTurn;
     private int numExtraDrawnThisTurn;
@@ -225,9 +226,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             final PlayerZone toPut = z == ZoneType.Battlefield ? new PlayerZoneBattlefield(z, this) : new PlayerZone(z, this);
             zones.put(z, toPut);
         }
+        poisonCountersToLose = game.getRules().getPoisonCountersToLose();
 
         view = new PlayerView(id0, game.getTracker());
         view.updateMaxHandSize(this);
+        view.updatePoisonCountersToLose(this);
         view.updateKeywords(this);
         view.updateMaxLandPlay(this);
         view.setDraftNotes(this.getDraftNotes());
@@ -2125,7 +2128,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.
         // 704.6b In a Two-Headed Giant game, if a team has fifteen or more poison counters, that team loses the game. See rule 810, “Two-Headed Giant Variant.”
-        if (getCounters(CounterEnumType.POISON) >= game.getRules().getPoisonCountersToLose() && loseConditionMet(GameLossReason.Poisoned, null)) {
+        if (getCounters(CounterEnumType.POISON) >= getPoisonCountersToLose() && loseConditionMet(GameLossReason.Poisoned, null)) {
             return true;
         }
 
@@ -2137,6 +2140,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         return false;
+    }
+
+    public final int getPoisonCountersToLose() {
+        return poisonCountersToLose;
+    }
+    public final void setPoisonCountersToLose(int amount) {
+        this.poisonCountersToLose = amount;
+        view.updatePoisonCountersToLose(this);
     }
 
     public final boolean hasLost() {

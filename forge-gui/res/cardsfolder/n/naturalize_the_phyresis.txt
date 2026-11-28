@@ -1,0 +1,7 @@
+Name:Naturalize the Phyresis
+ManaCost:1 G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ You | AddPoisonTolerance$ 1 | Description$ Poison Tolerance +1 (It takes an additional poison counter for you to lose the game to poison.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target artifact or enchantment an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target artifact or enchantment an opponent controls.
+Oracle:Poison Tolerance +1 (It takes an additional poison counter for you to lose the game to poison.)\nWhen Naturalize the Phyresis enters the battlefield, destroy target artifact or enchantment an opponent controls.

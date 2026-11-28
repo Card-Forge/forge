@@ -195,6 +195,8 @@ public class StaticEffect {
                 p.removeMaxLandPlays(getTimestamp());
                 p.removeMaxLandPlaysInfinite(getTimestamp());
 
+                p.setPoisonCountersToLose(p.getGame().getRules().getPoisonCountersToLose());
+
                 p.removeControlledWhileSearching(getTimestamp());
                 p.removeControlVote(getTimestamp());
                 p.removeAdditionalVote(getTimestamp());
