@@ -9,6 +9,7 @@ import forge.gui.UiCommand;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
+import forge.toolbox.FTextArea;
 import forge.util.Localizer;
 import forge.view.FDialog;
 
@@ -68,11 +69,19 @@ public class VDrawOfferDialog extends FDialog {
 
     private int addTally(final DrawOfferMessage.Status update, final Localizer localizer, int y) {
         final int w = WIDTH - 2 * PADDING;
-        final FLabel header = new FLabel.Builder()
-                .text(localizer.getMessage("lblDrawOfferedBy", update.offerer().getName()))
-                .fontAlign(SwingConstants.LEFT).build();
-        add(header, PADDING, y, w, ROW_HEIGHT);
-        y += ROW_HEIGHT + 4;
+        if (update.offerer() == null) {
+            final FTextArea reason = new FTextArea(update.reason());
+            reason.setSize(w, Short.MAX_VALUE);
+            final int h = reason.getPreferredSize().height;
+            add(reason, PADDING, y, w, h);
+            y += h + 4;
+        } else {
+            final FLabel header = new FLabel.Builder()
+                    .text(localizer.getMessage("lblDrawOfferedBy", update.offerer().getName()))
+                    .fontAlign(SwingConstants.LEFT).build();
+            add(header, PADDING, y, w, ROW_HEIGHT);
+            y += ROW_HEIGHT + 4;
+        }
         for (final DrawOfferMessage.Entry entry : update.entries()) {
             final FLabel row = new FLabel.Builder()
                     .text(entry.player().getName() + ": " + voteText(entry.vote(), localizer))
