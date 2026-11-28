@@ -1341,6 +1341,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getNumDrawnThisTurn() {
         return numDrawnThisTurn;
     }
+    /** For a copy of the game (GameCopier). */
+    public final void setNumDrawnThisTurn(final int n) {
+        numDrawnThisTurn = n;
+    }
     public final int getNumDrawnLastTurn() {
         return numDrawnLastTurn;
     }
@@ -1914,6 +1918,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
 
+    /** For a copy of the game (GameCopier): a creature that attacked this turn, without this combat's attacked players. */
+    public final void copyCreatureAttackedThisTurn(final Card c, final GameEntity e) {
+        attackedThisTurn.computeIfAbsent(e, k -> Lists.newArrayList()).add(c);
+    }
+
+    /** For a copy of the game (GameCopier): what was attacked this turn, a defender that has since left included. */
+    public final List<GameEntity> getDefendersAttackedThisTurn() {
+        return Lists.newArrayList(attackedThisTurn.keySet());
+    }
+
     public final Iterable<Player> getAttackedPlayersMyTurn() {
         return IterableUtil.filter(attackedThisTurn.keySet(), Player.class);
     }
@@ -2421,6 +2435,10 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final int getLifeGainedTimesThisTurn() {
         return lifeGainedTimesThisTurn;
+    }
+    /** For a copy of the game (GameCopier). */
+    public final void setLifeGainedTimesThisTurn(final int n) {
+        lifeGainedTimesThisTurn = n;
     }
 
     public final int getLifeLostThisTurn() {

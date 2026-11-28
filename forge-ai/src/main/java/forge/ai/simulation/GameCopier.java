@@ -23,8 +23,10 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import org.tinylog.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -125,6 +127,9 @@ public class GameCopier {
             newPlayer.setCommitedCrimeThisTurn(origPlayer.getCommittedCrimeThisTurn());
             newPlayer.setDilemmasFacedThisTurn(origPlayer.getDilemmasFacedThisTurn());
             newPlayer.setLifeStartedThisTurnWith(origPlayer.getLifeStartedThisTurnWith());
+            // setLife above counts as a life gain when the life is over the starting total
+            newPlayer.setLifeGainedTimesThisTurn(origPlayer.getLifeGainedTimesThisTurn());
+            newPlayer.setNumDrawnThisTurn(origPlayer.getNumDrawnThisTurn());
             newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
             newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
             newPlayer.setCounters(HashMultiset.create(origPlayer.getCounters()));
@@ -141,7 +146,6 @@ public class GameCopier {
             newPlayer.setMaxHandSize(origPlayer.getMaxHandSize());
             newPlayer.setUnlimitedHandSize(origPlayer.isUnlimitedHandSize());
             newPlayer.setCrankCounter(origPlayer.getCrankCounter());
-            // TODO creatureAttackedThisTurn
             for (Mana m : origPlayer.getManaPool()) {
                 newPlayer.getManaPool().addManaNoEvent(m);
             }
@@ -362,6 +366,79 @@ public class GameCopier {
         }
 
         copyLeftThisTurn(newGame, aiPlayer);
+        copyThisTurn(newGame, aiPlayer);
+    }
+
+    /**
+     * What else this turn keeps: the creatures that attacked (raid) and the cards put into each zone and from where
+     * (morbid reads the graveyard's from the battlefield). Their last known information is rebuilt from the copy.
+     */
+    private void copyThisTurn(Game newGame, Player aiPlayer) {
+        for (Player origPlayer : origGame.getPlayers()) {
+            final Player newPlayer = playerMap.get(origPlayer);
+            if (newPlayer == null) {
+                continue;
+            }
+            for (GameEntity defender : origPlayer.getDefendersAttackedThisTurn()) {
+                // a planeswalker or battle that has since left the battlefield: its last known information
+                final GameEntity newDefender = defender instanceof Player p ? playerMap.get(p)
+                        : cardMap.containsKey((Card) defender) ? cardMap.get((Card) defender) : lkiCopy(newGame, (Card) defender, aiPlayer);
+                for (Card lki : origPlayer.getCreaturesAttackedThisTurn(defender)) {
+                    final Card copy = lkiCopy(newGame, lki, aiPlayer);
+                    if (copy != null && newDefender != null) {
+                        newPlayer.copyCreatureAttackedThisTurn(copy, newDefender);
+                    }
+                }
+            }
+            for (ZoneType zone : ZONES) {
+                if (zone == ZoneType.Stack) {
+                    continue;
+                }
+                copyAddedThisTurn(newGame, origPlayer.getZone(zone), newPlayer.getZone(zone), aiPlayer);
+            }
+        }
+        copyAddedThisTurn(newGame, origGame.getStackZone(), newGame.getStackZone(), aiPlayer);
+    }
+
+    private void copyAddedThisTurn(Game newGame, Zone from, Zone to, Player aiPlayer) {
+        if (from == null || to == null) {
+            return;
+        }
+        for (ZoneType origin : ZoneType.values()) {
+            for (Card lki : from.getCardsAddedThisTurn(origin)) {
+                final Card copy = lkiCopy(newGame, lki, aiPlayer);
+                if (copy != null) {
+                    to.addCardAddedThisTurn(origin, copy);
+                }
+            }
+        }
+    }
+
+    /** Last known information of the copy's card for {@code lki}'s; a token that ceased to exist rebuilt. Null: none. */
+    private Card lkiCopy(Game newGame, Card lki, Player aiPlayer) {
+        try {
+            final Card now = origGame.findById(lki.getId());
+            Card base = now == null ? null : cardMap.get(now);
+            if (base == null) {
+                final Player owner = playerMap.get(lki.getOwner());
+                if (owner == null) {
+                    return null;
+                }
+                base = createCardCopy(newGame, owner, lki, aiPlayer);
+            }
+            final Card copy = CardCopyService.getLKICopy(base);
+            // a stolen creature is recorded under who controlled it, not its owner (morbid with YouCtrl)
+            final Player controller = lki.getController() == null ? null : playerMap.get(lki.getController());
+            if (controller != null && !controller.equals(copy.getController())) {
+                copy.setController(controller, copy.getGameTimestamp());
+            }
+            return copy;
+        } catch (final RuntimeException e) {
+            // history is a refinement: a card that cannot be rebuilt is left out, but say so
+            Logger.debug(e, "GameCopier: no last known information for {} ({}), left out of this turn's history",
+                    lki, lki.getId());
+            return null;
+        }
     }
 
     /**
@@ -372,29 +449,14 @@ public class GameCopier {
         for (int pass = 0; pass < 2; pass++) {
             final List<Card> origList = pass == 0 ? origGame.getLeftBattlefieldThisTurn() : origGame.getLeftGraveyardThisTurn();
             for (Card lki : new ArrayList<>(origList)) {
-                try {
-                    final Card now = origGame.findById(lki.getId());
-                    Card base = now == null ? null : cardMap.get(now);
-                    if (base == null) {
-                        // a token (it ceased to exist): rebuild it from the last known information
-                        final Player owner = playerMap.get(lki.getOwner());
-                        if (owner == null) {
-                            continue;
-                        }
-                        base = createCardCopy(newGame, owner, lki, aiPlayer);
-                    }
-                    final Card copy = CardCopyService.getLKICopy(base);
-                    final Player controller = lki.getController() == null ? null : playerMap.get(lki.getController());
-                    if (controller != null && !controller.equals(copy.getController())) {
-                        copy.setController(controller, copy.getGameTimestamp());
-                    }
-                    if (pass == 0) {
-                        newGame.addLeftBattlefieldThisTurn(copy);
-                    } else {
-                        newGame.addLeftGraveyardThisTurn(copy);
-                    }
-                } catch (final RuntimeException e) {
-                    // history is a refinement: a card that cannot be rebuilt is left out
+                final Card copy = lkiCopy(newGame, lki, aiPlayer);
+                if (copy == null) {
+                    continue;
+                }
+                if (pass == 0) {
+                    newGame.addLeftBattlefieldThisTurn(copy);
+                } else {
+                    newGame.addLeftGraveyardThisTurn(copy);
                 }
             }
         }
@@ -518,15 +580,18 @@ public class GameCopier {
             if (c.isSuspected()) {
                 newCard.setSuspected(true);
             }
-            if (c.isPlaneswalker()) {
-                for (SpellAbility sa : c.getAllSpellAbilities()) {
-                    int active = sa.getActivationsThisTurn();
-                    if (sa.isPwAbility() && active > 0) {
-                        SpellAbility newSa = findSAInCard(sa, newCard);
-                        if (newSa != null) {
-                            for (int i = 0; i < active; i++) {
-                                newCard.addAbilityActivated(newSa);
-                            }
+            // activations this turn and this game: "activate only once each turn", "only once" (GameActivationLimit)
+            for (SpellAbility sa : c.getAllSpellAbilities()) {
+                final int thisTurn = sa.getActivationsThisTurn();
+                final int thisGame = sa.getActivationsThisGame();
+                if (thisTurn > 0 || thisGame > 0) {
+                    SpellAbility newSa = findSAInCard(sa, newCard);
+                    if (newSa != null) {
+                        for (int i = 0; i < thisTurn; i++) {
+                            newCard.addAbilityActivated(newSa);
+                        }
+                        for (int i = thisTurn; i < thisGame; i++) {
+                            newCard.getAbilityActivatedThisGame().add(newSa);
                         }
                     }
                 }
@@ -581,10 +646,22 @@ public class GameCopier {
         } else {
             zoneOwner.getZone(zone).add(newCard);
         }
+        // the zone set it to this turn
+        newCard.setTurnInZone(c.getTurnInZone());
     }
 
     private static SpellAbility findSAInCard(SpellAbility sa, Card c) {
-        String saDesc = sa.getDescription();
+        final String saDesc = sa.getDescription();
+        // two abilities of a card can share a description, cost included (Skyblade's Boon): the copy is built from the
+        // same script, so the ability in the same place is the same one
+        final Card host = sa.getHostCard();
+        if (host != null) {
+            final int index = host.getAllSpellAbilities().indexOf(sa);
+            final List<SpellAbility> all = Lists.newArrayList(c.getAllSpellAbilities());
+            if (index >= 0 && index < all.size() && saDesc.equals(all.get(index).getDescription())) {
+                return all.get(index);
+            }
+        }
         for (SpellAbility cardSa : c.getAllSpellAbilities()) {
             if (saDesc.equals(cardSa.getDescription())) {
                 return cardSa;

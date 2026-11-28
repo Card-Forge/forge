@@ -246,6 +246,12 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return Lists.newArrayList(cardsAdded.values());
     }
 
+    /** For a copy of the game (GameCopier): a card put into this zone this turn, from {@code origin}. */
+    public final void addCardAddedThisTurn(final ZoneType origin, final Card lki) {
+        cardsAddedThisTurn.put(origin, lki);
+        enteredFromThisTurn.put(lki, origin);
+    }
+
     public final void resetCardsAddedThisTurn() {
         cardsAddedLastTurn.clear();
         cardsAddedLastTurn.putAll(cardsAddedThisTurn);
