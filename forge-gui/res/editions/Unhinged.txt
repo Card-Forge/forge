@@ -151,3 +151,6 @@ ScryfallCode=UNH
 139 L Mountain @John Avon
 140 L Forest @John Avon
 141 R Super Secret Tech @Dan Frazier
+
+[CreatureTypes]
+Penguin:Penguins
