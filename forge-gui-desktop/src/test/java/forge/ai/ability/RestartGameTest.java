@@ -1,8 +1,10 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Lists;
+import forge.StaticData;
 import forge.ai.AITest;
 import forge.ai.LobbyPlayerAi;
+import forge.card.CardType;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
@@ -19,10 +21,13 @@ import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.item.PaperCard;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.function.Predicate;
 
 /** Karn Liberated's ultimate restarts a Commander game. Each commander starts the new game in the command zone, unless Karn exiled it. */
 public class RestartGameTest extends AITest {
@@ -116,5 +121,49 @@ public class RestartGameTest extends AITest {
         final List<Card> commanders = commandersOwnedBy(p);
         AssertJUnit.assertEquals("one commander after the restart", 1, commanders.size());
         AssertJUnit.assertTrue("Karn puts the commander onto the battlefield", commanders.get(0).isInZone(ZoneType.Battlefield));
+    }
+
+    private static List<PaperCard> variantCards(final Predicate<CardType> kind) {
+        return StaticData.instance().getVariantCards().getAllCards().stream()
+                .filter(pc -> kind.test(pc.getRules().getType())).limit(4).toList();
+    }
+
+    /** CR 728.2 - nontraditional cards are in the new game once, so a restart rebuilds each deck instead of adding to it. */
+    @Test
+    public void nontraditionalDecksAreNotDoubledByARestart() {
+        final List<PaperCard> schemes = variantCards(CardType::isScheme);
+        final List<PaperCard> planes = variantCards(CardType::isPlane);
+        final List<PaperCard> attractions = variantCards(CardType::isAttraction);
+        final List<PaperCard> contraptions = variantCards(CardType::isContraption);
+        final Deck deck = new Deck();
+        for (final PaperCard pc : attractions) {
+            deck.getOrCreate(DeckSection.Attractions).add(pc);
+        }
+        for (final PaperCard pc : contraptions) {
+            deck.getOrCreate(DeckSection.Contraptions).add(pc);
+        }
+        final List<RegisteredPlayer> players = Lists.newArrayList(
+                RegisteredPlayer.forVariants(2, EnumSet.of(GameType.ArchenemyRumble, GameType.Planechase), deck, schemes,
+                        false, planes, null).setPlayer(new LobbyPlayerAi("p1", null)),
+                RegisteredPlayer.forVariants(2, EnumSet.of(GameType.ArchenemyRumble, GameType.Planechase), deck, schemes,
+                        false, planes, null).setPlayer(new LobbyPlayerAi("p2", null)));
+        final GameRules rules = new GameRules(GameType.Constructed);
+        final Game game = new Game(players, rules, new Match(rules, players, "Test"));
+        for (final Player p : game.getPlayers()) {
+            p.initVariantsZones(p.getRegisteredPlayer());
+        }
+        game.setAge(GameStage.Play);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, game.getPlayers().get(0));
+        game.getPhaseHandler().onStackResolved();
+
+        final Player p = game.getPlayers().get(0);
+        restartWithKarn(addCard("Karn Liberated", p), p);
+
+        for (final Player each : game.getPlayers()) {
+            AssertJUnit.assertEquals("scheme deck", schemes.size(), each.getZone(ZoneType.SchemeDeck).size());
+            AssertJUnit.assertEquals("planar deck", planes.size(), each.getZone(ZoneType.PlanarDeck).size());
+            AssertJUnit.assertEquals("attraction deck", attractions.size(), each.getZone(ZoneType.AttractionDeck).size());
+            AssertJUnit.assertEquals("contraption deck", contraptions.size(), each.getZone(ZoneType.ContraptionDeck).size());
+        }
     }
 }
