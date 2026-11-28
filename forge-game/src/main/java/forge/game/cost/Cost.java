@@ -613,6 +613,10 @@ public class Cost implements Serializable {
             return new CostForage();
         }
 
+        if (parse.equals("PutSticker")) {
+            return new CostPutSticker();
+        }
+
         // These won't show up with multiples
         if (parse.equals("Untap") || parse.equals("Q")) {
             return new CostUntap();

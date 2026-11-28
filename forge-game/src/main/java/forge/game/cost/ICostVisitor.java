@@ -42,6 +42,7 @@ public interface ICostVisitor<T> {
     T visit(CostTapType cost);
     T visit(CostPayShards cost);
     T visit(CostBlight cost);
+    T visit(CostPutSticker cost);
 
     class Base<T> implements ICostVisitor<T> {
 
@@ -203,5 +204,7 @@ public interface ICostVisitor<T> {
         }
         @Override
         public T visit(CostBlight cost) { return null; }
+        @Override
+        public T visit(CostPutSticker cost) {return null; }
     }
 }
