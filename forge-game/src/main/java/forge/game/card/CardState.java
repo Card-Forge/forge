@@ -70,6 +70,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private ManaCost perpetualAdjustedManaCost = null;
     private ColorSet color = ColorSet.C;
     private String oracleText = "";
+    private String nonAbilityText = ""; // Text: from card script; copiable characteristic
     private String functionalVariantName = null;
     private String flavorName = null;
     private int basePower = 0;
@@ -305,6 +306,13 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     public void setOracleText(final String oracleText) {
         this.oracleText = oracleText;
         view.setOracleText(oracleText);
+    }
+
+    public String getNonAbilityText() {
+        return nonAbilityText;
+    }
+    public void setNonAbilityText(final String nonAbilityText) {
+        this.nonAbilityText = nonAbilityText == null ? "" : nonAbilityText;
     }
 
     public String getFunctionalVariantName() {
@@ -1051,6 +1059,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         setManaCost(source.getManaCost());
         setColor(source.getColor());
         setOracleText(source.getOracleText());
+        setNonAbilityText(source.getNonAbilityText());
         setFunctionalVariantName(source.getFunctionalVariantName());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
