@@ -16,6 +16,10 @@ public interface CounterType extends Serializable, ITranslatable {
         if (CounterKeywordType.isKeywordCounter(name)) {
             return CounterKeywordType.get(name);
         }
+        CounterType result = CounterListType.get(name);
+        if (result != null) {
+            return result;
+        }
         try {
             return CounterEnumType.getType(name);
         } catch (final IllegalArgumentException ex) {
@@ -25,6 +29,7 @@ public interface CounterType extends Serializable, ITranslatable {
     static List<CounterType> getValues() {
         List<CounterType> result = Lists.newArrayList();
         result.addAll(List.of(CounterEnumType.values()));
+        result.addAll(CounterListType.getValues());
         result.addAll(CounterKeywordType.getValues());
         result.addAll(CounterCustomType.getValues());
         return result;
