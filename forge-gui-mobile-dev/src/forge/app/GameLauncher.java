@@ -2,6 +2,7 @@ package forge.app;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Graphics.DisplayMode;
+import com.badlogic.gdx.Graphics.Monitor;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
 import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import forge.util.HWInfo;
 import forge.Forge;
+import forge.adventure.data.SettingData;
 import forge.adventure.util.Config;
 import io.sentry.protocol.Device;
 import io.sentry.protocol.OperatingSystem;
@@ -107,7 +109,25 @@ public class GameLauncher {
             int tmp = windowHeight; windowHeight = windowWidth; windowWidth = tmp;
         }
 
-        if (Config.instance().getSettingData().fullScreen) {
+        final SettingData settings = Config.instance().getSettingData();
+        //not offered on macOS, where the menu bar and Dock would still cover the window
+        final boolean borderless = settings.fullScreen && settings.borderlessFullScreen && !forge.util.OperatingSystem.isMac();
+        Forge.setBorderlessFullscreen(borderless);
+        if (borderless && forge.util.OperatingSystem.isUnix()) {
+            //Linux desktops keep their panels above any window without the fullscreen state, which a borderless window
+            //never gets: use fullscreen at the desktop resolution, just without minimizing when another app takes focus
+            config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+            config.setAutoIconify(false);
+        } else if (borderless) {
+            //a borderless window over the primary monitor: on Windows exclusive fullscreen is kept on top, so this lets
+            //another app or monitor come up normally instead of the game having to minimize itself
+            final Monitor monitor = Lwjgl3ApplicationConfiguration.getPrimaryMonitor();
+            final DisplayMode mode = Lwjgl3ApplicationConfiguration.getDisplayMode(monitor);
+            config.setDecorated(false);
+            config.setWindowedMode(mode.width, mode.height);
+            config.setWindowPosition(monitor.virtualX, monitor.virtualY);
+            config.setResizable(false);
+        } else if (settings.fullScreen) {
             config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
             config.setAutoIconify(true);
         } else {
