@@ -695,11 +695,17 @@ public final class OpeningHand {
         return colors;
     }
 
-    /** Shared by the opening-hand evaluator and the land planner for simulated battlefield states. */
+    /**
+     * Shared by the opening-hand evaluator and the land planner for simulated battlefield states. The land is one of
+     * the simulated cards even when it is on the battlefield already: whether it entered this turn is what
+     * {@code landEntersThisTurn} says, not what the game says now (Gleaming Bastion).
+     */
     public static boolean manaAbilityRequirementsMet(final Card land, final SpellAbility sa,
                                                      final CardCollectionView battlefieldCandidates,
                                                      final boolean landEntersThisTurn) {
-        return activationRequirementsMet(land, sa, battlefieldCandidates, landEntersThisTurn);
+        final CardCollection simulated = new CardCollection(battlefieldCandidates);
+        simulated.add(land);
+        return activationRequirementsMet(land, sa, simulated, landEntersThisTurn);
     }
 
     /** 0..100: how good the hand is for the plan. */
@@ -1105,7 +1111,8 @@ public final class OpeningHand {
                     }
                     if (zone == ZoneType.Battlefield && hand != null) {
                         for (final Card card : hand) {
-                            if ((card.isLand() || isMdfcLand(card)) && isEarlyManaLand(card)) {
+                            if (!candidates.contains(card) && (card.isLand() || isMdfcLand(card))
+                                    && isEarlyManaLand(card)) {
                                 candidates.add(card);
                             }
                         }

@@ -567,6 +567,45 @@ public class LandPlannerTest extends FlatMcTestBase {
 
 
     @Test
+    public void anUntappedBastionThatEnteredThisTurnHasItsColourOnlyThisTurn() {
+        setUpGame();
+        final Card bastion = put("Gleaming Bastion", ai, ZoneType.Battlefield);
+        assertTrue(bastion.enteredThisTurn(), "the case under test");
+        final List<LandPlanner.Src> sources = LandPlanner.battlefieldSources(ai);
+        assertEquals(sources.size(), 1);
+        assertEquals(sources.get(0).from, 0);
+        assertTrue(LandPlanner.canPay(costs(U), 0, Collections.singletonList(sources.get(0).forTurn(0))));
+        assertFalse(LandPlanner.canPay(costs(U), 0, Collections.singletonList(sources.get(0).forTurn(1))));
+        assertTrue(LandPlanner.canPay(costs(), 1, Collections.singletonList(sources.get(0).forTurn(1))),
+                "it still makes {C}");
+    }
+
+    @Test
+    public void aTappedBastionThatEnteredThisTurnMakesNoColourNextTurn() {
+        setUpGame();
+        final Card bastion = put("Gleaming Bastion", ai, ZoneType.Battlefield);
+        bastion.setTapped(true);
+        assertTrue(bastion.enteredThisTurn(), "the case under test");
+        final List<LandPlanner.Src> sources = LandPlanner.battlefieldSources(ai);
+        assertEquals(sources.size(), 1);
+        assertEquals(sources.get(0).from, 1);
+        assertFalse(LandPlanner.canPay(costs(U), 0, Collections.singletonList(sources.get(0).forTurn(1))));
+        assertFalse(LandPlanner.canPay(costs(W), 0, Collections.singletonList(sources.get(0).forTurn(1))));
+        assertTrue(LandPlanner.canPay(costs(), 1, Collections.singletonList(sources.get(0).forTurn(1))));
+    }
+
+    @Test
+    public void aBasicLandKeepsTheColourOfABastionOnTheBattlefield() {
+        setUpGame();
+        final Card bastion = put("Gleaming Bastion", ai, ZoneType.Battlefield);
+        put("Mountain", ai, ZoneType.Battlefield); // basic, and no source of blue itself
+        bastion.setTapped(true);
+        final LandPlanner.Src source = LandPlanner.battlefieldSources(ai).stream()
+                .filter(s -> s.from == 1).findFirst().get();
+        assertTrue(LandPlanner.canPay(costs(U), 0, Collections.singletonList(source.forTurn(1))));
+    }
+
+    @Test
     public void spireOfIndustrySeesAFreeArtifactInTheHand() {
         setUpGame();
         final Card spire = put("Spire of Industry", ai, ZoneType.Hand);
