@@ -17,6 +17,7 @@ import io.sentry.Sentry;
 /**
  * libGDX decodes a one-channel image (a greyscale JPEG, as Scryfall serves for some mostly white cards) to an Alpha
  * pixmap, which draws its grey levels as transparency over black. This loader turns such images into RGB888.
+ * It also sends WebP files, which libGDX cannot decode, to {@link CardTextureData}.
  */
 class GreyscaleTextureLoader extends TextureLoader {
     GreyscaleTextureLoader(FileHandleResolver resolver) {
@@ -28,7 +29,9 @@ class GreyscaleTextureLoader extends TextureLoader {
         if (parameter == null || parameter.textureData == null) {
             Format format = parameter == null ? null : parameter.format;
             boolean genMipMaps = parameter != null && parameter.genMipMaps;
-            TextureData data = TextureData.Factory.loadFromFile(file, format, genMipMaps);
+            TextureData data = "webp".equalsIgnoreCase(file.extension())
+                    ? new CardTextureData(file.path(), genMipMaps, false, false)
+                    : TextureData.Factory.loadFromFile(file, format, genMipMaps);
             if (data instanceof FileTextureData && data.getFormat() == Format.Alpha) {
                 data.prepare();
                 Pixmap pixmap = toRgb(data.consumePixmap(), file.path());

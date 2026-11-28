@@ -283,7 +283,7 @@ public final class CdnUuidCache {
      * @param collectorNum collector number
      * @param lang preferred language code
      * @param face {@code ""}/{@code "front"} or {@code "back"}
-     * @param size {@code "normal"} or {@code "art_crop"}
+     * @param size {@code "grid"} or {@code "art"}
      */
     public static String getCdnUrl(String scryfallCode, String collectorNum,
                                    String lang, String face, String size) {
@@ -378,11 +378,11 @@ public final class CdnUuidCache {
      *
      * @param uuid Scryfall card UUID
      * @param side {@code "front"} or {@code "back"}
-     * @param size {@code "normal"} or {@code "art_crop"}
+     * @param size {@code "grid"} or {@code "art"}
      */
     public static String cdnUrl(String uuid, String side, String size) {
         return ForgeConstants.URL_SCRYFALL_CDN + size + "/" + side
-                + "/" + uuid.charAt(0) + "/" + uuid.charAt(1) + "/" + uuid + ".jpg";
+                + "/" + uuid.charAt(0) + "/" + uuid.charAt(1) + "/" + uuid + ".webp";
     }
 
     // -------------------------------------------------------------------------

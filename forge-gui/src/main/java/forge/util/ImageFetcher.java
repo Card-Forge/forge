@@ -85,7 +85,7 @@ public abstract class ImageFetcher {
                 && face != null && !face.isEmpty() && !"back".equals(face);
 
         if (!specVariant && !StringUtils.isBlank(setCode)) {
-            String size = useArtCrop ? "art_crop" : "normal";
+            String size = useArtCrop ? "art" : "grid";
             String cdnUrl = CdnUuidCache.getCdnUrlIfCached(setCode, card.getCollectorNumber(), langCode, face, size);
             if (cdnUrl != null && !downloadUrls.contains(cdnUrl)) downloadUrls.add(cdnUrl);
         }
@@ -170,7 +170,7 @@ public abstract class ImageFetcher {
                     downloadUrls.add("PLANECHASEBG:" + ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, "", setCode, langCode, true));
                     FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
                     File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, getPlanechaseFilename(cardName));
-                    if (destFile.exists())
+                    if (ImageKeys.getCachedFile(destFile) != null)
                         return;
 
                     setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
@@ -308,7 +308,7 @@ public abstract class ImageFetcher {
             destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
             if (ImageKeys.missingCards.contains(filename)
                     || filename.equalsIgnoreCase("null.jpg")
-                    || destFile.exists())
+                    || ImageKeys.getCachedFile(destFile) != null)
                 return;
 
             // token-images.txt lets mods route specific tokens to hosted URLs.
@@ -378,7 +378,7 @@ public abstract class ImageFetcher {
             return;
         }
 
-        if (destFile.exists()) {
+        if (ImageKeys.getCachedFile(destFile) != null) {
             // TODO: Figure out why this codepath gets reached.
             // Ideally, fetchImage() wouldn't be called if we already have the image.
             if (prefix.equals(ImageKeys.CARD_PREFIX)) {
@@ -394,7 +394,7 @@ public abstract class ImageFetcher {
 
     /**
      * Fetch the Scryfall art-crop image for a card image key and cache it as the player's deck
-     * sleeve. Forces art_crop regardless of the user's UI_CARD_ART_FORMAT preference and caches
+     * sleeve. Forces the art crop regardless of the user's UI_CARD_ART_FORMAT preference and caches
      * under CACHE_SLEEVE_PICS_DIR keyed by a hash of the image key.
      */
     public void fetchSleeveArt(final String sleeveArtKey, final Callback callback) {
@@ -413,7 +413,7 @@ public abstract class ImageFetcher {
             return;
         }
         final File destFile = new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(sleeveArtKey));
-        if (destFile.exists()) {
+        if (ImageKeys.getCachedFile(destFile) != null) {
             return;
         }
         final ArrayList<String> downloadUrls = new ArrayList<>();
