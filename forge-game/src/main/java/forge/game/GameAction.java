@@ -32,6 +32,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
+import forge.game.card.perpetual.PerpetualInterface;
+import forge.game.card.perpetual.PerpetualKeywords;
 import forge.game.event.*;
 import forge.game.extrahands.BackupPlanService;
 import forge.game.keyword.Keyword;
@@ -238,7 +240,8 @@ public class GameAction {
 
                         // CR 400.7g If an effect grants a nonland card an ability that allows it to be cast,
                         // that ability will continue to apply to the new object that card became after it moved to the stack as a result of being cast this way.
-                        if (!cause.isIntrinsic()) {
+                        // Skip when perpetual will re-grant the same keyword (otherwise Evoke etc. double and ETB triggers fire twice).
+                        if (!cause.isIntrinsic() && !isKeywordCoveredByPerpetual(c, kw)) {
                             kw.setHostCard(copied);
                             copied.addChangedCardKeywordsInternal(List.of(kw), null, false, copied.getGameTimestamp(), kw.getStatic(), false);
                         }
@@ -675,6 +678,27 @@ public class GameAction {
         }
 
         return copied;
+    }
+
+    /**
+     * True when perpetual keyword grants will recreate {@code kw} on the new object,
+     * so CR 400.7g must not also reattach the cast keyword (would duplicate Evoke et al.).
+     * Static-granted keywords ({@code kw.getStatic() != null}) are never covered this way.
+     */
+    private static boolean isKeywordCoveredByPerpetual(final Card leaving, final KeywordInterface kw) {
+        if (kw.getStatic() != null || !leaving.hasPerpetual()) {
+            return false;
+        }
+        final String original = kw.getOriginal();
+        for (final PerpetualInterface p : leaving.getPerpetual()) {
+            if (p instanceof PerpetualKeywords pk) {
+                final List<String> addKeywords = pk.addKeywords();
+                if (addKeywords != null && addKeywords.contains(original)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private Card setupStaticEffect(Card copied, SpellAbility cause) {
