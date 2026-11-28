@@ -27,6 +27,7 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.token.TokenInfo;
 import forge.game.card.CardZoneTable;
 import forge.game.event.GameEventCombatChanged;
@@ -187,6 +188,9 @@ public class TokenEffect extends TokenEffectBase {
 
         int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("TokenAmount", "1"), sa);
         if (amount < 1) {
+            if (sa.hasParam("AtEOT")) {
+                registerDelayedTrigger(sa, sa.getParam("AtEOT"), new CardCollection());
+            }
             return;
         }
 
