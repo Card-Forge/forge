@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -495,7 +496,7 @@ public final class OpeningHand {
             }
         }
         return pips.isEmpty() || spellsOf(card).stream().anyMatch(spell ->
-                !paymentResults(pool, pips, 0, spell, null, hand, Collections.emptySet(), true).isEmpty());
+                hasPayment(pool, pips, 0, spell, null, hand, Collections.emptySet()));
     }
 
     /** The ways to cast the card. */
@@ -1269,20 +1270,34 @@ public final class OpeningHand {
         for (final ManaCostShard shard : cost) {
             shards.add(shard);
         }
-        return !paymentResults(pool, shards, cost.getGenericCost(), spell, mustUse, hand, unavailable, true).isEmpty();
+        return hasPayment(pool, shards, cost.getGenericCost(), spell, mustUse, hand, unavailable);
     }
 
-    private static List<List<ManaUnit>> paymentResults(final List<ManaUnit> pool, final List<ManaCostShard> shards,
-                                                       final int generic, final SpellAbility spell, final Card mustUse,
-                                                       final CardCollectionView hand, final Set<Card> unavailable,
-                                                       final boolean allowFilters) {
-        final List<List<ManaUnit>> results = new ArrayList<>();
-        payShards(pool, shards, 0, new boolean[pool.size()], generic, spell, mustUse, false, results);
-        if (allowFilters) {
-            for (final List<ManaUnit> through : filtered(pool, hand, unavailable)) {
-                results.addAll(paymentResults(through, shards, generic, spell, mustUse, hand, unavailable, true));
+    /** Whether there is a way to pay, through the lands that have to be paid for if need be: the first one will do. */
+    private static boolean hasPayment(final List<ManaUnit> pool, final List<ManaCostShard> shards, final int generic,
+                                      final SpellAbility spell, final Card mustUse, final CardCollectionView hand,
+                                      final Set<Card> unavailable) {
+        if (payShards(pool, shards, 0, -1, new boolean[pool.size()], generic, spell, mustUse, false,
+                new HashSet<>(), spare -> true)) {
+            return true;
+        }
+        for (final List<ManaUnit> through : filtered(pool, hand, unavailable)) {
+            if (hasPayment(through, shards, generic, spell, mustUse, hand, unavailable)) {
+                return true;
             }
         }
+        return false;
+    }
+
+    /** The mana that each way of paying from the pool as it is leaves over, once for each set of mana left. */
+    private static List<List<ManaUnit>> paymentResults(final List<ManaUnit> pool, final List<ManaCostShard> shards,
+                                                       final int generic, final SpellAbility spell) {
+        final List<List<ManaUnit>> results = new ArrayList<>();
+        payShards(pool, shards, 0, -1, new boolean[pool.size()], generic, spell, null, false, new HashSet<>(),
+                spare -> {
+                    results.add(spare);
+                    return false; // all of them are wanted
+                });
         return results;
     }
 
@@ -1350,8 +1365,7 @@ public final class OpeningHand {
                         }
                         // Casting the fodder spends its mana first; the land is then tapped and the creature sacrificed.
                         final int generic = cost == null ? 0 : cost.getMana().getGenericCost();
-                        for (final List<ManaUnit> paid : paymentResults(pool, shards, generic,
-                                spell, null, hand, unavailable, false)) {
+                        for (final List<ManaUnit> paid : paymentResults(pool, shards, generic, spell)) {
                             // The land must still be untapped after casting the fodder; its {C} mode and its
                             // sacrifice mode are alternatives, not two activations of the same permanent.
                             if (pool.stream().filter(u -> u.source == idle.source).anyMatch(u -> !paid.contains(u))) {
@@ -1405,47 +1419,69 @@ public final class OpeningHand {
         return units;
     }
 
-    private static void payShards(final List<ManaUnit> pool, final List<ManaCostShard> shards, final int i,
-                                  final boolean[] used, final int generic, final SpellAbility spell,
-                                  final Card mustUse, final boolean usedIt, final List<List<ManaUnit>> results) {
+    /**
+     * Pays the coloured parts from {@code i} on, then the generic mana. The mana left over after paying the whole
+     * cost is offered to {@code enough}, once for each different set of it; the search ends when that returns true.
+     *
+     * @param previous the mana that paid the part before this one: equal parts take their mana in the order of the
+     *                 pool, as the other orders spend the same mana
+     * @param seen     the sets of leftover mana already offered
+     * @return whether {@code enough} ended the search
+     */
+    private static boolean payShards(final List<ManaUnit> pool, final List<ManaCostShard> shards, final int i,
+                                     final int previous, final boolean[] used, final int generic,
+                                     final SpellAbility spell, final Card mustUse, final boolean usedIt,
+                                     final Set<BitSet> seen, final Predicate<List<ManaUnit>> enough) {
         if (i == shards.size()) {
-            payGeneric(pool, used, generic, spell, mustUse, usedIt, false, results);
-            return;
+            return payGeneric(pool, used, 0, generic, spell, mustUse, usedIt, seen, enough);
         }
-        for (int u = 0; u < used.length; u++) {
+        final int first = i > 0 && shards.get(i) == shards.get(i - 1) ? previous + 1 : 0;
+        for (int u = first; u < used.length; u++) {
             if (isAvailable(pool, used, u) && unitPays(pool.get(u), shards.get(i), spell)) {
                 used[u] = true;
-                payShards(pool, shards, i + 1, used, generic, spell, mustUse,
-                        usedIt || isLimitedManaOf(pool.get(u), mustUse), results);
+                final boolean done = payShards(pool, shards, i + 1, u, used, generic, spell, mustUse,
+                        usedIt || isLimitedManaOf(pool.get(u), mustUse), seen, enough);
                 used[u] = false;
+                if (done) {
+                    return true;
+                }
             }
         }
+        return false;
     }
 
-    /** Enumerates the exact mana units spent, leaving the other units available for a later action. */
-    private static void payGeneric(final List<ManaUnit> pool, final boolean[] used, final int remaining,
-                                   final SpellAbility spell, final Card mustUse, final boolean usedIt,
-                                   final boolean usedInGeneric, final List<List<ManaUnit>> results) {
+    /** Pays the generic mana with mana from {@code from} on, so that each choice is tried in one order only. */
+    private static boolean payGeneric(final List<ManaUnit> pool, final boolean[] used, final int from,
+                                      final int remaining, final SpellAbility spell, final Card mustUse,
+                                      final boolean usedIt, final Set<BitSet> seen,
+                                      final Predicate<List<ManaUnit>> enough) {
         if (remaining == 0) {
-            if (mustUse == null || usedIt || usedInGeneric) {
-                final List<ManaUnit> spare = new ArrayList<>();
-                for (int u = 0; u < used.length; u++) {
-                    if (isAvailable(pool, used, u)) {
-                        spare.add(pool.get(u));
-                    }
-                }
-                results.add(spare);
+            if (mustUse != null && !usedIt) {
+                return false;
             }
-            return;
+            final List<ManaUnit> spare = new ArrayList<>();
+            final BitSet left = new BitSet(used.length);
+            for (int u = 0; u < used.length; u++) {
+                if (isAvailable(pool, used, u)) {
+                    spare.add(pool.get(u));
+                    left.set(u);
+                }
+            }
+            // either ability of one land can leave the same mana, so different payments can end up alike
+            return seen.add(left) && enough.test(spare);
         }
-        for (int u = 0; u < used.length; u++) {
+        for (int u = from; u <= used.length - remaining; u++) { // enough mana has to be left for the rest
             if (isAvailable(pool, used, u) && unitPays(pool.get(u), ManaCostShard.GENERIC, spell)) {
                 used[u] = true;
-                payGeneric(pool, used, remaining - 1, spell, mustUse, usedIt,
-                        usedInGeneric || isLimitedManaOf(pool.get(u), mustUse), results);
+                final boolean done = payGeneric(pool, used, u + 1, remaining - 1, spell, mustUse,
+                        usedIt || isLimitedManaOf(pool.get(u), mustUse), seen, enough);
                 used[u] = false;
+                if (done) {
+                    return true;
+                }
             }
         }
+        return false;
     }
 
     /** Whether the mana is not used yet, and its land is not tapped for another of its abilities. */
