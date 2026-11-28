@@ -15,7 +15,6 @@ import forge.ai.ManaSourceAllocation;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.GameObject;
-import forge.game.GameObjectPredicates;
 import forge.game.ability.AbilityUtils;
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaCost;
@@ -311,14 +310,50 @@ public final class OpeningHand {
 
         /** Every colour the hand can make for the spell, though not necessarily all together. */
         byte reachable(final Card spell) {
-            byte colors = colorsFor(manaWith(List.of()), spell, hand);
+            byte colors = 0;
+            final List<Card> noFound = Collections.emptyList();
+            for (final Card entryLand : entryOptions(noFound)) {
+                colors |= colorsFor(manaWith(noFound, entryLand), spell, hand);
+            }
             for (int i = 0; i < finders.length; i++) {
                 if (finders[i] != 0) {
                     // the found land may pay for one of the hand's, or meet its condition
-                    colors |= colorsFor(manaWith(List.of(lib.landCards.get(i))), spell, hand);
+                    final List<Card> found = Collections.singletonList(lib.landCards.get(i));
+                    for (final Card entryLand : entryOptions(found)) {
+                        colors |= colorsFor(manaWith(found, entryLand), spell, hand);
+                    }
                 }
             }
             return colors;
+        }
+
+        /** Only one land from the hand/fetch choice can have entered this turn. */
+        private List<Card> entryOptions(final List<Card> found) {
+            final List<Card> choices = new ArrayList<>();
+            for (final Card land : own) {
+                if (hasEntryTurnManaAbility(land)) {
+                    choices.add(land);
+                }
+            }
+            for (final Card land : found) {
+                if (hasEntryTurnManaAbility(land)) {
+                    choices.add(land);
+                }
+            }
+            if (choices.isEmpty()) {
+                choices.add(null);
+            }
+            return choices;
+        }
+
+        /** Try each possible entry-turn land separately; never combine two entry-only abilities in one turn. */
+        private boolean testWithEntryChoices(final List<Card> found, final Predicate<List<ManaUnit>> test) {
+            for (final Card entryLand : entryOptions(found)) {
+                if (test.test(manaWith(found, entryLand))) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /**
@@ -326,6 +361,10 @@ public final class OpeningHand {
          * judged with the found lands among the cards around, and without the fetch lands, which are gone.
          */
         private List<ManaUnit> manaWith(final List<Card> found) {
+            return manaWith(found, null);
+        }
+
+        private List<ManaUnit> manaWith(final List<Card> found, final Card entryLand) {
             final CardCollection around = new CardCollection();
             for (final Card c : hand) {
                 if (!((c.isLand() || isMdfcLand(c)) && isEarlyManaLand(c) && fetchesLand(c))) {
@@ -335,10 +374,10 @@ public final class OpeningHand {
             around.addAll(found);
             final List<ManaUnit> pool = new ArrayList<>();
             for (final Card land : own) {
-                addLandMana(pool, land, around);
+                addLandMana(pool, land, around, land == entryLand);
             }
             for (final Card land : found) {
-                addLandMana(pool, land, around);
+                addLandMana(pool, land, around, land == entryLand);
             }
             return pool;
         }
@@ -351,12 +390,12 @@ public final class OpeningHand {
         private boolean allocate(final int fetch, final boolean[] used, final List<Card> found,
                                  final Predicate<List<ManaUnit>> test, final int[] nodes) {
             if (fetch == fetches) {
-                return test.test(manaWith(found));
+                return testWithEntryChoices(found, test);
             }
             if (++nodes[0] > MAX_NODES) {
                 // too many ways to split the library to try them all: the best split found greedily, which is checked
                 // like any other, so a yes is a verified yes and a no is the cautious answer
-                return test.test(manaWith(greedy(fetch, used, found)));
+                return testWithEntryChoices(greedy(fetch, used, found), test);
             }
             final Set<String> tried = new HashSet<>();
             boolean finds = false;
@@ -391,8 +430,10 @@ public final class OpeningHand {
             final List<Card> out = new ArrayList<>(found);
             final boolean[] taken = used.clone();
             byte have = 0;
-            for (final ManaUnit u : manaWith(out)) {
-                have |= u.colors;
+            for (final Card entryLand : entryOptions(out)) {
+                for (final ManaUnit u : manaWith(out, entryLand)) {
+                    have |= u.colors;
+                }
             }
             for (int f = from; f < fetches; f++) {
                 int best = -1;
@@ -584,11 +625,18 @@ public final class OpeningHand {
 
         Library(final Player ai) {
             final CardCollectionView lib = ai.getCardsIn(ZoneType.Library);
+            final CardCollection possibleLands = new CardCollection();
+            for (final Card c : lib) {
+                if (c.isLand() || isMdfcLand(c)) {
+                    possibleLands.add(c);
+                }
+            }
             int l = 0;
             for (final Card c : lib) {
                 if (isManaLand(c)) {
                     l++;
-                    final byte colors = producedColors(c);
+                    // Count colours a land can make when the other lands still in the library can enable it.
+                    final byte colors = potentialProducedColors(c, ai, possibleLands);
                     if (colors != 0) {
                         landCards.add(c);
                         landMasks.add(colors);
@@ -624,6 +672,34 @@ public final class OpeningHand {
             }
         }
         return colors;
+    }
+
+    /** The colours a library land could make after it is drawn, with other remaining lands available to enable it. */
+    public static byte potentialProducedColors(final Card land, final Player ai, final CardCollectionView possibleLands) {
+        byte colors = 0;
+        final CardCollection around = new CardCollection();
+        around.addAll(possibleLands);
+        // Lands already in hand can also be played to enable a conditional land drawn or fetched later.
+        for (final Card card : ai.getCardsIn(ZoneType.Hand)) {
+            if ((card.isLand() || isMdfcLand(card)) && !around.contains(card)) {
+                around.add(card);
+            }
+        }
+        final Iterable<SpellAbility> abilities = isMdfcLand(land)
+                ? land.getState(CardStateName.Backside).getManaAbilities() : land.getManaAbilities();
+        for (final SpellAbility sa : abilities) {
+            if (activationRequirementsMet(land, sa, around, true)) {
+                colors |= ManaConversion.producedColors(sa);
+            }
+        }
+        return colors;
+    }
+
+    /** Shared by the opening-hand evaluator and the land planner for simulated battlefield states. */
+    public static boolean manaAbilityRequirementsMet(final Card land, final SpellAbility sa,
+                                                     final CardCollectionView battlefieldCandidates,
+                                                     final boolean landEntersThisTurn) {
+        return activationRequirementsMet(land, sa, battlefieldCandidates, landEntersThisTurn);
     }
 
     /** 0..100: how good the hand is for the plan. */
@@ -911,6 +987,11 @@ public final class OpeningHand {
      * Tomb makes two, and Sliver Hive makes {C} for anything or a colour for a Sliver spell, never a colour for anything.
      */
     private static void addLandMana(final List<ManaUnit> pool, final Card c, final CardCollectionView hand) {
+        addLandMana(pool, c, hand, true);
+    }
+
+    private static void addLandMana(final List<ManaUnit> pool, final Card c, final CardCollectionView hand,
+                                    final boolean landEntersThisTurn) {
         if (isPlainLand(c)) {
             pool.add(new ManaUnit((byte) (producedColors(c) & MagicColor.ALL_COLORS), null, null));
             return;
@@ -918,7 +999,7 @@ public final class OpeningHand {
         final int before = pool.size();
         SpellAbility fed = null;
         for (final SpellAbility sa : c.getManaAbilities()) {
-            if (!activationRequirementsMet(c, sa, hand)) {
+            if (!activationRequirementsMet(c, sa, hand, landEntersThisTurn)) {
                 continue;
             }
             if (!paysOtherCostsItself(c, sa)) {
@@ -955,6 +1036,26 @@ public final class OpeningHand {
         return restriction != null && restriction.getIsPresent() != null;
     }
 
+    /** Whether a land has a mana ability whose IsPresent condition includes ThisTurnEntered. */
+    private static boolean hasEntryTurnManaAbility(final Card land) {
+        final Iterable<SpellAbility> abilities = isMdfcLand(land)
+                ? land.getState(CardStateName.Backside).getManaAbilities() : land.getManaAbilities();
+        for (final SpellAbility sa : abilities) {
+            final SpellAbilityRestriction restriction = sa.getRestrictions();
+            if (restriction == null || restriction.getIsPresent() == null) {
+                continue;
+            }
+            for (final String alternative : restriction.getIsPresent().split(",")) {
+                for (final String part : alternative.split("\\+")) {
+                    if ("ThisTurnEntered".equals(part)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * Checks an ability's actual activation requirements. IsPresent normally checks the current battlefield; during
      * opening-hand evaluation, lands and castable zero-cost permanents in the hand may be played first, so include
@@ -962,6 +1063,11 @@ public final class OpeningHand {
      */
     private static boolean activationRequirementsMet(final Card land, final SpellAbility sa,
                                                      final CardCollectionView hand) {
+        return activationRequirementsMet(land, sa, hand, false);
+    }
+
+    private static boolean activationRequirementsMet(final Card land, final SpellAbility sa,
+                                                     final CardCollectionView hand, final boolean landEntersThisTurn) {
         ManaConversion.withActivator(sa);
         if (!sa.metConditions()) {
             return false;
@@ -1011,11 +1117,17 @@ public final class OpeningHand {
                                 candidates.add(card);
                             }
                         }
+                        // Other planned/fetchable lands may satisfy conditional abilities (e.g. Verge lands).
+                        for (final Card card : hand) {
+                            if (!candidates.contains(card) && (card.isLand() || isMdfcLand(card))) {
+                                candidates.add(card);
+                            }
+                        }
                     }
                 }
             }
-            final Predicate<GameObject> matches = GameObjectPredicates.restriction(
-                    present.split(","), activator, land, sa);
+            final Predicate<GameObject> matches = candidate -> matchesPresent(candidate, present.split(","),
+                    activator, land, sa, hand, landEntersThisTurn);
             final int count = (int) candidates.stream().filter(matches).count();
             final String compare = restriction.getPresentCompare();
             final int right = AbilityUtils.calculateAmount(land, compare.substring(2), sa);
@@ -1031,6 +1143,48 @@ public final class OpeningHand {
             }
         }
         return restriction.checkOtherRestrictions(land, sa, activator);
+    }
+
+    /** Treat simulated battlefield cards as entering on the simulated land-drop turn, not when drawn. */
+    private static boolean matchesPresent(final GameObject candidate, final String[] restrictions,
+                                          final Player activator, final Card land, final SpellAbility sa,
+                                          final CardCollectionView hypotheticalBattlefield,
+                                          final boolean landEntersThisTurn) {
+        for (final String restriction : restrictions) {
+            // Cards supplied by the simulation may still be in hand or library in the real game. Their real
+            // enteredThisTurn() stamp therefore cannot be used to judge a hypothetical battlefield state.
+            if (hypotheticalBattlefield != null && hypotheticalBattlefield.contains(candidate)) {
+                final boolean candidateEnteredThisTurn = candidate == land && landEntersThisTurn;
+                final List<String> parts = new ArrayList<>();
+                boolean matches = true;
+                for (final String part : restriction.split("\\+")) {
+                    if ("ThisTurnEntered".equals(part)) {
+                        if (!candidateEnteredThisTurn) {
+                            matches = false;
+                            break;
+                        }
+                    } else if ("!ThisTurnEntered".equals(part)) {
+                        if (candidateEnteredThisTurn) {
+                            matches = false;
+                            break;
+                        }
+                    } else {
+                        parts.add(part);
+                    }
+                }
+                if (!matches) {
+                    continue;
+                }
+                if (parts.isEmpty() || candidate.isValid(new String[] {String.join("+", parts)}, activator, land, sa)) {
+                    return true;
+                }
+                continue;
+            }
+            if (candidate.isValid(new String[] {restriction}, activator, land, sa)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** A single creature (or other valid permanent) from the hand may pay this land's sacrifice cost. */
@@ -1065,7 +1219,7 @@ public final class OpeningHand {
      * the land's ability or the spell being evaluated may need. Additional costs (discard, sacrifice, etc.) are not
      * guessed at.
      */
-    private static boolean isFreePermanentEnabler(final Card card) {
+    public static boolean isFreePermanentEnabler(final Card card) {
         if (!card.isPermanent()) {
             return false;
         }

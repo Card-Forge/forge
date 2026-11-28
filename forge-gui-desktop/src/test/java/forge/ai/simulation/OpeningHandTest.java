@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import forge.ai.AITest;
 import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -645,6 +646,40 @@ public class OpeningHandTest extends AITest {
         AssertJUnit.assertTrue(castsSomething(hand("Gloomlake Verge", "Evolving Wilds", "Hymn to Tourach")));
     }
 
+    @Test
+    public void gleamingBastionCanMakeBlueOnTheTurnItEnters() {
+        setUp(0, 0);
+        AssertJUnit.assertTrue(castsSomething(hand("Gleaming Bastion", "Brainstorm")));
+    }
+
+    @Test
+    public void twoGleamingBastionsCannotBothUseTheirEntryTurnColourAtOnce() {
+        setUp(0, 0);
+        final Card whiteKnight = addCardToZone("White Knight", ai, ZoneType.Library);
+        AssertJUnit.assertFalse(OpeningHand.makesColorsOf(
+                hand("Gleaming Bastion", "Gleaming Bastion"), ai, whiteKnight));
+    }
+
+    @Test
+    public void aBasicLandInHandEnablesAConditionalLibraryLandColour() {
+        setUp(0, 0);
+        final Card verge = addCardToZone("Gloomlake Verge", ai, ZoneType.Library);
+        addCardToZone("Swamp", ai, ZoneType.Hand);
+        final CardCollection possibleLands = new CardCollection();
+        possibleLands.add(verge);
+        AssertJUnit.assertTrue((OpeningHand.potentialProducedColors(verge, ai, possibleLands) & MagicColor.BLACK) != 0);
+    }
+
+    @Test
+    public void libraryColourPotentialIncludesTheEnabledSecondColourOfAVergeLand() {
+        setUp(0, 0);
+        final Card verge = addCardToZone("Floodfarm Verge", ai, ZoneType.Library);
+        final Card island = addCardToZone("Island", ai, ZoneType.Library);
+        final CardCollection possibleLands = new CardCollection();
+        possibleLands.add(verge);
+        possibleLands.add(island);
+        AssertJUnit.assertTrue((OpeningHand.potentialProducedColors(verge, ai, possibleLands) & MagicColor.BLUE) != 0);
+    }
     @Test
     public void oneDualLandCannotPayBothColoredPips() {
         setUp(0, 0);

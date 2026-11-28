@@ -14,9 +14,12 @@ import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 import forge.ai.simulation.FlatMcTestBase;
+import forge.ai.ability.TapAi;
 import forge.card.mana.ManaAtom;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 /**
@@ -510,14 +513,68 @@ public class LandPlannerTest extends FlatMcTestBase {
     }
 
     @Test
-    public void playsTheCreatureLandFirstWhenTheHandHasOnlyTwoDrops() {
-        // #13104: Dryad Arbor is summoning sick the turn it comes in, so it goes first and the Temple Garden
-        // comes in untapped for 2 life on the turn that the Ledgewalkers are cast
+    public void doesNotAssumeAFutureShocklandPaymentWhenPlanning() {
+        // TapAi decides from the actual hand and battlefield at the time of the land drop. The planner must not
+        // assume that it will pay 2 life for a future Temple Garden using today's state.
         setUpGame();
         final Card arbor = put("Dryad Arbor", ai, ZoneType.Hand);
         final Card garden = put("Temple Garden", ai, ZoneType.Hand);
         put("Silhana Ledgewalker", 2, ai, ZoneType.Hand); // {1}{G}
-        assertSame(LandPlanner.choose(ai, collection(arbor, garden), c -> c == garden), arbor);
+        assertNull(LandPlanner.choose(ai, collection(arbor, garden), c -> c == garden));
+    }
+
+    @Test
+    public void tapAiDoesNotPayForAShocklandForAOneDropBelowFourteenLife() {
+        setUpGame();
+        ai.setLife(13, null);
+        final Card garden = put("Temple Garden", ai, ZoneType.Hand);
+        put("Savannah Lions", ai, ZoneType.Hand);
+        SpellAbility payment = null;
+        for (final ReplacementEffect re : garden.getReplacementEffects()) {
+            payment = re.ensureAbility();
+            if (payment != null && payment.hasParam("UnlessCost")) {
+                break;
+            }
+        }
+        assertTrue(payment != null);
+        payment.setActivatingPlayer(ai);
+        assertFalse(TapAi.shouldPayForLandEntry(ai, garden, payment, 2, 0));
+    }
+
+    @Test
+    public void gleamingBastionsColouredAbilityExpiresAfterItsEntryTurnWithoutABasicLand() {
+        setUpGame();
+        final Card bastion = put("Gleaming Bastion", ai, ZoneType.Hand);
+        final List<LandPlanner.Src> sources = LandPlanner.sourcesForLand(bastion, ai,
+                Collections.singletonList(bastion), 0, true);
+        assertEquals(sources.size(), 1);
+        assertTrue(LandPlanner.canPay(costs(U), 0,
+                Collections.singletonList(sources.get(0).forTurn(0))));
+        assertFalse(LandPlanner.canPay(costs(U), 0,
+                Collections.singletonList(sources.get(0).forTurn(1))));
+    }
+
+    @Test
+    public void aBasicLandKeepsGleamingBastionsConditionalColourAvailable() {
+        setUpGame();
+        final Card bastion = put("Gleaming Bastion", ai, ZoneType.Hand);
+        put("Island", ai, ZoneType.Battlefield); // the basic land keeps the second ability enabled after this turn
+        final List<LandPlanner.Src> sources = LandPlanner.sourcesForLand(bastion, ai,
+                Collections.singletonList(bastion), 0, true);
+        assertTrue(LandPlanner.canPay(costs(U), 0,
+                Collections.singletonList(sources.get(0).forTurn(1))));
+    }
+
+
+    @Test
+    public void spireOfIndustrySeesAFreeArtifactInTheHand() {
+        setUpGame();
+        final Card spire = put("Spire of Industry", ai, ZoneType.Hand);
+        put("Ornithopter", ai, ZoneType.Hand);
+        final List<LandPlanner.Src> sources = LandPlanner.sourcesForLand(spire, ai,
+                Collections.singletonList(spire), 0, true);
+        assertTrue(LandPlanner.canPay(costs(R), 0,
+                Collections.singletonList(sources.get(0).forTurn(0))));
     }
 
     @Test

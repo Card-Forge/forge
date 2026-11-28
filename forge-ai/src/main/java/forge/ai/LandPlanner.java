@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 import forge.ai.ability.TapAi;
+import forge.ai.simulation.OpeningHand;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -69,6 +70,8 @@ public final class LandPlanner {
     static final class Src {
         final byte mask;
         final int from;
+        /** Colours available only on the turn this land enters (Gleaming Bastion without a basic land). */
+        final byte entryOnly;
         /** The types of the mask that this source makes only by paying life or taking damage (Horizon Canopy). */
         final byte pain;
         /** The activation that makes this mana (0: its own): Ancient Tomb's two {C} come from one, and hurt once. */
@@ -77,19 +80,34 @@ public final class LandPlanner {
         final int life;
 
         Src(final byte mask, final int from) {
-            this(mask, from, (byte) 0);
+            this(mask, from, (byte) 0, (byte) 0, 0, 1);
         }
 
         Src(final byte mask, final int from, final byte pain) {
-            this(mask, from, pain, 0, 1);
+            this(mask, from, (byte) 0, pain, 0, 1);
         }
 
         Src(final byte mask, final int from, final byte pain, final int activation, final int life) {
+            this(mask, from, (byte) 0, pain, activation, life);
+        }
+
+        Src(final byte mask, final int from, final byte entryOnly, final byte pain,
+            final int activation, final int life) {
             this.mask = mask;
             this.from = from;
+            this.entryOnly = entryOnly;
             this.pain = pain;
             this.activation = activation;
             this.life = life;
+        }
+
+        byte allColors() {
+            return (byte) (mask | entryOnly);
+        }
+
+        Src forTurn(final int turn) {
+            final byte available = (byte) (mask | (turn == from ? entryOnly : 0));
+            return new Src(available, from, (byte) (pain & available), activation, life);
         }
     }
 
@@ -149,9 +167,9 @@ public final class LandPlanner {
                 final List<Card> rest = new ArrayList<>(handLands);
                 rest.remove(land);
                 double score = Double.NEGATIVE_INFINITY;
-                for (final Variant v : variants(land, ai, entersTapped.test(land), 0)) {
+                for (final Variant v : variants(land, ai, entersTapped.test(land), 0, 0)) {
                     final List<Src> srcs = new ArrayList<>(base);
-                    addSources(srcs, land, ai, v.delay);
+                    srcs.addAll(sourcesForLand(land, ai, Collections.singletonList(land), v.delay, v.delay == 0));
                     score = Math.max(score, bestFuture(ai, srcs, rest, 1, spells, demand, entersTapped,
                             List.of(land), v.life) - v.cost);
                 }
@@ -201,9 +219,9 @@ public final class LandPlanner {
             remaining.remove(land);
             final List<Card> then = new ArrayList<>(played);
             then.add(land);
-            for (final Variant v : variants(land, ai, tapped, lifePaid)) {
+            for (final Variant v : variants(land, ai, tapped, lifePaid, turn)) {
                 final List<Src> next = new ArrayList<>(srcs);
-                addSources(next, land, ai, turn + v.delay);
+                next.addAll(sourcesForLand(land, ai, then, turn + v.delay, v.delay == 0));
                 best = Math.max(best, bestFuture(ai, next, remaining, turn + 1, spells, demand, entersTapped,
                         then, lifePaid + v.life) - v.cost);
             }
@@ -269,7 +287,10 @@ public final class LandPlanner {
             final List<Src> avail = new ArrayList<>();
             for (final Src s : srcs) {
                 if (s.from <= t) {
-                    avail.add(s);
+                    final Src active = s.forTurn(t);
+                    if (active.mask != 0) {
+                        avail.add(active);
+                    }
                 }
             }
             final List<byte[]> colouredSoFar = new ArrayList<>();
@@ -294,7 +315,7 @@ public final class LandPlanner {
         final int[] sources = new int[5];
         for (final Src s : srcs) {
             for (int c = 0; c < 5; c++) {
-                if ((s.mask & TYPE_BITS[c]) != 0) {
+                if ((s.allColors() & TYPE_BITS[c]) != 0) {
                     sources[c]++;
                 }
             }
@@ -546,13 +567,17 @@ public final class LandPlanner {
      * come in untapped for 2 life, which is worth it when a spell waits for the mana: both ways are planned, the second
      * with the price of the life.
      */
-    private static List<Variant> variants(final Card land, final Player ai, final boolean tapped, final int lifePaid) {
+    private static List<Variant> variants(final Card land, final Player ai, final boolean tapped,
+                                          final int lifePaid, final int turn) {
         final int sick = land.isCreature() && !land.hasKeyword(Keyword.HASTE) ? 1 : 0;
         final List<Variant> out = new ArrayList<>();
         out.add(new Variant(sick + (tapped ? 1 : 0), 0));
-        if (tapped) {
+        // Only the current land drop is allowed to assume a life payment. TapAi's full decision depends on the
+        // actual current hand and battlefield; speculative future payments would use stale information.
+        if (tapped && turn == 0 && lifePaid == 0) {
             final int life = lifeToEnterUntapped(land);
-            if (life > 0 && canPayToEnterUntapped(ai, life, lifePaid)) {
+            final SpellAbility payment = lifePaymentAbility(land);
+            if (life > 0 && payment != null && TapAi.shouldPayForLandEntry(ai, land, payment, life, lifePaid)) {
                 out.add(new Variant(sick, life));
             }
         }
@@ -588,6 +613,17 @@ public final class LandPlanner {
         return 0;
     }
 
+    private static SpellAbility lifePaymentAbility(final Card land) {
+        for (final ReplacementEffect re : land.getReplacementEffects()) {
+            final SpellAbility sa = re.ensureAbility();
+            if (sa != null && sa.getApi() == ApiType.Tap && sa.hasParam("UnlessCost")
+                    && sa.getParam("UnlessCost").startsWith("PayLife<")) {
+                return sa;
+            }
+        }
+        return null;
+    }
+
     /**
      * Adds the mana a permanent can make every turn: its mana abilities that cost nothing but tapping (an ability
      * that sacrifices something or needs mana of its own is not a source to plan with). A land that makes several
@@ -595,16 +631,37 @@ public final class LandPlanner {
      * may be any of them. A land that only fetches (Evolving Wilds) makes the types of the lands it can find.
      */
     private static void addSources(final List<Src> out, final Card c, final Player ai, final int from) {
+        addSources(out, c, ai, from, Collections.emptyList(), from == 0 && c.enteredThisTurn());
+    }
+
+    private static void addSources(final List<Src> out, final Card c, final Player ai, final int from,
+                                   final List<Card> planned, final boolean entryTurnAvailable) {
         final int before = out.size();
-        addSourcesOf(out, c, ai, from);
+        final CardCollection context = new CardCollection();
+        context.addAll(planned);
+        for (final Card candidate : ai.getCardsIn(ZoneType.Hand)) {
+            if (OpeningHand.isFreePermanentEnabler(candidate)) {
+                context.add(candidate);
+            }
+        }
+        addSourcesOf(out, c, ai, from, context, entryTurnAvailable);
         final byte pain = painMask(c, ai);
         if (pain != 0) {
             final int life = painLife(c, ai);
             for (int i = before; i < out.size(); i++) {
                 final Src s = out.get(i);
-                out.set(i, new Src(s.mask, s.from, (byte) (pain & s.mask), c.getId(), life)); // one activation for the card
+                out.set(i, new Src(s.mask, s.from, s.entryOnly, (byte) (pain & s.allColors()),
+                        c.getId(), life)); // one activation for the card
             }
         }
+    }
+
+    /** Sources for a land being added to a simulated land-drop sequence. */
+    static List<Src> sourcesForLand(final Card land, final Player ai, final List<Card> planned,
+                                    final int from, final boolean entryTurnAvailable) {
+        final List<Src> out = new ArrayList<>();
+        addSources(out, land, ai, from, planned, entryTurnAvailable);
+        return out;
     }
 
     /** The life that the cheapest painful mana ability of the permanent costs: a paid life point or damage to you. */
@@ -681,14 +738,25 @@ public final class LandPlanner {
         return false;
     }
 
-    private static void addSourcesOf(final List<Src> out, final Card c, final Player ai, final int from) {
+    private static void addSourcesOf(final List<Src> out, final Card c, final Player ai, final int from,
+                                     final CardCollectionView context, final boolean entryTurnAvailable) {
         final List<SpellAbility> usable = new ArrayList<>();
+        final List<SpellAbility> later = new ArrayList<>();
         for (final SpellAbility ma : ComputerUtilMana.getAIPlayableMana(c)) {
             final Cost cost = ma.getPayCosts();
             if (!isPlannable(cost)) {
                 continue;
             }
-            usable.add(ma);
+            ma.setActivatingPlayer(ai);
+            final boolean normal = OpeningHand.manaAbilityRequirementsMet(c, ma, context, false);
+            final boolean active = entryTurnAvailable
+                    ? OpeningHand.manaAbilityRequirementsMet(c, ma, context, true) : normal;
+            if (normal) {
+                later.add(ma);
+            }
+            if (active) {
+                usable.add(ma);
+            }
         }
         if (usable.isEmpty()) {
             final byte fetched = fetchMask(c, ai);
@@ -700,41 +768,49 @@ public final class LandPlanner {
         if (usable.size() == 1) {
             final SpellAbility ma = usable.get(0);
             ma.setActivatingPlayer(ai);
+            final boolean persistent = later.contains(ma);
             final AbilityManaPart mp = ma.getManaPart();
             if (mp != null && !mp.isAnyMana() && !mp.isComboMana()) {
                 final byte[] each = simultaneous(ma, mp);
                 if (each != null) {
                     for (final byte b : each) {
-                        out.add(new Src(b, from));
+                        out.add(new Src(persistent ? b : 0, from, persistent ? (byte) 0 : b,
+                                (byte) 0, 0, 1));
                     }
                     return;
                 }
             }
-            if (addChosenColorSources(out, ma, from)) {
+            if (addChosenColorSources(out, ma, from, persistent)) {
                 return;
             }
         }
         byte mask = 0;
+        byte activeMask = 0;
         int amount = 1;
         for (final SpellAbility ma : usable) {
             ma.setActivatingPlayer(ai);
-            mask |= maskOf(ma);
+            activeMask |= maskOf(ma);
+            if (later.contains(ma)) {
+                mask |= maskOf(ma);
+            }
             try {
                 amount = Math.max(amount, ma.amountOfManaGenerated(true));
             } catch (final RuntimeException e) {
                 // keep one
             }
         }
-        if (mask == 0) {
+        final byte entryOnly = (byte) (activeMask & ~mask);
+        if (mask == 0 && entryOnly == 0) {
             return;
         }
         for (int i = 0; i < Math.min(amount, 4); i++) {
-            out.add(new Src(mask, from));
+            out.add(new Src(mask, from, entryOnly, (byte) 0, 0, 1));
         }
     }
 
     /** For "choose a colour" abilities (Nyx Lotus): sources of the one colour that makes the most, false when this is not that. */
-    private static boolean addChosenColorSources(final List<Src> out, final SpellAbility ma, final int from) {
+    private static boolean addChosenColorSources(final List<Src> out, final SpellAbility ma, final int from,
+                                                 final boolean persistent) {
         for (SpellAbility part = ma; part != null; part = part.getSubAbility()) {
             final AbilityManaPart mp = part.getManaPart();
             if (mp == null || !mp.choosesColorOnResolution(part)) {
@@ -748,7 +824,8 @@ public final class LandPlanner {
                 }
             }
             for (int i = 0; i < Math.min(amounts[best], 4); i++) {
-                out.add(new Src(TYPE_BITS[best], from));
+                out.add(new Src(persistent ? TYPE_BITS[best] : 0, from,
+                        persistent ? (byte) 0 : TYPE_BITS[best], (byte) 0, 0, 1));
             }
             return true;
         }
@@ -814,10 +891,8 @@ public final class LandPlanner {
             }
             byte mask = 0;
             for (final Card l : lands) {
-                for (final SpellAbility ma : ComputerUtilMana.getAIPlayableMana(l)) {
-                    ma.setActivatingPlayer(ai);
-                    mask |= maskOf(ma);
-                }
+                // This fetch chooses one land; another possible target cannot satisfy its condition.
+                mask |= OpeningHand.potentialProducedColors(l, ai, new CardCollection(l));
             }
             return mask;
         }

@@ -151,6 +151,61 @@ public class TapAi extends TapAiBase {
     }
 
     /**
+     * The AI's complete decision for paying life to have a land enter untapped. The land planner uses this same
+     * decision for the land being played now; it does not guess that a future shockland payment will be accepted,
+     * because the future hand and battlefield are not known exactly.
+     */
+    public static boolean shouldPayForLandEntry(final Player payer, final Card source, final SpellAbility sa,
+                                                final int amount, final int lifeAlreadyPaid) {
+        final int projectedLife = payer.getLife() - lifeAlreadyPaid;
+        if (projectedLife <= amount + 1 || !payer.canPayLife(lifeAlreadyPaid + amount, true, sa)
+                || !lifeCanBeSpared(payer, lifeAlreadyPaid + amount)) {
+            return false;
+        }
+
+        final int lifeFloor = lifeReserve(payer);
+        final int lifeAvailableNow = Math.max(0, projectedLife - lifeFloor);
+        final int lifeAvailableWith = Math.max(0, projectedLife - amount - lifeFloor);
+        int untapped = 0;
+        final List<Byte> sourcesNow = new ArrayList<>();
+        for (final Card land : payer.getLandsInPlay()) {
+            if (land.isUntapped()) {
+                untapped++;
+                sourcesNow.add(forge.ai.simulation.RampPlan.landColors(land));
+            }
+        }
+        // A dual land is one source: it can pay one coloured shard, not one shard of each colour.
+        final List<Byte> sourcesWith = new ArrayList<>(sourcesNow);
+        sourcesWith.add(forge.ai.simulation.RampPlan.landColors(source));
+        final byte availableColors = ColorSet.fromNames(
+                ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
+        final boolean creatureInPlay = payer.getGame().getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CREATURES);
+        final List<Card> candidates = new ArrayList<>();
+        for (final Card c : payer.getCardsIn(ZoneType.Hand)) {
+            if (c.isLand() || c.isInstant() || c.hasKeyword(Keyword.FLASH)) {
+                continue; // burn and counterspells are held for the opponent's turn: the land can come in tapped
+            }
+            if (c.isAura() && !auraHasATarget(payer, c, creatureInPlay)) {
+                continue; // an Aura with nothing it may enchant is not a reason to pay 2 life (#12929)
+            }
+            if (c.getCMC() < 2 && payer.getLife() < LOW_LIFE_FOR_ONE_DROP) {
+                continue; // a one-drop is not worth the life while it is not plentiful
+            }
+            if (needsAnOwnTargetThatIsNotThere(payer, c)) {
+                continue; // Ephemerate with no creature to blink
+            }
+            // canPlaySa can't be asked here: the land is not on the battlefield yet, so the card always
+            // looks unaffordable. The colours of the sources with this land are what can be checked.
+            if (c.getManaCost().canBePaidWithAvailable(availableColors)) {
+                candidates.add(c);
+            }
+        }
+        // Pay only when this land lets the hand spend more this turn, not merely because it adds a colour.
+        return spendable(payer, candidates, untapped + 1, sourcesWith, lifeAvailableWith)
+                > spendable(payer, candidates, untapped, sourcesNow, lifeAvailableNow);
+    }
+
+    /**
      * Whether an Aura has something on the battlefield that it may enchant. A creature of the opponent does not count
      * for an Aura that enchants "creature you control", the usual one for the AI's own creatures.
      *
@@ -279,54 +334,7 @@ public class TapAi extends TapAiBase {
                 if (part instanceof CostPayLife) {
                     final CostPayLife lifeCost = (CostPayLife) part;
                     Integer amount = lifeCost.convertAmount();
-                    if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa) && lifeCanBeSpared(payer, amount)) {
-                        final int lifeFloor = lifeReserve(payer);
-                        final int lifeAvailableNow = Math.max(0, payer.getLife() - lifeFloor);
-                        final int lifeAvailableWith = Math.max(0, payer.getLife() - amount - lifeFloor);
-                        // the mana of the lands that are untapped now, and what the cards in hand can spend with and without this one
-                        int untapped = 0;
-                        final List<Byte> sourcesNow = new ArrayList<>();
-                        for (final Card land : payer.getLandsInPlay()) {
-                            if (land.isUntapped()) {
-                                untapped++;
-                                sourcesNow.add(forge.ai.simulation.RampPlan.landColors(land));
-                            }
-                        }
-                        // A dual land is one source: it can pay one coloured shard, not one shard of each colour.
-                        final List<Byte> sourcesWith = new ArrayList<>(sourcesNow);
-                        sourcesWith.add(forge.ai.simulation.RampPlan.landColors(source));
-                        // the same sources answer this for every card in hand, so ask once
-                        final byte availableColors = ColorSet.fromNames(
-                                ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
-                        final boolean creatureInPlay = payer.getGame().getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CREATURES);
-                        final List<Card> candidates = new ArrayList<>();
-                        for (Card c : payer.getCardsIn(ZoneType.Hand)) {
-                            if (c.isLand() || c.isInstant() || c.hasKeyword(Keyword.FLASH)) {
-                                continue; // burn and counterspells are held for the opponent's turn: the land can come in tapped
-                            }
-                            if (c.isAura() && !auraHasATarget(payer, c, creatureInPlay)) {
-                                continue; // an Aura with nothing it may enchant is not a reason to pay 2 life (#12929)
-                            }
-                            if (c.getCMC() < 2 && payer.getLife() < LOW_LIFE_FOR_ONE_DROP) {
-                                continue; // a one-drop is not worth the life while it is not plentiful
-                            }
-                            if (needsAnOwnTargetThatIsNotThere(payer, c)) {
-                                continue; // Ephemerate with no creature to blink
-                            }
-                            // canPlaySa can't be asked here: the land is not on the battlefield yet, so the card always
-                            // looks unaffordable. The colours of the sources with this land are what can be checked
-                            if (c.getManaCost().canBePaidWithAvailable(availableColors)) {
-                                candidates.add(c);
-                            }
-                        }
-                        // a land that lets the hand spend more this turn is worth the life: a card that needs exactly
-                        // this land, or two cards that fit together once a Malevolent Rumble's Spawn is counted
-                        if (spendable(payer, candidates, untapped + 1, sourcesWith, lifeAvailableWith)
-                                > spendable(payer, candidates, untapped, sourcesNow, lifeAvailableNow)) {
-                            return true;
-                        }
-                    }
-                    return false;
+                    return amount != null && shouldPayForLandEntry(payer, source, sa, amount, 0);
                 }
             }
         } else if (sa.hasParam("UnlessSwitched")) {
