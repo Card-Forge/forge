@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import forge.ai.ManaSourceAllocation;
 import forge.card.MagicColor;
@@ -17,18 +19,24 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterType;
+import forge.game.cost.CostExert;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
+import forge.game.cost.CostPayEnergy;
 import forge.game.cost.CostPayLife;
+import forge.game.cost.CostRemoveCounter;
 import forge.game.cost.CostSacrifice;
 import forge.game.cost.CostTap;
 import forge.game.cost.CostTapType;
 import forge.game.replacement.ReplacementType;
 import forge.card.CardStateName;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
@@ -46,6 +54,9 @@ import forge.game.zone.ZoneType;
  * A hand that cannot do anything (no lands, all lands, nothing castable) is scored down hard.
  */
 public final class OpeningHand {
+    private static final Pattern COUNTER_KIND = Pattern.compile("CounterType\\$ (\\w+)");
+    private static final Pattern COUNTER_NUMBER = Pattern.compile("CounterNum\\$ (\\w+)");
+
     private OpeningHand() {
     }
 
@@ -865,6 +876,9 @@ public final class OpeningHand {
         final int before = pool.size();
         SpellAbility fed = null;
         for (final SpellAbility sa : c.getManaAbilities()) {
+            if (!paysOtherCostsItself(c, sa)) {
+                continue; // Phyrexian Tower's {B}{B} without a creature to sacrifice
+            }
             if (needsMana(sa)) {
                 fed = sa; // makes nothing by itself: see filtered
                 continue;
@@ -884,7 +898,70 @@ public final class OpeningHand {
     /** Whether the card's land is one mana of any colour it makes, with nothing else to know about it. */
     private static boolean isPlainLand(final Card c) {
         return !c.isLand() || !hasRestrictedMana(c) && !makesSeveralMana(c)
-                && c.getManaAbilities().stream().noneMatch(OpeningHand::needsMana);
+                && c.getManaAbilities().stream().allMatch(sa -> !needsMana(sa) && paysOtherCostsItself(c, sa));
+    }
+
+    /**
+     * Whether the land can pay by itself, when it is first played, what the ability asks besides mana: tapping, life,
+     * sacrificing or exerting itself, and counters or energy that it gets on entering (Gemstone Mine, Vivid Crag,
+     * Aether Hub). Not another card (Phyrexian Tower's creature), nor counters it has to build up (Mirrodin's Core).
+     */
+    private static boolean paysOtherCostsItself(final Card land, final SpellAbility sa) {
+        return sa.getPayCosts() == null || sa.getPayCosts().getCostParts().stream().allMatch(part ->
+                part instanceof CostTap || part instanceof CostPartMana || part instanceof CostPayLife
+                || (part instanceof CostSacrifice || part instanceof CostExert) && part.payCostFromSource()
+                || part instanceof CostRemoveCounter && part.payCostFromSource() && part.getAmount().matches("\\d+")
+                        && countersOnEntering(land, ((CostRemoveCounter) part).counter)
+                                >= Integer.parseInt(part.getAmount())
+                || part instanceof CostPayEnergy && part.getAmount().matches("\\d+")
+                        && energyOnEntering(land) >= Integer.parseInt(part.getAmount()));
+    }
+
+    /** The counters of this kind the card enters with, read from its script. */
+    private static int countersOnEntering(final Card c, final CounterType type) {
+        int n = 0;
+        for (final KeywordInterface k : c.getKeywords()) {
+            final String[] words = k.getOriginal().split(":");
+            if (words.length > 2 && "etbCounter".equals(words[0]) && words[2].matches("\\d+")
+                    && type.equals(CounterType.getType(words[1]))) {
+                n += Integer.parseInt(words[2]);
+            }
+        }
+        for (final String script : c.getSVars().values()) { // Vivid Crag: part of how it enters tapped
+            if (script.contains("PutCounter") && script.contains("ETB$ True")) {
+                n += countersPut(script, type);
+            }
+        }
+        return n;
+    }
+
+    /** The energy the card's own entering gives. */
+    private static int energyOnEntering(final Card c) {
+        int n = 0;
+        for (final Trigger t : c.getTriggers()) {
+            if (isOwnEntering(t) && t.hasParam("Execute")) {
+                n += countersPut(c.getSVar(t.getParam("Execute")), CounterType.getType("ENERGY"));
+            }
+        }
+        return n;
+    }
+
+    /** How many counters of this kind the script of a PutCounter effect puts; 0 for another kind or no fixed number. */
+    private static int countersPut(final String script, final CounterType type) {
+        final Matcher kind = COUNTER_KIND.matcher(script);
+        if (!kind.find() || !type.equals(CounterType.getType(kind.group(1)))) {
+            return 0;
+        }
+        final Matcher amount = COUNTER_NUMBER.matcher(script);
+        if (!amount.find()) {
+            return 1;
+        }
+        return amount.group(1).matches("\\d+") ? Integer.parseInt(amount.group(1)) : 0;
+    }
+
+    private static boolean isOwnEntering(final Trigger t) {
+        return t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Destination"))
+                && "Card.Self".equals(t.getParam("ValidCard"));
     }
 
     /** Whether some ability of the land can be counted on for two or more mana. */
@@ -907,9 +984,7 @@ public final class OpeningHand {
                 && sa.getPayCosts().getCostParts().stream()
                         .allMatch(part -> part instanceof CostTap || part instanceof CostPayLife)
                 && worksOnceInPlay(c, sa)
-                && c.getTriggers().stream().noneMatch(t -> t.getMode() == TriggerType.ChangesZone
-                        && "Battlefield".equals(t.getParam("Destination"))
-                        && "Card.Self".equals(t.getParam("ValidCard")));
+                && c.getTriggers().stream().noneMatch(OpeningHand::isOwnEntering);
     }
 
     private static boolean needsMana(final SpellAbility sa) {

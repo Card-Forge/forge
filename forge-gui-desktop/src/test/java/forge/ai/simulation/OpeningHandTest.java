@@ -766,6 +766,26 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void phyrexianTowerCannotMakeBlackWithoutACreatureToSacrifice() {
+        setUp(0, 0);
+        AssertJUnit.assertFalse(castsSomething(hand("Phyrexian Tower", "Dark Ritual")));
+    }
+
+    @Test
+    public void mirrodinsCoreHasNoCounterForColouredManaYet() {
+        setUp(0, 0);
+        AssertJUnit.assertFalse(castsSomething(hand("Mirrodin's Core", "Dark Ritual")));
+    }
+
+    @Test
+    public void landsThatPayTheirExtraCostThemselvesStillMakeTheColour() {
+        setUp(0, 0);
+        for (final String land : new String[] {"Gemstone Mine", "Vivid Crag", "Tendo Ice Bridge", "Aether Hub"}) {
+            AssertJUnit.assertTrue(land, castsSomething(hand(land, "Dark Ritual")));
+        }
+    }
+
+    @Test
     public void aDualLandMakesOneColourOfTheTwoPips() {
         setUp(0, 0);
         final Card charm = addCardToZone("Simic Charm", ai, ZoneType.Library); // {G}{U}
