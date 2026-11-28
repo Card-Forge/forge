@@ -950,6 +950,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             int maxMatchPlayers = metadata.getInt("MaxMatchPlayers", 2);
             String freeCommander = metadata.get("DraftFreeCommander", "");
             String impliedPartner = metadata.get("DraftImpliedPartnership", "");
+            String teams = metadata.get("Teams","");
 
             res.draftOptions = new DraftOptions(
                     doublePick,
@@ -958,7 +959,8 @@ public final class CardEdition implements Comparable<CardEdition> {
                     maxMatchPlayers,
                     res.draftType,
                     freeCommander,
-                    impliedPartner
+                    impliedPartner,
+                    teams
             );
 
             return res;
