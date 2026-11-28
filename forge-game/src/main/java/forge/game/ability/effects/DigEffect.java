@@ -492,6 +492,8 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                     }
                 }
+            } else if (sa.hasParam("ForgetOtherRemembered")) {
+                host.clearRemembered();
             }
         }
         if (combatChanged) {
