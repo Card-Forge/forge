@@ -401,6 +401,25 @@ public class AiAttackController {
         return false;
     }
 
+    /** "Whenever ~ attacks, exile (or return to hand) up to one target creature/permanent": one potential blocker less. */
+    static boolean attackTriggerRemovesBlocker(final Card attacker) {
+        for (final Trigger trigger : attacker.getTriggers()) {
+            if (!TriggerType.Attacks.equals(trigger.getMode()) || !trigger.hasParam("ValidCard")
+                    || !trigger.matchesValidParam("ValidCard", attacker)) {
+                continue;
+            }
+            for (SpellAbility sa = trigger.ensureAbility(); sa != null; sa = sa.getSubAbility()) {
+                final String dest = sa.getParam("Destination");
+                if (ApiType.ChangeZone.equals(sa.getApi()) && "Battlefield".equals(sa.getParam("Origin"))
+                        && ("Exile".equals(dest) || "Hand".equals(dest))
+                        && sa.usesTargeting() && sa.getTargetRestrictions().canTgtCreature()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * Whether the effect adds power: only that makes a creature without any worth attacking for (a 0/4 that gets flying from
      * Aerial Guide, a -1/-1, a loyalty or charge counter deal no damage). Power from "+X" is judged by the trigger's source.
@@ -1587,6 +1606,10 @@ public class AiAttackController {
 
             // contains only the defender's blockers that can actually block the attacker
             CardCollection validBlockers = CardLists.filter(defenders, defender1 -> CombatUtil.canBlock(attacker, defender1));
+            // an attack trigger that exiles/bounces a creature (Phelia, #13090) takes the best blocker out of the way
+            if (!validBlockers.isEmpty() && attackTriggerRemovesBlocker(attacker)) {
+                validBlockers.remove(ComputerUtilCard.getBestCreatureAI(validBlockers));
+            }
 
             canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetCombatDamage() > Aggregates.sum(validBlockers, Card::getNetToughness);
 
