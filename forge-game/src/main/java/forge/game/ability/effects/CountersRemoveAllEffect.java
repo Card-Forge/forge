@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -58,13 +59,13 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
             cards = CardLists.filterControlledBy(cards, pl);
         }
 
+        GameEntityCounterTable table = new GameEntityCounterTable();
         int numberRemoved = 0;
         for (final Card tgtCard : cards) {
             if (sa.hasParam("AllCounterTypes")) {
                 for (Multiset.Entry<CounterType> e : Lists.newArrayList(tgtCard.getCounters().entrySet())) {
-                    numberRemoved += tgtCard.subtractCounter(e.getElement(), e.getCount(), sa.getActivatingPlayer());
+                    numberRemoved += tgtCard.subtractCounter(e.getElement(), e.getCount(), sa.getActivatingPlayer(), table);
                 }
-                //tgtCard.getCounters().clear();
                 continue;
             }
             if (sa.hasParam("AllCounters")) {
@@ -72,10 +73,11 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
             }
 
             if (counterAmount > 0) {
-                numberRemoved += tgtCard.subtractCounter(CounterType.getType(type), counterAmount, sa.getActivatingPlayer());
+                numberRemoved += tgtCard.subtractCounter(CounterType.getType(type), counterAmount, sa.getActivatingPlayer(), table);
                 game.updateLastStateForCard(tgtCard);
             }
         }
+        table.replaceRemoveCounterEffect(game, sa);
         if (sa.hasParam("RememberAmount")) {
             sa.getHostCard().addRemembered(numberRemoved);
         }
