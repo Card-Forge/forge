@@ -18,6 +18,7 @@
 
 package forge.screens.home.settings;
 
+import forge.GuiDesktop;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.BuildInfo;
@@ -75,11 +76,11 @@ public enum CSubmenuReleaseNotes implements ICDoc {
      */
     private static String getReleaseNotes() {
         final String filename = ForgeConstants.CHANGES_FILE_NO_RELEASE;
-        final String filePath = FileUtil.pathCombine(System.getProperty("user.dir"), filename);
+        final String filePath = FileUtil.pathCombine(GuiDesktop.getInstallDir(), filename);
 
         //The file packaged with full releases is not the same as the one for snapshots
         final String filenameRelease = ForgeConstants.CHANGES_FILE;
-        final String filePathRelease = FileUtil.pathCombine(System.getProperty("user.dir"), filenameRelease);
+        final String filePathRelease = FileUtil.pathCombine(GuiDesktop.getInstallDir(), filenameRelease);
 
         String notes;
 
