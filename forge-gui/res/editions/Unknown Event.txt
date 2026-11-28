@@ -47,7 +47,8 @@ ScryfallCode=UNK
 20230239 R Then, Dreadmaws Ate Everyone @
 20230240 C Unclaimed Tanadon @
 20230241 R Forestfolk @
-20230242 M Delphia, Undecided @
+20230242a M Delphia, Undecided @ ${"variant": "A"}
+20230242 M Delphia, Undecided @ ${"variant": "B"}
 20230243 M Phila, Unsealed @
 20230244 R Call Up Emrakul to Help @
 20230245 R Chancellor of the Mulligan @

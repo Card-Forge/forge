@@ -1,0 +1,5 @@
+Name:Sheoldred's Terror
+ManaCost:B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.!setMRD DST 5DN SOM MBS NPH ONE YONE | TgtPrompt$ Select target creature not originally printed in an Argentum expansion | SpellDescription$ Destroy target creature not originally printed in an Argentum expansion. (Mirrodin, Darksteel, Fifth Dawn, Scars of Mirrodin, Mirrodin Besieged, New Phyrexia, and Phyrexia: All Will Be One are Argentum expansions. Argentum is Karn's original name for that plane, now you know!)
+Oracle:Destroy target creature not originally printed in an Argentum expansion. (Mirrodin, Darksteel, Fifth Dawn, Scars of Mirrodin, Mirrodin Besieged, New Phyrexia, and Phyrexia: All Will Be One are Argentum expansions. Argentum is Karn's original name for that plane, now you know!)

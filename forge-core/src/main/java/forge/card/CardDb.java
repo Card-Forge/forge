@@ -1286,6 +1286,47 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return cr.isFoil ? result.getFoiled() : result;
     }
 
+    public PaperCard getOriginalPrint(String cardName) {
+        List<Type> originalPrintTypes = Arrays.asList(
+                Type.CORE,
+                Type.EXPANSION,
+                Type.STARTER,
+                Type.DRAFT,
+                Type.COMMANDER,
+                Type.FUNNY
+        );
+        List<PaperCard> cards = getAllCards(cardName);
+        // Collect the list of all editions found for target card
+        List<CardEdition> cardEditions = new ArrayList<>();
+        Map<String, PaperCard> candidatesCard = new HashMap<>();
+        for (PaperCard card : cards) {
+            String setCode = card.getEdition();
+            CardEdition ed;
+            if (setCode.equals(CardEdition.UNKNOWN_CODE))
+                ed = CardEdition.UNKNOWN;
+            else
+                ed = editions.get(card.getEdition());
+            if (ed != null) {
+                cardEditions.add(ed);
+                candidatesCard.put(setCode, card);
+            }
+        }
+        if (cardEditions.isEmpty())
+            return null;  // nothing to do
+        Collections.sort(cardEditions);
+        cardEditions.sort(Comparator.comparingInt(ed -> {
+            Type type = ed.getType();
+            if (originalPrintTypes.contains(type)) {
+                return 0;
+            }
+            if (type == Type.ONLINE) {
+                return 1;
+            }
+            return 2;
+        }));
+        return candidatesCard.get(cardEditions.get(0).getCode());
+    }
+
     @Override
     public int getMaxArtIndex(String cardName) {
         if (cardName == null)
