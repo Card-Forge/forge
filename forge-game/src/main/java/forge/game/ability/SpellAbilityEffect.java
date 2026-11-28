@@ -648,6 +648,11 @@ public abstract class SpellAbilityEffect implements IHasForgeParams {
     }
 
     protected static void registerDelayedTrigger(final SpellAbility sa, String location, final Iterable<Card> crds) {
+        // Myriad (CR 702.116a): the delayed trigger exists only if a token was created
+        if (sa.hasParam("AtEOTNeedsCard") && !crds.iterator().hasNext()) {
+            return;
+        }
+
         boolean intrinsic = sa.isIntrinsic();
         boolean your = location.startsWith("Your");
         boolean combat = location.endsWith("Combat");
