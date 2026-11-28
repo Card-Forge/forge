@@ -18,15 +18,22 @@
 
 package forge.toolbox.special;
 
+import java.awt.Container;
+import java.awt.KeyboardFocusManager;
+import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.RootPaneContainer;
 import javax.swing.Timer;
 
+import forge.Singletons;
 import forge.StaticData;
 import forge.game.card.Card;
 import forge.game.card.CardView.CardStateView;
@@ -74,6 +81,10 @@ public enum CardZoomer {
     // Used to ignore mouse wheel rotation for a short period of time.
     private Timer mouseWheelCoolDownTimer;
     private boolean isMouseWheelEnabled = false;
+
+    private Container overlayHome;
+    private int overlayHomeLayer;
+    private Rectangle overlayHomeBounds;
 
     // ctr
     CardZoomer() {
@@ -196,8 +207,43 @@ public enum CardZoomer {
         isMouseWheelEnabled = false;
         setLayout();
         setImage();
+        hostOverlayOnActiveWindow();
         SOverlayUtils.showOverlay();
         isOpen = true;
+    }
+
+    private void hostOverlayOnActiveWindow() {
+        final Window active = KeyboardFocusManager.getCurrentKeyboardFocusManager().getActiveWindow();
+        if (!(active instanceof RootPaneContainer) || active == Singletons.getView().getFrame()) {
+            return;
+        }
+
+        final Container parent = overlay.getParent();
+        final JLayeredPane target = ((RootPaneContainer) active).getLayeredPane();
+        if (parent == target || !(parent instanceof JLayeredPane)) {
+            return;
+        }
+
+        overlayHome = parent;
+        overlayHomeLayer = ((JLayeredPane) parent).getLayer(overlay);
+        overlayHomeBounds = overlay.getBounds();
+
+        target.add(overlay, JLayeredPane.MODAL_LAYER);
+        overlay.setBounds(0, 0, target.getWidth(), target.getHeight());
+        overlay.validate();
+    }
+
+    private void restoreOverlayHome() {
+        if (overlayHome == null) { return; }
+
+        final Container borrowed = overlay.getParent();
+        ((JLayeredPane) overlayHome).add(overlay, Integer.valueOf(overlayHomeLayer));
+        overlay.setBounds(overlayHomeBounds);
+        overlayHome = null;
+
+        if (borrowed != null) {
+            borrowed.repaint();
+        }
     }
 
     /**
@@ -260,6 +306,7 @@ public enum CardZoomer {
         stopMouseWheelCoolDownTimer();
         isOpen = false;
         SOverlayUtils.hideOverlay();
+        restoreOverlayHome();
         lastClosedTime = System.currentTimeMillis();
     }
 
