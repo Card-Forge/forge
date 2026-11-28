@@ -40,6 +40,8 @@ RULES = {
     "UniversesBeyond": lambda card: bool({"universesbeyond", "godzillaseries"} & set(card.get("promo_types", []))),
     "Digital": lambda card: card.get("digital", False),
     "Funny": is_funny,
+    # Default Cards holds a print in another language only when it was not printed in English
+    "NonEnglish": lambda card: card.get("lang", "en") != "en",
 }
 
 # Tags Scryfall cannot give, taken from a section of the edition files
