@@ -3060,6 +3060,49 @@ public class AiReportScenarioTest extends AITest {
                     c.bf("Willowdusk, Essence Seer", c.ai);
                     c.bf("Grizzly Bears", c.ai);
                 }));
+
+        // ---------------- a {T} ability that is used again and again (Samite Healer, Ley Druid): is the cost really paid?
+        l.add(new Scenario("samite-healer-repeat", "Samite Healer prevents damage once: its {T} cost is paid, so it cannot be activated again", Fid.APPROX, M1, false,
+                c -> {
+                    c.bf("Plains", c.ai);
+                    c.bf("Samite Healer", c.ai);
+                    final Card elves = c.bf("Llanowar Elves", c.ai); // a 1/1: one prevented damage saves it from Gut Shot
+                    c.stack(c.opp, "Gut Shot", elves);
+                },
+                c -> activatedAtMostOnce(c, "Samite Healer")));
+        l.add(new Scenario("ley-druid-repeat", "Ley Druid untaps a land once: its {T} cost is paid, so it cannot untap lands again and again", Fid.APPROX, "MAIN2", true,
+                c -> {
+                    c.bf("Forest", 3, c.ai);
+                    c.bf("Forest", c.ai).setTapped(true);
+                    c.bf("Ley Druid", c.ai);
+                    c.hand("Giant Spider", c.ai); // {3}{G}: one mana short of four until the Druid untaps the fourth land
+                },
+                c -> activatedAtMostOnce(c, "Ley Druid")));
+
+        // ---------------- Bloodline Keeper: the second ability (transform with five Vampires)
+        l.add(new Scenario("bloodline-keeper-transform", "with five Vampires Bloodline Keeper is transformed (the {B} ability)", Fid.EXACT, M1, true,
+                c -> { c.richMana(); c.bf("Bloodline Keeper", c.ai); c.bf("Vampire Nighthawk", 4, c.ai); },
+                c -> bloodlineKeeperTransforms(c) ? null : "AI never offered the transform ability of Bloodline Keeper" + c.why("Bloodline Keeper")));
+        l.add(new Scenario("bloodline-keeper-transform-four", "control: with only four Vampires the transform ability is not offered", Fid.EXACT, M1, true,
+                c -> { c.richMana(); c.bf("Bloodline Keeper", c.ai); c.bf("Vampire Nighthawk", 3, c.ai); },
+                c -> bloodlineKeeperTransforms(c) ? "AI offered the transform ability with only four Vampires" : null));
+
+        // ---------------- Charismatic Conqueror: the AI taps a hasty one-turn creature to deny the token
+        l.add(new Scenario("charismatic-conqueror-blitz-hellion", "Blitz Hellion (haste, shuffled away at the end of the turn) is not tapped to deny Charismatic Conqueror's Vampire", Fid.APPROX, M1, true,
+                c -> { c.richMana(); c.bf("Charismatic Conqueror", c.opp); },
+                c -> {
+                    final SpellAbility cast = c.hand("Blitz Hellion", c.ai).getFirstSpellAbility();
+                    cast.setActivatingPlayer(c.ai);
+                    if (!ComputerUtil.playStack(cast, c.ai, c.game)) {
+                        throw new AssertionError("Blitz Hellion could not be cast in the regression setup");
+                    }
+                    c.resolveAll();
+                    final Card hellion = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> "Blitz Hellion".equals(k.getName())).findFirst().orElse(null);
+                    if (hellion == null) { return "Blitz Hellion did not enter the battlefield" + c.trace; }
+                    return hellion.isTapped()
+                            ? "the AI tapped Blitz Hellion, which has haste and only this turn, to deny a 1/1 lifelink Vampire" + c.trace : null;
+                }));
         return l;
     }
 
@@ -3204,6 +3247,65 @@ public class AiReportScenarioTest extends AITest {
         AssertJUnit.assertTrue("the retained hand now contains only lands and creature Auras",
                 OpeningHand.hasOnlyLandsAndCreatureAuras(kept));
         AssertJUnit.assertFalse("the classic mulligan must reject the resulting hand", controller.classicMulliganKeepsHand(hand, 1));
+    }
+
+    /**
+     * The AI is asked for the play of {@code host} again and again, as in a game where it keeps priority, and each play is made
+     * through its controller (costs paid, the stack resolved in between). A {T} ability can be used once: every further play
+     * means its cost was not really paid.
+     */
+    private String activatedAtMostOnce(final Ctx c, final String host) {
+        final PlayerControllerAi pc = c.ctl();
+        int activations = 0;
+        for (int i = 0; i < 6; i++) {
+            final SpellAbility sa = c.playOf(host);
+            if (sa == null) { break; }
+            pc.playChosenSpellAbility(sa);
+            c.resolveAll();
+            activations++;
+        }
+        final Card card = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> host.equals(k.getName())).findFirst().orElse(null);
+        if (activations == 0) {
+            throw new SkipException("setup: the AI never activated " + host + ", so there is nothing to repeat" + c.why(host));
+        }
+        if (card != null && !card.isTapped()) { return host + " was activated " + activations + " time(s) and is still untapped" + c.trace; }
+        return activations > 1 ? host + " was activated " + activations + " times in a row" + c.trace : null;
+    }
+
+    private static boolean bloodlineKeeperTransforms(final Ctx c) {
+        for (final SpellAbility sa : c.plays()) {
+            if (sa.getHostCard() != null && "Bloodline Keeper".equals(sa.getHostCard().getName()) && sa.getApi() == ApiType.SetState) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Test
+    public void neganTargetsTheOpponentWhoHasCreaturesToSacrifice() {
+        final Game game = initAndCreateThreePlayerGame();
+        game.AI_FLAT_MONTE_CARLO = FLAT_MC;
+        game.AI_TIMEOUT = 10;
+        final Player human = game.getPlayers().get(0);
+        final Player ai = game.getPlayers().get(1);
+        final Player rival = game.getPlayers().get(2);
+        addCard("Mountain", ai); addCard("Mountain", ai); addCard("Mountain", ai); addCard("Plains", ai); addCard("Swamp", ai); // {2}{R}{W}{B}
+        addCard("Forest", human); addCard("Island", human); // nothing but a couple of lands: no creature to sacrifice
+        addCard("Serra Angel", rival);
+        addCard("Wurmcoil Engine", rival);
+        final SpellAbility cast = addCardToZone("Negan, the Cold-Blooded", ai, ZoneType.Hand).getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("Negan could not be cast in the regression setup", ComputerUtil.playStack(cast, ai, game));
+        game.getStack().resolveStack();
+        game.getAction().checkStateEffects(true);
+        game.getTriggerHandler().runWaitingTriggers();
+        game.getStack().addAllTriggeredAbilitiesToStack();
+        AssertJUnit.assertFalse("setup: the enter trigger of Negan never reached the stack", game.getStack().isEmpty());
+        final SpellAbility trigger = game.getStack().peekAbility();
+        final Player aimed = trigger.getTargets() == null ? null : trigger.getTargets().getFirstTargetedPlayer();
+        AssertJUnit.assertNotNull("Negan's trigger has no player as its target", aimed);
+        AssertJUnit.assertEquals("Negan's trigger went at " + aimed + ", the player with nothing but lands, instead of the one with creatures",
+                rival, aimed);
     }
 
     @AfterClass
