@@ -80,6 +80,12 @@ public class PlayerControllerAi extends PlayerController {
         return pilotsNonAggroDeck;
     }
 
+    /** Whether the board is wide enough for this AI's profile to let expensive evaluations take approximate shortcuts. */
+    public boolean takesShortcuts() {
+        final int threshold = brains.getIntProperty(AiProps.SHORTCUT_MIN_CREATURES);
+        return threshold >= 0 && CardLists.count(getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES) >= threshold;
+    }
+
     // lets mana triggered while paying, like Fertile Ground's, take this shard's color
     public void runPayingShard(ManaCostShard shard, Runnable proc) {
         ManaCostShard previous = shardBeingPaid;

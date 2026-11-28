@@ -325,6 +325,10 @@ SIDEBOARDING_SHARED_TYPE_ONLY=true
 # Allow replacing a creature with a planeswalker and vice versa when sideboarding
 SIDEBOARDING_PLANESWALKER_EQ_CREATURE=false
 
+# Once this many creatures are on the battlefield, combat evaluations may take approximate shortcuts to save time.
+# Set to -1 to always evaluate exactly
+SHORTCUT_MIN_CREATURES=10
+
 # Flat Monte Carlo, cautious: more samples, a heavy weight on risk and on keeping mana open, a bigger bonus for the
 # heuristic play (rollouts must clearly beat it), and a look at the opponent's reply. It holds back more, answers
 # spells on the stack, and values card advantage over tempo.

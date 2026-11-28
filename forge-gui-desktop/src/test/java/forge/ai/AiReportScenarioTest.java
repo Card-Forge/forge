@@ -264,7 +264,7 @@ public class AiReportScenarioTest extends AITest {
             final Combat combat = new Combat(opp);
             for (final Card a : attackers) { combat.addAttacker(a, ai); }
             game.getPhaseHandler().setCombat(combat);
-            new AiBlockController(ai, false).assignBlockersForCombat(combat);
+            new AiBlockController(ai, ai).assignBlockersForCombat(combat);
             return new ArrayList<Card>(combat.getAllBlockers());
         }
         /** The player puts a spell with the given target(s) on the stack, for the AI to respond to. */
