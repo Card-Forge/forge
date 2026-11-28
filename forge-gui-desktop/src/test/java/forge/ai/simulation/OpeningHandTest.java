@@ -772,6 +772,45 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void phyrexianTowerCanSacrificeAFreeCreatureFromTheHand() {
+        setUp(0, 0);
+        final Card ritual = addCardToZone("Dark Ritual", ai, ZoneType.Library);
+        AssertJUnit.assertTrue(OpeningHand.makesColorsOf(hand("Phyrexian Tower", "Memnite"), ai, ritual));
+    }
+
+    @Test
+    public void phyrexianTowerCanSacrificeACreatureCastWithOtherHandMana() {
+        setUp(0, 0);
+        final Card ritual = addCardToZone("Dark Ritual", ai, ZoneType.Library);
+        // Forest casts the Elf, leaving Tower untapped to sacrifice it for {B}{B}.
+        AssertJUnit.assertTrue(OpeningHand.makesColorsOf(
+                hand("Phyrexian Tower", "Forest", "Llanowar Elves"), ai, ritual));
+    }
+
+    @Test
+    public void phyrexianTowerCannotUseItsColorlessAndSacrificeModesInTheSameTurn() {
+        setUp(0, 0);
+        final Card ritual = addCardToZone("Dark Ritual", ai, ZoneType.Library);
+        // Tower's {C} cannot cast the Bears and then be tapped again to sacrifice them.
+        AssertJUnit.assertFalse(OpeningHand.makesColorsOf(
+                hand("Phyrexian Tower", "Forest", "Grizzly Bears"), ai, ritual));
+    }
+
+    @Test
+    public void taintedFieldNeedsASwampForItsWhiteOrBlackMana() {
+        setUp(0, 0);
+        AssertJUnit.assertFalse(castsSomething(hand("Tainted Field", "Savannah Lions")));
+        AssertJUnit.assertTrue(castsSomething(hand("Tainted Field", "Swamp", "Savannah Lions")));
+    }
+
+    @Test
+    public void floodfarmVergeNeedsAPlainsOrIslandForItsBlueMana() {
+        setUp(0, 0);
+        AssertJUnit.assertFalse(castsSomething(hand("Floodfarm Verge", "Brainstorm")));
+        AssertJUnit.assertTrue(castsSomething(hand("Floodfarm Verge", "Plains", "Brainstorm")));
+    }
+
+    @Test
     public void mirrodinsCoreHasNoCounterForColouredManaYet() {
         setUp(0, 0);
         AssertJUnit.assertFalse(castsSomething(hand("Mirrodin's Core", "Dark Ritual")));

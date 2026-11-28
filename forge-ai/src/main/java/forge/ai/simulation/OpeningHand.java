@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +13,9 @@ import java.util.regex.Pattern;
 import forge.ai.ManaSourceAllocation;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
+import forge.game.GameObject;
+import forge.game.GameObjectPredicates;
+import forge.game.ability.AbilityUtils;
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaCost;
 import forge.game.ability.ApiType;
@@ -36,8 +40,10 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.util.Expressions;
 import forge.game.zone.ZoneType;
 
 /**
@@ -264,6 +270,7 @@ public final class OpeningHand {
         private static final int MAX_NODES = 20000;
 
         private final Library lib;
+        private final CardCollectionView hand;
         private final List<ManaUnit> fixed = new ArrayList<>();
         /** For each library land: the fetch lands of the hand (bit by bit) that may find it. */
         private final int[] finders;
@@ -271,13 +278,14 @@ public final class OpeningHand {
 
         HandMana(final CardCollectionView hand, final Library lib) {
             this.lib = lib;
+            this.hand = hand;
             final List<Card> fetchLands = new ArrayList<>();
             for (final Card c : hand) {
                 if ((c.isLand() || isMdfcLand(c)) && isEarlyManaLand(c)) {
                     if (fetchesLand(c)) {
                         fetchLands.add(c);
                     } else {
-                        addLandMana(fixed, c);
+                        addLandMana(fixed, c, hand);
                     }
                 }
             }
@@ -301,12 +309,12 @@ public final class OpeningHand {
 
         /** Every colour the hand can make for the spell, though not necessarily all together. */
         byte reachable(final Card spell) {
-            byte colors = colorsFor(fixed, spell);
+            byte colors = colorsFor(fixed, spell, hand);
             for (int i = 0; i < finders.length; i++) {
                 if (finders[i] != 0) {
                     final List<ManaUnit> with = new ArrayList<>(fixed); // the found land may pay for one of the hand's
-                    addLandMana(with, lib.landCards.get(i));
-                    colors |= colorsFor(with, spell);
+                    addLandMana(with, lib.landCards.get(i), hand);
+                    colors |= colorsFor(with, spell, hand);
                 }
             }
             return colors;
@@ -343,7 +351,7 @@ public final class OpeningHand {
                 finds = true;
                 used[i] = true;
                 final int before = sources.size();
-                addLandMana(sources, lib.landCards.get(i));
+                addLandMana(sources, lib.landCards.get(i), hand);
                 final boolean ok = allocate(fetch + 1, used, sources, test, nodes);
                 sources.subList(before, sources.size()).clear();
                 used[i] = false;
@@ -378,7 +386,7 @@ public final class OpeningHand {
                 }
                 if (best >= 0) {
                     taken[best] = true;
-                    addLandMana(out, lib.landCards.get(best));
+                    addLandMana(out, lib.landCards.get(best), hand);
                     have |= lib.landMasks.get(best);
                 }
             }
@@ -391,7 +399,7 @@ public final class OpeningHand {
                 return true;
             }
             // one source for each coloured pip: a Tropical Island makes green or blue, never {G}{U} by itself
-            return allocate(sources -> canPayPips(sources, spell));
+            return allocate(sources -> canPayPips(sources, spell, hand));
         }
     }
 
@@ -418,8 +426,8 @@ public final class OpeningHand {
     private static boolean castsWith(final CardCollectionView kept, final List<ManaUnit> pool) {
         for (final Card c : kept) {
             if (!c.isLand() && !isMdfcLand(c) && !isCreatureAura(c)
-                    && c.getManaCost().canBePaidWithAvailable(colorsFor(pool, c)) // hybrid shards: either colour pays
-                    && canPayPips(pool, c)) {
+                    && c.getManaCost().canBePaidWithAvailable(colorsFor(pool, c, kept)) // hybrid shards: either colour pays
+                    && canPayPips(pool, c, kept)) {
                 return true;
             }
         }
@@ -428,11 +436,11 @@ public final class OpeningHand {
 
     /** Whether every mana is free to spend and every land makes just one: then only the colours matter. */
     private static boolean isPlain(final List<ManaUnit> pool) {
-        return pool.stream().allMatch(u -> u.limit == null && u.choice == null);
+        return pool.stream().allMatch(u -> u.limit == null && u.choice == null && !u.unfed);
     }
 
     /** The colours of the mana that may be spent on the card, through the lands that have to be paid for too. */
-    private static byte colorsFor(final List<ManaUnit> pool, final Card card) {
+    private static byte colorsFor(final List<ManaUnit> pool, final Card card, final CardCollectionView hand) {
         byte colors = 0;
         for (final ManaUnit u : pool) {
             if (!u.unfed && (u.limit == null
@@ -440,8 +448,8 @@ public final class OpeningHand {
                 colors |= u.colors;
             }
         }
-        for (final List<ManaUnit> through : filtered(pool)) {
-            colors |= colorsFor(through, card);
+        for (final List<ManaUnit> through : filtered(pool, hand, Collections.emptySet())) {
+            colors |= colorsFor(through, card, hand);
         }
         return (byte) (colors & MagicColor.ALL_COLORS);
     }
@@ -450,7 +458,7 @@ public final class OpeningHand {
      * Whether the mana pays all the coloured pips of the card together. How much mana the rest of the cost takes is
      * not looked at; the pips left to other kinds of payment are those of {@link ManaSourceAllocation}.
      */
-    private static boolean canPayPips(final List<ManaUnit> pool, final Card card) {
+    private static boolean canPayPips(final List<ManaUnit> pool, final Card card, final CardCollectionView hand) {
         if (isPlain(pool)) {
             final List<Byte> colors = new ArrayList<>();
             for (final ManaUnit u : pool) {
@@ -464,7 +472,8 @@ public final class OpeningHand {
                 pips.add(shard);
             }
         }
-        return pips.isEmpty() || spellsOf(card).stream().anyMatch(spell -> canPay(pool, pips, 0, spell, null));
+        return pips.isEmpty() || spellsOf(card).stream().anyMatch(spell ->
+                !paymentResults(pool, pips, 0, spell, null, hand, Collections.emptySet(), true).isEmpty());
     }
 
     /** The ways to cast the card. */
@@ -498,7 +507,7 @@ public final class OpeningHand {
         for (final Card c : kept) {
             if ((c.isLand() && CardPredicates.LANDS_PRODUCING_MANA.test(c)) || (isMdfcLand(c) && isManaLand(c))) {
                 lands++;
-                addLandMana(mana, c);
+                addLandMana(mana, c, kept);
             }
         }
         if (lands != 1) {
@@ -506,7 +515,7 @@ public final class OpeningHand {
         }
         for (final Card c : kept) {
             if (!c.isLand() && c.getCMC() <= 1 && ComboPlan.isDredgeOutlet(c)
-                    && (c.getManaCost().getColorProfile() & ~colorsFor(mana, c)) == 0) {
+                    && (c.getManaCost().getColorProfile() & ~colorsFor(mana, c, kept)) == 0) {
                 return true;
             }
         }
@@ -587,7 +596,9 @@ public final class OpeningHand {
         final Iterable<SpellAbility> abilities = isMdfcLand(land)
                 ? land.getState(CardStateName.Backside).getManaAbilities() : land.getManaAbilities();
         for (final SpellAbility sa : abilities) {
-            colors |= ManaConversion.producedColors(sa); // short letters ("R"), and it sets the activator itself
+            if (activationRequirementsMet(land, sa, null)) {
+                colors |= ManaConversion.producedColors(sa); // short letters ("R"), and it sets the activator itself
+            }
         }
         return colors;
     }
@@ -749,14 +760,14 @@ public final class OpeningHand {
         final List<ManaUnit> pool = new ArrayList<>(); // the mana the lands and the sources counted so far can make
         for (final Card c : hand) {
             if ((c.isLand() || isMdfcLand(c)) && isEarlyManaLand(c)) {
-                addLandMana(pool, c);
+                addLandMana(pool, c, hand);
             }
         }
         int sources = 0;
         for (final Card c : free) {
             final Flow flow = manaFlow(c);
-            if (flow != null && flow.net >= 1 && canDeploy(c, pool) && flow.paid <= unrestricted(pool)
-                    && (!flow.restricted || canSpendRestricted(c, flow, hand, pool))) {
+            if (flow != null && flow.net >= 1 && canDeploy(c, pool, hand, unavailable) && flow.paid <= unrestricted(pool)
+                    && (!flow.restricted || canSpendRestricted(c, flow, hand, pool, unavailable))) {
                 sources++;
                 unavailable.add(c);
                 addOutput(pool, c, flow);
@@ -764,8 +775,8 @@ public final class OpeningHand {
         }
         for (final Card c : needy) {
             final Flow flow = manaFlow(c);
-            if (flow == null || flow.net < 1 || !canDeploy(c, pool) || flow.paid > unrestricted(pool)
-                    || flow.restricted && !canSpendRestricted(c, flow, hand, pool)) {
+            if (flow == null || flow.net < 1 || !canDeploy(c, pool, hand, unavailable) || flow.paid > unrestricted(pool)
+                    || flow.restricted && !canSpendRestricted(c, flow, hand, pool, unavailable)) {
                 continue;
             }
             final Set<Card> tapped = tapResources(c, hand, unavailable, pool);
@@ -792,9 +803,17 @@ public final class OpeningHand {
         final SpellAbility choice;
         /** Not mana yet: stands for a land that makes none until its ability is paid for. */
         boolean unfed;
+        /** Mana from an ability that has already been activated (for example, a filter land or Phyrexian Tower). */
+        boolean activated;
 
         static ManaUnit unfed(final Card land, final SpellAbility ability) {
             final ManaUnit unit = new ManaUnit((byte) 0, null, land, ability);
+            unit.unfed = true;
+            return unit;
+        }
+
+        static ManaUnit consumed(final Card card) {
+            final ManaUnit unit = new ManaUnit((byte) 0, null, card);
             unit.unfed = true;
             return unit;
         }
@@ -868,7 +887,7 @@ public final class OpeningHand {
      * mana to pay, is one mana of any colour it makes. Otherwise each ability keeps its own output and restriction: Ancient
      * Tomb makes two, and Sliver Hive makes {C} for anything or a colour for a Sliver spell, never a colour for anything.
      */
-    private static void addLandMana(final List<ManaUnit> pool, final Card c) {
+    private static void addLandMana(final List<ManaUnit> pool, final Card c, final CardCollectionView hand) {
         if (isPlainLand(c)) {
             pool.add(new ManaUnit((byte) (producedColors(c) & MagicColor.ALL_COLORS), null, null));
             return;
@@ -876,8 +895,14 @@ public final class OpeningHand {
         final int before = pool.size();
         SpellAbility fed = null;
         for (final SpellAbility sa : c.getManaAbilities()) {
+            if (!activationRequirementsMet(c, sa, hand)) {
+                continue;
+            }
             if (!paysOtherCostsItself(c, sa)) {
-                continue; // Phyrexian Tower's {B}{B} without a creature to sacrifice
+                if (externalSacrificeCost(sa) != null) {
+                    pool.add(ManaUnit.unfed(c, sa));
+                }
+                continue; // an activation that needs another permanent is considered by filtered()
             }
             if (needsMana(sa)) {
                 fed = sa; // makes nothing by itself: see filtered
@@ -897,8 +922,110 @@ public final class OpeningHand {
 
     /** Whether the card's land is one mana of any colour it makes, with nothing else to know about it. */
     private static boolean isPlainLand(final Card c) {
-        return !c.isLand() || !hasRestrictedMana(c) && !makesSeveralMana(c)
+        return !c.isLand() && !isMdfcLand(c) || !hasRestrictedMana(c) && !makesSeveralMana(c)
+                && c.getManaAbilities().stream().noneMatch(OpeningHand::hasPresenceRequirement)
                 && c.getManaAbilities().stream().allMatch(sa -> !needsMana(sa) && paysOtherCostsItself(c, sa));
+    }
+
+    private static boolean hasPresenceRequirement(final SpellAbility sa) {
+        final SpellAbilityRestriction restriction = sa.getRestrictions();
+        return restriction != null && restriction.getIsPresent() != null;
+    }
+
+    /**
+     * Checks an ability's actual activation requirements. IsPresent normally checks the current battlefield; during
+     * opening-hand evaluation, lands in the hand may be played first, so include those as hypothetical battlefield
+     * permanents. Other restriction checks are still delegated to the engine.
+     */
+    private static boolean activationRequirementsMet(final Card land, final SpellAbility sa,
+                                                     final CardCollectionView hand) {
+        ManaConversion.withActivator(sa);
+        if (!sa.metConditions()) {
+            return false;
+        }
+        final SpellAbilityRestriction restriction = sa.getRestrictions();
+        if (restriction == null) {
+            return true;
+        }
+        final Player activator = sa.getActivatingPlayer();
+        if (activator == null) {
+            return false;
+        }
+        // The land is hypothetically on the battlefield. Check who/when may activate it, but defer its zone check.
+        if (!restriction.checkActivatorRestrictions(land, sa) || !restriction.checkTimingRestrictions(land, sa)) {
+            return false;
+        }
+        if (restriction.getLimitToCheck() != null
+                && sa.getActivationsThisTurn() >= AbilityUtils.calculateAmount(land, restriction.getLimitToCheck(), sa)) {
+            return false;
+        }
+        if (restriction.getGameLimitToCheck() != null
+                && sa.getActivationsThisGame() >= AbilityUtils.calculateAmount(
+                land, restriction.getGameLimitToCheck(), sa)) {
+            return false;
+        }
+        final String present = restriction.getIsPresent();
+        if (present != null) {
+            final List<GameObject> candidates = new ArrayList<>();
+            if (restriction.getPresentDefined() != null) {
+                candidates.addAll(AbilityUtils.getDefinedObjects(land, restriction.getPresentDefined(), sa));
+            } else {
+                for (final ZoneType zone : restriction.getPresentZones()) {
+                    for (final Card card : land.getGame().getCardsIn(zone)) {
+                        candidates.add(card);
+                    }
+                    if (zone == ZoneType.Battlefield && hand != null) {
+                        for (final Card card : hand) {
+                            if ((card.isLand() || isMdfcLand(card)) && isEarlyManaLand(card)) {
+                                candidates.add(card);
+                            }
+                        }
+                    }
+                }
+            }
+            final Predicate<GameObject> matches = GameObjectPredicates.restriction(
+                    present.split(","), activator, land, sa);
+            final int count = (int) candidates.stream().filter(matches).count();
+            final String compare = restriction.getPresentCompare();
+            final int right = AbilityUtils.calculateAmount(land, compare.substring(2), sa);
+            if (!Expressions.compare(count, compare, right)) {
+                return false;
+            }
+            // Check the rest of the activation restrictions without rechecking IsPresent against the real battlefield.
+            restriction.setIsPresent(null);
+            try {
+                return restriction.checkOtherRestrictions(land, sa, activator);
+            } finally {
+                restriction.setIsPresent(present);
+            }
+        }
+        return restriction.checkOtherRestrictions(land, sa, activator);
+    }
+
+    /** A single creature (or other valid permanent) from the hand may pay this land's sacrifice cost. */
+    private static CostSacrifice externalSacrificeCost(final SpellAbility sa) {
+        if (sa.getPayCosts() == null || !sa.getPayCosts().hasTapCost()) {
+            return null;
+        }
+        CostSacrifice sacrifice = null;
+        for (final CostPart part : sa.getPayCosts().getCostParts()) {
+            if (part instanceof CostTap || part instanceof CostPartMana || part instanceof CostPayLife) {
+                continue;
+            }
+            if (part instanceof CostSacrifice && !part.payCostFromSource() && sacrifice == null
+                    && "1".equals(part.getAmount())) {
+                sacrifice = (CostSacrifice) part;
+            } else {
+                return null;
+            }
+        }
+        return sacrifice;
+    }
+
+    /** Whether a creature in hand has a normal cast cost that the current land mana can pay. */
+    private static boolean isSimpleFodderSpell(final SpellAbility spell) {
+        return spell.isSpell() && spell.getPayCosts() != null
+                && spell.getPayCosts().getCostParts().stream().allMatch(part -> part instanceof CostPartMana);
     }
 
     /**
@@ -1085,18 +1212,26 @@ public final class OpeningHand {
      * The abilities of lands that have to be paid for are used when other mana at hand pays for them.
      */
     private static boolean canPay(final List<ManaUnit> pool, final ManaCost cost, final SpellAbility spell,
-                                  final Card mustUse) {
+                                  final Card mustUse, final CardCollectionView hand, final Set<Card> unavailable) {
         final List<ManaCostShard> shards = new ArrayList<>();
         for (final ManaCostShard shard : cost) {
             shards.add(shard);
         }
-        return canPay(pool, shards, cost.getGenericCost(), spell, mustUse);
+        return !paymentResults(pool, shards, cost.getGenericCost(), spell, mustUse, hand, unavailable, true).isEmpty();
     }
 
-    private static boolean canPay(final List<ManaUnit> pool, final List<ManaCostShard> shards, final int generic,
-                                  final SpellAbility spell, final Card mustUse) {
-        return payShards(pool, shards, 0, new boolean[pool.size()], generic, spell, mustUse, false)
-                || filtered(pool).stream().anyMatch(through -> canPay(through, shards, generic, spell, mustUse));
+    private static List<List<ManaUnit>> paymentResults(final List<ManaUnit> pool, final List<ManaCostShard> shards,
+                                                       final int generic, final SpellAbility spell, final Card mustUse,
+                                                       final CardCollectionView hand, final Set<Card> unavailable,
+                                                       final boolean allowFilters) {
+        final List<List<ManaUnit>> results = new ArrayList<>();
+        payShards(pool, shards, 0, new boolean[pool.size()], generic, spell, mustUse, false, results);
+        if (allowFilters) {
+            for (final List<ManaUnit> through : filtered(pool, hand, unavailable)) {
+                results.addAll(paymentResults(through, shards, generic, spell, mustUse, hand, unavailable, true));
+            }
+        }
+        return results;
     }
 
     /** How many lands that have to be paid for one payment may go through. */
@@ -1108,32 +1243,75 @@ public final class OpeningHand {
      * once. Abilities that ask for more mana than that are not judged: to the safe side they add nothing. Nor is a
      * payment through more than {@value #MAX_FILTERS} such lands: every order of them would have to be tried.
      */
-    private static List<List<ManaUnit>> filtered(final List<ManaUnit> pool) {
+    private static List<List<ManaUnit>> filtered(final List<ManaUnit> pool, final CardCollectionView hand,
+                                                 final Set<Card> unavailable) {
         final List<List<ManaUnit>> out = new ArrayList<>();
-        if (pool.stream().filter(u -> u.choice != null && !u.unfed && needsMana(u.choice))
+        if (pool.stream().filter(u -> u.activated)
                 .map(u -> u.source).distinct().count() >= MAX_FILTERS) {
             return out;
         }
         final Set<Card> lands = new HashSet<>();
         for (final ManaUnit idle : pool) {
             // a land that still has the mana of a free ability, or none yet: it is untapped
-            if (idle.choice == null || !idle.unfed && needsMana(idle.choice) || !lands.add(idle.source)) {
+            if (idle.choice == null || idle.activated || !lands.add(idle.source)) {
                 continue;
             }
             for (final SpellAbility sa : idle.source.getManaAbilities()) {
-                if (!isFilter(idle.source, sa)) {
+                if (!activationRequirementsMet(idle.source, sa, hand)) {
                     continue;
                 }
-                final ManaCostShard asked = activationShard(sa);
-                for (final ManaUnit feeder : pool) {
-                    if (feeder.source == idle.source && feeder.choice != null || !unitPays(feeder, asked, null)) {
+                if (isFilter(idle.source, sa)) {
+                    final ManaCostShard asked = activationShard(sa);
+                    for (final ManaUnit feeder : pool) {
+                        if (feeder.source == idle.source && feeder.choice != null || !unitPays(feeder, asked, null)) {
+                            continue;
+                        }
+                        final List<ManaUnit> through = new ArrayList<>(pool);
+                        through.remove(feeder);
+                        through.removeIf(u -> feeder.excludes(u) || u.source == idle.source);
+                        through.addAll(activatedLandOutput(idle.source, sa));
+                        out.add(through);
+                    }
+                    continue;
+                }
+
+                final CostSacrifice sacrifice = externalSacrificeCost(sa);
+                if (sacrifice == null || hand == null || !worksOnceInPlay(idle.source, sa)) {
+                    continue;
+                }
+                for (final Card fodder : hand) {
+                    if (fodder == idle.source || unavailable.contains(fodder) || !fodder.isPermanent()
+                            || !matchesType(fodder, idle.source, sacrifice.getType())
+                            || pool.stream().anyMatch(u -> u.source == fodder)) {
                         continue;
                     }
-                    final List<ManaUnit> through = new ArrayList<>(pool);
-                    through.remove(feeder);
-                    through.removeIf(u -> feeder.excludes(u) || u.choice != null && u.source == idle.source);
-                    through.addAll(landOutput(idle.source, sa));
-                    out.add(through);
+                    for (final SpellAbility spell : fodder.getSpellAbilities()) {
+                        if (!isSimpleFodderSpell(spell)) {
+                            continue;
+                        }
+                        final CostPartMana cost = spell.getPayCosts().getCostMana();
+                        final List<ManaCostShard> shards = new ArrayList<>();
+                        if (cost != null) {
+                            for (final ManaCostShard shard : cost.getMana()) {
+                                shards.add(shard);
+                            }
+                        }
+                        // Casting the fodder spends its mana first; the land is then tapped and the creature sacrificed.
+                        final int generic = cost == null ? 0 : cost.getMana().getGenericCost();
+                        for (final List<ManaUnit> paid : paymentResults(pool, shards, generic,
+                                spell, null, hand, unavailable, false)) {
+                            // The land must still be untapped after casting the fodder; its {C} mode and its
+                            // sacrifice mode are alternatives, not two activations of the same permanent.
+                            if (pool.stream().filter(u -> u.source == idle.source).anyMatch(u -> !paid.contains(u))) {
+                                continue;
+                            }
+                            final List<ManaUnit> through = new ArrayList<>(paid);
+                            through.removeIf(u -> u.source == idle.source || u.source == fodder);
+                            through.addAll(activatedLandOutput(idle.source, sa));
+                            through.add(ManaUnit.consumed(fodder));
+                            out.add(through);
+                        }
+                    }
                 }
             }
         }
@@ -1166,32 +1344,56 @@ public final class OpeningHand {
         return units;
     }
 
-    private static boolean payShards(final List<ManaUnit> pool, final List<ManaCostShard> shards, final int i,
-                                     final boolean[] used, final int generic, final SpellAbility spell,
-                                     final Card mustUse, final boolean usedIt) {
+    /** Mana from an ability whose activation cost has already been paid; the source cannot be activated again. */
+    private static List<ManaUnit> activatedLandOutput(final Card land, final SpellAbility sa) {
+        final List<ManaUnit> units = landOutput(land, sa);
+        for (final ManaUnit unit : units) {
+            unit.activated = true;
+        }
+        return units;
+    }
+
+    private static void payShards(final List<ManaUnit> pool, final List<ManaCostShard> shards, final int i,
+                                  final boolean[] used, final int generic, final SpellAbility spell,
+                                  final Card mustUse, final boolean usedIt, final List<List<ManaUnit>> results) {
         if (i == shards.size()) {
-            final List<ManaUnit> spare = new ArrayList<>();
-            boolean spareIt = false;
-            for (int u = 0; u < used.length; u++) {
-                if (isAvailable(pool, used, u) && unitPays(pool.get(u), ManaCostShard.GENERIC, spell)) {
-                    spare.add(pool.get(u));
-                    spareIt |= isLimitedManaOf(pool.get(u), mustUse);
-                }
-            }
-            return mostTogether(spare, u -> true) >= generic && (mustUse == null || usedIt || generic > 0 && spareIt);
+            payGeneric(pool, used, generic, spell, mustUse, usedIt, false, results);
+            return;
         }
         for (int u = 0; u < used.length; u++) {
             if (isAvailable(pool, used, u) && unitPays(pool.get(u), shards.get(i), spell)) {
                 used[u] = true;
-                final boolean ok = payShards(pool, shards, i + 1, used, generic, spell, mustUse,
-                        usedIt || isLimitedManaOf(pool.get(u), mustUse));
+                payShards(pool, shards, i + 1, used, generic, spell, mustUse,
+                        usedIt || isLimitedManaOf(pool.get(u), mustUse), results);
                 used[u] = false;
-                if (ok) {
-                    return true;
-                }
             }
         }
-        return false;
+    }
+
+    /** Enumerates the exact mana units spent, leaving the other units available for a later action. */
+    private static void payGeneric(final List<ManaUnit> pool, final boolean[] used, final int remaining,
+                                   final SpellAbility spell, final Card mustUse, final boolean usedIt,
+                                   final boolean usedInGeneric, final List<List<ManaUnit>> results) {
+        if (remaining == 0) {
+            if (mustUse == null || usedIt || usedInGeneric) {
+                final List<ManaUnit> spare = new ArrayList<>();
+                for (int u = 0; u < used.length; u++) {
+                    if (isAvailable(pool, used, u)) {
+                        spare.add(pool.get(u));
+                    }
+                }
+                results.add(spare);
+            }
+            return;
+        }
+        for (int u = 0; u < used.length; u++) {
+            if (isAvailable(pool, used, u) && unitPays(pool.get(u), ManaCostShard.GENERIC, spell)) {
+                used[u] = true;
+                payGeneric(pool, used, remaining - 1, spell, mustUse, usedIt,
+                        usedInGeneric || isLimitedManaOf(pool.get(u), mustUse), results);
+                used[u] = false;
+            }
+        }
     }
 
     /** Whether the mana is not used yet, and its land is not tapped for another of its abilities. */
@@ -1241,14 +1443,15 @@ public final class OpeningHand {
     }
 
     /** Whether the mana at hand pays for the card, in full: its cost, and the colour of every part of it. */
-    private static boolean canDeploy(final Card c, final List<ManaUnit> pool) {
+    private static boolean canDeploy(final Card c, final List<ManaUnit> pool, final CardCollectionView hand,
+                                     final Set<Card> unavailable) {
         if (c.getManaCost().isNoCost()) {
             return false;
         }
         // restricted mana (Ancient Ziggurat's) counts when the spell that casts the card meets the restriction
         for (final SpellAbility spell : c.getSpellAbilities()) {
             if (spell.isSpell() && spell.getPayCosts() != null && spell.getPayCosts().getCostMana() != null
-                    && canPay(pool, c.getManaCost(), spell, null)) {
+                    && canPay(pool, c.getManaCost(), spell, null, hand, unavailable)) {
                 return true;
             }
         }
@@ -1309,7 +1512,7 @@ public final class OpeningHand {
      * the deck might hold later is not looked at.
      */
     private static boolean canSpendRestricted(final Card c, final Flow flow, final CardCollectionView hand,
-                                              final List<ManaUnit> pool) {
+                                              final List<ManaUnit> pool, final Set<Card> unavailable) {
         final List<ManaUnit> with = new ArrayList<>(pool);
         payActivation(with, flow.paid); // what its own ability costs is not there for the spell
         with.addAll(outputOf(c, flow));
@@ -1319,7 +1522,7 @@ public final class OpeningHand {
             }
             for (final SpellAbility spell : other.getSpellAbilities()) {
                 if (spell.isSpell() && spell.getPayCosts() != null && spell.getPayCosts().getCostMana() != null
-                        && canPay(with, spell.getPayCosts().getCostMana().getMana(), spell, c)) {
+                        && canPay(with, spell.getPayCosts().getCostMana().getMana(), spell, c, hand, unavailable)) {
                     return true;
                 }
             }
@@ -1393,7 +1596,7 @@ public final class OpeningHand {
                     }
                     if ((other != c || ((CostTapType) part).canTapSource) && other.isPermanent() && !other.isLand()
                             && !unavailable.contains(other) && !needed.contains(other)
-                            && canDeploy(other, pool) && matchesType(other, c, part.getType())) {
+                            && canDeploy(other, pool, hand, unavailable) && matchesType(other, c, part.getType())) {
                         needed.add(other);
                         missing--;
                     }
