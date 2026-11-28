@@ -811,6 +811,22 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void spireOfIndustryCanUseAFreeArtifactFromTheHand() {
+        setUp(0, 0);
+        final Card bolt = addCardToZone("Lightning Bolt", ai, ZoneType.Library);
+        // Cast Ornithopter for free, then use Spire's artifact-enabled ability to make red.
+        AssertJUnit.assertTrue(OpeningHand.makesColorsOf(hand("Spire of Industry", "Ornithopter"), ai, bolt));
+    }
+
+    @Test
+    public void spireOfIndustryCannotCountAnArtifactThatNeedsManaFirst() {
+        setUp(0, 0);
+        final Card bolt = addCardToZone("Lightning Bolt", ai, ZoneType.Library);
+        // Spire's {C} cannot cast Etherium Sculptor, so it cannot enable the artifact-only color mode.
+        AssertJUnit.assertFalse(OpeningHand.makesColorsOf(hand("Spire of Industry", "Etherium Sculptor"), ai, bolt));
+    }
+
+    @Test
     public void mirrodinsCoreHasNoCounterForColouredManaYet() {
         setUp(0, 0);
         AssertJUnit.assertFalse(castsSomething(hand("Mirrodin's Core", "Dark Ritual")));

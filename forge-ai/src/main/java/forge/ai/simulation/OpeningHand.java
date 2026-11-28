@@ -934,8 +934,8 @@ public final class OpeningHand {
 
     /**
      * Checks an ability's actual activation requirements. IsPresent normally checks the current battlefield; during
-     * opening-hand evaluation, lands in the hand may be played first, so include those as hypothetical battlefield
-     * permanents. Other restriction checks are still delegated to the engine.
+     * opening-hand evaluation, lands and castable zero-cost permanents in the hand may be played first, so include
+     * those as hypothetical battlefield permanents. Other restriction checks are still delegated to the engine.
      */
     private static boolean activationRequirementsMet(final Card land, final SpellAbility sa,
                                                      final CardCollectionView hand) {
@@ -977,6 +977,14 @@ public final class OpeningHand {
                     if (zone == ZoneType.Battlefield && hand != null) {
                         for (final Card card : hand) {
                             if ((card.isLand() || isMdfcLand(card)) && isEarlyManaLand(card)) {
+                                candidates.add(card);
+                            }
+                        }
+                        // A zero-cost permanent such as Ornithopter can be cast before the land's mana ability.
+                        // Do not count permanents that need mana here: this check does not consume mana from the
+                        // pool, and counting one could let the same source pay for both the permanent and the spell.
+                        for (final Card card : hand) {
+                            if (card != land && !card.isLand() && !isMdfcLand(card) && isFreePermanentEnabler(card)) {
                                 candidates.add(card);
                             }
                         }
@@ -1022,10 +1030,32 @@ public final class OpeningHand {
         return sacrifice;
     }
 
-    /** Whether a creature in hand has a normal cast cost that the current land mana can pay. */
+    /** Whether a permanent in hand has a normal cast cost made up of mana cost parts only. */
     private static boolean isSimpleFodderSpell(final SpellAbility spell) {
         return spell.isSpell() && spell.getPayCosts() != null
                 && spell.getPayCosts().getCostParts().stream().allMatch(part -> part instanceof CostPartMana);
+    }
+
+    /**
+     * Whether a permanent can be put onto the battlefield from the hand without spending mana. These permanents can
+     * safely satisfy IsPresent during opening-hand evaluation because doing so does not consume any of the mana that
+     * the land's ability or the spell being evaluated may need. Additional costs (discard, sacrifice, etc.) are not
+     * guessed at.
+     */
+    private static boolean isFreePermanentEnabler(final Card card) {
+        if (!card.isPermanent()) {
+            return false;
+        }
+        for (final SpellAbility spell : card.getSpellAbilities()) {
+            if (!isSimpleFodderSpell(spell)) {
+                continue;
+            }
+            final CostPartMana cost = spell.getPayCosts().getCostMana();
+            if (cost == null || cost.getMana().getCMC() == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
