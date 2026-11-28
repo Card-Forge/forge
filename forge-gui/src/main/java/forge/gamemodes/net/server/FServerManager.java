@@ -261,13 +261,17 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
 
             // Bind and start to accept incoming connections.
             final ChannelFuture ch = b.bind(port).sync().channel().closeFuture();
+            final EventLoopGroup boss = bossGroup;
             new Thread(() -> {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
                     netLog.error(e, "Server channel error");
                 } finally {
-                    stopServer();
+                    // A shutting-down group means stopServer closed the channel, and the server may since have restarted
+                    if (!boss.isShuttingDown()) {
+                        stopServer();
+                    }
                 }
             }).start();
             if (startUPnP) {

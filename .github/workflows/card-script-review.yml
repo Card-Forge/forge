@@ -27,7 +27,7 @@ jobs:
       # Check out first: actions/checkout cleans the workspace, so it must run
       # before the artifact download and the files the resolve step writes.
       - name: Check out base scripts and corpus
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Download review data from the build
         uses: actions/download-artifact@v8
