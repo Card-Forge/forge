@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Forge
+Comment=Magic: The Gathering rules engine
+Exec=forge
+Icon=forge
+Terminal=false
+Categories=Game;CardGame;
