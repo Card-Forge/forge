@@ -82,7 +82,9 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
             }
 
             if (doReveal && sa.hasParam("RevealOptional")) {
-                final Card cardToShow = revealableCards.size() == 1 ? revealableCards.get(0) : null;
+                // NoPeek + RevealOptional must not leak the face before the reveal choice (e.g. Powerbalance).
+                final Card cardToShow = (!noPeek && revealableCards.size() == 1)
+                        ? revealableCards.get(0) : null;
                 doReveal = peekingPlayer.getController().confirmAction(sa, null,
                         Localizer.getInstance().getMessage("lblRevealCardToOtherPlayers"), cardToShow, params);
             }
