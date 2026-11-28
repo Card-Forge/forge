@@ -59,7 +59,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
         // Earthbend should only target one land
         for (Card c : getTargetCards(sa)) {
             c.addNewPT(0, 0, ts, 0);
-            c.addChangedCardTypes(new CardType(List.of("Creature"), true), null, false, EnumSet.noneOf(RemoveType.class), ts, 0, true, false);
+            c.addChangedCardTypesEffect(new CardType(List.of("Creature"), true), null, false, EnumSet.noneOf(RemoveType.class), ts);
             c.addChangedCardKeywords(List.of("Haste"), null, false, ts, null);
 
             GameEntityCounterTable table = new GameEntityCounterTable();

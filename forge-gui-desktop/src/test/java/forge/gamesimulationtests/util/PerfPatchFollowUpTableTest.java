@@ -6,6 +6,10 @@ import forge.util.collect.FSnapshotTable;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -176,6 +180,50 @@ public class PerfPatchFollowUpTableTest {
             }
         }
         assertSame(t, ref, "descending rows, shuffled columns");
+    }
+
+    @Test
+    public void linked_iteratesInFlatInsertionOrder() {
+        FSnapshotTable<Long, Long, String> t = FSnapshotTable.createLinked();
+        t.put(5L, 1L, "a");
+        t.put(3L, 1L, "b");
+        t.put(5L, 2L, "c");                                      // same row as "a", but applied after "b"
+        t.put(3L, 1L, "b2");                                     // overwriting keeps the position
+        eq(new ArrayList<>(t.values()), Arrays.asList("a", "b2", "c"), "values");
+
+        t.remove(5L, 1L);
+        t.put(5L, 1L, "a2");                                     // removed and put again goes last
+        eq(new ArrayList<>(t.values()), Arrays.asList("b2", "c", "a2"), "values after re-put");
+        eq(t.get(5L, 2L), "c", "get");
+
+        FSnapshotTable<Long, Long, String> copy = FSnapshotTable.createLinked();
+        copy.putAll(t);
+        eq(new ArrayList<>(copy.cellSet()), new ArrayList<>(t.cellSet()), "putAll keeps the order");
+    }
+
+    @Test
+    public void linked_keepsOrderInMapViewsAndSerialization() throws Exception {
+        FSnapshotTable<Long, Long, String> t = FSnapshotTable.createLinked();
+        t.put(5L, 2L, "a");
+        t.put(3L, 1L, "b");
+        t.put(5L, 1L, "c");
+
+        eq(new ArrayList<>(t.rowMap().keySet()), Arrays.asList(5L, 3L), "rowMap rows in first-put order");
+        eq(new ArrayList<>(t.rowMap().get(5L).keySet()), Arrays.asList(2L, 1L), "rowMap columns in put order");
+        eq(new ArrayList<>(t.columnMap().keySet()), Arrays.asList(2L, 1L), "columnMap columns in first-put order");
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try (ObjectOutputStream out = new ObjectOutputStream(bos)) {
+            out.writeObject(t);
+        }
+        FSnapshotTable<Long, Long, String> back;
+        try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray()))) {
+            back = (FSnapshotTable<Long, Long, String>) in.readObject();
+        }
+        eq(new ArrayList<>(back.values()), Arrays.asList("a", "b", "c"), "values after round trip");
+        eq(new ArrayList<>(back.cellSet()), new ArrayList<>(t.cellSet()), "cellSet after round trip");
+        back.put(4L, 1L, "d");
+        eq(new ArrayList<>(back.values()), Arrays.asList("a", "b", "c", "d"), "still linked after round trip");
     }
 
     @Test

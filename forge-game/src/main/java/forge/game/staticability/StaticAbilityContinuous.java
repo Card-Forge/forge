@@ -1088,6 +1088,10 @@ public final class StaticAbilityContinuous {
             }
             return new CardCollection(hostCard); // will always be the card itself
         }
+        // CR 611.2c the effect of a resolved ability stays on its card, phased out included
+        if (hostCard.isResolvedEffectStatic(stAb)) {
+            return new CardCollection(hostCard);
+        }
 
         // non - CharacteristicDefining
         CardCollection affectedCards = new CardCollection();
