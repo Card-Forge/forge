@@ -32,7 +32,7 @@ public final class HumanControlledGame {
 
     public final Game game;
     public final Player human;
-    final Player opponent;
+    public final Player opponent;
     final PlayerControllerHuman controller;
     final FakeGuiGame gui = new FakeGuiGame();
 
