@@ -20,6 +20,7 @@ import forge.game.trigger.TriggerType;
 import forge.util.Lang;
 
 public class BlockEffect extends SpellAbilityEffect {
+    public static final String[][] REQUIRED_PARAMS = {{"DefinedAttacker"}, {"DefinedBlocker"}};
 
     @Override
     public void resolve(SpellAbility sa) {

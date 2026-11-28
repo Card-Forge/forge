@@ -32,6 +32,10 @@ import forge.util.Localizer;
  *
  */
 public class ChangeTargetsEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "ChangeSingleTarget", "Chooser", "Defined", "DefinedMagnet", "Optional", "RandomTarget",
+        "RandomTargetRestriction", "TargetRestriction",
+    };
 
     @Override
     public void buildSpellAbility(SpellAbility sa) {

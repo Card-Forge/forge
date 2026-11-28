@@ -8,6 +8,9 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 
 public class BecomeMonarchEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined",
+    };
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

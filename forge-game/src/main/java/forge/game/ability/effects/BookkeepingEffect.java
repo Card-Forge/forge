@@ -24,6 +24,12 @@ import forge.game.zone.ZoneType;
  * pumps. {@link TargetOnlyEffect} does the same bookkeeping when it also chooses a target.
  */
 public class BookkeepingEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "ClearNotedCardsFor", "Defined", "ForgetImprinted", "ForgetObjects", "ImprintCards",
+        "NoteCards", "NoteCardsFor", "NoteNumber", "RememberAll", "RememberObjects",
+        "RememberZone",
+    };
+
     @Override
     protected String getStackDescription(final SpellAbility sa) {
         return sa.getParamOrDefault("StackDescription", "");

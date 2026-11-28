@@ -17,6 +17,9 @@ import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.util.Localizer;
 
 public class CamouflageEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defender", "Defined",
+    };
 
     private void randomizeBlockers(SpellAbility sa, Combat combat, Player declarer, Player defender, List<Card> attackers, List<CardCollection> blockerPiles) {
         CardLists.shuffle(attackers);

@@ -11,6 +11,10 @@ import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
 public class BidLifeEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "BidSubAbility", "OtherBidder", "StartBidding",
+    };
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         return "Bid Life";

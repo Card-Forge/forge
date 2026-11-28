@@ -7,6 +7,11 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 
 public class BranchEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "BranchConditionSVarCompare",
+    };
+    public static final String[][] REQUIRED_PARAMS = {{"BranchConditionSVar"}, {"TrueSubAbility", "FalseSubAbility"}};
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
