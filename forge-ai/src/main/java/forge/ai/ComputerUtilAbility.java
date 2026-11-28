@@ -42,6 +42,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.ComparatorUtil;
 import forge.util.IterableUtil;
+import forge.util.MyRandom;
 
 public class ComputerUtilAbility {
     public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {
@@ -552,6 +553,26 @@ public class ComputerUtilAbility {
         return true;
     }
 
+    // Could the damage or life loss of this ability be lethal for an opponent
+    public static boolean couldWinGame(final Player ai, final SpellAbility sa) {
+        for (SpellAbility s = sa; s != null; s = s.getSubAbility()) {
+            String amount = s.getApi() == ApiType.DealDamage ? s.getParam("NumDmg")
+                    : s.getApi() == ApiType.LoseLife ? s.getParam("LifeAmount") : null;
+            if (amount == null) {
+                continue;
+            }
+            int loss = AbilityUtils.calculateAmount(s.getHostCard(), amount, s);
+            for (Player opp : ai.getOpponents()) {
+                boolean affected = s.usesTargeting() ? s.canTarget(opp)
+                        : s.hasParam("Defined") && AbilityUtils.getDefinedPlayers(s.getHostCard(), s.getParam("Defined"), s).contains(opp);
+                if (affected && opp.canLoseLife() && opp.getLife() <= loss) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public final static Comparator<SpellAbility> saEvaluator = Comparator.comparing(sa -> new SortKey(sa, false));
 
     /**
@@ -743,6 +764,17 @@ public class ComputerUtilAbility {
                 final CostPart cost = sa.getPayCosts().getCostParts().get(0);
                 if (cost instanceof CostRemoveCounter) {
                     p += cost.convertAmount() == null ? 1 : cost.convertAmount();
+                    // Prefer ultimates and abilities that win the game.
+                    // Lower priorities of abilities that would cause the planeswalker to be destroyed.
+                    // 50% of the time, "+" abilities are favored if the planeswalker has an ultimate ability.
+                    if (source != null && !sa.hasParam("Ultimate") && cost.convertAmount() != null && !couldWinGame(ai, sa)) {
+                        int loyaltyLeft = source.getCurrentLoyalty() - cost.convertAmount();
+                        boolean hasUltimate = IterableUtil.any(source.getSpellAbilities(), s -> s.isPwAbility() && s.hasParam("Ultimate"));
+                        if (loyaltyLeft <= 0 || (hasUltimate && (MyRandom.getRandom().nextBoolean()
+                                || ComputerUtilCost.isPlaneswalkerThreatened(ai, source, loyaltyLeft)))) {
+                            p -= 20;
+                        }
+                    }
                 } else if (cost instanceof CostPutCounter) {
                     p -= cost.convertAmount();
                 }
