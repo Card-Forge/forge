@@ -34,7 +34,8 @@ import forge.util.Expressions;
  * best spells that can <em>jointly</em> be paid with the mana sources of that turn are cast (a source that enters
  * tapped only counts from the next turn on, and a dual land can pay only one colour at a time, which is checked by
  * matching the coloured costs to the sources). Each sequence is judged with the lands it has played by then (an Island
- * first lets a Drowned Catacomb enter untapped) and with the life it has paid by then. A spell cast sooner is worth
+ * first lets a Drowned Catacomb enter untapped) and with the life it has paid by then; a shockland enters untapped in
+ * it only when {@link TapAi} would pay for that on that turn. A spell cast sooner is worth
  * more than the same spell cast later, and a small bonus for the colours the library still needs breaks ties between
  * lands that do the same for the hand.
  * <p>
@@ -72,6 +73,11 @@ public final class LandPlanner {
         final int from;
         /** Colours available only on the turn this land enters (Gleaming Bastion without a basic land). */
         final byte entryOnly;
+        /** Colours that a land played later in the plan unlocks (an Island for a Gloomlake Verge), and from which turn. */
+        final byte later;
+        final int laterFrom;
+        /** The permanent that makes the mana, null for a made-up source. */
+        final Card host;
         /** The types of the mask that this source makes only by paying life or taking damage (Horizon Canopy). */
         final byte pain;
         /** The activation that makes this mana (0: its own): Ancient Tomb's two {C} come from one, and hurt once. */
@@ -93,6 +99,14 @@ public final class LandPlanner {
 
         Src(final byte mask, final int from, final byte entryOnly, final byte pain,
             final int activation, final int life) {
+            this(mask, from, entryOnly, pain, activation, life, null, (byte) 0, 0);
+        }
+
+        private Src(final byte mask, final int from, final byte entryOnly, final byte pain, final int activation,
+                    final int life, final Card host, final byte later, final int laterFrom) {
+            this.host = host;
+            this.later = later;
+            this.laterFrom = laterFrom;
             this.mask = mask;
             this.from = from;
             this.entryOnly = entryOnly;
@@ -101,26 +115,29 @@ public final class LandPlanner {
             this.life = life;
         }
 
+        /** The types it can make on the turns to come, not just on the turn it comes in. */
+        byte lasting() {
+            return (byte) (mask | later);
+        }
+
         byte allColors() {
-            return (byte) (mask | entryOnly);
+            return (byte) (mask | entryOnly | later);
         }
 
         Src forTurn(final int turn) {
-            final byte available = (byte) (mask | (turn == from ? entryOnly : 0));
+            final byte available = (byte) (mask | (turn == from ? entryOnly : 0) | (turn >= laterFrom ? later : 0));
             return new Src(available, from, (byte) (pain & available), activation, life);
         }
     }
 
-    /** One way to play a land: when its mana is there, the life paid to have it untapped, and what that costs in score. */
-    private static final class Variant {
+    /** How a planned land comes in: when its mana is there, and the life paid to have it untapped. */
+    private static final class Entry {
         final int delay;
         final int life;
-        final double cost;
 
-        Variant(final int delay, final int life) {
+        Entry(final int delay, final int life) {
             this.delay = delay;
             this.life = life;
-            this.cost = LIFE_COST * life;
         }
     }
 
@@ -131,8 +148,15 @@ public final class LandPlanner {
         final byte[] coloured;
         final int generic;
         final double weight;
+        /** The card to cast, null for a made-up spell. */
+        final Card card;
 
         Spell(final String name, final byte[] coloured, final int generic, final double weight) {
+            this(name, coloured, generic, weight, null);
+        }
+
+        Spell(final String name, final byte[] coloured, final int generic, final double weight, final Card card) {
+            this.card = card;
             this.name = name;
             this.coloured = coloured;
             this.generic = generic;
@@ -166,13 +190,11 @@ public final class LandPlanner {
                 }
                 final List<Card> rest = new ArrayList<>(handLands);
                 rest.remove(land);
-                double score = Double.NEGATIVE_INFINITY;
-                for (final Variant v : variants(land, ai, entersTapped.test(land), 0, 0)) {
-                    final List<Src> srcs = new ArrayList<>(base);
-                    srcs.addAll(sourcesForLand(land, ai, Collections.singletonList(land), v.delay, v.delay == 0));
-                    score = Math.max(score, bestFuture(ai, srcs, rest, 1, spells, demand, entersTapped,
-                            List.of(land), v.life) - v.cost);
-                }
+                final Entry entry = entry(ai, land, entersTapped.test(land), base, spells, 0, List.of(), 0);
+                final List<Src> srcs = unlockedBy(base, ai, List.of(land), 0);
+                srcs.addAll(sourcesForLand(land, ai, Collections.singletonList(land), entry.delay, entry.delay == 0));
+                final double score = bestFuture(ai, srcs, rest, 1, spells, demand, entersTapped,
+                        List.of(land), entry.life) - LIFE_COST * entry.life;
                 if (DEBUG) {
                     System.err.println("[landplanner] " + land + (entersTapped.test(land) ? " (tapped)" : "") + " = " + score);
                 }
@@ -219,12 +241,11 @@ public final class LandPlanner {
             remaining.remove(land);
             final List<Card> then = new ArrayList<>(played);
             then.add(land);
-            for (final Variant v : variants(land, ai, tapped, lifePaid, turn)) {
-                final List<Src> next = new ArrayList<>(srcs);
-                next.addAll(sourcesForLand(land, ai, then, turn + v.delay, v.delay == 0));
-                best = Math.max(best, bestFuture(ai, next, remaining, turn + 1, spells, demand, entersTapped,
-                        then, lifePaid + v.life) - v.cost);
-            }
+            final Entry entry = entry(ai, land, tapped, srcs, spells, turn, played, lifePaid);
+            final List<Src> next = unlockedBy(srcs, ai, then, turn);
+            next.addAll(sourcesForLand(land, ai, then, turn + entry.delay, entry.delay == 0));
+            best = Math.max(best, bestFuture(ai, next, remaining, turn + 1, spells, demand, entersTapped,
+                    then, lifePaid + entry.life) - LIFE_COST * entry.life);
         }
         return best;
     }
@@ -284,38 +305,21 @@ public final class LandPlanner {
         final boolean[] done = new boolean[spells.size()];
         double total = 0;
         for (int t = 0; t < HORIZON; t++) {
-            final List<Src> avail = new ArrayList<>();
-            for (final Src s : srcs) {
-                if (s.from <= t) {
-                    final Src active = s.forTurn(t);
-                    if (active.mask != 0) {
-                        avail.add(active);
-                    }
-                }
-            }
-            final List<byte[]> colouredSoFar = new ArrayList<>();
-            int genericSoFar = 0;
-            for (int i = 0; i < spells.size(); i++) { // spells are sorted by weight, best first
-                if (done[i]) {
-                    continue;
-                }
-                final Spell sp = spells.get(i);
-                final List<byte[]> coloured = new ArrayList<>(colouredSoFar);
+            final List<Src> avail = availableOn(srcs, t);
+            final List<byte[]> coloured = new ArrayList<>();
+            int generic = 0;
+            for (final Spell sp : castOn(avail, spells, done)) {
                 coloured.add(sp.coloured);
-                if (canPay(coloured, genericSoFar + sp.generic, avail)) {
-                    colouredSoFar.add(sp.coloured);
-                    genericSoFar += sp.generic;
-                    done[i] = true;
-                    total += sp.weight * DECAY[t];
-                }
+                generic += sp.generic;
+                total += sp.weight * DECAY[t];
             }
-            total -= painCost(avail, colouredSoFar, genericSoFar);
+            total -= painCost(avail, coloured, generic);
         }
         // the colours the library will ask for: a first source of a colour is worth more than a second
         final int[] sources = new int[5];
         for (final Src s : srcs) {
             for (int c = 0; c < 5; c++) {
-                if ((s.allColors() & TYPE_BITS[c]) != 0) {
+                if ((s.lasting() & TYPE_BITS[c]) != 0) {
                     sources[c]++;
                 }
             }
@@ -325,6 +329,56 @@ public final class LandPlanner {
             total += LIBRARY_COLOR_BONUS * demand[c] * share;
         }
         return total;
+    }
+
+    /** The sources that make mana on the turn, each with the types it can make then. */
+    private static List<Src> availableOn(final List<Src> srcs, final int turn) {
+        final List<Src> avail = new ArrayList<>();
+        for (final Src s : srcs) {
+            if (s.from <= turn) {
+                final Src active = s.forTurn(turn);
+                if (active.mask != 0) {
+                    avail.add(active);
+                }
+            }
+        }
+        return avail;
+    }
+
+    /** The spells not {@code done} yet that the sources of a turn can pay together, best first; marks them done. */
+    private static List<Spell> castOn(final List<Src> avail, final List<Spell> spells, final boolean[] done) {
+        final List<Spell> cast = new ArrayList<>();
+        final List<byte[]> coloured = new ArrayList<>();
+        int generic = 0;
+        for (int i = 0; i < spells.size(); i++) { // spells are sorted by weight, best first
+            if (done[i]) {
+                continue;
+            }
+            final Spell sp = spells.get(i);
+            coloured.add(sp.coloured);
+            if (canPay(coloured, generic + sp.generic, avail)) {
+                generic += sp.generic;
+                done[i] = true;
+                cast.add(sp);
+            } else {
+                coloured.remove(coloured.size() - 1);
+            }
+        }
+        return cast;
+    }
+
+    /** The cards that the schedule has cast on the turns before {@code turn}. */
+    static Set<Card> castBefore(final List<Src> srcs, final List<Spell> spells, final int turn) {
+        final boolean[] done = new boolean[spells.size()];
+        final Set<Card> cast = new HashSet<>();
+        for (int t = 0; t < turn; t++) {
+            for (final Spell sp : castOn(availableOn(srcs, t), spells, done)) {
+                if (sp.card != null) {
+                    cast.add(sp.card);
+                }
+            }
+        }
+        return cast;
     }
 
     /** Up to this many painful activations are tried in every combination; more are chosen cheapest first. */
@@ -518,7 +572,7 @@ public final class LandPlanner {
             arr[i] = coloured.get(i);
         }
         final int cmc = Math.min(8, Math.max(1, cost.getCMC()));
-        out.add(new Spell(c.getName(), arr, generic, (60 + 30 * cmc) * factor));
+        out.add(new Spell(c.getName(), arr, generic, (60 + 30 * cmc) * factor, c));
     }
 
     /** How much of its spells the library has a pip of each colour for, 0..1 (WUBRG order). */
@@ -562,26 +616,57 @@ public final class LandPlanner {
     }
 
     /**
-     * The ways to play a land. A land that enters tapped makes mana from the next turn, a land that is a creature
-     * (Dryad Arbor) is summoning sick and cannot be tapped for mana until the next turn too. A shockland may instead
-     * come in untapped for 2 life, which is worth it when a spell waits for the mana: both ways are planned, the second
-     * with the price of the life.
+     * How a land comes in on a turn of the plan. A land that enters tapped makes mana from the next turn, and so does a
+     * land that is a creature (Dryad Arbor), which is summoning sick. A shockland comes in untapped for its life exactly
+     * when {@link TapAi} would pay it then: the plan cannot count on a payment that its rule refuses, nor save the life
+     * of one that it makes.
+     *
+     * @param srcs     the sources of the plan before this land
+     * @param turn     the turn of the plan on which the land is played, 0 for this one
+     * @param played   the lands the plan has played before
+     * @param lifePaid the life the plan has paid before
      */
-    private static List<Variant> variants(final Card land, final Player ai, final boolean tapped,
-                                          final int lifePaid, final int turn) {
+    private static Entry entry(final Player ai, final Card land, final boolean tapped, final List<Src> srcs,
+                               final List<Spell> spells, final int turn, final List<Card> played, final int lifePaid) {
         final int sick = land.isCreature() && !land.hasKeyword(Keyword.HASTE) ? 1 : 0;
-        final List<Variant> out = new ArrayList<>();
-        out.add(new Variant(sick + (tapped ? 1 : 0), 0));
-        // Only the current land drop is allowed to assume a life payment. TapAi's full decision depends on the
-        // actual current hand and battlefield; speculative future payments would use stale information.
-        if (tapped && turn == 0 && lifePaid == 0) {
+        if (tapped) {
             final int life = lifeToEnterUntapped(land);
-            final SpellAbility payment = lifePaymentAbility(land);
-            if (life > 0 && payment != null && TapAi.shouldPayForLandEntry(ai, land, payment, life, lifePaid)) {
-                out.add(new Variant(sick, life));
+            if (life > 0 && wouldPayToEnterUntapped(ai, land, life, turn, played,
+                    castBefore(srcs, spells, turn), lifePaid)) {
+                return new Entry(sick, life);
             }
         }
-        return out;
+        return new Entry(sick + (tapped ? 1 : 0), 0);
+    }
+
+    /**
+     * Whether {@link TapAi} would pay {@code life} for the land on this turn of the plan. By then the lands in
+     * {@code played} are in play, the cards in {@code cast} have left the hand, and from the next turn on every land
+     * in play has untapped. For this turn it is the question the game itself will ask.
+     */
+    static boolean wouldPayToEnterUntapped(final Player ai, final Card land, final int life, final int turn,
+                                           final List<Card> played, final Set<Card> cast, final int lifePaid) {
+        final SpellAbility payment = lifePaymentAbility(land);
+        if (payment == null) {
+            return false;
+        }
+        payment.setActivatingPlayer(ai);
+        final List<Card> untapped = new ArrayList<>();
+        final List<Card> alsoThere = new ArrayList<>(played);
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand() && (turn > 0 || c.isUntapped())) {
+                untapped.add(c);
+            }
+            if (turn > 0 && c.isTapped()) {
+                alsoThere.add(c);
+            }
+        }
+        untapped.addAll(played);
+        final List<Card> hand = new ArrayList<>(ai.getCardsIn(ZoneType.Hand));
+        hand.remove(land);
+        hand.removeAll(played);
+        hand.removeAll(cast);
+        return TapAi.shouldPayForLandEntry(ai, land, payment, life, lifePaid, untapped, hand, alsoThere);
     }
 
     /**
@@ -654,6 +739,53 @@ public final class LandPlanner {
                         c.getId(), life)); // one activation for the card
             }
         }
+        for (int i = before; i < out.size(); i++) {
+            final Src s = out.get(i);
+            out.set(i, new Src(s.mask, s.from, s.entryOnly, s.pain, s.activation, s.life, c, s.later, s.laterFrom));
+        }
+    }
+
+    /**
+     * The sources once the lands in {@code planned} are in play, the last of them from {@code turn} on. A land whose
+     * ability counts what is in play may make more from then on than when its sources were first worked out.
+     */
+    static List<Src> unlockedBy(final List<Src> srcs, final Player ai, final List<Card> planned, final int turn) {
+        final List<Src> out = new ArrayList<>(srcs);
+        final Set<Card> judged = new HashSet<>();
+        for (final Src first : srcs) {
+            final Card host = first.host;
+            if (host == null || !judged.add(host) || !hasPresenceCondition(host)) {
+                continue;
+            }
+            final List<Integer> own = new ArrayList<>();
+            for (int i = 0; i < srcs.size(); i++) {
+                if (srcs.get(i).host == host) {
+                    own.add(i);
+                }
+            }
+            final List<Src> now = sourcesForLand(host, ai, planned, turn, false);
+            if (now.size() != own.size()) {
+                continue; // not the same mana to compare: leave it as it was
+            }
+            for (int j = 0; j < own.size(); j++) {
+                final Src was = out.get(own.get(j));
+                final Src is = now.get(j);
+                final byte gained = (byte) (is.mask & ~was.lasting());
+                if (gained == 0 || was.later != 0) {
+                    continue;
+                }
+                final boolean hurts = (is.pain & gained) != 0;
+                out.set(own.get(j), new Src(was.mask, was.from, was.entryOnly, (byte) (was.pain | is.pain & gained),
+                        hurts ? is.activation : was.activation, hurts ? is.life : was.life, host, gained,
+                        Math.max(turn, was.from)));
+            }
+        }
+        return out;
+    }
+
+    private static boolean hasPresenceCondition(final Card c) {
+        return c.getManaAbilities().stream().anyMatch(sa ->
+                sa.getRestrictions() != null && sa.getRestrictions().getIsPresent() != null);
     }
 
     /** Sources for a land being added to a simulated land-drop sequence. */
@@ -892,7 +1024,15 @@ public final class LandPlanner {
             byte mask = 0;
             for (final Card l : lands) {
                 // This fetch chooses one land; another possible target cannot satisfy its condition.
-                mask |= OpeningHand.potentialProducedColors(l, ai, new CardCollection(l));
+                final CardCollection alone = new CardCollection(l);
+                mask |= OpeningHand.potentialProducedColors(l, ai, alone);
+                // those are colours only: a Wastes makes mana too, which pays the generic part of a cost
+                for (final SpellAbility ma : ComputerUtilMana.getAIPlayableMana(l)) {
+                    ma.setActivatingPlayer(ai);
+                    if (ma.canProduce("C") && OpeningHand.manaAbilityRequirementsMet(l, ma, alone, true)) {
+                        mask |= ManaAtom.COLORLESS;
+                    }
+                }
             }
             return mask;
         }

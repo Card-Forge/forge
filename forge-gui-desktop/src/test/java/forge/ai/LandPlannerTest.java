@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.testng.annotations.Test;
 
@@ -243,6 +244,17 @@ public class LandPlannerTest extends FlatMcTestBase {
         final List<LandPlanner.Src> s = LandPlanner.battlefieldSources(ai);
         assertTrue(LandPlanner.canPay(costs(G, G, G), 0, s), "devotion to green makes three green");
         assertFalse(LandPlanner.canPay(costs(G, U), 0, s), "the Lotus makes one colour, not green and blue");
+    }
+
+    @Test
+    public void aFetchLandThatCanOnlyFindWastesMakesColourlessMana() {
+        setUpGame();
+        put("Wastes", ai, ZoneType.Library);
+        final Card wilds = put("Evolving Wilds", ai, ZoneType.Hand);
+        final List<LandPlanner.Src> s = LandPlanner.sourcesForLand(wilds, ai, Collections.singletonList(wilds), 0, true);
+        assertEquals(s.size(), 1);
+        assertEquals(s.get(0).mask, C);
+        assertTrue(LandPlanner.canPay(costs(), 1, s), "it pays generic mana");
     }
 
     @Test
@@ -513,14 +525,80 @@ public class LandPlannerTest extends FlatMcTestBase {
     }
 
     @Test
-    public void doesNotAssumeAFutureShocklandPaymentWhenPlanning() {
-        // TapAi decides from the actual hand and battlefield at the time of the land drop. The planner must not
-        // assume that it will pay 2 life for a future Temple Garden using today's state.
+    public void playsTheCreatureLandFirstWhenTheHandHasOnlyTwoDrops() {
+        // #13104: Dryad Arbor is summoning sick the turn it comes in, so it goes first and the Temple Garden
+        // comes in untapped for 2 life on the turn that the Ledgewalkers are cast
         setUpGame();
         final Card arbor = put("Dryad Arbor", ai, ZoneType.Hand);
         final Card garden = put("Temple Garden", ai, ZoneType.Hand);
         put("Silhana Ledgewalker", 2, ai, ZoneType.Hand); // {1}{G}
-        assertNull(LandPlanner.choose(ai, collection(arbor, garden), c -> c == garden));
+        assertSame(LandPlanner.choose(ai, collection(arbor, garden), c -> c == garden), arbor);
+    }
+
+    private boolean wouldPay(final Card land, final int turn, final List<Card> played, final Set<Card> cast,
+                             final int lifePaid) {
+        return LandPlanner.wouldPayToEnterUntapped(ai, land, 2, turn, played, cast, lifePaid);
+    }
+
+    @Test
+    public void noShocklandPaymentIsPlannedForAnInstant() {
+        setUpGame();
+        put("Island", ai, ZoneType.Battlefield);
+        final Card grave = put("Watery Grave", ai, ZoneType.Hand);
+        put("Counterspell", ai, ZoneType.Hand);
+        assertFalse(wouldPay(grave, 1, Collections.<Card>emptyList(), Collections.<Card>emptySet(), 0),
+                "TapAi does not pay for a spell that is held for the opponent's turn");
+    }
+
+    @Test
+    public void aShocklandPaymentIsPlannedOnlyWhileItsSpellIsInHand() {
+        setUpGame();
+        put("Island", ai, ZoneType.Battlefield);
+        final Card grave = put("Watery Grave", ai, ZoneType.Hand);
+        final Card strix = put("Baleful Strix", ai, ZoneType.Hand); // {U}{B}
+        assertTrue(wouldPay(grave, 1, Collections.<Card>emptyList(), Collections.<Card>emptySet(), 0));
+        assertFalse(wouldPay(grave, 1, Collections.<Card>emptyList(), Collections.singleton(strix), 0),
+                "the plan has cast the Strix already: nothing is left to pay for");
+    }
+
+    @Test
+    public void aPlannedLandCountsAsUntappedManaForTheShocklandPayment() {
+        setUpGame();
+        final Card island = put("Island", ai, ZoneType.Hand);
+        final Card grave = put("Watery Grave", ai, ZoneType.Hand);
+        put("Baleful Strix", ai, ZoneType.Hand);
+        assertFalse(wouldPay(grave, 0, Collections.<Card>emptyList(), Collections.<Card>emptySet(), 0),
+                "one land does not cast a two-drop");
+        assertTrue(wouldPay(grave, 1, Collections.singletonList(island), Collections.<Card>emptySet(), 0));
+    }
+
+    @Test
+    public void aLandTappedNowCountsOnlyFromTheNextTurn() {
+        setUpGame();
+        put("Island", ai, ZoneType.Battlefield).setTapped(true);
+        final Card grave = put("Watery Grave", ai, ZoneType.Hand);
+        put("Baleful Strix", ai, ZoneType.Hand);
+        assertFalse(wouldPay(grave, 0, Collections.<Card>emptyList(), Collections.<Card>emptySet(), 0));
+        assertTrue(wouldPay(grave, 1, Collections.<Card>emptyList(), Collections.<Card>emptySet(), 0));
+    }
+
+    @Test
+    public void aOneDropIsNoReasonToPayOnceThePlannedPaymentsLeaveLittleLife() {
+        setUpGame();
+        final Card grave = put("Watery Grave", ai, ZoneType.Hand);
+        put("Typhoid Rats", ai, ZoneType.Hand); // {B}
+        assertTrue(wouldPay(grave, 0, Collections.<Card>emptyList(), Collections.<Card>emptySet(), 0));
+        assertFalse(wouldPay(grave, 1, Collections.<Card>emptyList(), Collections.<Card>emptySet(), 8),
+                "12 life by then: above the reserve, but below what TapAi asks for a one-drop");
+    }
+
+    @Test
+    public void theScheduleSaysWhichCardsAreCastBeforeATurn() {
+        setUpGame();
+        put("Lightning Bolt", ai, ZoneType.Hand);
+        final List<LandPlanner.Spell> spells = LandPlanner.spellsWanted(ai);
+        assertTrue(LandPlanner.castBefore(Arrays.asList(src(R, 1)), spells, 1).isEmpty());
+        assertEquals(LandPlanner.castBefore(Arrays.asList(src(R, 1)), spells, 2).size(), 1);
     }
 
     @Test
@@ -603,6 +681,41 @@ public class LandPlannerTest extends FlatMcTestBase {
         final LandPlanner.Src source = LandPlanner.battlefieldSources(ai).stream()
                 .filter(s -> s.from == 1).findFirst().get();
         assertTrue(LandPlanner.canPay(costs(U), 0, Collections.singletonList(source.forTurn(1))));
+    }
+
+    @Test
+    public void coloursOfTheEntryTurnOnlyEarnNoLibraryBonus() {
+        final double[] wantsBlue = { 0, 1, 0, 0, 0 };
+        final LandPlanner.Src bastion = new LandPlanner.Src(C, 0, U, (byte) 0, 0, 1);
+        assertEquals(LandPlanner.score(Arrays.asList(bastion), Collections.<LandPlanner.Spell>emptyList(), wantsBlue),
+                0.0, 1e-9);
+    }
+
+    @Test
+    public void aBasicLandPlayedLaterUnlocksTheColoursOfAPlannedBastion() {
+        setUpGame();
+        final Card bastion = put("Gleaming Bastion", ai, ZoneType.Hand);
+        final Card mountain = put("Mountain", ai, ZoneType.Hand);
+        final List<LandPlanner.Src> alone = LandPlanner.sourcesForLand(bastion, ai,
+                Collections.singletonList(bastion), 0, true);
+        final LandPlanner.Src after = LandPlanner.unlockedBy(alone, ai, Arrays.asList(bastion, mountain), 1).get(0);
+        assertTrue(LandPlanner.canPay(costs(U), 0, Collections.singletonList(after.forTurn(1))));
+        final double[] wantsBlue = { 0, 1, 0, 0, 0 };
+        assertEquals(LandPlanner.score(Collections.singletonList(after), Collections.<LandPlanner.Spell>emptyList(),
+                wantsBlue), 18.0, 1e-9, "now a lasting source of blue");
+    }
+
+    @Test
+    public void anIslandUnlocksAVergeOnTheBattlefieldFromTheTurnItIsPlayed() {
+        setUpGame();
+        final Card verge = put("Gloomlake Verge", ai, ZoneType.Battlefield);
+        final Card island = put("Island", ai, ZoneType.Hand);
+        final List<LandPlanner.Src> before = LandPlanner.battlefieldSources(ai);
+        assertFalse(LandPlanner.canPay(costs(B), 0, Collections.singletonList(before.get(0).forTurn(1))));
+        final LandPlanner.Src after = LandPlanner.unlockedBy(before, ai, Collections.singletonList(island), 1).get(0);
+        assertSame(after.host, verge);
+        assertFalse(LandPlanner.canPay(costs(B), 0, Collections.singletonList(after.forTurn(0))), "not before");
+        assertTrue(LandPlanner.canPay(costs(B), 0, Collections.singletonList(after.forTurn(1))));
     }
 
     @Test
