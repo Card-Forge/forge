@@ -40,6 +40,12 @@ public class QuestController {
             return allQuests;
     }
 
+    public String[] getEnemyNames() {
+        return java.util.stream.Stream.concat(java.util.stream.Stream.of(""),
+                java.util.stream.IntStream.range(0, allEnemies.size()).mapToObj(i -> allEnemies.get(i).name)
+                        .distinct().sorted()).toArray(String[]::new);
+    }
+
     private QuestController(){
         load();
     }
