@@ -1,0 +1,7 @@
+Name:Hidetsugu's Poison Rite
+ManaCost:3 B
+Types:Sorcery
+A:SP$ LosesGame | ValidTgts$ Player.counters_EQ7_POISON | SpellDescription$ Target player with exactly seven poison counters loses the game.
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Target player with exactly seven poison counters loses the game.

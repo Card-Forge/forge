@@ -1,0 +1,10 @@
+Name:Pulse of the Hunter Maze
+ManaCost:1 G G
+Types:Instant
+A:SP$ Poison | ValidTgts$ Opponent | Num$ 1 | SubAbility$ DBReturn | SpellDescription$ Target opponent gets a poison counter. Then, if you have more poison counters than that player, return CARDNAME to its owner's hand.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ LTY
+SVar:X:TargetedPlayer$Counters.Poison
+SVar:Y:Count$YourCountersPoison
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:Target opponent gets a poison counter. Then, if you have more poison counters than that player, return Pulse of the Hunter Maze to its owner's hand.

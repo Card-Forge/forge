@@ -1,0 +1,12 @@
+Name:Mindslaver Toolkit
+ManaCost:0
+Types:Artifact
+A:AB$ GainControl | Cost$ T | Defined$ Self | ValidTgts$ Opponent | SpellDescription$ Target opponent gains control of CARDNAME
+A:AB$ Charm | Cost$ X T | Choices$ DBLoseLife,DBDiscard,DBSac | MinCharmNum$ 0 | CharmNum$ 3
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | SpellDescription$ You lose X life
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ X | Mode$ TgtChoose | SpellDescription$ You discard X cards
+SVar:DBSac:DB$ Sacrifice | Defined$ You | SacValid$ Permanent | Amount$ X | SpellDescription$ You sacrifice X permanents
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:{T}: Target opponent gains control of Mindslaver Toolkit.\n{X}, {T}: Choose any number —\n• You lose X life.\n• You discard X cards.\n• You sacrifice X permanents.

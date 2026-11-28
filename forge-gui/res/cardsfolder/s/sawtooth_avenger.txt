@@ -1,0 +1,16 @@
+Name:Sawtooth Avenger
+ManaCost:5
+Types:Artifact Creature Golem Construct
+PT:0/0
+K:etbCounter:P1P1:Sunburst:no Condition:Megasunburst (This enters the battlefield with two +1/+1 counters on it for each color of mana spent to cast it)
+A:AB$ GenericChoice | Choices$ Deathtouch,Lifelink,Menace | Cost$ SubCounter<3/P1P1> | StackDescription$ SpellDescription | SpellDescription$ CARDNAME gains your choice of deathtouch, lifelink, or menace until end of turn.
+SVar:Deathtouch:DB$ Pump | Defined$ Self | KW$ Deathtouch | SpellDescription$ Deathtouch
+SVar:Lifelink:DB$ Pump | Defined$ Self | KW$ Lifelink | SpellDescription$ Lifelink
+SVar:Menace:DB$ Pump | Defined$ Self | KW$ Menace | SpellDescription$ Menace
+SVar:Sunburst:Count$Converge/Twice
+SVar:NeedsToPlayVar:Z GE2
+SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
+AI:RemoveDeck:All
+DeckHints:Ability$Proliferate
+DeckHas:Ability$Counters
+Oracle:Megasunburst (This enters the battlefield with two +1/+1 counters on it for each color of mana spent to cast it)\nRemove three +1/+1 counters from Sawtooth Avenger: Sawtooth Avenger gains your choice of deathtouch, lifelink, or menace until end of turn.
