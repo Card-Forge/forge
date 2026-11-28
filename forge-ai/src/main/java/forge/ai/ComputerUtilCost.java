@@ -64,13 +64,35 @@ public class ComputerUtilCost {
                         continue;
                     }
                     ab.setActivatingPlayer(ai);
-                    if (ab.canPlay() && ComputerUtilMana.canPayManaCost(ab, ai, 0, false)) {
+                    // castable now: the timing and restrictions, the whole cost (additional costs, not just the mana) and, for a
+                    // spell that must target, something it can legally and usefully target (Fatal Push needs a creature with
+                    // mana value 2 or less, 4 with revolt: its AITgts is evaluated against the current game state)
+                    if (ab.canPlay() && canPayCost(ab, ai, false) && hasUsefulTarget(ab, ai)) {
                         return false;
                     }
                 }
             }
         }
         return true;
+    }
+
+    /** A spell that has to target needs a legal target that is worth it; the script's AITgts says what is, when it says. */
+    private static boolean hasUsefulTarget(final SpellAbility ab, final Player ai) {
+        if (!ab.usesTargeting() || ab.getMinTargets() <= 0) {
+            return true;
+        }
+        for (final Player p : ai.getGame().getPlayers()) {
+            if (ab.canTarget(p)) {
+                return true;
+            }
+        }
+        final String aiTgts = ab.getParam("AITgts");
+        for (final Card c : forge.game.card.CardUtil.getValidCardsToTarget(ab)) {
+            if (aiTgts == null || c.isValid(aiTgts, ai, ab.getHostCard(), ab)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean checkExileFromGraveCost(final Cost cost, final Player payer, final SpellAbility sa) {

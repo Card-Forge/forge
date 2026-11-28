@@ -787,11 +787,23 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return false;
             }
             recast.setActivatingPlayer(caster);
-            if (!recast.isSpell() || !ComputerUtilMana.canPayManaCost(recast, caster, 0, false)) {
+            if (!recast.isSpell() || !canCastAgain(recast, card, caster)) {
                 return false;
             }
         }
         return true;
+    }
+
+    /**
+     * The whole of casting the returned card again: its restrictions, its timing (once the stack is empty again, which is when it
+     * comes back), and the full cost (the sacrifice of Culling the Weak, not just its mana).
+     */
+    private static boolean canCastAgain(final SpellAbility recast, final Card card, final Player caster) {
+        final PhaseHandler ph = caster.getGame().getPhaseHandler();
+        final boolean timing = recast.withFlash(card, caster) || (ph.isPlayerTurn(caster) && ph.getPhase().isMain());
+        return timing && recast.getRestrictions().checkTimingRestrictions(card, recast)
+                && recast.getRestrictions().checkOtherRestrictions(card, recast, caster)
+                && ComputerUtilCost.canPayCost(recast, caster, false);
     }
 
     private static AiAbilityDecision knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {

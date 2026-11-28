@@ -3150,6 +3150,22 @@ public class AiReportScenarioTest extends AITest {
                 c -> { c.bf("Swamp", c.ai).tap(true, null, null); c.hand("Soul Spike", c.ai); c.hand("Fatal Push", c.ai); c.hand("Sovereign's Bite", c.ai); c.bf("Noble Hierarch", c.opp); }));
         l.add(play("13103-reprieve-colors", "Reprieve is cast on a Hill Giant: the opponent only has Forests and cannot cast it again", Fid.APPROX, M1, false, "Reprieve",
                 c -> { c.bf("Forest", 5, c.opp); c.bf("Plains", 2, c.ai); c.hand("Reprieve", c.ai); c.castOnStack(c.opp, "Hill Giant"); }));
+
+        // ---------------- #13111 review: what the AI can legally do now, not what an ability could do in general
+        // 1. Fatal Push with no creature of mana value 2 or less cannot be cast usefully, so it is a fair price for Soul Spike
+        l.add(play("13111-soul-spike-push-without-target", "Soul Spike may exile Fatal Push when the only creature has mana value 6 (Push has nothing to kill)", Fid.APPROX, M1, false, "Soul Spike",
+                c -> { c.bf("Swamp", c.ai); c.hand("Soul Spike", c.ai); c.hand("Fatal Push", c.ai); c.hand("Sovereign's Bite", c.ai); c.bf("Craw Wurm", c.opp); }));
+        l.add(noPlay("13111-soul-spike-push-has-target", "control: Soul Spike does not exile Fatal Push while a mana value 2 creature is there to kill", Fid.EXACT, M1, false, "Soul Spike",
+                c -> { c.bf("Swamp", c.ai); c.hand("Soul Spike", c.ai); c.hand("Fatal Push", c.ai); c.hand("Sovereign's Bite", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        // 2. Culling the Weak: the sacrifice is part of casting it, with the only creature gone it cannot be cast again
+        l.add(play("13111-reprieve-culling-sacrificed", "Reprieve on Culling the Weak whose caster sacrificed his only creature: it cannot be recast, one Swamp or not", Fid.APPROX, M1, false, "Reprieve",
+                c -> { c.bf("Swamp", c.opp); c.bf("Swamp", c.opp).tap(true, null, null); c.bf("Plains", 2, c.ai); c.hand("Reprieve", c.ai); c.castOnStack(c.opp, "Culling the Weak"); }));
+        l.add(noPlay("13111-reprieve-culling-creature-left", "control: with a creature to sacrifice and a Swamp open Culling the Weak is cast again, no Reprieve", Fid.APPROX, M1, false, "Reprieve",
+                c -> { c.bf("Swamp", c.opp); c.bf("Swamp", c.opp); c.bf("Grizzly Bears", c.opp); c.bf("Plains", 2, c.ai); c.hand("Reprieve", c.ai); c.castOnStack(c.opp, "Culling the Weak"); }));
+        // 3. Phelia cannot take Guardian of the Guildpact (protection from monocolored) out of the way, so it still blocks and kills her
+        l.add(new Scenario("13111-phelia-protection-blocker", "Phelia does not attack into a creature with protection from monocolored: her trigger cannot target it", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Phelia, Exuberant Shepherd", c.ai); c.bf("Guardian of the Guildpact", c.opp); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().startsWith("Phelia")) ? "AI attacked with Phelia into a blocker her trigger cannot exile" : null));
         return l;
     }
 
