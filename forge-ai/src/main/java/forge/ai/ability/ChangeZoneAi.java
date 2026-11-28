@@ -744,6 +744,27 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 && !ph.getCombat().getAttackers().isEmpty() && CombatUtil.canBlock(c);
     }
 
+    /** Whether every spell this returns to hand belongs to an opponent who has the mana left to cast it again right away. */
+    private static boolean targetsSpellItsOwnerCanRecast(final SpellAbility sa) {
+        final CardCollection spells = new CardCollection(sa.getTargets().getTargetCards());
+        for (final SpellAbility spell : sa.getTargets().getTargetSpells()) {
+            spells.add(spell.getHostCard());
+        }
+        if (spells.isEmpty()) {
+            return false;
+        }
+        final Player ai = sa.getActivatingPlayer();
+        for (final Card spell : spells) {
+            final Player owner = spell.getOwner();
+            // the spell is paid for already: what is untapped now is what is left for casting it again
+            if (owner == null || !owner.isOpponentOf(ai)
+                    || ComputerUtilMana.getAvailableManaEstimate(owner) < spell.getCMC()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private static AiAbilityDecision knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
 
@@ -759,6 +780,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (!isPreferredTarget(ai, sa, false, false)) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+            if (origin.contains(ZoneType.Stack) && destination == ZoneType.Hand && targetsSpellItsOwnerCanRecast(sa)) {
+                // Reprieve on a Noble Hierarch with plenty of lands open only costs the player a little mana (#13103)
+                sa.resetTargets();
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             if (ComputerUtilAbility.hasUnpromisedGiftReturn(sa)) {
                 for (final Card target : sa.getTargets().getTargetCards()) {

@@ -484,6 +484,23 @@ public class AiController {
         return rightapi;
     }
 
+    /** Names of the AI's own evoked creatures that still have a trigger (the sacrifice or the enters effect) on the stack. */
+    private Set<String> evokedCardNamesOnStack() {
+        final Set<String> names = new HashSet<>();
+        for (final SpellAbilityStackInstance si : game.getStack()) {
+            final SpellAbility sa = si.getSpellAbility();
+            final Card host = sa == null ? null : sa.getHostCard();
+            if (host == null || !sa.isTrigger() || !player.equals(sa.getActivatingPlayer())) {
+                continue;
+            }
+            final SpellAbility cast = host.getCastSA();
+            if (sa.getTrigger().isKeyword(Keyword.EVOKE) || (cast != null && cast.isEvoke())) {
+                names.add(host.getName());
+            }
+        }
+        return names;
+    }
+
     private static List<SpellAbility> getPlayableCounters(final CardCollection all) {
         final List<SpellAbility> spellAbility = Lists.newArrayList();
         for (final Card c : all) {
@@ -2345,16 +2362,12 @@ public class AiController {
 
         // Must respond: cases where the AI should respond to its own triggers or other abilities (need to add negative stuff to be countered here)
         boolean mustRespond = false;
-        String evokedName = null;
         if (top != null) {
             mustRespond = top.hasParam("AIRespondsToOwnAbility"); // Forced combos (currently defined for Sensei's Divining Top)
-            final boolean ownEvokeTrigger = top.isTrigger() && top.getTrigger().isKeyword(Keyword.EVOKE);
-            mustRespond |= ownEvokeTrigger; // Evoke sacrifice trigger
-            if (ownEvokeTrigger && topOwnedByAI && top.getHostCard() != null) {
-                evokedName = top.getHostCard().getName(); // the response is for the evoked creature, not another one of it (#13091)
-            }
+            mustRespond |= top.isTrigger() && top.getTrigger().isKeyword(Keyword.EVOKE); // Evoke sacrifice trigger
         }
-        final String evoked = evokedName;
+        // the response is for the evoked creature, not another one of it (#13091): whichever of its triggers is on top
+        final Set<String> evokedOnStack = evokedCardNamesOnStack();
         if (topOwnedByAI) {
             // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
             // in a scripted timed fashion.
@@ -2385,9 +2398,9 @@ public class AiController {
         if (saList.isEmpty()) {
             saList = ComputerUtilAbility.getSpellAbilities(cards, player);
         }
-        if (evoked != null) {
+        if (!evokedOnStack.isEmpty()) {
             // a second Solitude cast while the triggers of the first are on the stack: let them resolve and look again
-            saList.removeIf(sa -> sa.isSpell() && sa.getHostCard() != null && evoked.equals(sa.getHostCard().getName()));
+            saList.removeIf(sa -> sa.isSpell() && sa.getHostCard() != null && evokedOnStack.contains(sa.getHostCard().getName()));
         }
 
         final SpellAbility hexmage = sureHexmageImpending(saList);
