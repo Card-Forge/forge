@@ -142,6 +142,7 @@ public class AiReportScenarioTest extends AITest {
         }
         void bf(final String name, final int n, final Player p) { for (int i = 0; i < n; i++) { bf(name, p); } }
         Card hand(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Hand); }
+        void hand(final String name, final int n, final Player p) { for (int i = 0; i < n; i++) { hand(name, p); } }
         Card gy(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Graveyard); }
         Card lib(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Library); }
         void lib(final String name, final int n, final Player p) { for (int i = 0; i < n; i++) { lib(name, p); } }
@@ -3103,6 +3104,39 @@ public class AiReportScenarioTest extends AITest {
                     return hellion.isTapped()
                             ? "the AI tapped Blitz Hellion, which has haste and only this turn, to deny a 1/1 lifelink Vampire" + c.trace : null;
                 }));
+
+        // ---------------- #13106, #13091, #13103, #13090 (Soul Spike, Solitude, Reprieve, Phelia)
+        l.add(noPlay("13106-soul-spike", "Soul Spike is not cast on a Noble Hierarch with Fatal Push and Sovereign's Bite (both black) in hand: exiling them is the cost", Fid.EXACT, M1, false, "Soul Spike",
+                c -> { c.bf("Swamp", c.ai); c.hand("Soul Spike", c.ai); c.hand("Fatal Push", c.ai); c.hand("Sovereign's Bite", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        l.add(play("13106-fatal-push", "Fatal Push kills the Noble Hierarch with one Swamp open instead of Soul Spike", Fid.EXACT, M1, false, "Fatal Push",
+                c -> { c.bf("Swamp", c.ai); c.hand("Soul Spike", c.ai); c.hand("Fatal Push", c.ai); c.hand("Sovereign's Bite", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        l.add(new Scenario("13091-solitude", "no second Solitude while the triggers of the first one are on the stack", Fid.APPROX, M1, false,
+                c -> {
+                    c.bf("Forest", 2, c.opp); c.bf("Noble Hierarch", c.opp); c.bf("Eladamri, Korvecdal", c.opp);
+                    c.hand("Solitude", 2, c.ai); c.hand("Swords to Plowshares", c.ai); c.hand("Path to Exile", c.ai); // evoke needs no mana
+                },
+                c -> {
+                    final SpellAbility first = c.playOf("Solitude");
+                    if (first == null) { throw new SkipException("setup: the AI did not cast the first Solitude at all" + c.why("Solitude")); }
+                    c.ctl().playChosenSpellAbility(first);
+                    c.game.getStack().resolveStack(); // the creature spell resolves, its triggers wait
+                    c.game.getAction().checkStateEffects(true);
+                    c.game.getTriggerHandler().runWaitingTriggers();
+                    c.game.getStack().addAllTriggeredAbilitiesToStack();
+                    if (c.game.getStack().isEmpty()) { throw new SkipException("setup: the triggers of the first Solitude never reached the stack"); }
+                    return c.plays("Solitude") ? "AI cast a second Solitude with the triggers of the first one still on the stack" : null;
+                }));
+        l.add(noPlay("13103-reprieve", "Reprieve is not cast on a Noble Hierarch that the player can cast again with five open Forests", Fid.EXACT, M1, false, "Reprieve",
+                c -> { c.bf("Forest", 5, c.opp); c.bf("Plains", 2, c.ai); c.hand("Reprieve", c.ai); c.stack(c.opp, "Noble Hierarch"); }));
+        l.add(new Scenario("13090-phelia-barricade", "Phelia's attack trigger exiles Crystal Barricade, the creature that would block it", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Phelia, Exuberant Shepherd", c.ai); c.bf("Crystal Barricade", c.opp); },
+                c -> pheliaAimsAt(c, "Crystal Barricade")));
+        l.add(new Scenario("13090-phelia-hill-giant-trigger", "Phelia's attack trigger exiles the Hill Giant that would block it", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Phelia, Exuberant Shepherd", c.ai); c.bf("Hill Giant", c.opp); },
+                c -> pheliaAimsAt(c, "Hill Giant")));
+        l.add(new Scenario("13090-phelia-hill-giant-attack", "Phelia attacks into a Hill Giant, because her trigger exiles the blocker", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Phelia, Exuberant Shepherd", c.ai); c.bf("Hill Giant", c.opp); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().startsWith("Phelia")) ? null : "AI did not attack with Phelia, whose trigger removes the Hill Giant"));
         return l;
     }
 
@@ -3270,6 +3304,22 @@ public class AiReportScenarioTest extends AITest {
         }
         if (card != null && !card.isTapped()) { return host + " was activated " + activations + " time(s) and is still untapped" + c.trace; }
         return activations > 1 ? host + " was activated " + activations + " times in a row" + c.trace : null;
+    }
+
+    /** Phelia is attacking: what does the AI aim her attack trigger at? */
+    private String pheliaAimsAt(final Ctx c, final String wanted) {
+        final Card phelia = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                .filter(k -> k.getName().startsWith("Phelia")).findFirst().orElse(null);
+        if (phelia == null) { return "Phelia is missing"; }
+        final Combat combat = new Combat(c.ai);
+        combat.addAttacker(phelia, c.opp);
+        c.game.getPhaseHandler().setCombat(combat);
+        final SpellAbility trigger = c.triggerAbility(phelia, "TrigExile");
+        if (trigger == null) { return "Phelia's attack trigger is missing"; }
+        trigger.setActivatingPlayer(c.ai);
+        if (!c.shouldRunAiTrigger(trigger, false)) { return "AI did not use Phelia's trigger at all"; }
+        final Card got = trigger.getTargets() == null ? null : trigger.getTargets().getFirstTargetedCard();
+        return got != null && wanted.equals(got.getName()) ? null : "Phelia's trigger aimed at " + got + " instead of " + wanted;
     }
 
     private static boolean bloodlineKeeperTransforms(final Ctx c) {

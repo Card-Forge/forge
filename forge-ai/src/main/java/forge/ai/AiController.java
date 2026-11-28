@@ -2345,10 +2345,16 @@ public class AiController {
 
         // Must respond: cases where the AI should respond to its own triggers or other abilities (need to add negative stuff to be countered here)
         boolean mustRespond = false;
+        String evokedName = null;
         if (top != null) {
             mustRespond = top.hasParam("AIRespondsToOwnAbility"); // Forced combos (currently defined for Sensei's Divining Top)
-            mustRespond |= top.isTrigger() && top.getTrigger().isKeyword(Keyword.EVOKE); // Evoke sacrifice trigger
+            final boolean ownEvokeTrigger = top.isTrigger() && top.getTrigger().isKeyword(Keyword.EVOKE);
+            mustRespond |= ownEvokeTrigger; // Evoke sacrifice trigger
+            if (ownEvokeTrigger && topOwnedByAI && top.getHostCard() != null) {
+                evokedName = top.getHostCard().getName(); // the response is for the evoked creature, not another one of it (#13091)
+            }
         }
+        final String evoked = evokedName;
         if (topOwnedByAI) {
             // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
             // in a scripted timed fashion.
@@ -2378,6 +2384,10 @@ public class AiController {
 
         if (saList.isEmpty()) {
             saList = ComputerUtilAbility.getSpellAbilities(cards, player);
+        }
+        if (evoked != null) {
+            // a second Solitude cast while the triggers of the first are on the stack: let them resolve and look again
+            saList.removeIf(sa -> sa.isSpell() && sa.getHostCard() != null && evoked.equals(sa.getHostCard().getName()));
         }
 
         final SpellAbility hexmage = sureHexmageImpending(saList);

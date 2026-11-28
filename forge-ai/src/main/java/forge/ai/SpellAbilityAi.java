@@ -397,6 +397,9 @@ public abstract class SpellAbilityAi extends SpellAbilityEffect {
         if (!ComputerUtilCost.checkDiscardCost(payer, cost, source, sa)) {
             return false;
         }
+        if (!ComputerUtilCost.checkExileFromHandCost(payer, cost, source, sa)) {
+            return false;
+        }
         if (!ComputerUtilCost.checkSacrificeCost(payer, cost, source, sa)) {
             return false;
         }

@@ -34,6 +34,40 @@ import forge.util.TextUtil;
 
 public class ComputerUtilCost {
 
+    /**
+     * A cost that exiles other cards from the hand (Soul Spike, Force of Will, evoke) is not paid with a card that could be cast
+     * right now: Soul Spike exiled Fatal Push, which killed the same mana dork for one mana.
+     */
+    public static boolean checkExileFromHandCost(final Player ai, final Cost cost, final Card source, final SpellAbility sa) {
+        if (cost == null) {
+            return true;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (!(part instanceof CostExile) || part.payCostFromSource()) {
+                continue;
+            }
+            final CostExile exile = (CostExile) part;
+            if (exile.zoneRestriction != 1 || !exile.getFrom().contains(ZoneType.Hand)) {
+                continue;
+            }
+            final CardCollection chosen = ComputerUtil.chooseExileFrom(ai, exile, source, part.getAbilityAmount(sa), sa, false);
+            if (chosen == null) {
+                continue; // not payable at all: the cost check of the play says so
+            }
+            for (final Card c : chosen) {
+                if (c.isLand()) {
+                    continue;
+                }
+                for (final SpellAbility ab : c.getSpellAbilities()) {
+                    if (ab.isBasicSpell() && ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     public static boolean checkExileFromGraveCost(final Cost cost, final Player payer, final SpellAbility sa) {
         CardCollection payingCards = new CardCollection();
         int needed = 0;

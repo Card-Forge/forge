@@ -17,6 +17,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
@@ -736,6 +737,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return any;
     }
 
+    /** A creature that could block the attack being declared, exiled until the end step. */
+    private static boolean takesABlockerOutOfTheWay(final Player ai, final Card c) {
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        return c.isCreature() && ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) && ph.getCombat() != null
+                && !ph.getCombat().getAttackers().isEmpty() && CombatUtil.canBlock(c);
+    }
+
     private static AiAbilityDecision knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
 
@@ -1148,7 +1156,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             return aura.getController().isOpponentOf(ai);
                         }
                         if (blink) {
-                            return c.isToken();
+                            // a token never comes back; any other creature that could block comes back at the end step, which is
+                            // all of the attack it has to be out of the way for (Phelia, #13090)
+                            return c.isToken() || takesABlockerOutOfTheWay(ai, c);
                         }
                         return c.isToken() || c.getCMC() > 0;
                     });
