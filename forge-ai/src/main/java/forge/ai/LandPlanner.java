@@ -7,6 +7,7 @@ import forge.ai.ability.TapAi;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -20,6 +21,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Expressions;
 
 /**
  * Plans the land drops of the next turns so that the spells in hand (and the commander) can be cast as early as the
@@ -30,8 +32,10 @@ import forge.game.zone.ZoneType;
  * follow it on the next two turns, and for each such sequence it schedules the spells turn by turn: on every turn the
  * best spells that can <em>jointly</em> be paid with the mana sources of that turn are cast (a source that enters
  * tapped only counts from the next turn on, and a dual land can pay only one colour at a time, which is checked by
- * matching the coloured costs to the sources). A spell cast sooner is worth more than the same spell cast later, and
- * a small bonus for the colours the library still needs breaks ties between lands that do the same for the hand.
+ * matching the coloured costs to the sources). Each sequence is judged with the lands it has played by then (an Island
+ * first lets a Drowned Catacomb enter untapped) and with the life it has paid by then. A spell cast sooner is worth
+ * more than the same spell cast later, and a small bonus for the colours the library still needs breaks ties between
+ * lands that do the same for the hand.
  * <p>
  * Only the cards the AI can see are used (its hand, its battlefield, its commander, and the colours of its own
  * library as deck statistics), nothing about the opponent. The planner never plays a land by itself: it only answers
@@ -89,14 +93,16 @@ public final class LandPlanner {
         }
     }
 
-    /** One way to play a land: when its mana is there, and what it costs in score (life paid to have it untapped). */
+    /** One way to play a land: when its mana is there, the life paid to have it untapped, and what that costs in score. */
     private static final class Variant {
         final int delay;
+        final int life;
         final double cost;
 
-        Variant(final int delay, final double cost) {
+        Variant(final int delay, final int life) {
             this.delay = delay;
-            this.cost = cost;
+            this.life = life;
+            this.cost = LIFE_COST * life;
         }
     }
 
@@ -143,10 +149,11 @@ public final class LandPlanner {
                 final List<Card> rest = new ArrayList<>(handLands);
                 rest.remove(land);
                 double score = Double.NEGATIVE_INFINITY;
-                for (final Variant v : variants(land, ai, entersTapped)) {
+                for (final Variant v : variants(land, ai, entersTapped.test(land), 0)) {
                     final List<Src> srcs = new ArrayList<>(base);
                     addSources(srcs, land, ai, v.delay);
-                    score = Math.max(score, bestFuture(ai, srcs, rest, 1, spells, demand, entersTapped) - v.cost);
+                    score = Math.max(score, bestFuture(ai, srcs, rest, 1, spells, demand, entersTapped,
+                            List.of(land), v.life) - v.cost);
                 }
                 if (DEBUG) {
                     System.err.println("[landplanner] " + land + (entersTapped.test(land) ? " (tapped)" : "") + " = " + score);
@@ -171,27 +178,85 @@ public final class LandPlanner {
         }
     }
 
-    /** The best score over the lands that could be played on the turns after this one. */
+    /**
+     * The best score over the lands that could be played on the turns after this one.
+     *
+     * @param played   the lands this sequence has played so far
+     * @param lifePaid the life this sequence has paid so far to have lands enter untapped
+     */
     private static double bestFuture(final Player ai, final List<Src> srcs, final List<Card> rest, final int turn,
-                                     final List<Spell> spells, final double[] demand, final Predicate<Card> entersTapped) {
+                                     final List<Spell> spells, final double[] demand, final Predicate<Card> entersTapped,
+                                     final List<Card> played, final int lifePaid) {
         if (turn >= HORIZON || rest.isEmpty()) {
             return score(srcs, spells, demand);
         }
         double best = Double.NEGATIVE_INFINITY;
         final Set<String> seen = new HashSet<>();
         for (final Card land : rest) {
-            if (!seen.add(land.getName() + "|" + entersTapped.test(land))) {
+            final boolean tapped = entersTappedAfter(land, ai, played, entersTapped);
+            if (!seen.add(land.getName() + "|" + tapped)) {
                 continue;
             }
             final List<Card> remaining = new ArrayList<>(rest);
             remaining.remove(land);
-            for (final Variant v : variants(land, ai, entersTapped)) {
+            final List<Card> then = new ArrayList<>(played);
+            then.add(land);
+            for (final Variant v : variants(land, ai, tapped, lifePaid)) {
                 final List<Src> next = new ArrayList<>(srcs);
                 addSources(next, land, ai, turn + v.delay);
-                best = Math.max(best, bestFuture(ai, next, remaining, turn + 1, spells, demand, entersTapped) - v.cost);
+                best = Math.max(best, bestFuture(ai, next, remaining, turn + 1, spells, demand, entersTapped,
+                        then, lifePaid + v.life) - v.cost);
             }
         }
         return best;
+    }
+
+    /**
+     * Whether the land will enter tapped once the lands in {@code played} are on the battlefield too. The caller's
+     * answer is about the battlefield as it is now. It is changed only for a land whose own condition counts
+     * permanents (check lands, fast lands, slow lands) and gives another answer with those lands there. A land that
+     * something else makes enter tapped now stays tapped.
+     */
+    static boolean entersTappedAfter(final Card land, final Player ai, final List<Card> played,
+                                     final Predicate<Card> entersTapped) {
+        final boolean now = entersTapped.test(land);
+        for (final ReplacementEffect re : land.getReplacementEffects()) {
+            final SpellAbility sa = re.ensureAbility();
+            if (sa == null || sa.getApi() != ApiType.Tap || !sa.hasParam("ConditionPresent")
+                    || sa.hasParam("ConditionPresent2") || sa.hasParam("ConditionDefined")
+                    || sa.hasParam("ConditionZone")) {
+                continue;
+            }
+            sa.setActivatingPlayer(ai);
+            final boolean ownNow = presentConditionMet(land, sa, ai, Collections.emptyList());
+            final boolean ownThen = presentConditionMet(land, sa, ai, played);
+            if (ownNow == ownThen) {
+                return now;
+            }
+            return now && !ownNow || ownThen; // tapped now though its own condition says no: that is something else
+        }
+        return now;
+    }
+
+    /** The ConditionPresent of the ability, counted on the battlefield with the planned lands added to it. */
+    private static boolean presentConditionMet(final Card land, final SpellAbility sa, final Player ai,
+                                               final List<Card> planned) {
+        final List<Card> there = new ArrayList<>();
+        for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            if (c != land) {
+                there.add(c);
+            }
+        }
+        there.addAll(planned);
+        final String[] valid = sa.getParam("ConditionPresent").split(",");
+        int count = 0;
+        for (final Card c : there) {
+            if (c.isValid(valid, ai, land, sa)) {
+                count++;
+            }
+        }
+        final String compare = sa.getParamOrDefault("ConditionCompare", "GE1");
+        return Expressions.compare(count, compare, AbilityUtils.calculateAmount(land, compare.substring(2), sa));
     }
 
     // ----------------------------------------------------------------------------------------------- the schedule
@@ -481,19 +546,25 @@ public final class LandPlanner {
      * come in untapped for 2 life, which is worth it when a spell waits for the mana: both ways are planned, the second
      * with the price of the life.
      */
-    private static List<Variant> variants(final Card land, final Player ai, final Predicate<Card> entersTapped) {
+    private static List<Variant> variants(final Card land, final Player ai, final boolean tapped, final int lifePaid) {
         final int sick = land.isCreature() && !land.hasKeyword(Keyword.HASTE) ? 1 : 0;
-        final boolean tapped = entersTapped.test(land);
         final List<Variant> out = new ArrayList<>();
         out.add(new Variant(sick + (tapped ? 1 : 0), 0));
         if (tapped) {
             final int life = lifeToEnterUntapped(land);
-            // the payment is decided by TapAi with this reserve (10 life, or what the opponent hits for next turn plus 5)
-            if (life > 0 && ai.getLife() > life + 1 && TapAi.lifeCanBeSpared(ai, life)) {
-                out.add(new Variant(sick, LIFE_COST * life));
+            if (life > 0 && canPayToEnterUntapped(ai, life, lifePaid)) {
+                out.add(new Variant(sick, life));
             }
         }
         return out;
+    }
+
+    /**
+     * Whether {@code life} can still be paid after the {@code lifePaid} that the planned sequence pays before it. The
+     * payment is decided by TapAi with a reserve (10 life, or what the opponent hits for next turn plus 5).
+     */
+    static boolean canPayToEnterUntapped(final Player ai, final int life, final int lifePaid) {
+        return ai.getLife() - lifePaid > life + 1 && TapAi.lifeCanBeSpared(ai, lifePaid + life);
     }
 
     /** The life a land asks to enter untapped ("you may pay 2 life"), 0 when it has no such choice. */

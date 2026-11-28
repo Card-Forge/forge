@@ -367,6 +367,54 @@ public class LandPlannerTest extends FlatMcTestBase {
     }
 
     @Test
+    public void aPlannedIslandLetsDrownedCatacombEnterUntapped() {
+        setUpGame();
+        final Card island = put("Island", ai, ZoneType.Hand);
+        final Card forest = put("Forest", ai, ZoneType.Hand);
+        final Card catacomb = put("Drowned Catacomb", ai, ZoneType.Hand);
+        assertFalse(LandPlanner.entersTappedAfter(catacomb, ai, Arrays.asList(island), c -> true));
+        assertTrue(LandPlanner.entersTappedAfter(catacomb, ai, Arrays.asList(forest), c -> true));
+    }
+
+    @Test
+    public void plannedLandsMakeAFastLandEnterTapped() {
+        setUpGame();
+        put("Forest", ai, ZoneType.Battlefield);
+        final Card swamp = put("Swamp", ai, ZoneType.Hand);
+        final Card mountain = put("Mountain", ai, ZoneType.Hand);
+        final Card cliffs = put("Blackcleave Cliffs", ai, ZoneType.Hand); // untapped with two or fewer other lands
+        assertFalse(LandPlanner.entersTappedAfter(cliffs, ai, Arrays.asList(swamp), c -> false));
+        assertTrue(LandPlanner.entersTappedAfter(cliffs, ai, Arrays.asList(swamp, mountain), c -> false));
+    }
+
+    @Test
+    public void aLandThatSomethingElseTapsStaysTapped() {
+        setUpGame();
+        put("Island", ai, ZoneType.Battlefield); // the Catacomb's own condition would let it enter untapped
+        final Card swamp = put("Swamp", ai, ZoneType.Hand);
+        final Card catacomb = put("Drowned Catacomb", ai, ZoneType.Hand);
+        assertTrue(LandPlanner.entersTappedAfter(catacomb, ai, Arrays.asList(swamp), c -> true));
+    }
+
+    @Test
+    public void theOrderOfIslandAndDrownedCatacombDoesNotMatterForATwoDrop() {
+        setUpGame();
+        final Card island = put("Island", ai, ZoneType.Hand);
+        final Card catacomb = put("Drowned Catacomb", ai, ZoneType.Hand);
+        put("Baleful Strix", ai, ZoneType.Hand); // {U}{B}: castable next turn in either order
+        assertNull(LandPlanner.choose(ai, collection(island, catacomb), c -> c == catacomb),
+                "after the Island the Catacomb is untapped, so neither order is better");
+    }
+
+    @Test
+    public void plannedLifePaymentsCountAgainstTheReserve() {
+        setUpGame();
+        ai.setLife(12, null); // the reserve is 10: room for one payment of 2
+        assertTrue(LandPlanner.canPayToEnterUntapped(ai, 2, 0));
+        assertFalse(LandPlanner.canPayToEnterUntapped(ai, 2, 2));
+    }
+
+    @Test
     public void saysNothingWhenTheLandsAreTooCloseToCall() {
         setUpGame();
         final Card mountain = put("Mountain", ai, ZoneType.Hand);
