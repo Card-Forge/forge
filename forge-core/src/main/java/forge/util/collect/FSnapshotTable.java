@@ -372,7 +372,8 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
         Table<R, C, V> table() {
             Table<R, C, V> t = table;
             if (t == null) {
-                final Table raw = linked ? HashBasedTable.create() : TreeBasedTable.create();
+                // linked: rows and columns in first-put order; rowMap() still groups the cells by row
+                final Table raw = linked ? Tables.newCustomTable(new LinkedHashMap<>(), LinkedHashMap::new) : TreeBasedTable.create();
                 for (int i = 0; i < n; i++) {
                     raw.put(d[3 * i], d[3 * i + 1], d[3 * i + 2]);
                 }
@@ -809,11 +810,21 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
 
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
-        out.writeObject(snap.table());                       // the same format as before: a Guava table
+        if (linked) {
+            final SortedSnap<R, C, V> s = sortedSnap();
+            out.writeObject(Arrays.copyOf(s.d, 3 * s.n));      // the flat array, so the insertion order survives
+        } else {
+            out.writeObject(snap.table());                   // the same format as before: a Guava table
+        }
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
+        if (linked) {
+            final Object[] d = (Object[]) in.readObject();
+            snap = new SortedSnap<R, C, V>(d, d.length / 3, true);
+            return;
+        }
         final Table<R, C, V> t = (Table<R, C, V>) in.readObject();
         if (sorted) {
             snap = emptySortedSnap();
