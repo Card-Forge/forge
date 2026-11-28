@@ -364,6 +364,39 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void cascadeBluffsMakesNoRedWithoutBlueOrRedToPayForIt() {
+        // the Mox Emerald's {G} cannot pay {U/R}: no {R} for the Zhur-Taa Druid, so the Mox is the only source
+        AssertJUnit.assertEquals(1, sourcesCounted("Cascade Bluffs", new String[] {"Mox Emerald", "Zhur-Taa Druid"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void cascadeBluffsAndADruidItCannotHelpCastDoNotMakeUpForASingleLand() {
+        AssertJUnit.assertFalse(oneLandAndSources("Cascade Bluffs", new String[] {"Mox Emerald", "Zhur-Taa Druid"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void cascadeBluffsMakesRedWhenBluePaysForIt() {
+        // the Sapphire pays the Bluffs, whose {R} and the Emerald's {G} cast the Druid
+        AssertJUnit.assertEquals(3, sourcesCounted("Cascade Bluffs",
+                new String[] {"Mox Sapphire", "Mox Emerald", "Zhur-Taa Druid"}, "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void skycloudExpanseMakesNothingByItself() {
+        AssertJUnit.assertEquals(0, sourcesCounted("Skycloud Expanse", new String[] {"Fire Diamond"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
+    public void skycloudExpanseMakesTwoWhenAnotherSourcePaysForIt() {
+        // the Mox pays the Expanse's {1}, and its {W}{U} casts the Fire Diamond
+        AssertJUnit.assertEquals(2, sourcesCounted("Skycloud Expanse", new String[] {"Mox Emerald", "Fire Diamond"},
+                "Shock", "Shock", "Divination", "Lava Axe"));
+    }
+
+    @Test
     public void manaCreaturesTheLandCannotCastAreNoSources() {
         // an Island makes no green mana for the Elves
         AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Llanowar Elves", "Llanowar Elves"},
@@ -691,6 +724,45 @@ public class OpeningHandTest extends AITest {
 
         AssertJUnit.assertTrue("each Evolving Wilds can fetch its own Island for Counterspell",
                 castsSomething(hand("Evolving Wilds", "Evolving Wilds", "Counterspell")));
+    }
+
+    @Test
+    public void sliverHivesColouredManaDoesNotMakeShockCastable() {
+        setUp(0, 0);
+        AssertJUnit.assertFalse(castsSomething(hand("Sliver Hive", "Shock")));
+    }
+
+    @Test
+    public void sliverHivesColouredManaMakesASliverCastable() {
+        setUp(0, 0);
+        AssertJUnit.assertTrue(castsSomething(hand("Sliver Hive", "Muscle Sliver")));
+    }
+
+    @Test
+    public void ancientZigguratCastsCreaturesOnly() {
+        setUp(0, 0);
+        AssertJUnit.assertFalse(castsSomething(hand("Ancient Ziggurat", "Shock")));
+        AssertJUnit.assertTrue(castsSomething(hand("Ancient Ziggurat", "Grizzly Bears")));
+    }
+
+    @Test
+    public void cavernOfSoulsCanChooseTheTypeOfACreatureInHand() {
+        setUp(0, 0);
+        AssertJUnit.assertTrue(castsSomething(hand("Cavern of Souls", "Grizzly Bears")));
+        AssertJUnit.assertFalse(castsSomething(hand("Cavern of Souls", "Shock")));
+    }
+
+    @Test
+    public void cascadeBluffsNeedsBlueOrRedToMakeRed() {
+        setUp(0, 0);
+        AssertJUnit.assertFalse(castsSomething(hand("Cascade Bluffs", "Forest", "Shock")));
+        AssertJUnit.assertTrue(castsSomething(hand("Cascade Bluffs", "Island", "Shock")));
+    }
+
+    @Test
+    public void aFetchedLandCanPayForCascadeBluffs() {
+        setUp(1, 0); // the Island that Evolving Wilds finds pays the Bluffs, which then make red
+        AssertJUnit.assertTrue(castsSomething(hand("Cascade Bluffs", "Evolving Wilds", "Shock")));
     }
 
     @Test
