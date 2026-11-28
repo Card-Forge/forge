@@ -22,6 +22,7 @@ public class DialogData implements Serializable {
     public boolean isDisabled = false;
     // Persist quest dialog state here because this class already has a stable cross-platform serialization UID.
     private boolean displayed = false;
+    public boolean narrator = false;       //Narration: don't show the speaking actor's name and portrait.
 
     public transient Consumer callback;
 
@@ -44,6 +45,7 @@ public class DialogData implements Serializable {
         this.voiceFile = other.voiceFile;
         this.isDisabled = other.isDisabled;
         this.displayed = other.displayed;
+        this.narrator = other.narrator;
     }
 
     public boolean isDisplayed() {

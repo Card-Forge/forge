@@ -264,24 +264,8 @@
                 &quot;loctext&quot;: &quot;adv.main_story_spawn.69.d.n29.text&quot;,
                 &quot;options&quot;: [
                   {
-                    &quot;name&quot;: &quot;(Continue)&quot;,
-                    &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
-                    &quot;text&quot;: &quot;[RED]Developer's note:[] You have now reached the end of the currently available story content, but there is more to be found in Shandalar. Several difficult dungeons have now been added to your world map, and your card collection can continue to grow.&quot;,
-                    &quot;loctext&quot;: &quot;adv.main_story_spawn.69.d.n31.text&quot;,
-                    &quot;options&quot;: [
-                      {
-                        &quot;name&quot;: &quot;(Continue)&quot;,
-                        &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
-                        &quot;text&quot;: &quot;[RED}Developer's note:[] Check in with this NPC after updating Forge (or watch for announcements in our Discord) to continue the story when it is ready. And thanks for coming on this Adventure with us!&quot;,
-                        &quot;loctext&quot;: &quot;adv.main_story_spawn.69.d.n33.text&quot;,
-                        &quot;options&quot;: [
-                          {
-                            &quot;name&quot;: &quot;(Chapter 1 complete)&quot;,
-                            &quot;locname&quot;: &quot;adv.main_story_spawn.69.d.n35.name&quot;
-                          }
-                        ]
-                      }
-                    ]
+                    &quot;name&quot;: &quot;(Chapter 1 complete)&quot;,
+                    &quot;locname&quot;: &quot;adv.main_story_spawn.69.d.n35.name&quot;
                   }
                 ]
               }
@@ -350,9 +334,93 @@
 		{ &quot;removeItem&quot;: &quot;Black Key&quot; },
 		{ &quot;removeItem&quot;: &quot;White Key&quot; },
 		{ &quot;removeItem&quot;: &quot;Red Key&quot; },
-                       { &quot;addItem&quot;: &quot;Strange Key&quot; }
+                       { &quot;addItem&quot;: &quot;Strange Key&quot; }, { &quot;issueQuest&quot;: &quot;55&quot; }
          ]
          }    
+    ]
+  },
+  {
+    &quot;condition&quot;: [
+      {
+        &quot;checkQuestFlag&quot;: &quot;EmrakulDefeated&quot;
+      },
+      {
+        &quot;checkQuestFlag&quot;: &quot;ArzakonRevealed&quot;,
+        &quot;not&quot;: true
+      }
+    ],
+    &quot;text&quot;: &quot;\&quot;{var=player_name}! I felt Emrakul fall. But with her gone, the last of the Great Barrier has crumbled as well.\&quot;&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;\&quot;What does that mean?\&quot;&quot;,
+        &quot;text&quot;: &quot;\&quot;Long ago a planeswalker named Arzakon tried to make Shandalar his own. The ancients could not destroy him, only seal him away behind the barrier. The guardians' spell, and Emrakul's presence, kept him from finding his way back.\&quot;&quot;,
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;text&quot;: &quot;\&quot;He has returned. A fortress has risen in the Wastes, and he waits within it, still slowed by the last remnant wards. Find him, {var=player_name}, and end this before he regains his full strength.\&quot;&quot;,
+            &quot;options&quot;: [
+              {
+                &quot;name&quot;: &quot;\&quot;I will stop him.\&quot;&quot;,
+                &quot;action&quot;: [
+                  {
+                    &quot;setQuestFlag&quot;: {
+                      &quot;key&quot;: &quot;ArzakonRevealed&quot;,
+                      &quot;val&quot;: 1
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    &quot;condition&quot;: [
+      {
+        &quot;checkQuestFlag&quot;: &quot;ArzakonDefeated&quot;
+      },
+      {
+        &quot;checkQuestFlag&quot;: &quot;ArzakonEpilogue&quot;,
+        &quot;not&quot;: true
+      }
+    ],
+    &quot;text&quot;: &quot;\&quot;You did it, {var=player_name}. Arzakon is gone, and Shandalar is free at last.\&quot;&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;(Continue)&quot;,
+        &quot;text&quot;: &quot;\&quot;Whatever planes call to you now, Shandalar will remember the planeswalker who saved it.\&quot;&quot;,
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+            &quot;text&quot;: &quot;[RED]Developer's note:[] You have now reached the end of the currently available story content, but there is more to be found in Shandalar. Several difficult dungeons have now been added to your world map, and your card collection can continue to grow.&quot;,
+            &quot;loctext&quot;: &quot;adv.main_story_spawn.69.d.n31.text&quot;,
+            &quot;options&quot;: [
+              {
+                &quot;name&quot;: &quot;(Continue)&quot;,
+                &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
+                &quot;text&quot;: &quot;[RED]Developer's note:[] Check in with this NPC after updating Forge (or watch for announcements in our Discord) to continue the story when it is ready. And thanks for coming on this Adventure with us!&quot;,
+                &quot;loctext&quot;: &quot;adv.main_story_spawn.69.d.n33.text&quot;,
+                &quot;options&quot;: [
+                  {
+                    &quot;name&quot;: &quot;(Story complete)&quot;,
+                    &quot;action&quot;: [
+                      {
+                        &quot;setQuestFlag&quot;: {
+                          &quot;key&quot;: &quot;ArzakonEpilogue&quot;,
+                          &quot;val&quot;: 1
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     ]
   }
 ]</property>

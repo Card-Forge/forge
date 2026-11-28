@@ -71,6 +71,7 @@
   </object>
   <object id="72" template="../../obj/enemy.tx" x="269.201" y="404.379" width="64" height="64">
    <properties>
+    <property name="defeatDialog">[{&quot;narrator&quot;: true, &quot;text&quot;: &quot;As Emrakul's colossal form unravels, the last of the guardians' spell breaks. In the silence that follows you feel something vast and hungry turn its attention towards Shandalar. The mage at the Secluded Encampment may know what it is.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;EmrakulDefeated&quot;, &quot;val&quot;: 1}}, {&quot;deleteMapObject&quot;: -1}]}]}]</property>
     <property name="effect" value="{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Emrakul's Presence&quot;]}"/>
     <property name="enemy" value="Emrakul"/>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -81,6 +82,7 @@
   </object>
   <object id="73" template="../../obj/enemy.tx" x="203.133" y="404.621" width="64" height="64">
    <properties>
+    <property name="defeatDialog">[{&quot;narrator&quot;: true, &quot;text&quot;: &quot;As Emrakul's colossal form unravels, the last of the guardians' spell breaks. In the silence that follows you feel something vast and hungry turn its attention towards Shandalar. The mage at the Secluded Encampment may know what it is.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;EmrakulDefeated&quot;, &quot;val&quot;: 1}}, {&quot;deleteMapObject&quot;: -1}]}]}]</property>
     <property name="effect" value="{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Emrakul's Awakening&quot;]}"/>
     <property name="enemy" value="Emrakul"/>
     <property name="spawn.Easy" type="bool" value="true"/>
