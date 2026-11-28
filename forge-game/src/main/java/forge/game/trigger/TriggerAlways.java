@@ -58,10 +58,16 @@ public class TriggerAlways extends Trigger {
     /** {@inheritDoc} */
     @Override
     public void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        if (hasParam("PresentEach") && runParams.get(AbilityKey.Card) instanceof Card card) {
+            objects.put(AbilityKey.Card, card);
+        }
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
-        return "";
+        if (!hasParam("PresentEach") || !sa.hasTriggeringObject(AbilityKey.Card)) {
+            return "";
+        }
+        return sa.getTriggeringObject(AbilityKey.Card).toString();
     }
 }
