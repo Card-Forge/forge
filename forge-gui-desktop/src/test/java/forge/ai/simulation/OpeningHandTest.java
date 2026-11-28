@@ -624,6 +624,28 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void aSwampThatAFetchLandFindsTurnsOnTaintedField() {
+        setUp(0, 0);
+        addCardToZone("Swamp", ai, ZoneType.Library);
+        AssertJUnit.assertTrue(castsSomething(hand("Tainted Field", "Evolving Wilds", "Savannah Lions")));
+    }
+
+    @Test
+    public void aForestThatAFetchLandFindsDoesNotTurnOnTaintedField() {
+        setUp(0, 0);
+        addCardToZone("Forest", ai, ZoneType.Library);
+        AssertJUnit.assertFalse(castsSomething(hand("Tainted Field", "Evolving Wilds", "Savannah Lions")));
+    }
+
+    @Test
+    public void aFetchedSwampGivesGloomlakeVergeItsSecondBlack() {
+        setUp(0, 0);
+        addCardToZone("Swamp", ai, ZoneType.Library);
+        // {B}{B}: one from the Swamp, one from the Verge that the Swamp turns on
+        AssertJUnit.assertTrue(castsSomething(hand("Gloomlake Verge", "Evolving Wilds", "Hymn to Tourach")));
+    }
+
+    @Test
     public void oneDualLandCannotPayBothColoredPips() {
         setUp(0, 0);
         AssertJUnit.assertFalse("one Underground Sea only pays one of {U} or {B}",

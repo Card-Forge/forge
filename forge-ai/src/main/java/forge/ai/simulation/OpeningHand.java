@@ -271,7 +271,8 @@ public final class OpeningHand {
 
         private final Library lib;
         private final CardCollectionView hand;
-        private final List<ManaUnit> fixed = new ArrayList<>();
+        /** The lands of the hand that make mana themselves. */
+        private final List<Card> own = new ArrayList<>();
         /** For each library land: the fetch lands of the hand (bit by bit) that may find it. */
         private final int[] finders;
         private final int fetches;
@@ -285,7 +286,7 @@ public final class OpeningHand {
                     if (fetchesLand(c)) {
                         fetchLands.add(c);
                     } else {
-                        addLandMana(fixed, c, hand);
+                        own.add(c);
                     }
                 }
             }
@@ -309,66 +310,87 @@ public final class OpeningHand {
 
         /** Every colour the hand can make for the spell, though not necessarily all together. */
         byte reachable(final Card spell) {
-            byte colors = colorsFor(fixed, spell, hand);
+            byte colors = colorsFor(manaWith(List.of()), spell, hand);
             for (int i = 0; i < finders.length; i++) {
                 if (finders[i] != 0) {
-                    final List<ManaUnit> with = new ArrayList<>(fixed); // the found land may pay for one of the hand's
-                    addLandMana(with, lib.landCards.get(i), hand);
-                    colors |= colorsFor(with, spell, hand);
+                    // the found land may pay for one of the hand's, or meet its condition
+                    colors |= colorsFor(manaWith(List.of(lib.landCards.get(i))), spell, hand);
                 }
             }
             return colors;
         }
 
-        /** Whether some choice of the cards the fetch lands find makes {@code test} true for the sources that result. */
-        boolean allocate(final Predicate<List<ManaUnit>> test) {
-            return allocate(0, new boolean[finders.length], new ArrayList<>(fixed), test, new int[1]);
+        /**
+         * The mana of the lands of the hand and of the lands that the fetch lands found. Activation conditions are
+         * judged with the found lands among the cards around, and without the fetch lands, which are gone.
+         */
+        private List<ManaUnit> manaWith(final List<Card> found) {
+            final CardCollection around = new CardCollection();
+            for (final Card c : hand) {
+                if (!((c.isLand() || isMdfcLand(c)) && isEarlyManaLand(c) && fetchesLand(c))) {
+                    around.add(c);
+                }
+            }
+            around.addAll(found);
+            final List<ManaUnit> pool = new ArrayList<>();
+            for (final Card land : own) {
+                addLandMana(pool, land, around);
+            }
+            for (final Card land : found) {
+                addLandMana(pool, land, around);
+            }
+            return pool;
         }
 
-        private boolean allocate(final int fetch, final boolean[] used, final List<ManaUnit> sources,
+        /** Whether some choice of the cards the fetch lands find makes {@code test} true for the sources that result. */
+        boolean allocate(final Predicate<List<ManaUnit>> test) {
+            return allocate(0, new boolean[finders.length], new ArrayList<>(), test, new int[1]);
+        }
+
+        private boolean allocate(final int fetch, final boolean[] used, final List<Card> found,
                                  final Predicate<List<ManaUnit>> test, final int[] nodes) {
             if (fetch == fetches) {
-                return test.test(sources);
+                return test.test(manaWith(found));
             }
             if (++nodes[0] > MAX_NODES) {
                 // too many ways to split the library to try them all: the best split found greedily, which is checked
                 // like any other, so a yes is a verified yes and a no is the cautious answer
-                return test.test(greedy(fetch, used, sources));
+                return test.test(manaWith(greedy(fetch, used, found)));
             }
-            final Set<Long> tried = new HashSet<>();
+            final Set<String> tried = new HashSet<>();
             boolean finds = false;
             for (int i = 0; i < finders.length; i++) {
                 if (used[i] || (finders[i] & (1 << fetch)) == 0) {
                     continue;
                 }
-                // two lands with the same colours that the same later fetch lands may find are the same choice; a land
-                // whose abilities are kept apart is only the same as itself
-                final long kind = isPlainLand(lib.landCards.get(i)) ? lib.landMasks.get(i) & 0xFF : 0x100 + i;
-                final long key = (kind << 32) | (finders[i] >>> (fetch + 1));
+                // two lands with the same colours and types (a type may meet a condition) that the same later fetch
+                // lands may find are the same choice; a land whose abilities are kept apart is only the same as itself
+                final Card land = lib.landCards.get(i);
+                final String kind = isPlainLand(land) ? lib.landMasks.get(i) + " " + land.getType() : "#" + i;
+                final String key = kind + " " + (finders[i] >>> (fetch + 1));
                 if (!tried.add(key)) {
                     continue;
                 }
                 finds = true;
                 used[i] = true;
-                final int before = sources.size();
-                addLandMana(sources, lib.landCards.get(i), hand);
-                final boolean ok = allocate(fetch + 1, used, sources, test, nodes);
-                sources.subList(before, sources.size()).clear();
+                found.add(land);
+                final boolean ok = allocate(fetch + 1, used, found, test, nodes);
+                found.remove(found.size() - 1);
                 used[i] = false;
                 if (ok) {
                     return true;
                 }
             }
             // a found land only adds a source, so finding one is never worse; with nothing to find, it makes no mana
-            return !finds && allocate(fetch + 1, used, sources, test, nodes);
+            return !finds && allocate(fetch + 1, used, found, test, nodes);
         }
 
-        /** The sources when each remaining fetch land takes the unused land that adds the most colours. */
-        private List<ManaUnit> greedy(final int from, final boolean[] used, final List<ManaUnit> sources) {
-            final List<ManaUnit> out = new ArrayList<>(sources);
+        /** The lands found when each remaining fetch land takes the unused land that adds the most colours. */
+        private List<Card> greedy(final int from, final boolean[] used, final List<Card> found) {
+            final List<Card> out = new ArrayList<>(found);
             final boolean[] taken = used.clone();
             byte have = 0;
-            for (final ManaUnit u : out) {
+            for (final ManaUnit u : manaWith(out)) {
                 have |= u.colors;
             }
             for (int f = from; f < fetches; f++) {
@@ -386,7 +408,7 @@ public final class OpeningHand {
                 }
                 if (best >= 0) {
                     taken[best] = true;
-                    addLandMana(out, lib.landCards.get(best), hand);
+                    out.add(lib.landCards.get(best));
                     have |= lib.landMasks.get(best);
                 }
             }
