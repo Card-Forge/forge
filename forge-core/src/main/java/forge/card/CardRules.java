@@ -305,6 +305,12 @@ public final class CardRules implements ICardCharacteristics {
     @Override public Set<Integer> getAttractionLights() { return mainPart.getAttractionLights(); }
 
     @Override
+    public String getPowerModifier() { return mainPart.getPowerModifier(); }
+
+    @Override
+    public String getToughnessModifier() { return mainPart.getToughnessModifier(); }
+
+    @Override
     public String getOracleText() {
         switch (splitType.getAggregationMethod()) {
             case COMBINE:
@@ -438,6 +444,10 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean canBeCreature() {
+        //augments don't have PT so they can't be a commander
+        if (mainPart.getPowerModifier() != null) {
+            return false;
+        }
         CardType type = mainPart.getType();
         if (type.isCreature()) {
             return true;
@@ -831,6 +841,8 @@ public final class CardRules implements ICardCharacteristics {
                 case 'P':
                     if ("PT".equals(key)) {
                         face.setPtText(value);
+                    } else if ("PTModifier".equals(key)) {
+                        face.setPTModifier(value);
                     }
                     break;
 

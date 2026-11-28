@@ -28,6 +28,7 @@ public enum ApiType {
     AssembleContraption (AssembleContraptionEffect.class),
     Assimilate (AssimilateEffect.class),
     AssignGroup (AssignGroupEffect.class),
+    Augment(AugmentEffect.class),
     Balance (BalanceEffect.class),
     BecomeMonarch (BecomeMonarchEffect.class),
     BecomesBlocked (BecomesBlockedEffect.class),

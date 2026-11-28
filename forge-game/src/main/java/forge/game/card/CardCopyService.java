@@ -77,7 +77,12 @@ public class CardCopyService {
             if (copyFrom.hasMergedCard()) {
                 out.setMergedCards(copyFrom.getMergedCards());
             }
-
+            if (copyFrom.getAugmentedWith() != null) {
+                out.setAugmentedWith(copyFrom.getAugmentedWith());
+            }
+            if (copyFrom.getAugmenting() != null) {
+                out.setAugmenting(copyFrom.getAugmenting());
+            }
             out.setLeavesPlayCommands(copyFrom.getLeavesPlayCommands());
 
             out.setSpecialized(copyFrom.isSpecialized());
@@ -387,6 +392,8 @@ public class CardCopyService {
         newCopy.setPrepared(copyFrom.getPrepared());
 
         newCopy.setMeldedWith(getLKICopy(copyFrom.getMeldedWith(), cachedMap));
+
+        newCopy.attachAugment(getLKICopy(copyFrom.getAugmentedWith(), cachedMap));
 
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {

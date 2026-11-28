@@ -1,0 +1,11 @@
+Name:Humming-
+ManaCost:no cost
+Types:Creature Bird
+Colors:white
+PTModifier:+2/+3
+K:Flying
+K:Augment:3 W:LeftSide
+SVar:LeftSide:T:Mode$ AttackersDeclared | ValidAttackers$ Creature | ValidAttackersAmount$ GE2 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more creatures,
+AI:RemoveDeck:Random
+DeckNeeds:Type$Host
+Oracle:Flying\nWhenever you attack with two or more creatures,\nAugment {3}{W} ({3}{W}, Reveal this card from your hand: Combine it with target host. Augment only as a sorcery.)

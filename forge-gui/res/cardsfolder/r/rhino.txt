@@ -1,0 +1,10 @@
+Name:Rhino-
+ManaCost:no cost
+Types:Creature Rhino
+Colors:white
+PTModifier:+1/+4
+K:Augment:3 W:LeftSide
+SVar:LeftSide:T:Mode$ AttackerBlocked | ValidBlocker$ Card.Self | TriggerDescription$ Whenever this creature blocks,
+AI:RemoveDeck:Random
+DeckNeeds:Type$Host
+Oracle:Whenever this creature blocks,\nAugment {3}{W} ({3}{W}, Reveal this card from your hand: Combine it with target host. Augment only as a sorcery.)

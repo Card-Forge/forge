@@ -1,0 +1,8 @@
+Name:Monkey-
+ManaCost:no cost
+Types:Creature Monkey
+Colors:green
+PTModifier:+2/+2
+K:Augment:2 G:LeftSide
+SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+!token | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature you control dies,
+Oracle:Whenever a nontoken creature you control dies,\nAugment {2}{G} ({2}{G}, Reveal this card from your hand: Combine it with target host. Augment only as a sorcery.)

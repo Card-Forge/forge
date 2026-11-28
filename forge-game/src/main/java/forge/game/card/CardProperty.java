@@ -55,7 +55,11 @@ public class CardProperty {
                 return false;
             }
         }
-
+        //Augments have power/toughness altering. That’s not the same as power/toughness
+        if (card.isAugment() && (property.startsWith("power") || property.startsWith("toughness") || property.startsWith("totalPT")
+                || property.startsWith("basePower") || property.startsWith("baseToughness"))) {
+            return false;
+        }
         if (property.equals("noName")) {
             if (!card.hasNoName()) {
                 return false;
@@ -1203,7 +1207,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("greatestPower")) {
-            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES_WITH_PT);
             if (property.contains("ControlledBy")) {
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
                 cards = CardLists.filterControlledBy(cards, p);
@@ -1218,14 +1222,14 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("yardGreatestPower")) {
-            final CardCollectionView cards = CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES);
+            final CardCollectionView cards = CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES_WITH_PT);
             for (final Card crd : cards) {
                 if (crd.getNetPower() > card.getNetPower()) {
                     return false;
                 }
             }
         } else if (property.startsWith("leastPower")) {
-            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES_WITH_PT);
             if (property.contains("ControlledBy")) {
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
                 cards = CardLists.filterControlledBy(cards, p);
@@ -1239,7 +1243,7 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("leastToughness")) {
-            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES_WITH_PT);
             if (property.contains("ControlledBy")) { // 4/25/2023 only used for adventure mode Death Ring
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
                 cards = CardLists.filterControlledBy(cards, p);

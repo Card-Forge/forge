@@ -1166,6 +1166,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (prepared != null) {
             linked.add(prepared);
         }
+        final CardView augmented = card.getAugment();
+        if (augmented != null) {
+            linked.add(augmented);
+        }
         for (final CardView exiled : card.getUntilLeavesBattlefield()) {
             linked.add(exiled);
         }
