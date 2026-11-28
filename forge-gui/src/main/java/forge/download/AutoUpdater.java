@@ -21,11 +21,12 @@ import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static forge.localinstance.properties.ForgeConstants.GITHUB_FORGE_URL;
+import static forge.localinstance.properties.ForgeConstants.GITHUB_RELEASES_ATOM;
 import static forge.localinstance.properties.ForgeConstants.GITHUB_SNAPSHOT_URL;
-import static forge.localinstance.properties.ForgeConstants.RELEASE_URL;
 
 public class AutoUpdater {
-    private static final boolean VERSION_FROM_METADATA = true;
+    private static final Pattern RELEASE_TAG = Pattern.compile("releases/tag/forge-([0-9]+(?:[.][0-9]+)*)");
     private static final Localizer localizer = Localizer.getInstance();
 
     public static String[] updateChannels = new String[]{ "none", "snapshot", "release"};
@@ -95,11 +96,11 @@ public class AutoUpdater {
 
             versionUrlString = GITHUB_SNAPSHOT_URL + "version.txt";
         } else {
-            if (!updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"))) {
+            if (!isReleaseChannel()) {
                 System.out.println("Release build versions must use release update channel to work");
                 return false;
             }
-            versionUrlString = RELEASE_URL + "forge/forge-gui-desktop/version.txt";
+            versionUrlString = GITHUB_RELEASES_ATOM;
         }
 
         if (!testNetConnection()) {
@@ -154,29 +155,30 @@ public class AutoUpdater {
     }
 
     private void retrieveVersion() throws MalformedURLException {
-        if (VERSION_FROM_METADATA && updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"))) {
-            extractVersionFromMavenRelease();
+        if (isReleaseChannel()) {
+            extractVersionFromLatestRelease();
+            packageUrl = GITHUB_FORGE_URL + "releases/download/forge-" + version + "/forge-installer-" + version + ".jar";
         } else {
             URL versionUrl = new URL(versionUrlString);
             version = FileUtil.readFileToString(versionUrl);
-        }
-        if (updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"))) {
-            packageUrl = RELEASE_URL + "forge/forge-gui-desktop/" + version + "/forge-gui-desktop-" + version + ".tar.bz2";
-        } else {
             packageUrl = GITHUB_SNAPSHOT_URL + "forge-installer-" + version + ".jar";
         }
     }
 
-    private void extractVersionFromMavenRelease() throws MalformedURLException {
-        String RELEASE_MAVEN_METADATA = RELEASE_URL + "forge/forge-gui-desktop/maven-metadata.xml";
-        URL metadataUrl = new URL(RELEASE_MAVEN_METADATA);
-        String xml = FileUtil.readFileToString(metadataUrl);
-
-        Pattern p = Pattern.compile("<release>(.*)</release>");
-        Matcher m = p.matcher(xml);
-        while (m.find()) {
+    /**
+     * Latest numbered release, from the releases feed. Entries are newest first, and the rolling
+     * daily-snapshots pre-release is in there too, so only forge-&lt;version&gt; tags are considered.
+     */
+    private void extractVersionFromLatestRelease() throws MalformedURLException {
+        String feed = FileUtil.readFileToString(new URL(GITHUB_RELEASES_ATOM));
+        Matcher m = RELEASE_TAG.matcher(feed);
+        if (m.find()) {
             version = m.group(1);
         }
+    }
+
+    private boolean isReleaseChannel() {
+        return updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"));
     }
 
     private boolean downloadUpdate(CompletableFuture<String> cf) throws URISyntaxException, IOException, ExecutionException, InterruptedException {
@@ -232,18 +234,40 @@ public class AutoUpdater {
         return false;
     }
     private void restartAndUpdate(String packagePath) {
+        File downloaded = new File(packagePath);
+        if (!downloaded.exists()) {
+            return;
+        }
+
+        // Install it in place if we can tell where this copy of Forge lives, so the user doesn't
+        // have to point the installer at their own installation by hand.
+        if (UpdateInstaller.isSupported(downloaded)) {
+            String installDir = UpdateInstaller.getInstallDir().getAbsolutePath();
+            List<String> options = List.of(localizer.getMessage("lblUpdateNow"), localizer.getMessage("lblUpdateLater"));
+            if (SOptionPane.showOptionDialog(localizer.getMessage("lblForgeUpdateInstallConfirm", installDir),
+                    localizer.getMessage("lblRestart"), null, options, 0) != 0) {
+                return; // the package stays where it was downloaded, they can run it whenever
+            }
+            if (UpdateInstaller.install(downloaded)) {
+                System.exit(0);
+            }
+            // handing it over failed, fall through to the installer's own UI
+        }
+
         if (SOptionPane.showOptionDialog(localizer.getMessage("lblForgeUpdateMessage", packagePath), localizer.getMessage("lblRestart"), null, List.of(localizer.getMessage("lblOK")), 0) == 0) {
+            // still point the installer at this installation, so clicking through it updates
+            // Forge instead of installing a second copy somewhere else
+            if (UpdateInstaller.openInstaller(downloaded)) {
+                System.exit(0);
+            }
             final Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
             if (desktop != null) {
                 try {
-                    File installer = new File(packagePath);
-                    if (installer.exists()) {
-                        if (packagePath.endsWith(".jar")) {
-                            installer.setExecutable(true, false);
-                            desktop.open(installer);
-                        } else {
-                            desktop.open(installer.getParentFile());
-                        }
+                    if (packagePath.endsWith(".jar")) {
+                        downloaded.setExecutable(true, false);
+                        desktop.open(downloaded);
+                    } else {
+                        desktop.open(downloaded.getParentFile());
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

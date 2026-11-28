@@ -61,7 +61,7 @@
                 </executions>
                 <configuration>
                     <basedir>${project.basedir}/libs</basedir>
-                    <filesToInclude>default-dir.txt, install.xml, eng.xml</filesToInclude>
+                    <filesToInclude>default-dir.txt, install.xml, eng.xml, auto-install.xml</filesToInclude>
                     <outputBasedir>${project.basedir}/target</outputBasedir>
                     <outputDir>.</outputDir>
                     <regex>false</regex>
