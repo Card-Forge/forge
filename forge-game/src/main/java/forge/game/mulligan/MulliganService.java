@@ -81,7 +81,7 @@ public class MulliganService {
                 boolean keep = !mulligan.canMulligan() ||
                         p.getController().mulliganKeepHand(
                                 firstPlayer,
-                                mulligan.tuckCardsDuringMulligan()
+                                mulligan.cardsToBottomIfKept()
                         );
 
                 if (game.isGameOver()) {
