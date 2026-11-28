@@ -1,15 +1,24 @@
 package forge.ai.sacrifice;
 
 import forge.ai.AITest;
+import forge.ai.ComputerUtil;
+import forge.ai.LobbyPlayerAi;
+import forge.ai.SpellApiToAi;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
+import org.testng.annotations.DataProvider;
 
 /**
- * Tests for AI sacrifice decision-making when facing lethal consequences.
+ * Tests for AI sacrifice selection and decisions about its value.
  */
 public class AiSacrificeDecisionTest extends AITest {
 
@@ -132,5 +141,100 @@ public class AiSacrificeDecisionTest extends AITest {
 
         // Opponent should still have 4 life (didn't lose life because they sacrificed)
         AssertJUnit.assertEquals("Opponent should still have 4 life after sacrificing", 4, opponent.getLife());
+    }
+
+    @Test
+    public void mixedPermanentPreferenceIsOptInAndRetainsMandatoryFallback() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Card braids = addCard("Braids, Arisen Nightmare", ai);
+        final Card goat = addToken("w_0_1_goat", ai);
+        final Card ring = addCard("Sol Ring", ai);
+        final Card land = addCard("Swamp", ai);
+        final SpellAbility sacrifice = AbilityFactory.getAbility(
+                "DB$ Sacrifice | Defined$ You | SacValid$ Permanent | Amount$ 1"
+                + " | AIPermanentSacPreference$ DeckMostProminentType", braids);
+        sacrifice.setActivatingPlayer(ai);
+        final CardCollection options = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
+
+        CardCollection chosen = ComputerUtil.choosePermanentsToSacrifice(ai, options, 1, sacrifice, false, true);
+        AssertJUnit.assertEquals(1, chosen.size());
+        AssertJUnit.assertTrue("prefer the nonland token's type", chosen.contains(goat));
+        sacrifice.getMapParams().remove("AIPermanentSacPreference");
+        chosen = ComputerUtil.choosePermanentsToSacrifice(ai, options, 1, sacrifice, false, true);
+        AssertJUnit.assertEquals(1, chosen.size());
+        AssertJUnit.assertTrue("ordinary mixed-permanent selection is unchanged", chosen.contains(ring));
+
+        sacrifice.getMapParams().put("AIPermanentSacPreference", "DeckMostProminentType");
+        chosen = ComputerUtil.choosePermanentsToSacrifice(
+                ai, new CardCollection(land), 1, sacrifice, false, false);
+        AssertJUnit.assertTrue("a mandatory sacrifice still uses a land when necessary", chosen.contains(land));
+        AssertJUnit.assertTrue(SpellApiToAi.Converter.get(ApiType.Sacrifice).doTrigger(ai, sacrifice, true));
+
+        final Card centaur = addCard("Accursed Centaur", ai);
+        final SpellAbility mandatory = centaur.getTriggers().get(0).ensureAbility();
+        mandatory.setActivatingPlayer(ai);
+        chosen = ComputerUtil.choosePermanentsToSacrifice(ai, new CardCollection(centaur), 1, mandatory, false, false);
+        AssertJUnit.assertTrue("mandatory ExceptSelf still sacrifices its source as a last resort", chosen.contains(centaur));
+    }
+
+    @DataProvider
+    public Object[][] optionalExceptSelfBoards() {
+        return new Object[][] {{0, false}, {3, false}, {3, true}};
+    }
+
+    @Test(dataProvider = "optionalExceptSelfBoards")
+    public void optionalExceptSelfRequiresAWorthwhileAlternative(final int lands, final boolean token) {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        ((LobbyPlayerAi) ai.getLobbyPlayer()).setAiProfile("Default");
+        final Card braids = addCard("Braids, Arisen Nightmare", ai);
+        addCards("Swamp", lands, ai);
+        for (final Player player : game.getPlayers()) {
+            addCardToZone("Swamp", player, ZoneType.Library);
+        }
+        final Card goat = token ? addToken("w_0_1_goat", ai) : null;
+        final SpellAbility sacrifice = braids.getTriggers().get(0).ensureAbility();
+        sacrifice.setActivatingPlayer(ai);
+        AssertJUnit.assertEquals("confirmation weighs the actual optional sacrifice", token,
+                ai.getController().confirmAction(sacrifice, null, "Sacrifice a permanent?", null));
+        final CardCollection options = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
+        final CardCollection chosen = ComputerUtil.choosePermanentsToSacrifice(ai, options, 1, sacrifice, false, true);
+        AssertJUnit.assertFalse("an optional ExceptSelf never selects its own source", chosen.contains(braids));
+        if (token) {
+            AssertJUnit.assertTrue(chosen.contains(goat));
+        }
+
+        game.copyLastState();
+        AbilityUtils.resolve(sacrifice);
+        AssertJUnit.assertTrue(ai.getCreaturesInPlay().contains(braids));
+        AssertJUnit.assertEquals("needed lands survive actual resolution", lands, ai.getLandsInPlay().size());
+        AssertJUnit.assertEquals("only worthwhile fodder is sacrificed", 1, ai.getCreaturesInPlay().size());
+    }
+
+    @Test
+    public void optionalArtifactSacrificeUsesFodderRatherThanCreatureScoring() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        ((LobbyPlayerAi) ai.getLobbyPlayer()).setAiProfile("Experimental");
+        final Card host = addCard("Grizzly Bears", ai);
+        final Card valuableArtifact = addCard("Crucible of Worlds", ai);
+        final SpellAbility sacrifice = AbilityFactory.getAbility(
+                "DB$ Sacrifice | Defined$ You | SacValid$ Artifact | Optional$ True | Amount$ 1", host);
+        sacrifice.setActivatingPlayer(ai);
+
+        AssertJUnit.assertFalse("a valuable artifact is not cheap creature fodder",
+                SpellApiToAi.Converter.get(ApiType.Sacrifice).doTrigger(ai, sacrifice, false));
+        final Card treasure = addToken("c_a_treasure_sac", ai);
+        AssertJUnit.assertTrue("an expendable artifact makes the optional sacrifice worthwhile",
+                SpellApiToAi.Converter.get(ApiType.Sacrifice).doTrigger(ai, sacrifice, false));
+        final CardCollection options = new CardCollection();
+        options.add(valuableArtifact);
+        options.add(treasure);
+        final CardCollection chosen = ComputerUtil.choosePermanentsToSacrifice(
+                ai, options, 1, sacrifice, false, true);
+        AssertJUnit.assertEquals(1, chosen.size());
+        AssertJUnit.assertTrue(chosen.contains(treasure));
+        AssertJUnit.assertFalse(chosen.contains(valuableArtifact));
     }
 }
