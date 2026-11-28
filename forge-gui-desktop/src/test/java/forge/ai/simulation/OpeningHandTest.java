@@ -340,6 +340,30 @@ public class OpeningHandTest extends AITest {
     }
 
     @Test
+    public void ancientTombsTwoManaCastsASignet() {
+        // the Tomb casts the Signet, then there is mana for the Drum, which taps the Memnite: two sources
+        final String[] sources = {"Azorius Signet", "Springleaf Drum", "Memnite"};
+        AssertJUnit.assertEquals(2, sourcesCounted("Ancient Tomb", sources, "Grizzly Bears", "Hill Giant", "Shock"));
+    }
+
+    @Test
+    public void ancientTombWithTwoCheapSourcesMakesUpForASingleLand() {
+        AssertJUnit.assertTrue(oneLandAndSources("Ancient Tomb",
+                new String[] {"Azorius Signet", "Springleaf Drum", "Memnite"}, "Grizzly Bears", "Hill Giant", "Shock"));
+    }
+
+    @Test
+    public void landsThatAskForMoreThanATapDoNotCountAllTheirMana() {
+        // none of them pays a Fire Diamond's {2} as the only land: Azorius Chancery returns itself, Lotus Vale and
+        // Scorched Ruins need two lands to give up, and Phyrexian Tower needs a creature for its second ability
+        setUp(9, 8);
+        for (final String land : new String[] {"Azorius Chancery", "Lotus Vale", "Scorched Ruins", "Phyrexian Tower"}) {
+            AssertJUnit.assertEquals(land, 0,
+                    OpeningHand.cheapManaSources(hand(land, "Fire Diamond", "Shock", "Divination", "Lava Axe")));
+        }
+    }
+
+    @Test
     public void manaCreaturesTheLandCannotCastAreNoSources() {
         // an Island makes no green mana for the Elves
         AssertJUnit.assertFalse(oneLandAndSources("Island", new String[] {"Llanowar Elves", "Llanowar Elves"},

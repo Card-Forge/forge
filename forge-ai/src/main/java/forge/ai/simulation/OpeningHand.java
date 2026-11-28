@@ -19,6 +19,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
+import forge.game.cost.CostPayLife;
 import forge.game.cost.CostSacrifice;
 import forge.game.cost.CostTap;
 import forge.game.cost.CostTapType;
@@ -28,6 +29,7 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 /**
@@ -791,30 +793,64 @@ public final class OpeningHand {
     }
 
     /**
-     * Adds the mana of a land of the hand. Without a spending restriction it is one mana of any colour the land makes.
-     * With one (Ancient Ziggurat, Sliver Hive) each ability keeps its own output and restriction: Sliver Hive makes
-     * {C} for anything or a colour for a Sliver spell, never a colour for anything.
+     * Adds the mana of a land of the hand. A land that makes one mana at a time, with no spending restriction, is one
+     * mana of any colour it makes. Otherwise each ability keeps its own output and restriction: Ancient Tomb makes two,
+     * and Sliver Hive makes {C} for anything or a colour for a Sliver spell, never a colour for anything.
      */
     private static void addLandMana(final List<ManaUnit> pool, final Card c) {
-        if (!c.isLand() || !hasRestrictedMana(c)) {
+        if (!c.isLand() || !hasRestrictedMana(c) && !makesSeveralMana(c)) {
             pool.add(new ManaUnit((byte) (producedColors(c) & MagicColor.ALL_COLORS), null, null));
             return;
         }
         for (final SpellAbility sa : c.getManaAbilities()) {
-            if (sa.getPayCosts() != null && sa.getPayCosts().getCostMana() != null
-                    && sa.getPayCosts().getCostMana().getMana().getCMC() > 0) {
+            if (needsMana(sa)) {
                 continue; // an ability that has to be fed mana is not judged here: to the safe side it adds nothing
             }
             final AbilityManaPart limit = isRestricted(sa) ? sa.getManaPart() : null;
-            if (sa.getApi() == ApiType.Mana && sa.getParamOrDefault("Amount", "1").matches("\\d+")) {
+            if (hasFixedAmount(sa) && (manaProduced(sa) == 1 || makesItsFullAmount(c, sa))) {
                 // not judged by manaFlow: a land has no mana cost, which that asks for of a card that has to be cast
                 for (final ManaUnit u : outputOf(c, new Flow(0, manaProduced(sa), limit != null, sa))) {
                     pool.add(new ManaUnit(u.colors, u.limit, c, sa));
                 }
-            } else { // reflected mana or a variable amount: one mana of what it can make
+            } else { // reflected mana, a variable amount, or more that asks for something first: one mana
                 pool.add(new ManaUnit(ManaConversion.producedColors(sa), limit, c, sa));
             }
         }
+    }
+
+    /** Whether some ability of the land can be counted on for two or more mana. */
+    private static boolean makesSeveralMana(final Card c) {
+        for (final SpellAbility sa : c.getManaAbilities()) {
+            if (!needsMana(sa) && hasFixedAmount(sa) && manaProduced(sa) > 1 && makesItsFullAmount(c, sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether an opening hand gets all the mana of the ability by tapping the land, perhaps paying life too (Ancient
+     * Tomb). Not when something else is asked first: a creature to sacrifice (Phyrexian Tower), counters (Hickory
+     * Woodlot), lands to give up on entering (Lotus Vale) or to return once it has (Azorius Chancery).
+     */
+    private static boolean makesItsFullAmount(final Card c, final SpellAbility sa) {
+        return sa.getPayCosts() != null
+                && sa.getPayCosts().getCostParts().stream()
+                        .allMatch(part -> part instanceof CostTap || part instanceof CostPayLife)
+                && worksOnceInPlay(c, sa)
+                && c.getTriggers().stream().noneMatch(t -> t.getMode() == TriggerType.ChangesZone
+                        && "Battlefield".equals(t.getParam("Destination"))
+                        && "Card.Self".equals(t.getParam("ValidCard")));
+    }
+
+    private static boolean needsMana(final SpellAbility sa) {
+        return sa.getPayCosts() != null && sa.getPayCosts().getCostMana() != null
+                && sa.getPayCosts().getCostMana().getMana().getCMC() > 0;
+    }
+
+    /** Whether the ability is a plain mana ability that says how much it makes with a number. */
+    private static boolean hasFixedAmount(final SpellAbility sa) {
+        return sa.getApi() == ApiType.Mana && sa.getParamOrDefault("Amount", "1").matches("\\d+");
     }
 
     private static boolean hasRestrictedMana(final Card c) {
@@ -868,13 +904,15 @@ public final class OpeningHand {
 
     /**
      * Takes what an activation costs out of the pool: unrestricted mana, the least flexible first. Tapping a land for
-     * one of its abilities takes the mana of its other abilities with it.
+     * one of its abilities takes the mana of its other abilities with it, so a land is tapped for the ability that
+     * makes the most.
      */
     private static void payActivation(final List<ManaUnit> pool, final int amount) {
         for (int i = 0; i < amount; i++) {
             ManaUnit least = null;
             for (final ManaUnit u : pool) {
-                if (u.limit == null && (least == null || Integer.bitCount(u.colors) < Integer.bitCount(least.colors))) {
+                if (u.limit == null && isFromBestAbility(pool, u)
+                        && (least == null || Integer.bitCount(u.colors) < Integer.bitCount(least.colors))) {
                     least = u;
                 }
             }
@@ -884,6 +922,16 @@ public final class OpeningHand {
             pool.remove(least);
             pool.removeIf(least::excludes);
         }
+    }
+
+    /** Whether no other ability of the same land makes more unrestricted mana than the one that makes this one. */
+    private static boolean isFromBestAbility(final List<ManaUnit> pool, final ManaUnit unit) {
+        if (unit.choice == null) {
+            return true;
+        }
+        final List<ManaUnit> land = new ArrayList<>(pool);
+        land.removeIf(u -> u.source != unit.source || u.limit != null);
+        return mostTogether(land, u -> true) == land.stream().filter(u -> u.choice == unit.choice).count();
     }
 
     /**
@@ -1163,9 +1211,11 @@ public final class OpeningHand {
      * the ability has no condition (Mox Opal's metalcraft) and the amount is a fixed one (Everflowing Chalice).
      */
     private static boolean worksAsItIs(final Card c, final SpellAbility sa) {
-        if (c.getManaCost().isNoCost()) {
-            return false;
-        }
+        return !c.getManaCost().isNoCost() && worksOnceInPlay(c, sa);
+    }
+
+    /** {@link #worksAsItIs} without the question of casting the card, which is none for a land. */
+    private static boolean worksOnceInPlay(final Card c, final SpellAbility sa) {
         for (final String condition : new String[] {"Activation", "IsPresent", "CheckSVar", "ActivationPhases"}) {
             if (sa.hasParam(condition)) {
                 return false;
