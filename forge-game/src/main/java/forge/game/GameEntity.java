@@ -19,6 +19,7 @@ package forge.game;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -104,43 +105,49 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
         }
 
         for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final ReplacementEffect re : ca.getReplacementEffects()) {
+            if (!ca.hasReplacementEffects()) {
+                continue;
+            }
+            Stream<ReplacementEffect> filteredStream = ca.streamReplacementEffects().filter(re -> {
                 if (!re.getMode().equals(ReplacementType.DamageDone) ||
                         (!re.hasParam("PreventionEffect") && !re.hasParam("Prevent"))) {
-                    continue;
+                    return false;
                 }
                 if (!re.zonesCheck(getGame().getZoneOf(ca))) {
-                    continue;
+                    return false;
                 }
                 if (!re.requirementsCheck(getGame())) {
-                    continue;
+                    return false;
                 }
                 // Immortal Coil prevents the damage but has a similar negative effect
                 if ("Immortal Coil".equals(ca.getName())) {
-                    continue;
+                    return false;
                 }
                 if (!re.matchesValidParam("ValidSource", source)) {
-                    continue;
+                    return false;
                 }
                 if (!re.matchesValidParam("ValidTarget", this)) {
-                    continue;
+                    return false;
                 }
-                if (re.hasParam("IsCombat")) {
-                    if (re.getParam("IsCombat").equals("True") != isCombat) {
-                        continue;
-                    }
+                if (re.hasParam("IsCombat") && re.getParam("IsCombat").equals("True") != isCombat) {
+                    return false;
                 }
+                return true;
+            });
+
+            damage = filteredStream.reduce(damage, (d, re) -> {
                 if (re.hasParam("Prevent")) {
                     return 0;
                 } else if (re.getOverridingAbility() != null) {
                     SpellAbility repSA = re.getOverridingAbility();
                     if (repSA.getApi() == ApiType.ReplaceDamage) {
-                        damage = Math.max(0, damage - AbilityUtils.calculateAmount(ca, repSA.getParam("Amount"), repSA));
+                        return Math.max(0, d - AbilityUtils.calculateAmount(ca, repSA.getParam("Amount"), repSA));
                     }
+                    return d;
                 } else {
                     return 0;
                 }
-            }
+            }, Integer::sum);
         }
 
         return Math.max(0, damage - possiblePrevention);
