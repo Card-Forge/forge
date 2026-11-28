@@ -111,6 +111,86 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
         this(new ManaCostParser(str));
     }
 
+    /**
+     * Parses a mana cost written in Comprehensive Rules symbol notation
+     * (e.g. {@code 2WW}, {@code {G}{U}}, {@code {R/P}}, {@code {2/W}}).
+     * Shorthand is allowed for non-split symbols. Returns {@code null} if the
+     * string is empty or contains invalid symbols.
+     *
+     * @param input the cost symbol string
+     * @return a ManaCost, or null if unparseable
+     */
+    public static ManaCost parseCostSymbols(final String input) {
+        if (input == null) {
+            return null;
+        }
+        final String s = input.trim().toUpperCase();
+        if (s.isEmpty()) {
+            return null;
+        }
+
+        final List<String> tokens = Lists.newArrayList();
+        int i = 0;
+        while (i < s.length()) {
+            final char c = s.charAt(i);
+            if (c == ' ' || c == '/') {
+                i++;
+                continue;
+            }
+            if (c == '{') {
+                final int close = s.indexOf('}', i + 1);
+                if (close < 0) {
+                    return null;
+                }
+                final String inner = s.substring(i + 1, close);
+                if (inner.isEmpty()) {
+                    return null;
+                }
+                boolean allDigits = true;
+                for (int j = 0; j < inner.length(); j++) {
+                    if (!Character.isDigit(inner.charAt(j))) {
+                        allDigits = false;
+                        break;
+                    }
+                }
+                if (allDigits) {
+                    tokens.add(inner);
+                } else {
+                    final ManaCostShard shard = ManaCostShard.parseNonGeneric(inner);
+                    if (shard == null || shard == ManaCostShard.GENERIC) {
+                        return null;
+                    }
+                    tokens.add(shard.toShortString());
+                }
+                i = close + 1;
+                continue;
+            }
+            if (Character.isDigit(c)) {
+                final int start = i;
+                while (i < s.length() && Character.isDigit(s.charAt(i))) {
+                    i++;
+                }
+                tokens.add(s.substring(start, i));
+                continue;
+            }
+            if ("WUBRGCSX".indexOf(c) >= 0) {
+                final ManaCostShard shard = ManaCostShard.parseNonGeneric(String.valueOf(c));
+                if (shard == null || shard == ManaCostShard.GENERIC) {
+                    return null;
+                }
+                tokens.add(shard.toShortString());
+                i++;
+                continue;
+            }
+            return null;
+        }
+
+        if (tokens.isEmpty()) {
+            return null;
+        }
+        return new ManaCost(String.join(" ", tokens));
+    }
+
     public String getSimpleString() {
         if (this.hasNoCost) {
             return "no cost";
@@ -175,6 +255,32 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
             }
         }
         return res;
+    }
+
+    /**
+     * Whether this cost contains at least the symbols in {@code other}
+     * as a multiset (generic amount and each non-generic shard).
+     */
+    public boolean containsAtLeast(final ManaCost other) {
+        if (other == null) {
+            return false;
+        }
+        if (this.genericCost < other.genericCost) {
+            return false;
+        }
+        for (final ManaCostShard shard : other.shards) {
+            if (this.getShardCount(shard) < other.getShardCount(shard)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Whether this cost has the same generic amount and shard multiset as {@code other}.
+     */
+    public boolean isSameManaCost(final ManaCost other) {
+        return other != null && this.containsAtLeast(other) && other.containsAtLeast(this);
     }
 
     /**
