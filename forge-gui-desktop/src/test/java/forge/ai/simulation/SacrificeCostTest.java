@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import forge.ai.AITest;
 import forge.ai.AiCostDecision;
+import forge.ai.ComputerUtil;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.cost.CostPart;
@@ -79,5 +80,23 @@ public class SacrificeCostTest extends AITest {
         setUp("Grixis Grimblade", "Raging Goblin"); // the Grimblade is blue, the Herald black, the Goblin red
         AssertJUnit.assertFalse(ActivationGuard.sacrificesNeedMoreCards(ai, tutor, tutor.getPayCosts()));
         AssertJUnit.assertTrue(decidesDifferentCardsForEveryPart());
+    }
+
+    @Test
+    public void counterOutletCannotPayWithItself() {
+        final Game game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        final Card feeder = addCard("Carrion Feeder", ai);
+        final SpellAbility growth = feeder.getSpellAbilities().stream()
+                .filter(sa -> sa.isActivatedAbility() && "AristocratCounters".equals(sa.getParam("AILogic")))
+                .findFirst().get();
+        growth.setActivatingPlayer(ai);
+        final CostSacrifice cost = (CostSacrifice) growth.getPayCosts().getCostParts().get(0);
+        AssertJUnit.assertNull("the outlet cannot pay when it is the only creature",
+                new AiCostDecision(ai, growth, false).visit(cost));
+        final Card goat = addToken("w_0_1_goat", ai);
+        AssertJUnit.assertTrue(ComputerUtil.playNoStack(ai, growth, game, false));
+        AssertJUnit.assertTrue(ai.getCreaturesInPlay().contains(feeder));
+        AssertJUnit.assertFalse(ai.getCreaturesInPlay().contains(goat));
     }
 }

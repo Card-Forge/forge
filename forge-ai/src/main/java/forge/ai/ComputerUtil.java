@@ -320,8 +320,18 @@ public class ComputerUtil {
     public static Card getCardPreference(final Player ai, final Card activate, final String pref, final CardCollection typeList) {
         return getCardPreference(ai, activate, pref, typeList, null);
     }
-    public static Card getCardPreference(final Player ai, final Card activate, final String pref, final CardCollection typeList, SpellAbility sa) {
+    public static Card getCardPreference(final Player ai, final Card activate, final String pref, CardCollection typeList, SpellAbility sa) {
         final Game game = ai.getGame();
+        final boolean aristocratCounters = pref.contains("SacCost") && sa != null
+                && sa.getParamOrDefault("AILogic", "").startsWith("AristocratCounters");
+        if (aristocratCounters) {
+            typeList = SpecialAiLogic.aristocratSacrificeOptions(ai, sa, typeList);
+            final CardCollection threatened = CardLists.filter(typeList,
+                    c -> predictThreatenedObjects(ai, null, true).contains(c) || shouldSacrificeThreatenedCard(ai, c, sa));
+            if (!threatened.isEmpty()) {
+                return ComputerUtilCard.getWorstAI(threatened);
+            }
+        }
         String prefDef = "";
         if (activate != null) {
             prefDef = activate.getSVar("AIPreference");
@@ -439,6 +449,9 @@ public class ComputerUtil {
                     // TODO make sure survival is possible in case the creature blocks a trampler
                     return ComputerUtilCard.getWorstAI(typeList);
                 }
+            }
+            if (aristocratCounters && !typeList.isEmpty()) {
+                return ComputerUtilCard.getWorstAI(typeList);
             }
         }
         else if (pref.contains("DiscardCost")) { // search for permanents with DiscardMe
@@ -610,6 +623,9 @@ public class ComputerUtil {
 
         // don't sacrifice the card we're pumping
         typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, ability, ai);
+        if (ability.getParamOrDefault("AILogic", "").startsWith("AristocratCounters")) {
+            typeList = SpecialAiLogic.aristocratSacrificeOptions(ai, ability, typeList);
+        }
 
         // if the source has "Casualty", don't sacrifice cards that may have granted the effect
         // TODO: is there a surefire way to determine which card added Casualty?

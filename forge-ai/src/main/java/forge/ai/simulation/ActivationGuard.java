@@ -861,7 +861,10 @@ public final class ActivationGuard {
             }
             final CardCollection paid = forge.ai.ComputerUtil.chooseSacrificeType(ai, type, sa, null, false, 1, null);
             if (paid == null || paid.isEmpty()) {
-                continue; // cannot be paid: costUnpayable says so
+                if (sa.getParamOrDefault("AILogic", "").startsWith("AristocratCounters")) {
+                    return true;
+                }
+                continue;
             }
             final Card c = paid.get(0);
             if (c.equals(host)) {
