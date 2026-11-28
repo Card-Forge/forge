@@ -1,0 +1,17 @@
+Name:Good Knight
+ManaCost:W W
+Types:Creature Cat Knight
+PT:2/2
+K:MayEffectFromOpeningDeck:ChooseTeam
+SVar:ChooseTeam:DB$ GenericChoice | Defined$ You | Choices$ MirranChoice,PhyrexianChoice | ChoicePrompt$ Join a Team | ConditionCheckSVar$ AnyTeam | ConditionSVarCompare$ EQ0 | SpellDescription$
+SVar:MirranChoice:DB$ Pump | Defined$ You | JoinTeam$ Mirran | SpellDescription$ Mirran
+SVar:PhyrexianChoice:DB$ Pump | Defined$ You | JoinTeam$ Phyrexian | SpellDescription$ Phyrexian
+K:First Strike
+S:Mode$ CantBeCast | ValidCard$ Card.Self | Caster$ Player | EffectZone$ All | CheckSVar$ TeamPhyrexian | Description$ You can't cast CARDNAME if you're on the Phyrexian team.
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ Opponent | ReplaceWith$ ScorePoint | ReplacementResult$ NotReplaced | Description$ If CARDNAME is on the battlefield at the end of the game, score an additional point for the Mirran team.
+SVar:ScorePoint:DB$ Pump | Defined$ You | NoteNumber$ 1 | ConditionCheckSVar$ TotalOpponents | ConditionSVarCompare$ EQ1 | ScoreForTeam$ Mirran
+SVar:TotalOpponents:PlayerCountOpponents$Amount
+SVar:AnyTeam:PlayerCountPropertyYou$HasPropertyisInTeam
+SVar:TeamMirran:PlayerCountPropertyYou$HasPropertyisInTeamMirran
+SVar:TeamPhyrexian:PlayerCountPropertyYou$HasPropertyisInTeamPhyrexian
+Oracle:First Strike\nYou can't cast Good Knight if you're on the Phyrexian team.\nIf Good Knight is on the battlefield at the end of the game, score an additional point for the Mirran team.

@@ -471,8 +471,26 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("NoteNumber")) {
             int num = AbilityUtils.calculateAmount(host, sa.getParam("NoteNumber"), sa);
+            String name = null;
+            if (sa.hasParam("ScoreForTeam")) {
+                name = sa.getParam("ScoreForTeam");
+            }
             for (Player p : tgtPlayers) {
-                p.noteNumberForName(host.getName(), num);
+                if (name != null) {
+                    String team = name;
+                    if ("YourTeam".equals(name)) {
+                        team = p.getDraftNotes().getOrDefault("Team", "");
+                    }
+                    p.noteNumberForName("Team:" + team, p.getNotedNumberForName("Team:" + team) + num);
+                } else {
+                    p.noteNumberForName(host.getName(), num);
+                }
+            }
+        }
+
+        if (sa.hasParam("JoinTeam")) {
+            for (Player p : tgtPlayers) {
+                p.getDraftNotes().put("Team", sa.getParam("JoinTeam"));
             }
         }
 

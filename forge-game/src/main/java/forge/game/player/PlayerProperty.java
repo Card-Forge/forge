@@ -491,6 +491,12 @@ public class PlayerProperty {
                 }
             }
             return false;
+        } else if(property.startsWith("isInTeam")) {
+            if (property.equals("isInTeam")) {
+                return player.getDraftNotes().containsKey("Team");
+            }
+            String team = property.substring(8);
+            return team.equals(player.getDraftNotes().get("Team"));
         } else if (property.startsWith("counters")) {
             final String[] splitProperty = property.split("_");
             final String strNum = splitProperty[1].substring(2);
