@@ -597,8 +597,42 @@ public class LandPlannerTest extends FlatMcTestBase {
         setUpGame();
         put("Lightning Bolt", ai, ZoneType.Hand);
         final List<LandPlanner.Spell> spells = LandPlanner.spellsWanted(ai);
-        assertTrue(LandPlanner.castBefore(Arrays.asList(src(R, 1)), spells, 1).isEmpty());
-        assertEquals(LandPlanner.castBefore(Arrays.asList(src(R, 1)), spells, 2).size(), 1);
+        assertTrue(LandPlanner.before(Arrays.asList(src(R, 1)), spells, 1).cast.isEmpty());
+        assertEquals(LandPlanner.before(Arrays.asList(src(R, 1)), spells, 2).cast.size(), 1);
+    }
+
+    @Test
+    public void thePainOfEarlierTurnsIsAddedUp() {
+        final LandPlanner.Src canopy = new LandPlanner.Src((byte) (G | W), 0, (byte) (G | W));
+        final List<LandPlanner.Spell> two = Arrays.asList(spell(100, 0, W), spell(80, 0, W));
+        assertEquals(LandPlanner.before(Arrays.asList(canopy), two, 0).painLife, 0, "nothing is cast yet");
+        assertEquals(LandPlanner.before(Arrays.asList(canopy), two, 1).painLife, 1);
+        assertEquals(LandPlanner.before(Arrays.asList(canopy), two, 2).painLife, 2, "one activation on each turn");
+        assertEquals(LandPlanner.before(Arrays.asList(canopy, src(W, 0)), two, 1).painLife, 1,
+                "two spells at once: the Plains pays one of them");
+    }
+
+    /**
+     * The life the plan pays for a Temple Garden on its second turn, after {@code first} has paid for the Savannah
+     * Lions on the first. The Garden is what lets the Silhana Ledgewalker be cast.
+     */
+    private int lifePlannedForTheGarden(final String first, final int life) {
+        setUpGame();
+        ai.setLife(life, null);
+        put(first, ai, ZoneType.Battlefield);
+        final Card garden = put("Temple Garden", ai, ZoneType.Hand);
+        put("Savannah Lions", ai, ZoneType.Hand); // {W}
+        put("Silhana Ledgewalker", ai, ZoneType.Hand); // {1}{G}
+        return LandPlanner.entry(ai, garden, true, LandPlanner.battlefieldSources(ai), LandPlanner.spellsWanted(ai), 1,
+                Collections.<Card>emptyList(), 0).life;
+    }
+
+    @Test
+    public void lifeLostToAHorizonCanopyCountsAgainstALaterShockland() {
+        assertEquals(lifePlannedForTheGarden("Horizon Canopy", 12), 0,
+                "the Canopy leaves 11, and 2 more would go below the reserve of 10");
+        assertEquals(lifePlannedForTheGarden("Horizon Canopy", 13), 2, "13 - 1 - 2 keeps the reserve");
+        assertEquals(lifePlannedForTheGarden("Plains", 12), 2, "a painless land leaves room for the payment");
     }
 
     @Test

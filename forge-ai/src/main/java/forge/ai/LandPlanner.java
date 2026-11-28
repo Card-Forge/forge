@@ -131,7 +131,7 @@ public final class LandPlanner {
     }
 
     /** How a planned land comes in: when its mana is there, and the life paid to have it untapped. */
-    private static final class Entry {
+    static final class Entry {
         final int delay;
         final int life;
 
@@ -367,18 +367,29 @@ public final class LandPlanner {
         return cast;
     }
 
-    /** The cards that the schedule has cast on the turns before {@code turn}. */
-    static Set<Card> castBefore(final List<Src> srcs, final List<Spell> spells, final int turn) {
-        final boolean[] done = new boolean[spells.size()];
+    /** What the schedule has done on the turns before one: the cards it cast, and the life that their mana cost. */
+    static final class Past {
         final Set<Card> cast = new HashSet<>();
+        int painLife;
+    }
+
+    static Past before(final List<Src> srcs, final List<Spell> spells, final int turn) {
+        final boolean[] done = new boolean[spells.size()];
+        final Past past = new Past();
         for (int t = 0; t < turn; t++) {
-            for (final Spell sp : castOn(availableOn(srcs, t), spells, done)) {
+            final List<Src> avail = availableOn(srcs, t);
+            final List<byte[]> coloured = new ArrayList<>();
+            int generic = 0;
+            for (final Spell sp : castOn(avail, spells, done)) {
+                coloured.add(sp.coloured);
+                generic += sp.generic;
                 if (sp.card != null) {
-                    cast.add(sp.card);
+                    past.cast.add(sp.card);
                 }
             }
+            past.painLife += (int) Math.round(painCost(avail, coloured, generic) / LIFE_COST);
         }
-        return cast;
+        return past;
     }
 
     /** Up to this many painful activations are tried in every combination; more are chosen cheapest first. */
@@ -624,16 +635,19 @@ public final class LandPlanner {
      * @param srcs     the sources of the plan before this land
      * @param turn     the turn of the plan on which the land is played, 0 for this one
      * @param played   the lands the plan has played before
-     * @param lifePaid the life the plan has paid before
+     * @param lifePaid the life the plan has paid before to have lands enter untapped; what its painful mana has cost
+     *                 by this turn is worked out from {@code srcs} and counts too
      */
-    private static Entry entry(final Player ai, final Card land, final boolean tapped, final List<Src> srcs,
-                               final List<Spell> spells, final int turn, final List<Card> played, final int lifePaid) {
+    static Entry entry(final Player ai, final Card land, final boolean tapped, final List<Src> srcs,
+                       final List<Spell> spells, final int turn, final List<Card> played, final int lifePaid) {
         final int sick = land.isCreature() && !land.hasKeyword(Keyword.HASTE) ? 1 : 0;
         if (tapped) {
             final int life = lifeToEnterUntapped(land);
-            if (life > 0 && wouldPayToEnterUntapped(ai, land, life, turn, played,
-                    castBefore(srcs, spells, turn), lifePaid)) {
-                return new Entry(sick, life);
+            if (life > 0) {
+                final Past past = before(srcs, spells, turn);
+                if (wouldPayToEnterUntapped(ai, land, life, turn, played, past.cast, lifePaid + past.painLife)) {
+                    return new Entry(sick, life);
+                }
             }
         }
         return new Entry(sick + (tapped ? 1 : 0), 0);
