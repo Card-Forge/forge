@@ -962,6 +962,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            // Whether the searcher owns what is being searched - the same test TriggerSearchedLibrary
+            // spells SearchOwnLibrary. Both halves of Opposition Agent key off it: the control
+            // effect below, and the replacement further down.
+            final boolean ownLibrary = decider.equals(player);
+
             List<ZoneType> origin = Lists.newArrayList();
             if (sa.hasParam("Origin")) {
                 origin.addAll(ZoneType.listValueOf(sa.getParam("Origin")));
@@ -1090,7 +1095,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             Long controlTimestamp = null;
             if (searchedLibrary) {
-                if (decider.equals(player)) {
+                if (ownLibrary) {
                     Map.Entry<Long, Player> searchControlPlayer = player.getControlledWhileSearching();
                     if (searchControlPlayer != null) {
                         controlTimestamp = searchControlPlayer.getKey();
@@ -1313,7 +1318,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             HiddenOriginChoices choices = new HiddenOriginChoices();
-            choices.searchedLibrary = searchedLibrary;
+            // Has to be settled here: the loop below rebuilds decider from the map key, which is
+            // player after the retarget above, so ownLibrary is always true down there.
+            choices.searchOwnLibrary = searchedLibrary && ownLibrary;
             choices.shuffleMandatory = shuffleMandatory;
             choices.chosenCards = chosenCards;
             choices.libraryPos = libraryPos;
@@ -1331,7 +1338,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
 
         for (Player player : hiddenChoices.keySet()) {
-            boolean searchedLibrary = hiddenChoices.get(player).searchedLibrary;
+            boolean searchOwnLibrary = hiddenChoices.get(player).searchOwnLibrary;
             boolean shuffleMandatory = hiddenChoices.get(player).shuffleMandatory;
             CardCollection chosenCards = hiddenChoices.get(player).chosenCards;
             int libraryPos = hiddenChoices.get(player).libraryPos;
@@ -1345,7 +1352,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final Zone originZone = game.getZoneOf(c);
                 final Card lkiCopy = sa.hasParam("RememberLKI") ? CardCopyService.getLKICopy(c) : null;
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
+                moveParams.put(AbilityKey.SearchOwnLibrary, searchOwnLibrary);
                 AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
                 if (destination == null) {
@@ -1603,7 +1610,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
     private static class HiddenOriginChoices {
         boolean shuffleMandatory;
-        boolean searchedLibrary;
+        boolean searchOwnLibrary;
         CardCollection chosenCards;
         int libraryPos;
         List<ZoneType> origin;
