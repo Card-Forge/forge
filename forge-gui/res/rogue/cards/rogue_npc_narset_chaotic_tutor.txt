@@ -1,0 +1,6 @@
+Name:Narset Trait - Chaotic Tutor
+ManaCost:no cost
+Types:Trait
+R:Event$ ChaosEnsues | ActiveZones$ Command | ValidPlayer$ You | ValidCause$ PlanarDie | Optional$ True | OptionalDecider$ You | ReplaceWith$ RETutor | Description$ If chaos would ensue as a result of you rolling the planar die, instead you may search your library for a card, put that card into your hand, then shuffle. If you do, chaos doesn't ensue.
+SVar:RETutor:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle.
+Oracle:If chaos would ensue as a result of you rolling the planar die, instead you may search your library for a card, put that card into your hand, then shuffle. If you do, chaos doesn't ensue.

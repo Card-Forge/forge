@@ -1,0 +1,6 @@
+Name:Narset Trait - Negation of Chaos
+ManaCost:no cost
+Types:Trait
+R:Event$ ChaosEnsues | ActiveZones$ Command | ValidPlayer$ Opponent | ValidCause$ PlanarDie | Optional$ True | OptionalDecider$ You | ReplaceWith$ RELoseLife | Description$ If chaos would ensue as a result of an opponent rolling the planar die, instead you may lose 3 life. If you do, chaos doesn't ensue.
+SVar:RELoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 3
+Oracle:If chaos would ensue as a result of an opponent rolling the planar die, instead you may lose 3 life. If you do, chaos doesn't ensue.
