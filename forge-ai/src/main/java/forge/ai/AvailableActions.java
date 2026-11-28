@@ -8,6 +8,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.tinylog.Logger;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,13 +32,13 @@ public final class AvailableActions {
             new ZoneScan(ZoneType.Flashback,   true));
 
     /** Boolean form: early-exits on the first actionable card. */
-    public static boolean compute(Player player, long timeoutMs) {
-        return withAiController(player, () -> !walk(player, timeoutMs, true).isEmpty());
+    public static boolean compute(Player player, long timeoutMs, Set<Integer> ignoredIds) {
+        return withAiController(player, () -> !walk(player, timeoutMs, true, ignoredIds).isEmpty());
     }
 
     /** Set form: walks every card so highlight consumers can mark the actionable subset. */
     public static Set<CardView> collectActionable(Player player, long timeoutMs) {
-        return withAiController(player, () -> walk(player, timeoutMs, false));
+        return withAiController(player, () -> walk(player, timeoutMs, false, Collections.emptySet()));
     }
 
     /** Run the predictive sweep under an AI controller so cost-adjustment chooseX
@@ -50,7 +51,7 @@ public final class AvailableActions {
         return result.get();
     }
 
-    private static Set<CardView> walk(Player player, long timeoutMs, boolean earlyExit) {
+    private static Set<CardView> walk(Player player, long timeoutMs, boolean earlyExit, Set<Integer> ignoredIds) {
         long deadlineNanos = System.nanoTime() + timeoutMs * 1_000_000L;
         Set<CardView> actionable = new HashSet<>();
         Set<CardView> visited = new HashSet<>();
@@ -60,11 +61,15 @@ public final class AvailableActions {
                     ? sortedCardsIn(player, scan.zone())
                     : player.getCardsIn(scan.zone());
             for (Card card : cards) {
+                CardView cv = card.getView();
+                if (ignoredIds.contains(card.getId())) {
+                    visited.add(cv);
+                    continue;
+                }
                 if (checkTimeout(deadlineNanos, timeoutMs)) {
                     addUnvisited(actionable, visited, player);
                     return actionable;
                 }
-                CardView cv = card.getView();
                 visited.add(cv);
                 if (cardHasActionable(card, player)) {
                     actionable.add(cv);

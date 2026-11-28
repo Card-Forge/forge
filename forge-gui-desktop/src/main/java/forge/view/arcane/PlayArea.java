@@ -820,6 +820,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 return;
             }
         }
+        if (getMatchUI().showIgnoreForAutoPassMenu(panel.getCard(), this, evt.getX(), evt.getY())) {
+            super.mouseRightClicked(panel, evt);
+            return;
+        }
         boolean selected = selectCard(panel, new MouseTriggerEvent(evt), evt.isShiftDown());
         // Right-click undeclare: remove from splitCardIds so card merges back
         if (selected && panel.getCard() != null) {
@@ -872,17 +876,18 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         boolean isCombat = alreadyInCombat
                 || activateDesc.equals(loc.getMessage("lblAttackWithCard"))
                 || activateDesc.equals(loc.getMessage("lblBlockWithCard"));
+        final MouseTriggerEvent leftClick = new MouseTriggerEvent(MouseEvent.BUTTON1, evt.getX(), evt.getY());
         if (alreadyInCombat) {
             getMatchUI().getGameController().selectCard(primary, others, new MouseTriggerEvent(evt));
         } else if (isCombat) {
             // Synthesize a left-click: InputAttack/InputBlock route the right-click button to
             // their undeclare branch, but here the user wants to declare from the badge prompt.
-            MouseTriggerEvent declareTrigger = new MouseTriggerEvent(MouseEvent.BUTTON1, evt.getX(), evt.getY());
-            getMatchUI().getGameController().selectCard(primary, others, declareTrigger);
+            getMatchUI().getGameController().selectCard(primary, others, leftClick);
         } else {
-            // Non-combat inputs (sacrifice, targeting) ignore otherCardsToSelect and the button.
+            // Non-combat inputs (sacrifice, targeting) ignore otherCardsToSelect.
+            // A left-click, because a right-click at priority opens each card's ability menu.
             for (CardView cv : selected) {
-                getMatchUI().getGameController().selectCard(cv, null, new MouseTriggerEvent(evt));
+                getMatchUI().getGameController().selectCard(cv, null, leftClick);
             }
         }
         // Update splitCardIds: clear whole stack, then mark the subset that

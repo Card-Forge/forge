@@ -11,6 +11,7 @@ import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.GameProtocolSender;
+import forge.gamemodes.net.NetTriggerEvent;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
@@ -64,7 +65,7 @@ public class NetGameController implements IGameController {
 
     @Override
     public boolean selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
-        send(ProtocolMethod.selectCard, cardView, otherCardViewsToSelect, null/*triggerEvent*/); //some platform don't have mousetriggerevent class or it will not allow them to click/tap
+        send(ProtocolMethod.selectCard, cardView, otherCardViewsToSelect, NetTriggerEvent.of(triggerEvent));
         // Difference from local games! Always consider a card as successfully selected,
         // to avoid blocks where server and client wait for each other to respond.
         // Some cost in functionality but a huge gain in stability & speed.
