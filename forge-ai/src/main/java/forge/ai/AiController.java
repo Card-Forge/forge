@@ -484,6 +484,23 @@ public class AiController {
         return rightapi;
     }
 
+    /** Names of the AI's own evoked creatures that still have a trigger (the sacrifice or the enters effect) on the stack. */
+    private Set<String> evokedCardNamesOnStack() {
+        final Set<String> names = new HashSet<>();
+        for (final SpellAbilityStackInstance si : game.getStack()) {
+            final SpellAbility sa = si.getSpellAbility();
+            final Card host = sa == null ? null : sa.getHostCard();
+            if (host == null || !sa.isTrigger() || !player.equals(sa.getActivatingPlayer())) {
+                continue;
+            }
+            final SpellAbility cast = host.getCastSA();
+            if (sa.getTrigger().isKeyword(Keyword.EVOKE) || (cast != null && cast.isEvoke())) {
+                names.add(host.getName());
+            }
+        }
+        return names;
+    }
+
     private static List<SpellAbility> getPlayableCounters(final CardCollection all) {
         final List<SpellAbility> spellAbility = Lists.newArrayList();
         for (final Card c : all) {
@@ -1173,14 +1190,16 @@ public class AiController {
             Sentry.setExtra("Card", card.getName());
             Sentry.setExtra("SA", sa.toString());
 
-            boolean canPlay = SpellApiToAi.Converter.get(sa).canPlayWithSubs(player, sa).willingToPlay();
+            final AiAbilityDecision apiDecision = SpellApiToAi.Converter.get(sa).canPlayWithSubs(player, sa);
+            boolean canPlay = apiDecision.willingToPlay();
 
             // remove added extra
             Sentry.removeExtra("Card");
             Sentry.removeExtra("SA");
 
             if (!canPlay) {
-                return AiPlayDecision.CantPlayAi;
+                // the one reason the rollouts must not argue with (see isLegalDiscovery): the player casts the spell again
+                return apiDecision.decision() == AiPlayDecision.WouldBeRecast ? AiPlayDecision.WouldBeRecast : AiPlayDecision.CantPlayAi;
             }
             if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX() && sa.getApi() != ApiType.RollPlanarDice) {
                 // An activated "{X}: ..." ability whose AI did not size X would be paid with X=0: the effect resolves for
@@ -2349,6 +2368,8 @@ public class AiController {
             mustRespond = top.hasParam("AIRespondsToOwnAbility"); // Forced combos (currently defined for Sensei's Divining Top)
             mustRespond |= top.isTrigger() && top.getTrigger().isKeyword(Keyword.EVOKE); // Evoke sacrifice trigger
         }
+        // the response is for the evoked creature, not another one of it (#13091): whichever of its triggers is on top
+        final Set<String> evokedOnStack = evokedCardNamesOnStack();
         if (topOwnedByAI) {
             // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
             // in a scripted timed fashion.
@@ -2378,6 +2399,10 @@ public class AiController {
 
         if (saList.isEmpty()) {
             saList = ComputerUtilAbility.getSpellAbilities(cards, player);
+        }
+        if (!evokedOnStack.isEmpty()) {
+            // a second Solitude cast while the triggers of the first are on the stack: let them resolve and look again
+            saList.removeIf(sa -> sa.isSpell() && sa.getHostCard() != null && evokedOnStack.contains(sa.getHostCard().getName()));
         }
 
         final SpellAbility hexmage = sureHexmageImpending(saList);
@@ -3206,8 +3231,8 @@ public class AiController {
         }
         switch (opinion) {
             case CantPlaySa, CantAfford, CantAffordX, StopRunawayActivations, TimingRestrictions,
-                    WouldDestroyLegend, WouldBecomeZeroToughnessCreature:
-                return false;
+                    WouldDestroyLegend, WouldBecomeZeroToughnessCreature, WouldBeRecast:
+                return false; // WouldBeRecast: the player casts the bounced spell again, the rollouts do not see that
             default:
                 break;
         }

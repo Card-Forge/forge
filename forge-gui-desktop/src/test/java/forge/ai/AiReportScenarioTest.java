@@ -142,6 +142,7 @@ public class AiReportScenarioTest extends AITest {
         }
         void bf(final String name, final int n, final Player p) { for (int i = 0; i < n; i++) { bf(name, p); } }
         Card hand(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Hand); }
+        void hand(final String name, final int n, final Player p) { for (int i = 0; i < n; i++) { hand(name, p); } }
         Card gy(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Graveyard); }
         Card lib(final String name, final Player p) { return addCardToZone(name, p, ZoneType.Library); }
         void lib(final String name, final int n, final Player p) { for (int i = 0; i < n; i++) { lib(name, p); } }
@@ -271,6 +272,15 @@ public class AiReportScenarioTest extends AITest {
         void stack(final Player owner, final String name, final GameObject... targets) {
             final SpellAbility sa = hand(name, owner).getFirstSpellAbility();
             sa.setActivatingPlayer(owner);
+            for (final GameObject t : targets) { sa.getTargets().add(t); }
+            game.getStack().add(sa);
+        }
+        /** Like {@link #stack}, but the card really is in the stack zone, as when it is cast (Reprieve targets the cards there). */
+        void castOnStack(final Player owner, final String name, final GameObject... targets) {
+            final Card card = hand(name, owner);
+            final SpellAbility sa = card.getFirstSpellAbility();
+            sa.setActivatingPlayer(owner);
+            sa.setHostCard(game.getAction().moveToStack(card, sa));
             for (final GameObject t : targets) { sa.getTargets().add(t); }
             game.getStack().add(sa);
         }
@@ -3060,6 +3070,102 @@ public class AiReportScenarioTest extends AITest {
                     c.bf("Willowdusk, Essence Seer", c.ai);
                     c.bf("Grizzly Bears", c.ai);
                 }));
+
+        // ---------------- a {T} ability that is used again and again (Samite Healer, Ley Druid): is the cost really paid?
+        l.add(new Scenario("samite-healer-repeat", "Samite Healer prevents damage once: its {T} cost is paid, so it cannot be activated again", Fid.APPROX, M1, false,
+                c -> {
+                    c.bf("Plains", c.ai);
+                    c.bf("Samite Healer", c.ai);
+                    final Card elves = c.bf("Llanowar Elves", c.ai); // a 1/1: one prevented damage saves it from Gut Shot
+                    c.stack(c.opp, "Gut Shot", elves);
+                },
+                c -> activatedAtMostOnce(c, "Samite Healer")));
+        l.add(new Scenario("ley-druid-repeat", "Ley Druid untaps a land once: its {T} cost is paid, so it cannot untap lands again and again", Fid.APPROX, "MAIN2", true,
+                c -> {
+                    c.bf("Forest", 3, c.ai);
+                    c.bf("Forest", c.ai).setTapped(true);
+                    c.bf("Ley Druid", c.ai);
+                    c.hand("Giant Spider", c.ai); // {3}{G}: one mana short of four until the Druid untaps the fourth land
+                },
+                c -> activatedAtMostOnce(c, "Ley Druid")));
+
+        // ---------------- Bloodline Keeper: the second ability (transform with five Vampires)
+        l.add(new Scenario("bloodline-keeper-transform", "with five Vampires Bloodline Keeper is transformed (the {B} ability)", Fid.EXACT, M1, true,
+                c -> { c.richMana(); c.bf("Bloodline Keeper", c.ai); c.bf("Vampire Nighthawk", 4, c.ai); },
+                c -> bloodlineKeeperTransforms(c) ? null : "AI never offered the transform ability of Bloodline Keeper" + c.why("Bloodline Keeper")));
+        l.add(new Scenario("bloodline-keeper-transform-four", "control: with only four Vampires the transform ability is not offered", Fid.EXACT, M1, true,
+                c -> { c.richMana(); c.bf("Bloodline Keeper", c.ai); c.bf("Vampire Nighthawk", 3, c.ai); },
+                c -> bloodlineKeeperTransforms(c) ? "AI offered the transform ability with only four Vampires" : null));
+
+        // ---------------- Charismatic Conqueror: the AI taps a hasty one-turn creature to deny the token
+        l.add(new Scenario("charismatic-conqueror-blitz-hellion", "Blitz Hellion (haste, shuffled away at the end of the turn) is not tapped to deny Charismatic Conqueror's Vampire", Fid.APPROX, M1, true,
+                c -> { c.richMana(); c.bf("Charismatic Conqueror", c.opp); },
+                c -> {
+                    final SpellAbility cast = c.hand("Blitz Hellion", c.ai).getFirstSpellAbility();
+                    cast.setActivatingPlayer(c.ai);
+                    if (!ComputerUtil.playStack(cast, c.ai, c.game)) {
+                        throw new AssertionError("Blitz Hellion could not be cast in the regression setup");
+                    }
+                    c.resolveAll();
+                    final Card hellion = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                            .filter(k -> "Blitz Hellion".equals(k.getName())).findFirst().orElse(null);
+                    if (hellion == null) { return "Blitz Hellion did not enter the battlefield" + c.trace; }
+                    return hellion.isTapped()
+                            ? "the AI tapped Blitz Hellion, which has haste and only this turn, to deny a 1/1 lifelink Vampire" + c.trace : null;
+                }));
+
+        // ---------------- #13106, #13091, #13103, #13090 (Soul Spike, Solitude, Reprieve, Phelia)
+        l.add(noPlay("13106-soul-spike", "Soul Spike is not cast on a Noble Hierarch with Fatal Push and Sovereign's Bite (both black) in hand: exiling them is the cost", Fid.EXACT, M1, false, "Soul Spike",
+                c -> { c.bf("Swamp", c.ai); c.hand("Soul Spike", c.ai); c.hand("Fatal Push", c.ai); c.hand("Sovereign's Bite", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        l.add(play("13106-fatal-push", "Fatal Push kills the Noble Hierarch with one Swamp open instead of Soul Spike", Fid.EXACT, M1, false, "Fatal Push",
+                c -> { c.bf("Swamp", c.ai); c.hand("Soul Spike", c.ai); c.hand("Fatal Push", c.ai); c.hand("Sovereign's Bite", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        l.add(new Scenario("13091-solitude", "no second Solitude while the triggers of the first one are on the stack", Fid.APPROX, M1, false,
+                c -> {
+                    c.bf("Forest", 2, c.opp); c.bf("Noble Hierarch", c.opp); c.bf("Eladamri, Korvecdal", c.opp);
+                    c.hand("Solitude", 2, c.ai); c.hand("Swords to Plowshares", c.ai); c.hand("Path to Exile", c.ai); // evoke needs no mana
+                },
+                c -> {
+                    final SpellAbility first = c.playOf("Solitude");
+                    if (first == null) { throw new SkipException("setup: the AI did not cast the first Solitude at all" + c.why("Solitude")); }
+                    c.ctl().playChosenSpellAbility(first);
+                    c.game.getStack().resolveStack(); // the creature spell resolves, its triggers wait
+                    c.game.getAction().checkStateEffects(true);
+                    c.game.getTriggerHandler().runWaitingTriggers();
+                    c.game.getStack().addAllTriggeredAbilitiesToStack();
+                    if (c.game.getStack().isEmpty()) { throw new SkipException("setup: the triggers of the first Solitude never reached the stack"); }
+                    return c.plays("Solitude") ? "AI cast a second Solitude with the triggers of the first one still on the stack" : null;
+                }));
+        l.add(noPlay("13103-reprieve", "Reprieve is not cast on a Noble Hierarch that the player can cast again with five open Forests", Fid.EXACT, M1, false, "Reprieve",
+                c -> { c.bf("Forest", 5, c.opp); c.bf("Plains", 2, c.ai); c.hand("Reprieve", c.ai); c.castOnStack(c.opp, "Noble Hierarch"); }));
+        l.add(new Scenario("13090-phelia-barricade", "Phelia's attack trigger exiles Crystal Barricade, the creature that would block it", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Phelia, Exuberant Shepherd", c.ai); c.bf("Crystal Barricade", c.opp); },
+                c -> pheliaAimsAt(c, "Crystal Barricade")));
+        l.add(new Scenario("13090-phelia-hill-giant-trigger", "Phelia's attack trigger exiles the Hill Giant that would block it", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Phelia, Exuberant Shepherd", c.ai); c.bf("Hill Giant", c.opp); },
+                c -> pheliaAimsAt(c, "Hill Giant")));
+        l.add(new Scenario("13090-phelia-hill-giant-attack", "Phelia attacks into a Hill Giant, because her trigger exiles the blocker", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Phelia, Exuberant Shepherd", c.ai); c.bf("Hill Giant", c.opp); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().startsWith("Phelia")) ? null : "AI did not attack with Phelia, whose trigger removes the Hill Giant"));
+        l.add(play("13106-soul-spike-tapped", "Soul Spike exiles Fatal Push and Sovereign's Bite when the only Swamp is tapped: neither can be cast now", Fid.APPROX, M1, false, "Soul Spike",
+                c -> { c.bf("Swamp", c.ai).tap(true, null, null); c.hand("Soul Spike", c.ai); c.hand("Fatal Push", c.ai); c.hand("Sovereign's Bite", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        l.add(play("13103-reprieve-colors", "Reprieve is cast on a Hill Giant: the opponent only has Forests and cannot cast it again", Fid.APPROX, M1, false, "Reprieve",
+                c -> { c.bf("Forest", 5, c.opp); c.bf("Plains", 2, c.ai); c.hand("Reprieve", c.ai); c.castOnStack(c.opp, "Hill Giant"); }));
+
+        // ---------------- #13111 review: what the AI can legally do now, not what an ability could do in general
+        // 1. Fatal Push with no creature of mana value 2 or less cannot be cast usefully, so it is a fair price for Soul Spike
+        l.add(play("13111-soul-spike-push-without-target", "Soul Spike may exile Fatal Push when the only creature has mana value 6 (Push has nothing to kill)", Fid.APPROX, M1, false, "Soul Spike",
+                c -> { c.bf("Swamp", c.ai); c.hand("Soul Spike", c.ai); c.hand("Fatal Push", c.ai); c.hand("Sovereign's Bite", c.ai); c.bf("Craw Wurm", c.opp); }));
+        l.add(noPlay("13111-soul-spike-push-has-target", "control: Soul Spike does not exile Fatal Push while a mana value 2 creature is there to kill", Fid.EXACT, M1, false, "Soul Spike",
+                c -> { c.bf("Swamp", c.ai); c.hand("Soul Spike", c.ai); c.hand("Fatal Push", c.ai); c.hand("Sovereign's Bite", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        // 2. Culling the Weak: the sacrifice is part of casting it, with the only creature gone it cannot be cast again
+        l.add(play("13111-reprieve-culling-sacrificed", "Reprieve on Culling the Weak whose caster sacrificed his only creature: it cannot be recast, one Swamp or not", Fid.APPROX, M1, false, "Reprieve",
+                c -> { c.bf("Swamp", c.opp); c.bf("Swamp", c.opp).tap(true, null, null); c.bf("Plains", 2, c.ai); c.hand("Reprieve", c.ai); c.castOnStack(c.opp, "Culling the Weak"); }));
+        l.add(noPlay("13111-reprieve-culling-creature-left", "control: with a creature to sacrifice and a Swamp open Culling the Weak is cast again, no Reprieve", Fid.APPROX, M1, false, "Reprieve",
+                c -> { c.bf("Swamp", c.opp); c.bf("Swamp", c.opp); c.bf("Grizzly Bears", c.opp); c.bf("Plains", 2, c.ai); c.hand("Reprieve", c.ai); c.castOnStack(c.opp, "Culling the Weak"); }));
+        // 3. Phelia cannot take Guardian of the Guildpact (protection from monocolored) out of the way, so it still blocks and kills her
+        l.add(new Scenario("13111-phelia-protection-blocker", "Phelia does not attack into a creature with protection from monocolored: her trigger cannot target it", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
+                c -> { c.bf("Phelia, Exuberant Shepherd", c.ai); c.bf("Guardian of the Guildpact", c.opp); },
+                c -> c.attackers().stream().anyMatch(a -> a.getName().startsWith("Phelia")) ? "AI attacked with Phelia into a blocker her trigger cannot exile" : null));
         return l;
     }
 
@@ -3204,6 +3310,81 @@ public class AiReportScenarioTest extends AITest {
         AssertJUnit.assertTrue("the retained hand now contains only lands and creature Auras",
                 OpeningHand.hasOnlyLandsAndCreatureAuras(kept));
         AssertJUnit.assertFalse("the classic mulligan must reject the resulting hand", controller.classicMulliganKeepsHand(hand, 1));
+    }
+
+    /**
+     * The AI is asked for the play of {@code host} again and again, as in a game where it keeps priority, and each play is made
+     * through its controller (costs paid, the stack resolved in between). A {T} ability can be used once: every further play
+     * means its cost was not really paid.
+     */
+    private String activatedAtMostOnce(final Ctx c, final String host) {
+        final PlayerControllerAi pc = c.ctl();
+        int activations = 0;
+        for (int i = 0; i < 6; i++) {
+            final SpellAbility sa = c.playOf(host);
+            if (sa == null) { break; }
+            pc.playChosenSpellAbility(sa);
+            c.resolveAll();
+            activations++;
+        }
+        final Card card = c.ai.getCardsIn(ZoneType.Battlefield).stream().filter(k -> host.equals(k.getName())).findFirst().orElse(null);
+        if (activations == 0) {
+            throw new SkipException("setup: the AI never activated " + host + ", so there is nothing to repeat" + c.why(host));
+        }
+        if (card != null && !card.isTapped()) { return host + " was activated " + activations + " time(s) and is still untapped" + c.trace; }
+        return activations > 1 ? host + " was activated " + activations + " times in a row" + c.trace : null;
+    }
+
+    /** Phelia is attacking: what does the AI aim her attack trigger at? */
+    private String pheliaAimsAt(final Ctx c, final String wanted) {
+        final Card phelia = c.ai.getCardsIn(ZoneType.Battlefield).stream()
+                .filter(k -> k.getName().startsWith("Phelia")).findFirst().orElse(null);
+        if (phelia == null) { return "Phelia is missing"; }
+        final Combat combat = new Combat(c.ai);
+        combat.addAttacker(phelia, c.opp);
+        c.game.getPhaseHandler().setCombat(combat);
+        final SpellAbility trigger = c.triggerAbility(phelia, "TrigExile");
+        if (trigger == null) { return "Phelia's attack trigger is missing"; }
+        trigger.setActivatingPlayer(c.ai);
+        if (!c.shouldRunAiTrigger(trigger, false)) { return "AI did not use Phelia's trigger at all"; }
+        final Card got = trigger.getTargets() == null ? null : trigger.getTargets().getFirstTargetedCard();
+        return got != null && wanted.equals(got.getName()) ? null : "Phelia's trigger aimed at " + got + " instead of " + wanted;
+    }
+
+    private static boolean bloodlineKeeperTransforms(final Ctx c) {
+        for (final SpellAbility sa : c.plays()) {
+            if (sa.getHostCard() != null && "Bloodline Keeper".equals(sa.getHostCard().getName()) && sa.getApi() == ApiType.SetState) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Test
+    public void neganTargetsTheOpponentWhoHasCreaturesToSacrifice() {
+        final Game game = initAndCreateThreePlayerGame();
+        game.AI_FLAT_MONTE_CARLO = FLAT_MC;
+        game.AI_TIMEOUT = 10;
+        final Player human = game.getPlayers().get(0);
+        final Player ai = game.getPlayers().get(1);
+        final Player rival = game.getPlayers().get(2);
+        addCard("Mountain", ai); addCard("Mountain", ai); addCard("Mountain", ai); addCard("Plains", ai); addCard("Swamp", ai); // {2}{R}{W}{B}
+        addCard("Forest", human); addCard("Island", human); // nothing but a couple of lands: no creature to sacrifice
+        addCard("Serra Angel", rival);
+        addCard("Wurmcoil Engine", rival);
+        final SpellAbility cast = addCardToZone("Negan, the Cold-Blooded", ai, ZoneType.Hand).getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("Negan could not be cast in the regression setup", ComputerUtil.playStack(cast, ai, game));
+        game.getStack().resolveStack();
+        game.getAction().checkStateEffects(true);
+        game.getTriggerHandler().runWaitingTriggers();
+        game.getStack().addAllTriggeredAbilitiesToStack();
+        AssertJUnit.assertFalse("setup: the enter trigger of Negan never reached the stack", game.getStack().isEmpty());
+        final SpellAbility trigger = game.getStack().peekAbility();
+        final Player aimed = trigger.getTargets() == null ? null : trigger.getTargets().getFirstTargetedPlayer();
+        AssertJUnit.assertNotNull("Negan's trigger has no player as its target", aimed);
+        AssertJUnit.assertEquals("Negan's trigger went at " + aimed + ", the player with nothing but lands, instead of the one with creatures",
+                rival, aimed);
     }
 
     @AfterClass

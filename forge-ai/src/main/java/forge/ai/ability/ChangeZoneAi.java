@@ -17,6 +17,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
@@ -736,6 +737,75 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return any;
     }
 
+    /** A creature that could block one of the attackers being declared at its defender, exiled until the end step. */
+    private static boolean takesABlockerOutOfTheWay(final Player ai, final Card c) {
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        final Combat combat = ph.getCombat();
+        if (!c.isCreature() || combat == null || !ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai)) {
+            return false;
+        }
+        for (final Card attacker : combat.getAttackers()) {
+            // in multiplayer only the creatures of the player that is attacked block (planeswalker and battle defenders
+            // are found through their controller)
+            final GameEntity defender = combat.getDefenderByAttacker(attacker);
+            final Player defendingPlayer = combat.getDefenderPlayerByAttacker(attacker);
+            if (defender != null && c.getController().equals(defendingPlayer) && CombatUtil.canBlock(attacker, c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether every spell this returns to hand belongs to an opponent who can cast it again right away: the card back from
+     * the hand, paid with the mana (colors and cost changes included) that is still untapped now. Reprieve on a Noble
+     * Hierarch with plenty of Forests open only costs the player a little mana; against Counterspell with two Forests it counters.
+     */
+    private static boolean targetsSpellItsOwnerCanRecast(final SpellAbility sa) {
+        final Player ai = sa.getActivatingPlayer();
+        final List<SpellAbility> spells = new ArrayList<>();
+        for (final SpellAbility spell : sa.getTargets().getTargetSpells()) {
+            spells.add(spell);
+        }
+        for (final Card card : sa.getTargets().getTargetCards()) {
+            final SpellAbility spell = ai.getGame().getStack().getSpellMatchingHost(card);
+            if (spell != null) {
+                spells.add(spell);
+            }
+        }
+        if (spells.isEmpty()) {
+            return false;
+        }
+        for (final SpellAbility spell : spells) {
+            final Player caster = spell.getActivatingPlayer(); // the one who cast it, not necessarily the owner
+            final Card card = spell.getHostCard();
+            if (caster == null || card == null || !caster.isOpponentOf(ai) || spell.isCopied()) {
+                return false; // a copy is gone for good when it is returned
+            }
+            final SpellAbility recast = card.getFirstSpellAbility();
+            if (recast == null) {
+                return false;
+            }
+            recast.setActivatingPlayer(caster);
+            if (!recast.isSpell() || !canCastAgain(recast, card, caster)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * The whole of casting the returned card again: its restrictions, its timing (once the stack is empty again, which is when it
+     * comes back), and the full cost (the sacrifice of Culling the Weak, not just its mana).
+     */
+    private static boolean canCastAgain(final SpellAbility recast, final Card card, final Player caster) {
+        final PhaseHandler ph = caster.getGame().getPhaseHandler();
+        final boolean timing = recast.withFlash(card, caster) || (ph.isPlayerTurn(caster) && ph.getPhase().isMain());
+        return timing && recast.getRestrictions().checkTimingRestrictions(card, recast)
+                && recast.getRestrictions().checkOtherRestrictions(card, recast, caster)
+                && ComputerUtilCost.canPayCost(recast, caster, false);
+    }
+
     private static AiAbilityDecision knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
 
@@ -751,6 +821,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (!isPreferredTarget(ai, sa, false, false)) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+            if (origin.contains(ZoneType.Stack) && destination == ZoneType.Hand && targetsSpellItsOwnerCanRecast(sa)) {
+                // Reprieve on a Noble Hierarch with plenty of lands open only costs the player a little mana (#13103)
+                sa.resetTargets();
+                return new AiAbilityDecision(0, AiPlayDecision.WouldBeRecast);
             }
             if (ComputerUtilAbility.hasUnpromisedGiftReturn(sa)) {
                 for (final Card target : sa.getTargets().getTargetCards()) {
@@ -1148,7 +1223,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             return aura.getController().isOpponentOf(ai);
                         }
                         if (blink) {
-                            return c.isToken();
+                            // a token never comes back; any other creature that could block comes back at the end step, which is
+                            // all of the attack it has to be out of the way for (Phelia, #13090)
+                            return c.isToken() || takesABlockerOutOfTheWay(ai, c);
                         }
                         return c.isToken() || c.getCMC() > 0;
                     });

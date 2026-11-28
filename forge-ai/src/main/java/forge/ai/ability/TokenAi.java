@@ -10,6 +10,7 @@ import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -20,6 +21,7 @@ import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCost;
 import forge.game.cost.CostDraw;
+import forge.game.cost.CostTapType;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostRemoveCounter;
@@ -576,6 +578,18 @@ public class TokenAi extends SpellAbilityAi {
         return ComputerUtilMana.calculateManaCost(spell.getPayCosts(), spell, payer, true, 0, false);
     }
 
+    /** Whether the card that triggered the ability could attack this turn if it stays untapped, as the payer's creature. */
+    private static boolean tapWouldLoseAnAttack(final Player payer, final SpellAbility sa) {
+        if (!(sa.getTriggeringObject(AbilityKey.Card) instanceof Card)) {
+            return false;
+        }
+        final Card entered = (Card) sa.getTriggeringObject(AbilityKey.Card);
+        final PhaseHandler ph = payer.getGame().getPhaseHandler();
+        return entered.isCreature() && entered.isUntapped() && entered.getController().equals(payer)
+                && ph.isPlayerTurn(payer) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                && CombatUtil.canAttack(entered);
+    }
+
     @Override
     public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card source = sa.getHostCard();
@@ -661,6 +675,11 @@ public class TokenAi extends SpellAbilityAi {
             }
 
             if (alreadyPaid) {
+                return false;
+            }
+            // Charismatic Conqueror: tapping the creature that just entered costs its attack this turn when it can make one
+            // (haste), which is all a creature that is shuffled away at the end of the turn has to offer
+            if (cost.hasSpecificCostType(CostTapType.class) && tapWouldLoseAnAttack(payer, sa)) {
                 return false;
             }
             final Card tokenCard = TokenAi.spawnToken(p, sa);

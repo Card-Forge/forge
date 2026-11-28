@@ -249,6 +249,11 @@ public class DamageDealAi extends DamageAiBase {
             return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
+        // this class does not go through SpellAbilityAi#willPayCosts: Soul Spike must not exile castable cards (#13106)
+        if (!ComputerUtilCost.checkExileFromHandCost(ai, abCost, source, sa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
+        }
+
         if ("DiscardLands".equals(sa.getParam("AILogic")) && !ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
