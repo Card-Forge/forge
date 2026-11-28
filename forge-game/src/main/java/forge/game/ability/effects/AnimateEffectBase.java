@@ -121,7 +121,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             if (perpetual) {
                 c.addPerpetual(new PerpetualTypes(timestamp, addType, removeType, remove));
             }
-            c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
+            c.addChangedCardTypesEffect(addType, removeType, addAllCreatureTypes, remove, timestamp);
             if (remove.contains(RemoveType.LandTypes)) {
                 c.updateStateForView();
             }
@@ -271,7 +271,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         c.removeChangedCardKeywords(timestamp, 0);
 
-        c.removeChangedCardTypes(timestamp, 0);
+        c.removeChangedCardTypesEffect(timestamp, true);
         c.removeColor(timestamp, 0);
 
         c.removeChangedCardTraits(timestamp, 0);

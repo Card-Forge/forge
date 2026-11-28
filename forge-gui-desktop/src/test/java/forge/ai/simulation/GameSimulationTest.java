@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import com.google.common.collect.Lists;
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
@@ -2612,6 +2613,121 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertTrue(nonBasicForest.isCreature());
         AssertJUnit.assertTrue(nonBasicForest.getType().hasSubtype("Mountain"));
+    }
+
+    @Test
+    public void testTypeLayerDependencyAgainstTimestamp() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        Card forest = addCard("Forest", p);
+        Card conspiracy = addCard("Conspiracy", p);
+        conspiracy.setChosenType("Elf");
+        addCard("Life and Limb", p);
+
+        game.getAction().checkStaticAbilities();
+
+        // Conspiracy depends on Life and Limb, so it applies last despite its earlier timestamp
+        AssertJUnit.assertTrue(forest.isCreature());
+        AssertJUnit.assertTrue(forest.getType().hasCreatureType("Elf"));
+        AssertJUnit.assertFalse(forest.getType().hasCreatureType("Saproling"));
+    }
+
+    @Test
+    public void testTypeLayerDependencyOnResolvedEffect() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        Card conspiracy = addCard("Conspiracy", p);
+        conspiracy.setChosenType("Elf");
+        Card village = addCard("Treetop Village", p);
+        game.getAction().checkStaticAbilities();
+
+        SpellAbility animate = StreamUtil.stream(village.getSpellAbilities()).filter(sa -> sa.getApi() == ApiType.Animate).findFirst().orElseThrow();
+        animate.setActivatingPlayer(p);
+        animate.resolve();
+        game.getAction().checkStaticAbilities();
+
+        // Conspiracy depends on the animation, so the creature types it sets replace Ape
+        AssertJUnit.assertTrue(village.isCreature());
+        AssertJUnit.assertTrue(village.getType().hasCreatureType("Elf"));
+        AssertJUnit.assertFalse(village.getType().hasCreatureType("Ape"));
+    }
+
+    @Test
+    public void testTypeLayerResolvedEffectInTimestampOrder() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        Card adaptation = addCard("Arcane Adaptation", p);
+        adaptation.setChosenType("Elf");
+        Card bear = addCard("Grizzly Bears", p);
+        Card frog = addCardToZone("Turn to Frog", p, ZoneType.Hand);
+        game.getAction().checkStaticAbilities();
+
+        SpellAbility frogSA = frog.getSpellAbilities().get(0);
+        frogSA.setActivatingPlayer(p);
+        frogSA.getTargets().add(bear);
+        frogSA.resolve();
+        game.getAction().checkStaticAbilities();
+
+        // no dependency, so the later Turn to Frog overwrites the Elf type
+        AssertJUnit.assertTrue(bear.getType().hasCreatureType("Frog"));
+        AssertJUnit.assertFalse(bear.getType().hasCreatureType("Elf"));
+    }
+
+    @Test
+    public void testResolvedTypeChangeKeptWhilePhasedOut() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        Card village = addCard("Treetop Village", p);
+        game.getAction().checkStaticAbilities();
+        SpellAbility animate = StreamUtil.stream(village.getSpellAbilities()).filter(sa -> sa.getApi() == ApiType.Animate).findFirst().orElseThrow();
+        animate.setActivatingPlayer(p);
+        animate.resolve();
+
+        village.phase(false);
+        game.getAction().checkStaticAbilities();
+
+        AssertJUnit.assertTrue(village.isPhasedOut());
+        AssertJUnit.assertTrue(village.getType().hasCreatureType("Ape"));
+    }
+
+    @Test
+    public void testBestowTypeChangeAndViewAfterUnattach() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        addCards("Forest", 5, p);
+        Card bear = addCard("Grizzly Bears", p);
+        Card satyr = addCardToZone("Boon Satyr", p, ZoneType.Hand);
+        game.getAction().checkStaticAbilities();
+
+        SpellAbility bestow = StreamUtil.stream(satyr.getSpellAbilities()).filter(SpellAbility::isBestow).findFirst().orElseThrow();
+        bestow.setActivatingPlayer(p);
+        bestow.getTargets().add(bear);
+        AssertJUnit.assertTrue(ComputerUtil.handlePlayingSpellAbility(p, bestow, null));
+        game.getStack().resolveStack();
+        game.getAction().checkStateEffects(true);
+
+        Card aura = game.getCardState(satyr);
+        AssertJUnit.assertEquals(bear, aura.getEntityAttachedTo());
+        AssertJUnit.assertTrue(aura.isAura());
+        AssertJUnit.assertFalse(aura.isCreature());
+
+        game.getAction().moveToGraveyard(bear, null);
+        game.getAction().checkStateEffects(true);
+
+        aura = game.getCardState(satyr);
+        AssertJUnit.assertTrue(aura.isCreature());
+        AssertJUnit.assertFalse(aura.isAura());
+        AssertJUnit.assertTrue(aura.getView().getCurrentState().getType().isCreature());
     }
 
     @Test

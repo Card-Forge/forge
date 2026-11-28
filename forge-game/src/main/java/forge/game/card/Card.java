@@ -134,7 +134,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, ICardChangedType> changedCardTypesByText = FSnapshotTable.createTree(); // Layer 3
     private final Table<Long, Long, ICardChangedType> changedCardTypesCharacterDefining = FSnapshotTable.createTree(); // Layer 4 CDA
-    private final Table<Long, Long, ICardChangedType> changedCardTypes = FSnapshotTable.createTree(); // Layer 4
+    private final Table<Long, Long, ICardChangedType> changedCardTypes = FSnapshotTable.createLinked(); // Layer 4, in the order the effects were applied
 
     private final Table<Long, Long, CardChangedName> changedCardNames = FSnapshotTable.createTree(); // Layer 3
     private final Table<Long, Long, IKeywordsChange> changedCardKeywordsByText = FSnapshotTable.createTree(); // Layer 3 by Text Change
@@ -184,6 +184,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private final Multimap<Long, Keyword> cantHaveKeywords = MultimapBuilder.hashKeys().hashSetValues().build();
 
     private final Map<CounterType, StaticAbility> counterTypeKeywordStatic = Maps.newHashMap();
+    // CR 611.2c effects of resolved abilities, kept as statics so the layer system orders them with the others
+    private final Map<Long, StaticAbility> resolvedEffectStatics = Maps.newHashMap();
 
     private final Map<Long, Integer> canBlockAdditional = Maps.newTreeMap();
     private final Set<Long> canBlockAny = Sets.newHashSet();
@@ -4132,9 +4134,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public final boolean removeChangedCardTypes(final long timestamp, final long staticId) {
-        return removeChangedCardTypes(timestamp, staticId, true);
-    }
     public final boolean removeChangedCardTypes(final long timestamp, final long staticId, final boolean updateView) {
         boolean removed = false;
         removed |= changedCardTypes.remove(timestamp, staticId) != null;
@@ -4145,6 +4144,53 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 updateTypesForView();
         }
         return removed;
+    }
+
+    public final void addChangedCardTypesEffect(final CardTypeView addType, final CardTypeView removeType, final boolean addAllCreatureTypes,
+            final Set<RemoveType> remove, final long timestamp) {
+        StringBuilder sb = new StringBuilder("Mode$ Continuous | AffectedDefined$ Self | Timestamp$ ").append(timestamp);
+        if (addType != null && !addType.isEmpty()) {
+            sb.append(" | AddType$ ").append(typeParam(addType));
+        }
+        if (removeType != null && !removeType.isEmpty()) {
+            sb.append(" | RemoveType$ ").append(typeParam(removeType));
+        }
+        if (addAllCreatureTypes) {
+            sb.append(" | AddAllCreatureTypes$ True");
+        }
+        for (RemoveType r : remove) {
+            sb.append(" | Remove").append(r.name()).append("$ True");
+        }
+        StaticAbility stAb = StaticAbility.create(sb.toString(), this, currentState, false);
+        resolvedEffectStatics.put(timestamp, stAb);
+        // apply now so the change shows before the next static check puts it in layer order
+        stAb.applyContinuousAbility(StaticAbilityLayer.TYPE, new CardCollection(this));
+        updateTypesForView();
+    }
+
+    private static String typeParam(final CardTypeView type) {
+        List<String> types = Lists.newArrayList();
+        type.getSupertypes().forEach(t -> types.add(t.name()));
+        type.getCoreTypes().forEach(t -> types.add(t.name()));
+        types.addAll(type.getSubtypes());
+        return String.join(" & ", types);
+    }
+
+    public final void removeChangedCardTypesEffect(final long timestamp, final boolean updateView) {
+        StaticAbility stAb = resolvedEffectStatics.remove(timestamp);
+        if (stAb == null) {
+            return;
+        }
+        // remove the entry here rather than through the StaticEffect, which skips the view update
+        removeChangedCardTypes(timestamp, stAb.getId(), updateView);
+        // an LKI copy's static keeps the original's id, so its StaticEffect is the original card's
+        if (!isLKI()) {
+            getGame().getStaticEffects().removeStaticEffect(stAb, StaticAbilityLayer.TYPE, true);
+        }
+    }
+
+    public final boolean isResolvedEffectStatic(final StaticAbility stAb) {
+        return resolvedEffectStatics.containsValue(stAb);
     }
 
     public final void updateTypeCache() {
@@ -6877,9 +6923,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
 
         bestowTimestamp = getGame().getNextTimestamp();
-        addChangedCardTypes(new CardType(Collections.singletonList("Aura"), true),
+        addChangedCardTypesEffect(new CardType(Collections.singletonList("Aura"), true),
                 new CardType(Collections.singletonList("Creature"), true),
-                false, EnumSet.of(RemoveType.EnchantmentTypes), bestowTimestamp, 0, updateView, false);
+                false, EnumSet.of(RemoveType.EnchantmentTypes), bestowTimestamp);
         addChangedCardKeywords(Collections.singletonList("Enchant:Creature"), Lists.newArrayList(),
                 false, bestowTimestamp, null, updateView);
     }
@@ -6893,7 +6939,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
 
         removeChangedCardKeywords(bestowTimestamp, 0, updateView);
-        removeChangedCardTypes(bestowTimestamp, 0, updateView);
+        removeChangedCardTypesEffect(bestowTimestamp, updateView);
         bestowTimestamp = -1;
     }
 
@@ -7119,6 +7165,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 result.add(e.getValue());
             }
         }
+        result.addAll(resolvedEffectStatics.values());
         return result;
     }
 
@@ -8250,6 +8297,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         for (Map.Entry<CounterType, StaticAbility> e : in.counterTypeKeywordStatic.entrySet()) {
             this.counterTypeKeywordStatic.put(e.getKey(), e.getValue().copy(this, true));
+        }
+        for (Map.Entry<Long, StaticAbility> e : in.resolvedEffectStatics.entrySet()) {
+            this.resolvedEffectStatics.put(e.getKey(), e.getValue().copy(this, true));
         }
     }
 }

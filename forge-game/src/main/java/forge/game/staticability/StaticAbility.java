@@ -340,6 +340,10 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (isSuppressed()) {
             return false;
         }
+        // effects of resolved abilities keep applying to the card in any zone, and while it is phased out
+        if (getHostCard().isResolvedEffectStatic(this)) {
+            return true;
+        }
         if (getHostCard().isPhasedOut()) {
             return false;
         }

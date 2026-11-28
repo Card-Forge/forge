@@ -1189,7 +1189,11 @@ public class GameAction {
                 // and may change if an effect that has not yet been applied becomes
                 // dependent on or independent of one or more other effects that have not yet been applied.
             }
-            staticAbilities.addAll(toAdd);
+            if (!toAdd.isEmpty()) {
+                staticAbilities.addAll(toAdd);
+                // later layers apply in list order, so gained statics keep timestamp order
+                staticAbilities.sort(effectOrder);
+            }
             for (Player p : game.getPlayers()) {
                 p.afterStaticAbilityLayer(layer);
             }
@@ -1304,7 +1308,8 @@ public class GameAction {
             return first;
         }
         // CR 611.2c continuous effects from resolved abilities always affect the same objects the same way
-        Predicate<StaticAbility> isResolved = stAb -> stAb.getHostCard().isImmutable() && !stAb.getHostCard().isEmblem();
+        Predicate<StaticAbility> isResolved = stAb -> (stAb.getHostCard().isImmutable() && !stAb.getHostCard().isEmblem())
+                || stAb.getHostCard().isResolvedEffectStatic(stAb);
         if (isResolved.test(first)) {
             return first;
         }

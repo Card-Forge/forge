@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -39,6 +40,10 @@ import java.util.function.Predicate;
  * hot pattern of continuous effects - "put one entry, read all values, repeat" for every lord on every creature -
  * linear instead of quadratic with a Guava copy per step. Guava-shaped views that are rarely needed
  * (rowMap(), columnMap(), toString()) are built lazily from the array, once per snapshot.</p>
+ *
+ * <p><b>Linked tables</b> ({@link #createLinked()}): the same flat array, kept in the order entries were first put
+ * instead of sorted. Overwriting an entry keeps its position; removing it and putting it again moves it last.
+ * Lookups scan the array, which suits the small per-card tables this is meant for.</p>
  *
  * <p><b>Hash tables</b> ({@link #createHash()}): backed by a Guava HashBasedTable that is copied on write, as
  * before. They are small and written rarely, and their iteration order (hash order) is kept unchanged.</p>
@@ -135,15 +140,30 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
     private static final class SortedSnap<R, C, V> extends Snap<R, C, V> {
         static final Object[] NO_DATA = new Object[0];
 
-        /** row0, column0, value0, row1, column1, value1, ... sorted by (row, column); exactly 3 * n elements. */
+        /** row0, column0, value0, row1, column1, value1, ... sorted by (row, column), or in insertion order when linked; exactly 3 * n elements. */
         final Object[] d;
         final int n;
+        final boolean linked;
         private volatile Table<R, C, V> table;
         private volatile Collection<V> values;
 
-        SortedSnap(Object[] d, int n) {
+        SortedSnap(Object[] d, int n, boolean linked) {
             this.d = d;
             this.n = n;
+            this.linked = linked;
+        }
+
+        /** Index of the entry (r, c), or -(insertionPoint + 1); a linked table always inserts at the end. */
+        static int search(Object[] d, int n, Object r, Object c, boolean linked) {
+            if (!linked) {
+                return search(d, n, r, c);
+            }
+            for (int i = 0; i < n; i++) {
+                if (r.equals(d[3 * i]) && c.equals(d[3 * i + 1])) {
+                    return i;
+                }
+            }
+            return -(n + 1);
         }
 
         static int cmp(Object a, Object b) {
@@ -177,7 +197,7 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
                 return -1;
             }
             try {
-                return search(d, n, r, c);
+                return search(d, n, r, c, linked);
             } catch (ClassCastException e) {
                 return -1;
             }
@@ -214,7 +234,7 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
         SortedSnap<R, C, V> withValue(int index, Object value) {
             final Object[] nd = d.clone();
             nd[3 * index + 2] = value;
-            return new SortedSnap<>(nd, n);
+            return new SortedSnap<>(nd, n, linked);
         }
 
         SortedSnap<R, C, V> inserted(int index, Object r, Object c, Object v) {
@@ -224,17 +244,17 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
             nd[3 * index + 1] = c;
             nd[3 * index + 2] = v;
             System.arraycopy(d, 3 * index, nd, 3 * index + 3, 3 * (n - index));
-            return new SortedSnap<>(nd, n + 1);
+            return new SortedSnap<>(nd, n + 1, linked);
         }
 
         SortedSnap<R, C, V> without(int index) {
             if (n == 1) {
-                return new SortedSnap<>(NO_DATA, 0);
+                return new SortedSnap<>(NO_DATA, 0, linked);
             }
             final Object[] nd = new Object[3 * (n - 1)];
             System.arraycopy(d, 0, nd, 0, 3 * index);
             System.arraycopy(d, 3 * index + 3, nd, 3 * index, 3 * (n - index - 1));
-            return new SortedSnap<>(nd, n - 1);
+            return new SortedSnap<>(nd, n - 1, linked);
         }
 
         @Override int size() { return n; }
@@ -250,6 +270,14 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
         @Override
         boolean containsRow(Object r) {
             if (n == 0 || r == null) {
+                return false;
+            }
+            if (linked) {
+                for (int i = 0; i < n; i++) {
+                    if (r.equals(d[3 * i])) {
+                        return true;
+                    }
+                }
                 return false;
             }
             try {
@@ -306,6 +334,15 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
             if (n == 0 || r == null) {
                 return Collections.emptyMap();
             }
+            if (linked) {
+                final Map<C, V> out = new LinkedHashMap<>();
+                for (int i = 0; i < n; i++) {
+                    if (r.equals(d[3 * i])) {
+                        out.put((C) d[3 * i + 1], (V) d[3 * i + 2]);
+                    }
+                }
+                return out.isEmpty() ? Collections.<C, V>emptyMap() : Collections.unmodifiableMap(out);
+            }
             try {
                 final int lo = rowLow(r);
                 if (lo >= n || cmp(d[3 * lo], r) != 0) {
@@ -322,7 +359,7 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
             if (n == 0 || c == null) {
                 return Collections.emptyMap();
             }
-            final Map<R, V> out = new LinkedHashMap<>();         // rows come out ascending, as in Guava
+            final Map<R, V> out = new LinkedHashMap<>();         // rows come out in table order: ascending, as in Guava, unless linked
             for (int i = 0; i < n; i++) {
                 if (c.equals(d[3 * i + 1])) {
                     out.put((R) d[3 * i], (V) d[3 * i + 2]);
@@ -335,7 +372,7 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
         Table<R, C, V> table() {
             Table<R, C, V> t = table;
             if (t == null) {
-                final TreeBasedTable raw = TreeBasedTable.create();
+                final Table raw = linked ? HashBasedTable.create() : TreeBasedTable.create();
                 for (int i = 0; i < n; i++) {
                     raw.put(d[3 * i], d[3 * i + 1], d[3 * i + 2]);
                 }
@@ -347,6 +384,13 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
 
         @Override
         List<R> computeRowKeys() {
+            if (linked) {
+                final Set<Object> set = new LinkedHashSet<>();
+                for (int i = 0; i < n; i++) {
+                    set.add(d[3 * i]);
+                }
+                return new ArrayList<>((Set<R>) (Set) set);
+            }
             final List<R> out = new ArrayList<>();
             Object last = null;
             for (int i = 0; i < n; i++) {
@@ -361,7 +405,7 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
 
         @Override
         List<C> computeColumnKeys() {
-            final TreeSet<Object> set = new TreeSet<>();
+            final Set<Object> set = linked ? new LinkedHashSet<>() : new TreeSet<>();
             for (int i = 0; i < n; i++) {
                 set.add(d[3 * i + 1]);
             }
@@ -522,16 +566,23 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
     // ======================================================================================================
 
     private final boolean sorted;
+    private final boolean linked;
     private transient volatile Snap<R, C, V> snap;
 
-    private FSnapshotTable(boolean sorted, Snap<R, C, V> initial) {
+    private FSnapshotTable(boolean sorted, boolean linked, Snap<R, C, V> initial) {
         this.sorted = sorted;
+        this.linked = linked;
         this.snap = initial;
     }
 
     /** Replacement for TreeBasedTable.create() */
     public static <R extends Comparable, C extends Comparable, V> FSnapshotTable<R, C, V> createTree() {
-        return new FSnapshotTable<R, C, V>(true, new SortedSnap<R, C, V>(SortedSnap.NO_DATA, 0));
+        return new FSnapshotTable<R, C, V>(true, false, new SortedSnap<R, C, V>(SortedSnap.NO_DATA, 0, false));
+    }
+
+    /** Insertion-ordered table: iteration follows the order entries were first put, not the keys. */
+    public static <R, C, V> FSnapshotTable<R, C, V> createLinked() {
+        return new FSnapshotTable<R, C, V>(true, true, new SortedSnap<R, C, V>(SortedSnap.NO_DATA, 0, true));
     }
 
     /** Replacement for TreeBasedTable.create(table) */
@@ -543,16 +594,20 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
 
     /** Replacement for HashBasedTable.create() */
     public static <R, C, V> FSnapshotTable<R, C, V> createHash() {
-        return new FSnapshotTable<R, C, V>(false, new HashSnap<R, C, V>(HashBasedTable.<R, C, V>create()));
+        return new FSnapshotTable<R, C, V>(false, false, new HashSnap<R, C, V>(HashBasedTable.<R, C, V>create()));
     }
 
     /** Replacement for HashBasedTable.create(table) */
     public static <R, C, V> FSnapshotTable<R, C, V> createHash(Table<? extends R, ? extends C, ? extends V> src) {
-        return new FSnapshotTable<R, C, V>(false, new HashSnap<R, C, V>(HashBasedTable.<R, C, V>create(src)));
+        return new FSnapshotTable<R, C, V>(false, false, new HashSnap<R, C, V>(HashBasedTable.<R, C, V>create(src)));
     }
 
     private SortedSnap<R, C, V> sortedSnap() {
         return (SortedSnap<R, C, V>) snap;
+    }
+
+    private SortedSnap<R, C, V> emptySortedSnap() {
+        return new SortedSnap<R, C, V>(SortedSnap.NO_DATA, 0, linked);
     }
 
     private Table<R, C, V> hashCopy() {
@@ -577,7 +632,7 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
             return old;
         }
         final SortedSnap<R, C, V> s = sortedSnap();
-        final int i = SortedSnap.search(s.d, s.n, rowKey, columnKey);
+        final int i = SortedSnap.search(s.d, s.n, rowKey, columnKey, s.linked);
         if (i >= 0) {
             final V old = (V) s.d[3 * i + 2];
             if (old == value) {
@@ -630,7 +685,7 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
             if (r == null || c == null || v == null) {
                 throw new NullPointerException();
             }
-            final int i = SortedSnap.search(d, n, r, c);
+            final int i = SortedSnap.search(d, n, r, c, s.linked);
             if (i >= 0) {
                 if (d[3 * i + 2] == v) {
                     continue;
@@ -655,14 +710,14 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
             changed = true;
         }
         if (changed) {
-            snap = new SortedSnap<>(d.length == 3 * n ? d : Arrays.copyOf(d, 3 * n), n);
+            snap = new SortedSnap<>(d.length == 3 * n ? d : Arrays.copyOf(d, 3 * n), n, s.linked);
         }
     }
 
     @Override
     public synchronized void clear() {
         if (snap.size() == 0) return;
-        snap = sorted ? new SortedSnap<R, C, V>(SortedSnap.NO_DATA, 0) : new HashSnap<R, C, V>(HashBasedTable.<R, C, V>create());
+        snap = sorted ? emptySortedSnap() : new HashSnap<R, C, V>(HashBasedTable.<R, C, V>create());
     }
 
     /**
@@ -705,7 +760,7 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
                 w++;
             }
         }
-        snap = w == 0 ? new SortedSnap<R, C, V>(SortedSnap.NO_DATA, 0) : new SortedSnap<R, C, V>(Arrays.copyOf(out, 3 * w), w);
+        snap = w == 0 ? emptySortedSnap() : new SortedSnap<R, C, V>(Arrays.copyOf(out, 3 * w), w, s.linked);
         return true;
     }
 
@@ -761,7 +816,7 @@ public final class FSnapshotTable<R, C, V> implements Table<R, C, V>, Serializab
         in.defaultReadObject();
         final Table<R, C, V> t = (Table<R, C, V>) in.readObject();
         if (sorted) {
-            snap = new SortedSnap<R, C, V>(SortedSnap.NO_DATA, 0);
+            snap = emptySortedSnap();
             putAll(t);
         } else {
             snap = new HashSnap<>(t);

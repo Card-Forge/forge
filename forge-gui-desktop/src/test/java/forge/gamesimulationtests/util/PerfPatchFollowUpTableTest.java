@@ -179,6 +179,25 @@ public class PerfPatchFollowUpTableTest {
     }
 
     @Test
+    public void linked_iteratesInFlatInsertionOrder() {
+        FSnapshotTable<Long, Long, String> t = FSnapshotTable.createLinked();
+        t.put(5L, 1L, "a");
+        t.put(3L, 1L, "b");
+        t.put(5L, 2L, "c");                                      // same row as "a", but applied after "b"
+        t.put(3L, 1L, "b2");                                     // overwriting keeps the position
+        eq(new ArrayList<>(t.values()), Arrays.asList("a", "b2", "c"), "values");
+
+        t.remove(5L, 1L);
+        t.put(5L, 1L, "a2");                                     // removed and put again goes last
+        eq(new ArrayList<>(t.values()), Arrays.asList("b2", "c", "a2"), "values after re-put");
+        eq(t.get(5L, 2L), "c", "get");
+
+        FSnapshotTable<Long, Long, String> copy = FSnapshotTable.createLinked();
+        copy.putAll(t);
+        eq(new ArrayList<>(copy.cellSet()), new ArrayList<>(t.cellSet()), "putAll keeps the order");
+    }
+
+    @Test
     public void putAll_mergesAndOverwritesInOneStep() {
         FSnapshotTable<Long, Long, String> t = FSnapshotTable.createTree();
         Table<Long, Long, String> ref = TreeBasedTable.create();
