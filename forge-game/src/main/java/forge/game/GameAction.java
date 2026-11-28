@@ -1437,6 +1437,8 @@ public class GameAction {
         boolean orderedDesCreats = false;
         boolean orderedNoRegCreats = false;
         boolean orderedSacrificeList = false;
+        // cards of a combined pass already ordered, so a survivor is not asked about again
+        CardCollection orderedSbaDeaths = new CardCollection();
 
         for (int q = 0; q < 9; q++) {
             boolean checkAgain = false;
@@ -1588,32 +1590,85 @@ public class GameAction {
             // (e.g. helpful for Erebos's Titan and another creature dealing lethal damage to each other simultaneously)
             setHoldCheckingStaticAbilities(true);
 
-            if (noRegCreats.size() > 1 && !orderedNoRegCreats) {
-                noRegCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, noRegCreats, ZoneType.Graveyard, null);
-                orderedNoRegCreats = true;
-            }
-            for (Card c : noRegCreats) {
-                sacrificeDestroy(c, null, mapParams);
-            }
-
-            if (desCreats != null) {
-                if (desCreats.size() > 1 && !orderedDesCreats) {
-                    desCreats = CardLists.filter(desCreats, Card::canBeDestroyed);
-                    if (!desCreats.isEmpty()) {
-                        desCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, desCreats, ZoneType.Graveyard, null);
+            // CR 704.3, 404.3: cards from different lists dying in one pass are one simultaneous move,
+            // so their owners order the union once (e.g. a creature and a planeswalker from Volcanic Salvo)
+            CardCollection combinedDes = desCreats == null ? null : CardLists.filter(desCreats, Card::canBeDestroyed);
+            CardCollection combinedSba = null;
+            if ((noRegCreats.isEmpty() ? 0 : 1)
+                    + (combinedDes == null || combinedDes.isEmpty() ? 0 : 1)
+                    + (sacrificeList.isEmpty() ? 0 : 1) > 1) {
+                combinedSba = new CardCollection(noRegCreats);
+                if (combinedDes != null) {
+                    for (Card c : combinedDes) {
+                        if (!combinedSba.contains(c)) {
+                            combinedSba.add(c);
+                        }
                     }
-                    orderedDesCreats = true;
                 }
-                for (Card c : desCreats) {
-                    destroy(c, null, true, mapParams);
+                for (Card c : sacrificeList) {
+                    if (!combinedSba.contains(c)) {
+                        combinedSba.add(c);
+                    }
+                }
+                CardCollection toOrder = new CardCollection();
+                for (Card c : combinedSba) {
+                    if (!orderedSbaDeaths.contains(c)) {
+                        toOrder.add(c);
+                    }
+                }
+                if (toOrder.size() > 1) {
+                    CardCollection ordered = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, toOrder, ZoneType.Graveyard, null);
+                    orderedSbaDeaths.addAll(ordered);
+                    for (Card c : combinedSba) {
+                        if (!ordered.contains(c)) {
+                            ordered.add(c);
+                        }
+                    }
+                    combinedSba = ordered;
                 }
             }
 
-            if (sacrificeList.size() > 1 && !orderedSacrificeList) {
-                sacrificeList = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, sacrificeList, ZoneType.Graveyard, null);
-                orderedSacrificeList = true;
+            if (combinedSba != null) {
+                Multimap<Player, Card> sacrificeLki = MultimapBuilder.hashKeys().arrayListValues().build();
+                CardCollection sacrificed = new CardCollection();
+                for (Card c : combinedSba) {
+                    if (noRegCreats.contains(c)) {
+                        sacrificeDestroy(c, null, mapParams);
+                    } else if (combinedDes != null && combinedDes.contains(c)) {
+                        destroy(c, null, true, mapParams);
+                    } else if (sacrificeList.contains(c)) {
+                        sacrificeOne(c, null, true, mapParams, sacrificeLki, sacrificed, false);
+                    }
+                }
+                runSacrificedOnce(sacrificeLki, null);
+            } else {
+                if (noRegCreats.size() > 1 && !orderedNoRegCreats) {
+                    noRegCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, noRegCreats, ZoneType.Graveyard, null);
+                    orderedNoRegCreats = true;
+                }
+                for (Card c : noRegCreats) {
+                    sacrificeDestroy(c, null, mapParams);
+                }
+
+                if (desCreats != null) {
+                    if (desCreats.size() > 1 && !orderedDesCreats) {
+                        desCreats = CardLists.filter(desCreats, Card::canBeDestroyed);
+                        if (!desCreats.isEmpty()) {
+                            desCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, desCreats, ZoneType.Graveyard, null);
+                        }
+                        orderedDesCreats = true;
+                    }
+                    for (Card c : desCreats) {
+                        destroy(c, null, true, mapParams);
+                    }
+                }
+
+                if (sacrificeList.size() > 1 && !orderedSacrificeList) {
+                    sacrificeList = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, sacrificeList, ZoneType.Graveyard, null);
+                    orderedSacrificeList = true;
+                }
+                sacrifice(sacrificeList, null, true, mapParams);
             }
-            sacrifice(sacrificeList, null, true, mapParams);
 
             setHoldCheckingStaticAbilities(false);
 
@@ -2142,34 +2197,43 @@ public class GameAction {
 
         CardCollection result = new CardCollection();
         for (Card c : list) {
-            if (c == null) {
-                continue;
-            }
-
-            if (!c.canBeSacrificedBy(source, effect)) {
-                continue;
-            }
-
-            Card lkiCopy = ((CardCollection) params.get(AbilityKey.LastStateBattlefield)).get(c);
-            c.getController().addSacrificedThisTurn(lkiCopy, source);
-            lki.put(c.getController(), lkiCopy);
-
-            Card changed = sacrificeDestroy(c, source, params);
-            if (changed != null) {
-                result.add(changed);
-            }
-            if (showRevealDialog) {
-                final String message = Localizer.getInstance().getMessage("lblSacrifice");
-                reveal(result, ZoneType.Graveyard, c.getOwner(), false, message, false);
-            }
+            sacrificeOne(c, source, effect, params, lki, result, showRevealDialog);
         }
+        runSacrificedOnce(lki, source);
+        return result;
+    }
+
+    /** The per-card half of {@link #sacrifice}, shared with the combined state-based action pass. */
+    private Card sacrificeOne(final Card c, final SpellAbility source, final boolean effect,
+            Map<AbilityKey, Object> params, Multimap<Player, Card> lki, CardCollection moved,
+            final boolean showRevealDialog) {
+        if (c == null || !c.canBeSacrificedBy(source, effect)) {
+            return null;
+        }
+
+        Card lkiCopy = ((CardCollection) params.get(AbilityKey.LastStateBattlefield)).get(c);
+        c.getController().addSacrificedThisTurn(lkiCopy, source);
+        lki.put(c.getController(), lkiCopy);
+
+        Card changed = sacrificeDestroy(c, source, params);
+        if (changed != null) {
+            moved.add(changed);
+        }
+        if (showRevealDialog) {
+            final String message = Localizer.getInstance().getMessage("lblSacrifice");
+            reveal(moved, ZoneType.Graveyard, c.getOwner(), false, message, false);
+        }
+        return changed;
+    }
+
+    /** Runs the one SacrificedOnce trigger per sacrificing controller. */
+    private void runSacrificedOnce(Multimap<Player, Card> lki, final SpellAbility source) {
         for (Map.Entry<Player, Collection<Card>> e : lki.asMap().entrySet()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(e.getKey());
             runParams.put(AbilityKey.Cards, new CardCollection(e.getValue()));
             runParams.put(AbilityKey.Cause, source);
             game.getTriggerHandler().runTrigger(TriggerType.SacrificedOnce, runParams, false);
         }
-        return result;
     }
 
     public final boolean destroy(final Card c, final SpellAbility sa, final boolean regenerate, Map<AbilityKey, Object> params) {
