@@ -21,6 +21,49 @@ jobs:
           java-version: ${{ matrix.java }}
           cache: 'maven'
 
+      - name: Choose test scope
+        id: scope
+        if: github.event_name == 'pull_request'
+        run: |
+          yq --version
+          scopes=.github/test-scopes.yml
+          changed=$(git diff --name-only --no-renames HEAD^1 HEAD)
+
+          # Treat a changed card script as a change to each test file and each file in res/lists that names the card.
+          # Names come from the Name: lines of the old and new script, so renamed and deleted cards still match.
+          names=$(grep '^forge-gui/res/cardsfolder/' <<< "$changed" | while read -r script; do
+            { git show "HEAD^1:$script" 2>/dev/null; git show "HEAD:$script" 2>/dev/null; } | sed -n 's/^Name://p'
+          done | tr -d '\r' | grep -v '^$' | sort -u || true)
+          if [ -n "$names" ]; then
+            changed+=$'\n'$(grep -rlF -f <(echo "$names") forge-gui-desktop/src/test forge-gui/res/lists || true)
+          fi
+
+          matches() {
+            while read -r pattern; do
+              while read -r file; do
+                [[ $file == $pattern ]] && return 0
+              done <<< "$changed"
+            done < <(yq ".\"$1\"[]" "$scopes")
+            return 1
+          }
+
+          if matches all; then
+            echo "run: all"
+            exit 0
+          fi
+
+          excludes="$RUNNER_TEMP/excludes.txt"
+          : > "$excludes"
+          for category in $(yq 'keys | .[] | select(. != "all")' "$scopes"); do
+            if matches "$category"; then
+              echo "run:  $category"
+            else
+              echo "skip: $category"
+              echo "forge/$category/**" >> "$excludes"
+            fi
+          done
+          echo "args=-Dsurefire.excludesFile=$excludes" >> "$GITHUB_OUTPUT"
+
       - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
         run: command -v Xvfb >/dev/null 2>&1 || { sudo apt update && sudo apt install -y xvfb; }
 
@@ -34,7 +77,7 @@ jobs:
             git -c core.quotePath=false diff -U0 HEAD^1 HEAD -- forge-gui/res > "$RUNNER_TEMP/pr.diff"
             CARDSCRIPT="-Dcardscript.diff=$RUNNER_TEMP/pr.diff"
           fi
-          mvn -U -B clean test $CARDSCRIPT
+          mvn -U -B clean test $CARDSCRIPT ${{ steps.scope.outputs.args }}
 
       # CardScriptLinterTest writes its findings here; hand them, plus the PR number,
       # to the Card-script review workflow. A pull_request build has a read-only token
