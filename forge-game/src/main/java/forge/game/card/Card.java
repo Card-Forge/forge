@@ -7109,6 +7109,39 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         getUnhiddenKeywords(state).applyStaticAbility(list);
     }
 
+    /**
+     * Characteristic-defining statics (Changeling, Devoid) of keywords already removed from the keyword cache by an
+     * immediate "loses all abilities"; they still apply in layers 4/5 before the ability loss (CR 613.6).
+     */
+    public final List<StaticAbility> getCharacteristicStaticsLostWithKeywords() {
+        final CardState state = currentState;
+        final KeywordCollection kept = getUnhiddenKeywords(state);
+        List<StaticAbility> result = Collections.emptyList();
+        result = addLostCharacteristicStatics(result, state.getIntrinsicKeywords(), kept);
+        for (final KeywordsChange kc : changedCardKeywords.values()) {
+            result = addLostCharacteristicStatics(result, kc.getKeywords(), kept);
+        }
+        return result;
+    }
+
+    private static List<StaticAbility> addLostCharacteristicStatics(List<StaticAbility> result,
+            final Collection<KeywordInterface> candidates, final KeywordCollection kept) {
+        for (final KeywordInterface inst : candidates) {
+            if (kept.getValues(inst.getKeyword()).contains(inst)) {
+                continue;
+            }
+            for (final StaticAbility stAb : inst.getStaticAbilities()) {
+                if (stAb.hasParam("CharacteristicDefining")) {
+                    if (result.isEmpty()) {
+                        result = new ArrayList<>();
+                    }
+                    result.add(stAb);
+                }
+            }
+        }
+        return result;
+    }
+
     public final FCollectionView<StaticAbility> getHiddenStaticAbilities() {
         FCollection<StaticAbility> result = new FCollection<>();
         if (this.isInPlay() && this.isSuspected()) {

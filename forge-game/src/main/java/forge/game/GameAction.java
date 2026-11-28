@@ -1127,6 +1127,12 @@ public class GameAction {
                     staticAbilities.add(stAb);
                 }
             }
+            // CDAs of Changeling/Devoid still apply after an immediate "loses all abilities" (CR 613.6)
+            for (StaticAbility stAb : co.getCharacteristicStaticsLostWithKeywords()) {
+                if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
+                    staticAbilities.add(stAb);
+                }
+            }
             if (!co.getStaticCommandList().isEmpty()) {
                 staticList.add(co);
             }
