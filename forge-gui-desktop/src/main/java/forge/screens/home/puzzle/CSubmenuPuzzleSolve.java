@@ -80,6 +80,18 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
             return false;
         }
 
+        startPuzzle(selected, true);
+        return true;
+    }
+
+    /**
+     * Starts a match laid out from the given puzzle. Shared by the Solve button and the
+     * {@code puzzle <file>} launch mode, so both set the game up the same way.
+     *
+     * @param recordSolve whether winning marks the puzzle as completed; off for ad-hoc test boards,
+     *                    which could otherwise share a file name with a real puzzle.
+     */
+    public static void startPuzzle(final Puzzle selected, final boolean recordSolve) {
         SwingUtilities.invokeLater(() -> {
             SOverlayUtils.startGameOverlay();
             SOverlayUtils.showOverlay();
@@ -92,7 +104,9 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
             hostedMatch.refreshTitle();
         });
 
-        hostedMatch.setEndGameHook((() -> selected.savePuzzleSolve(hostedMatch.getGame().getOutcome().isWinner(GamePlayerUtil.getGuiPlayer()))));
+        if (recordSolve) {
+            hostedMatch.setEndGameHook((() -> selected.savePuzzleSolve(hostedMatch.getGame().getOutcome().isWinner(GamePlayerUtil.getGuiPlayer()))));
+        }
 
         final List<RegisteredPlayer> players = new ArrayList<>();
         final RegisteredPlayer human = new RegisteredPlayer(new Deck()).setPlayer(GamePlayerUtil.getGuiPlayer());
@@ -108,7 +122,5 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
         hostedMatch.startMatch(rules, null, players, human, GuiBase.getInterface().getNewGuiGame());
 
         SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
-
-        return true;
     }
 }

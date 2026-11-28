@@ -45,4 +45,15 @@ public class PuzzleIO {
         return puzzles;
     }
 
+    /**
+     * Loads a single puzzle from any path, so test boards don't have to live in the puzzle directory.
+     */
+    public static Puzzle loadPuzzle(final File file) {
+        if (!file.isFile()) {
+            throw new RuntimeException("Puzzle file not found -- " + file.getAbsolutePath());
+        }
+        final List<String> pfData = FileUtil.readFile(file);
+        final String filename = file.getName().replace(SUFFIX_DATA, "");
+        return new Puzzle(FileSection.parseSections(pfData), filename, false);
+    }
 }

@@ -254,6 +254,7 @@ public enum FView {
 		//start background music
 		SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
 
+		StartupPuzzle.startIfPending();
 	}
 
 	// will populate remainingFiles with remaining files if not null, returns whether any files have
