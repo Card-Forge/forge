@@ -197,13 +197,13 @@ public class VZone implements IVDoc<CZone> {
 
         @Override
         public void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-            getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
+            getMatchUI().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
             super.mouseLeftClicked(panel, evt);
         }
 
         @Override
         public void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-            getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
+            getMatchUI().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
             super.mouseRightClicked(panel, evt);
         }
     }
