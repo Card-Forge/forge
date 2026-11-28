@@ -209,9 +209,9 @@ public class DigEffect extends SpellAbilityEffect {
                     game.getAction().reveal(top, p, false);
                 }
                 else if (sa.hasParam("RevealOptional")) {
-                    final Card cardToShow = top.size() == 1 ? top.get(0) : null;
+                    // Ask before looking; do not pass the top card or it leaks via tempShowCard.
                     hasRevealed = p.getController().confirmAction(sa, null,
-                            Localizer.getInstance().getMessage("lblRevealCardToOtherPlayers"), cardToShow, null);
+                            Localizer.getInstance().getMessage("lblRevealCardToOtherPlayers"), null, null);
                     if (hasRevealed) {
                         game.getAction().reveal(top, p);
                     }
