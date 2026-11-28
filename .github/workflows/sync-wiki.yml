@@ -16,7 +16,7 @@ jobs:
     if: github.repository_owner == 'Card-Forge'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - name: fix md links for Gollum
         run: find ${{ github.workspace }}/docs/ -type f -name "*.md" -exec sed -i -E 's|(\[[^]]+]\()([^)]+\/)*([^).]+).md(#)*([[:alnum:]]*)\)|\1\3\4\5)|g' '{}' \;
       - name: fix image links for Gollum
