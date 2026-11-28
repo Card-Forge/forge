@@ -3,6 +3,7 @@ package forge.screens.settings;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.Iterables;
 import forge.Forge;
+import forge.StaticData;
 import forge.assets.FSkinFont;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
@@ -45,6 +46,8 @@ public class CardImageBrowserScreen extends FScreen {
     private final FComboBox<String> cbxIndexLang;
     private final FCheckBox         cbPreferLangForUnique;
     private final Map<String, String> cardLangMapping;
+    private final FCheckBox         cbIncludeTokens;
+    private final FCheckBox         cbOverwrite;
     private final FProgressBar      bulkSyncProgress;
     private final FButton           btnClearCdnCache;
 
@@ -81,6 +84,13 @@ public class CardImageBrowserScreen extends FScreen {
                 lblMissing.setBounds(x, y, w, STAT_HEIGHT);
                 y += STAT_HEIGHT + PADDING * 5;
 
+                float checkboxHeight = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
+                cbIncludeTokens.setBounds(x, y, w, checkboxHeight);
+                y += checkboxHeight + PADDING;
+
+                cbOverwrite.setBounds(x, y, w, checkboxHeight);
+                y += checkboxHeight + PADDING;
+
                 float btnW = Math.min(w * 0.6f, Utils.AVG_FINGER_HEIGHT * 4);
                 btnDownload.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
                 y += BTN_HEIGHT + PADDING;
@@ -91,7 +101,6 @@ public class CardImageBrowserScreen extends FScreen {
                 btnSyncBulkData.setBounds(x + (w - btnW) / 2f, y, btnW, BTN_HEIGHT);
                 y += BTN_HEIGHT + PADDING;
 
-                float checkboxHeight = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
                 cbPreferLangForUnique.setBounds(x, y, w, checkboxHeight);
                 y += checkboxHeight + PADDING;
 
@@ -178,6 +187,11 @@ public class CardImageBrowserScreen extends FScreen {
         lblDownloaded = scroller.add(new FLabel.Builder().text("--").font(STAT_FONT).align(Align.center).build());
         lblMissing    = scroller.add(new FLabel.Builder().text("--").font(STAT_FONT).align(Align.center).build());
 
+        // ── Download options ─────────────────────────────────────────────────
+        cbIncludeTokens = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("cbIncludeTokenImages")));
+        cbIncludeTokens.setCommand(e -> scheduleStatsUpdate());
+        cbOverwrite = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("cbOverwriteImages")));
+
         // ── Download button ──────────────────────────────────────────────────
         btnDownload = scroller.add(new FButton(Forge.getLocalizer().getMessage("btnDownloadCardImages")));
         btnDownload.setCommand(e -> startDownload());
@@ -225,16 +239,30 @@ public class CardImageBrowserScreen extends FScreen {
         lblMissing.setText(Forge.getLocalizer().getMessage("lblMissing") + ": ...");
 
         final Predicate<PaperCard> combined = buildCurrentFilter();
+        final Predicate<CardEdition> editionFilter = buildCurrentEditionFilter();
+        final boolean withTokens = cbIncludeTokens.isSelected();
 
         FThreads.invokeInBackgroundThread(() -> {
             int total = 0, downloaded = 0, missing = 0;
+            final Set<CardEdition> tokenEditions = new HashSet<>();
             for (PaperCard card : Iterables.concat(
                     FModel.getMagicDb().getCommonCards().getAllCards(),
                     FModel.getMagicDb().getVariantCards().getAllCards())) {
                 if (combined.test(card)) {
                     total++;
                     if (card.hasImage()) { downloaded++; } else { missing++; }
+                    if (withTokens) {
+                        final CardEdition edition = StaticData.instance().getEditions().get(card.getEdition());
+                        if (GuiDownloadFilteredCardImages.hasTokenImages(edition)) { tokenEditions.add(edition); }
+                    }
                 }
+            }
+            if (withTokens) {
+                GuiDownloadFilteredCardImages.addTokenOnlyEditions(tokenEditions, editionFilter);
+                final int[] tokens = GuiDownloadFilteredCardImages.countTokenImages(tokenEditions);
+                total += tokens[0];
+                downloaded += tokens[1];
+                missing += tokens[2];
             }
 
             // Only apply the result if no newer refresh has been triggered
@@ -254,7 +282,7 @@ public class CardImageBrowserScreen extends FScreen {
     // =========================================================================
 
     private void startDownload() {
-        new GuiDownloader(new GuiDownloadFilteredCardImages(buildCurrentFilter()), finished -> {
+        new GuiDownloader(new GuiDownloadFilteredCardImages(buildCurrentFilter(), buildCurrentEditionFilter(), cbIncludeTokens.isSelected(), cbOverwrite.isSelected()), finished -> {
             if (finished) { scheduleStatsUpdate(); } // re-check counts after download
         }).show();
     }
@@ -369,6 +397,16 @@ public class CardImageBrowserScreen extends FScreen {
     // =========================================================================
     //  Helpers
     // =========================================================================
+
+    /**
+     * Whether an edition is selected, for the editions that have no cards of their own (Old Border Custom, Duelist
+     * Magazine): there is no search text and the edition is in the chosen format or sets.
+     */
+    private Predicate<CardEdition> buildCurrentEditionFilter() {
+        final boolean noSearch = txtSearch.getText().trim().isEmpty();
+        final GameFormat format = selectedFormat;
+        return edition -> noSearch && (format == null || format.isSetLegal(edition.getCode()));
+    }
 
     /** Builds the combined card predicate from the current search field and format selection. */
     private Predicate<PaperCard> buildCurrentFilter() {

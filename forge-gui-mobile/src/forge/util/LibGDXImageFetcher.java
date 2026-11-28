@@ -5,6 +5,7 @@ import forge.Forge;
 import forge.adventure.data.ConfigData;
 import forge.adventure.util.Config;
 import forge.gui.GuiBase;
+import forge.gui.download.GuiDownloadService;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import io.sentry.Sentry;
@@ -50,7 +51,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
         }
 
         private boolean doFetch(String urlToDownload) throws IOException {
-            if (disableHostedDownload && urlToDownload.startsWith(ForgeConstants.URL_CARDFORGE)) {
+            if (isHostedDownloadDisabled(urlToDownload)) {
                 // Don't try to download card images from cardforge servers
                 return false;
             }
@@ -69,6 +70,9 @@ public class LibGDXImageFetcher extends ImageFetcher {
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
             ScryfallRateLimiter.acquire(urlToDownload);
+            if (ScryfallRateLimiter.shouldSkip(urlToDownload)) {
+                return false; // a 429 came in while this download waited for its turn
+            }
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
             c.setRequestProperty("Accept", "*/*");
             c.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
@@ -84,8 +88,8 @@ public class LibGDXImageFetcher extends ImageFetcher {
 
                 if (responseCode == 429 && ScryfallRateLimiter.isApiUrl(urlToDownload)) {
                     Sentry.captureMessage("Device has been rate limited. Adding reduction of download attempts for this device. " + urlToDownload);
-                    ScryfallRateLimiter.noteIfRateLimited(responseCode, urlToDownload, c.getHeaderField("Retry-After"));
                 }
+                ScryfallRateLimiter.noteIfRateLimited(responseCode, urlToDownload, c.getHeaderField("Retry-After"));
 
                 c.disconnect();
                 return false;
@@ -113,6 +117,13 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 // never leave a poisoned 0-byte cache file ("downloaded" but
                 // undisplayable, and never retried because the file exists)
                 System.err.println("  Downloaded 0 bytes, skipping");
+                destFile.delete();
+                c.disconnect();
+                return false;
+            }
+            if (!GuiDownloadService.isWholeDownload(destFile.file(), newdespath, c.getContentLengthLong())) {
+                // a cut-off transfer or an error page answered with a 200: the same check as the bulk download, so neither is installed
+                System.err.println("  Not a whole image, skipping");
                 destFile.delete();
                 c.disconnect();
                 return false;

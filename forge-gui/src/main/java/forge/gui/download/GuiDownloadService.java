@@ -35,9 +35,18 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.*;
 import java.net.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,10 +79,34 @@ public abstract class GuiDownloadService implements Runnable {
 
     // Progress variables
     private Map<String, String> files; // local path -> url
-    protected boolean cancel;
+    protected volatile boolean cancel;
     private final long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int tptr = 0;
+    /**
+     * How many images a desktop fetches at the same time from a host that has no rate limit (the Scryfall CDN); requests
+     * to the Scryfall API and to paced hosts still go one after the other through {@link ScryfallRateLimiter}.
+     * Speed grows with the worker count until the connection is full, and the workers needed for that are about
+     * 1.35 x (images per second the connection carries) x (round trip + time to first byte). Measured on a desktop JVM
+     * through an emulated network with 90 KB images: 20 workers reach the full speed of every path up to 100 Mbit at
+     * 100 ms or 300 Mbit at 30 ms (16 reach only 85-92% there) and more workers add nothing, only longer or faster paths gain.
+     */
+    private static final int PARALLEL_DOWNLOADS = 20;
+    /**
+     * Mobile ports fetch fewer at a time. The measurement above says nothing about what a phone gains from more
+     * connections, while each one costs memory and CPU that a phone has little of and shares a single radio.
+     */
+    private static final int MOBILE_PARALLEL_DOWNLOADS = 6;
+    private static final int CONNECT_TIMEOUT_MS = 10_000;
+    private static final int READ_TIMEOUT_MS = 30_000;
+    /** Separates alternative urls in a value of {@link #getNeededFiles()}; they are tried in order until one saves the file. */
+    public static final String URL_SEPARATOR = "\n";
+    private static final byte[] PNG_SIGNATURE = {(byte) 0x89, 'P', 'N', 'G', '\r', '\n', 0x1A, '\n'};
+    /** The last bytes of every PNG: its empty IEND chunk (length, type, CRC). */
+    private static final byte[] PNG_END = {0, 0, 0, 0, 'I', 'E', 'N', 'D', (byte) 0xAE, 0x42, 0x60, (byte) 0x82};
+
     private int skipped = 0;
+    private int completed = 0;
+    private final AtomicInteger started = new AtomicInteger();
     private long lTime = System.currentTimeMillis();
 
     protected GuiDownloadService() {
@@ -222,153 +255,279 @@ public abstract class GuiDownloadService implements Runnable {
         btnStart.requestFocusInWindow();
     }
 
+    /** How many images are fetched at the same time from a host that has no rate limit: {@link #PARALLEL_DOWNLOADS}, fewer on a mobile port. */
+    public static int parallelDownloads() {
+        return GuiBase.isMobile() ? MOBILE_PARALLEL_DOWNLOADS : PARALLEL_DOWNLOADS;
+    }
+
+    /** How many files are downloaded at once. Only services that fetch from a host without rate limits should raise this. */
+    protected int getThreadCount() {
+        return 1;
+    }
+
     @Override
     public void run() {
         GuiBase.getInterface().preventSystemSleep(true); //prevent system from going into sleep mode while downloading
 
-        Proxy p = getProxy();
+        final Proxy p = getProxy();
+        final Iterator<Entry<String, String>> queue = files.entrySet().iterator();
+        final int threads = Math.min(getThreadCount(), files.size());
 
-        boolean cardSkipped;
-        int bufferLength;
-        int count = 0;
-        int totalCount = files.size();
-        byte[] buffer = new byte[1024];
+        if (threads > 1) {
+            // sized by the request, not by the CPU count: these threads spend their time waiting on the network
+            final ExecutorService pool = Executors.newFixedThreadPool(threads, r -> {
+                Thread t = new Thread(r);
+                t.setDaemon(true);
+                return t;
+            });
+            for (int i = 0; i < threads; i++) {
+                pool.execute(() -> downloadQueued(queue, p));
+            }
+            pool.shutdown();
+            try {
+                pool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            } catch (InterruptedException e) {
+                pool.shutdownNow();
+                Thread.currentThread().interrupt();
+            }
+        } else {
+            downloadQueued(queue, p);
+        }
 
-        for (Entry<String, String> kv : files.entrySet()) {
-            boolean isJPG = true;
-            boolean isLogged = false;
-            boolean fullborder = false;
+        GuiBase.getInterface().preventSystemSleep(false);
+    }
+
+    /** Downloads files taken from the shared queue until it is empty or the download is cancelled. */
+    private void downloadQueued(final Iterator<Entry<String, String>> queue, final Proxy p) {
+        byte[] buffer = new byte[8192];
+
+        while (true) {
+            final Entry<String, String> kv;
+            synchronized (queue) {
+                if (!queue.hasNext()) {
+                    break;
+                }
+                kv = queue.next();
+            }
             if (cancel) {//stop prevent sleep
                 GuiBase.getInterface().preventSystemSleep(false);
                 break; }
 
-            count++;
-            cardSkipped = true; //assume skipped unless saved successfully
-            String url = kv.getValue();
+            final int index = started.incrementAndGet();
 
-            String decodedKey = decodeURL(kv.getKey());
-            File fileDest = new File(decodedKey);
-            final String filePath = fileDest.getPath();
+            final String decodedKey = decodeURL(kv.getKey());
+            final String filePath = new File(decodedKey).getPath();
             final String subLastIndex = filePath.contains("pics") ? "\\pics\\" : filePath.contains("skins") ? "\\"+FileUtil.getParent(filePath)+"\\" : "\\db\\";
 
-            System.out.println(count + "/" + totalCount + " - .." + filePath.substring(filePath.lastIndexOf(subLastIndex)+1));
+            System.out.println(index + "/" + files.size() + " - .." + filePath.substring(filePath.lastIndexOf(subLastIndex)+1));
 
-            FileOutputStream fos = null;
-            try {
-                final File base = fileDest.getParentFile();
-                if (ScryfallRateLimiter.isApiUrl(url)) {
-                    // Wait out an active cooldown rather than skipping -- this is a background,
-                    // cancelable bulk run, so it's worth pausing to actually finish downloading
-                    // instead of racing through the rest of a large queue in skip-only mode.
-                    ScryfallRateLimiter.awaitCooldownCleared(() -> cancel, this::reportStatus);
+            // the urls of a file are alternatives: the first one that delivers it wins
+            boolean saved = false;
+            for (final String url : kv.getValue().split(URL_SEPARATOR)) {
+                if (saved || cancel) {
+                    break;
                 }
-                if (!cancel && FileUtil.ensureDirectoryExists(base)) { //ensure destination directory exists
-                    URL imageUrl = new URL(url);
-                    HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection(p);
-                    // Scryfall asks for a descriptive User-Agent and rate-limits harder without one.
-                    conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
-                    // don't allow redirections here -- they indicate 'file not found' on the server
-                    // only allow redirections to consume Scryfall API
-                    if (ScryfallRateLimiter.isApiUrl(url)) {
-                        conn.setInstanceFollowRedirects(true);
-                        ScryfallRateLimiter.acquire(url);
-                    } else {
-                        conn.setInstanceFollowRedirects(false);
-                    }
-                    conn.connect();
+                saved = downloadFile(decodedKey, url, p, buffer);
+            }
 
-                    //if .full file is not found try fullborder
-                    if ((conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) && (url.contains(".full.jpg")))
-                    {
-                        fullborder = true;
-                        conn.disconnect();
-                        url = TextUtil.fastReplace(url, ".full.jpg", ".fullborder.jpg");
-                        imageUrl = new URL(url);
-                        conn = (HttpURLConnection) imageUrl.openConnection(p);
-                        conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
-                        conn.setInstanceFollowRedirects(false);
-                        conn.connect();
-                    }
+            finishItem(!saved); //skipped unless saved successfully
+        }
+    }
 
-                    // if file is not found and this is a JPG, give PNG a shot...
-                    if ((conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) && (url.endsWith(".jpg"))) {
-                        fullborder = false;
-                        isJPG = false;
-                        conn.disconnect();
-                        if(url.contains("/images/")){
-                            isLogged = true;
-                            System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
-                        }
-                        url = url.substring(0,url.length() - 4) + ".png";
-                        imageUrl = new URL(TextUtil.fastReplace(url, ".fullborder.", ".full."));
-                        conn = (HttpURLConnection) imageUrl.openConnection(p);
-                        conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
-                        conn.setInstanceFollowRedirects(false);
-                        conn.connect();
-                    }
+    /** Downloads one file from one url. Returns whether it was saved. */
+    private boolean downloadFile(final String decodedKey, String url, final Proxy p, final byte[] buffer) {
+        boolean saved = false;
+        int bufferLength;
+        boolean isJPG = true;
+        boolean isLogged = false;
+        boolean fullborder = false;
+        File fileDest = new File(decodedKey);
 
-                    if (fullborder) {
-                        fileDest = new File(TextUtil.fastReplace(decodedKey, ".full.jpg", ".fullborder.jpg"));
-                    }
+        FileOutputStream fos = null;
+        File tmpDest = null;
+        try {
+            final File base = fileDest.getParentFile();
+            if (!cancel && FileUtil.ensureDirectoryExists(base)) { //ensure destination directory exists
+                // don't allow redirections here -- they indicate 'file not found' on the server
+                // only allow redirections to consume Scryfall API
+                HttpURLConnection conn = connect(url, p, ScryfallRateLimiter.isApiUrl(url));
+                if (conn == null) {
+                    return false; //cancelled while waiting for its turn
+                }
 
-                    switch (conn.getResponseCode()) {
-                    case HttpURLConnection.HTTP_OK:
-                        fos = new FileOutputStream(fileDest);
-                        InputStream inputStream = conn.getInputStream();
+                //if .full file is not found try fullborder
+                if ((conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) && (url.contains(".full.jpg")))
+                {
+                    fullborder = true;
+                    conn.disconnect();
+                    url = TextUtil.fastReplace(url, ".full.jpg", ".fullborder.jpg");
+                    conn = connect(url, p, false);
+                    if (conn == null) {
+                        return false;
+                    }
+                }
+
+                // if file is not found and this is a JPG, give PNG a shot...
+                if ((conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) && (url.endsWith(".jpg"))) {
+                    fullborder = false;
+                    isJPG = false;
+                    conn.disconnect();
+                    if(url.contains("/images/")){
+                        isLogged = true;
+                        System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
+                    }
+                    url = url.substring(0,url.length() - 4) + ".png";
+                    conn = connect(TextUtil.fastReplace(url, ".fullborder.", ".full."), p, false);
+                    if (conn == null) {
+                        return false;
+                    }
+                }
+
+                if (fullborder) {
+                    fileDest = new File(TextUtil.fastReplace(decodedKey, ".full.jpg", ".fullborder.jpg"));
+                }
+
+                switch (conn.getResponseCode()) {
+                case HttpURLConnection.HTTP_OK:
+                    tmpDest = new File(fileDest.getPath() + ".tmp");
+                    fos = new FileOutputStream(tmpDest);
+                    long received = 0;
+                    try (InputStream inputStream = conn.getInputStream()) {
                         while ((bufferLength = inputStream.read(buffer)) > 0) {
                             fos.write(buffer, 0, bufferLength);
+                            received += bufferLength;
                         }
-                        cardSkipped = false;
-                        break;
-                    case HttpURLConnection.HTTP_NOT_FOUND:
-                        conn.disconnect();
-                        if(url.contains("/images/") && !isJPG && !isLogged)
-                            System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
-                        break;
-                    case 429:
-                        ScryfallRateLimiter.noteIfRateLimited(429, url, conn.getHeaderField("Retry-After"));
-                        conn.disconnect();
-                        break;
-                    default:
-                        conn.disconnect();
-                        System.out.println("  Connection failed for url: " + url);
-                        break;
                     }
-                } else if (!cancel) {
-                    System.out.println("  Can't create folder: " + base.getAbsolutePath());
+                    fos.close();
+                    fos = null;
+                    if (!isWholeDownload(tmpDest, fileDest.getName(), conn.getContentLengthLong())) {
+                        throw new IOException("Not a whole image: " + fileDest.getName() + " (" + received + " bytes)");
+                    }
+                    Files.move(tmpDest.toPath(), fileDest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    saved = true;
+                    break;
+                case HttpURLConnection.HTTP_NOT_FOUND:
+                    conn.disconnect();
+                    if(url.contains("/images/") && !isJPG && !isLogged)
+                        System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
+                    break;
+                case 429:
+                    ScryfallRateLimiter.noteIfRateLimited(429, url, conn.getHeaderField("Retry-After"));
+                    conn.disconnect();
+                    break;
+                default:
+                    // a paced third-party host answers 503 when it wants to be left alone for a while
+                    ScryfallRateLimiter.noteIfRateLimited(conn.getResponseCode(), url, conn.getHeaderField("Retry-After"));
+                    conn.disconnect();
+                    System.out.println("  Connection failed for url: " + url);
+                    break;
+                }
+            } else if (!cancel) {
+                System.out.println("  Can't create folder: " + base.getAbsolutePath());
+            }
+        }
+        catch (final ConnectException ce) {
+            System.out.println("  Connection refused for url: " + url);
+        }
+        catch (final MalformedURLException mURLe) {
+            System.out.println("  Error - possibly missing URL for: " + fileDest.getName());
+        }
+        catch (final FileNotFoundException fnfe) {
+            String formatStr = "  Error - the LQ picture %s could not be found on the server. [%s] - %s";
+            System.out.printf((formatStr) + "%n", fileDest.getName(), url, fnfe.getMessage());
+        }
+        catch (final Exception ex) {
+            Logger.error(ex, "Error downloading pictures");
+        }
+        finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                }
+                catch (IOException e) {
+                    System.out.println("  Error closing output stream");
                 }
             }
-            catch (final ConnectException ce) {
-                System.out.println("  Connection refused for url: " + url);
-            }
-            catch (final MalformedURLException mURLe) {
-                System.out.println("  Error - possibly missing URL for: " + fileDest.getName());
-            }
-            catch (final FileNotFoundException fnfe) {
-                String formatStr = "  Error - the LQ picture %s could not be found on the server. [%s] - %s";
-                System.out.printf((formatStr) + "%n", fileDest.getName(), url, fnfe.getMessage());
-            }
-            catch (final Exception ex) {
-                Logger.error(ex, "Error downloading pictures");
-            }
-            finally {
-                if (fos != null) {
-                    try {
-                        fos.close();
-                    }
-                    catch (IOException e) {
-                        System.out.println("  Error closing output stream");
-                    }
-                }
-            }
-
-            update(count);
-            if (cardSkipped) {
-                skipped++;
+            if (tmpDest != null) {
+                tmpDest.delete(); //only still there if the transfer failed
             }
         }
 
-        GuiBase.getInterface().preventSystemSleep(false);
+
+        return saved;
+    }
+
+    /**
+     * Whether a file received over HTTP is the whole file its name says, for every download that saves an image (the
+     * bulk download and the on-demand fetch of the mobile ports). A dropped connection ends the stream like a finished
+     * one, so it must have the length the server promised ({@code contentLength}, negative if it promised none). An
+     * image must also start like a JPEG or a PNG, which tells it from the error page a server may answer with a 200,
+     * and without a promised length it must end like one too: a JPEG with the end-of-image marker, a PNG with its IEND
+     * chunk. Other files have nothing more to check.
+     */
+    public static boolean isWholeDownload(final File received, final String name, final long contentLength) throws IOException {
+        final boolean lengthKnown = contentLength >= 0;
+        if (lengthKnown && received.length() != contentLength) {
+            return false;
+        }
+        final String lowerName = name.toLowerCase(Locale.ROOT);
+        if (!lowerName.endsWith(".jpg") && !lowerName.endsWith(".jpeg") && !lowerName.endsWith(".png")) {
+            return true;
+        }
+        try (RandomAccessFile in = new RandomAccessFile(received, "r")) {
+            final long length = in.length();
+            if (length < PNG_END.length) {
+                return false;
+            }
+            final byte[] head = new byte[PNG_SIGNATURE.length];
+            in.readFully(head);
+            final boolean jpeg = head[0] == (byte) 0xFF && head[1] == (byte) 0xD8;
+            if (!jpeg && !Arrays.equals(head, PNG_SIGNATURE)) {
+                return false;
+            }
+            if (lengthKnown) {
+                return true;
+            }
+            final byte[] tail = new byte[PNG_END.length];
+            in.seek(length - tail.length);
+            in.readFully(tail);
+            return jpeg ? tail[tail.length - 2] == (byte) 0xFF && tail[tail.length - 1] == (byte) 0xD9 : Arrays.equals(tail, PNG_END);
+        }
+    }
+
+    /**
+     * Opens a connection to the url and connects it once it is this download's turn on the url's host.
+     * Returns null if the run was cancelled while waiting.
+     */
+    private HttpURLConnection connect(final String url, final Proxy p, final boolean followRedirects) throws IOException {
+        final HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection(p);
+        // Scryfall asks for a descriptive User-Agent and rate-limits harder without one.
+        conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
+        // a transfer that stalls has to end, or its worker and the dialog's "finished" wait for it forever
+        conn.setConnectTimeout(CONNECT_TIMEOUT_MS);
+        conn.setReadTimeout(READ_TIMEOUT_MS);
+        conn.setInstanceFollowRedirects(followRedirects);
+        do {
+            // Wait out an active cooldown rather than skipping -- this is a background, cancelable bulk run,
+            // so it's worth pausing to actually finish downloading instead of racing through the rest of a
+            // large queue in skip-only mode. Does nothing for urls that are not rate limited.
+            ScryfallRateLimiter.awaitCooldownCleared(url, () -> cancel, this::reportStatus);
+            ScryfallRateLimiter.acquire(url); // waits for its turn on the Scryfall API and on paced hosts
+            // Queuing for the turn can take a while with many workers, and a 429 may have come in meanwhile:
+            // check again so that the workers already in line stop too.
+        } while (!cancel && !Thread.currentThread().isInterrupted() && ScryfallRateLimiter.isCoolingDown(url));
+        if (cancel || Thread.currentThread().isInterrupted()) {
+            return null;
+        }
+        conn.connect();
+        return conn;
+    }
+
+    private synchronized void finishItem(final boolean cardSkipped) {
+        if (cardSkipped) {
+            skipped++;
+        }
+        update(++completed); //posted while holding the lock so progress reaches the EDT in order
     }
 
     @SuppressWarnings("deprecation")
