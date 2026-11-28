@@ -247,16 +247,24 @@ public final class GameActionUtil {
                 }
 
                 // some needs to check after ability was put on the stack
-                if (game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
-                    Map<StaticAbility, CardPlayOption> oldMayPlay = source.getMayPlay();
-                    Zone oldZone = source.getLastKnownZone();
-                    Card stackCopy = source;
+                final Map<StaticAbility, CardPlayOption> oldMayPlay = source.getMayPlay();
+                final Zone oldZone = source.getLastKnownZone();
+                Card stackCopy = source;
+                boolean checkOnStack = game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES);
+                if (checkOnStack) {
                     if (!source.isLKI()) {
                         stackCopy = CardCopyService.getLKICopy(source);
                     }
                     stackCopy.setLastKnownZone(game.getStackZone());
                     stackCopy.setCastFrom(oldZone);
                     stackCopy.setCastSA(sa);
+                    // The check above only says that some static ability somewhere applies to the stack. Two full static
+                    // checks (this one and the reset below) are only worth it if one of them can affect this very spell.
+                    // An LKI source is the card itself and not a throwaway copy, so keep the full check for that case.
+                    checkOnStack = stackCopy == source
+                            || game.getAction().hasStaticAbilityAffectingCard(ZoneType.Stack, stackCopy);
+                }
+                if (checkOnStack) {
                     lkicheck = true;
 
                     stackCopy.clearStaticChangedCardKeywords(false);
