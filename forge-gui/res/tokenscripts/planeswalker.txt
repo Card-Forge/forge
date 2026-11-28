@@ -1,0 +1,6 @@
+Name:Planeswalker Token
+ManaCost:no cost
+Colors:colorless
+Types:Legendary Planeswalker
+Loyalty:0
+Oracle:
