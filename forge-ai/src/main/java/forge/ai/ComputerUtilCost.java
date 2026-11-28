@@ -35,8 +35,9 @@ import forge.util.TextUtil;
 public class ComputerUtilCost {
 
     /**
-     * A cost that exiles other cards from the hand (Soul Spike, Force of Will, evoke) is not paid with a card that could be cast
-     * right now: Soul Spike exiled Fatal Push, which killed the same mana dork for one mana.
+     * A cost that exiles other cards from the hand (Soul Spike, Force of Will, evoke) is not paid with a card that can be cast
+     * right now: Soul Spike exiled Fatal Push, which killed the same mana dork for one mana. A card that is not castable in
+     * the current game state (the only Swamp is tapped, wrong timing) is a fair price, which keeps the emergency plays.
      */
     public static boolean checkExileFromHandCost(final Player ai, final Cost cost, final Card source, final SpellAbility sa) {
         if (cost == null) {
@@ -59,7 +60,11 @@ public class ComputerUtilCost {
                     continue;
                 }
                 for (final SpellAbility ab : c.getSpellAbilities()) {
-                    if (ab.isBasicSpell() && ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {
+                    if (!ab.isBasicSpell()) {
+                        continue;
+                    }
+                    ab.setActivatingPlayer(ai);
+                    if (ab.canPlay() && ComputerUtilMana.canPayManaCost(ab, ai, 0, false)) {
                         return false;
                     }
                 }

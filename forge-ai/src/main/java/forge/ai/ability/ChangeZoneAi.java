@@ -737,28 +737,57 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return any;
     }
 
-    /** A creature that could block the attack being declared, exiled until the end step. */
+    /** A creature that could block one of the attackers being declared at its defender, exiled until the end step. */
     private static boolean takesABlockerOutOfTheWay(final Player ai, final Card c) {
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
-        return c.isCreature() && ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) && ph.getCombat() != null
-                && !ph.getCombat().getAttackers().isEmpty() && CombatUtil.canBlock(c);
+        final Combat combat = ph.getCombat();
+        if (!c.isCreature() || combat == null || !ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai)) {
+            return false;
+        }
+        for (final Card attacker : combat.getAttackers()) {
+            // in multiplayer only the creatures of the player that is attacked block (planeswalker and battle defenders
+            // are found through their controller)
+            final GameEntity defender = combat.getDefenderByAttacker(attacker);
+            final Player defendingPlayer = combat.getDefenderPlayerByAttacker(attacker);
+            if (defender != null && c.getController().equals(defendingPlayer) && CombatUtil.canBlock(attacker, c)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    /** Whether every spell this returns to hand belongs to an opponent who has the mana left to cast it again right away. */
+    /**
+     * Whether every spell this returns to hand belongs to an opponent who can cast it again right away: the card back from
+     * the hand, paid with the mana (colors and cost changes included) that is still untapped now. Reprieve on a Noble
+     * Hierarch with plenty of Forests open only costs the player a little mana; against Counterspell with two Forests it counters.
+     */
     private static boolean targetsSpellItsOwnerCanRecast(final SpellAbility sa) {
-        final CardCollection spells = new CardCollection(sa.getTargets().getTargetCards());
+        final Player ai = sa.getActivatingPlayer();
+        final List<SpellAbility> spells = new ArrayList<>();
         for (final SpellAbility spell : sa.getTargets().getTargetSpells()) {
-            spells.add(spell.getHostCard());
+            spells.add(spell);
+        }
+        for (final Card card : sa.getTargets().getTargetCards()) {
+            final SpellAbility spell = ai.getGame().getStack().getSpellMatchingHost(card);
+            if (spell != null) {
+                spells.add(spell);
+            }
         }
         if (spells.isEmpty()) {
             return false;
         }
-        final Player ai = sa.getActivatingPlayer();
-        for (final Card spell : spells) {
-            final Player owner = spell.getOwner();
-            // the spell is paid for already: what is untapped now is what is left for casting it again
-            if (owner == null || !owner.isOpponentOf(ai)
-                    || ComputerUtilMana.getAvailableManaEstimate(owner) < spell.getCMC()) {
+        for (final SpellAbility spell : spells) {
+            final Player caster = spell.getActivatingPlayer(); // the one who cast it, not necessarily the owner
+            final Card card = spell.getHostCard();
+            if (caster == null || card == null || !caster.isOpponentOf(ai) || spell.isCopied()) {
+                return false; // a copy is gone for good when it is returned
+            }
+            final SpellAbility recast = card.getFirstSpellAbility();
+            if (recast == null) {
+                return false;
+            }
+            recast.setActivatingPlayer(caster);
+            if (!recast.isSpell() || !ComputerUtilMana.canPayManaCost(recast, caster, 0, false)) {
                 return false;
             }
         }
@@ -784,7 +813,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (origin.contains(ZoneType.Stack) && destination == ZoneType.Hand && targetsSpellItsOwnerCanRecast(sa)) {
                 // Reprieve on a Noble Hierarch with plenty of lands open only costs the player a little mana (#13103)
                 sa.resetTargets();
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                return new AiAbilityDecision(0, AiPlayDecision.WouldBeRecast);
             }
             if (ComputerUtilAbility.hasUnpromisedGiftReturn(sa)) {
                 for (final Card target : sa.getTargets().getTargetCards()) {

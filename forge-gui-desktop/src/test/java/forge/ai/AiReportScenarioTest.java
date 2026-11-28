@@ -275,6 +275,15 @@ public class AiReportScenarioTest extends AITest {
             for (final GameObject t : targets) { sa.getTargets().add(t); }
             game.getStack().add(sa);
         }
+        /** Like {@link #stack}, but the card really is in the stack zone, as when it is cast (Reprieve targets the cards there). */
+        void castOnStack(final Player owner, final String name, final GameObject... targets) {
+            final Card card = hand(name, owner);
+            final SpellAbility sa = card.getFirstSpellAbility();
+            sa.setActivatingPlayer(owner);
+            sa.setHostCard(game.getAction().moveToStack(card, sa));
+            for (final GameObject t : targets) { sa.getTargets().add(t); }
+            game.getStack().add(sa);
+        }
         /** Plays and resolves an ability the AI chose (costs paid, stack emptied). */
         void resolve(final SpellAbility sa) {
             ComputerUtil.playStack(sa, ai, game);
@@ -3127,7 +3136,7 @@ public class AiReportScenarioTest extends AITest {
                     return c.plays("Solitude") ? "AI cast a second Solitude with the triggers of the first one still on the stack" : null;
                 }));
         l.add(noPlay("13103-reprieve", "Reprieve is not cast on a Noble Hierarch that the player can cast again with five open Forests", Fid.EXACT, M1, false, "Reprieve",
-                c -> { c.bf("Forest", 5, c.opp); c.bf("Plains", 2, c.ai); c.hand("Reprieve", c.ai); c.stack(c.opp, "Noble Hierarch"); }));
+                c -> { c.bf("Forest", 5, c.opp); c.bf("Plains", 2, c.ai); c.hand("Reprieve", c.ai); c.castOnStack(c.opp, "Noble Hierarch"); }));
         l.add(new Scenario("13090-phelia-barricade", "Phelia's attack trigger exiles Crystal Barricade, the creature that would block it", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Phelia, Exuberant Shepherd", c.ai); c.bf("Crystal Barricade", c.opp); },
                 c -> pheliaAimsAt(c, "Crystal Barricade")));
@@ -3137,6 +3146,10 @@ public class AiReportScenarioTest extends AITest {
         l.add(new Scenario("13090-phelia-hill-giant-attack", "Phelia attacks into a Hill Giant, because her trigger exiles the blocker", Fid.APPROX, "COMBAT_DECLARE_ATTACKERS", true,
                 c -> { c.bf("Phelia, Exuberant Shepherd", c.ai); c.bf("Hill Giant", c.opp); },
                 c -> c.attackers().stream().anyMatch(a -> a.getName().startsWith("Phelia")) ? null : "AI did not attack with Phelia, whose trigger removes the Hill Giant"));
+        l.add(play("13106-soul-spike-tapped", "Soul Spike exiles Fatal Push and Sovereign's Bite when the only Swamp is tapped: neither can be cast now", Fid.APPROX, M1, false, "Soul Spike",
+                c -> { c.bf("Swamp", c.ai).tap(true, null, null); c.hand("Soul Spike", c.ai); c.hand("Fatal Push", c.ai); c.hand("Sovereign's Bite", c.ai); c.bf("Noble Hierarch", c.opp); }));
+        l.add(play("13103-reprieve-colors", "Reprieve is cast on a Hill Giant: the opponent only has Forests and cannot cast it again", Fid.APPROX, M1, false, "Reprieve",
+                c -> { c.bf("Forest", 5, c.opp); c.bf("Plains", 2, c.ai); c.hand("Reprieve", c.ai); c.castOnStack(c.opp, "Hill Giant"); }));
         return l;
     }
 

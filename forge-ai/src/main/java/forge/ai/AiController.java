@@ -1190,14 +1190,16 @@ public class AiController {
             Sentry.setExtra("Card", card.getName());
             Sentry.setExtra("SA", sa.toString());
 
-            boolean canPlay = SpellApiToAi.Converter.get(sa).canPlayWithSubs(player, sa).willingToPlay();
+            final AiAbilityDecision apiDecision = SpellApiToAi.Converter.get(sa).canPlayWithSubs(player, sa);
+            boolean canPlay = apiDecision.willingToPlay();
 
             // remove added extra
             Sentry.removeExtra("Card");
             Sentry.removeExtra("SA");
 
             if (!canPlay) {
-                return AiPlayDecision.CantPlayAi;
+                // the one reason the rollouts must not argue with (see isLegalDiscovery): the player casts the spell again
+                return apiDecision.decision() == AiPlayDecision.WouldBeRecast ? AiPlayDecision.WouldBeRecast : AiPlayDecision.CantPlayAi;
             }
             if (sa.isActivatedAbility() && !sa.isSpell() && !sa.isManaAbility() && sa.costHasManaX() && sa.getApi() != ApiType.RollPlanarDice) {
                 // An activated "{X}: ..." ability whose AI did not size X would be paid with X=0: the effect resolves for
@@ -3229,8 +3231,8 @@ public class AiController {
         }
         switch (opinion) {
             case CantPlaySa, CantAfford, CantAffordX, StopRunawayActivations, TimingRestrictions,
-                    WouldDestroyLegend, WouldBecomeZeroToughnessCreature:
-                return false;
+                    WouldDestroyLegend, WouldBecomeZeroToughnessCreature, WouldBeRecast:
+                return false; // WouldBeRecast: the player casts the bounced spell again, the rollouts do not see that
             default:
                 break;
         }

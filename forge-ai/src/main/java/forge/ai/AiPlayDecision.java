@@ -43,6 +43,7 @@ public enum AiPlayDecision {
     WouldBecomeZeroToughnessCreature,
     WouldDestroyLegend,
     WouldDestroyWorldEnchantment,
+    WouldBeRecast,
     HybridSimRejected;
 
     public boolean willingToPlay() {

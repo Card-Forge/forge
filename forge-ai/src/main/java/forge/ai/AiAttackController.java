@@ -401,37 +401,23 @@ public class AiAttackController {
         return false;
     }
 
-    /**
-     * The potential blockers that an "attacks" trigger of the attacker itself exiles or returns to hand. Only creatures the
-     * trigger can legally target right now count (shroud, protection, hexproof), and no more than it can target at once:
-     * the best of them go first. Nothing is removed when the trigger is not a targeted exile/bounce.
-     */
-    static CardCollection blockersRemovedByAttackTrigger(final Card attacker, final CardCollectionView blockers) {
-        final CardCollection removed = new CardCollection();
+    /** "Whenever ~ attacks, exile (or return to hand) up to one target creature/permanent": one potential blocker less. */
+    static boolean attackTriggerRemovesBlocker(final Card attacker) {
         for (final Trigger trigger : attacker.getTriggers()) {
             if (!TriggerType.Attacks.equals(trigger.getMode()) || !trigger.hasParam("ValidCard")
-                    || !trigger.matchesValidParam("ValidCard", attacker) || trigger.hasParam("Condition")) {
+                    || !trigger.matchesValidParam("ValidCard", attacker)) {
                 continue;
             }
             for (SpellAbility sa = trigger.ensureAbility(); sa != null; sa = sa.getSubAbility()) {
                 final String dest = sa.getParam("Destination");
-                if (!ApiType.ChangeZone.equals(sa.getApi()) || !"Battlefield".equals(sa.getParam("Origin"))
-                        || !("Exile".equals(dest) || "Hand".equals(dest)) || !sa.usesTargeting()) {
-                    continue;
-                }
-                final SpellAbility removal = sa;
-                removal.setActivatingPlayer(attacker.getController());
-                final CardCollection targetable = CardLists.filter(blockers,
-                        c -> !removed.contains(c) && removal.canTarget(c));
-                int max = removal.getTargetRestrictions().getMaxTargets(attacker, removal);
-                while (max-- > 0 && !targetable.isEmpty()) {
-                    final Card best = ComputerUtilCard.getBestCreatureAI(targetable);
-                    targetable.remove(best);
-                    removed.add(best);
+                if (ApiType.ChangeZone.equals(sa.getApi()) && "Battlefield".equals(sa.getParam("Origin"))
+                        && ("Exile".equals(dest) || "Hand".equals(dest))
+                        && sa.usesTargeting() && sa.getTargetRestrictions().canTgtCreature()) {
+                    return true;
                 }
             }
         }
-        return removed;
+        return false;
     }
 
     /**
@@ -1620,8 +1606,10 @@ public class AiAttackController {
 
             // contains only the defender's blockers that can actually block the attacker
             CardCollection validBlockers = CardLists.filter(defenders, defender1 -> CombatUtil.canBlock(attacker, defender1));
-            // an attack trigger that exiles/bounces creatures (Phelia, #13090) takes blockers it can legally target out of the way
-            validBlockers.removeAll(blockersRemovedByAttackTrigger(attacker, validBlockers));
+            // an attack trigger that exiles/bounces a creature (Phelia, #13090) takes the best blocker out of the way
+            if (!validBlockers.isEmpty() && attackTriggerRemovesBlocker(attacker)) {
+                validBlockers.remove(ComputerUtilCard.getBestCreatureAI(validBlockers));
+            }
 
             canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetCombatDamage() > Aggregates.sum(validBlockers, Card::getNetToughness);
 
